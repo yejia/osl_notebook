@@ -198,9 +198,8 @@ def get_public_tags(tags):
 book_model_dict = {'notebook':Note, 'snippetbook':Snippet,'bookmarkbook':Bookmark, 'scrapbook': Scrap}
 book_folder_dict = {'notebook':Folder, 'snippetbook':notebook.snippets.models.Snippet_Folder,'bookmarkbook':notebook.bookmarks.models.Bookmark_Folder, 'scrapbook': notebook.scraps.models.Scrap_Folder}
 book_cache_dict = {'notebook':notebook.notes.models.Cache, 'snippetbook':notebook.snippets.models.Snippet_Cache,'bookmarkbook':notebook.bookmarks.models.Bookmark_Cache, 'scrapbook': notebook.scraps.models.Scrap_Cache}
-
 book_entry_dict = {'notebook':'', 'snippetbook':'__snippet','bookmarkbook':'__bookmark', 'scrapbook': '__scrap'}
-
+search_fields_dict = {'notebook':('title','desc'), 'snippetbook':('title','desc'), 'bookmarkbook':('title','desc', 'url'), 'scrapbook':('title','desc', 'url')}
 
 def getNote(username, bookname):
     return create_model("Note_"+str(bookname)+"_"+str(username), book_model_dict.get(bookname), username) 
@@ -228,7 +227,7 @@ def index(request, username, bookname):
 
     qstr = __getQStr(request)
     
-    note_list  = getSearchResults(note_list, qstr)
+    note_list  = getSearchResults(note_list, qstr, search_fields_dict.get(bookname))
     #TODO: use regex, also T and Tag
     
     
