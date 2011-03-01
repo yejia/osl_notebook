@@ -69,6 +69,7 @@ urlpatterns = patterns('',
     (r'^linkagenotes/note/(?P<note_id>[^/]+)/updateLinkageNote/$','notebook.notes.views.update_linkagenote'),
 
     (r'^setNotesPrivate/$','notebook.notes.views.set_notes_private'),
+    (r'^setNotesPublic/$','notebook.notes.views.set_notes_public'),
 
     (r'^share/$','notebook.notes.views.share'),
 

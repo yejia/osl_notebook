@@ -367,7 +367,14 @@
     function set_notes_private(){
              selected_notes = getSelectedNoteIds();
              $.post('/{{profile_username}}/{{bookname}}/setNotesPrivate/',{'note_ids':selected_notes});
-             //window.location.reload( false );   
+             //TODO: maybe no reload
+             window.location.reload( true);   
+    }
+    
+    function set_notes_public(){
+             selected_notes = getSelectedNoteIds();
+             $.post('/{{profile_username}}/{{bookname}}/setNotesPublic/',{'note_ids':selected_notes});   
+             window.location.reload( true);                
     }
     
      function share(){

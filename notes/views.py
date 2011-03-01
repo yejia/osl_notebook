@@ -1316,10 +1316,11 @@ def set_notes_private(request, username, bookname):
 
 @login_required
 def set_notes_public(request, username, bookname): 
-    note_ids = []    
+    note_ids = request.POST.getlist('note_ids')   
     N = getNote(username, bookname)
-    notes = N.objects.filter(id_in=note_ids)
+    notes = N.objects.filter(id__in=note_ids)
     notes.update(private = False)
+    return HttpResponse('success', mimetype="text/plain")
 
 @login_required    
 def set_notes_delete(request, username, bookname):
