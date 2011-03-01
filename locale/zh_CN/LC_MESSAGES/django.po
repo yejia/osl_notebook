@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-01 23:33+0800\n"
+"POT-Creation-Date: 2011-03-02 06:17+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1519,12 +1519,14 @@ msgid "login"
 msgstr "登录"
 
 #: templates/registration/login.html:29
-msgid "Recommended browsers for visiting this sites: Chrome, Firefox, Opera."
+msgid "Recommended browsers for visiting this site: Chrome, Firefox, Opera."
 msgstr "访问本站，建议使用以下浏览器：Chrome, Firefox, Opera。"
 
 #: templates/registration/login.html:29
-msgid "Best viewed with Chrome and Firefox, and with one level zooming in."
-msgstr "最佳浏览效果是使用Chrome和Firefox，并且将屏幕放大一级。"
+msgid ""
+"Best viewed with Chrome and Firefox, and with your browser zooming in one "
+"level."
+msgstr "最佳浏览效果是使用Chrome和Firefox，并且将浏览器屏幕放大一级。"
 
 #: templates/scrapbook/notes/folders_ special_side_menu.html:4
 msgid ""
