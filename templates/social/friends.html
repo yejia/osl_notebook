@@ -1,0 +1,29 @@
+{% extends "include/base2.html" %}
+{% load i18n %}
+
+
+{% block tite %}
+<title>{% blocktrans %} {{user}}'s Friends {% endblocktrans %}</title> 
+{% endblock %}
+
+
+{% block site_branding %}
+<div id="branding">
+<h1 id="site-name">{% blocktrans %} {{user}}'s Friends {% endblocktrans %}</h1>
+</div>
+{% endblock %}
+
+
+{% block content%}
+
+<div>
+<br/><br/><br/>
+{% blocktrans %}Friends of {{user}} {% endblocktrans %}:
+{% for f in user.member.get_friends %}		
+<li>
+<a href="/social/{{f.username}}/">{{f.username}}</a><!--TODO:nickname-->
+</li>
+{% endfor %}
+</div>
+
+{% endblock %}

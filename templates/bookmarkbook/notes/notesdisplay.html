@@ -1,0 +1,45 @@
+{% extends "include/notesdisplay.html" %}
+{% load i18n %}
+
+
+{% block add_js_button_section %}
+
+{% endblock %}
+
+
+{% block add_note_section %}
+<div id="add_note_section">
+ {% trans "Want to create a new bookmark" %}?  {% trans "See" %} <a href="/forNewUsers">{% trans "how" %}</a>  {% trans "you can add a button to your browser" %}.  {% trans "Or you can" %} <a href="importBookmark/"> {% trans "import" %}</a>.
+<!--
+<div class="section_header">
+{% trans "Add a new bookmark" %}:<span class="show_add_note_section"><img title="" src="/site_media/img/down-arrow.jpg"/></span><span class="hide_add_note_section"><img title="" src="/site_media/img/collapse-arrow.jpg"/></span> 
+</div>
+<div class="addnote">
+<form action="addNote/" method="post" enctype="multipart/form-data" id="addNoteForm"> 
+	<input type="submit" value="Submit"/>
+
+	<table> 
+        <tr><th>{{addNoteForm.url.errors }}<label for="id_url">{% trans "URL" %}<span class="required">*</span>:</label></th><td><input id="id_url" type="text" name="url" maxlength="300" size="55"/></td> 
+               <th>{{addNoteForm.title.errors }}<label for="id_title">{% trans "Title" %}:</label></th><td><input id="id_title" type="text" name="title" maxlength="50" size="55"/></td> 
+			   <th><label for="id_private">{% trans "Private" %}:</label></th><td>{{addNoteForm.private}}</td>                        		
+		</tr> 
+		<tr><th><label for="id_tags">{% trans "Tags" %}:</label></th><td>{{addNoteForm.tags}}</td>
+        <th>{{addNoteForm.desc.errors }}<label for="id_desc">{% trans "Desc" %}:</label></th><td>{{addNoteForm.desc}}</td>
+            <th>{{addNoteForm.extra.errors }}<label for="id_event">{% trans "Extra" %}:</label></th><td>{{addNoteForm.extra}}</td>
+			
+			
+		</tr> 
+		
+	</table>        
+</form> 
+</div>
+-->
+</div>
+{% endblock %}
+
+
+
+
+{% block notes_section %}
+{% include "bookmarkbook/notes/notes_display.html" %}
+{% endblock %}

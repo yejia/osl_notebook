@@ -1,0 +1,22 @@
+<html>
+
+<head>
+<script>
+
+function scrap(){
+var a=window,b=document,c=encodeURIComponent;
+var txt = '';if (window.getSelection){txt=window.getSelection();}else if (document.getSelection){txt=document.getSelection();}else if (document.selection){txt=document.selection.createRange().text;}
+d=a.open("http://localhost:8000/user/scrapbook/scraps/addScrap/?url="+c(b.location)+"&title="+c(b.title)+"&desc="+c(txt),"bkmk_popup","left="+((a.screenX||a.screenLeft)+10)+",top="+((a.screenY||a.screenTop)+10)+",height=700px,width=550px,resizable=1,alwaysRaised=1");a.setTimeout(function(){d.focus()},300)}
+
+
+function scrapt(){
+alert('clicked'); 
+}
+</script>
+</head>
+<body>
+The urllib2 library in python is an excellent example of an input where encoding will be an issue. For the Arkayne project I pull in pages and analyze contents. Foreign pages with non ASCII encoding threw ASCII encode exceptions. I was exploiting the fact that ASCII is a subset of UTF-8 but that doesn’t work for long, its a hack. I tried using ignore for the encode function but I still got errors or missed entire pages. The urllib2, and urllib for that matter, library does not handle character set encodings by design. Urllib2 is built to connect to sockets and fetch data using the http protocol. Unfortunately there is no commonly used standard for passing http encoding so its not handled by the library.
+
+<button onclick="scrap()">scrap</button>
+</body>
+</html>

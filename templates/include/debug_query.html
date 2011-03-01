@@ -1,0 +1,11 @@
+<div class="debug">
+Queries performed:
+<ol>
+{% for query in queries %}
+<li>
+sql: {{query.sql}}, 
+time: {{query.time}}
+</li>
+{% endfor %}
+</ol>
+</div>

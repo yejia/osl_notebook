@@ -1,0 +1,1821 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-03-01 10:46+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: notes/models.py:147
+#, fuzzy
+msgid "self ranking"
+msgstr "原作者的评级"
+
+#: notes/views.py:770
+msgid "note"
+msgstr "条笔记"
+
+#: notes/views.py:771
+msgid "notes"
+msgstr "条笔记"
+
+#: notes/templatetags/admin_list.py:257
+msgid "All dates"
+msgstr ""
+
+#: templates/404.html:3
+msgid ""
+"The page you requested doesn't exist. Please check the url to see if spelled "
+"correctly."
+msgstr "你要访问的网页不存在。请检查url拼写是否正确。"
+
+#: templates/500.html:3
+msgid ""
+"An internal server error happened. An error report is sent to the admin, and "
+"it will be fixed shortly. Please come back later."
+msgstr ""
+
+#: templates/admin/404.html:4 templates/admin/404.html.py:8
+msgid "Page not found"
+msgstr ""
+
+#: templates/admin/404.html:10
+msgid "We're sorry, but the requested page could not be found."
+msgstr ""
+
+#: templates/admin/500.html:4 templates/admin/app_index.html:8
+#: templates/admin/base.html:55 templates/admin/change_form.html:18
+#: templates/admin/delete_confirmation.html:6
+#: templates/admin/delete_selected_confirmation.html:6
+#: templates/admin/invalid_setup.html:4 templates/admin/object_history.html:6
+#: templates/admin/auth/user/change_password.html:11
+#: templates/registration/base.html:55
+msgid "Home"
+msgstr ""
+
+#: templates/admin/500.html:4
+msgid "Server error"
+msgstr ""
+
+#: templates/admin/500.html:6
+msgid "Server error (500)"
+msgstr ""
+
+#: templates/admin/500.html:9
+msgid "Server Error <em>(500)</em>"
+msgstr ""
+
+#: templates/admin/500.html:10
+msgid ""
+"There's been an error. It's been reported to the site administrators via e-"
+"mail and should be fixed shortly. Thanks for your patience."
+msgstr ""
+
+#: templates/admin/actions.html:4
+msgid "Run the selected action"
+msgstr ""
+
+#: templates/admin/actions.html:4
+msgid "Go"
+msgstr ""
+
+#: templates/admin/actions.html:11
+msgid "Click here to select the objects across all pages"
+msgstr ""
+
+#: templates/admin/actions.html:11
+#, python-format
+msgid "Select all %(total_count)s %(module_name)s"
+msgstr ""
+
+#: templates/admin/actions.html:13
+msgid "Clear selection"
+msgstr ""
+
+#: templates/admin/app_index.html:10 templates/admin/index.html:19
+#, python-format
+msgid "%(name)s"
+msgstr ""
+
+#: templates/admin/base.html:28 templates/registration/base.html:28
+msgid "Welcome,"
+msgstr ""
+
+#: templates/admin/base.html:33 templates/registration/base.html:33
+msgid "Documentation"
+msgstr ""
+
+#: templates/admin/base.html:41
+#: templates/admin/auth/user/change_password.html:15
+#: templates/admin/auth/user/change_password.html:48
+#: templates/include/sites_header.html:55 templates/registration/base.html:41
+msgid "Change password"
+msgstr ""
+
+#: templates/admin/base.html:48 templates/include/sites_header.html:56
+#: templates/registration/base.html:48
+msgid "Log out"
+msgstr "退出"
+
+#: templates/admin/base_site.html:4
+msgid "Notebook site admin"
+msgstr "笔记本网站管理"
+
+#: templates/admin/base_site.html:7
+msgid "Notebook administration"
+msgstr "笔记本管理"
+
+#: templates/admin/change_form.html:21 templates/admin/index.html:29
+#: templates/notes/notesdisplay.html:18
+#: templates/snippetbook/notes/notesdisplay.html:23
+msgid "Add"
+msgstr "添加"
+
+#: templates/admin/change_form.html:28 templates/admin/object_history.html:10
+msgid "History"
+msgstr ""
+
+#: templates/admin/change_form.html:29
+#: templates/admin/edit_inline/stacked.html:9
+#: templates/admin/edit_inline/tabular.html:28
+msgid "View on site"
+msgstr ""
+
+#: templates/admin/change_form.html:39
+#: templates/admin/auth/user/change_password.html:24
+msgid "Please correct the error below."
+msgid_plural "Please correct the errors below."
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/admin/delete_confirmation.html:10
+#: templates/admin/submit_line.html:4
+#: templates/include/note_list_base.html:788
+msgid "Delete"
+msgstr "删除"
+
+#: templates/admin/delete_confirmation.html:16
+#, python-format
+msgid ""
+"Deleting the %(object_name)s '%(escaped_object)s' would result in deleting "
+"related objects, but your account doesn't have permission to delete the "
+"following types of objects:"
+msgstr ""
+
+#: templates/admin/delete_confirmation.html:23
+#, python-format
+msgid ""
+"Are you sure you want to delete the %(object_name)s \"%(escaped_object)s\"? "
+"All of the following related items will be deleted:"
+msgstr ""
+
+#: templates/admin/delete_confirmation.html:28
+#: templates/admin/delete_selected_confirmation.html:33
+msgid "Yes, I'm sure"
+msgstr ""
+
+#: templates/admin/delete_selected_confirmation.html:9
+msgid "Delete multiple objects"
+msgstr ""
+
+#: templates/admin/delete_selected_confirmation.html:15
+#, python-format
+msgid ""
+"Deleting the %(object_name)s would result in deleting related objects, but "
+"your account doesn't have permission to delete the following types of "
+"objects:"
+msgstr ""
+
+#: templates/admin/delete_selected_confirmation.html:22
+#, python-format
+msgid ""
+"Are you sure you want to delete the selected %(object_name)s objects? All of "
+"the following objects and their related items will be deleted:"
+msgstr ""
+
+#: templates/admin/filter.html:2
+#, python-format
+msgid " By %(filter_title)s "
+msgstr ""
+
+#: templates/admin/index.html:18
+#, python-format
+msgid "Models available in the %(name)s application."
+msgstr ""
+
+#: templates/admin/index.html:35
+msgid "Change"
+msgstr ""
+
+#: templates/admin/index.html:45
+msgid "You don't have permission to edit anything."
+msgstr ""
+
+#: templates/admin/index.html:53
+msgid "Recent Actions"
+msgstr ""
+
+#: templates/admin/index.html:54
+msgid "My Actions"
+msgstr ""
+
+#: templates/admin/index.html:58
+msgid "None available"
+msgstr ""
+
+#: templates/admin/index.html:72
+msgid "Unknown content"
+msgstr ""
+
+#: templates/admin/invalid_setup.html:7
+msgid ""
+"Something's wrong with your database installation. Make sure the appropriate "
+"database tables have been created, and make sure the database is readable by "
+"the appropriate user."
+msgstr ""
+
+#: templates/admin/login.html:19
+msgid "Username:"
+msgstr ""
+
+#: templates/admin/login.html:22
+msgid "Password:"
+msgstr ""
+
+#: templates/admin/login.html:26
+msgid "Log in"
+msgstr ""
+
+#: templates/admin/object_history.html:22
+msgid "Date/time"
+msgstr ""
+
+#: templates/admin/object_history.html:23
+msgid "User"
+msgstr ""
+
+#: templates/admin/object_history.html:24
+msgid "Action"
+msgstr ""
+
+#: templates/admin/object_history.html:38
+msgid ""
+"This object doesn't have a change history. It probably wasn't added via this "
+"admin site."
+msgstr ""
+
+#: templates/admin/pagination.html:10
+msgid "Show all"
+msgstr ""
+
+#: templates/admin/pagination.html:11 templates/admin/submit_line.html:3
+msgid "Save"
+msgstr ""
+
+#: templates/admin/search_form.html:8
+#: templates/bookmarkbook/notes/search.html:6 templates/include/search.html:6
+#: templates/scrapbook/notes/search.html:6 templates/social/search.html:6
+msgid "Search"
+msgstr "搜索"
+
+#: templates/admin/search_form.html:10
+#, python-format
+msgid "1 result"
+msgid_plural "%(counter)s results"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/admin/search_form.html:10
+#, python-format
+msgid "%(full_result_count)s total"
+msgstr ""
+
+#: templates/admin/submit_line.html:5
+msgid "Save as new"
+msgstr ""
+
+#: templates/admin/submit_line.html:6
+msgid "Save and add another"
+msgstr ""
+
+#: templates/admin/submit_line.html:7
+msgid "Save and continue editing"
+msgstr ""
+
+#: templates/admin/auth/user/add_form.html:5
+msgid ""
+"First, enter a username and password. Then, you'll be able to edit more user "
+"options."
+msgstr ""
+
+#: templates/admin/auth/user/change_password.html:28
+#, python-format
+msgid "Enter a new password for the user <strong>%(username)s</strong>."
+msgstr ""
+
+#: templates/admin/auth/user/change_password.html:35
+msgid "Password"
+msgstr ""
+
+#: templates/admin/auth/user/change_password.html:41
+msgid "Password (again)"
+msgstr ""
+
+#: templates/admin/auth/user/change_password.html:42
+msgid "Enter the same password as above, for verification."
+msgstr ""
+
+#: templates/admin/edit_inline/stacked.html:64
+#: templates/admin/edit_inline/tabular.html:110
+#, python-format
+msgid "Add another %(verbose_name)s"
+msgstr ""
+
+#: templates/admin/edit_inline/stacked.html:67
+#: templates/admin/edit_inline/tabular.html:113
+msgid "Remove"
+msgstr ""
+
+#: templates/admin/edit_inline/tabular.html:15
+msgid "Delete?"
+msgstr ""
+
+#: templates/bookmarkbook/notes/addNote.html:49
+#: templates/doc/for_new_users.html:10
+msgid "Add a bookmark"
+msgstr "添加一个网址"
+
+#: templates/bookmarkbook/notes/addNote.html:51
+#: templates/scrapbook/notes/addNote.html:50 templates/social/groups.html:49
+msgid "Submit"
+msgstr "递交"
+
+#: templates/bookmarkbook/notes/addNote.html:51
+#: templates/bookmarkbook/notes/notes_display.html:56
+#: templates/include/add_comments_inline.html:53
+#: templates/include/notesdisplay.html:100
+#: templates/notes/notes_display.html:58
+#: templates/scrapbook/notes/addNote.html:50
+#: templates/scrapbook/notes/notes_display.html:52
+#: templates/snippetbook/notes/notes_display.html:59
+#: templates/social/notesdisplay.html:108 templates/workingset/index.html:293
+msgid "Cancel"
+msgstr "取消"
+
+#: templates/bookmarkbook/notes/addNote.html:57
+#: templates/scrapbook/notes/addNote.html:57
+msgid "title"
+msgstr "标题"
+
+#: templates/bookmarkbook/notes/addNote.html:60
+#: templates/include/notesdisplay.html:98
+#: templates/include/notesdisplay.html:106
+#: templates/include/notesdisplay.html:137
+#: templates/scrapbook/notes/addNote.html:64 templates/social/groups.html:35
+#: templates/social/admin/group.html:71 templates/workingset/index.html:291
+#: templates/workingset/index.html:299
+msgid "Add Tags"
+msgstr "加标签"
+
+#: templates/bookmarkbook/notes/addNote.html:65
+#: templates/scrapbook/notes/addNote.html:69
+msgid "More"
+msgstr "更多"
+
+#: templates/bookmarkbook/notes/addNote.html:71
+#: templates/scrapbook/notes/addNote.html:75
+msgid "Vote"
+msgstr "自打分重要性"
+
+#: templates/bookmarkbook/notes/addNote.html:74
+#: templates/include/groups_menu.html:8
+#: templates/include/notes_display.html:61
+#: templates/scrapbook/notes/addNote.html:78 templates/social/groups.html:60
+msgid "private"
+msgstr "隐私"
+
+#: templates/bookmarkbook/notes/addNote.html:77
+#: templates/bookmarkbook/notes/notesdisplay.html:27
+#: templates/include/notesdisplay.html:32 templates/notes/notesdisplay.html:23
+#: templates/scrapbook/notes/addNote.html:60
+#: templates/scrapbook/notes/notesdisplay.html:22
+#: templates/snippetbook/notes/notesdisplay.html:28
+#: templates/social/groups.html:39 templates/workingset/index.html:256
+msgid "Desc"
+msgstr "正文"
+
+#: templates/bookmarkbook/notes/folders.html:21
+#: templates/notes/folders.html:46 templates/scrapbook/notes/folders.html:18
+#: templates/snippetbook/notes/folders.html:25
+msgid "Please select a folder from the right menu."
+msgstr "请从右边菜单里选择一个文件夹。"
+
+#: templates/bookmarkbook/notes/folders_ special_side_menu.html:4
+msgid "Bookmarkbook"
+msgstr "网址本"
+
+#: templates/bookmarkbook/notes/folders_ special_side_menu.html:4
+msgid ""
+"A bookmarkbook is dynamic set of bookmarks that are selected based on "
+"certain queries."
+msgstr "一个网址本是一组动态的基于搜索的网址。"
+
+#: templates/bookmarkbook/notes/folders_ special_side_menu.html:5
+#: templates/include/folders_ templates/include/friends_menu.html:5
+#: templates/include/groups_menu.html:4 templates/include/sites_header.html:52
+#: templates/include/toggle_tag_menu.html:24
+#: templates/scrapbook/notes/folders_ templates/snippetbook/notes/folders_
+msgid "Settings"
+msgstr "设置"
+
+#: templates/bookmarkbook/notes/import.html:13
+msgid "Import bookmarks from your bookmark file"
+msgstr "从网址（即书签）文件里导入书签"
+
+#: templates/bookmarkbook/notes/import.html:17
+msgid "Bookmark file"
+msgstr "网址（即书签）文件"
+
+#: templates/bookmarkbook/notes/import.html:20
+msgid "Advanced Options"
+msgstr "高级选项"
+
+#: templates/bookmarkbook/notes/import.html:21
+msgid "Default vote for all bookmarks imported from this file"
+msgstr "文件里所有网址（即书签）的缺省重要性"
+
+#: templates/bookmarkbook/notes/import.html:21
+msgid "Enter a integer number here. Default is 0."
+msgstr "这里输入一个整数。缺省为0。"
+
+#: templates/bookmarkbook/notes/import.html:22
+msgid "Ignore folders in the bookmark file"
+msgstr "忽略网址文件里的文件夹信息。"
+
+#: templates/bookmarkbook/notes/import.html:23
+msgid ""
+"If not ignoring folders in the bookmark file, the folders in the bookmark "
+"file will be converted into tags, and urls in those folders will be tagged "
+"accordingly."
+msgstr ""
+"如果不忽略书签文件里的文件夹，这些文件夹将被变成标签，而文件夹里的urls会相应"
+"的被赋予这些标签。"
+
+#: templates/bookmarkbook/notes/import.html:26
+msgid "Import from a bookmark file that is exported from delicious"
+msgstr "从delicious导出的文件导入"
+
+#: templates/bookmarkbook/notes/import.html:27
+msgid ""
+"Delicious exported bookmark file has tags as an attribute inside the A tag."
+msgstr "Delicious 导出的书签文件有标签作为attribute在A tag里。"
+
+#: templates/bookmarkbook/notes/import.html:29
+msgid "Apply a common tag to all bookmarks imported"
+msgstr "为所有导入的网址加同一个标签"
+
+#: templates/bookmarkbook/notes/import.html:32
+msgid "Apply a working set to all tags imported"
+msgstr "为所有导入的标签加一个工作区"
+
+#: templates/bookmarkbook/notes/import.html:33
+msgid "A working set is a set of tags that you work with in your app."
+msgstr "一个工作区是一组你用来工作的标签。"
+
+#: templates/bookmarkbook/notes/import.html:40
+msgid ""
+"So far can only import from html files. You can upload the same file "
+"multiple times. The bookmarks created won't be created again. The new tags "
+"will be added. The new working set will be added to as well. But the default "
+"vote won't be updated."
+msgstr ""
+"目前只能导入html文件。你可以多次上传同一个文件。 网址（即书签）不会被重复生"
+"成。新标签会被加入。新工作区也会被加入。但是缺省的重要性值不会被更新。"
+
+#: templates/bookmarkbook/notes/import_success.html:3
+msgid "return to"
+msgstr "回到"
+
+#: templates/bookmarkbook/notes/import_success.html:5
+msgid "urls altogether in the bookmark file."
+msgstr "urls 在书签文件里。"
+
+#: templates/bookmarkbook/notes/import_success.html:8
+msgid "Folders in the bookmark file are ignored."
+msgstr "书签文件里的文件夹将被忽略。"
+
+#: templates/bookmarkbook/notes/import_success.html:10
+msgid "tags are created, and added to bookmark working set."
+msgstr "标签生成了，并加入了书签工作区"
+
+#: templates/bookmarkbook/notes/import_success.html:14
+msgid "bookmarks are imported"
+msgstr "书签导入了"
+
+#: templates/bookmarkbook/notes/import_success.html:18
+msgid "bookmarks are duplicated"
+msgstr "书签重复"
+
+#: templates/bookmarkbook/notes/import_success.html:21
+msgid "Replace with this one"
+msgstr "替换成这个"
+
+#: templates/bookmarkbook/notes/note.html:10
+#: templates/notes/linkagenote.html:9 templates/notes/note.html:9
+#: templates/scrapbook/notes/note.html:9
+#: templates/snippetbook/notes/linkagenote.html:9
+#: templates/snippetbook/notes/note.html:9
+msgid "This one is private. Sorry you have no permission to view it!"
+msgstr "隐私部分。你没有权限浏览。"
+
+#: templates/bookmarkbook/notes/note_list_base.html:13
+#: templates/bookmarkbook/notes/todelete/displaynotes.html:13
+#: templates/include/todelete/frame.html:6
+#: templates/include/todelete/frame.html:13
+#: templates/notes/note_list_base.html:11
+#: templates/scrapbook/notes/note_list_base.html:13
+#: templates/scrapbook/notes/todelete/displaynotes.html:4
+#: templates/snippetbook/notes/note_list_base.html:17
+#: templates/snippetbook/notes/todelete/displaynotes.html:621
+#, python-format
+msgid "Notetbook of %(profile_username)s"
+msgstr "%(profile_username)s的笔记本"
+
+#: templates/bookmarkbook/notes/note_list_base.html:17
+#: templates/notes/folders.html:19 templates/notes/note_list_base.html:18
+#: templates/scrapbook/notes/note_list_base.html:17
+#: templates/snippetbook/notes/note_list_base.html:21
+#: templates/social/group_notes.html:18 templates/social/social_notes.html:24
+#: templates/social/wall_snippets.html:25
+msgid "Snippets"
+msgstr "便条"
+
+#: templates/bookmarkbook/notes/note_list_base.html:18
+#: templates/include/profile_header.html:17
+#: templates/include/profile_header.html:19
+#: templates/include/sites_header.html:26
+#: templates/include/sites_header.html:28 templates/notes/folders.html:21
+#: templates/notes/note_list_base.html:20
+#: templates/scrapbook/notes/note_list_base.html:18
+#: templates/snippetbook/notes/note_list_base.html:22
+#: templates/social/group_notes.html:19 templates/social/social_notes.html:25
+#: templates/social/wall_snippets.html:28
+#: templates/social/wall_snippets.html:30
+#: templates/social/wall_snippets.html:42
+msgid "Bookmarks"
+msgstr "网址"
+
+#: templates/bookmarkbook/notes/note_list_base.html:18
+#: templates/notes/folders.html:23 templates/notes/note_list_base.html:22
+#: templates/scrapbook/notes/note_list_base.html:18
+#: templates/snippetbook/notes/note_list_base.html:22
+#: templates/social/group_notes.html:19 templates/social/social_notes.html:25
+#: templates/social/wall_snippets.html:33
+#: templates/social/wall_snippets.html:35
+#: templates/social/wall_snippets.html:43
+msgid "Scraps"
+msgstr "网摘"
+
+#: templates/bookmarkbook/notes/note_list_base.html:20
+#: templates/bookmarkbook/notes/notes.html:11
+#: templates/bookmarkbook/notes/notes.html:13
+#: templates/include/note_list_base.html:805
+#: templates/include/note_list_base.html:807
+#: templates/include/note_list_base.html:871
+#: templates/include/note_list_base.html:873
+#: templates/include/notesdisplay.html:94 templates/notes/folders.html:25
+#: templates/notes/linkagenotesdisplay.html:61
+#: templates/notes/note_list_base.html:24 templates/notes/notes.html:11
+#: templates/notes/notes.html.py:13
+#: templates/scrapbook/notes/note_list_base.html:20
+#: templates/scrapbook/notes/notes.html:11
+#: templates/scrapbook/notes/notes.html:13
+#: templates/snippetbook/notes/linkagenotesdisplay.html:61
+#: templates/snippetbook/notes/note_list_base.html:24
+#: templates/snippetbook/notes/notes.html:11
+#: templates/snippetbook/notes/notes.html:13
+#: templates/social/group_notes.html:21 templates/social/social_notes.html:27
+#: templates/tags/index.html:182 templates/workingset/index.html:288
+msgid "All"
+msgstr "所有"
+
+#: templates/bookmarkbook/notes/note_list_base.html:20
+#: templates/notes/folders.html:25
+#: templates/scrapbook/notes/note_list_base.html:20
+#: templates/snippetbook/notes/note_list_base.html:24
+#: templates/social/group_notes.html:21 templates/social/social_notes.html:27
+msgid "linkiages"
+msgstr "链条"
+
+#: templates/bookmarkbook/notes/notes.html:9 templates/notes/notes.html:9
+#: templates/scrapbook/notes/notes.html:9
+#: templates/snippetbook/notes/notes.html:9
+msgid "In linkages"
+msgstr "在链条里的"
+
+#: templates/bookmarkbook/notes/notes.html:16
+#: templates/bookmarkbook/notes/notes.html:18
+#: templates/include/note_list_base.html:790
+#: templates/include/note_list_base.html:792
+#: templates/include/note_list_base.html:811
+#: templates/include/note_list_base.html:813
+#: templates/include/note_list_base.html:877
+#: templates/include/note_list_base.html:879 templates/notes/notes.html:16
+#: templates/notes/notes.html.py:18 templates/scrapbook/notes/notes.html:16
+#: templates/scrapbook/notes/notes.html:18
+#: templates/snippetbook/notes/notes.html:16
+#: templates/snippetbook/notes/notes.html:18
+msgid "Yes"
+msgstr "是"
+
+#: templates/bookmarkbook/notes/notes_display.html:9
+#: templates/notes/notes_display.html:7 templates/notes/notes_display.html:25
+#: templates/snippetbook/notes/notes_display.html:8
+#: templates/snippetbook/notes/notes_display.html:26
+#: templates/social/bookmarksdisplay.html:11
+#: templates/social/bookmarksdisplay.html:36
+#: templates/social/scrapsdisplay.html:35
+#: templates/social/snippetsdisplay.html:11
+#: templates/social/snippetsdisplay.html:36
+msgid "note title"
+msgstr "笔记标题"
+
+#: templates/bookmarkbook/notes/notes_display.html:9
+#: templates/bookmarkbook/notes/notes_display.html:27
+#: templates/notes/linkagenotesdisplay.html:109
+#: templates/notes/linkagenotesdisplay.html:155
+#: templates/notes/notes_display.html:7 templates/notes/notes_display.html:25
+#: templates/scrapbook/notes/notes_display.html:36
+#: templates/snippetbook/notes/linkagenotesdisplay.html:109
+#: templates/snippetbook/notes/linkagenotesdisplay.html:155
+#: templates/snippetbook/notes/notes_display.html:8
+#: templates/snippetbook/notes/notes_display.html:26
+#: templates/social/bookmarksdisplay.html:11
+#: templates/social/bookmarksdisplay.html:36
+#: templates/social/scrapsdisplay.html:35
+#: templates/social/snippetsdisplay.html:11
+#: templates/social/snippetsdisplay.html:36
+msgid "(No Title)"
+msgstr "（无标题）"
+
+#: templates/bookmarkbook/notes/notes_display.html:11
+#: templates/scrapbook/notes/notes_display.html:8
+msgid "note url"
+msgstr "笔记标题"
+
+#: templates/bookmarkbook/notes/notes_display.html:14
+#: templates/notes/notes_display.html:12 templates/notes/notes_display.html:30
+#: templates/scrapbook/notes/notes_display.html:12
+#: templates/snippetbook/notes/notes_display.html:13
+#: templates/snippetbook/notes/notes_display.html:31
+#: templates/social/bookmarksdisplay.html:17
+#: templates/social/notesdisplay.html:78
+#: templates/social/scrapsdisplay.html:13
+#: templates/social/snippetsdisplay.html:16
+msgid "note tags"
+msgstr "笔记标签"
+
+#: templates/bookmarkbook/notes/notes_display.html:47
+#: templates/bookmarkbook/notes/notes_display.html:52
+#: templates/include/add_comments_inline.html:44
+#: templates/include/add_comments_inline.html:49
+#: templates/notes/notes_display.html:49 templates/notes/notes_display.html:54
+#: templates/scrapbook/notes/notes_display.html:43
+#: templates/scrapbook/notes/notes_display.html:48
+#: templates/snippetbook/notes/notes_display.html:50
+#: templates/snippetbook/notes/notes_display.html:55
+#: templates/social/notesdisplay.html:100
+msgid "Comment"
+msgstr "评论"
+
+#: templates/bookmarkbook/notes/notes_display.html:49
+#: templates/notes/notes_display.html:51
+#: templates/scrapbook/notes/notes_display.html:45
+#: templates/snippetbook/notes/notes_display.html:52
+msgid "remove this comment"
+msgstr "去除这个评论"
+
+#: templates/bookmarkbook/notes/notes_display.html:52
+#: templates/bookmarkbook/notes/notes_display.html:55
+#: templates/include/add_comments_inline.html:49
+#: templates/include/add_comments_inline.html:52
+#: templates/notes/notes_display.html:54 templates/notes/notes_display.html:57
+#: templates/scrapbook/notes/notes_display.html:48
+#: templates/scrapbook/notes/notes_display.html:51
+#: templates/snippetbook/notes/notes_display.html:55
+#: templates/snippetbook/notes/notes_display.html:58
+#: templates/social/notesdisplay.html:105
+msgid "Add Comment"
+msgstr "添加评论"
+
+#: templates/bookmarkbook/notes/notes_display.html:56
+#: templates/include/add_comments_inline.html:53
+#: templates/notes/notes_display.html:58
+#: templates/scrapbook/notes/notes_display.html:52
+#: templates/snippetbook/notes/notes_display.html:59
+#: templates/social/notesdisplay.html:108
+msgid "Save Comment"
+msgstr "增加评论"
+
+#: templates/bookmarkbook/notes/notesdisplay.html:12
+msgid "Want to create a new bookmark"
+msgstr "想添加一个新书签"
+
+#: templates/bookmarkbook/notes/notesdisplay.html:12
+#: templates/scrapbook/notes/notesdisplay.html:12
+msgid "See"
+msgstr "看"
+
+#: templates/bookmarkbook/notes/notesdisplay.html:12
+#: templates/scrapbook/notes/notesdisplay.html:12
+msgid "how"
+msgstr "如何"
+
+#: templates/bookmarkbook/notes/notesdisplay.html:12
+#: templates/scrapbook/notes/notesdisplay.html:12
+msgid "you can add a button to your browser"
+msgstr "在你的浏览器里添加一个按钮"
+
+#: templates/bookmarkbook/notes/notesdisplay.html:12
+msgid "Or you can"
+msgstr "或者你可以"
+
+#: templates/bookmarkbook/notes/notesdisplay.html:12
+msgid "import"
+msgstr "导入"
+
+#: templates/bookmarkbook/notes/notesdisplay.html:15
+msgid "Add a new bookmark"
+msgstr "加一个新书签"
+
+#: templates/bookmarkbook/notes/notesdisplay.html:22
+#: templates/scrapbook/notes/notesdisplay.html:27
+msgid "URL"
+msgstr ""
+
+#: templates/bookmarkbook/notes/notesdisplay.html:23
+#: templates/include/notesdisplay.html:35 templates/notes/notesdisplay.html:27
+#: templates/scrapbook/notes/notesdisplay.html:28
+#: templates/snippetbook/notes/notesdisplay.html:32
+msgid "Title"
+msgstr "标题"
+
+#: templates/bookmarkbook/notes/notesdisplay.html:24
+#: templates/include/note_list_base.html:803
+#: templates/include/notesdisplay.html:39 templates/notes/notesdisplay.html:25
+#: templates/scrapbook/notes/notesdisplay.html:29
+#: templates/snippetbook/notes/notesdisplay.html:22
+#: templates/snippetbook/notes/notesdisplay.html:30
+#: templates/social/groups.html:42
+msgid "Private"
+msgstr "隐私"
+
+#: templates/bookmarkbook/notes/notesdisplay.html:26
+#: templates/include/notesdisplay.html:33
+#: templates/include/toggle_tag_menu.html:9
+#: templates/notes/notesdisplay.html:24
+#: templates/scrapbook/notes/notesdisplay.html:24
+#: templates/snippetbook/notes/notesdisplay.html:29
+#: templates/workingset/index.html:255
+msgid "Tags"
+msgstr "标签"
+
+#: templates/bookmarkbook/notes/notesdisplay.html:28
+#: templates/scrapbook/notes/notesdisplay.html:23
+msgid "Extra"
+msgstr "额外"
+
+#: templates/bookmarkbook/notes/search.html:5
+msgid "search bookmarks"
+msgstr "搜索网址"
+
+#: templates/bookmarkbook/notes/search.html:8 templates/include/search.html:9
+#: templates/scrapbook/notes/search.html:8 templates/social/search.html:8
+msgid "Or Search on comments"
+msgstr "或者在评论上搜索"
+
+#: templates/doc/for_new_users.html:4
+msgid "New User Guide"
+msgstr "新用户指南"
+
+#: templates/doc/for_new_users.html:6
+msgid ""
+"Notebook so far has three books: snippetbook (a collection of snippets or "
+"notes), bookmarks book (a collection of bookmarks), scrapbook (a collection "
+"of scraps)."
+msgstr ""
+"笔记本目前有三个本：便条本（记录便条），网址本（收集网址），网摘本（收集网页"
+"摘录）。"
+
+#: templates/doc/for_new_users.html:9
+msgid ""
+"For the convenience of adding bookmarks, you can drag the link below to your "
+"browser bookmark bar."
+msgstr "为了方便加书签，您可以将下面这个链接拖到你的浏览器的书签栏里去。"
+
+#: templates/doc/for_new_users.html:14
+msgid ""
+"For the convenience of adding scraps, you can drag the link below to your "
+"browser bookmark bar."
+msgstr "为了方便加摘录，您可以将下面这个链接拖到你的浏览器的书签栏里去。"
+
+#: templates/doc/for_new_users.html:15
+#: templates/scrapbook/notes/addNote.html:48
+msgid "Add a scrap"
+msgstr "加一个摘录"
+
+#: templates/doc/for_new_users.html:19
+msgid ""
+"There are two tags automatically added when a new user is generated: "
+"untagged, notebook feedbacks. \"untagged\" is the default tag used for all "
+"stuff not tagged. \"notebook feedbacks\" is used for users to provide "
+"feedbacks on this notebook application."
+msgstr ""
+"当增加一个新的用户时，系统自动为其生成两个标签：untagged, notebook "
+"feedbacks。 \"untagged\"是一切没有无标签项的缺省标签。\"notebook feedbacks"
+"\"是供用户对本笔记本应用程序提出反馈。"
+
+#: templates/doc/for_new_users.html:22
+msgid "About folder"
+msgstr "关于文件夹的更多信息"
+
+#: templates/doc/for_new_users.html:22
+msgid ""
+"A folder is dynamic set of notes/bookmarks/scraps that are selected based on "
+"certain queries."
+msgstr "一个文件夹是一组动态的基于搜索的便条/网址/网摘。"
+
+#: templates/doc/for_new_users.html:25
+msgid "About search"
+msgstr "关于搜索"
+
+#: templates/doc/for_new_users.html:25
+msgid ""
+"You can do some complex searches in the search box. Below are the sample "
+"queries"
+msgstr "你可以在搜索框里做一些复杂的搜索。下面是一些例子。"
+
+#: templates/doc/for_new_users.html:28
+msgid "Note on notation"
+msgstr "标注说明"
+
+#: templates/doc/for_new_users.html:42
+msgid "Below are for advanced users only"
+msgstr "下面的仅供高级用户"
+
+#: templates/doc/for_new_users.html:44
+msgid "About working set"
+msgstr "关于工作区"
+
+#: templates/doc/for_new_users.html:44 templates/include/tags_menu.html:44
+msgid ""
+"A working set is a set of tags that you can work with when viewing stuff in "
+"the notebook. If you have a lot of tags, it is a good idea to choose a "
+"working set of tags to work with at certain times."
+msgstr ""
+"一个工作区是一组标签，你可以用来浏览或记录你的笔记本。如果你使用很多的标签，"
+"可以用工作区来只使用这个工作区的标签来浏览或记录你的笔记本。"
+
+#: templates/doc/for_new_users.html:47
+msgid "About linkage"
+msgstr "关于链条"
+
+#: templates/doc/for_new_users.html:47
+msgid ""
+"Linkage is a set of notes/bookmarks/scraps linked together because they are "
+"tightly related. For example, they come from the same event, or they are of "
+"the same topic."
+msgstr ""
+"链条是链起来的一组便条/网址/网摘，因为它们是很紧密相关的。例如，它们是来自于"
+"同一件事，或者它们属于同一个主题。"
+
+#: templates/folders/index.html:11
+msgid "Create a new folder"
+msgstr "产生一个新的便条"
+
+#: templates/folders/index.html:11
+msgid ""
+"Recommended way of creating a folder is: do a search first, then save that "
+"search as a folder."
+msgstr "建议的创建文件夹的方式是先做一个搜索，然后把那个搜索存成一个文件夹。"
+
+#: templates/include/caches_section.html:5
+msgid "Notes in cache"
+msgstr "缓存区的便条"
+
+#: templates/include/caches_section.html:5
+msgid "Show cache section"
+msgstr "显示缓存区"
+
+#: templates/include/caches_section.html:5
+msgid "Hide cache section"
+msgstr "隐藏缓存区"
+
+#: templates/include/caches_section.html:13
+#: templates/include/caches_section.html:15
+#: templates/include/note_list_base.html:337
+#: templates/include/note_list_base.html:347
+#: templates/snippetbook/notes/todelete/displaynotes.html:252
+#: templates/snippetbook/notes/todelete/displaynotes.html:262
+msgid "cache"
+msgstr "缓存"
+
+#: templates/include/caches_section.html:13
+#: templates/include/caches_section.html:15
+#: templates/include/note_list_base.html:337
+#: templates/snippetbook/notes/todelete/displaynotes.html:252
+msgid "View"
+msgstr "浏览"
+
+#: templates/include/caches_section.html:13
+#: templates/include/caches_section.html:15
+#: templates/include/note_list_base.html:337
+#: templates/snippetbook/notes/todelete/displaynotes.html:252
+msgid "Clear"
+msgstr "清除"
+
+#: templates/include/folders_ special_side_menu.html:4
+#: templates/include/sites_header.html:7
+msgid "Notebook"
+msgstr "笔记本"
+
+#: templates/include/folders_ special_side_menu.html:4
+msgid ""
+"A notebook is dynamic set of snippets/bookmarks/scraps that are selected "
+"based on certain queries."
+msgstr "一个笔记本是一组动态的基于搜索的便条/网址/网摘。"
+
+#: templates/include/folders_help_message_if_none.html:6
+msgid ""
+"You don't have a folder yet. You can try creating a folder by doing a query."
+msgstr "你还没有动态文件夹。你可以通过搜索产生一个文件夹。"
+
+#: templates/include/folders_help_message_if_none.html:7
+msgid "More about query."
+msgstr "关于搜索的更多信息"
+
+#: templates/include/folders_help_message_if_none.html:8
+msgid "More about folder."
+msgstr "关于文件夹的更多信息"
+
+#: templates/include/friends_menu.html:5
+msgid "My Friends"
+msgstr "我的朋友"
+
+#: templates/include/groups_menu.html:4 templates/include/sites_header.html:10
+msgid "Learning Groups"
+msgstr "学习小组"
+
+#: templates/include/groups_menu.html:10
+#: templates/include/notes_display.html:64 templates/social/groups.html:62
+msgid "public"
+msgstr "公开"
+
+#: templates/include/note_list_base.html:420
+#: templates/snippetbook/notes/todelete/displaynotes.html:335
+msgid ""
+"If you join this group, any note you make that is tagged with any of the tag "
+"of this group will be pushed to this group. Private note, however, will not "
+"be pushed, unless you specifically want to share it with a group."
+msgstr ""
+"如果你加入这个小组，你做的笔记，只要加了这个小组使用的同样的标签，就会自动的"
+"被添加到这个小组里。但是隐私的笔记不会。隐私的笔记永远在你的私人笔记本里，除"
+"非你有意的要分享给某个小组。"
+
+#: templates/include/note_list_base.html:796
+#: templates/include/note_list_base.html:798
+#: templates/include/note_list_base.html:817
+#: templates/include/note_list_base.html:819
+msgid "No"
+msgstr "否"
+
+#: templates/include/note_list_base.html:826
+msgid "Date Range"
+msgstr "时间范围"
+
+#: templates/include/note_list_base.html:831
+#: templates/include/note_list_base.html:833
+msgid "Any day"
+msgstr "任何天"
+
+#: templates/include/note_list_base.html:837
+#: templates/include/note_list_base.html:839
+msgid "Today"
+msgstr "今天"
+
+#: templates/include/note_list_base.html:843
+#: templates/include/note_list_base.html:845
+msgid "Past 7 Days"
+msgstr "过去7天"
+
+#: templates/include/note_list_base.html:849
+#: templates/include/note_list_base.html:851
+msgid "This Month"
+msgstr "本月"
+
+#: templates/include/note_list_base.html:854
+msgid "This Season"
+msgstr "本季度"
+
+#: templates/include/note_list_base.html:857
+#: templates/include/note_list_base.html:859
+msgid "This Year"
+msgstr "今年"
+
+#: templates/include/note_list_base.html:864
+msgid "Pick a Range"
+msgstr "选择一个范围"
+
+#: templates/include/note_list_base.html:869
+msgid "With attachment"
+msgstr "有附件的"
+
+#: templates/include/note_list_base.html:905
+#: templates/include/sort_menu.html:5 templates/social/sort_menu.html:5
+msgid "Sorting"
+msgstr "排序"
+
+#: templates/include/note_list_base.html:908
+#: templates/include/note_list_base.html:910
+#: templates/include/sort_menu.html:14 templates/include/sort_menu.html:16
+#: templates/social/sort_menu.html:20 templates/social/sort_menu.html.py:22
+msgid "By Importance"
+msgstr "根据重要性"
+
+#: templates/include/note_list_base.html:914
+#: templates/include/note_list_base.html:916
+#: templates/include/sort_menu.html:8 templates/include/sort_menu.html:10
+#: templates/social/sort_menu.html:8 templates/social/sort_menu.html.py:10
+msgid "By Creation Date"
+msgstr "根据生成时间"
+
+#: templates/include/note_list_base.html:920
+#: templates/include/note_list_base.html:922
+#: templates/include/sort_menu.html:20 templates/include/sort_menu.html:22
+#: templates/social/sort_menu.html:26 templates/social/sort_menu.html.py:28
+msgid "By Last Modification Date"
+msgstr "根据最后一次修改时间"
+
+#: templates/include/note_list_base.html:926
+#: templates/include/note_list_base.html:928
+#: templates/include/sort_menu.html:26 templates/include/sort_menu.html:28
+#: templates/social/sort_menu.html:32 templates/social/sort_menu.html.py:34
+msgid "By Title"
+msgstr "根据标题"
+
+#: templates/include/note_list_base.html:932
+#: templates/include/note_list_base.html:934
+#: templates/include/sort_menu.html:32 templates/include/sort_menu.html:34
+#: templates/social/sort_menu.html:38 templates/social/sort_menu.html.py:40
+msgid "By Desc"
+msgstr "根据正文"
+
+#: templates/include/note_list_base.html:937
+msgid "Order Type"
+msgstr "升降种类"
+
+#: templates/include/note_list_base.html:939
+#: templates/include/note_list_base.html:941
+msgid "Descend"
+msgstr "降序"
+
+#: templates/include/note_list_base.html:944
+#: templates/include/note_list_base.html:946
+msgid "Ascend"
+msgstr "升序"
+
+#: templates/include/note_list_base.html:955
+msgid "Archive"
+msgstr "存档"
+
+#: templates/include/note_list_base.html:961
+msgid "Managing"
+msgstr "管理"
+
+#: templates/include/note_list_base.html:962 templates/tags/index.html:104
+msgid "Manage Tags"
+msgstr "管理标签"
+
+#: templates/include/note_list_base.html:963
+msgid "Manage Folders"
+msgstr "管理文件夹"
+
+#: templates/include/note_list_base.html:976
+msgid "My Learning Groups"
+msgstr "我的学习小组"
+
+#: templates/include/note_list_base.html:977
+msgid "Create a Learning Group"
+msgstr "创建一个学习小组"
+
+#: templates/include/notes_display.html:73
+msgid "Importance"
+msgstr "重要性"
+
+#: templates/include/notes_display.html:75
+msgid "Rank Up Importance"
+msgstr "增加重要性"
+
+#: templates/include/notes_display.html:76
+msgid "Rank Down Importance"
+msgstr "降低重要性"
+
+#: templates/include/notes_display.html:80
+msgid "soft delete"
+msgstr "软删除"
+
+#: templates/include/notes_display.html:98
+msgid "top"
+msgstr "顶"
+
+#: templates/include/notesdisplay.html:27
+msgid "Create a linkage"
+msgstr "生成一个链条"
+
+#: templates/include/notesdisplay.html:31
+msgid "Type of linkage"
+msgstr "链条类型"
+
+#: templates/include/notesdisplay.html:37 templates/notes/notesdisplay.html:29
+#: templates/snippetbook/notes/notesdisplay.html:34
+msgid "Attachment"
+msgstr "附件"
+
+#: templates/include/notesdisplay.html:59
+msgid "Folder"
+msgstr "文件夹"
+
+#: templates/include/notesdisplay.html:62
+msgid "Search term is"
+msgstr "搜索词条是"
+
+#: templates/include/notesdisplay.html:67
+msgid "Save this search as a folder"
+msgstr "将这个搜索存为一个文件夹"
+
+#: templates/include/notesdisplay.html:80
+#: templates/social/notesdisplay.html:18
+msgid "Show"
+msgstr "显示"
+
+#: templates/include/notesdisplay.html:81
+#: templates/social/notesdisplay.html:18
+msgid "Expanded"
+msgstr "展开"
+
+#: templates/include/notesdisplay.html:82
+#: templates/social/notesdisplay.html:18
+msgid "List"
+msgstr "表单"
+
+#: templates/include/notesdisplay.html:85
+#: templates/social/notesdisplay.html:20
+msgid "Stream"
+msgstr "流"
+
+#: templates/include/notesdisplay.html:85
+#: templates/social/notesdisplay.html:20
+msgid "Structuralize"
+msgstr "结构化"
+
+#: templates/include/notesdisplay.html:94
+#: templates/notes/linkagenotesdisplay.html:61
+#: templates/snippetbook/notes/linkagenotesdisplay.html:61
+#: templates/tags/index.html:182 templates/workingset/index.html:288
+msgid "Select"
+msgstr "选择"
+
+#: templates/include/notesdisplay.html:94
+#: templates/notes/linkagenotesdisplay.html:61
+#: templates/snippetbook/notes/linkagenotesdisplay.html:61
+#: templates/tags/index.html:182 templates/workingset/index.html:288
+msgid "None"
+msgstr "无"
+
+#: templates/include/notesdisplay.html:99
+#: templates/include/notesdisplay.html:107
+#: templates/include/notesdisplay.html:149 templates/workingset/index.html:292
+#: templates/workingset/index.html:300
+msgid "Remove Tags"
+msgstr "去除标签"
+
+#: templates/include/notesdisplay.html:104 templates/workingset/index.html:297
+msgid "Change Tags"
+msgstr "改标签"
+
+#: templates/include/notesdisplay.html:112
+msgid "Linking"
+msgstr "组成链条"
+
+#: templates/include/notesdisplay.html:114
+msgid "Make a linkage with selected notes"
+msgstr "将选取的便条生成一个链条"
+
+#: templates/include/notesdisplay.html:116
+msgid "Cache"
+msgstr "缓存"
+
+#: templates/include/notesdisplay.html:120
+#: templates/include/notesdisplay.html:122
+#: templates/include/notesdisplay.html:126
+msgid "Add selection to cache"
+msgstr "加选取的到缓存区"
+
+#: templates/include/notesdisplay.html:130
+msgid "Add selection to another cache"
+msgstr "加选取的到另一个缓存区"
+
+#: templates/include/notesdisplay.html:144 templates/tags/index.html:130
+msgid "Create new"
+msgstr "产生新的"
+
+#: templates/include/notesdisplay.html:145
+msgid "Add tags selected"
+msgstr "加选取的标签"
+
+#: templates/include/notesdisplay.html:156
+msgid "Remove tags selected"
+msgstr "去除选取的标签"
+
+#: templates/include/notesdisplay.html:160 templates/tags/index.html:146
+#: templates/workingset/index.html:304
+msgid "More actions"
+msgstr "更多操作"
+
+#: templates/include/notesdisplay.html:162
+msgid "Notes analysis"
+msgstr "便条分析"
+
+#: templates/include/notesdisplay.html:164
+msgid "Similar notes"
+msgstr "相似的便条"
+
+#: templates/include/notesdisplay.html:165
+msgid "Draw the map"
+msgstr "画图"
+
+#: templates/include/notesdisplay.html:166
+msgid "Diff"
+msgstr "不同"
+
+#: templates/include/notesdisplay.html:169
+msgid "Share"
+msgstr "分享"
+
+#: templates/include/notesdisplay.html:170 templates/tags/index.html:149
+#: templates/workingset/index.html:307
+msgid "Make private"
+msgstr "变隐私"
+
+#: templates/include/notesdisplay.html:171 templates/tags/index.html:150
+#: templates/workingset/index.html:308
+msgid "Make public"
+msgstr "变公开"
+
+#: templates/include/notesdisplay.html:172 templates/tags/index.html:151
+#: templates/workingset/index.html:309
+msgid "Soft Delete"
+msgstr "软删除"
+
+#: templates/include/notesdisplay.html:173
+msgid "Change the creation date"
+msgstr "改变生成的时间"
+
+#: templates/include/notesdisplay.html:174
+msgid "Apply a vote"
+msgstr "自评一个重要值"
+
+#: templates/include/notesdisplay.html:175
+msgid "Add event"
+msgstr ""
+
+#: templates/include/notesdisplay.html:176
+msgid "Add comment"
+msgstr "增加评论"
+
+#: templates/include/profile_header.html:10
+#: templates/include/profile_header.html:12
+#: templates/include/sites_header.html:19
+#: templates/include/sites_header.html:21 templates/snippetbook/notes/folders_
+#: special_side_menu.html:4
+msgid "Snippetbook"
+msgstr "便条本"
+
+#: templates/include/profile_header.html:24
+#: templates/include/profile_header.html:26
+#: templates/include/sites_header.html:33
+#: templates/include/sites_header.html:35 templates/scrapbook/notes/folders_
+#: special_side_menu.html:4
+msgid "Scrapbook"
+msgstr "摘录本"
+
+#: templates/include/search.html:5
+msgid "search snippets"
+msgstr "搜索便条"
+
+#: templates/include/sites_header.html:13
+msgid "Friends"
+msgstr "我的朋友"
+
+#: templates/include/sites_header.html:46
+msgid "For new users"
+msgstr "新用户帮助"
+
+#: templates/include/sites_header.html:49
+msgid "Doc"
+msgstr "文档"
+
+#: templates/include/sort_menu.html:42
+msgid "down"
+msgstr "下"
+
+#: templates/include/sort_menu.html:45
+msgid "up"
+msgstr "上"
+
+#: templates/include/tags_menu.html:4
+msgid "Tag"
+msgstr "标签"
+
+#: templates/include/tags_menu.html:43
+#, python-format
+msgid "Your current working set of tags is %(current_ws)s."
+msgstr "你当前工作区是%(current_ws)s"
+
+#: templates/include/tags_menu.html:45
+msgid "Pick another one."
+msgstr "另选一个"
+
+#: templates/include/tags_menu.html:53 templates/include/tags_menu.html:55
+#: templates/social/tags_menu.html:9 templates/social/tags_menu.html.py:11
+msgid "all tags"
+msgstr "所有标签"
+
+#: templates/include/tags_menu.html:59
+msgid "Loading tags..."
+msgstr "载入。。。"
+
+#: templates/include/toggle_tag_menu.html:6
+msgid "Show tags"
+msgstr "显示标签"
+
+#: templates/include/toggle_tag_menu.html:6
+msgid "Hide tags"
+msgstr "隐藏标签"
+
+#: templates/include/toggle_tag_menu.html:10
+msgid "in"
+msgstr "属于"
+
+#: templates/include/toggle_tag_menu.html:20
+msgid "You can use working set to pick a set of tags to work with."
+msgstr "一个工作区是一组你用来工作的标签。"
+
+#: templates/notes/folders.html:5 templates/snippetbook/notes/folders.html:5
+msgid "folders"
+msgstr "文件夹"
+
+#: templates/notes/folders.html:12
+#, python-format
+msgid "%(profile_username)s's Folder %(current_folder)s"
+msgstr "%(profile_username)s的文件夹%(current_folder)s"
+
+#: templates/notes/linkagenotesdisplay.html:71
+#: templates/snippetbook/notes/linkagenotesdisplay.html:71
+msgid "bottom"
+msgstr "底"
+
+#: templates/notes/linkagenotesdisplay.html:71
+#: templates/snippetbook/notes/linkagenotesdisplay.html:71
+msgid "Expand all"
+msgstr "扩展所有的"
+
+#: templates/notes/linkagenotesdisplay.html:198
+#: templates/snippetbook/notes/linkagenotesdisplay.html:198
+msgid ""
+"When editing, replace content with comma separated note ids. And those notes "
+"will be included in this linkage."
+msgstr ""
+"编辑时将内容替换成逗号分隔的note ids，所有的在内的便条都会被加到链条里去。"
+
+#: templates/notes/linkages.html:11 templates/notes/note_list_base.html:36
+#: templates/notes/note_list_base.html:38
+#: templates/scrapbook/notes/linkages.html:11
+#: templates/snippetbook/notes/linkages.html:11
+#: templates/snippetbook/notes/note_list_base.html:51
+#: templates/snippetbook/notes/note_list_base.html:53
+msgid "Linkages"
+msgstr "链条"
+
+#: templates/notes/linkages.html:12 templates/scrapbook/notes/linkages.html:12
+#: templates/snippetbook/notes/linkages.html:12
+msgid "All Linkages"
+msgstr "所有链条"
+
+#: templates/notes/linkages.html:13 templates/scrapbook/notes/linkages.html:13
+#: templates/snippetbook/notes/linkages.html:13
+msgid "Same Topic"
+msgstr "同一个主题"
+
+#: templates/notes/linkages.html:14 templates/scrapbook/notes/linkages.html:14
+#: templates/snippetbook/notes/linkages.html:14
+msgid "Same Event"
+msgstr "同一个事件"
+
+#: templates/notes/note_list_base.html:31
+#: templates/notes/note_list_base.html:33
+#: templates/snippetbook/notes/note_list_base.html:46
+#: templates/snippetbook/notes/note_list_base.html:48
+#: templates/social/wall_snippets.html:23
+#: templates/social/wall_snippets.html:41
+msgid "Notes"
+msgstr "便条"
+
+#: templates/notes/note_list_base.html:41
+#: templates/notes/note_list_base.html:43
+#: templates/snippetbook/notes/note_list_base.html:56
+#: templates/snippetbook/notes/note_list_base.html:58
+msgid "Folders"
+msgstr "文件夹"
+
+#: templates/notes/notes_display.html:9 templates/notes/notes_display.html:27
+#: templates/scrapbook/notes/notes_display.html:10
+#: templates/snippetbook/notes/notes_display.html:10
+#: templates/snippetbook/notes/notes_display.html:28
+#: templates/social/scrapsdisplay.html:11
+#: templates/social/scrapsdisplay.html:37
+#: templates/social/snippetsdisplay.html:13
+#: templates/social/snippetsdisplay.html:38
+msgid "note desc"
+msgstr "笔记正文"
+
+#: templates/notes/notes_display.html:39
+#: templates/snippetbook/notes/notes_display.html:40
+#: templates/social/notesdisplay.html:90
+msgid "initial creation time"
+msgstr "生成的时间"
+
+#: templates/notes/notes_display.html:40
+#: templates/snippetbook/notes/notes_display.html:41
+#: templates/social/notesdisplay.html:91
+msgid "last modified time"
+msgstr "最后修改时间"
+
+#: templates/notes/notes_display.html:43
+#: templates/snippetbook/notes/notes_display.html:44
+#: templates/social/notesdisplay.html:94
+msgid "attachment"
+msgstr "附件"
+
+#: templates/notes/notes_display.html:46
+#: templates/snippetbook/notes/notes_display.html:47
+msgid "note linkages"
+msgstr "在链条里的"
+
+#: templates/notes/notesdisplay.html:10
+#: templates/snippetbook/notes/notesdisplay.html:11
+msgid "Record your experience/thought"
+msgstr "记录你的感受或想法"
+
+
+#: templates/notes/notesdisplay.html:20
+#: templates/snippetbook/notes/notesdisplay.html:25
+msgid ""
+"A short snippet is enough to represent a significant experience. Practice on "
+"that. :-)"
+msgstr "一个短的便条足够表达一个重要的感受。练习一下。:-)"
+
+#: templates/notes/notesdisplay.html:28
+#: templates/snippetbook/notes/notesdisplay.html:33
+msgid "Event"
+msgstr "事件"
+
+#: templates/registration/login.html:7
+msgid "A simple notebook that helps you learn"
+msgstr "一个简单的帮你学习的笔记本"
+
+#: templates/registration/login.html:10
+msgid "Your username and password didn't match. Please try again."
+msgstr "你的用户名和密码不对。请重新输入。"
+
+#: templates/registration/login.html:25
+msgid "login"
+msgstr "登录"
+
+#: templates/registration/login.html:29
+msgid "Recommended browsers for visiting this sites: Chrome, Firefox, Opera."
+msgstr "访问本站，建议使用以下浏览器：Chrome, Firefox, Opera。"
+
+#: templates/scrapbook/notes/folders_ special_side_menu.html:4
+msgid ""
+"A scrapbook is dynamic set of scraps that are selected based on certain "
+"queries."
+msgstr "一个网摘本是一组动态的基于某个搜索的网摘。"
+
+#: templates/scrapbook/notes/notesdisplay.html:12
+msgid "Want to create a new scrap"
+msgstr "想添加一个新的网摘"
+
+#: templates/scrapbook/notes/notesdisplay.html:15
+msgid "Add a new scrap"
+msgstr "加新摘录"
+
+#: templates/scrapbook/notes/search.html:5
+msgid "search scraps"
+msgstr "搜索网摘"
+
+#: templates/settings/index.html:6 templates/settings/index.html.py:10
+msgid "Settings of your acccount"
+msgstr "你的帐号的设置"
+
+#: templates/settings/index.html:14
+msgid "Update user info"
+msgstr "更新用户信息"
+
+#: templates/settings/index.html:20
+msgid "Update"
+msgstr "更新"
+
+#: templates/settings/index.html:26
+msgid "You are currently using advanced features. You can swtich to"
+msgstr "你目前使用的是高级功能。你可以切换到"
+
+#: templates/settings/index.html:26
+msgid "normal features"
+msgstr "普通功能。"
+
+#: templates/settings/index.html:28
+msgid "You are currently using normal features. You can swtich to"
+msgstr "你目前使用的是普通功能。你可以切换到"
+
+#: templates/settings/index.html:28
+msgid "advanced features"
+msgstr "高级功能"
+
+#: templates/settings/index.html:32
+msgid "Tags settings"
+msgstr "标签设置"
+
+#: templates/settings/index.html:34
+msgid "Working Sets settings"
+msgstr "工作区设置"
+
+#: templates/snippetbook/notes/folders_ special_side_menu.html:4
+msgid ""
+"A snippetbook is dynamic set of snippets that are selected based on certain "
+"queries."
+msgstr "一个便条本是一组动态的基于某个搜索的便条。"
+
+#: templates/snippetbook/notes/notesdisplay.html:11
+msgid "Show adding snippet"
+msgstr "显示加便条"
+
+#: templates/snippetbook/notes/notesdisplay.html:11
+msgid "Hide adding snippet"
+msgstr "隐藏加便条"
+
+#: templates/snippetbook/notes/notesdisplay.html:24
+msgid "Short snippet is recommended (less than 300 characters)"
+msgstr "建议短便条（少于60字）"
+
+#: templates/social/bookmarksdisplay.html:23
+#: templates/social/scrapsdisplay.html:19
+#: templates/social/snippetsdisplay.html:22
+msgid "snippet's owner"
+msgstr "便条的原作者"
+
+#: templates/social/friends.html:6 templates/social/friends.html.py:12
+#, python-format
+msgid " %(user)s's Friends "
+msgstr "%(user)s的朋友"
+
+#: templates/social/friends.html:21
+#, python-format
+msgid "Friends of %(user)s "
+msgstr "%(user)s的朋友"
+
+#: templates/social/group.html:8 templates/social/group.html.py:14
+#: templates/social/group_notes.html:7 templates/social/group_notes.html:15
+#: templates/social/admin/group.html:7 templates/social/admin/group.html:13
+msgid "Group"
+msgstr "小组"
+
+#: templates/social/group_notes.html:43
+msgid "Members"
+msgstr "成员"
+
+#: templates/social/group_notes.html:64
+msgid "Join the Group"
+msgstr "加入小组"
+
+#: templates/social/group_notes.html:89 templates/social/wall_snippets.html:62
+msgid "My Groups:"
+msgstr "我的小组"
+
+#: templates/social/groups.html:8 templates/social/groups.html.py:14
+#, python-format
+msgid " %(user)s's Groups "
+msgstr "%(user)s的小组"
+
+#: templates/social/groups.html:25
+msgid "Add a group"
+msgstr "创建一个小组"
+
+#: templates/social/groups.html:31
+msgid "Name"
+msgstr "名字"
+
+#: templates/social/groups.html:55
+#, python-format
+msgid " Groups created by %(user)s "
+msgstr "%(user)s创建的小组"
+
+#: templates/social/groups.html:59 templates/social/admin/group.html:39
+msgid "admin"
+msgstr "管理"
+
+#: templates/social/groups.html:73
+#, python-format
+msgid " Groups followed by %(user)s "
+msgstr "%(user)s加入的小组"
+
+#: templates/social/notesdisplay.html:45
+msgid "owner's ranking"
+msgstr "原作者的评级"
+
+#: templates/social/notesdisplay.html:47
+msgid "Group Member Vote Useful"
+msgstr "小组成员认为有用"
+
+#: templates/social/notesdisplay.html:48
+msgid "Usefulness voted by group members"
+msgstr "根据小组成员投票结果的有用度"
+
+#: templates/social/notesdisplay.html:49
+msgid "Group Member Vote Unuseful"
+msgstr "小组成员认为没用"
+
+#: templates/social/profile.html:6 templates/social/profile.html.py:12
+#, python-format
+msgid " %(profile_username)s's Public Profile "
+msgstr "%(profile_username)s的公开主页"
+
+#: templates/social/profile.html:40
+msgid "Add Friend"
+msgstr "加朋友"
+
+#: templates/social/profile.html:46
+#, python-format
+msgid " view %(profile_username)s's notebook "
+msgstr "%(profile_username)s的笔记本"
+
+#: templates/social/profile.html:51
+#, python-format
+msgid "Friends of %(profile_username)s "
+msgstr "%(profile_username)s的朋友"
+
+#: templates/social/profile.html:62
+#, python-format
+msgid " Groups created by %(profile_username)s "
+msgstr "%(profile_username)s的小组"
+
+#: templates/social/profile.html:75
+#, python-format
+msgid " Groups followed by %(profile_username)s "
+msgstr "%(profile_username)s的小组"
+
+#: templates/social/social_notes.html:8 templates/social/social_notes.html:21
+#, python-format
+msgid "Public Notetbook of %(profile_username)s"
+msgstr "%(profile_username)s的公开笔记本"
+
+#: templates/social/sort_menu.html:14 templates/social/sort_menu.html.py:16
+msgid "By User Vote"
+msgstr "根据用户推荐"
+
+#: templates/social/wall_snippets.html:14
+#, python-format
+msgid "Wall of %(profile_username)s"
+msgstr "%(profile_username)s的墙"
+
+#: templates/social/admin/group.html:7 templates/social/admin/group.html:13
+msgid "Admin"
+msgstr "管理"
+
+#: templates/social/admin/group.html:27
+msgid "Group Name"
+msgstr "小组名字"
+
+#: templates/social/admin/group.html:27
+msgid "remove this group"
+msgstr "去除这个小组"
+
+#: templates/social/admin/group.html:34
+msgid "Group Members:"
+msgstr "小组成员"
+
+#: templates/social/admin/group.html:40
+msgid "creator"
+msgstr "创建者"
+
+#: templates/social/admin/group.html:41
+msgid "remove this member"
+msgstr "去除这个组员"
+
+#: templates/social/admin/group.html:55
+msgid "Group Tags:"
+msgstr "小组的标签"
+
+#: templates/social/admin/group.html:61
+msgid "remove this tag"
+msgstr "去除标签"
+
+#: templates/tags/index.html:106
+msgid "Please be aware that all apps share the same tags management page."
+msgstr "请注意所有的应用共用同一个标签管理页面。"
+
+#: templates/tags/index.html:122
+msgid "Add to Working Sets"
+msgstr "加入到工作区"
+
+#: templates/tags/index.html:131
+msgid "Add to working sets selected"
+msgstr "加入到选中的工作区"
+
+#: templates/tags/index.html:135
+msgid "Remove from Working Sets"
+msgstr "从工作区中删除"
+
+#: templates/tags/index.html:142
+msgid "Remove working sets selected"
+msgstr "删除选中的工作区"
+
+#: templates/tags/index.html:162
+msgid "Add a new tag"
+msgstr "加一个新的标签"
+
+#: templates/tags/index.html:180
+msgid "All the tags"
+msgstr "所有的标签"
+
+#: templates/workingset/index.html:232
+msgid "Manage My Working Sets"
+msgstr "管理工作区"
+
+#: templates/workingset/index.html:234
+#, python-format
+msgid "Viewing Working Sets of %(profile_username)s"
+msgstr "%(profile_username)s的工作区"
+
+#: templates/workingset/index.html:272
+msgid "The current workingset is"
+msgstr "当前的工作区是"
+
+#: templates/workingset/index.html:274
+msgid "There is no current working set of tags."
+msgstr "没有设置标签的当前工作区"
+
+#: templates/workingset/index.html:278
+msgid "If You want to work with all the tags. You can"
+msgstr "如果你想使用所有的标签工作，你可以"
+
+#: templates/workingset/index.html:278
+msgid "set it here"
+msgstr "在这里设置"
+
+#: templates/workingset/index.html:286
+msgid "All the working sets"
+msgstr "所有工作区"
+
+#: templates/workingset/index.html:341
+msgid "Make Current"
+msgstr "设成当前"
+
+#~ msgid "snippets"
+#~ msgstr "便条"
+
+#~ msgid ""
+#~ "You don't have a linkage yet. You can try creating a linkage by linking "
+#~ "several bookmarks together."
+#~ msgstr "你还没有链条。你可以把几个书签连起来生成一个链条。"
+
+#~ msgid "Bookmark book of %(profile_username)s"
+#~ msgstr "%(profile_username)s的书签本"
+
+#~ msgid "bookmark book of %(profile_username)s"
+#~ msgstr " %(profile_username)s的书签本"
+
+#~ msgid "Filter"
+#~ msgstr "过滤器"

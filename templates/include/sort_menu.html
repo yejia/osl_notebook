@@ -1,0 +1,50 @@
+{% load i18n %}
+
+<span>
+<!--TODO: think of using jquery to do this-->
+{% trans "Sorting" %}
+<select id="sort_drop_down"  name="sort">
+{% if sort == 'init_date' %}
+<option value="init_date" selected="selected">{% trans "By Creation Date" %}</option>
+{% else %}
+<option value="init_date">{% trans "By Creation Date" %}</option>
+{% endif %}
+
+{% if sort == 'vote' %}
+<option value="vote" selected="selected">{% trans "By Importance" %}</option>
+{% else %}
+<option value="vote">{% trans "By Importance" %}</option>
+{% endif %}
+
+{% if sort == 'last_modi_date' %}
+<option value="last_modi_date" selected="selected">{% trans "By Last Modification Date" %}</option>
+{% else %}
+<option value="last_modi_date">{% trans "By Last Modification Date" %}</option>
+{% endif %}
+
+{% if sort == 'title' %}
+<option value="title" selected="selected">{% trans "By Title" %}</option>
+{% else %}
+<option value="title">{% trans "By Title" %}</option>
+{% endif %}
+
+{% if sort == 'desc' %}
+<option value="desc" selected="selected">{% trans "By Desc" %}</option>
+{% else %}
+<option value="desc">{% trans "By Desc" %}</option>
+{% endif %}
+
+
+</select>   
+
+<span id="sort_order">
+<a href="?order_type=desc">
+<img src="/site_media/img/down-small.png" class="order_type" title="{% trans "down" %}"/>
+</a>
+<a href="?order_type=asc">
+<img src="/site_media/img/up-small.png"  class="order_type"  title="{% trans "up" %}"/>
+</a>
+</span>
+
+
+</span>

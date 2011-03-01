@@ -1,0 +1,34 @@
+{% load i18n %}
+
+
+{% if user.username == profile_username %}   
+{% else %}   
+{{profile_username}}: 
+<span  id="profile_header">
+<span class="item">
+{% if bookname == 'snippetbook' %}
+<span style="font-size:12px">{% trans 'Snippetbook' %}</span>
+{% else %}
+<a href="/{{ profile_username }}/snippetbook/notes/">{% trans 'Snippetbook' %}</a>
+{% endif %}
+</span>
+<span class="item">
+{% if bookname == 'bookmarkbook' %}
+<span style="font-size:12px">{% trans 'Bookmarks' %}</span>
+{% else %}
+<a href="/{{ profile_username }}/bookmarkbook/bookmarks/">{% trans 'Bookmarks' %}</a>
+{% endif %}
+</span>
+<span class="item">
+{% if bookname == 'scrapbook' %}
+<span style="font-size:12px">{% trans "Scrapbook" %}</span>
+{% else %}
+<a href="/{{ profile_username }}/scrapbook/scraps/">{% trans "Scrapbook" %}</a>
+{% endif %}
+</span>
+
+</span>
+{% endif %}
+
+
+

@@ -1,0 +1,96 @@
+{% extends "include/base2.html" %}
+{% load i18n %}
+
+
+{% block tite %}
+<title>{% blocktrans %} {{profile_username}}'s Public Profile {% endblocktrans %}</title> 
+{% endblock %}
+
+
+{% block site_branding %}
+<div id="branding">
+<h1 id="site-name">{% blocktrans %} {{profile_username}}'s Public Profile {% endblocktrans %}</h1>
+</div>
+{% endblock %}
+
+
+{% block content%}
+
+<table class="my_table"><tr>
+<td>
+<div>
+<div><img src={% if  profile_member.icon %}"/file/{{profile_member.icon}}"{% else %}"/site_media/img/default_user_icon.jpg"{% endif %}/>
+</div>
+<div>{{profile_member.username}}
+</div>
+<div>{{profile_member.last_name}}  {{profile_member.first_name}}
+</div>
+<div>{{profile_member.nickname}}
+</div>
+<div>{{profile_member.last_login}}
+</div>
+<div>{{profile_member.date_joined}}
+</div>
+</div>
+</td>
+<td>
+<p>
+{% if profile_username not in user.member.get_friends_names  and profile_username != user.username%}  
+<form action="addFriend/" method="get">
+<input type="submit" value="{% trans "Add Friend" %}"/>
+</form>
+{% endif %} 
+</p>
+
+<br/><br/>
+<p>{% blocktrans %} view {{profile_username}}'s notebook {% endblocktrans %}: <a href="/social/{{profile_username}}/snippetbook/"><img src="/site_media/img/notebook-small.png"/></a></p>
+
+
+<br/><br/>
+<div>
+{% blocktrans %}Friends of {{profile_username}} {% endblocktrans %}:
+{% for f in profile_user.member.get_friends %}		
+<li>
+<a href="/social/{{f.username}}/">{{f.username}}</a><!--TODO:nickname-->
+</li>
+{% endfor %}
+</div>
+    
+
+<br/><br/>
+<div>
+{% blocktrans %} Groups created by {{profile_username}} {% endblocktrans %}:
+{% for g in gs_created %}	
+{% if  not g.private %}
+<li>
+<a href="/groups/{{g}}/">{{g}}</a>
+</li>
+{% endif %}
+{% endfor %}
+</div>
+
+
+<br/><br/>
+<div>
+{% blocktrans %} Groups followed by {{profile_username}} {% endblocktrans %}:
+{% for g in gs_following %}	
+{% if  not g.private %}
+<li>
+<a href="/groups/{{g}}/">{{g}}</a>
+</li>
+{% endif %}
+{% endfor %}
+</div>
+
+
+</div>
+
+</td>
+</tr>
+<table>
+
+{% endblock %}
+
+
+
+

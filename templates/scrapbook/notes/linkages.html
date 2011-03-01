@@ -1,0 +1,24 @@
+{% extends "notes/note_list_base.html" %}
+{% load i18n %}
+
+
+{% block tags_menu %}
+{% include "notes/tags_menu.html" %} 
+{% endblock %}
+
+{% block special_side_menu %}
+<div class="module"> 
+        <h2>{% trans "Linkages" %}</h2>       
+        <a href="/{{ profile_username }}/linkagenotes/">{% trans "All Linkages" %}</a><br/>
+        <a href="/linkagenotes/">{% trans "Same Topic" %}</a><br/>      
+        <a href="/linkagenotes/">{% trans "Same Event" %}</a><br/> 
+</div> 
+{% endblock %}
+
+{% block content%}
+<div id="content-main"> 
+<div> 
+{% include "notes/linkagenotesdisplay.html" %}
+</div> 
+</div> 
+{% endblock %}

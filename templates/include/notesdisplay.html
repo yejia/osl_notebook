@@ -1,0 +1,204 @@
+{% load i18n %}
+
+
+
+
+
+
+
+{% if user.username == profile_username %}    
+
+{% if not note_list.object_list %}
+{% block add_js_button_section %}
+{% endblock %}
+{% endif %}
+
+
+{% block add_note_section %}
+{% endblock %}
+
+
+
+
+
+
+
+<div class="linkNotes">
+{% trans "Create a linkage" %}:
+<form action="linkNotes/" method="post" enctype="multipart/form-data" id="linkNotesForm"> <!--TODO:get ok? it still send an extra request to the server-->
+<input type="hidden" name="user" id="id_user"  value="{{user.id}}"/>
+	<table> 
+		<tr><th><label for="id_type_of_linkage">{% trans "Type of linkage" %}:</label></th><td>{{addLinkNoteForm.type_of_linkage}}</td>
+		        <th>{{addLinkNoteForm.desc.errors }}<label for="id_desc">{% trans "Desc" %}:</label></th><td>{{addLinkNoteForm.desc}}</td>
+		<!--	<th><label for="id_tags">{% trans "Tags" %}:</label></th><td>{{addLinkNoteForm.tags}}</td>--><!--TODO:automatically select the current_tag if it is available-->			
+		</tr> 
+		<tr><th>{{addLinkNoteForm.title.errors }}<label for="id_title">{% trans "Title" %}:</label></th><td><input id="id_title" type="text" name="title" maxlength="30" size="30"/></td> 		
+{% if bookname == "snippetbook" %}                
+                        <th>{{addLinkNoteForm.attachment.errors }}<label for="id_attachment">{% trans "Attachment" %}:</label></th><td>{{addLinkNoteForm.attachment}}</td>
+{% endif %}                        
+			<th><label for="id_private">{% trans "Private" %}:</label></th><td>{{addLinkNoteForm.private}}</td>			 
+		</tr> 
+		<tr>
+			<td><input type="submit" value="Submit"/></td>
+		</tr> 
+	</table>
+        
+</form>    
+</div>
+
+
+{% include "include/caches_section.html" %}
+
+
+{% endif %}
+
+<div class="search_term">
+{% if qstr %}
+
+{% if is_in_folders %}
+      {% trans "Folder" %}: {{current_folder.name}} = {{current_folder.value}}
+{% else %}
+      <form action="saveSearch/" method="post">
+                {% trans "Search term is" %}: {{qstr}} &nbsp;&nbsp;
+		<input type="hidden" name="folder_value" value="{{qstr}}"/>
+        <input type="hidden" name="username" value="{{profile_username}}"/>
+		<input type="text" name="folder_name" value="" id="id_folder_name" size="50"/>
+        {% if user.username == profile_username %}     
+		<button id="show_folder_name_input"  onclick="this.disabled=true;return true;" >{% trans "Save this search as a folder" %}</button>
+		<input type="submit" id="submit_saveSearch" value="Save this search as a folder"/>
+        {% endif %}
+	</form> 
+{% endif %}	
+{% endif %}
+</div>
+
+
+
+{% if note_list.object_list %}
+
+<div class="section_header">
+<span class="item">{% trans "Show" %}:</span>
+<span class="item"><a href="javascript:expandall();">{% trans "Expanded" %}</span>
+<span class="item"><a href="javascript:collapseall();">{% trans "List" %}</a></span>&nbsp;&nbsp;&nbsp;&nbsp;
+<span class="show_notes_section"><img title="show notes section" src="/site_media/img/right-arrow.jpg" class="click_img"/></span>
+<span class="hide_notes_section"><img title="hide notes section" src="/site_media/img/down-arrow.jpg" class="click_img"/></span> 
+<span  style="float:right;"><a href="javascript:stream();">{% trans "Stream" %}</a>    |    <a href="javascript:structure();">{% trans "Structuralize" %}</a></span>
+</div>
+
+<div id='notes_section'>
+<div id='notes_section_menu'>
+{% if user.username == profile_username %}   
+
+
+
+<div class="menu_bar"><span>{% trans "Select" %}: <a href="javascript:selectAll();">{% trans "All" %}</a>, <a href="javascript:selectNone();">{% trans "None" %}</a></span>
+
+<div id="ac_tags_box">                       
+<ul id="ac_tags"></ul>
+ <button  id="add_tags_to_notes"  onclick="javascript:addTags_new();">{% trans 'Add Tags' %}</button>
+ <button  id="remove_tags_from_notes" onclick="javascript:removeTags_new();">{% trans 'Remove Tags' %}</button>&nbsp;
+  <button  id="cancel_change_tags" onclick="javascript:cancelChangeTags();">{% trans 'Cancel' %}</button>
+</div> 
+<ul class="jd_menu">
+
+                        <li class="accessible"><a href="#" class="accessible" href="javascript:changeTags();">{% trans "Change Tags" %}  <img src="/site_media/img/arrow.gif"/>&nbsp;&nbsp;</a>
+                            <ul>  
+                                <li><a href="javascript:showAddTags();">{% trans "Add Tags" %}</a></li> 
+                                <li><a href="javascript:showRemoveTags();">{% trans "Remove Tags" %}</a></li>
+                            </ul>                       
+                        </li>                      
+                        
+                        
+                        <li class="accessible advanced"><a href="#" class="accessible">{% trans "Linking" %} <img src="/site_media/img/arrow.gif"/>&nbsp;&nbsp;</a> 
+                            <ul>  
+                                <li><a href="javascript:linkNotes();">{% trans "Make a linkage with selected notes" %}</a></li> 
+                            </ul>
+                        <li class="accessible advanced"><a href="#" class="accessible">{% trans "Cache" %} <img src="/site_media/img/arrow.gif"/>&nbsp;&nbsp;</a> 
+                            <ul>  				
+                                {% for cache in caches %}		
+                                    {% if bookname == 'notebook' %}
+                                        <li  id="add_to_cache_{{cache.id}}"><a href="javascript:addNotes2Cache({{cache.id}});">{% trans "Add selection to cache" %}{{cache.id}}</a></li>   
+                                    {% else %}
+                                        <li  id="add_to_cache_{{cache.cache_id}}"><a href="javascript:addNotes2Cache({{cache.cache_id}});">{% trans "Add selection to cache" %}{{cache.cache_id}}</a></li>                        
+                                    {% endif %}                       
+                                {% endfor %}
+                                {% if caches|length =  0 %}
+                                    <li id="add_to_cache_1"><a href="javascript:addNotes2Cache(1);">{% trans "Add selection to cache" %} 1</a></li> 
+                                {% endif %}
+                                {% if caches|length >  0 %}
+                                    <!--<li id="add_to_another_cache"><a href="javascript:addNotes2Cache({{cache_ids|last|add:"1"}});">Add selection to another cache</a></li> -->
+                                    <li id="add_to_another_cache"><a href="javascript:addNotes2Cache({{next_cache_id}});">{% trans "Add selection to another cache" %}</a></li> 
+					
+                                {% endif %}
+					
+                                <!--<li><a href="javascript:showSelectedPlusCachedNoteIds();">Get the list of selected note id </a></li> 	-->				
+                            </ul> 
+                        </li>      
+                        <li class="accessible" style="display:none;"><a href="#" class="accessible">{% trans "Add Tags" %} <img src="/site_media/img/arrow.gif"/>&nbsp;&nbsp;</a> 
+                
+                        <ul> 
+				        
+				        {% for tag in tags %}					
+                            <li  class="noclick"><input type="checkbox" name="tag_selected"  value="{{ tag.id }}" class="tag_selection">{{tag.name}}</input></li>   
+                        {% endfor %}
+                            <li><a href="/{{profile_username}}/settings/tags/">{% trans "Create new" %}</a></li> 	
+                            <li><a href="javascript:addTags();">{% trans "Add tags selected" %}</a></li> 
+                        </ul> 
+                    </li> 
+			
+                    <li class="accessible" style="display:none;"><a href="#" class="accessible">{% trans "Remove Tags" %} <img src="/site_media/img/arrow.gif"/>&nbsp;&nbsp;</a> 
+ 
+                    <ul> <!--
+				         <li><input type="text" size="30" name="q" value="" class="tagsearchbar" /></li>--> <!--TODO: creat the margin at the bottom-->	
+				        {% for tag in tags %}					
+						<li  class="noclick"><input type="checkbox" name="tag_selected"  value="{{ tag.id }}" class="tag_selection">{{tag.name}}</input></li>   
+                        {% endfor %}
+                        <li><a href="javascript:removeTags();">{% trans "Remove tags selected" %}</a></li> 	
+                    </ul> 
+                </li> 
+		
+                <li  class="accessible"><a href="#" class="accessible">{% trans "More actions" %} <img src="/site_media/img/arrow.gif"/></a> 
+				<ul> 
+					<li  style="display:none;">{% trans "Notes analysis" %} &raquo;
+						<ul> 
+							<li><a href="javascript:alert('Not implemented yet!');" class="NotImplementedYet">{% trans "Similar notes" %}</a></li> 
+							<li><a href="javascript:alert('Not implemented yet!');" class="NotImplementedYet">{% trans "Draw the map" %}</a></li> 
+							<li><a href="javascript:alert('Not implemented yet!');" class="NotImplementedYet">{% trans "Diff" %}</a></li> 
+						</ul> 
+						</li> 
+                    <li><a href="javascript:share();">{% trans "Share" %}</a></li> 
+					<li style="display:none;"><a href="javascript:set_notes_private();">{% trans "Make private" %}</a></li> 
+					<li style="display:none;"> <a href="javascript:alert('Not implemented yet!');" class="NotImplementedYet">{% trans "Make public" %}</a></li> 
+					<li style="display:none;"><a href="javascript:alert('Not implemented yet!');" class="NotImplementedYet">{% trans "Soft Delete" %}</a></li> 					
+					<li style="display:none;"><a href="javascript:alert('Not implemented yet!');" class="NotImplementedYet">{% trans "Change the creation date" %}</a></li> 
+                    <li style="display:none;"><a href="javascript:alert('Not implemented yet!');" class="NotImplementedYet">{% trans "Apply a vote" %}</a></li> 
+					<li style="display:none;"><a href="javascript:alert('Not implemented yet!');" class="NotImplementedYet">{% trans "Add event" %}</a></li> 
+					<li style="display:none;"><a href="javascript:alert('Not implemented yet!');" class="NotImplementedYet">{% trans "Add comment" %}</a></li> 
+				</ul> 
+			</li> 
+			
+		</ul> 
+        
+<span class="right_menu_bar">
+<span>
+{% include "include/sort_menu.html" %} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+{% include "include/toggle_tag_menu.html" %} 
+</span>
+</span>        
+        
+</div>
+
+
+{% endif %}
+
+
+
+<div id="notes_section_notes">
+{% block notes_section %}
+{% endblock %}
+</div>
+{% endif %}
+
+</div>
+
+

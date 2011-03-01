@@ -1,0 +1,717 @@
+body{/*These makes the font sharper*/
+font-family: Arial, sans-serif; 
+background-color:#FFFFFF;
+color:#000000;
+}
+
+a:link, a:visited {
+    color:  #3333CC; /*#0000FF; #0066CC;  #0066FF;*/
+    text-decoration: none;
+}
+
+#sites_header{
+padding-bottom:6px;
+
+border-bottom:thin solid;
+}
+
+span.item{
+margin-right:10px;
+}
+
+span.sites_right_header{
+float:right;
+}
+
+.small_font{
+font-size: 9px;
+}
+#content-main{
+border-right:1px dotted #696969;
+border-left:1px dotted #696969;
+background-color: #F5FFD6;/*#FAFFEB;*/
+}
+
+#header {
+position:relative;
+    background: #696969;/*#EBFAFF;*/
+    color: #000000;
+    overflow: hidden;
+border:1px solid;
+border-bottom:none;
+-moz-border-radius:35px 35px 0px 0; /* Firefox */
+border-top-left-radius:35px;
+border-top-right-radius:35px;
+z-index:10;
+
+}
+
+table.my_table td{
+border-bottom:none;/*the one from base.css (i think), has a border-bottom:solid property*/
+padding:25px;
+}
+
+#branding h1{
+    padding: 0 10px;
+    font-size: 27px;
+    margin: 8px 0;
+    font-weight: normal;
+    color: #FFFFFF;
+}
+.setting-in-r-menu{
+float:right;
+}
+
+.book_tabs{
+position:absolute;
+right:90px;
+top:26px;
+}
+span.book_tabs_item{
+border:2px solid #696969;
+padding-top:6px;
+padding-left:3px;
+padding-right:30px;
+background-color:#EBEBEB; /*#CCCCFF;*/
+-moz-border-radius:25px 5px 0px 0; /* Firefox */
+border-top-left-radius:25px;
+border-top-right-radius:5px;
+border-bottom-left-radius:-5px;
+margin-left:-2px;
+cursor:pointer;
+}
+
+span.current{
+font-size:18px;
+border-bottom:none;
+background-color: #E0FF85;/*#CCFF33;#F5FC9E;*/
+z-index:300;
+}
+
+
+.advanced{
+display:none;
+}
+
+.disabled{
+display:none;
+}
+
+/*TODO: debug info control should be moved to py code. Otherwise, it can be viewed.*/
+.debug{
+display:none;
+}
+
+.grey{
+   color: #AAAAAA;
+}
+
+.delete_img 
+{
+position:absolute;
+right:0px;
+top:0px;
+cursor:pointer;
+}
+
+.thumb
+{
+position:absolute;
+right:20px;
+bottom:0px;
+}
+span.thumbup:hover{
+cursor:pointer;
+}
+.thumbdown{
+cursor:pointer;
+}
+.cancel_comment_submit{
+cursor:pointer;
+}
+.comment_submit{
+cursor:pointer;
+}
+.click_img{
+cursor:pointer;
+}
+
+
+span.voteuseful:hover{
+cursor:pointer;
+}
+.voteunuseful{
+cursor:pointer;
+}
+
+/*
+span.noteshome:hover{
+cursor:pointer;
+}*/
+
+/*
+div #note_title, #note_tags
+{
+display:inline;
+}*/
+
+
+/*override the css in the admin module, make the whole dashboard wider.--correction: After testing, actually below doesn't have any effect*/
+.dashboard #content {
+    width: 100%;
+}
+
+/*
+#note_tags
+{
+position:absolute;
+right:10px;
+top:1px;
+width:200px;
+}
+*/
+
+
+#content-related .module h2 {
+    background: /*#CCFF99*/ #F5FC9E bottom left repeat-x;
+   
+}
+
+span.tag_section{
+position:relative;
+}
+span.tag_section .module{
+width:250px;
+}
+
+span.tag_section .module h2{ 
+  background: /*#CCFF99*/ #CCFFB2 bottom left repeat-x;
+  color: #000000;
+/*TODO:below are copied from base.css. Try to see if some can be used here to achieve similar effect desired*/
+  /*background-attachment:initial;
+  background-clip:initial;
+  background-color:#7CA0C7;
+  background-image:url(http://localhost:8000/media/img/admin/default-bg.gif);
+  background-origin:initial;
+  background-position:0 0;
+  background-repeat:repeat no-repeat;
+  color:white;
+  font-size:11px;
+  font-weight:bold;
+  margin-bottom:0;
+  margin-left:0;
+  margin-right:0;
+  margin-top:0;
+  padding-bottom:3px;
+  padding-left:5px;
+  padding-right:5px;
+  padding-top:2px;
+  text-align:left;*/
+}
+
+.addnotebutton, .doneaddingbutton
+{
+float:right;/*TODO:change to not floating*/
+}
+
+div.notesbar{
+margin-bottom:12px;
+width: 100%;
+}
+
+.notesbar table{
+width:100%; /*TODO*/
+}
+
+.notesbar table td#theme{
+width:10%;
+}
+.notesbar table td#menu_bar{
+width:70%;
+}
+
+div.search_term{
+margin-top:12px;
+margin-bottom:12px;
+}
+
+.required{
+color: red;
+}
+
+.note_display{
+position:relative;
+}
+
+li.note_display input{
+position:absolute;
+left:-20px;
+top:0px;
+}
+
+.tag_display{
+position:relative;
+}
+
+li.tag_display input{
+position:absolute;
+left:-20px;
+top:0px;
+}
+
+.jd_menu{  
+list-style-type:lower-alpha;
+position:absolute;
+left:90px;
+top:0px;
+border:none;/*no effect*/
+} 
+
+
+
+ul li {
+    list-style-type: none;
+    padding: 1px 0;
+}
+
+.menu_bar{
+position:relative;
+width: 100%;
+margin-top:0px;
+margin-bottom:0px;
+padding-top:3px;
+padding-bottom:8px;
+background-color: #F5FC9E;
+
+}
+
+#ac_tags_box{
+position:absolute;
+left:90px;
+top:22px;
+z-index:1;
+background-color:#F5FC9E;
+border:2px solid;
+
+/*html5 stuff*/
+/*
+-moz-border-radius:45px;*/ /* Firefox */
+/*border-radius:45px*/
+
+-moz-box-shadow: 10px 10px 5px #888888; /* Firefox */
+-webkit-box-shadow: 10px 10px 5px #888888; /* Safari and Chrome */
+box-shadow: 10px 10px 5px #888888;
+}
+
+input.tagit-input{
+background-color:#F5FC9E;
+}
+
+#sort_drop_down{
+margin-top:-5px;
+}
+
+.right_menu_bar{
+
+float:right;
+/*left:669px;
+top:0px;*/
+margin-top:-10px;
+padding-top:0px;
+}
+
+.linkNotes{
+display:none;
+}
+
+.paginator{
+margin-left:auto;
+width: 40%;
+border-top:none;
+margin-bottom:-10px;
+}
+
+.social .paginator{
+
+margin-left:auto;
+width: 50%;
+border-top:none;
+margin-bottom:-10px;
+}
+
+
+.tagsearchbar{
+margin-bottom:16px;
+}
+
+ul.long{
+height:100px;
+overflow:auto;
+}
+
+div.tag_menu_box{
+position:absolute;
+left:36px;
+top:0px;
+z-index:1;
+
+}
+
+ul.tag_menu{
+max-height:1000px;
+/*height:300px;*/
+overflow:auto;
+}
+
+/*TODO:below has no effect*/
+img.img_in_notes_section_header{
+margin-bottom:-5px;
+}
+
+span.tags_img{
+
+/*
+ background-image:url("../img/tags-small.png");
+ background-repeat:no-repeat;
+   width: 100px;
+   height: 100px;*/
+}
+
+
+
+/*
+div.brief_display .note_table td div{
+height:12px;
+overflow:hidden;
+}
+*/
+
+
+div.brief_display{
+height:20px;
+overflow:hidden;
+}
+
+div#linkage.brief_display{
+height:100px;
+overflow:hidden;
+}
+
+pre {
+  white-space: pre-wrap;       /* css-3 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+.note_table{
+margin-left:14px;
+margin-top:0px;
+margin-bottom:0px;
+}
+
+.note_table td.note_table_title{
+	width: 18em;	
+}
+.note_table td.note_table_desc, td.note_table_2td{
+	width: 53em;        
+        overflow:hidden;	
+}
+.note_table td.note_table_tags{
+	width: 40em;	
+}
+
+#note_title{
+font-weight:800;
+}
+#note_desc{
+font-weight:700;
+}
+.snippetbook .brief_display #note_desc{
+/*
+font-size/line-height:120%/1.5;*/
+white-space:nowrap; 
+width:50em; 
+overflow:hidden; 
+text-overflow:ellipsis;
+}
+
+
+.bookmarkbook .brief_display #note_title{
+white-space:nowrap; 
+width:22em; 
+overflow:hidden; 
+text-overflow:ellipsis;
+}
+
+.bookmarkbook .brief_display #note_url{
+white-space:nowrap; 
+width:35em; 
+overflow:hidden; 
+text-overflow:ellipsis;
+}
+
+.scrapbook .brief_display #note_url{
+white-space:nowrap; 
+width:14em; 
+overflow:hidden; 
+text-overflow:ellipsis;
+}
+.scrapbook .brief_display #note_desc{
+white-space:nowrap; 
+width:43em; 
+overflow:hidden; 
+text-overflow:ellipsis;
+}
+
+div.accordion_title{
+position:absolute;
+top:-2px;
+left:70%;
+width:20%;
+
+}
+div.accordion_title div.show_color{
+height:3px;
+background-color:#59E68C;
+}
+
+div.accordion_title div.no_color{
+
+height:88px;
+}
+
+.lockunlock{
+position:absolute;
+right:80px;
+bottom:0px;
+}
+.lock{
+   background-image:url("../img/lockunlock-small.png");
+   background-repeat:no-repeat;
+   position:relative;
+   width: 25px;
+   height: 20px;
+   cursor:pointer;
+   background-position:-4px -18px; 
+}
+.unlock{
+   background-image:url("../img/lockunlock-small.png");
+   background-repeat:no-repeat;
+   position:relative;
+   width: 25px;
+   height: 20px;
+   cursor:pointer;
+   background-position:0 -2px; 
+}
+
+
+
+.lock_noclick{
+   background-image:url("../img/lockunlock-small.png");
+   background-repeat:no-repeat;
+   position:relative;
+   width: 25px;
+   height: 20px;
+   
+   background-position:-4px -18px; 
+}
+.unlock_noclick{
+   background-image:url("../img/lockunlock-small.png");
+   background-repeat:no-repeat;
+   position:relative;
+   width: 25px;
+   height: 20px;
+   
+   background-position:0 -2px; 
+}
+	
+
+
+/*inline_delete is for deleteing notes in linkage, change naming TODO:*/
+.inline_delete, .inline_delete_comment, .inline_delete_member{
+   background-image:url("../img/inline-delete-middle.png");
+   background-repeat:no-repeat;
+   position:relative;
+   width: 12px;
+   height: 11px;
+   cursor:pointer
+}
+
+
+.inline_delete, .inline_delete_comment{
+   background-position:-1px 0;
+}
+
+.inline_delete:hover{
+   background-position:-12px 0;
+}
+.inline_delete_comment:hover{
+   background-position:-12px 0;
+}
+.inline_delete_member:hover{
+   background-position:-12px 0;
+}
+
+
+/*Below has no effect*/
+img.order_type{
+   margin-top:10px;
+}
+
+
+li.success{
+background-color: #F7FF66;
+width: 20%;
+}
+
+
+#notes_section{
+border:thick groove;
+/*background-color: #FFFFF0;*/
+}
+
+#group_notes_section{
+border:thick groove;
+
+}
+
+div.help_message{
+margin-top:10px;
+margin-bottom:10px;
+}
+
+.note_display {
+  border-style:dotted;
+  border-width:1px;
+
+}
+
+
+.cache_item{
+font-size:10px;
+}
+
+
+
+
+div#add_note_section{
+margin-top:15px;
+margin-left:10px;
+}
+
+div.section_header{
+margin-top:20px;
+}
+
+
+/*
+.note_last_modi_date {
+  display: block;
+  float:right; 
+}
+
+.note_init_date {  
+  float:left; 
+}
+*/
+
+
+/*TODO:remove stuff not needed*/
+
+.ei,.fi,.kuoda,.yasuo{
+   background-image:url("../img/plusboxes.gif");
+   background-repeat:no-repeat;
+   position:relative;
+   cursor:pointer;
+   left:4px;
+   
+   z-index:10;
+   outline:0;
+   top:6px
+
+}
+
+.ei,.fi{
+   height:11px;
+   width:11px
+}
+
+.fi,.zf{
+   background-position:-48px 0
+}
+
+.ei,.ag .zf{
+   background-position:-72px 0
+}
+
+div.zg:hover div.fi:hover{
+   background-position:-60px 0
+}
+
+div.zg:hover div.ei:hover{
+   background-position:-84px 0
+}
+
+.kuoda,.yasuo{
+   height:12px;
+   width:12px;
+   position:absolute;
+left:0px;
+top:0px;
+}
+
+
+
+.yasuo a{
+    display: block;
+    width: 17px;
+    height: 15px;
+    float: left;
+    margin: 0px;
+}
+
+.yasuo{
+   background-position:0 0
+}
+
+.kuoda{
+   background-position:-24px 0
+}
+
+div.zg:hover span.yasuo:hover{
+   background-position:-12px 0
+}
+
+div.zg:hover span.kuoda:hover{
+   background-position:-36px 0
+}
+
+.ii,.ji,.ki,.li,.mi,.ni,.oi,.pi{
+   position:absolute;
+   font-size:0
+}
+
+a.NotImplementedYet{
+   color: #DCDCDC;
+}
+.NotImplementedYet{
+   color: #DCDCDC;
+}
+
+
+
+#panel{width:1080px;margin-left:auto;margin-right:auto;}
+
+/* grid */
+.grid-20-4 {margin-top:20px;margin-bottom:20px; }
+.grid-20-4 .article { float: left; width: 1000px; padding-right: 4px; }
+.grid-20-4 .aside { float: right; width: 76px }
+.grid-4-14-6 .nav { float: left; width: 150px; margin-right: 10px;  border:1px solid #bbb; border-bottom:0px;}
+.grid-4-14-6 .article { float: left; width: 540px; padding-right: 10px }
+.grid-4-14-6 .aside { float: right; width: 230px }
+
+#footer {clear: both; width: 100%; color: #999; padding-top: 6px; margin-top: 40px; overflow: auto; zoom: 1; border-top: 1px dashed #ddd }
+
+

@@ -1,0 +1,13 @@
+{% load i18n %}
+
+<div class="module">
+
+ <h2>{% trans "My Friends" %}  <span class="setting-in-r-menu"><a href="/{{user}}/friends/">{% trans "Settings" %}</a></span></h2>  
+
+ <ul>  
+{% for f in user.member.get_friends %}
+ <li><a href="/social/{{ f.username }}/">{{f.username}}</a></li> 
+{% endfor %} 
+</ul>  
+         
+</div>

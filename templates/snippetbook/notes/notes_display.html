@@ -1,0 +1,65 @@
+{% extends "include/notes_display.html" %}
+{% load i18n %}
+
+{% block note_content_section%}
+<div class="snippetbook">
+<div class="brief_display">
+         <table class="note_table"><tr><td class="note_table_title structure">
+            <div id="note_title" title="{% trans 'note title' %}"><a href="/{{profile_username}}/{{bookname}}/notes/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a></div> 		    
+		    </td><td class="note_table_desc">
+		    <div  id="note_desc" title="{% trans "note desc" %}">{{note.desc}}</div>		   
+		    </td>
+		    <td class="note_table_tags">
+		    <div id="note_tags" title="{% trans "note tags" %}">
+                {% for tag in note.get_tags %}
+                    <span><a href="/{{profile_username}}/{{bookname}}/notes/tags/{{tag}}/">{{tag}}</a>,</span>
+                {% endfor %}
+            </div>
+		    </td>
+		    </tr>
+        </table>
+</div>
+
+
+<div class="full_display">
+ <table class="note_table"><tr><td class="note_table_title structure">
+            <div id="note_title" title="{% trans "note title" %}">{% if user.username == profile_username %}<span class="editableText">{% endif %}<a href="/{{profile_username}}/{{bookname}}/notes/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a>{% if user.username == profile_username %}</span>{% endif %}</div> 		    
+		    </td><td class="note_table_desc">
+		    <div  id="note_desc" title="{% trans "note desc" %}">{% if user.username == profile_username %}<span class="editableText">{% endif %}{{note.desc}}{% if user.username == profile_username %}</span>{% endif %}</div>		   
+		    </td>
+		    <td class="note_table_tags">
+		    <div id="note_tags" title="{% trans "note tags" %}">{% if user.username == profile_username %}<span class="editableText">{% endif %}{{note.display_tags}}{% if user.username == profile_username %}</span>{% endif %}</div>
+		    </td>
+		    </tr>
+		    </table>
+            
+           <div>
+           <!--
+		    <div  id="note_event" title="event">e:{% if user.username == profile_username %}<span class="editableText">{% endif %}{ {{note.event}} }{% if user.username == profile_username %}</span>{% endif %}</div>
+		    -->
+            <div  class="grey" id="note_init_date" title="{% trans "initial creation time" %}">{% if user.username == profile_username %}<span  class="editableText">{% endif %}{{note.init_date|date:"Y-m-d H:i"}}{% if user.username == profile_username %}<span>{% endif %}</div>
+		    <div class="grey structure" id="note_last_modi_date" title="{% trans "last modified time" %}">{{note.last_modi_date|date:"Y-m-d H:i"}} </div>
+		    
+            {% if note.attachment %}
+		    <div  id="note_attachment" title="{% trans "attachment" %}"><a href="/file/{{note.attachment.name}}" target="top">{{note.attachment.name}}</a> </div>
+		    {% endif %}
+            
+             <div  class="structure advanced" id="note_linkages" title="{% trans "note linkages" %}">Linkages: {{note.display_linkages|default:'Not in any linkages'}}</div>
+             
+             
+             <div id="comments">{% trans "Comment" %}:<br/> 
+                    {% for comment in note.get_comments %}
+                            <div comment_id="{{comment.id}}">{{comment}}  <span title="{% trans "remove this comment" %}" class="inline_delete_comment" id="note_delete_comment">&nbsp;&nbsp;&nbsp;</span></div>                    
+                    {% endfor %}
+             </div>
+             <div class="add_comment_button"><!--<button>{% trans "Comment" %}</button>--><img src="/site_media/img/add.gif" title="{% trans "Add Comment" %}" class="click_img"/></div>
+             
+             
+             <div id="add_comment_box" style="display:none;">{{user.username}}: <textarea id="add_comment" rows="3" cols="90" name="desc"></textarea><!--<button class="comment_submit">{% trans "Add Comment" %}</button>-->
+             <span class="comment_submit"  title="{% trans "Save Comment" %}"><img src="/site_media/img/save.png"/></span>&nbsp;<span class="cancel_comment_submit" title="{% trans "Cancel" %}"><img src="/site_media/img/cancel.png" /></span></div>
+             
+	        </div>
+</div>
+</div>
+
+{% endblock %}

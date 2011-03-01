@@ -1,0 +1,48 @@
+{% load i18n %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us" > 
+<head> 
+<title>Import Bookmarks</title> 
+<link rel="stylesheet" type="text/css" href="/media/css/base.css" /> 
+<link href="/site_media/css/note.css" rel="stylesheet" type="text/css"> 
+
+</head>  
+<body> 
+
+
+<h2>{% trans "Import bookmarks from your bookmark file"  %}</h2>
+
+<form id="import" action="/{{profile_username}}/{{bookname}}/{{aspect_name}}/importBookmark/" method="post" enctype="multipart/form-data" >  		
+		 
+        <p><label for="bookmark">{% trans "Bookmark file"  %} <span class="required">*</span>:</label>
+      <input type="file" name="bookmark" id="bookmark" /></p>
+      <p><input type="submit" value="Upload" /> </p>	
+      ---------------------------------{% trans "Advanced Options"  %}-------------------------------------------------------------------------------------------------------------------------------------------------------
+      <p><label for="id_vote">{% trans "Default vote for all bookmarks imported from this file"  %}</label>: <input type="text" name="vote" value="0" id="id_vote" size="3" /> ({% trans "Enter a integer number here. Default is 0."  %})</p> 
+		<p><label for="id_ignore_folders">{% trans "Ignore folders in the bookmark file"  %}
+        <a href="javascript:alert('{% trans "If not ignoring folders in the bookmark file, the folders in the bookmark file will be converted into tags, and urls in those folders will be tagged accordingly." %}');"><img src="/media/img/admin/icon-unknown.gif"/></a>:</label>
+        
+        <input type="checkbox" name="ignore_folders" id="id_ignore_folders" /></p>
+        <p><label for="id_from_delicious">{% trans "Import from a bookmark file that is exported from delicious"  %}
+        <a href="javascript:alert('{% trans "Delicious exported bookmark file has tags as an attribute inside the A tag." %}');"><img src="/media/img/admin/icon-unknown.gif"/></a>:</label>        
+        <input type="checkbox" name="from_delicious" id="id_from_delicious" /></p>
+        <p><label for="id_common_tag">{% trans "Apply a common tag to all bookmarks imported"  %}
+        :</label>        
+        <input type="text" name="common_tag" id="id_common_tag" /></p>
+        <p><label for="id_common_ws">{% trans "Apply a working set to all tags imported"  %}
+        <a href="javascript:alert('{% trans "A working set is a set of tags that you work with in your app." %}');"><img src="/media/img/admin/icon-unknown.gif"/></a>:</label>        
+        <input type="text" name="common_ws" id="id_common_ws" /></p>
+        
+       
+</form>
+
+<p>
+Note: {% trans "So far can only import from html files. You can upload the same file multiple times. The bookmarks created won't be created again. The new tags will be added. The new working set will be added to as well. But the default vote won't be updated." %}
+</p>
+
+<div id="footer"/>
+</div>
+
+
+</body> 
+</html> 

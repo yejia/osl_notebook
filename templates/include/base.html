@@ -1,0 +1,314 @@
+{% load i18n %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us" > 
+<head> 
+{% block tite %}
+{% endblock %}
+
+<!--
+<link rel="stylesheet" type="text/css" href="/media/css/base.css" /> 
+<link rel="stylesheet" type="text/css" href="/media/css/dashboard.css" /> 
+-->
+
+<link rel="stylesheet" type="text/css" href="/media/css/changelists.css" /> 
+
+<!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="/media/css/ie.css" /><![endif]--> 
+<meta name="robots" content="NONE,NOARCHIVE" /> 
+
+
+
+
+<link href="/site_media/css/editableText.css" rel="stylesheet" type="text/css" />	
+
+<link rel="stylesheet" href="/site_media/css/jquery.jdMenu.css" type="text/css" /> 
+
+
+<!--
+<link rel="stylesheet" href="/site_media/css/dp.g.base.css" type="text/css" />
+-->
+<link rel="stylesheet" href="/site_media/css/dpshopall.css" type="text/css" />
+
+<!--
+<link rel="stylesheet" href="/site_media/css/ft.mother.css" type="text/css" />
+<link rel="stylesheet" href="/site_media/css/ft.bjtop.css" type="text/css" />
+
+<link rel="stylesheet" href="/site_media/css/ft.thickbox.css" type="text/css" />
+
+
+ <link href="/site_media/css/ft.search_g.css" rel="stylesheet" type="text/css"> 
+ 
+ -->
+ 
+ <link href="/site_media/css/note.css" rel="stylesheet" type="text/css" /> 
+
+ 
+ 
+ <!--
+  <link rel="stylesheet" href="/site_media/css/dp.g.reviewform.v8.css" type="text/css" />
+<link rel="stylesheet" href="/site_media/css/dp.c.shop.v75.css" type="text/css" />
+
+ -->
+ 
+ <!--
+<link href="/site_media/fttemp_files/jquery.autocomplete.css" type="text/css" rel="stylesheet"> 
+ -->
+
+	<!-- We will use jQuery hosted by Google-->
+	        <!--
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" type="text/javascript"></script>	
+    
+      <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.0/jquery.min.js"></script>
+ 
+  
+       <script src="/site_media/js/jquery-1.4.js" type="text/javascript"></script>	
+  -->
+  
+     
+
+    <script src="/site_media/js/jquery.min.js" type="text/javascript"></script>	
+      
+    <script src="/site_media/js/jquery.editableText.js" type="text/javascript"></script>
+    
+     <script src="/site_media/js/jquery.positionBy.js" type="text/javascript"></script>	
+     <script src="/site_media/js/jquery.dimensions.js" type="text/javascript"></script>	
+     
+     <script src="/site_media/js/jquery.bgiframe.js" type="text/javascript"></script> 
+	<script src="/site_media/js/jquery.jdMenu.js" type="text/javascript"></script> 
+    
+
+	<script src="/site_media/js/chili-1.7.pack.js"  type="text/javascript" ></script>	
+	<script src="/site_media/js/jquery.easing.js"  type="text/javascript" ></script>
+	<script src="/site_media/js/jquery.accordion.js"  type="text/javascript" ></script>
+    
+    <script src="/site_media/js/jquery.AddIncSearch.js"  type="text/javascript" ></script>
+
+	
+    
+ <script>
+           function getLandmarks(landmarks){
+                    landmark_select = $('select#id_landmarks');
+                    landmark_select.empty();
+                    //alert('landmarks:'+landmarks);
+                    for (i=1;i<landmarks.length;i++){
+                        id = landmarks[1][0];
+                        // alert('id is:'+id);
+                       name = landmarks[i][1];
+                       //alert('name is:'+name);
+                       landmark_select.append('<option value="'+id+'">'+name+'</option>');
+                    }          
+           }
+           
+           function getStations(stations){
+                    station_select = $('select#id_subway_stations');
+                    station_select.empty();
+                    //alert('landmarks:'+landmarks);
+                    for (i=1;i<stations.length;i++){
+                        id = stations[1][0];
+                        // alert('id is:'+id);
+                       name = stations[i][1];
+                       //alert('name is:'+name);
+                       station_select.append('<option value="'+id+'">'+name+'</option>');
+                    }          
+           }    
+
+          
+
+            function voteUp(review_id){
+                    //alert('voting up review:'+review_id);
+                    $.post('/voteUp/', {'review_id':review_id, 'user': '{{user}}' },  voted, 'json');
+                         
+            
+            
+            }
+            
+            
+            function voted(result){
+                  review_id = result.review_id;                      
+                  $('span#vote_useful_'+review_id).text(result.useful_votes);        
+                  $('span#vote_unuseful_'+review_id).text(result.unuseful_votes);   
+            }
+            
+            
+            function voteDown(review_id){
+                    //alert('voting down review:'+review_id);
+                    $.post('/voteDown/', {'review_id':review_id, 'user': '{{user}}' },  voted, 'json');
+                    
+            }
+            
+            
+            function votedDown(result){
+                  review_id = result.review_id;
+                  new_vote = result.unuseful_votes;              
+                  $('span#vote_unuseful_'+review_id).text(new_vote);     
+            
+            }
+            
+            
+            function toggle_owner_reply_section(review_id){
+            alert('review_id:'+review_id);
+                    $('div.owner_reply_section#ors_'+review_id).slideToggle("slow");//show(0);
+            
+            }
+
+            function toggle_my_review_owner_reply_section(){
+                    $('div.owner_reply_section#my_review').slideToggle("slow");//show(0);
+            
+            }
+            
+
+           function showAddCashTicket(){
+                   $('div#add-cash-ticket').show(0);           
+           
+           }
+
+</script>
+    
+    
+<script>
+	$(document).ready(function(){	
+    
+     // $('div.place_comment').hide(0);
+    
+                $('select#id_region').change(function(){
+                 //alert("selected");
+                    //$('div#caches_section').show();	
+                    //$(this).hide();   	
+                    //$('.hide_caches_section').show();
+                    region = $("select#id_region option:selected").val();
+                    //alert("region is:"+region);
+                    landmarks = $.post('/getLandmarksByRegion/', {'region':region},  getLandmarks, 'json');
+                                 
+                   // stations = 
+                    $.post('/getStationsByRegion/', {'region':region},  getStations, 'json');
+                    return false;
+            });
+		
+    });
+    
+
+    
+    
+    
+	
+</script>
+	
+	
+
+
+</head>  
+<body> 
+
+
+{% include "include/sites_header.html" %}
+
+
+<div id="container">
+<!--
+{% include "include/profile_header.html" %}
+-->
+<div id="header">
+
+{% block site_branding %}
+{% endblock %}
+
+
+<div id="user-tools">
+
+</div>
+
+</div>
+
+
+{% block site_apps_menu %}
+{% endblock %}
+
+
+{% block help_message_if_none %}
+{% endblock %}
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<!--
+<div>
+Queries performed:
+<ol>
+{% for query in queries %}
+<li>
+sql: {{query.sql}}, 
+time: {{query.time}}
+</li>
+{% endfor %}
+</ol>
+</div>
+-->
+
+
+
+<!--
+ <div  id="content" class="colMS"> 
+ 
+ 
+<div id="content-related"> 
+-->
+
+
+
+<!--
+{% include "include/search.html" %}
+-->
+
+       
+    
+    
+<!--
+       
+</div>
+
+
+
+</div> 
+-->
+
+
+<div class="main">
+
+
+{% block menu_bar %}
+
+
+
+{% endblock %}
+
+
+
+{% block content %}
+
+
+
+{% endblock %}
+
+
+
+<div id="footer"/>
+{% include "include/footer.html" %}
+</div>
+
+</div>
+<!--
+</div>
+
+-->
+
+
+
+
+
+</body> 
+</html> 

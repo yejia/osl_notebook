@@ -1,0 +1,75 @@
+{% extends "include/base2.html" %}
+{% load i18n %}
+
+
+
+
+{% block tite %}
+<title>{{profile_username}}'s Snippet Wall</title> 
+{% endblock %}
+
+
+{% block site_branding %}
+<div id="branding">
+<h1 id="site-name">{% blocktrans %}Wall of {{profile_username}}{% endblocktrans %}</h1>
+</div>
+{% endblock %}
+
+{% block site_apps_menu %}
+<!--TODO: refactor-->
+<!--
+<div>
+{% if book_name == 'snippets' %}
+ <span style="font-size:18px" class="noteshome"  onclick="window.open('/{{ profile_username }}/snippetbook/notes/', '_self')">{% trans "Notes" %}</span>
+ {% else %}
+<a href="/{{ profile_username }}/snippetbook/notes/">{% trans "Snippets" %}</a>
+{% endif %}     |   
+{% if book_name == 'bookmarks' %}
+ <span style="font-size:18px">{% trans "Bookmarks" %}</span>
+ {% else %}
+<a href="/{{ profile_username }}/snippetbook/linkagenotes/">{% trans "Bookmarks" %}</a> 
+{% endif %}     |   
+{% if book_name == 'scraps' %}
+ <span style="font-size:18px">{% trans "Scraps" %}</span>
+ {% else %}
+<a href="/{{ profile_username }}/snippetbook/folders//">{% trans "Scraps" %}</a>    
+{% endif %}     
+</div>
+-->
+
+<div> 
+    <a href="../snippets/">{% trans "Notes" %}</a>  | 
+    <a href="../bookmarks/">{% trans "Bookmarks" %}</a>  |
+    <a href="../scraps/">{% trans "Scraps" %}</a>  |  
+ 
+</div> 
+
+{% endblock %}
+
+
+{% block content%}
+<div class="grid-20-4" > 
+<div class="article"> 
+
+
+    {% include "social/notesdisplay.html" %}
+
+
+</div> 
+<div class="aside"> 
+
+<div>
+{% trans "My Groups:" %}
+<ul>
+{% for g in gs %}		
+<li>
+<a href="/groups/{{g}}/">{{g}}</a>
+</li>
+{% endfor %}
+</ul>
+
+</div>
+
+</div> 
+</div> 
+{% endblock %}

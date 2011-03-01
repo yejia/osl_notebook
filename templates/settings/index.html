@@ -1,0 +1,37 @@
+{% extends "include/base2.html" %}
+{% load i18n %}
+
+
+{% block tite %}
+<title>{% trans "Settings of your acccount" %}</title> 
+{% endblock %}
+
+{% block content%}
+<h1>{% trans "Settings of your acccount" %} </h1>
+
+
+<p> 
+{% trans "Update user info" %}:
+<span class="show_more_section"><img title="" src="/site_media/img/right-arrow.jpg"/></span><span class="hide_more_section"><img title="" src="/site_media/img/down-arrow.jpg"/></span> 
+</p>
+<div id="more_section" style="display:none;">
+<form action="updateProfile/" method="post" enctype="multipart/form-data" id="updateProfileForm">
+{{profileForm.as_p}}
+<input type="submit" value="{% trans 'Update' %}"/>
+</form> 
+</div>
+
+<p>
+{% if request.session.advanced == 'on' %}
+{%trans "You are currently using advanced features. You can swtich to"%} <a href="/settings/setAdvanced?advanced=off">{%trans "normal features" %}</a>
+{% else %}
+{%trans "You are currently using normal features. You can swtich to"%} <a href="/settings/setAdvanced?advanced=on">{%trans "advanced features" %}</a>
+{% endif %}
+</p>
+
+<p><a href="/{{user.username}}/settings/tags/">{% trans "Tags settings" %}</a></p>
+
+<p class="advanced"><a href="/{{user.username}}/settings/workingsets/">{% trans "Working Sets settings" %}</a></p>
+
+{% endblock %}
+

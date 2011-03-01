@@ -1,0 +1,25 @@
+{% load i18n %}
+
+<a href="/{{profile_username}}/{{bookname}}/{{aspect_name}}/">{% trans "return to"  %} {{aspect_name}}</a>
+
+<p>{{count_urls_in_file}} {% trans "urls altogether in the bookmark file."  %}</p>
+
+{% if  ignore_folders == 'on'  %} 
+<p>{% trans "Folders in the bookmark file are ignored."  %}</p>
+{% else %}
+{{count_tag_created}}  {% trans "tags are created, and added to bookmark working set."  %}
+{% endif %}
+
+<p>
+{{count_note_created}} {% trans "bookmarks are imported"  %}!  
+</p>
+
+<div>
+{{ duplicate|length }} {% trans "bookmarks are duplicated"  %}:
+<ul>
+ {% for url in duplicate %}
+     <li><span>{{url.0}} </span>&nbsp;&nbsp;&nbsp;&nbsp; <span>{{url.1}} </span> <span><a href="javascript:alert('Not implemented yet!');">{% trans "Replace with this one"  %}</a></span> 
+     </li>
+ {% endfor %}   
+</ul> 
+</div>

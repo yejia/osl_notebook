@@ -1,0 +1,36 @@
+{% extends "scrapbook/notes/note_list_base.html" %}
+{% load i18n %}
+
+{% block tags_menu %}
+{% include "include/tags_menu.html" %} 
+{% endblock %}
+
+{% block linkage_filter %}
+       <h4>{% trans "In linkages" %}</h4>
+        {% if in_linkage == 'All' %}
+             <span style="font-size:15px">{% trans "All" %}</span><br/>
+        {% else %}
+            <a href="?in_linkage=All">{% trans "All" %}</a><br/>      
+        {% endif %}       
+        {% if in_linkage == 'True' %}
+             <span style="font-size:15px">{% trans "Yes" %}</span><br/>
+        {% else %}
+            <a href="?in_linkage=True">{% trans "Yes" %}</a><br/>      
+        {% endif %}
+               
+       
+{% endblock %}
+
+
+{% block search_box %}
+{% include "scrapbook/notes/search.html" %}
+{% endblock %}
+
+
+{% block content%}
+<div id="content-main"> 
+<div> 
+{% include "scrapbook/notes/notesdisplay.html" %}
+</div> 
+</div> 
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends "include/note_list_base.html" %}
+{% load i18n %}
+
+
+
+
+{% block tite %}
+<title>{% blocktrans %}Public Notetbook of {{profile_username}}{% endblocktrans %}</title> 
+{% endblock %}
+
+
+{% block site_branding %}
+
+{% endblock %}
+
+
+
+{% block header %}
+<div id="header">
+<div id="branding">
+<h1 id="site-name">{% blocktrans %}Public Notetbook of {{profile_username}}{% endblocktrans %}</h1>
+</div>
+<div class="book_tabs">
+<span class="book_tabs_item {% if bookname == 'snippetbook' %}current{% endif %} " onclick="window.location.replace('/social/{{ profile_username }}/snippetbook/')">{% trans "Snippets" %}</span>
+<span class="book_tabs_item {% if bookname == 'bookmarkbook' %}current{% endif %}" onclick="window.location.replace('/social/{{ profile_username }}/bookmarkbook/')">{% trans "Bookmarks" %}</span><span class="book_tabs_item {% if bookname == 'scrapbook' %}current{% endif %}" onclick="window.location.replace('/social/{{ profile_username }}/scrapbook/')">{% trans "Scraps" %}</span>
+<span class="disabled">  |
+<a href="/{{ profile_username }}/notebook/notes/">{% trans "All" %}</a> </span> <span class="disabled" style="float:right;"><a href="../linkagenotes">{% trans "linkiages" %}</a></span>
+</div>
+</div>
+{% endblock %}
+
+
+
+
+
+ 
+ 
+
+{% block content%}
+<!--
+<div class="grid-16-8" > 
+<div class="article"> 
+-->
+<div id="content-main"> 
+<div>
+
+{% if bookname == 'snippetbook' %}  
+    {% include "social/snippetsdisplay.html" %}
+{% endif %} 
+{% if bookname == 'bookmarkbook' %}  
+   {% include "social/bookmarksdisplay.html" %}
+{% endif %}  
+{% if bookname == 'scrapbook' %}  
+   {% include "social/scrapsdisplay.html" %}
+{% endif %}     
+
+</div> 
+</div> 
+
+{% endblock %}

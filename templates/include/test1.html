@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>   
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Tag Editor - example</title>
+
+
+
+    <script src="/site_media/js/jquery/jquery-1.4.2.min.js" type="text/javascript" charset="utf-8"></script>
+
+    <link href="/site_media/css/tag-it/reset.css" rel="stylesheet" type="text/css" />
+	<link href="/site_media/css/tag-it/master.css" rel="stylesheet" type="text/css" />
+    
+	<link href="/site_media/css/jquery-ui/jquery.ui.autocomplete.custom.css" rel="stylesheet" type="text/css"  />
+    <script src="/site_media/js/jquery-ui/jquery-ui-1.8.core-and-interactions.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/site_media/js/jquery-ui/jquery-ui-1.8.autocomplete.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/site_media/js/tag-it.js" type="text/javascript" charset="utf-8"></script>
+    
+    <script>
+	$(document).ready(function(){
+		$("#yourtags").tagit({
+			availableTags: ["c++", "java", "php", "coldfusion", "javascript", "asp", "ruby", "python", "c", "scala", "groovy", "haskell", "perl", "测试"]
+		});
+        
+
+	});
+	</script>
+
+    
+ </head>
+<body>
+
+<div id="content">
+   	
+		<div class="line">
+			<p><strong>Tag it!</strong> ~ Tag editor and suggestions</p>
+			<p>After looking for a jQuery plugin for handling a 'tag suggestion' form field, in much the same way ZenDesk.com does, I ended up developing a customization of jQuery UI that does the same interaction.</p>
+		</div>
+	
+      <form class="myform" method="get">  
+        <input type="hidden" name="var1" value="testing"/>
+        <div class="line">
+			<label for="tags">another Tags</label>
+			<ul id="yourtags"></ul>
+		</div>
+        <input type="submit" value="Submit"/>
+	</form>
+		<div class="line">
+			<p>Built with <a href="http://jquery.com/" target="_blank">jQuery</a> and <a href="http://jqueryui.com/" target="_blank">jQueryUI</a>.</p>
+			<p>By <a href="http://levycarneiro.com/">Levy Carneiro Jr</a></p>
+		</div>
+        
+        
+</div>
+
+
+
+
+
+
+</body>
+</html>

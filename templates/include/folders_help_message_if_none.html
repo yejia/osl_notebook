@@ -1,0 +1,11 @@
+{% load i18n %}
+
+{% if not folders %}
+<div class="help_message">
+     <p>
+        {% trans "You don't have a folder yet. You can try creating a folder by doing a query." %}     
+          <span class="item"><a href="javascript:alert('Not implemented yet!');" class="NotImplementedYet">{% trans "More about query." %}</a></span>
+          <span class="item"><a href="javascript:alert('Not implemented yet!');" class="NotImplementedYet">{% trans "More about folder." %}</a></span>
+     </p>     
+</div>
+{% endif %}

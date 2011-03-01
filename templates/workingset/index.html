@@ -1,0 +1,357 @@
+{% load i18n %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us" > 
+<head> 
+<title>Manage Working Set</title> 
+<link rel="stylesheet" type="text/css" href="/media/css/base.css" /> 
+<link href="/site_media/css/note.css" rel="stylesheet" type="text/css"> 
+<link href="/site_media/css/editableText.css" rel="stylesheet" type="text/css">	
+<link rel="stylesheet" href="/site_media/css/jquery.jdMenu.css" type="text/css" /> 
+    <script src="/site_media/js/jquery.min.js" type="text/javascript"></script>	
+    <script src="/site_media/js/jquery.editableText.js" type="text/javascript"></script>
+    
+      <script src="/site_media/js/jquery.positionBy.js" type="text/javascript"></script>	
+     <script src="/site_media/js/jquery.dimensions.js" type="text/javascript"></script>	
+     
+     <script src="/site_media/js/jquery.bgiframe.js" type="text/javascript"></script> 
+	<script src="/site_media/js/jquery.jdMenu.js" type="text/javascript"></script> 
+    
+    
+    
+        <link href="/site_media/css/tag-it/reset.css" rel="stylesheet" type="text/css" />
+       
+	<link href="/site_media/css/tag-it/master.css" rel="stylesheet" type="text/css" />
+    	<link href="/site_media/css/jquery-ui/jquery.ui.autocomplete.custom.css" rel="stylesheet" type="text/css"  />
+    <script src="/site_media/js/jquery-ui/jquery-ui-1.8.core-and-interactions.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/site_media/js/jquery-ui/jquery-ui-1.8.autocomplete.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/site_media/js/tag-it.js" type="text/javascript" charset="utf-8"></script>
+    
+    
+    
+    
+    
+<script>
+	jQuery(function($){
+
+                $('span.editableText').editableText({
+				newlinesEnabled: false
+		});
+			
+		$.editableText.defaults.newlinesEnabled = true;
+
+		$('div.editableText, p.editableText').editableText();
+			
+		$('.editableText').change(function(){
+			var newValue = $(this).text();
+			$(this).load('updateWSInline/', {'ws_name':$(this).parents('li').attr('ws_name'), 'new_ws_name':  newValue});
+		});
+			
+		 
+		
+		$('.inline_delete_ws'). click(function(){
+                        $(this).load('/deleteWS/',{ 'ws_name':$(this).parents("li").attr('ws_name')});
+		        $(this).parents("li").remove();
+                });		
+			
+        });
+  
+        function  selectAll(){
+		     $('.note_selection').attr('checked',true);
+		
+		}
+		
+		function  selectNone(){		     
+		     $('.note_selection').attr('checked',false);
+		
+		}
+        
+        
+        function	addTags2WSs(){
+		    var selected_tags = [];
+		    
+		    $('.tag_selection').each(function(){
+			if ($(this).attr('checked')==true){				
+				selected_tags.push($(this).val());	
+			}			
+		     });
+		    
+		    
+		      // alert('selected tags:'+selected_tags);
+		       
+		       selected_notes = getSelectedNoteIds();
+		       
+		       // alert("Selected notes:"+ selected_notes);
+		       
+		       $(this).load('addTags2WSs/', {'wss': selected_notes, 'tag_ids': selected_tags});
+		       
+		        setTimeout( "window.location.reload(false)", 1000); //TODO: only load the changed notes using response from the server
+		       
+		      
+		
+	}
+	
+	function removeTagsFromWSs(){
+	           var selected_tags = [];		    
+		    $('.tag_selection').each(function(){
+			if ($(this).attr('checked')==true){				
+				selected_tags.push($(this).val());	
+			}			
+		     });
+		    
+		      //alert('selected tags:'+selected_tags);
+		       
+		       selected_notes = getSelectedNoteIds();
+		       
+		      // alert("Selected notes:"+ selected_notes);
+		       
+		       $(this).load('removeTagsFromWSs/', {'wss': selected_notes, 'tag_ids': selected_tags});
+		       
+		         setTimeout( "window.location.reload(false)", 1000);
+		      
+	
+	
+	}
+    
+    
+    function	getSelectedNoteIds(){
+		    	   // alert('clicked');
+		    var selected_notes = [];	
+		    $('.note_selection').each(function(){
+			if ($(this).attr('checked')==true){
+				//alert('selected');
+				selected_notes.push($(this).val());	
+			}			
+		     });
+		     	
+		     return selected_notes;
+		}
+        
+        
+        
+         function showAddTags(){    
+            //alert('show add tgs');
+            $('#ac_tags_box').show(0);  
+             $('#add_tags_to_notes').show(0); 
+            $('#remove_tags_from_notes').hide(0);  
+            $('.tagit-input').focus();           
+            $('.tagit-input').css("background-color","#F5FC9E");            
+    }
+    
+    function cancelChangeTags(){    
+            //alert('cancel add tgs');
+            $('#ac_tags_box').hide(0);  
+            //Below cannot succesfully remove tags entered earlier. I guess it is ok to leave those tags there for now
+            //$('ul#ac_tags').text('')
+    }
+    
+    function showRemoveTags(){    
+            //alert('show remove tgs');
+            $('#ac_tags_box').show(0);  
+            $('#remove_tags_from_notes').show(0);   
+            $('#add_tags_to_notes').hide(0);      
+            $('.tagit-input').focus();    
+             $('.tagit-input').css("background-color","#F5FC9E");       
+    }
+
+        
+        function  addTags2WSs_new(){
+   
+          var selected_tags = [];	
+          $('li.tagit-choice').each(function(){    
+                selected_tags.push($(this).find(':input').val());	                    			
+		     });	            
+           
+            selected_notes = getSelectedNoteIds();	
+            
+              $.ajax({url: 'addTags2WSs2/'+
+                                    '?wss='+selected_notes+
+                                    '&tags_to_add='+selected_tags,
+                            success:  processReturn,
+                            async:   false
+            })
+            window.location.reload(false);     
+            return false;
+   }
+   
+    
+     function removeTagsFromWSs_new(){
+          
+          var selected_tags = [];	
+          $('li.tagit-choice').each(function(){               
+                   	    //alert('find a tag:'+$(this).find(':input').val());
+                            selected_tags.push($(this).find(':input').val());	
+                    			
+		     });	
+           //alert('selected_tags is:'+selected_tags );        
+           
+            selected_notes = getSelectedNoteIds();		  
+            
+              $.ajax({url: 'removeTagsFromWSs2/'+
+                                    '?wss='+selected_notes+
+                                    '&tags_to_add='+selected_tags,
+                            success:  processReturn,
+                            async:   false
+            })
+           window.location.reload(false);     
+            return false;
+    
+    
+    
+    }
+        
+        function processReturn(data){
+         ;    
+    }
+
+
+</script>
+
+<script>
+	$(document).ready(function(){	
+    
+     $('#ac_tags_box').hide(0);
+    
+              $("#ac_tags").tagit({
+			    availableTags: [{% for tag in tags %}"{{tag}}",{% endfor %}]
+            });  
+    
+    
+        
+    });
+    	
+</script>
+
+</head>  
+<body> 
+{% include "include/sites_header.html" %}
+
+{% include "include/profile_header.html" %}
+
+
+{% if user.username == profile_username %}    
+<h1>{% trans "Manage My Working Sets" %}</h1>
+{% else %}   
+<h1>{% blocktrans %}Viewing Working Sets of {{profile_username}}{% endblocktrans %}</h1>
+{% endif %}
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<br/><br/><br/>
+
+{% if user.username == profile_username %}    
+
+
+<div class="addnote">
+Create a new working set:
+<form action="addWS/" method="post" id="addWSForm">   
+	<table> 
+		<tr><th>{{addWSForm.name.errors }}<label for="id_name">Name <span class="required">*</span>:</label></th><td>{{addWSForm.name}}</td>
+              <th><label for="id_tags">{% trans "Tags" %}:</label></th><td>{{addWSForm.tags}}</td> 
+              <th>{{addWSForm.desc.errors }}<label for="id_desc">{% trans "Desc" %}:</label></th><td>{{addWSForm.desc}}</td>              
+			  <th><label for="id_private">Private:</label></th><td>{{addWSForm.private}}</td>
+		</tr> 
+	</table>
+    <input type="submit" value="Submit"/>   
+</form> 
+</div>
+{% endif %}
+
+<br/><br/><br/>
+
+
+
+
+<div>
+{% if  current_workingset %}    
+{% trans "The current workingset is"  %} {{current_workingset}}
+{% else %}
+{% trans "There is no current working set of tags."  %}
+{% endif %}
+
+{% if  current_workingset != 'all tags' %}    
+{% trans "If You want to work with all the tags. You can"  %} <a href="?current=all tags">{% trans "set it here"  %}</a>.
+{% endif %}
+</div>
+<br/><br/><br/>
+
+
+
+
+<p>{% trans "All the working sets"  %}:</p>
+<div class="settings_menu_bar" style="position:relative;">
+<span>{% trans "Select" %}: <a href="javascript:selectAll();">{% trans "All" %}</a>, <a href="javascript:selectNone();">{% trans "None" %}</a></span>
+<div id="ac_tags_box">                       
+<ul id="ac_tags"></ul>
+ <button  id="add_tags_to_notes"  onclick="javascript:addTags2WSs_new();">{% trans 'Add Tags' %}</button>
+ <button  id="remove_tags_from_notes" onclick="javascript:removeTagsFromWSs_new();">{% trans 'Remove Tags' %}</button>&nbsp;
+  <button  id="cancel_change_tags" onclick="javascript:cancelChangeTags();">{% trans 'Cancel' %}</button>
+</div> 
+
+<ul class="jd_menu">                        
+			 <li class="accessible"><a href="#" class="accessible" href="javascript:changeTags();">{% trans "Change Tags" %}  <img src="/site_media/img/arrow.gif"/>&nbsp;&nbsp;</a>
+                            <ul>  
+                                <li><a href="javascript:showAddTags();">{% trans "Add Tags" %}</a></li> 
+                                <li><a href="javascript:showRemoveTags();">{% trans "Remove Tags" %}</a></li>
+                            </ul>                       
+            </li>    
+		
+			<li  class="accessible"><a href="#" class="accessible">{% trans "More actions" %} <img src="/site_media/img/arrow.gif"/></a> 
+				<ul> 			
+ 
+					<li><a href="javascript:alert('Not implemented yet!');">{% trans "Make private" %}</a></li> 
+					<li><a href="javascript:alert('Not implemented yet!');">{% trans "Make public" %}</a></li> 
+					<li><a href="javascript:alert('Not implemented yet!');">{% trans "Soft Delete" %}</a></li> 					
+					
+				</ul> 
+			</li> 
+			
+		</ul> 
+</div>
+
+
+<br/><br/><br/>
+
+
+<!--TODO: disallow changing random thought tag -->
+<div>
+
+
+
+<ul>
+ {% for ws in workingsets %}
+    {% if user.username != profile_username and ws.private %}  
+    {% else %}   
+    <li class="tag_display"  ws_name="{{ws.name}}">
+ 
+    <input type="checkbox" name="note_selected"  value="{{ ws.id }}" class="note_selection" />
+
+    <span class="editableText"><a href="workingset/{{ws.name}}/">{{ws.name}}</a></span>  
+    &nbsp;&nbsp;&nbsp; {{ws.display_tags}} 
+    &nbsp;&nbsp;&nbsp; {{ws.private|yesno:"private, public, unknown"}}   
+     &nbsp;&nbsp;&nbsp; {{ws.deleted|yesno:"deleted, , "}}  
+    {% if user.username == profile_username %}    
+    &nbsp;&nbsp;&nbsp;&nbsp; <span title="remove this working set" class="inline_delete_ws inline_delete" id="delete_ws">&nbsp;&nbsp;&nbsp;<!--TODO:get rid of &nbsp; use the style instead--></span>
+    {% endif %}
+    &nbsp;&nbsp;&nbsp;&nbsp; <a href="?current={{ws.name}}">{% trans "Make Current"  %}</a>
+    <br/><br/>
+    </li>
+   {% endif %}
+
+{% endfor %}
+
+</ul>
+
+</div>
+
+<div id="footer"/>
+</div>
+
+
+</body> 
+</html> 

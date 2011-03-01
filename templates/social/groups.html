@@ -1,0 +1,85 @@
+{% extends "include/base2.html" %}
+{% load i18n %}
+
+
+
+
+{% block tite %}
+<title>{% blocktrans %} {{user}}'s Groups {% endblocktrans %}</title> 
+{% endblock %}
+
+
+{% block site_branding %}
+<div id="branding">
+<h1 id="site-name">{% blocktrans %} {{user}}'s Groups {% endblocktrans %}</h1>
+</div>
+{% endblock %}
+
+
+{% block content%}
+
+
+
+<br/><br/>
+<div>
+{% trans "Add a group" %}:
+<!--<span class="show_add_group_section"><img title="" src="/site_media/img/right-arrow.jpg"/></span><span class="hide_add_note_section"><img title="" src="/site_media/img/down-arrow.jpg"/></span> -->
+</div>
+<div class="addgroup">
+<form action="addGroup" method="post" id="addGroupForm"> 
+    <p>
+               {% trans "Name" %}<span class="required">*</span>: {{addGroupForm.name}}
+    </p>
+
+    <div>
+   {% trans "Add Tags" %} <span class="required">*</span>:
+    <ul id="ac_tags"></ul> 
+    </div>
+    <p>
+        {% trans "Desc" %}:  {{addGroupForm.desc}}
+    </p>
+    <p>
+        {% trans "Private" %}:  {{addGroupForm.private}}
+    </p>
+    
+    <input type="hidden" name="creator" value="{{user.id}}"/>
+    <input type="hidden" name="members" value="{{user.id}}"/>
+    <input type="hidden" name="admins" value="{{user.id}}"/>
+
+   <input type="submit" value="{% trans 'Submit' %}"/>
+</form> 
+</div>
+
+<br/><br/><br/>
+<div>
+{% blocktrans %} Groups created by {{user}} {% endblocktrans %}:
+{% for g in gs_created_by_self %}		
+
+<li>
+<a href="/groups/{{g}}/">{{g}}</a>&nbsp;&nbsp;&nbsp;&nbsp;<span><a href="/groups/{{g}}/admin">{% trans "admin" %}</a></span>
+{% if g.private %} <span class="lock_noclick" title="{% trans 'private'  %}" style="display:{% if g.private %}inline{% else %}none{% endif %};">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;              
+                                   </span> 
+        {% else %} <span class="unlock_noclick" title="{% trans 'public'  %}" style="display:{% if g.private %}none{% else %}inline{% endif %};">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;          
+                </span>
+        
+        {% endif %}  
+</li>
+{% endfor %}
+</div>
+
+
+<br/><br/><br/>
+<div>
+{% blocktrans %} Groups followed by {{user}} {% endblocktrans %}:
+{% for g in gs_following %}		
+<li>
+<a href="/groups/{{g}}/">{{g}}</a>
+</li>
+{% endfor %}
+</div>
+
+
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,16 @@
+ {% load i18n %}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <div id="header">
+                <div id="branding">
+                    <h1 id="site-name">{% blocktrans %}Notetbook of {{profile_username}}{% endblocktrans %} </h1>  
+                </div>
+</div> 
+        {% include "bookmarkbook/notes/notesdisplay.html" %}    

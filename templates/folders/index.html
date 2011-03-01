@@ -1,0 +1,41 @@
+{% extends "include/base2.html" %}
+{% load i18n %}
+
+{% block content%}
+
+<div id="content-main"> 
+<div> 
+
+
+<div class="addnote">
+{% trans "Create a new folder" %}  ({% trans "Recommended way of creating a folder is: do a search first, then save that search as a folder." %}):
+<form action="addFolder/" method="post" id="addFolderForm">
+    <input type="hidden" name="user" id="id_user"  value="{{user.id}}"/>
+	<table> 
+		<tr><th>{{addFolderForm.name.errors }}<label for="id_name">Name <span class="required">*</span>:</label></th><td>{{addFolderForm.name}}</td>			
+			  <th><label for="id_private">Private:</label></th><td>{{addFolderForm.private}}</td>
+               <th><label for="id_value">Value:</label></th><td>{{addFolderForm.value}}</td>
+                <th><label for="id_desc">Desc:</label></th><td>{{addFolderForm.desc}}</td>
+		</tr> 
+	</table>
+    <input type="submit" value="Submit"/>   
+</form> 
+</div>
+
+
+
+
+<ul>
+ {% for folder in folders %}
+ 
+    <li><a href="folder/{{folder.name}}">{{folder.name}}</a>  &nbsp;&nbsp;&nbsp; {{folder.private|yesno:"private, public, unknown"}}
+    </li>
+
+
+{% endfor %}
+
+</ul>
+
+</div> 
+</div> 
+{% endblock %}

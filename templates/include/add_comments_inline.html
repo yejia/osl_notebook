@@ -1,0 +1,54 @@
+{% load i18n %}
+
+<script>
+	jQuery(function($){        
+        
+               $('.comment_submit').click(function(){  
+                        var newValue = $(this).parents("#add_comment_box").find("#add_comment").val();
+                        $.post('addComment/',{ 'id':$(this).parents('li').attr('note_id'), 'content':  newValue}, commentAdded ,'json');              
+      
+                });
+                
+                $('.cancel_comment_submit').click(function(){                   
+                        comment_box  = $(this).parents("#add_comment_box")
+                        comment_box.find("#add_comment").val('');
+                        comment_box.hide();
+      
+                });
+                
+               
+                
+                function commentAdded(result){
+                     note_id = result.note_id;
+                     $("li[note_id='"+note_id+"']").find('div#comments').append("<div>"+result.content+"</div>");            
+                     
+                    comment_box = $("li[note_id='"+note_id+"']").find('div#add_comment_box');
+                    comment_box.find("#add_comment").val('')
+                    comment_box.hide();
+                
+                }
+                
+                
+                 $('.add_comment_button').click(function(){              
+                        $(this).parents('li').find('#add_comment_box').show();
+                
+      
+                });
+        
+        
+    });    
+        
+</script>
+
+
+<div id="comments">{% trans "Comment" %}:<br/> 
+                    {% for comment in note.get_comments %}
+                            <div>{{comment}}</div>                    
+                    {% endfor %}
+             </div>
+             <div class="add_comment_button"><!--<button>{% trans "Comment" %}</button>--><img src="/site_media/img/add.gif" title="{% trans "Add Comment" %}" class="click_img"/></div>
+             
+             
+             <div id="add_comment_box" style="display:none;">{{user.username}}: <textarea id="add_comment" rows="3" cols="90" name="desc"></textarea><!--<button class="comment_submit">{% trans "Add Comment" %}</button>-->
+             <span class="comment_submit"  title="{% trans "Save Comment" %}"><img src="/site_media/img/save.png"/></span>&nbsp;<span class="cancel_comment_submit" title="{% trans "Cancel" %}"><img src="/site_media/img/cancel.png" /></span></div>
+             

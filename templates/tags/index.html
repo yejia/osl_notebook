@@ -1,0 +1,226 @@
+{% load i18n %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us" > 
+<head> 
+<title>Manage Tags</title> 
+<link rel="stylesheet" type="text/css" href="/media/css/base.css" /> 
+<link href="/site_media/css/note.css" rel="stylesheet" type="text/css"> 
+<link href="/site_media/css/editableText.css" rel="stylesheet" type="text/css">	
+<link rel="stylesheet" href="/site_media/css/jquery.jdMenu.css" type="text/css" /> 
+    <script src="/site_media/js/jquery.min.js" type="text/javascript"></script>	
+    <script src="/site_media/js/jquery.editableText.js" type="text/javascript"></script>
+    
+      <script src="/site_media/js/jquery.positionBy.js" type="text/javascript"></script>	
+     <script src="/site_media/js/jquery.dimensions.js" type="text/javascript"></script>	
+     
+     <script src="/site_media/js/jquery.bgiframe.js" type="text/javascript"></script> 
+	<script src="/site_media/js/jquery.jdMenu.js" type="text/javascript"></script> 
+    
+<script>
+	jQuery(function($){
+
+                $('span.editableText').editableText({
+				newlinesEnabled: false
+		});
+			
+		$.editableText.defaults.newlinesEnabled = true;
+
+		$('div.editableText, p.editableText').editableText();
+			
+		$('.editableText').change(function(){
+			var newValue = $(this).text();
+			$(this).load('updateTagName/',{ 'id':$(this).parents('li').attr('tag_id'), 'name':  newValue})
+		});
+			
+		 
+		
+		$('.inline_delete'). click(function(){
+                        $(this).load('deleteTag/',{ 'id':$(this).parents("li").attr('tag_id')});
+		        $(this).parents("li").remove();
+                });		
+			
+        });
+  
+        function  selectAll(){
+		     $('.note_selection').attr('checked',true);
+		
+		}
+		
+		function  selectNone(){		     
+		     $('.note_selection').attr('checked',false);
+		
+		}
+        
+        
+        //TODO: change the naming of variables
+        function	  add2WSs(){
+		    var selected_tags = [];		    
+		    $('.tag_selection').each(function(){
+			if ($(this).attr('checked')==true){
+				//alert('selected');
+				selected_tags.push($(this).val());	
+			}			
+		     });		       
+		       selected_notes = getSelectedNoteIds();
+		       $(this).load('addTags2WSs/', {'tag_ids': selected_notes, 'wss': selected_tags});		       
+		        setTimeout( "window.location.reload(false)", 1000); //TODO: only load the changed notes using response from the server
+	}
+    
+        function removeTagsFromWSs(){
+            var selected_tags = [];		    
+		    $('.tag_selection').each(function(){
+			if ($(this).attr('checked')==true){
+				//alert('selected');
+				selected_tags.push($(this).val());	
+			}			
+		     });		       
+		       selected_notes = getSelectedNoteIds();
+		       $(this).load('removeTagsFromWSs/', {'tag_ids': selected_notes, 'wss': selected_tags});		       
+		       setTimeout( "window.location.reload(false)", 1000); //TODO: only load the changed notes using response from the server        
+        }
+       
+        //TODO:refactor this function out as it is the same in note_list_base.html
+        function	getSelectedNoteIds(){
+		    	   // alert('clicked');
+		    var selected_notes = [];	
+		    $('.note_selection').each(function(){
+			if ($(this).attr('checked')==true){
+				//alert('selected');
+				selected_notes.push($(this).val());	
+			}			
+		     });
+		     	
+		     return selected_notes;
+		}
+      
+
+
+</script>
+
+</head>  
+<body> 
+{% include "include/sites_header.html" %}
+
+<h1{% trans "Manage Tags" %}></h1>
+
+{% trans "Please be aware that all apps share the same tags management page." %}
+
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+<br/><br/>
+
+
+<div class="menu_bar">
+<ul class="jd_menu"> 
+                       
+			<li class="accessible"><a href="#" class="accessible">{% trans "Add to Working Sets" %} <img src="/site_media/img/arrow.gif"/>&nbsp;&nbsp;</a> 
+ 
+				<ul> <!--
+				         <li><input type="text" size="30" name="q" value="" class="tagsearchbar" /></li> --> <!--TODO: creat the margin at the bottom-->	
+					
+				        {% for ws in wss %}					
+                            <li  class="noclick"><input type="checkbox" name="tag_selected"  value="{{ ws.id }}" class="tag_selection">{{ws.name}}</input></li>   
+                        {% endfor %}
+					<li><a href="javascript:alert('Not implemented yet!');">{% trans "Create new" %}</a></li> 	
+					<li><a href="javascript:add2WSs();">{% trans "Add to working sets selected" %}</a></li> 
+				</ul> 
+			</li> 
+			
+			<li class="accessible"><a href="#" class="accessible">{% trans "Remove from Working Sets" %} <img src="/site_media/img/arrow.gif"/>&nbsp;&nbsp;</a> 
+ 
+				<ul> <!--
+				         <li><input type="text" size="30" name="q" value="" class="tagsearchbar" /></li>--> <!--TODO: creat the margin at the bottom-->	
+				         {% for ws in wss %}					
+                            <li  class="noclick"><input type="checkbox" name="tag_selected"  value="{{ ws.id }}" class="tag_selection">{{ws.name}}</input></li>   
+                        {% endfor %}
+					<li><a href="javascript:removeTagsFromWSs();">{% trans "Remove working sets selected" %}</a></li> 	
+				</ul> 
+			</li> 
+		
+			<li  class="accessible"><a href="#" class="accessible">{% trans "More actions" %} <img src="/site_media/img/arrow.gif"/></a> 
+				<ul> 			
+ 
+					<li><a href="javascript:alert('Not implemented yet!');">{% trans "Make private" %}</a></li> 
+					<li><a href="javascript:alert('Not implemented yet!');">{% trans "Make public" %}</a></li> 
+					<li><a href="javascript:alert('Not implemented yet!');">{% trans "Soft Delete" %}</a></li> 					
+					
+				</ul> 
+			</li> 
+			
+		</ul> 
+</div>
+
+<br/><br/><br/>
+
+<div class="addnote">
+{% trans "Add a new tag" %}:
+<form action="addTag/" method="post" id="addTagForm">
+    <!--<input type="hidden" name="user" id="id_user"  value="{{user.id}}"/>-->
+	<table> 
+		<tr><th>{{addTagForm.name.errors }}<label for="id_name">Name <span class="required">*</span>:</label></th><td>{{addTagForm.name}}</td>			
+			  <th><label for="id_private">Private:</label></th><td>{{addTagForm.private}}</td>
+		</tr> 
+	</table>
+    <input type="submit" value="Submit"/>   
+</form> 
+</div>
+
+<br/><br/><br/>
+
+
+
+<!--TODO: disallow changing random thought tag -->
+<div>
+<p>{% trans "All the tags" %}:</p>
+
+<span>{% trans "Select" %}: <a href="javascript:selectAll();">{% trans "All" %}</a>, <a href="javascript:selectNone();">{% trans "None" %}</a></span>
+<ul>
+ {% for tag in tags %}
+ 
+    <li class="tag_display"  tag_id="{{tag.id}}">
+ 
+    <input type="checkbox" name="note_selected"  value="{{ tag.id }}" class="note_selection" />
+
+    <span class="editableText"><a href="tag/{{tag.name}}">{{tag.name}}</a></span>  &nbsp;&nbsp;&nbsp; {{tag.private|yesno:"private, public, unknown"}}    &nbsp;&nbsp;&nbsp;&nbsp; 
+     
+  
+    <span title="remove this tag" class="inline_delete" id="delete_tag">&nbsp;&nbsp;&nbsp;<!--TODO:get rid of &nbsp; use the style instead--></span>&nbsp;&nbsp;&nbsp;&nbsp; 
+       In working sets: {% for ws in tag.get_working_sets %}
+          {% if 'snippetbook' = ws.name %}
+              <span><a href="/{{user.username}}/snippetbook/notes/tags/{{tag.name}}/">snippetbook</a>,</span>
+          {% endif %}    
+          {% if  'bookmarkbook' = ws.name %}             
+              <span><a href="/{{user.username}}/bookmarkbook/notes/tags/{{tag.name}}/">bookmarkbook</a>,</span>   
+          {% endif %}              
+          {% if 'scrapbook' = ws.name %}
+              <span><a href="/{{user.username}}/scrapbook/notes/tags/{{tag.name}}/">scrapbook</a>,</span>
+          {% endif %}    
+          {% if ws.name != 'snippetbook' and ws.name != 'bookmarkbook'  and ws.name != 'scrapbook' %}
+              <span>{{ws.name}},</span>
+          {% endif %}
+          
+     {% endfor %}
+       
+    
+    <br/><br/>
+    </li>
+
+
+{% endfor %}
+
+</ul>
+
+</div>
+
+<div id="footer"/>
+</div>
+
+
+</body> 
+</html> 

@@ -1,0 +1,73 @@
+<script>
+	jQuery(function($){
+
+        $(updateLinkageNoteForm).hide();     		
+		$('#edit_linkage'). click(function(){                       
+		        $(updateLinkageNoteForm).show();
+                });		
+			
+        });
+</script>
+<div>
+<b>Title:</b> {{note.title}}
+</div>
+<div>
+<b>Desc:</b> {{note.desc}}
+</div>
+
+<div>
+<b>tags:</b> {{note.display_tags}}
+</div>
+<div>
+<b>init_date:</b> {{note.init_date|date:"Y-m-d H:i"}}
+</div>
+<div>
+<b>last_modi_date:</b> {{note.last_modi_date|date:"Y-m-d H:i"}}
+</div>
+<div>
+<b>private:</b> {{note.private}}
+</div>
+<div>
+<b>delete:</b> {{note.delete}}
+</div>
+<div>
+<b>vote:</b> {{note.vote}}
+</div>
+
+<div>
+<b>linkages: </b>
+ {% if user.username == profile_username %} 
+{% for id, title, desc, display_tags in note.display_notes %}
+<div>
+<a href="/{{profile_username}}/bookmarkbook/bookmarks/note/{{id}}/">{{title|default:'(No Title)'}}</a> {{desc}}
+</div>
+{% endfor %}
+{% else %}    
+{% for id, title, desc, display_tags in note.display_public_notes %}
+<div>
+<a href="/{{profile_username}}/bookmarkbook/bookmarks/note/{{id}}/">{{title|default:'(No Title)'}}</a> {{desc}}
+</div>
+{% endfor %}
+{% endif %}
+
+</div>
+
+<br/><br/>
+
+<!--TODO: change the way notes are updated here.  For now, just hide it-->
+ {% if user.username == profile_username %} 
+<div>
+<span id="edit_linkage"><a href="#">Edit this Linkage:</a></span>
+<div>
+<form action="updateLinkageNote/" method="post" enctype="multipart/form-data" id="updateLinkageNoteForm">
+{{linkage_form.as_p}}
+<input type="submit" value="Submit" />
+</form> 
+</div>
+</div>
+{% endif %}
+
+
+
+
+

@@ -1,0 +1,64 @@
+{% extends "include/notes_display.html" %}
+{% load i18n %}
+
+{% block note_content_section%}
+<div class="scrapbook">
+<div class="brief_display">
+                 <table class="note_table">
+                    <tr><td class="note_table_title"><div id="note_url" title="{% trans "note url" %}"><a href="{{ note.url}}" target="_blank">{{ note.url}}</a></div> 		    
+                            </td>
+                            <td class="note_table_desc"><div  id="note_desc" title="{% trans "note desc" %}">{{note.desc|striptags}}</div>		   
+		                    </td>
+                            <td class="note_table_tags"><div id="note_tags" title="{% trans "note tags" %}">
+                                {% for tag in note.get_tags %}
+                                    <span><a href="/{{profile_username}}/{{bookname}}/{{aspect_name}}/tags/{{tag}}/">{{tag}}</a>,</span>
+                                {% endfor %}
+                            </div>
+                            </td>
+                    </tr>
+                </table>
+</div>
+
+<div class="full_display">
+		    <table class="note_table"><tr><td class="note_table_title">
+	            <div id="note_url" title="note url">{% if user.username == profile_username %}<span class="editableText">{% endif %}<a href="{{ note.url}}" target="_blank">{{ note.url}}</a>{% if user.username == profile_username %}</span>{% endif %}</div> 		    
+		    </td><td class="note_table_desc">
+		    <div  id="note_desc" title="note desc">{% if user.username == profile_username %}<span class="editableText">{% endif %}<pre>{{note.desc}}</pre>{% if user.username == profile_username %}</span>{% endif %}</div>		   
+		    </td>
+		    <td class="note_table_tags">		    
+            <div id="note_tags" title="note tags">{% if user.username == profile_username %}<span class="editableText">{% endif %}{{note.display_tags}}{% if user.username == profile_username %}</span>{% endif %}</div>
+		    </td>
+		    </tr>
+		    </table>
+            
+            
+           <div>
+           <div id="note_title" title="note title">{% if user.username == profile_username %}<span class="editableText">{% endif %}<a href="/{{profile_username}}/scrapbook/notes/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a>{% if user.username == profile_username %}</span>{% endif %}</div> 		    
+   <!--		   
+           <div  id="note_event" title="event">e:{% if user.username == profile_username %}<span class="editableText">{% endif %}{ {{note.extra}} }{% if user.username == profile_username %}</span>{% endif %}</div>
+-->		 
+         <div  id="note_init_date" title="initial creation time" class="grey">{% if user.username == profile_username %}<span  class="editableText">{% endif %}{{note.init_date|date:"Y-m-d H:i"}}{% if user.username == profile_username %}<span>{% endif %}</div>
+		    <div  id="note_last_modi_date" title="last modified time" class="grey structure">{{note.last_modi_date|date:"Y-m-d H:i"}} </div>
+		    
+            <div id="comments">{% trans "Comment" %}:<br/> 
+                    {% for comment in note.get_comments %}
+                            <div comment_id="{{comment.id}}">{{comment}}  <span title="{% trans "remove this comment" %}" class="inline_delete" id="note_delete_comment">&nbsp;&nbsp;&nbsp;</span></div>                    
+                    {% endfor %}
+             </div>
+             <div class="add_comment_button"><!--<button>{% trans "Comment" %}</button>--><img src="/site_media/img/add.gif" title="{% trans "Add Comment" %}" class="click_img"/></div>
+             
+             
+             <div id="add_comment_box" style="display:none;">{{user.username}}: <textarea id="add_comment" rows="3" cols="90" name="desc"></textarea><!--<button class="comment_submit">{% trans "Add Comment" %}</button>-->
+             <span class="comment_submit"  title="{% trans "Save Comment" %}"><img src="/site_media/img/save.png"/></span>&nbsp;<span class="cancel_comment_submit" title="{% trans "Cancel" %}"><img src="/site_media/img/cancel.png" /></span></div>
+             
+	        
+
+
+            <!--
+             <div  id="note_linkages" title="note linkages">Linkages: {{note.display_linkages|default:'Not in any linkages'}}</div>
+             -->
+	        </div>
+</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,91 @@
+{% extends "include/base2.html" %}
+{% load i18n %}
+
+
+
+{% block tite %}
+<title>{% trans "Group" %} {{group.name}} {% trans "Admin" %}</title> 
+{% endblock %}
+
+
+{% block site_branding %}
+<div id="branding">
+<h1 id="site-name">{% trans "Group" %} {{group.name}} {% trans "Admin" %} </h1>
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+{% block content%}
+<!--TODO: so far, don't implement renaming and removing the group-->
+<div style="display:none;">{% trans "Group Name" %}: <span class="editableText">{{group.name}}</span> <button onclick="removeGroup/">{% trans "remove this group" %}</button>
+</div>
+<br/><br/>
+<div>This is a {{ group.private|yesno:"private, public, public"}} group
+</div>
+<br/><br/>
+<div>
+{% trans "Group Members:" %}
+<ul>
+{% for m in group.members.all %}		
+<li member_id="{{m.id}}">
+<a href="/social/{{m}}/">{{m.username}}</a> 
+&nbsp;&nbsp;&nbsp;&nbsp;{% if m in group.admins.all %}{% trans "admin" %}{% endif %} 
+&nbsp;&nbsp;&nbsp;&nbsp;{% if m == group.creator %}{% trans "creator" %}{% endif %} 
+{% if m != group.creator %}<span title="{% trans "remove this member" %}" class="inline_delete" id="group_delete_member">&nbsp;&nbsp;&nbsp;</span>
+{% endif %} 
+</li>
+{% endfor %}
+</ul>
+
+
+
+</div>
+
+
+
+
+<div>
+{% trans "Group Tags:" %}
+<ul>
+{% for t in group.tags.all %}		
+<li tag_id="{{t.id}}">
+<a href="/groups/{{group.name}}/snippetbook/tags/{{t}}/">{{t.name}}</a> 
+
+<span title="{% trans "remove this tag" %}" class="inline_delete" id="group_delete_tag">&nbsp;&nbsp;&nbsp;</span>
+
+</li>
+{% endfor %}
+<li>
+
+<form action="addTags2Group/" method="post" id="addTags2GroupForm"> 
+<div>   
+    <ul id="ac_tags"></ul>     
+</div> 
+<input type="submit" value="{% trans 'Add Tags' %}"/>
+</form> 
+
+</li>
+</ul>
+
+
+
+
+</div>
+<!--
+<div class="aside"> 
+
+
+
+
+</div>
+
+</div> 
+-->
+{% endblock %}

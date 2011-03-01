@@ -1,0 +1,40 @@
+{% extends "social/notesdisplay.html" %}
+{% load i18n %}
+
+
+
+{% block brief_display %}
+<div class="snippetbook">
+    <div class="brief_display">
+         <table class="note_table"><tr>
+             <td class="note_table_title structure">
+            <div id="note_title" title="{% trans 'note title' %}"><a href="/{{profile_username}}/{{appname}}/notes/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a></div> 		    
+		    </td><td class="note_table_desc">
+		    <div  id="note_desc" title="{% trans "note desc" %}">{{note.desc}}</div>		   
+		    </td>
+		    <td class="note_table_tags">
+		    <div id="note_tags" title="{% trans "note tags" %}">
+                {% for tag in note.get_tags %}
+                    <span>{% if appname == 'groups' %}{{tag}}, {% else %}  <a href="/social/{{profile_username}}/{{bookname}}/tags/{{tag}}/">{{tag}}</a>, {% endif %}   </span>
+                {% endfor %}
+            </div>            
+		    </td>
+            <td><span id="note_owner" title="{% trans "snippet's owner"  %}"><a href="/social/{{note.owner.username}}/">{{note.owner.username}}</a></span>
+            </td>
+		    </tr>
+        </table>
+</div>
+</div>
+{% endblock %}
+
+
+
+
+
+{% block full_display_td12 %}
+           <td class="note_table_title structure">
+            <div id="note_title" title="{% trans 'note title' %}">{% if user.username == profile_username %}<span class="editableText">{% endif %}<a href="/{{profile_username}}/{{appname}}/notes/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a>{% if user.username == profile_username %}</span>{% endif %}</div> 		    
+		    </td><td class="note_table_desc">
+		    <div  id="note_desc" title="{% trans "note desc" %}">{% if user.username == profile_username %}<span class="editableText">{% endif %}{{note.desc}}{% if user.username == profile_username %}</span>{% endif %}</div>		   
+		    </td>
+{% endblock %} 

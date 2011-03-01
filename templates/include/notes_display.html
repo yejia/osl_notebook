@@ -1,0 +1,100 @@
+{% load adminmedia admin_list i18n %}
+
+
+<script>
+	jQuery(function($){
+
+                $('span.editableText').editableText({
+                        newlinesEnabled: false
+                });
+			
+                $.editableText.defaults.newlinesEnabled = true;
+
+                $('div.editableText, p.editableText').editableText();
+			
+                $('.editableText').change(function(){
+                        var newValue = $(this).text();
+                        $(this).load('updateNoteInline/',{ 'id':$(this).parents('li').attr('note_id'), 'note_field':$(this).parents('div').attr('id'), 'content':  newValue})
+                });
+			
+                //move below to a separate file
+                $('.thumbup'). click(function(){                
+                        $(this).parents(".thumb").find("#note_vote").load('voteUpNote/',{ 'id':$(this).parents("li").attr('note_id')});
+                });
+		
+                $('.thumbdown'). click(function(){
+                        $(this).parents(".thumb").find("#note_vote").load('voteDownNote/',{ 'id':$(this).parents("li").attr('note_id')});
+                });
+		
+                $('.delete_img'). click(function(){
+                        $(this).load('deleteNote/',{ 'id':$(this).parents("li").attr('note_id')});
+                        $(this).parents("li").remove();
+                });		
+                
+                
+         
+			
+        });
+        
+    
+</script>
+
+
+<!--With pagination, the web page will disapper first and appear. Without pagination, although it is still slower than before (probably due to the search stuff), the webpage doesn't seem to disapper.-->
+
+ {% block pagination_top %}{% pagination cl %}{% endblock %}  
+
+<div class="notes_display" view_mode="{{view_mode}}">
+<ul>
+    {% for note in note_list.object_list %}
+        {% if user.username != profile_username and note.is_private %}  
+        {% else %}     
+         <li class="note_display" note_id="{{ note.id }}">
+         {% if user.username == profile_username %}     
+	            <input type="checkbox" name="note_selected"  value="{{ note.id }}" class="note_selection" />
+        {% endif %}      
+	          <div class="kuoda"></div><div class="yasuo"></div>
+            
+            {% if user.username == profile_username %}  
+            <span class="lockunlock">
+               
+                <span class="lock" title="{% trans 'private'  %}" style="display:{% if note.private %}inline{% else %}none{% endif %};">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;              
+                </span>
+                           
+                <span class="unlock" title="{% trans 'public'  %}" style="display:{% if note.private %}none{% else %}inline{% endif %};">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;          
+                </span>
+                   
+            </span>
+             {% endif %}  
+		    <span class="thumb">     
+
+
+
+			<span id="note_vote" title="{% trans "Importance"  %}">{{note.vote}}</span>
+            {% if user.username == profile_username %}  
+			<span class="thumbup"  title="{% trans "Rank Up Importance"  %}"><img src="/site_media/img/thumbUp.gif"/></span>
+			<span class="thumbdown"  title="{% trans "Rank Down Importance"  %}"><img src="/site_media/img/thumbDown.gif"/></span>
+            {% endif %}
+		    </span>
+             {% if user.username == profile_username %}  
+		    <span class="delete_img" title="{% trans "soft delete" %}"><img src="/site_media/img/delete.png"/></span><!--TODO:move delete to css as background img-->
+		    {% endif %}
+            {% block note_content_section %}
+            {% endblock %}
+	     </li>
+    {% endif %} 
+    {% endfor %}
+</ul>
+<!--
+{% include "notes/pagination.html" %}
+-->
+
+ {% block pagination_bottom %}{% pagination cl %}{% endblock %}
+</div>
+
+</div>
+<!--
+<a name="bottom"/>
+<a href="#top">{% trans "top" %}</a>
+-->
+</div>

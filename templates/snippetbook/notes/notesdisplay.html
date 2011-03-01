@@ -1,0 +1,47 @@
+{% extends "include/notesdisplay.html" %}
+{% load i18n %}
+
+
+{% block add_note_section %}
+
+{{tags.2.note__snippet__count}}
+
+<div id="add_note_section">
+<div class="section_header">
+{% trans "Record your experience/thought" %}:&nbsp;&nbsp;&nbsp;&nbsp;<span class="show_add_note_section"><img title="{% trans 'Show adding snippet' %}" src="/site_media/img/right-arrow.jpg" class="click_img"/></span><span class="hide_add_note_section"  ><img title="{% trans 'Hide adding snippet' %}" src="/site_media/img/down-arrow.jpg" class="click_img"/></span> 
+<!--记录你的感受/想法-->
+</div>
+
+
+<div class="addnote">
+<form action="addNote/" method="post" enctype="multipart/form-data" id="addNoteForm"> <!--TODO:get ok? it still send an extra request to the server-->
+{% if current_tag %}
+	<input type="hidden" name="tags" value="{{current_tag}}"/>
+{% endif %}    
+    <textarea id="id_desc" rows="3" cols="90" name="desc"></textarea>
+    {% trans "Private" %} <input type="checkbox" name="private" id="id_private"/>
+    <br/><input type="submit" value="{% trans 'Add' %}"/>
+    {% trans "Short snippet is recommended (less than 300 characters)" %}
+    <a href="javascript:alert('{% trans "A short snippet is enough to represent a significant experience. Practice on that. :-)" %}');"><img src="/media/img/admin/icon-unknown.gif"/></a>
+    <!--
+	<table> 
+		<tr><th>{{addNoteForm.desc.errors }}<label for="id_desc">{% trans "Desc" %} <span class="required">*</span>:</label></th><td>{{addNoteForm.desc}}</td>
+			<th><label for="id_tags">{% trans "Tags" %}:</label></th><td>{{addNoteForm.tags}}</td>
+			<th><label for="id_private">{% trans "Private" %}:</label></th><td>{{addNoteForm.private}}</td>
+		</tr> 
+		<tr><th>{{addNoteForm.title.errors }}<label for="id_title">{% trans "Title" %}:</label></th><td><input id="id_title" type="text" name="title" maxlength="50" size="50"/></td> 
+			<th>{{addNoteForm.event.errors }}<label for="id_event">{% trans "Event" %}:</label></th><td><input id="id_event" type="text" name="event" maxlength="300" size="50"/></td>
+                         <th>{{addNoteForm.attachment.errors }}<label for="id_attachment">{% trans "Attachment" %}:</label></th><td>{{addNoteForm.attachment}}</td>			
+		</tr> 
+	</table> 
+-->    
+</form> 
+</div>
+<br/>
+</div>
+{% endblock %}
+
+
+{% block notes_section %}
+    {% include "snippetbook/notes/notes_display.html" %}
+{% endblock %}

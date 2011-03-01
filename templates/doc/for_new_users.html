@@ -1,0 +1,52 @@
+{% load i18n %}
+
+
+<h1>{% trans 'New User Guide' %}</h1>
+
+{% trans 'Notebook so far has three books: snippetbook (a collection of snippets or notes), bookmarks book (a collection of bookmarks), scrapbook (a collection of scraps).' %}
+<br/><br/>
+
+{% trans "For the convenience of adding bookmarks, you can drag the link below to your browser bookmark bar." %}<br/>
+<a href="javascript:(function(){var%20a=window,b=document,c=encodeURIComponent,d=a.open('http://localhost:8000/user/bookmarkbook/bookmarks/addBookmark/?url='+c(b.location)+'&title='+c(b.title),'bkmk_popup','left='+((a.screenX||a.screenLeft)+10)+',top='+((a.screenY||a.screenTop)+10)+',height=700px,width=550px,resizable=1,alwaysRaised=1');a.setTimeout(function(){d.focus()},300)})();">{% trans "Add a bookmark" %}</a>
+<br/><br/>
+
+
+{% trans "For the convenience of adding scraps, you can drag the link below to your browser bookmark bar." %}<br/>
+<a href="javascript:(function(){var%20a=window,b=document,c=encodeURIComponent;var%20txt%20=%20'';if%20(window.getSelection){txt=window.getSelection();}else%20if%20(document.getSelection){txt=document.getSelection();}else%20if%20(document.selection){txt=document.selection.createRange().text;}d=a.open('http://localhost:8000/user/scrapbook/scraps/addScrap/?url='+c(b.location)+'&title='+c(b.title)+'&desc='+c(txt),'bkmk_popup','left='+((a.screenX||a.screenLeft)+10)+',top='+((a.screenY||a.screenTop)+10)+',height=700px,width=550px,resizable=1,alwaysRaised=1');a.setTimeout(function(){d.focus()},300)})();">{% trans "Add a scrap" %}</a>
+<br/><br/>
+
+
+{% trans 'There are two tags automatically added when a new user is generated: untagged, notebook feedbacks. "untagged" is the default tag used for all stuff not tagged. "notebook feedbacks" is used for users to provide feedbacks on this notebook application.' %}
+<br/><br/>
+
+{% trans 'About folder' %}:{% trans 'A folder is dynamic set of notes/bookmarks/scraps that are selected based on certain queries.' %}
+<br/><br/>
+
+{% trans 'About search' %}:{% trans 'You can do some complex searches in the search box. Below are the sample queries' %} :
+
+<pre>
+{% trans 'Note on notation' %} : 't' for tag, 'v' for vote, '&' is "and" relation, '|' is "or" relation, '~' is "not" relation.
+
+edu efforts in China = t:chinese & t:education
+computer errands =  t:errand & t:on computer
+Chinese web and IT = t:OS in China | t:chinese sites | t:chinese web | t:grassroots in China | t:IT in China | t:beijing web
+important agile programming people = t:agile & t:people  & v:>2
+Non tech blog= t:blog & ~t:tech
+important liberal arts learning = t:movies |  t:books |  t:blogs & ~t:tech & v:>2
+consciousness only =  t:consciousness & ~t:society & ~t:new science & ~t:zen
+stuff that has "thinking" in = thinking' 
+</pre>
+<br/><br/>
+
+
+-----------------------------------------------------------------------------------------  {% trans 'Below are for advanced users only'  %}  ---------------------------------------------------------<br/>
+
+{% trans 'About working set' %}: {% trans 'A working set is a set of tags that you can work with when viewing stuff in the notebook. If you have a lot of tags, it is a good idea to choose a working set of tags to work with at certain times.' %}
+<br/><br/>
+
+{% trans 'About linkage' %}:{% trans 'Linkage is a set of notes/bookmarks/scraps linked together because they are tightly related. For example, they come from the same event, or they are of the same topic.' %}
+<br/><br/>
+
+
+
+

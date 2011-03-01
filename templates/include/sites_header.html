@@ -1,0 +1,64 @@
+{% load i18n %}
+
+
+<div id="sites_header">
+<span>
+<span class="item">
+<a href="/{{ user.username }}/snippetbook/notes/">{% trans 'Notebook' %}</a>
+</span>
+<span class="item">
+<a href="/{{ user.username }}/groups/">{% trans 'Learning Groups' %}</a>
+</span>
+<span class="item">
+<a href="/{{ user.username }}/friends/">{% trans 'Friends' %}</a>
+</span>
+
+<!--
+<span class="item">
+{% if bookname == 'snippetbook' %}
+<span style="font-size:12px">{% trans 'Snippetbook' %}</span>
+{% else %}
+<a href="/{{ user.username }}/snippetbook/notes/">{% trans 'Snippetbook' %}</a>
+{% endif %}
+</span>
+<span class="item">
+{% if bookname == 'bookmarkbook' %}
+<span style="font-size:12px">{% trans 'Bookmarks' %}</span>
+{% else %}
+<a href="/{{ user.username }}/bookmarkbook/bookmarks/">{% trans 'Bookmarks' %}</a>
+{% endif %}
+</span>
+<span class="item">
+{% if bookname == 'scrapbook' %}
+<span style="font-size:12px">{% trans "Scrapbook" %}</span>
+{% else %}
+<a href="/{{ user.username }}/scrapbook/scraps/">{% trans "Scrapbook" %}</a>
+{% endif %}
+</span>
+-->
+
+</span>
+<span class='sites_right_header'>
+<span class="item">
+    <strong><a href="/social/{{ user.username }}/">{{ user.username }}</a></strong> <!--TODO:user-->
+</span>
+<span class="item">
+    <a href="/forNewUsers/">{% trans 'For new users' %}</a>
+</span>
+<span class="item">
+    <a href="javascript:alert('Not implemented yet!');" class="NotImplementedYet">{% trans 'Doc' %}</a>
+</span>
+<span class="item">
+    <a href="/settings/">{% trans 'Settings' %}</a>
+</span>
+<span class="item">
+    <a href="/passwordChange/">{% trans 'Change password' %}</a> /
+    <a href="/logout/">{% trans "Log out" %}</a>
+</span> 
+<span class="item">
+     <a href="/setLang/?language=zh-cn">中文</a> |  <a href="/setLang/?language=en_US">English</a> &nbsp;&nbsp;&nbsp;&nbsp;
+</span>
+</span>
+</div>
+
+<hr/>

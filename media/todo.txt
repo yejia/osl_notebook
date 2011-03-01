@@ -1,0 +1,2 @@
+in img folder, admin folder is copied from contri of library. It was copied over because login page is looking for some img from that folder and if it is not there,
+it send a broken link error. And it seems whenever sending an email, it took a while to finish (todo: fix). So I copied that folder over.

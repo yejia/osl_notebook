@@ -1,0 +1,209 @@
+{% load i18n %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us" > 
+<head> 
+{% block tite %}
+{% endblock %}
+
+<link rel="stylesheet" type="text/css" href="/media/css/base.css" /> 
+<link rel="stylesheet" type="text/css" href="/media/css/dashboard.css" /> 
+
+<link rel="stylesheet" type="text/css" href="/media/css/changelists.css" /> 
+
+<!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="/media/css/ie.css" /><![endif]--> 
+<meta name="robots" content="NONE,NOARCHIVE" /> 
+
+<link href="/site_media/css/editableText.css" rel="stylesheet" type="text/css" />	
+<link href="/site_media/css/note.css" rel="stylesheet" type="text/css" /> 
+<link rel="stylesheet" href="/site_media/css/jquery.jdMenu.css" type="text/css" /> 
+
+
+
+  
+     
+
+    <script src="/site_media/js/jquery.min.js" type="text/javascript"></script>	
+      
+    <script src="/site_media/js/jquery.editableText.js" type="text/javascript"></script>
+    
+     <script src="/site_media/js/jquery.positionBy.js" type="text/javascript"></script>	
+     <script src="/site_media/js/jquery.dimensions.js" type="text/javascript"></script>	
+     
+     <script src="/site_media/js/jquery.bgiframe.js" type="text/javascript"></script> 
+	<script src="/site_media/js/jquery.jdMenu.js" type="text/javascript"></script> 
+    
+
+	<script src="/site_media/js/chili-1.7.pack.js"  type="text/javascript" ></script>	
+	<script src="/site_media/js/jquery.easing.js"  type="text/javascript" ></script>
+
+    
+    <script src="/site_media/js/jquery.AddIncSearch.js"  type="text/javascript" ></script>
+    
+    
+     
+    <link href="/site_media/css/tag-it/reset.css" rel="stylesheet" type="text/css" />       
+	<link href="/site_media/css/tag-it/master.css" rel="stylesheet" type="text/css" />
+    
+	<link href="/site_media/css/jquery-ui/jquery.ui.autocomplete.custom.css" rel="stylesheet" type="text/css"  />
+    <script src="/site_media/js/jquery-ui/jquery-ui-1.8.core-and-interactions.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/site_media/js/jquery-ui/jquery-ui-1.8.autocomplete.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/site_media/js/tag-it.js" type="text/javascript" charset="utf-8"></script>
+
+	
+    
+
+	
+<script>
+	$(document).ready(function(){	           
+            
+		    $("#ac_tags").tagit({
+			    availableTags: [{% for tag in tags %}"{{tag}}",{% endfor %}]
+            });  
+            
+            //TODO: make the tag-it lib able to take several auto complete input boxes
+            //$("#ab_tags").tagit({
+			//    availableTags: [{% for friend in user.member.get_friends %}"{{friend}}",{% endfor %}]
+            //});  
+            
+            
+              $('span#group_delete_member').click(function(){                  
+                    $(this).load('deleteMember/',{'member_id':$(this).parents('li[member_id]').attr('member_id')});
+                    $(this).parents("li[member_id]").remove();
+                });
+                
+                 $('span#group_delete_tag').click(function(){     
+              
+                    $(this).load('removeTagFromGroup/',{'tag_id':$(this).parents('li[tag_id]').attr('tag_id')});
+                    $(this).parents("li[tag_id]").remove();
+                });
+                
+                
+                
+                //TODO:below duplicate with js from include/notes_display.html
+                 $('span.editableText').editableText({
+                        newlinesEnabled: false
+                });
+			
+                $.editableText.defaults.newlinesEnabled = true;
+
+                $('div.editableText, p.editableText').editableText();
+			
+                $('.editableText').change(function(){
+                        var newValue = $(this).text();
+                        $(this).load('updateNoteInline/',{ 'id':$(this).parents('li').attr('note_id'), 'note_field':$(this).parents('div').attr('id'), 'content':  newValue})
+                });
+                
+                {% ifequal request.session.advanced 'on' %}                       
+                    $('.advanced').show(0);
+		    {% else %}                   
+                    $('.advanced').hide(0);                   
+		    {% endifequal %}
+            
+            
+            //below are copied from add bookmark button page. TODO: merge and clean up
+              $('.hide_more_section').hide(0);
+   
+   $('.hide_more_section').click(function(){
+                    $('div#more_section').hide();
+             		$(this).hide();   
+                    $('.show_more_section').show();                  
+                    return false;
+        });
+		
+    $('.show_more_section').click(function(){
+                    $('div#more_section').show();	
+                    $(this).hide();   	
+                    $('.hide_more_section').show();                    
+                    return false;
+        });
+		
+	});
+	
+</script>
+	
+	
+
+
+</head>  
+<body> 
+
+
+{% include "include/sites_header.html" %}
+
+<div id="header">
+{% block site_branding %}
+{% endblock %}
+</div>
+
+<div id="panel">
+
+
+
+
+
+{% block site_apps_menu %}
+{% endblock %}
+
+
+{% block help_message_if_none %}
+{% endblock %}
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<!--
+<div>
+Queries performed:
+<ol>
+{% for query in queries %}
+<li>
+sql: {{query.sql}}, 
+time: {{query.time}}
+</li>
+{% endfor %}
+</ol>
+</div>
+-->
+
+
+
+
+
+<!--
+{% include "include/search.html" %}
+-->
+
+{% block special_side_menu %}
+{% endblock %}
+
+
+
+
+
+
+
+{% block content %}
+
+
+
+{% endblock %}
+
+
+</div>
+
+
+
+
+
+<div id="footer"/>
+{% include "include/footer.html" %}
+</div>
+
+
+</body> 
+</html> 

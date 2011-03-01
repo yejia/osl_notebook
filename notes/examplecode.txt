@@ -1,0 +1,25 @@
+from notebook.notes.models import Note, Tag
+
+n.tags = [1]
+
+t1.note_set.all()
+
+
+t1.note_set.create(title="responsibility, give and take", event="", desc="Don't forget: interacting with gs, is to be ready to take responsibilities. If you take, you need to give. Then you can be go back to zero.")
+
+
+t1.note_set.count()
+
+Note.objects.filter(init_date__year=2010)
+
+Note.objects.filter(desc__startswith='when there')
+
+t1.note_set.filter(desc__startswith='when there')
+
+In [67]: n.tags.values()
+Out[67]: [{'id': 1, 'private': False, 'name': u'gfs'}]
+
+
+In [66]: n.tags.values_list()
+Out[66]: [(1, u'gfs', False)]
+

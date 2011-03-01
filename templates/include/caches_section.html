@@ -1,0 +1,21 @@
+{% load i18n %}
+
+<div class="advanced">
+<div class="section_header">
+{% trans "Notes in cache" %}:  <span class="show_caches_section"><img title="{% trans 'Show cache section' %}" src="/site_media/img/right-arrow.jpg" class="click_img"/></span><span class="hide_caches_section"><img title="{% trans 'Hide cache section' %}" src="/site_media/img/down-arrow.jpg" class="click_img"/></span> 
+</div>
+<div id="caches_section">          
+<div id="cache">
+{% for cache in caches %}
+<div class="cache_item">
+<!--TODO: For note (instead of snippets/bookmarks/scraps) cache, need to change cache_id to id. -->
+{% if bookname == 'notebook' %}
+<span id="cache_{{cache.id}}">{% trans "cache" %} {{cache.id}}: {{cache.note_ids|default:'no notes in cache'}}</span> &nbsp;&nbsp;&nbsp;<a href="/{{profile_username}}/{{bookname}}/caches/{{cache.id}}/">{% trans "View" %}</a> | <a href="javascript:clearCache('{{cache.id}}');">{% trans "Clear" %}</a>
+{% else %}
+<span id="cache_{{cache.cache_id}}">{% trans "cache" %} {{cache.cache_id}}: {{cache.note_ids|default:'no notes in cache'}}</span> &nbsp;&nbsp;&nbsp;<a href="/{{profile_username}}/{{bookname}}/caches/{{cache.cache_id}}/">{% trans "View" %}</a> | <a href="javascript:clearCache('{{cache.cache_id}}');">{% trans "Clear" %}</a>
+{% endif %}
+</div>
+{% endfor %}
+</div>
+</div>
+</div>

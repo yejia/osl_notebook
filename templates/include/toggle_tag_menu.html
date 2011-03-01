@@ -1,0 +1,29 @@
+{% load i18n %}
+
+
+<span class="tag_section">
+<span class="tags_img"><img src="/site_media/img/tags-small.png" class="img_in_notes_section_header"/></span>
+<span class="show_tags_section"><img title="{% trans "Show tags" %}" src="/site_media/img/right-arrow.jpg" class="click_img"/></span><span class="hide_tags_section"><img title="{% trans "Hide tags" %}" src="/site_media/img/down-arrow.jpg" class="click_img"/></span> 
+
+<div class="module tag_menu_box"> 
+        <h2>{% trans "Tags" %}
+        <span class="advanced">&nbsp;{% trans "in" %}  
+        <select id="ws_drop_down"  name="workingset">
+            {% for ws in wss %} 
+                {% if ws.name == current_ws %}
+                <option value="{{ws.name}}" selected="selected">{{ws.name}}</option>
+                {% else %}                
+                <option value="{{ws.name}}">{{ws.name}}</option>
+                {% endif %}   
+            {% endfor %}       
+         </select>   
+<a href="javascript:alert('{% trans "You can use working set to pick a set of tags to work with." %}');">
+<img src="/media/img/admin/icon-unknown.gif"/>
+</a>         
+</span>
+<span class="setting-in-r-menu"><a href="/settings/tags/">{% trans "Settings" %}</a></span>
+</h2>    
+{% include "include/tags_menu.html" %} 
+
+</div>
+</span>

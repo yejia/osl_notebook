@@ -1,0 +1,17 @@
+{% load i18n %}
+
+<div class="module"> 
+        <h2>{% trans "Learning Groups" %} <span class="setting-in-r-menu"><a href="/{{user}}/groups/">{% trans "Settings" %}</a></span></h2>  
+<ul>        
+	{% for g in user.member.get_groups %}	
+		<li><a href="/groups/{{ g.name }}/">{{g.name}}</a>   
+        {% if g.private %} <span class="lock_noclick" title="{% trans 'private'  %}" style="display:{% if g.private %}inline{% else %}none{% endif %};">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;              
+                                   </span> 
+        {% else %} <span class="unlock_noclick" title="{% trans 'public'  %}" style="display:{% if g.private %}none{% else %}inline{% endif %};">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;          
+                </span>
+        
+        {% endif %}  
+        </li>
+        {% endfor %} 
+</ul>       
+</div> 

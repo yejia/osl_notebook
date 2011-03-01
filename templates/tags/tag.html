@@ -1,0 +1,24 @@
+<div>
+<b>Tag id:</b> {{tag.id}}
+</div>
+<div>
+<b>Tag name:</b> {{tag.name}}
+</div>
+<div>
+<b>private:</b> {{tag.private}}
+</div>
+<div>
+<b>delete:</b> {{tag.delete}}
+</div>
+
+<br/><br/>
+
+<div>
+<span>Edit this tag:</span>
+<div>
+<form action="updateTag/" method="post" id="updateTagForm">
+{{tag_form.as_p}}
+<input type="submit" value="Submit" />
+</form> 
+</div>
+</div>

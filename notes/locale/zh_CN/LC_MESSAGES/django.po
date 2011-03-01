@@ -1,0 +1,302 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-07-12 01:34+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: views.py:769
+msgid "note"
+msgstr "便条"
+
+#: views.py:770
+msgid "notes"
+msgstr "便条"
+
+#: templatetags/admin_list.py:257
+msgid "All dates"
+msgstr ""
+
+#~ msgid "Folders"
+#~ msgstr "文件夹"
+
+#~ msgid "Please select a folder from the right menu."
+#~ msgstr "请从右边菜单里选择一个文件夹。"
+
+#~ msgid "(No Title)"
+#~ msgstr "（无标题）"
+
+#~ msgid ""
+#~ "When editing, replace content with comma separated note ids. And those "
+#~ "notes will be included in this linkage."
+#~ msgstr "编辑时，将内容替代为逗号分隔的便条id. 这些便条将被包括在链条里。"
+
+#~ msgid "Linkages"
+#~ msgstr "链条"
+
+#~ msgid "All Linkages"
+#~ msgstr "全部链条"
+
+#~ msgid "Same Topic"
+#~ msgstr "同一个主题"
+
+#~ msgid "Same Event"
+#~ msgstr "同一个事件"
+
+#~ msgid "Notebook of %(profile_username)s"
+#~ msgstr "%(profile_username)s 的便条本"
+
+#~ msgid "Notes"
+#~ msgstr "便条本"
+
+#~ msgid "Or Search on extra"
+#~ msgstr "或者在额外信息上搜索"
+
+#~ msgid "Filter"
+#~ msgstr "过滤器"
+
+#~ msgid "Yes"
+#~ msgstr "是"
+
+#~ msgid "No"
+#~ msgstr "否"
+
+#~ msgid "Private"
+#~ msgstr "隐私"
+
+#~ msgid "All"
+#~ msgstr "全部"
+
+#~ msgid "Date Range"
+#~ msgstr "时间范围"
+
+#~ msgid "Any day"
+#~ msgstr "任何天"
+
+#~ msgid "Today"
+#~ msgstr "今天"
+
+#~ msgid "Past 7 Days"
+#~ msgstr "过去7天"
+
+#~ msgid "This Month"
+#~ msgstr "本月"
+
+#~ msgid "This Season"
+#~ msgstr "本季度"
+
+#~ msgid "This Year"
+#~ msgstr "今年"
+
+#~ msgid "Pick a Range"
+#~ msgstr "选择一个范围"
+
+#~ msgid "With attachment"
+#~ msgstr "有附件的"
+
+#~ msgid "Sorting"
+#~ msgstr "排序"
+
+#~ msgid "By Importance"
+#~ msgstr "根据重要性"
+
+#~ msgid "By Creation Date"
+#~ msgstr "根据生成时间"
+
+#~ msgid "By Last Modification Date"
+#~ msgstr "根据最后一次修改时间"
+
+#~ msgid "By Title"
+#~ msgstr "根据标题"
+
+#~ msgid "By Desc"
+#~ msgstr "根据正文"
+
+#~ msgid "Order Type"
+#~ msgstr "升降种类"
+
+#~ msgid "Descend"
+#~ msgstr "降序"
+
+#~ msgid "Ascend"
+#~ msgstr "升序"
+
+#~ msgid "Archive"
+#~ msgstr "存档"
+
+#~ msgid "Managing"
+#~ msgstr "管理"
+
+#~ msgid "Manage Tags"
+#~ msgstr "管理标签"
+
+#~ msgid "Manage Folders"
+#~ msgstr "管理文件夹"
+
+#~ msgid "My Friends"
+#~ msgstr "我的朋友们"
+
+#~ msgid "so far list all users"
+#~ msgstr "暂时列出所有用户"
+
+#~ msgid "In linkages"
+#~ msgstr "在链条里的"
+
+#~ msgid "Linking"
+#~ msgstr "组成链条"
+
+#~ msgid "Make a linkage with selected notes"
+#~ msgstr "将选取的便条生成一个链条"
+
+#~ msgid "Cache"
+#~ msgstr "缓存区"
+
+#~ msgid "Add selection to cache"
+#~ msgstr "加选取的到缓存区"
+
+#~ msgid "Add selection to another cache"
+#~ msgstr "加选取的到另一个缓存区"
+
+#~ msgid "Add Tags"
+#~ msgstr "加标签"
+
+#~ msgid "Create new"
+#~ msgstr "产生新的"
+
+#~ msgid "Add tags selected"
+#~ msgstr "加选取的标签"
+
+#~ msgid "Remove Tags"
+#~ msgstr "去除标签"
+
+#~ msgid "Remove tags selected"
+#~ msgstr "去除选取的标签"
+
+#~ msgid "More actions"
+#~ msgstr "更多操作"
+
+#~ msgid "Notes analysis"
+#~ msgstr "便条分析"
+
+#~ msgid "Similar notes"
+#~ msgstr "相似的便条"
+
+#~ msgid "Draw the map"
+#~ msgstr "画图"
+
+#~ msgid "Diff"
+#~ msgstr "不同"
+
+#~ msgid "Make private"
+#~ msgstr "变隐私"
+
+#~ msgid "Make public"
+#~ msgstr "变公开"
+
+#~ msgid "Soft Delete"
+#~ msgstr "软删除"
+
+#~ msgid "Change the creation date"
+#~ msgstr "改变生成的时间"
+
+#~ msgid "Add event"
+#~ msgstr "加事件"
+
+#~ msgid "Add comment"
+#~ msgstr "加评论"
+
+#~ msgid "Add note"
+#~ msgstr "加便条"
+
+#~ msgid "Done adding note"
+#~ msgstr "不再加便条"
+
+#~ msgid "Hide notes section"
+#~ msgstr "隐藏便条部分"
+
+#~ msgid "Show notes section"
+#~ msgstr "显示便条部分"
+
+#~ msgid "Hide caches section"
+#~ msgstr "隐藏缓存区部分"
+
+#~ msgid "Show caches section"
+#~ msgstr "显示缓存区部分"
+
+#~ msgid "Create a new note"
+#~ msgstr "产生一个新的便条"
+
+#~ msgid "Desc"
+#~ msgstr "正文"
+
+#~ msgid "Tags"
+#~ msgstr "标签"
+
+#~ msgid "Title"
+#~ msgstr "标题"
+
+#~ msgid "Event"
+#~ msgstr "事件"
+
+#~ msgid "Attachment"
+#~ msgstr "附件"
+
+#~ msgid "Create a linkage"
+#~ msgstr "生成一个链条"
+
+#~ msgid "Type of linkage"
+#~ msgstr "链条类型"
+
+#~ msgid "Notes in cache"
+#~ msgstr "缓存区的便条"
+
+#~ msgid "cache"
+#~ msgstr "缓存"
+
+#~ msgid "View"
+#~ msgstr "浏览"
+
+#~ msgid "Clear"
+#~ msgstr "清除"
+
+#~ msgid "Folder"
+#~ msgstr "文件夹"
+
+#~ msgid "Search term is"
+#~ msgstr "搜索词条是"
+
+#~ msgid "Save this search as a folder"
+#~ msgstr "将这个搜索存为一个文件夹"
+
+#~ msgid "bottom"
+#~ msgstr "底"
+
+#~ msgid "Expand all"
+#~ msgstr "扩展所有的"
+
+#~ msgid "Select"
+#~ msgstr "选择"
+
+#~ msgid "None"
+#~ msgstr "无"
+
+#~ msgid "top"
+#~ msgstr "顶"
+
+#~ msgid "Tag"
+#~ msgstr "标签"
+
+#~ msgid "all tags"
+#~ msgstr "全部标签"

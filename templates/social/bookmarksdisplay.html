@@ -1,0 +1,41 @@
+{% extends "social/notesdisplay.html" %}
+{% load i18n %}
+
+
+
+{% block brief_display %}
+<div class="bookmarkbook">
+    <div class="brief_display">
+         <table class="note_table"><tr>
+            <td class="note_table_title">
+            <div id="note_title" title="{% trans 'note title' %}">{{ note.title|default:_('(No Title)')}}</div> 		    
+		    </td>
+            <td class="note_table_2td">
+		    <div  id="note_url" title="note url"><a href="{{ note.url}}" target="_blank">{{note.url}}</a></div>	   
+		    </td>
+		    <td class="note_table_tags">
+		    <div id="note_tags" title="{% trans "note tags" %}">
+                {% for tag in note.get_tags %}
+                    <span>{% if appname == 'groups' %}{{tag}}, {% else %}  <a href="/social/{{profile_username}}/{{bookname}}/tags/{{tag}}/">{{tag}}</a>, {% endif %}   </span>
+                {% endfor %}
+            </div>            
+		    </td>
+            <td><span id="note_owner" title="{% trans "snippet's owner"  %}"><a href="">{{note.owner.username}}</a></span>
+            </td>
+		    </tr>
+        </table>
+</div>
+</div>
+{% endblock %}
+
+
+
+
+{% block full_display_td12 %}
+           <td class="note_table_title">
+            <div id="note_title" title="{% trans 'note title' %}">{{ note.title|default:_('(No Title)')}}</div> 		    
+		    </td>            
+            <td class="note_table_2td">
+		    <div  id="note_url" title="note url"><a href="{{ note.url}}" target="_blank">{{note.url}}</a></div>	   
+		    </td>
+{% endblock %} 

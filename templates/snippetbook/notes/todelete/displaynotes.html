@@ -1,0 +1,624 @@
+ {% load i18n %}
+ 
+ <link rel="stylesheet" href="/site_media/css/jquery.jdMenu.css" type="text/css" /> 
+ <script>
+	
+	Array.prototype.unique = function () {
+	var r = new Array();
+	o:for(var i = 0, n = this.length; i < n; i++)
+	{
+		for(var x = 0, y = r.length; x < y; x++)
+		{
+			if(r[x]==this[i])
+			{
+				continue o;
+			}
+		}
+		r[r.length] = this[i];
+	}
+	return r;
+}
+
+    function sortNumber(a,b){
+            return a - b;
+    }
+	
+    
+    
+    function showAddTags(){    
+            //alert('show add tgs');
+            $('#ac_tags_box').show(0);  
+             $('#add_tags_to_notes').show(0); 
+            $('#remove_tags_from_notes').hide(0);     
+            $('.tagit-input').focus();     
+            $('.tagit-input').css("background-color","#F5FC9E");
+           
+           // $('#ac_tags').css("border","groove");
+                        
+    }
+    
+    
+    
+    function cancelChangeTags(){    
+            //alert('cancel add tgs');
+            $('#ac_tags_box').hide(0);  
+            //Below cannot succesfully remove tags entered earlier. I guess it is ok to leave those tags there for now
+            //$('ul#ac_tags').text('')
+    }
+    
+    function showRemoveTags(){    
+            //alert('show remove tgs');
+            $('#ac_tags_box').show(0);  
+            $('#remove_tags_from_notes').show(0);   
+            $('#add_tags_to_notes').hide(0);     
+            $('.tagit-input').focus();     
+            $('.tagit-input').css("background-color","#F5FC9E");            
+    }
+
+	
+	function	addTags(){    
+		    var selected_tags = [];    		    
+		    $('.tag_selection').each(function(){
+                    if ($(this).attr('checked')==true){			
+                        selected_tags.push($(this).val());	
+                    }			
+		     });
+             
+            selected_notes = getSelectedNoteIds();		       
+		    
+		       
+		      // $(this).load('addTags2Notes/', {'note_ids': selected_notes, 'tags_to_add': selected_tags}, processReturn);
+		       
+               //window.location.href=window.location.href;
+		      //setTimeout( "window.location.reload(false)", 1000) ; //TODO: only load the changed notes using response from the server
+		       //time out is added to fix a problem happened after uplodading to the server. If wait a while, the ajax will succeed, otherwise, will return error.
+               //on local server, tags will be added or removed even return error. But on remote server, the py method is not even called.
+               //On local server, no the pipe broken error any more.
+               //So I think the reason is like this: this ajax call is a non-blocking one. So if you reload the page, the pipe is broken. On a local server, the ajax call is already
+              //mapped to a url and method called. But for a remote server, the ajax call probably fall behind the next page reload request and is not even mapped to a url yet.         
+               
+               
+            $.ajax({url: 'addTags2Notes/'+
+                                    '?note_ids='+selected_notes+
+                                    '&tags_to_add='+selected_tags,
+                            success:  processReturn,
+                            async:   false
+            })
+            window.location.reload(false);     
+		       //return true;
+		
+	}
+    
+    function processReturn(data){
+         ;    
+    }
+    
+    
+    function  addTags_new(){
+    //alert('adding tags new...');
+          var selected_tags = [];	
+          $('li.tagit-choice').each(function(){               
+                   	   // alert('find a tag:'+$(this).find(':input').val());
+                            selected_tags.push($(this).find(':input').val());	
+                    			
+		     });	
+          // alert('selected_tags is:'+selected_tags );        
+           
+            selected_notes = getSelectedNoteIds();		  
+            
+              $.ajax({url: 'addTags2Notes2/'+
+                                    '?note_ids='+selected_notes+
+                                    '&tags_to_add='+selected_tags,
+                            success:  processReturn,
+                            async:   false
+            })
+            window.location.reload(false);     
+            return false;
+   
+   
+   
+    }
+	
+	function removeTags(){
+            var selected_tags = [];		    
+		    $('.tag_selection').each(function(){
+                    if ($(this).attr('checked')==true){				
+                            selected_tags.push($(this).val());	
+                    }			
+		     });		    
+		      
+            selected_notes = getSelectedNoteIds();	    
+		       
+		       //$(this).load('removeTagsFromNotes/', {'note_ids': selected_notes, 'tags_to_add': selected_tags}, processReturn);
+		       
+               //window.location.href=window.location.href;
+		     // setTimeout( "window.location.reload(false)", 1000);
+		       //return true;
+               
+               
+            $.ajax({url: 'removeTagsFromNotes/'+
+                                    '?note_ids='+selected_notes+
+                                    '&tags_to_add='+selected_tags,
+                            success:  processReturn,
+                            async:   false
+            })
+                           
+            window.location.reload(false);    
+	
+	}
+    
+    
+    function removeTags_new(){
+          
+          var selected_tags = [];	
+          $('li.tagit-choice').each(function(){               
+                   	    //alert('find a tag:'+$(this).find(':input').val());
+                            selected_tags.push($(this).find(':input').val());	
+                    			
+		     });	
+           //alert('selected_tags is:'+selected_tags );        
+           
+            selected_notes = getSelectedNoteIds();		  
+            
+              $.ajax({url: 'removeTagsFromNotes2/'+
+                                    '?note_ids='+selected_notes+
+                                    '&tags_to_add='+selected_tags,
+                            success:  processReturn,
+                            async:   false
+            })
+            window.location.reload(false);     
+            return false;
+    
+    
+    
+    }
+		 
+	
+			
+    function	linkNotes(){
+		     selected_notes = getSelectedNoteIds();
+		     $('form#linkNotesForm').before("The following notes are going to be linked together:"+selected_notes);
+		     $('form#linkNotesForm').prepend('<input type="hidden"  name="notes"  value="'+selected_notes+'"/>');
+		     $('.linkNotes').show();		
+    }
+		
+		
+    function	showSelectedPlusCachedNoteIds(){
+		     notes = getSelectedPlusCachedNoteIds();
+		     alert("Selected notes:"+ notes+"  You can copy and paste these ids into another form.");			
+    }
+		
+    function	getSelectedPlusCachedNoteIds(){
+		     current_selected_notes = getSelectedNoteIds();
+		     cached_notes = getCachedNoteIds();
+		     //alert('cached_notes:'+cached_notes);
+		     notes = current_selected_notes +','+cached_notes ;
+		     notes_list = notes.split(',');
+		     //alert('selected_notes_list :'+selected_notes_list );		     
+		     notes_set = notes_list.unique();
+		     notes_set.sort(sortNumber);		     
+		     //alert('selected_notes_set :'+selected_notes_set );
+		     unique_notes = notes_set.toString();
+		     return unique_notes;
+		
+    }
+		
+    function	showSelectedNotes(){
+		      notes = getSelectedPlusCachedNoteIds();
+		      $.post('toggleAddNoteMode/', {'addnote_mode':'on'});
+		      return false;	
+    }
+		
+		
+    function	getCachedNoteIds(){
+		       cachespan = $('#cache span');
+		       cached_notes= $(cachespan).text();
+		       if  (cached_notes=='no notes in cache'){
+		             cached_notes ='';
+		       }
+		       //alert('cached_notes:'+cached_notes);
+		       return cached_notes;
+    }
+		
+    function	getSelectedNoteIds(){		    	   
+		    var selected_notes = [];	
+		    $('.note_selection').each(function(){
+                    if ($(this).attr('checked')==true){				
+                        selected_notes.push($(this).val());	
+                    }			
+		     });		     	
+		     return selected_notes;
+    }
+		
+    function  selectAll(){
+		     $('.note_selection').attr('checked',true);
+		
+    }
+		
+    function  selectNone(){		     
+		     $('.note_selection').attr('checked',false);		
+    }
+		
+    function addNotes2Cache(cache_id){		   
+            selected_notes = getSelectedNoteIds();
+            //cachespan = $('span#cache_'+cache_id);		       
+            $.post('/{{profile_username}}/{{bookname}}/caches/'+cache_id+'/addNotes2Cache/',{'cache_id':cache_id, 'selected_note_ids':selected_notes}, notesAdded, 'json');
+    }		
+		
+    function notesAdded(cache){			 
+            if (cache.created==true){
+                    window.location.reload( false ); //for now, just refresh the page. Because the new item added to note menu cannot be clicked. (might because it is not recognized by the jd_menu plugin) TODO:
+		  
+                    $('div#cache').prepend('<div class="cache_item"><span id="cache_'+cache.cache_id+'">{% trans 'cache' %} ' +cache.cache_id+':' +cache.note_ids+'</span> &nbsp;&nbsp;&nbsp;<a href="/mynotes/caches/'+cache.cache_id+'/">{% trans 'View' %}</a> | <a href="javascript:clearCache('+cache.cache_id+');">{% trans 'Clear' %}</a>');		 
+                    previous_cache_id = cache.cache_id-1;
+                    next_cache_id = parseInt(cache.cache_id)+1;
+                    //alert('<li  id="add_to_cache_'+cache.id+'"><a href="javascript:addNotes2Cache('+cache.id+');">Add selection to cache '+cache.id+'</a></li>');
+                    $("li#add_to_cache_"+previous_cache_id).after('<li  id="add_to_cache_'+cache.cache_id+'"><a href="javascript:addNotes2Cache('+cache.cache_id+');">Add selection to cache '+cache.cache_id+'</a></li>' );
+                    $("li#add_to_another_cache").find('a').attr('href','javascript:addNotes2Cache('+next_cache_id+');')
+                    //even after adding below, it still cannot recognize the newly added li 
+                    $('ul.jd_menu').jdMenu();                    
+           }
+            if (cache.created==false){
+                    $('span#cache_'+cache.cache_id).text("{% trans 'cache' %} " +cache.cache_id+":" +cache.note_ids);		 
+            }		
+    }
+		
+    function clearCache(cache_id){	
+            cachespan = $('span#cache_'+cache.cache_id);			
+            div = $(cachespan).parents('div.cache_item');			
+            $.post('/{{profile_username}}/{{bookname}}/caches/'+cache_id+'/'+'clearCache/', cacheCleared);			 
+    }
+		
+		
+		
+    function cacheCleared(cache_id){		
+            window.location.reload( false ); //for now, just refresh the page TODO:		 
+            $('span#cache_'+cache_id).parents('div.cache_item').remove();		  
+            $("li#add_to_cache_"+cache_id).remove();
+            //TODO: if the last cache, should get rid of add to another, and restore add to the cache 1  		
+    }
+        
+        
+    function set_notes_private(){
+             selected_notes = getSelectedNoteIds();
+             $.post('/{{profile_username}}/{{bookname}}/setNotesPrivate/',{'note_ids':selected_notes});
+             //window.location.reload( false );   
+    }
+    
+     function share(){
+             selected_notes = getSelectedNoteIds();
+             $.post('/{{profile_username}}/{{bookname}}/share/',{'note_ids':selected_notes});
+     
+     }
+        
+		
+    function expandall(){       
+              $('div.brief_display').hide();
+              $('div.full_display').show();   
+              $("div.kuoda").hide();
+              $("div.yasuo").show();              
+    }
+        
+    function collapseall(){
+            $('div.brief_display').show();
+            $('div.full_display').hide();
+            $("div.kuoda").show();
+            $("div.yasuo").hide(); 
+    }
+    
+    
+        
+                    
+                    
+    
+    
+    //TODO: the ones in base2.html are not updated with the change here.
+    function structure(){
+              $('.structure').show(0);
+              //$('.stream').hide(0);
+    
+            {% ifequal request.session.advanced 'on' %}                       
+                    $('.advanced').show(0);                  
+		    {% else %}                   
+                    $('.advanced').hide(0);                   
+		    {% endifequal %}     
+    }
+    
+    function stream(){
+   
+          //$('.stream').show(0);    
+          $('.structure').hide(0);
+    }
+    
+    
+    function show_confirm(){
+        var r=confirm("{% trans "If you join this group, any note you make that is tagged with any of the tag of this group will be pushed to this group. Private note, however, will not be pushed, unless you specifically want to share it with a group." %}");
+        if (r==true){
+            window.location.replace('/groups/{{group.name}}/joinGroup')
+        }
+        else{
+             ;
+        }
+}
+
+	
+</script>
+ 
+ 
+ <script>
+ 
+ $(document).ready(function(){	
+    
+            $('#ac_tags_box').hide(0);
+           
+    
+            $('.stream').show(0);    
+            $('.structure').hide(0);
+            
+            $('.show_tags_section').show(0);
+            $('.hide_tags_section').hide(0);
+            $('.tag_menu_box').hide(0);
+             
+            $('.hide_tags_section').click(function(){	  
+                        
+                        $('.show_tags_section').show(0);
+                        $('.hide_tags_section').hide(0);
+                         $('.tag_menu_box').hide(0);
+                });
+                
+            $('.show_tags_section').click(function(){	    
+                        $('.show_tags_section').hide(0);
+                        $('.hide_tags_section').show(0);
+                         $('.tag_menu_box').show(0);
+                });
+    
+
+	
+            $('#id_folder_name').hide();
+            $('#submit_saveSearch').hide();
+            $('#show_folder_name_input').click(function(){
+                    $('#id_folder_name').show();
+                    $('#submit_saveSearch').show();
+                    $(this).hide();
+            });
+            
+            {% ifequal request.session.advanced 'on' %}                       
+                    $('.advanced').show(0);
+                    $('.stream').show(0);    
+                    $('.structure').hide(0);
+		    {% else %}                   
+                    $('.advanced').hide(0);                   
+		    {% endifequal %}
+	
+	
+            {% ifequal addnote_mode 'on' %}	             
+                    $('.show_add_note_section').hide(0);
+                    $('.hide_add_note_section').show(0);
+                    $('.addnote').show(0);				
+		    {% else %}
+                    $('.show_add_note_section').show(0);
+                    $('.hide_add_note_section').hide(0);
+                    $('.addnote').hide(0);
+		    {% endifequal %}
+		     //$('.hide_add_note_section').hide();
+		    $('.show_add_note_section').click(function(){
+                    $('.addnote').show();
+                    $(this).hide();
+                    $('.hide_add_note_section').show();
+                    $.post('toggleAddNoteMode/', {'addnote_mode':'on'});
+                    return false;
+            });
+		
+            $('.hide_add_note_section').click(function(){
+                    $('.addnote').hide();
+                    $(this).hide();
+                    $('.show_add_note_section').show();
+                    $.post('toggleAddNoteMode/', {'addnote_mode':'off'});
+                    return false;
+            });
+		
+            {% ifequal show_notes_mode 'on' %}	             
+                    $('.show_notes_section').hide(0);
+                    $('.hide_notes_section').show(0);
+                    $('div#notes_section').show(0);				
+            {% else %}
+                    $('.show_notes_section').show(0);
+                    $('.hide_notes_section').hide(0);
+                    $('div#notes_section').hide(0);
+		    {% endifequal %}
+		
+		
+            $('.hide_notes_section').click(function(){
+                    $('div#notes_section').hide();
+             		$(this).hide();   
+                    $('.show_notes_section').show();
+                    $.post('toggleShowNotesMode/', {'show_notes_mode':'off'});
+                    return false;
+            });
+		
+            $('.show_notes_section').click(function(){
+                    $('div#notes_section').show();	
+                    $(this).hide();   	
+                    $('.hide_notes_section').show();
+                    $.post('toggleShowNotesMode/', {'show_notes_mode':'on'});
+                    return false;
+            });
+		
+		
+		    {% ifequal show_caches_mode 'on' %}	             
+                    $('.show_caches_section').hide(0);
+                    $('.hide_caches_section').show(0);
+                    $('div#caches_section').show(0);				
+		    {% else %}
+                    $('.show_caches_section').show(0);
+                    $('.hide_caches_section').hide(0);
+                    $('div#caches_section').hide(0);
+		    {% endifequal %}
+		
+		
+            $('.hide_caches_section').click(function(){
+                    $('div#caches_section').hide();
+             		$(this).hide();   
+                    $('.show_caches_section').show();
+                    $.post('toggleShowCachesMode/', {'show_caches_mode':'off'});
+                    return false;
+            });
+		
+            $('.show_caches_section').click(function(){
+                    $('div#caches_section').show();	
+                    $(this).hide();   	
+                    $('.hide_caches_section').show();
+                    $.post('toggleShowCachesMode/', {'show_caches_mode':'on'});
+                    return false;
+            });
+		
+		     
+		        
+            $('#addnoteSubmit').click(function(){		   
+                    var form = $(this).parents('form');			
+                    $(this).load('addNote/',{'title':form.find('#id_title').val(),'desc':form.find('#id_desc').val(),'event':form.find('#id_event').val(), 
+			                                       'vote':form.find('#id_vote').val(),'tags':form.find('#id_tags').val(),'private':form.find('#id_private').val(), 'attachment':form.find('#id_attachment').val()}); //TODO: broken pipe issue on the server side
+		
+                    return false; //need this to prevent flashing the page again, e.g. requesting the same page again, which is nice in my case (although causing broken pipe -- seems avoidable if  server don't return response), but it is still refreshs the page
+            });	
+
+		
+		
+            //TODO: where to define the call back
+            function addNoteCallback(n){
+	                //alert("note added");     
+            }			
+	     
+	   	
+            $('div.brief_display').show();
+            $('div.full_display').hide();		
+		
+		
+            $('.yasuo').hide();
+		
+            $('.kuoda').click(function(){		
+                    $(this).parents("li").find('div.brief_display').hide();
+                    $(this).parents("li").find('div.full_display').show();
+                
+                    $(this).parents("li").find("div.kuoda").hide();
+                    $(this).parents("li").find("div.yasuo").show();		
+            });
+		
+            $('.yasuo').click(function(){        
+                    $(this).parents("li").find('div.brief_display').show();
+                    $(this).parents("li").find('div.full_display').hide();		       
+                    $(this).parents("li").find("div.kuoda").show();
+                    $(this).parents("li").find("div.yasuo").hide();		
+            });		
+
+        
+		
+            $("a:contains('(No Title)')").css({'font-weight':100,'font-size':9});	
+            $("a:contains('（无标题）')").css({'font-weight':100,'font-size':9});	
+            $("li.note_display:odd").css("background-color", "#FFFFFF");
+            $("li.note_display:even").css("background-color", "#E0FFFF");
+		
+        
+
+		    $("#ac_tags").tagit({
+			    availableTags: [{% for tag in tags %}"{{tag}}",{% endfor %}]
+            });    
+
+
+            $(":input[name='sort']").change(function(){       
+            //alert('changed');
+                
+                window.location.replace('?sort='+$(this).val())
+      
+             });
+             
+         
+             
+             
+             
+             
+                    $('.comment_submit').click(function(){  
+                        var newValue = $(this).parents("#add_comment_box").find("#add_comment").val();
+                        $.post('addComment/',{ 'id':$(this).parents('li').attr('note_id'), 'content':  newValue}, commentAdded ,'json');              
+      
+                });
+                
+                $('.cancel_comment_submit').click(function(){                   
+                        comment_box  = $(this).parents("#add_comment_box")
+                        comment_box.find("#add_comment").val('');
+                        comment_box.hide();
+      
+                });
+                
+               
+                
+                function commentAdded(result){
+                     note_id = result.note_id;
+                     $("li[note_id='"+note_id+"']").find('div#comments').append("<div>"+result.content+"</div>");            
+                     
+                    comment_box = $("li[note_id='"+note_id+"']").find('div#add_comment_box');
+                    comment_box.find("#add_comment").val('')
+                    comment_box.hide();
+                
+                }
+                
+                
+                 $('.add_comment_button').click(function(){                   
+                        $(this).parents('li').find('#add_comment_box').show();               
+      
+                });
+                
+                
+                $('span.inline_delete_comment').click(function(){	                
+                    $(this).load('deleteComment/',{'comment_id':$(this).parents('div').attr('comment_id')});
+                    $(this).parents("div[comment_id]").remove();
+                });
+                
+                
+               
+                
+                
+                
+                $('span.unlock').click(function(){	                   
+                    $.post('makePrivate/',{'id':$(this).parents('li').attr('note_id')}, privacyChanged, 'json');                   
+                });
+                
+                 $('span.lock').click(function(){	                   
+                    $.post('makePublic/',{'id':$(this).parents('li').attr('note_id')}, privacyChanged, 'json');                   
+                });
+               
+               
+                 function privacyChanged(result){                 
+                     note_id = result.note_id
+                    if (result.private == 'y'){
+                    //alert('is true');                          
+                          $("li[note_id='"+note_id+"']").find('span.lock').show();
+                          $("li[note_id='"+note_id+"']").find('span.unlock').hide();
+                    }else{
+                   //alert('is fale');
+                          $("li[note_id='"+note_id+"']").find('span.unlock').show();
+                          $("li[note_id='"+note_id+"']").find('span.lock').hide();
+                    }
+                     
+                
+                }
+ 
+  });
+ 
+ 
+ </script>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <div id="header">
+                <div id="branding">
+                    <h1 id="site-name">{% blocktrans %}Notetbook of {{profile_username}}{% endblocktrans %} </h1>  
+                </div>
+</div> 
+        {% include "snippetbook/notes/notesdisplay.html" %}    

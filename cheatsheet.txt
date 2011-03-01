@@ -1,0 +1,126 @@
+django-admin.py startproject notebook
+
+python manage.py dbshell
+
+python manage.py  dumpdata  notes  > notes_app_db.json
+python manage.py help
+
+python manage.py cleanup 
+python manage.py dbshell
+python manage.py syncdb
+python manage.py loaddata notes_app_db.json
+python manage.py syncdb
+
+
+python manage.py validate
+python manage.py sql
+python manage.py sql notes
+python manage.py sqlall notes
+
+python manage.py runserver
+python manage.py shell
+
+django-admin.py makemessages -l zh_CN
+django-admin.py compilemessages
+
+
+
+=========================
+from django.db import connection, transaction
+
+cursor = connection.cursor()
+cursor.execute("select count(*) from notes_note n,notes_note_tags nt,notes_tag t where n.id = nt.note_id and nt.tag_id=t.id and t.name='zen' or t.name='gfs'  ")
+
+row = cursor.fetchone()
+rows = cursor.fetchall()
+=========================
+
+n9 = Note.objects.filter(tags__name='zen')
+n10 = Note.objects.filter(tags__name='gfs')
+n11 = n9 & n10
+n12 = n9 | n10
+
+#be aware that sql 's and and or when used on the same field
+=========================
+from django.db.models import Q
+
+q1 = Q(tags__name='zen')
+q2 = Q(tags__name='gfs')
+
+q = q1 & q2
+q = q1 | q2
+
+#also be aware that sql 's and and or when used on the same field TODO: try query on a single table (seems messed up with the m2m relations)
+===========================
+
+n1 = Note.objects.filter(tags__name='zen')
+n2 = Note.objects.filter(tags__name='gfs')
+
+n = n1 & n2
+
+n._as_sql() #view the sql str this way. n if of type QuerySet
+
+/*output a query as below:
+SELECT U0."id" FROM "notes_note" U0 INNER JOIN "notes_note_tags" U1 ON (U0."id" = U1."note_id") INNER JOIN "notes_tag" U2 ON (U1."tag_id" = U2."id") INNER JOIN "notes_note_tags" U3 ON (U0."id" = U3."note_id") INNER JOIN "notes_tag" U4 ON (U1."tag_id" = U4."id") WHERE (U2."name" = 'zen'  AND U4."name" ='gfs');
+*/
+
+
+q1 = Q(tags__name='zen')
+q2 = Q(tags__name='gfs')
+q = q1 & q2
+n3 = Note.objects.filter(q)
+n3._as_sql()
+
+/*output a query as below:
+('SELECT U0."id" FROM "notes_note" U0 INNER JOIN "notes_note_tags" U1 ON (U0."id" = U1."note_id") INNER JOIN "notes_tag" U2 ON (U1."tag_id" = U2."id") WHERE (U2."name" = %s  AND U2."name" = %s )',
+ ('zen', 'gfs'))
+
+*/
+==========================
+
+ALTER TABLE notes_note ADD COLUMN attachment VARCHAR(100) NOT NULL;
+
+ALTER TABLE notes_note MODIFY attachment VARCHAR(100) NOT NULL;
+
+//ALTER TABLE notes_note DROP COLUMN attachment;
+
+//ALTER TABLE notes_folder MODIFY name VARCHAR(50) NOT NULL;
+
+ALTER TABLE notes_note ADD COLUMN note_id  integer;
+
+ALTER TABLE notes_cache ADD COLUMN cache_id integer;
+
+//ALTER TABLE notes_cache DROP COLUMN cache_id integer;
+
+ALTER TABLE notes_tag ADD COLUMN tag_id  integer;
+
+ALTER TABLE notes_note ADD COLUMN note_id  integer;
+ALTER TABLE notes_note ADD COLUMN user_id  integer REFERENCES "auth_user" ("id");
+
+ALTER TABLE notes_cache ADD COLUMN user_id  integer REFERENCES "auth_user" ("id");
+
+ALTER TABLE notes_tag ADD COLUMN user_id  integer REFERENCES "auth_user" ("id");
+
+UPDATE notes_note SET note_id=id, user_id=2;
+UPDATE notes_tag SET tag_id=id, user_id=2;
+UPDATE notes_note SET note_id=id, user_id=2;
+
+UPDATE notes_cache SET cache_id=id, user_id=2;
+
+
+
+Alter table notes_note change delete deleted bool NOT NULL;
+
+
+
+===========================
+t:zen | t:gfs | t:love and marriage & v:>2 
+
+==========================
+    from django.core.mail import send_mail
+    send_mail('Subject here', 'Here is the message.', 'from@example.com',
+    ['yuanliangliu@gmail.com'], fail_silently=False)
+    
+
+
+

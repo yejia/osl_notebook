@@ -1,0 +1,24 @@
+<div>
+<b>Folder id:</b> {{folder.folder_id}}
+</div>
+<div>
+<b>Folder name:</b> {{folder.name}}
+</div>
+<div>
+<b>private:</b> {{folder.private}}
+</div>
+<div>
+<b>delete:</b> {{folder.delete}}
+</div>
+
+<br/><br/>
+
+<div>
+<span>Edit this folder:</span>
+<div>
+<form action="updateFolder/" method="post" id="updateFolderForm">
+{{folder_form.as_p}}
+<input type="submit" value="Submit" />
+</form> 
+</div>
+</div>

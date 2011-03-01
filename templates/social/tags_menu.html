@@ -1,0 +1,43 @@
+{% load i18n %}
+
+
+
+
+  <ul class="tag_menu">
+  <li>
+  {% if not current_tag %}    
+<span style="font-size:18px">{% trans "all tags" %}</span>  
+  {% else %}
+  <span><a href="/{{appname}}/{{group.name}}/{{bookname}}/">{% trans "all tags" %}</a> </span> 
+ {% endif %}
+ </li>
+ 
+
+
+{% for tag in tags %}
+    {% ifnotequal tag.name current_tag %}
+    <li>
+        <span>
+        
+            <a href="/{{appname}}/{{group.name}}/{{bookname}}/tags/{{tag.name}}/">{{tag.name}}</a> 
+            <!--
+            {% if bookname == 'bookmarks' %} ({{tag.social_social_bookmark_related.count}}) {% endif %}
+            {% if bookname == 'scraps' %} ({{tag.social_social_scrap_related.count}}) {% endif %}
+            {% if bookname == 'snippets' %} ({{tag.social_social_snippet_tags.count}}){% endif %}
+           -->
+        </span>
+     </li>   
+     {% endifnotequal %}
+     {% ifequal tag.name current_tag %}
+     <li>
+       <span style="font-size:18px"> {{tag.name}}  
+       <!--
+            {% if bookname == 'bookmarks' %} ({{tag.social_social_bookmark_set.count}}) {% endif %}
+            {% if bookname == 'scraps' %} ({{tag.social_social_scrap_set.count}}) {% endif %}
+            {% if bookname == 'notes' %} ({{tag.social_social_note_set.count}}) {% endif %}
+            -->
+       </span>
+     </li>   
+     {% endifequal %}     
+{% endfor %}    
+</ul>

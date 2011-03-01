@@ -1,0 +1,127 @@
+{% load adminmedia admin_list %}
+{% load i18n %}
+
+<script>
+	jQuery(function($){
+                $('.voteuseful'). click(function(){                   
+                        $(this).parents(".thumb").find("#note_vote").load('voteUseful/',{ 'id':$(this).parents("li").attr('note_id')});
+                });
+		
+                $('.voteunuseful'). click(function(){
+                        $(this).parents(".thumb").find("#note_vote").load('voteUnuseful/',{ 'id':$(this).parents("li").attr('note_id')});
+                });
+      });    
+
+</script>
+
+<div class="section_header"> 
+<span class="item">{% trans "Show" %}:</span><span class="item"><a href="javascript:expandall();">{% trans "Expanded" %}</span><span class="item"><a href="javascript:collapseall();">{% trans "List" %}</a></span>
+<!--
+<span  style="float:right;"><a href="javascript:stream();">{% trans "Stream" %}</a>    |    <a href="javascript:structure();">{% trans "Structuralize" %}</a></span>
+-->
+</div> 
+<div  id="group_notes_section"><!--group_notes_section has no hiding and showing, different from notes_section-->
+<div class="social">&nbsp;  
+{% include "social/sort_menu.html" %} 
+</div>
+
+
+<div class="notes_display" view_mode="{{view_mode}}">
+<span class="social">
+ {% block pagination_top %}{% pagination cl %}{% endblock %}   
+ <span>
+
+
+<ul>
+    {% for note in note_list.object_list %}
+        <!--got rid of "user.username != profile_username and " so that even the user himself cannot see private social notes (only viewable in the groups that the private notes are shared. TODO: change?)-->
+        {% if appname == 'social' and note.private %}  <!--for social public notebook, not private social notes will be shown. But in the group app, it is ok.-->
+        {% else %}     
+         <li class="note_display" note_id="{{ note.id }}">
+           
+	          <div class="kuoda"></div><div class="yasuo"></div>
+            
+		    <span class="thumb">                 
+			<span id="note_rank" title="{% trans "owner's ranking"  %}">{{note.vote}}</span>
+            
+            <span class="voteuseful"><img src="/site_media/img/vote_up.gif"   title="{% trans "Group Member Vote Useful"  %}"/></span>
+            <span id="note_vote" title="{% trans "Usefulness voted by group members"  %}">{{note.get_useful_votes}}/{{note.get_total_votes}}</span>
+			<span class="voteunuseful"><img src="/site_media/img/vote_down.gif"  title="{% trans "Group Member Vote Unuseful"  %}"/></span>
+            
+            
+            <!--
+            {% if user.username == note.owner.username %}  
+			<span class="thumbup" style="cursor:hand"><img src="/site_media/img/thumbUp.gif"/></span>
+			<span class="thumbdown"><img src="/site_media/img/thumbDown.gif"/></span>
+            {% endif %}
+            -->
+		    </span>
+            <!--
+             {% if user.username == note.owner.username %}  
+		    <span class="delete_img" title="soft delete"><img src="/site_media/img/delete.png"/></span>
+		    {% endif %}
+            -->
+           
+           
+       
+{% block brief_display %}
+{% endblock %}
+
+
+
+
+<div class="full_display">
+ <table class="note_table"><tr>
+           {% block full_display_td12 %}
+            {% endblock %} 
+		    <td class="note_table_tags">
+		    <div id="note_tags" title="{% trans "note tags" %}">{% if user.username == profile_username %}<span class="editableText">{% endif %}{{note.display_tags}}{% if user.username == profile_username %}</span>{% endif %}</div>
+		    </td>
+		    </tr>
+		    </table>
+            
+           <div>
+           <!--
+		    <div  id="note_event" title="event">e:{% if user.username == profile_username %}<span class="editableText">{% endif %}{ {{note.event}} }{% if user.username == profile_username %}</span>{% endif %}</div>
+		    -->
+            
+            {% block full_display_div_extra %}
+            {% endblock %} 
+            <div  id="note_init_date" title="{% trans "initial creation time" %}" class="grey">{% if user.username == profile_username %}<span  class="editableText">{% endif %}{{note.init_date|date:"Y-m-d H:i"}}{% if user.username == profile_username %}<span>{% endif %}</div>
+		    <div  id="note_last_modi_date" title="{% trans "last modified time" %}" class="grey structure">{{note.last_modi_date|date:"Y-m-d H:i"}} </div>
+		    
+            {% if note.attachment %}
+		    <div  id="note_attachment" title="{% trans "attachment" %}"><a href="/file/{{note.attachment.name}}" target="top">{{note.attachment.name}}</a> </div>
+		    {% endif %}
+            <!--
+             <div  id="note_linkages" title="note linkages">Linkages: {{note.display_linkages|default:'Not in any linkages'}}</div>
+             -->
+             
+             <div id="comments">{% trans "Comment" %}:<br/> 
+                    {% for comment in note.get_comments %}
+                            <div>{{comment}}</div>                    
+                    {% endfor %}
+             </div>
+             <div class="add_comment_button"><img src="/site_media/img/add.gif" title="{% trans "Add Comment" %}" class="click_img"/></div>             
+             
+             <div id="add_comment_box" style="display:none;">{{user.username}}: <textarea id="add_comment" rows="3" cols="90" name="desc"></textarea>
+             <span class="comment_submit"  title="{% trans "Save Comment" %}"><img src="/site_media/img/save.png"/></span>&nbsp;<span class="cancel_comment_submit" title="{% trans "Cancel" %}"><img src="/site_media/img/cancel.png" /></span></div>
+             
+	        </div>
+</div>
+           
+           
+           
+	     </li>
+    {% endif %} 
+    {% endfor %}
+</ul>
+
+ {% block pagination_bottom %}{% pagination cl %}{% endblock %}
+<!--
+{% include "notes/pagination.html" %}
+
+ -->
+</div>
+
+</div>
