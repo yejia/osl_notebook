@@ -1524,7 +1524,7 @@ msgstr "访问本站，建议使用以下浏览器：Chrome, Firefox, Opera。"
 
 #: templates/registration/login.html:29
 msgid "Best viewed with Chrome and Firefox, and with one level zooming in."
-msgstr "最佳浏览效果是使用chrome和Firefox，并且将屏幕放大一级。"
+msgstr "最佳浏览效果是使用Chrome和Firefox，并且将屏幕放大一级。"
 
 #: templates/scrapbook/notes/folders_ special_side_menu.html:4
 msgid ""
