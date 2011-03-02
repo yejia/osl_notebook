@@ -16,7 +16,9 @@
 		    <div id="note_tags" title="{% trans "note tags" %}">
             {% if appname == 'groups' %}
                 {% for tag in note.get_all_tags %}
-                    <span>{% if appname == 'groups' %}{{tag}}, {% else %}  <a href="/social/{{profile_username}}/{{bookname}}/tags/{{tag}}/">{{tag}}</a>, {% endif %}   </span>
+                    {% if not tag.private or tag.name == group.get_group_tag_name %}
+                        <span>{% if appname == 'groups' %}{{tag}}, {% else %}  <a href="/social/{{profile_username}}/{{bookname}}/tags/{{tag}}/">{{tag}}</a>, {% endif %}   </span>
+                    {% endif %}
                 {% endfor %}
             {% else %}
                 {% for tag in note.get_tags %}

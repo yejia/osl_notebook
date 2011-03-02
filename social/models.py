@@ -97,21 +97,24 @@ class Social_Note(models.Model):
 
    
     def display_tags(self):
-        return ','.join([t.name for t in self.tags.filter(private=False)])
+        return ','.join([t.name for t in self.tags.filter(private=False).order_by('name')])
     
     def display_all_tags(self):
-        return ','.join([t.name for t in self.tags.all()])  
+        return ','.join([t.name for t in self.tags.all().order_by('name')])  
     
     def get_tags(self):
-        return [t.name for t in self.tags.filter(private=False)] 
+        return [t.name for t in self.tags.filter(private=False).order_by('name')] 
     
     def get_all_tags(self):
-        return [t.name for t in self.tags.all()]   
+        return [t.name for t in self.tags.all().order_by('name')]   
     
     
+    #TODO:so far not used yet in the view
     def get_tags_for_group(self, group):
-        group_tag = group.get_group_tag()
-        return [t.name for t in self.tags.filter()] 
+        group_tag_name = group.get_group_tag_name()
+        q1 = Q(private=False)
+        q2 = Q(name=group_tag_name)
+        return [t.name for t in self.tags.filter(q1 | q2).order_by('name').order_by('name')] 
         
         
                
@@ -222,9 +225,11 @@ class Group(models.Model):
         pass
             
        
-    def get_group_tag(self):
+    def get_group_tag_name(self):
         return "sharinggroup:"+self.name        
         
+        
+
            
             
 #Activity Stream such as adding friend, posting...
