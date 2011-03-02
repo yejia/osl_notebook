@@ -97,10 +97,18 @@ class Social_Note(models.Model):
 
    
     def display_tags(self):
-        return ','.join([t.name for t in self.tags.all()])
-  
+        return ','.join([t.name for t in self.tags.filter(private=False)])
+    
+    def display_all_tags(self):
+        return ','.join([t.name for t in self.tags.all()])  
+    
     def get_tags(self):
-        return [t.name for t in self.tags.all()]          
+        return [t.name for t in self.tags.filter(private=False)] 
+    
+    def get_all_tags(self):
+        return [t.name for t in self.tags.all()]   
+    
+               
 
     def get_useful_votes(self):
         votes = Social_Note_Vote.objects.filter(note=self, useful=True)        

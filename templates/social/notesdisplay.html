@@ -75,7 +75,7 @@
            {% block full_display_td12 %}
             {% endblock %} 
 		    <td class="note_table_tags">
-		    <div id="note_tags" title="{% trans "note tags" %}">{% if user.username == profile_username %}<span class="editableText">{% endif %}{{note.display_tags}}{% if user.username == profile_username %}</span>{% endif %}</div>
+		    <div id="note_tags" title="{% trans "note tags" %}">{% if appname == 'groups' %}{{note.display_all_tags}}{% else %}{{note.display_tags}}{% endif %}</div>
 		    </td>
 		    </tr>
 		    </table>

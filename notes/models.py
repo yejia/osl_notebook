@@ -242,7 +242,8 @@ class Note(models.Model):
                 print 'y =', y              
             
             self.tags.add(t)  
-            #TODO: there seems to be no need t save this instance, as self.tags.add(t) already saved data to the m2m table          
+            #TODO: there seems to be no need t save this instance, as self.tags.add(t) already saved data to the m2m table  
+            # but to update the social note as well, I think below is still needed        
             self.save()    
             
     
@@ -315,7 +316,7 @@ class Note(models.Model):
         
         
         #if the note has sharinggroup: prefixed tag, then it still need to be in the social space
-        if not created and (self.private or self.deleted) and not self.tags.filter(name__contains="sharinggroup:").exists():   
+        if not created and (self.private or self.deleted) and not self.tags.filter(name__startswith="sharinggroup:").exists():   
             #if the note is already in social note, and the note in the original db is changed to priviate or delete
             #   then needs to delete it from the social note
             #TODO: still, deleting the child won't delete the parent. Will this be an issue? So at least disable mixed.
@@ -323,8 +324,9 @@ class Note(models.Model):
         else:   
             #whether the note is first created or just an update, below applies to both situations
             sts = [] 
-            for t in self.tags.all():     
-                if not t.private:                
+            for t in self.tags.all():  
+                #private tags should not be pushed to the social space, unless it contains "sharinggroup:"  
+                if not t.private or t.name.startswith("sharinggroup:"):                
                     st, created = Social_Tag.objects.get_or_create(name=t.name)
                     sts.append(st)
             

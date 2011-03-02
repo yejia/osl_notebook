@@ -14,9 +14,15 @@
 		    </td>
 		    <td class="note_table_tags">
 		    <div id="note_tags" title="{% trans "note tags" %}">
-                {% for tag in note.get_tags %}
+            {% if appname == 'groups' %}
+                {% for tag in note.get_all_tags %}
                     <span>{% if appname == 'groups' %}{{tag}}, {% else %}  <a href="/social/{{profile_username}}/{{bookname}}/tags/{{tag}}/">{{tag}}</a>, {% endif %}   </span>
                 {% endfor %}
+            {% else %}
+                {% for tag in note.get_tags %}
+                    <span>{% if appname == 'groups' %}{{tag}}, {% else %}  <a href="/social/{{profile_username}}/{{bookname}}/tags/{{tag}}/">{{tag}}</a>, {% endif %}   </span>
+                {% endfor %}  
+            {% endif %}
             </div>            
 		    </td>
             <td><span id="note_owner" title="{% trans "snippet's owner"  %}"><a href="/social/{{note.owner.username}}/">{{note.owner.username}}</a></span>
