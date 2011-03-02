@@ -450,8 +450,8 @@ def group(request, groupname, bookname):
     sort, order_type,  paged_notes, cl = __get_notes_context(request, note_list) 
       
     #group.tags.all()
-    tags = Social_Tag.objects.filter(group=group).order_by('name')#.annotate(Count('social_'+book_entry_dict.get(bookname))).order_by('name')
-    
+    #tags = Social_Tag.objects.filter(group=group).order_by('name')#.annotate(Count('social_'+book_entry_dict.get(bookname))).order_by('name')
+    tags = get_group_tags(request, groupname, bookname)
     return render_to_response('social/group_notes.html', {'group':group, 'gs':gs, 'note_list':paged_notes,'sort':sort, 'bookname':bookname, \
                                                  'tags':tags, 'appname':'groups', 'cl':cl},\
                                                   context_instance=RequestContext(request))
@@ -465,9 +465,25 @@ def notes_tag(request, username, bookname, tag_name):
     qstr = __getQStr(request)    
     note_list  = getSearchResults(note_list, qstr)
     sort, order_type,  paged_notes, cl  = __get_notes_context(request, note_list) 
+    tags = Social_Tag.objects.filter(group=group).order_by('name')
+    
     return render_to_response('social/social_notes.html', {'note_list':paged_notes,'sort':sort, 'current_tag':tag_name, 'bookname':bookname,\
-                               'profile_username':username, 'tags':[], 'appname':'social', 'cl':cl},\
+                               'profile_username':username, 'tags':tags, 'appname':'social', 'cl':cl},\
                                                   context_instance=RequestContext(request)) 
+
+
+
+
+def get_group_tags(request, groupname, bookname):
+    group = G.objects.get(name=groupname) 
+    tags_qs = group.tags.all().order_by('name')    
+    SN = getSN(bookname)
+    tags = []
+    for tag in tags_qs:
+        count = SN.objects.filter(tags=tag).count()
+        t = {'name':tag.name, 'private':tag.private, 'note_count':count}
+        tags.append(t)
+    return tags    
 
 
 @login_required
@@ -487,8 +503,9 @@ def group_tag(request, groupname, bookname, tag_name):
     qstr = __getQStr(request)    
     note_list  = getSearchResults(note_list, qstr)
     sort, order_type,  paged_notes, cl  = __get_notes_context(request, note_list) 
+    tags = get_group_tags(request, groupname, bookname)
     return render_to_response('social/group_notes.html', {'group':group, 'note_list':paged_notes,'sort':sort, 'current_tag':tag_name, 'bookname':bookname,\
-                                                 'tags':group.tags.all(), 'appname':'groups', 'cl':cl},\
+                                                 'tags':tags, 'appname':'groups', 'cl':cl},\
                                                   context_instance=RequestContext(request))
     
 
