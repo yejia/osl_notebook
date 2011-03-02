@@ -255,7 +255,7 @@ class Note(models.Model):
             self.save()                           
     
     
-    
+    #TODO: merge the ws part with add_tags or maybe move that into save() (seems better since save will be called anyway to update social note)
     def update_tags(self, tags_str):
         new_tags_list = [name.lstrip().rstrip() for name in tags_str.split(',')]
         #TODO:for now, just remove all the old tags and then add all the new ones

@@ -108,6 +108,12 @@ class Social_Note(models.Model):
     def get_all_tags(self):
         return [t.name for t in self.tags.all()]   
     
+    
+    def get_tags_for_group(self, group):
+        group_tag = group.get_group_tag()
+        return [t.name for t in self.tags.filter()] 
+        
+        
                
 
     def get_useful_votes(self):
@@ -216,7 +222,8 @@ class Group(models.Model):
         pass
             
        
-            
+    def get_group_tag(self):
+        return "sharinggroup:"+self.name        
         
            
             

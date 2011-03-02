@@ -1811,7 +1811,7 @@ def set_language(request):
     return HttpResponseRedirect(__get_pre_url(request))  
 
 def for_new_users(request):
-    return render_to_response('doc/for_new_users.html')
+    return render_to_response('doc/for_new_users.html', context_instance=RequestContext(request))
 
 
 #a test page to try jquery stuff. TODO: might use django's tests

@@ -3,16 +3,18 @@
 
 <h1>{% trans 'New User Guide' %}</h1>
 
+
+
 {% trans 'Notebook so far has three books: snippetbook (a collection of snippets or notes), bookmarks book (a collection of bookmarks), scrapbook (a collection of scraps).' %}
 <br/><br/>
 
 {% trans "For the convenience of adding bookmarks, you can drag the link below to your browser bookmark bar." %}<br/>
-<a href="javascript:(function(){var%20a=window,b=document,c=encodeURIComponent,d=a.open('http://localhost:8000/user/bookmarkbook/bookmarks/addBookmark/?url='+c(b.location)+'&title='+c(b.title),'bkmk_popup','left='+((a.screenX||a.screenLeft)+10)+',top='+((a.screenY||a.screenTop)+10)+',height=700px,width=550px,resizable=1,alwaysRaised=1');a.setTimeout(function(){d.focus()},300)})();">{% trans "Add a bookmark" %}</a>
+<a href="javascript:(function(){var%20a=window,b=document,c=encodeURIComponent,d=a.open('http://{{request.META.HTTP_HOST}}/user/bookmarkbook/bookmarks/addBookmark/?url='+c(b.location)+'&title='+c(b.title),'bkmk_popup','left='+((a.screenX||a.screenLeft)+10)+',top='+((a.screenY||a.screenTop)+10)+',height=300px,width=500px,resizable=1,alwaysRaised=1');a.setTimeout(function(){d.focus()},300)})();">{% trans "Add a bookmark" %}</a>
 <br/><br/>
 
 
 {% trans "For the convenience of adding scraps, you can drag the link below to your browser bookmark bar." %}<br/>
-<a href="javascript:(function(){var%20a=window,b=document,c=encodeURIComponent;var%20txt%20=%20'';if%20(window.getSelection){txt=window.getSelection();}else%20if%20(document.getSelection){txt=document.getSelection();}else%20if%20(document.selection){txt=document.selection.createRange().text;}d=a.open('http://localhost:8000/user/scrapbook/scraps/addScrap/?url='+c(b.location)+'&title='+c(b.title)+'&desc='+c(txt),'bkmk_popup','left='+((a.screenX||a.screenLeft)+10)+',top='+((a.screenY||a.screenTop)+10)+',height=700px,width=550px,resizable=1,alwaysRaised=1');a.setTimeout(function(){d.focus()},300)})();">{% trans "Add a scrap" %}</a>
+<a href="javascript:(function(){var%20a=window,b=document,c=encodeURIComponent;var%20txt%20=%20'';if%20(window.getSelection){txt=window.getSelection();}else%20if%20(document.getSelection){txt=document.getSelection();}else%20if%20(document.selection){txt=document.selection.createRange().text;}d=a.open('http://{{request.META.HTTP_HOST}}/user/scrapbook/scraps/addScrap/?url='+c(b.location)+'&title='+c(b.title)+'&desc='+c(txt),'bkmk_popup','left='+((a.screenX||a.screenLeft)+10)+',top='+((a.screenY||a.screenTop)+10)+',height=500px,width=600px,resizable=1,alwaysRaised=1');a.setTimeout(function(){d.focus()},300)})();">{% trans "Add a scrap" %}</a>
 <br/><br/>
 
 
