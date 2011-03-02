@@ -21,7 +21,7 @@
 {% trans 'There are two tags automatically added when a new user is generated: untagged, notebook feedbacks. "untagged" is the default tag used for all stuff not tagged. "notebook feedbacks" is used for users to provide feedbacks on this notebook application.' %}
 <br/><br/>
 
-{% trans 'About folder' %}:{% trans 'A folder is dynamic set of notes/bookmarks/scraps that are selected based on certain queries.' %}
+{% trans ' You can save your queries on snippets/bookmarks/scraps into a dynamic snippetbook/bookmarkbook/scrapbook.' %}
 <br/><br/>
 
 {% trans 'About search' %}:{% trans 'You can do some complex searches in the search box. Below are the sample queries' %} :
@@ -41,9 +41,23 @@ stuff that has "thinking" in = thinking'
 <br/><br/>
 
 
+{% trans ' About sharing to your public notebook' %}: {% trans ' Any note you make that is not marked as private will be pushed to your social public notebook, together with its tags.' %} 
+{% trans "Your private tags, however, won't be pushed over to your social public notebook."  %}
+<br/><br/>
+
+{% trans ' About groups' %}: {% trans ' A group has several tags that are added by the group admin. (The creater of the group is automatically the admin of the group.) After you join a group, you can make notes in your personal notebook. Any notes that is tagged with any of the group tags will be pushed to that group. ' %}
+{% trans "Notes that are private, however, won't be pushed to the social space." %}{% trans ' If you add a sharinggroup:yourgroupname tag to the note, the sharing machanism will be different.' %}
+{% trans ' Any note you add a sharinggroup:yourgroupname tag will be pushed to that group, even if the note has no any other tags of that group or the note is private.' %}
+
+<br/><br/><br/>
+
+
 -----------------------------------------------------------------------------------------  {% trans 'Below are for advanced users only'  %}  ---------------------------------------------------------<br/>
 
 {% trans 'About working set' %}: {% trans 'A working set is a set of tags that you can work with when viewing stuff in the notebook. If you have a lot of tags, it is a good idea to choose a working set of tags to work with at certain times.' %}
+<br/><br/>
+
+{% trans 'About cache' %}:{% trans ' Cache is used to help you when working with notes. For example, you can find some notes by search. Then add those notes to a cache. Do a search again, and add some other notes to that same cache. You can then view all notes in that cache, and do bulk operations on them.' %}
 <br/><br/>
 
 {% trans 'About linkage' %}:{% trans 'Linkage is a set of notes/bookmarks/scraps linked together because they are tightly related. For example, they come from the same event, or they are of the same topic.' %}
