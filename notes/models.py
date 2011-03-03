@@ -225,14 +225,16 @@ class Note(models.Model):
     def add_tags(self, tags_to_add, bookname):  
         #TODO: not right. Should tell bookname base on the instance. After using hasattr, no need to consider the case of 'notebook'
         if bookname == 'notebook':
-            bookname = 'snippetbook'           
-        w = WorkingSet.objects.using(self.owner_name).get(name=bookname)     
+            bookname = 'snippetbook'   
+        W = getW(self.owner_name)             
+        w = W.objects.get(name=bookname)     
         for tag_name in tags_to_add:    
             t, created = Tag.objects.using(self.owner_name).get_or_create(name=tag_name) 
             #in any case, just add the tag to the snippet working set. If it is already
             # in it, just no effect.             
             try:             
                 w.tags.add(t)
+                w.save()                
             except Exception as inst:
                 print type(inst)     # the exception instance
                 print inst.args      # arguments stored in .args
