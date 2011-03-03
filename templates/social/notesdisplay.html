@@ -25,7 +25,9 @@
 <span style="float:right;">
 <span>
 {% include "social/sort_menu.html" %} 
+  {% if appname == 'groups'  %}  
 {% include "social/toggle_tag_menu.html" %} 
+{% endif %}
 </span>
 </span>    
 </div>

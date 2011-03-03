@@ -465,7 +465,8 @@ def notes_tag(request, username, bookname, tag_name):
     qstr = __getQStr(request)    
     note_list  = getSearchResults(note_list, qstr)
     sort, order_type,  paged_notes, cl  = __get_notes_context(request, note_list) 
-    tags = Social_Tag.objects.filter(group=group).order_by('name')
+    #TODO: provide tags for social public notebook
+    tags = []#Social_Tag.objects.filter(notes_set=note_list).order_by('name')
     
     return render_to_response('social/social_notes.html', {'note_list':paged_notes,'sort':sort, 'current_tag':tag_name, 'bookname':bookname,\
                                'profile_username':username, 'tags':tags, 'appname':'social', 'cl':cl},\
