@@ -12,6 +12,27 @@ ADMINS = (
 
 DATABASES = {
 
+'ywb': {
+                        'NAME': DB_ROOT+'/notesdb_ywb',
+                        'ENGINE': 'django.db.backends.sqlite3' ,
+                        'USER': '',
+                        'PASSWORD': ''
+                        },
+
+'ly': {
+                        'NAME': DB_ROOT+'/notesdb_ly',
+                        'ENGINE': 'django.db.backends.sqlite3' ,
+                        'USER': '',
+                        'PASSWORD': ''
+                        },
+
+'Zoom.Quiet': {
+                        'NAME': DB_ROOT+'/notesdb_Zoom.Quiet',
+                        'ENGINE': 'django.db.backends.sqlite3' ,
+                        'USER': '',
+                        'PASSWORD': ''
+                        },
+
 'test': {
                         'NAME': DB_ROOT+'/notesdb_test',
                         'ENGINE': 'django.db.backends.sqlite3' ,
@@ -263,7 +284,7 @@ INSTALLED_APPS = (
 EMAIL_HOST =  'smtp.googlemail.com' #'localhost'
 EMAIL_PORT = 25
 EMAIL_HOST_USER = 'yuanliangliu'
-EMAIL_HOST_PASSWORD = 'peiman457' #TODO:get rid of
+EMAIL_HOST_PASSWORD = '' #TODO:get rid of
 SERVER_EMAIL = 'yuanliangliu@gmail.com' #'root@localhost'
 EMAIL_USE_TLS = True
 

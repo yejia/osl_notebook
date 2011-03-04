@@ -2,7 +2,7 @@
 
 import sys, os
 
-HOME_PATH = '/home/leon/projects/notebookWebapp/notebook_src/'
+HOME_PATH = '../'
 sys.path.append(HOME_PATH)
 
 from notebook.env_setting import *
@@ -86,7 +86,9 @@ if __name__ == "__main__":
     #TODO: cannot run all command together. Problem is that init method has to be run separatly. If run together, it cannot
     #find the connection for the db.  It might because it couldn't find the newly created db file from memory or simply setting
     #was not reloaded
-    if command=='all':   
+    if command=='all':  
+        email = sys.argv[3]
+        passwd = sys.argv[4] 
         create_member(username, email, passwd)         
         create_db(username)                
     elif command=='create_db':

@@ -23,6 +23,9 @@ python manage.py shell
 django-admin.py makemessages -l zh_CN
 django-admin.py compilemessages
 
+#clean up the db
+manage.py flush # what's the difference from python manage.py cleanup??
+
 
 
 =========================
