@@ -59,7 +59,7 @@ class Member(User):
    
 
 class Social_Tag(models.Model):    
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=150)
     private = models.BooleanField(default=False)
     
     class Meta:
@@ -77,9 +77,9 @@ class Social_Tag(models.Model):
 class Social_Note(models.Model):
     owner = models.ForeignKey(Member)
     owner_note_id = models.IntegerField()#reference to the id of the note in the user's db
-    title = models.CharField(blank=True, max_length=50, help_text="The size of the title is limited to 50 characaters.") #maybe 20 is enough
+    title = models.CharField(blank=True, max_length=2000, help_text="The size of the title is limited to 50 characaters.") #maybe 20 is enough
     #event = models.CharField(blank=True,max_length=300)
-    desc =  models.TextField(max_length=200, help_text="The size of the desc is limited to 200 characaters.")
+    desc =  models.TextField(max_length=2000, help_text="The size of the desc is limited to 200 characaters.")
     tags = models.ManyToManyField(Social_Tag, blank=True) #, related_name="%(app_label)s_%(class)s_related" this only works for abstract base class
     #not actually used, just have it here so filters from notes.view can still be used since that note/bookmark/scrap has this field
     private = models.BooleanField(default=False)
@@ -155,7 +155,7 @@ class Social_Snippet(Social_Note):
 
 
 class Social_Bookmark(Social_Note):
-    url = models.CharField(max_length=300)
+    url = models.CharField(max_length=2000)
     
     
     def __unicode__(self):
@@ -164,7 +164,7 @@ class Social_Bookmark(Social_Note):
     
 
 class Social_Scrap(Social_Note):
-    url = models.CharField(max_length=300)
+    url = models.CharField(max_length=2000)
     
     
     def __unicode__(self):
@@ -233,8 +233,8 @@ class Group(models.Model):
            
             
 #Activity Stream such as adding friend, posting...
-class Activity(models.Model): 
-    pass
+#class Activity(models.Model): 
+#    pass
 
 
 #one relation has one entry in this table (although two entries make it easy for query).  TODO: enforce no redundance?          

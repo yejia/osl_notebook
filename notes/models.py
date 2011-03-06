@@ -67,7 +67,7 @@ def getNC(username):
 
 #TODO: add delete field? add desc field?
 class Tag(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=150)
     private = models.BooleanField(default=False)
     #tag_id = models.IntegerField()
     #user = models.ForeignKey(User)
@@ -134,10 +134,11 @@ from django.utils.translation import ugettext_lazy
 #TODO: add importance (just 2 level or 3 level, optional)? Or maybe don't use importance level, but associate a 
 # list of events with the experience. From the number of events, you can tell the importance.
 class Note(models.Model):
-    title = models.CharField(blank=True,max_length=200, help_text="The size of the title is limited to 200 characaters.") #maybe 20 is enough
+    #For bookmarks or scraps from some sites, the title can be quite long. Force users to truncate it?
+    title = models.CharField(blank=True,max_length=2000, help_text="The size of the title is limited to 2000 characaters.") #maybe 20 is enough
     #event = models.CharField(blank=True,max_length=300)
     #enforce in views to limit the length for snippet or enforce in save(), or move this field down to snippet
-    desc =  models.TextField(max_length=200, blank=True,  help_text="The size of the desc is limited to 200 characaters.")
+    desc =  models.TextField(max_length=2000, blank=True,  help_text="The size of the desc is limited to 200 characaters.")
     tags = models.ManyToManyField(Tag, blank=True,  help_text="Default tag is 'random thought'.")	#TODO: NOT NULL?? #TODO: set default as random thoughts?
     private = models.BooleanField(default=False)
     init_date = models.DateTimeField('date created', auto_now_add=True)
@@ -396,8 +397,8 @@ class LinkageNote(models.Model):
         ('E', 'the same event'),
     )
     type_of_linkage = models.CharField(max_length=1, choices=LINKAGE_TYPE_CHOICES,blank=True)
-    title = models.CharField(blank=True, max_length=30) #TODO: need title?
-    desc =  models.TextField(blank=True, max_length=200)
+    title = models.CharField(blank=True, max_length=2000) #TODO: need title?
+    desc =  models.TextField(blank=True, max_length=2000)
     tags = models.ManyToManyField(Tag, blank=True)#TODO: get rid of
     private = models.BooleanField(default=False)
     init_date = models.DateTimeField('date created', auto_now_add=True)

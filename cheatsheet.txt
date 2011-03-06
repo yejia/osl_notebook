@@ -26,7 +26,7 @@ django-admin.py compilemessages
 #clean up the db
 manage.py flush # what's the difference from python manage.py cleanup??
 
-
+#a lot of utils especially data utils in django/utils
 
 =========================
 from django.db import connection, transaction

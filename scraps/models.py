@@ -5,7 +5,7 @@ from notebook.notes.models import Note, Tag, WorkingSet, Folder, Cache
 
 
 class Scrap(Note):
-    url = models.CharField(max_length=300)#models.URLField(max_length=300)
+    url = models.CharField(max_length=2000)#models.URLField(max_length=300)
 
 
     def __unicode__(self):

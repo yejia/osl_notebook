@@ -6,7 +6,7 @@ from notebook.notes.models import Note, Tag, WorkingSet, Folder, Cache
 
 class Bookmark(Note):
     #We don't want to validate if the url is broken or not for the reason everyone knows :) :(
-    url = models.CharField(max_length=300)#models.URLField(max_length=300)
+    url = models.CharField(max_length=2000)#models.URLField(max_length=300)
 
     class Meta:
         unique_together = (('url'),)
@@ -42,8 +42,8 @@ class Bookmark_Cache(Cache):
 
             
 class Linkage_Of_Bookmark(models.Model):
-    title = models.CharField(blank=True, max_length=30) #TODO: need title?
-    desc =  models.TextField(blank=True, max_length=200)
+    title = models.CharField(blank=True, max_length=2000) #TODO: need title?
+    desc =  models.TextField(blank=True, max_length=2000)
     tags = models.ManyToManyField(Tag, blank=True)
     private = models.BooleanField(default=False)
     init_date = models.DateTimeField('date created', auto_now_add=True)
