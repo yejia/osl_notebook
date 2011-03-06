@@ -10,6 +10,22 @@ from notebook.social.models import Social_Note, Social_Tag, Social_Snippet, Soci
 
 standalone = False
 
+import logging
+import notebook
+
+
+#TODO: put logging into a common modules so both models and views can import from it
+def getlogger(name):
+    logger = logging.getLogger(name)
+    hdlr = logging.FileHandler(notebook.settings.LOG_FILE)    
+    formatter = logging.Formatter('[%(asctime)s]%(levelname)-8s%(name)s,%(pathname)s,line%(lineno)d,process%(process)d,thread%(thread)d,"%(message)s"','%Y-%m-%d %a %H:%M:%S')    
+    hdlr.setFormatter(formatter)
+    logger.addHandler(hdlr)
+    logger.setLevel(notebook.settings.LOG_LEVEL)
+    return logger
+
+log = getlogger('notes.models')
+
 #owner_name = ""
 
 
@@ -236,13 +252,14 @@ class Note(models.Model):
             try:             
                 w.tags.add(t)
                 w.save()                
-            except Exception as inst:
-                print type(inst)     # the exception instance
-                print inst.args      # arguments stored in .args
-                print inst           # __str__ allows args to printed directly
-                x, y = inst          # __getitem__ allows args to be unpacked directly
-                print 'x =', x
-                print 'y =', y              
+            except Exception:
+                log.error("Error in add_tags with w "+w.name+' and tag '+t.name)
+#                print type(inst)     # the exception instance
+#                print inst.args      # arguments stored in .args
+#                print inst           # __str__ allows args to printed directly
+#                x, y = inst          # __getitem__ allows args to be unpacked directly
+#                print 'x =', x
+#                print 'y =', y              
             
             self.tags.add(t)  
             #TODO: there seems to be no need t save this instance, as self.tags.add(t) already saved data to the m2m table  

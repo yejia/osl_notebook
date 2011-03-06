@@ -47,7 +47,7 @@ def getlogger(name):
     logger.setLevel(notebook.settings.LOG_LEVEL)
     return logger
 
-log = getlogger('notes.view')
+log = getlogger('notes.views')
 
 
     
