@@ -482,6 +482,15 @@ div.accordion_title div.no_color{
 height:88px;
 }
 
+
+.hover{
+display:none;
+}
+
+.hover:hover{
+display:block;
+}
+
 .lockunlock{
 position:absolute;
 right:80px;

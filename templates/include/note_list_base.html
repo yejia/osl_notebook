@@ -441,7 +441,15 @@
     
     
    
-    
+          $('li.note_display').mouseenter(function(){	    
+                        $(this).find('.hover').show(0);
+                        
+                });
+                
+           $('li.note_display').mouseleave(function(){	    
+                        $(this).find('.hover').hide(0);
+                        
+                });     
     
     
             $('#ac_tags_box').hide(0);
