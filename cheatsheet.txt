@@ -115,6 +115,8 @@ UPDATE notes_cache SET cache_id=id, user_id=2;
 Alter table notes_note change delete deleted bool NOT NULL;
 
 
+INSERT INTO "notes_workingset_tags" ("workingset_id", "tag_id") VALUES (2, 858);
+INSERT INTO "notes_note_tags" ("note_id", "tag_id")  VALUES(10,7);
 
 ===========================
 t:zen | t:gfs | t:love and marriage & v:>2 

@@ -46,7 +46,7 @@ def add_scrap(request):
             tags = []
             for tag_name in tag_names:
                 t, created = T.objects.get_or_create(name=tag_name)
-                if created:
+                if created or not w.tags.filter(name=t.name).exists():
                     w.tags.add(t)
                 tags.append(t.id)    
             

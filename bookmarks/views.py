@@ -41,7 +41,8 @@ def add_bookmark(request):
         tags = []
         for tag_name in tag_names:
             t, created = T.objects.get_or_create(name=tag_name)
-            if created:
+            #even if it not created, if it is not in this ws, still add it
+            if created or not w.tags.filter(name=t.name).exists():
                 w.tags.add(t)
             tags.append(t.id) 
         
