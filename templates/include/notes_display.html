@@ -71,7 +71,7 @@
 			<span class="thumbup hover"  title="{% trans "Rank Up Importance"  %}"><img src="/site_media/img/thumbUp.gif"/></span>
 			<span class="thumbdown hover"  title="{% trans "Rank Down Importance"  %}"><img src="/site_media/img/thumbDown.gif"/></span>
             {% endif %}
-            <span id="note_vote" title="{% trans "Importance"  %}">{{note.vote}}</span>
+            <span id="note_rank" title="{% trans "Importance"  %}">{{note.vote}}</span>
 		    </span>
              {% if user.username == profile_username %}  
 		    <span class="delete_img hover" title="{% trans "soft delete" %}"><img src="/site_media/img/delete.png"/></span><!--TODO:move delete to css as background img-->

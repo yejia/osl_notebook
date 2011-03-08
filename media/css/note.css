@@ -120,6 +120,14 @@ position:absolute;
 right:20px;
 bottom:0px;
 }
+
+.social_thumb
+{
+position:absolute;
+right:40px;
+bottom:0px;
+}
+
 span.thumbup:hover{
 cursor:pointer;
 }
@@ -143,6 +151,13 @@ cursor:pointer;
 .voteunuseful{
 cursor:pointer;
 }
+#note_rank{
+color:red;
+}
+span#note_owner{
+
+}
+
 
 /*
 span.noteshome:hover{

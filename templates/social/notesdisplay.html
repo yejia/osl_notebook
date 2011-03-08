@@ -4,11 +4,11 @@
 <script>
 	jQuery(function($){
                 $('.voteuseful'). click(function(){                   
-                        $(this).parents(".thumb").find("#note_vote").load('voteUseful/',{ 'id':$(this).parents("li").attr('note_id')});
+                        $(this).parents(".social_thumb").find("#note_vote").load('voteUseful/',{ 'id':$(this).parents("li").attr('note_id')});
                 });
 		
                 $('.voteunuseful'). click(function(){
-                        $(this).parents(".thumb").find("#note_vote").load('voteUnuseful/',{ 'id':$(this).parents("li").attr('note_id')});
+                        $(this).parents(".social_thumb").find("#note_vote").load('voteUnuseful/',{ 'id':$(this).parents("li").attr('note_id')});
                 });
       });    
 
@@ -48,13 +48,12 @@
            
 	          <div class="kuoda"></div><div class="yasuo"></div>
             
-		    <span class="thumb">                 
-			<span id="note_rank" title="{% trans "owner's ranking"  %}">{{note.vote}}</span>
-            
-            <span class="voteuseful"><img src="/site_media/img/vote_up.gif"   title="{% trans "Group Member Vote Useful"  %}"/></span>
-            <span id="note_vote" title="{% trans "Usefulness voted by group members"  %}">{{note.get_useful_votes}}/{{note.get_total_votes}}</span>
-			<span class="voteunuseful"><img src="/site_media/img/vote_down.gif"  title="{% trans "Group Member Vote Unuseful"  %}"/></span>
-            
+		    <span class="social_thumb">                 
+			         
+            <span class="voteuseful hover"><img src="/site_media/img/vote_up.gif"   title="{% trans "Group Member Vote Useful"  %}"/></span>           
+			<span class="voteunuseful hover"><img src="/site_media/img/vote_down.gif"  title="{% trans "Group Member Vote Unuseful"  %}"/></span>
+             <span id="note_vote" title="{% trans "Usefulness voted by group members"  %}">{{note.get_useful_votes}}/{{note.get_total_votes}}</span>
+            <span id="note_rank" title="{% trans "owner's ranking"  %}">{{note.vote}}</span>   
             
             <!--
             {% if user.username == note.owner.username %}  
