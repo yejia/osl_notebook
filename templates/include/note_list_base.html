@@ -440,6 +440,11 @@
 	$(document).ready(function(){	
     
     
+        if (window.screen.availWidth > 1400){
+              $('#container').css({'width':'100%'});
+        
+        }
+    
    
           $('li.note_display').mouseenter(function(){	    
                         $(this).find('.hover').show(0);
