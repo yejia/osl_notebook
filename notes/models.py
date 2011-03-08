@@ -357,6 +357,7 @@ class Note(models.Model):
             sn.title = self.title
             #sn.event = self.event            
             sn.last_modi_date = self.last_modi_date
+            sn.init_date = self.init_date
             sn.vote = self.vote
             sn.private = self.private
             #attachment

@@ -93,7 +93,7 @@ class Social_Note(models.Model):
     
     
     def __unicode__(self):
-        return self.title + u' by ' + self.owner.username
+        return self.desc + u' by ' + self.owner.username
 
    
     def display_tags(self):
