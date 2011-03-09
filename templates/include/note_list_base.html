@@ -439,18 +439,7 @@
 <script>
 	$(document).ready(function(){	
     
-    
-        if (window.screen.availWidth > 1400){
-              $('#container').css({'width':'100%'});
-              $('.note_table td.note_table_title').css({'width': '18em'});
-              $('.note_table td.note_table_desc, td.note_table_2td').css({'width': '53em'});
-              $('.note_table td.note_table_tags').css({'width': '40em'});
-              $('.snippetbook .brief_display #note_desc').css({'width': '50em'});
-              $('.bookmarkbook .brief_display #note_title').css({'width': '22em'});
-              $('.bookmarkbook .brief_display #note_url').css({'width': '35em'});
-              $('.scrapbook .brief_display #note_url').css({'width': '14em'});
-              $('.scrapbook .brief_display #note_desc').css({'width': '43em'});
-        }
+
     
    
           $('li.note_display').mouseenter(function(){	    
@@ -477,40 +466,62 @@
             $('.show_side_menu').hide(0);
             $('.hide_side_menu').click(function(){	  
                         
-                        $('.show_side_menu').show(0);
-                        $('.hide_side_menu').hide(0);
-                        $('#content-related').hide(0);
-               if (window.screen.availWidth > 1400){           
-              $('#main').css({'width':'1150px'});
-              $('.note_table td.note_table_title').css({'width': '18em'});
-              $('.note_table td.note_table_desc, td.note_table_2td').css({'width': '53em'});
-              $('.note_table td.note_table_tags').css({'width': '40em'});
-              $('.snippetbook .brief_display #note_desc').css({'width': '50em'});
-              $('.bookmarkbook .brief_display #note_title').css({'width': '22em'});
-              $('.bookmarkbook .brief_display #note_url').css({'width': '35em'});
-              $('.scrapbook .brief_display #note_url').css({'width': '14em'});
-              $('.scrapbook .brief_display #note_desc').css({'width': '43em'});
-              }else{
-              $('#main').css({'width':'970px'});
-              $('.note_table td.note_table_title').css({'width': '18em'});
-              $('.note_table td.note_table_desc, td.note_table_2td').css({'width': '53em'});
-              $('.note_table td.note_table_tags').css({'width': '40em'});
-              $('.snippetbook .brief_display #note_desc').css({'width': '50em'});
-              $('.bookmarkbook .brief_display #note_title').css({'width': '22em'});
-              $('.bookmarkbook .brief_display #note_url').css({'width': '35em'});
-              $('.scrapbook .brief_display #note_url').css({'width': '14em'});
-              $('.scrapbook .brief_display #note_desc').css({'width': '43em'});
+                $('.show_side_menu').show(0);
+                $('.hide_side_menu').hide(0);
+                $('#content-related').hide(0);
+                if (screen.availWidth > 1300){           
+                    $('#main').css({'width':'1120px'});
+                    $('.note_table td.note_table_td1').css({'width': '14em'});
+                    $('.note_table td.note_table_td2').css({'width': '30em'});
+                    $('.note_table td.note_table_tags').css({'width': '50em'});
+                    $('.snippetbook .brief_display #note_desc').css({'width': '63em'});
+                    $('.bookmarkbook .brief_display #note_title').css({'width': '33em'});
+                    $('.bookmarkbook .brief_display #note_url').css({'width': '30em'});
+                    $('.scrapbook .brief_display #note_url').css({'width': '14em'});
+                    $('.scrapbook .brief_display #note_desc').css({'width': '50em'});
+                }else{
+                    $('#main').css({'width':'970px'});
+                    $('.note_table td.note_table_td1').css({'width': '12em'});
+                    $('.note_table td.note_table_td2').css({'width': '27em'});
+                    $('.note_table td.note_table_tags').css({'width': '40em'});
+                    $('.snippetbook .brief_display #note_desc').css({'width': '45em'});
+                    $('.bookmarkbook .brief_display #note_title').css({'width': '28em'});
+                    $('.bookmarkbook .brief_display #note_url').css({'width': '27em'});
+                    $('.scrapbook .brief_display #note_url').css({'width': '14em'});
+                    $('.scrapbook .brief_display #note_desc').css({'width': '43em'});
               
               }
                          
                 });
                 
-            $('.show_side_menu').click(function(){	   
-            
-                        $('.show_side_menu').hide(0);
-                        $('.hide_side_menu').show(0);
-                         $('#content-related').show(0);
-                          $('#main').css({'width':'100%'});
+            $('.show_side_menu').click(function(){	               
+                    $('.show_side_menu').hide(0);
+                    $('.hide_side_menu').show(0);
+                    $('#content-related').show(0);
+                    if (screen.availWidth > 1300){           
+                        $('#main').css({'width':'897px'});
+                        $('.note_table td.note_table_td1').css({'width': '14em'});
+                        $('.note_table td.note_table_td2').css({'width': '25em'});
+                        $('.note_table td.note_table_tags').css({'width': '40em'});
+                        $('.snippetbook .brief_display #note_desc').css({'width': '50em'});
+                        $('.bookmarkbook .brief_display #note_title').css({'width': '22em'});
+                        $('.bookmarkbook .brief_display #note_url').css({'width': '25em'});
+                        $('.scrapbook .brief_display #note_url').css({'width': '15em'});
+                        $('.scrapbook .brief_display #note_desc').css({'width': '35em'});
+                    }else{
+                        $('#main').css({'width':'745px'});
+                        $('.note_table td.note_table_td1').css({'width': '14em'});
+                        $('.note_table td.note_table_td2').css({'width': '23em'});
+                        $('.note_table td.note_table_tags').css({'width': '30em'});
+                        $('.snippetbook .brief_display #note_desc').css({'width': '35em'});
+                        $('.bookmarkbook .brief_display #note_title').css({'width': '18em'});
+                        $('.bookmarkbook .brief_display #note_url').css({'width': '22em'});
+                        $('.scrapbook .brief_display #note_url').css({'width': '14em'});
+                        $('.scrapbook .brief_display #note_desc').css({'width': '26em'});
+              
+              }
+                          
+                          
                 });
              
             $('.hide_tags_section').click(function(){	  
@@ -768,6 +779,22 @@
  // $("input.tagit-input").keyup(function(){
   //  $(this).css("background-color","#D6D6FF");
  // });
+                
+                
+               
+         //firefox and chrome have different interpretation of screen.availWidth (For FF, with zooming, the screen size changes, while for chrome it doesn't.)  
+        if (screen.availWidth > 1100){      
+              $('#container').css({'width':'1150px'});
+              $('.note_table td.note_table_td1').css({'width': '14em'});
+              $('.note_table td.note_table_td2').css({'width': '25em'});
+              $('.note_table td.note_table_tags').css({'width': '40em'});
+              $('.snippetbook .brief_display #note_desc').css({'width': '50em'});
+              $('.bookmarkbook .brief_display #note_title').css({'width': '22em'});
+              $('.bookmarkbook .brief_display #note_url').css({'width': '25em'});
+              $('.scrapbook .brief_display #note_url').css({'width': '15em'});
+              $('.scrapbook .brief_display #note_desc').css({'width': '35em'});
+        }
+                
                 
         
     

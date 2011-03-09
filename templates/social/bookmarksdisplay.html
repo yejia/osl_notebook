@@ -7,10 +7,10 @@
 <div class="bookmarkbook">
     <div class="brief_display">
          <table class="note_table"><tr>
-            <td class="note_table_title">
+            <td class="note_table_td1">
             <div id="note_title" title="{% trans 'note title' %}">{{ note.title|default:_('(No Title)')}}</div> 		    
 		    </td>
-            <td class="note_table_2td">
+            <td class="note_table_td2">
 		    <div  id="note_url" title="note url"><a href="{{ note.url}}" target="_blank">{{note.url}}</a></div>	   
 		    </td>
 		    <td class="note_table_tags">
@@ -32,10 +32,10 @@
 
 
 {% block full_display_td12 %}
-           <td class="note_table_title">
+           <td class="note_table_td1">
             <div id="note_title" title="{% trans 'note title' %}">{{ note.title|default:_('(No Title)')}}</div> 		    
 		    </td>            
-            <td class="note_table_2td">
+            <td class="note_table_td2">
 		    <div  id="note_url" title="note url"><a href="{{ note.url}}" target="_blank">{{note.url}}</a></div>	   
 		    </td>
 {% endblock %} 

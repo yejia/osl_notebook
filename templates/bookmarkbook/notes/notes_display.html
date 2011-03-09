@@ -5,9 +5,9 @@
 {% block note_content_section%}
 <div class="bookmarkbook">
 <div class="brief_display">
-         <table class="note_table"><tr><td class="note_table_title">
+         <table class="note_table"><tr><td class="note_table_td1">
             <div id="note_title" title="{% trans 'note title' %}"><a href="/{{profile_username}}/{{bookname}}/{{aspect_name}}/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a></div> 		    
-		    </td><td class="note_table_desc">
+		    </td><td class="note_table_td2">
 		    <div  id="note_url" title="{% trans "note url" %}"><a href="{{ note.url}}" target="_blank">{{note.url}}</a></div>		   
 		    </td>
 		    <td class="note_table_tags">
@@ -23,10 +23,10 @@
 
 
 <div class="full_display">
-         <table class="note_table"><tr><td class="note_table_title">
+         <table class="note_table"><tr><td class="note_table_td1">
                 <div id="note_title" title="note title">{% if user.username == profile_username %}<span class="editableText">{% endif %}<a href="/{{profile_username}}/{{bookname}}/{{aspect_name}}/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a>{% if user.username == profile_username %}</span>{% endif %}</div> 		    
 	            
-		    </td><td class="note_table_desc"><!--TODO: change to note_table_2ndtd-->
+		    </td><td class="note_table_td2"><!--TODO: change to note_table_2ndtd-->
                    <div id="note_url" title="note url">{% if user.username == profile_username %}<span class="editableText">{% endif %}<a href="{{ note.url}}" target="_blank">{{ note.url}}</a>{% if user.username == profile_username %}</span>{% endif %}</div> 		    
 		    
 		    </td>

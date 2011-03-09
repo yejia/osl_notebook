@@ -5,9 +5,9 @@
 <div class="scrapbook">
 <div class="brief_display">
                  <table class="note_table">
-                    <tr><td class="note_table_title"><div id="note_url" title="{% trans "note url" %}"><a href="{{ note.url}}" target="_blank">{{ note.url}}</a></div> 		    
+                    <tr><td class="note_table_td1"><div id="note_url" title="{% trans "note url" %}"><a href="{{ note.url}}" target="_blank">{{ note.url}}</a></div> 		    
                             </td>
-                            <td class="note_table_desc"><div  id="note_desc" title="{% trans "note desc" %}">{{note.desc|striptags}}</div>		   
+                            <td class="note_table_td2"><div  id="note_desc" title="{% trans "note desc" %}">{{note.desc|striptags}}</div>		   
 		                    </td>
                             <td class="note_table_tags"><div id="note_tags" title="{% trans "note tags" %}">
                                 {% for tag in note.get_tags %}
@@ -20,9 +20,9 @@
 </div>
 
 <div class="full_display">
-		    <table class="note_table"><tr><td class="note_table_title">
+		    <table class="note_table"><tr><td class="note_table_td1">
 	            <div id="note_url" title="note url">{% if user.username == profile_username %}<span class="editableText">{% endif %}<a href="{{ note.url}}" target="_blank">{{ note.url}}</a>{% if user.username == profile_username %}</span>{% endif %}</div> 		    
-		    </td><td class="note_table_desc">
+		    </td><td class="note_table_td2">
 		    <div  id="note_desc" title="note desc">{% if user.username == profile_username %}<span class="editableText">{% endif %}<pre>{{note.desc}}</pre>{% if user.username == profile_username %}</span>{% endif %}</div>		   
 		    </td>
 		    <td class="note_table_tags">		    

@@ -449,23 +449,26 @@ margin-top:0px;
 margin-bottom:0px;
 }
 
-.note_table td.note_table_title{
-	width: 8em;	
+.note_table td.note_table_td1{
+	width: 14em;	
 }
-.note_table td.note_table_desc, td.note_table_2td{
-	width: 35em;        
+.note_table td.note_table_td2{
+	width: 23em;        
         overflow:hidden;	
 }
 .note_table td.note_table_tags{
 	width: 30em;	
 }
-
+.note_table td.note_table_td4{
+	width: 12em;	
+}
 #note_title{
 font-weight:800;
 }
 #note_desc{
 font-weight:700;
 }
+
 .snippetbook .brief_display #note_desc{
 /*
 font-size/line-height:120%/1.5;*/
@@ -476,7 +479,6 @@ text-overflow:ellipsis;
 vertical-align:middle;
 }
 
-
 .bookmarkbook .brief_display #note_title{
 white-space:nowrap; 
 width:18em; 
@@ -486,20 +488,20 @@ text-overflow:ellipsis;
 
 .bookmarkbook .brief_display #note_url{
 white-space:nowrap; 
-width:27em; 
+width:22em; 
 overflow:hidden; 
 text-overflow:ellipsis;
 }
 
 .scrapbook .brief_display #note_url{
 white-space:nowrap; 
-width:12em; 
+width:14em; 
 overflow:hidden; 
 text-overflow:ellipsis;
 }
 .scrapbook .brief_display #note_desc{
 white-space:nowrap; 
-width:33em; 
+width:26em; 
 overflow:hidden; 
 text-overflow:ellipsis;
 }
@@ -533,7 +535,7 @@ display:block;
 
 .lockunlock{
 position:absolute;
-right:80px;
+right:70px;
 bottom:0px;
 }
 .lock{
