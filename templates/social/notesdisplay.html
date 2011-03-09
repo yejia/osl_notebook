@@ -40,7 +40,7 @@
 
 
 <ul>
-    {% for note in note_list.object_list %}
+    {% for note in note_list.object_list %} 
         <!--got rid of "user.username != profile_username and " so that even the user himself cannot see private social notes (only viewable in the groups that the private notes are shared. TODO: change?)-->
         {% if appname == 'social' and note.private %}  <!--for social public notebook, not private social notes will be shown. But in the group app, it is ok.-->
         {% else %}     
@@ -70,23 +70,23 @@
            
            
        
-{% block brief_display %}
-{% endblock %}
+            {% block brief_display %}
+            {% endblock %}
 
 
 
 
-<div class="full_display">
- <table class="note_table"><tr>
-           {% block full_display_td12 %}
-            {% endblock %} 
-		    <td class="note_table_tags">
-		    <div id="note_tags" title="{% trans "note tags" %}">{% if appname == 'groups' %}{{note.display_all_tags}}{% else %}{{note.display_tags}}{% endif %}</div>
-		    </td>
-		    </tr>
-		    </table>
+            <div class="full_display">
+            <table class="note_table"><tr>
+                {% block full_display_td12 %}
+                {% endblock %} 
+                <td class="note_table_tags">
+                    <div id="note_tags" title="{% trans "note tags" %}">{% if appname == 'groups' %}{{note.display_all_tags}}{% else %}{{note.display_tags}}{% endif %}</div>
+                </td>
+                </tr>
+            </table>
             
-           <div>
+            <div>
            <!--
 		    <div  id="note_event" title="event">e:{% if user.username == profile_username %}<span class="editableText">{% endif %}{ {{note.event}} }{% if user.username == profile_username %}</span>{% endif %}</div>
 		    -->
@@ -114,7 +114,7 @@
              <span class="comment_submit"  title="{% trans "Save Comment" %}"><img src="/site_media/img/save.png"/></span>&nbsp;<span class="cancel_comment_submit" title="{% trans "Cancel" %}"><img src="/site_media/img/cancel.png" /></span></div>
              
 	        </div>
-</div>
+        </div>
            
            
            

@@ -14,8 +14,11 @@
 {% endif %}
 
 
+<!--So far,  folders are only for viewing notes, no adding note in folders view. TODO:-->
+{% if aspect_name != 'folders' %}
 {% block add_note_section %}
 {% endblock %}
+{% endif %}  
 
 
 
@@ -54,8 +57,7 @@
 
 <div class="search_term">
 {% if qstr %}
-
-{% if is_in_folders %}
+{% if is_in_folders %} 
       {% trans "Folder" %}: {{current_folder.name}} = {{current_folder.value}}
 {% else %}
       <form action="saveSearch/" method="post">

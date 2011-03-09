@@ -835,7 +835,11 @@ def folders(request, username, bookname, folder_name):
     
     extra_context = {'qstr':qstr,'folder_values':folder_values, 'is_in_folders':is_in_folders, 'current_folder':current_folder, 'aspect_name':'folders'}    
     context.update(extra_context)
-    return render_to_response('notes/folders.html', context, context_instance=RequestContext(request,{'bookname': bookname,}))
+    
+    book_template_dict = {'notebook':'notes/folders.html', 'snippetbook':'snippetbook/notes/folders.html','bookmarkbook':'bookmarkbook/notes/folders.html', 'scrapbook': 'scrapbook/notes/folders.html'}
+       
+    
+    return render_to_response(book_template_dict.get(bookname), context, context_instance=RequestContext(request,{'bookname': bookname,}))
 
   
 #TODO:add protection

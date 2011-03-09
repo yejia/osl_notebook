@@ -11,19 +11,15 @@ from django.core.exceptions import ObjectDoesNotExist, FieldError
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
 
-from django.http import Http404
-
 import datetime
-
-from datetime import date
 
 from notebook.notes.models import Note, Tag, create_model, WorkingSet
 from notebook.bookmarks.models import Bookmark
 from notebook.scraps.models import Scrap
 from notebook.social.models import Member, Group, Social_Note, Social_Tag, Social_Note_Vote, Social_Note_Comment, Social_Snippet, Social_Bookmark, Social_Scrap, Friend_Rel
 
-from notebook.notes.views import User, getT, getW, getlogger
-from notebook.notes.views import getSearchResults, getlogger,  __getQStr, __get_view_theme, true_words, Pl, ALL_VAR
+from notebook.notes.views import User, getT, getW, getlogger, getFolder, get_public_notes, __get_folder_context
+from notebook.notes.views import getSearchResults,  __getQStr, __get_view_theme, Pl, ALL_VAR
 
 
 log = getlogger('social.views')  
@@ -270,20 +266,52 @@ def getSN(bookname):
 @login_required
 def notes(request, username, bookname):
     #profile_user = 
-    note_list = book_model_dict.get(bookname).objects.filter(owner__username=username)  
-    
-     
-    qstr = __getQStr(request)
-    
+    note_list = book_model_dict.get(bookname).objects.filter(owner__username=username)       
+    qstr = __getQStr(request)    
     note_list  = getSearchResults(note_list, qstr)
     sort, order_type,  paged_notes, cl = __get_notes_context(request, note_list)    
     
     #For now, no tags in a user's social page. Later might bring the tags from user's own db and display here.
     tags = []
     
+
+    #So far, get folders from users' personal space, but need to be public folders TODO:
+    F = getFolder(username, bookname)    
+    #folders = F.objects.all()   
+#    if request.user.username != username:
+#        log.debug('Not the owner, getting public folders only...')      
+    folders = F.objects.filter(private=False).order_by('name') 
+    
+    
     return render_to_response('social/social_notes.html', {'note_list':paged_notes,'sort':sort, 'bookname':bookname, \
-                               'profile_username':username, 'appname':'social', 'cl':cl},\
+                               'folders':folders, 'profile_username':username, 'appname':'social', 'cl':cl},\
                                                   context_instance=RequestContext(request))
+
+
+@login_required
+def folders(request, username, bookname, foldername):
+    F = getFolder(username, bookname)    
+    #T = getT(username)
+    SN = getSN(bookname)
+    note_list = SN.objects.filter(owner__username=username)
+    if request.user.username != username:
+        log.debug( 'Not the owner of the notes requested, getting public notes only...')
+        #For the time being, still apply this. TODO:
+        note_list = get_public_notes(note_list)    
+        
+    qstr = ""
+    current_folder = None
+    if foldername:        
+        current_folder = F.objects.get(name=foldername)     
+        qstr = current_folder.value        
+        note_list  = getSearchResults(note_list, qstr)   
+    sort, order_type,  paged_notes, cl = __get_notes_context(request, note_list)           
+    folders = F.objects.filter(private=False).order_by('name') 
+    
+    return render_to_response('social/social_folders.html',  {'note_list':paged_notes,'sort':sort, 'bookname':bookname, \
+                              'folders':folders, 'is_in_folders':True, 'current_folder':current_folder,
+                               'profile_username':username, 'appname':'social', 'cl':cl}, context_instance=RequestContext(request))
+     
 
 
 @login_required

@@ -1,4 +1,4 @@
-{% extends "notes/note_list_base.html" %}
+{% extends "snippetbook/notes/note_list_base.html" %}
 {% load i18n %}
 
 {% block title %}
@@ -10,11 +10,10 @@
 {% include "include/folders_help_message_if_none.html" %} 
 {% endblock %}
 
-<!--
-{% block special_side_menu %}
-{% include "include/folders_ special_side_menu.html" %} 
+
+{% block search_box %}
+{% include "include/search.html" %}
 {% endblock %}
--->
 
 
 {% block content%}
@@ -24,7 +23,7 @@
 {% if not current_folder %} 
 {% trans "Please select a folder from the right menu." %}
 {% else %}
-{% include "notes/notesdisplay.html" %}
+{% include "snippetbook/notes/notesdisplay.html" %}
 {% endif %}
 {% endif %}
 </div>
