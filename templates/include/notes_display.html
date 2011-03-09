@@ -19,11 +19,11 @@
 			
                 //move below to a separate file
                 $('.thumbup'). click(function(){                
-                        $(this).parents(".thumb").find("#note_vote").load('voteUpNote/',{ 'id':$(this).parents("li").attr('note_id')});
+                        $(this).parents(".thumb").find("#note_rank").load('voteUpNote/',{ 'id':$(this).parents("li").attr('note_id')});
                 });
 		
                 $('.thumbdown'). click(function(){
-                        $(this).parents(".thumb").find("#note_vote").load('voteDownNote/',{ 'id':$(this).parents("li").attr('note_id')});
+                        $(this).parents(".thumb").find("#note_rank").load('voteDownNote/',{ 'id':$(this).parents("li").attr('note_id')});
                 });
 		
                 $('.delete_img'). click(function(){
