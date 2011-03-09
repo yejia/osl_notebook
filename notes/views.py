@@ -10,6 +10,7 @@ from django.utils.http import urlencode
 from django.utils.translation import ugettext as _
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
@@ -152,6 +153,31 @@ def login_user(request):
     else:
         messages.error(request, "Username or password is not correct. Please enter again!")
         return HttpResponseRedirect('/login/') 
+
+
+
+from notebook.newuser import create_member, create_db
+#So far, this is to let existing users to register others
+@login_required
+def register_user(request): 
+    if request.method == 'POST': 
+        #=======================================================================
+        username = request.POST.get('username')
+        # password1 = request.POST.get('password1')
+        # email = request.POST.get('email')
+        #=======================================================================
+        f = UserCreationForm(request.POST)
+        log.debug('Registrtion form errors:'+str(f.errors))
+        f.save()
+
+        create_db(username)
+        #automatically add the invited person to the inviter's friends
+        notebook.social.views.add_friend(request, username)
+        return HttpResponseRedirect('/')     
+    else:     
+        registerForm = UserCreationForm()
+        return render_to_response('registration/register.html', {'form':registerForm}) 
+       
        
 
 @login_required
@@ -213,9 +239,7 @@ def getCache(username, bookname):
 
 #TODO: add date range search, votes search
 @login_required
-def index(request, username, bookname):  
-    #N = getN(username)
-    
+def index(request, username, bookname):         
     N = getNote(username, bookname)
     connection.queries = []
     

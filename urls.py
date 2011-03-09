@@ -122,6 +122,8 @@ urlpatterns = patterns('',
     (r'^passwordChange/$', 'django.contrib.auth.views.password_change'),
     (r'^passwordChanged/$', 'django.contrib.auth.views.password_change_done'),
 
+    (r'registre/$', 'notebook.notes.views.register_user'),
+
     (r'^setLang/$', 'notebook.notes.views.set_language'),
 
     (r'/toggleShowNotesMode/$','notebook.notes.views.toggle_show_notes_mode'),

@@ -1,0 +1,24 @@
+{% extends "registration/base.html" %}
+{% load i18n %}
+
+
+{% block content %}
+
+<h1>{% trans "User Registration"  %}!</h1>
+
+{% if form.errors %}
+<p>{% trans "The info you provided is not correct. Please try again."  %}</p>
+<p>{{form.errors}}</p>
+{% endif %}
+
+
+<form method="post" action="/registre/">
+{{form.as_p}}
+
+<input type="submit" value="{% trans "register" %}" />
+
+</form>
+
+
+
+{% endblock %}

@@ -23,8 +23,9 @@ from notebook.social.models import Member
 def create_member(username, email, passwd):
     m = Member.objects.create_user(username, email, passwd)
     m.is_active = True
-    m.save()    
-    return m
+    m.save()  
+    created = True  
+    return m, created
                                      
 
 
