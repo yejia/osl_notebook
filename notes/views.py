@@ -21,7 +21,7 @@ from notebook.notes.models import Note, Tag, LinkageNote, Folder, WorkingSet, cr
 from notebook.snippets.models import Snippet
 from notebook.bookmarks.models import Bookmark
 from notebook.scraps.models import Scrap
-from notebook.social.models import Member
+from notebook.social.models import Member, Friend_Rel
 
 
 import notebook
@@ -171,8 +171,14 @@ def register_user(request):
         f.save()
 
         create_db(username)
-        #automatically add the invited person to the inviter's friends
-        notebook.social.views.add_friend(request, username)
+        #automatically add the invited person to the inviter's friends        
+        #notebook.social.views.add_friend(request, username)
+        m1 = request.user.member
+        m2 = Member.objects.get(username=username)         
+        f = Friend_Rel(friend1=m1, friend2=m2)
+        #So far, make it confirmed automcatically. TODO:
+        f.comfirmed = True
+        f.save()
         return HttpResponseRedirect('/')     
     else:     
         registerForm = UserCreationForm()
