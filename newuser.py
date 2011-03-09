@@ -2,7 +2,8 @@
 
 import sys, os
 
-HOME_PATH = '../'
+from env_setting import HOME_PATH
+
 sys.path.append(HOME_PATH)
 
 from notebook.env_setting import *
@@ -18,6 +19,10 @@ from notebook.social.models import Member
 
 #from django.contrib.auth.models import User
 
+
+
+def dryrun():
+    print 'HOME_PATH: ', HOME_PATH
 
 
 def create_member(username, email, passwd):
@@ -100,6 +105,7 @@ if __name__ == "__main__":
         email = sys.argv[3]
         passwd = sys.argv[4]
         create_member(username, email, passwd)
-    
+    elif command=='dryrun':
+        dryrun()  
 
 

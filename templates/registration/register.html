@@ -6,18 +6,19 @@
 
 <h1>{% trans "User Registration"  %}!</h1>
 
-{% if form.errors %}
-<p>{% trans "The info you provided is not correct. Please try again."  %}</p>
-<p>{{form.errors}}</p>
-{% endif %}
 
 
 <form method="post" action="/registre/">
-{{form.as_p}}
+<p><label for="id_username">Username:</label> <input id="id_username" type="text" name="username" maxlength="30" /> Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only.</p>
 
-<input type="submit" value="{% trans "register" %}" />
+<p><label for="id_password1">Password:</label> <input type="password" name="password1" id="id_password1" /></p>
+<p><label for="id_password2">Password confirmation:</label> <input type="password" name="password2" id="id_password2" /> Enter the same password as above, for verification.</p>
+<p><label for="id_email">Email:</label> <input type="text" name="email" id="id_email" /></p>
+<input type="submit" value="register" />
 
 </form>
+
+
 
 
 

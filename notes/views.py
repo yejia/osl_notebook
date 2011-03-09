@@ -124,6 +124,13 @@ class ProfileForm(ModelForm):
         exclude = ('username','password', 'is_staff', 'is_active', 'is_superuser',\
                     'id', 'user_permissions', 'groups', 'role', 'last_login', 'date_joined')  
         
+
+#class RegistrationForm(ModelForm): 
+#    error_css_class = 'error'
+#    required_css_class = 'required'
+#    class Meta:
+#        model = Member
+#        fields = ('username')  
                        
     
 def logout_view(request): 
@@ -160,29 +167,46 @@ from notebook.newuser import create_member, create_db
 #So far, this is to let existing users to register others
 @login_required
 def register_user(request): 
-    if request.method == 'POST': 
-        #=======================================================================
+    if request.method == 'POST':         
         username = request.POST.get('username')
-        # password1 = request.POST.get('password1')
-        # email = request.POST.get('email')
-        #=======================================================================
-        f = UserCreationForm(request.POST)
-        log.debug('Registrtion form errors:'+str(f.errors))
-        f.save()
-
-        create_db(username)
-        #automatically add the invited person to the inviter's friends        
-        #notebook.social.views.add_friend(request, username)
-        m1 = request.user.member
-        m2 = Member.objects.get(username=username)         
-        f = Friend_Rel(friend1=m1, friend2=m2)
-        #So far, make it confirmed automcatically. TODO:
-        f.comfirmed = True
-        f.save()
-        return HttpResponseRedirect('/')     
+        password1 = request.POST.get('password1')
+        password2 = request.POST.get('password2')
+        email = request.POST.get('email')
+        #f = UserCreationForm(request.POST)
+#        if f.errors:
+#            log.debug('Registrtion form errors:'+str(f.errors))
+#            return render_to_response('registration/register.html', {'form':f}) 
+        #f.save()
+        #TODO: might subclass UserCreationForm to save to member 
+        
+        #TODO: validate email
+        
+        if User.objects.filter(username=username).exists():
+            messages.error(request, "Username is already used by someone else. Please pick another one.")  
+            return HttpResponseRedirect('/registre/')          
+        if password1 == password2:        
+            m, created = create_member(username, email, password1)
+            if created:
+                create_db(username)
+                #automatically add the invited person to the inviter's friends        
+                #notebook.social.views.add_friend(request, username)
+                m1 = request.user.member
+                m2 = Member.objects.get(username=username)         
+                fr = Friend_Rel(friend1=m1, friend2=m2)
+                #So far, make it confirmed automcatically. TODO:
+                fr.comfirmed = True
+                fr.save()
+                messages.success(request, "New member created and added as your friend!")  
+                return HttpResponseRedirect('/registre/') 
+            else:
+                messages.error(request, "Error creating a member!")  
+                return HttpResponseRedirect('/registre/')   
+        messages.error(request, "Passwords don't match!")
+        return HttpResponseRedirect('/registre/')               
     else:     
-        registerForm = UserCreationForm()
-        return render_to_response('registration/register.html', {'form':registerForm}) 
+        #registerForm = UserCreationForm()
+        #registerForm = RegistrationForm()
+        return render_to_response('registration/register.html', {}, context_instance=RequestContext(request)) 
        
        
 
