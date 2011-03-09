@@ -962,7 +962,7 @@ msgid ""
 "notes in that cache, and do bulk operations on them."
 msgstr ""
 "缓存区是为了方便你整理笔记。比如，你可以通过搜索找到一些笔记，把这些笔记加入"
-"缓存区。然后再搜索找到一下其他笔记，你也把他们加入该缓存区。然后浏览该缓存区"
+"缓存区。然后再搜索找到一些其他笔记，你也把他们加入该缓存区。然后浏览该缓存区"
 "的所有笔记，对他们进行批量处理。"
 
 #: templates/doc/for_new_users.html:63
