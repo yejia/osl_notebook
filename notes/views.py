@@ -1562,11 +1562,15 @@ def settings(request):
 @login_required
 def settings_update_profile(request):  
     m = request.user.member
-    m.icon = request.FILES.get('icon')
+    #TODO: display current avatar in the template, and allow user to upload another avatar
+    avatar = request.FILES.get('icon')
+    if avatar:
+        m.icon = avatar
     m.first_name = request.POST.get('first_name')
     m.last_name = request.POST.get('last_name')
     m.email = request.POST.get('email')
     m.nickname = request.POST.get('nickname')
+    m.gender = request.POST.get('gender')
     m.save()
     #
     #f = ProfileForm(request.POST, request.FILES, instance=m)          
