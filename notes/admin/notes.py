@@ -1,5 +1,5 @@
 from notebook.notes.models import Note, Tag, LinkageNote, Folder, Cache, WorkingSet
-from notebook.social.models import Group, Social_Note, Social_Tag
+from notebook.social.models import Group, Social_Note, Social_Tag, Member
 from django.contrib import admin
 from django.contrib.auth.models import User #, Group
 
@@ -73,7 +73,7 @@ site.register(WorkingSet)
 site.register(Group)
 site.register(Social_Note)
 site.register(Social_Tag)
-
+site.register(Member)
 site.register(User, UserAdmin)
 #site.register(Group, GroupAdmin)
 

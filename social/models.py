@@ -23,13 +23,17 @@ class Member(User):
         ('l', 'learner'),
         ('t', 'teacher'),
         
-    )    
+    )  
+    GENDER_CHOICES = (        
+        ('f', 'female'),
+        ('m', 'male'),        
+    )
+      
     nickname = models.CharField(max_length=50, blank=True)   
     role = models.CharField(max_length=1, choices=ROLE_CHOICES, blank=True) 
     #TODO: change to avatar
-    icon = models.ImageField(upload_to=get_storage_loc,blank=True, storage=fs)
-    #TODO:
-    #gender
+    icon = models.ImageField(upload_to=get_storage_loc,blank=True, storage=fs)    #TODO:
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, blank=True) 
     #maynot be a good way to do like this. TODO:
     # Use UserManager to get the create_user method, etc.
     objects = UserManager()
@@ -39,7 +43,7 @@ class Member(User):
     
     
     def __unicode__(self): 
-        return self.nickname   
+        return self.username   
     
 
 

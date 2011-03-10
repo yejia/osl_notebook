@@ -19,7 +19,11 @@
 <table class="my_table"><tr>
 <td>
 <div>
-<div><img src={% if  profile_member.icon %}"/file/{{profile_member.icon}}"{% else %}"/site_media/img/default_user_icon.jpg"{% endif %}/>
+<div><img src={% if  profile_member.icon %}"/file/{{profile_member.icon}}"
+{% else %}
+{% if  profile_member.gender == 'f' %}"/site_media/img/default_female.png"{% endif %} 
+{% if  profile_member.gender == 'm' %}"/site_media/img/default_male.jpg"{% endif %} 
+{% if  not profile_member.gender %}"/site_media/img/default_user_icon.jpg"{% endif %}{% endif %}/>
 </div>
 <div>{{profile_member.username}}
 </div>
