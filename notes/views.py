@@ -12,7 +12,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.template import RequestContext
 from django.core.exceptions import ObjectDoesNotExist, FieldError
 from django.core.mail import send_mass_mail
@@ -165,6 +165,8 @@ def login_user(request):
 
 from notebook.newuser import create_member, create_db
 #So far, this is to let existing users to register others
+#just me for the time being TODO:
+@user_passes_test(lambda u: u.username=='leon')
 @login_required
 def register_user(request): 
     if request.method == 'POST':         

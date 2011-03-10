@@ -26,10 +26,12 @@ class Member(User):
     )    
     nickname = models.CharField(max_length=50, blank=True)   
     role = models.CharField(max_length=1, choices=ROLE_CHOICES, blank=True) 
+    #TODO: change to avatar
     icon = models.ImageField(upload_to=get_storage_loc,blank=True, storage=fs)
     #TODO:
     #gender
-    #maynote bo a good way to do like this. TODO:
+    #maynot be a good way to do like this. TODO:
+    # Use UserManager to get the create_user method, etc.
     objects = UserManager()
     #TODO:
     #timezone = models.CharField(max_length=50, default='Europe/London')
@@ -44,8 +46,10 @@ class Member(User):
     def get_friends(self):
         q1 = Q(friend1=self)
         q2 = Q(friend2=self)
-        friend_rels = Friend_Rel.objects.filter(q1 | q2) #TODO: confirmed
-        return [friend_rel.get_friend(self)  for friend_rel in friend_rels]
+        friend_rels = Friend_Rel.objects.filter(q1 | q2)#TODO: confirmed
+        fl = [friend_rel.get_friend(self)  for friend_rel in friend_rels]
+        fl.sort(key=lambda r: r.username) 
+        return fl
    
    
     def get_friends_names(self):

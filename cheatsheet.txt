@@ -28,6 +28,11 @@ manage.py flush # what's the difference from python manage.py cleanup??
 
 #a lot of utils especially data utils in django/utils
 
+#in python shell, to view sql queries executed:
+>>> from django.db import connection
+>>> connection.queries
+
+
 =========================
 from django.db import connection, transaction
 
