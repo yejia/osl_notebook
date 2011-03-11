@@ -648,7 +648,7 @@ def __get_notes_context(request, note_list):
         sorted_notes.sort(key=lambda r: r[1],reverse = (order_type == 'desc' and True or False))  
         sorted_note_list = [r[0] for r in sorted_notes]
    
-    list_per_page = 50
+    list_per_page = 30
     paginator = Paginator(sorted_note_list, list_per_page) 
    
     #using code from the admin module
