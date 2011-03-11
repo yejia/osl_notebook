@@ -562,13 +562,13 @@ def vote_unuseful(request):
 
 
 @login_required
-def group_add_comment(request):  
+def add_comment(request):  
     note_id = request.POST.get('id')
     #N = getN(username)    
     note = SN.objects.get(id=note_id)
     content = request.POST.get('content')
     #NC = getNC(username)
-    nc = Social_Note_Comment(note=note, commenter=request.user, desc=content)
+    nc = Social_Note_Comment(note=note, commenter=request.user.member, desc=content)
     nc.save()
     return  HttpResponse(simplejson.dumps({'note_id':note_id, 'content':content}),
                                                                      "application/json")

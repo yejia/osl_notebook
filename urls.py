@@ -54,13 +54,11 @@ urlpatterns = patterns('',
 
     #TODO: distinguish btw social notes and notes when merging snippets/bookmarks/scraps back here
     #TODO: better regex
-    (r'^groups/[^/]+/[^/]+/addComment/$', 'notebook.social.views.group_add_comment'),
+    (r'^groups/[^/]+/[^/]+/addComment/$', 'notebook.social.views.add_comment'),
+    (r'^social/.+/addComment/$', 'notebook.social.views.add_comment'),
     #for now, no deleting of social comments TODO:
     #(r'^groups/[^/]+/[^/]+/deleteComment/$','notebook.social.views.group_delete_comment'),
 
-    #(r'^groups/(?P<groupname>[^/]+)/bookmarks/$', 'notebook.social.views.group_bookmarks'),
-    #(r'^groups/(?P<groupname>[^/]+)/bookmarks/tags/(?P<tag_name>[^/]+)/$','notebook.social.views.group_bookmarks_tag'),
-    #(r'^groups/(?P<groupname>[^/]+)/bookmarks/addComment/$', 'notebook.social.views.group_bookmarks_add_comment'),
 
 
     (r'/voteUseful/$','notebook.social.views.vote_useful'), 
