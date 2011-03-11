@@ -647,8 +647,8 @@ def __get_notes_context(request, note_list):
         sorted_notes = [(note, note.get_usefulness()) for note in note_list]   
         sorted_notes.sort(key=lambda r: r[1],reverse = (order_type == 'desc' and True or False))  
         sorted_note_list = [r[0] for r in sorted_notes]
-   
-    list_per_page = 30
+    #for social pages, only show 20 notes per page since it is not edited much
+    list_per_page = 20
     paginator = Paginator(sorted_note_list, list_per_page) 
    
     #using code from the admin module
