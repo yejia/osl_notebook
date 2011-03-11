@@ -31,7 +31,10 @@
 </div>
 <div>{{profile_member.nickname}}
 </div>
-
+{% if  user.username == 'leon' %}
+<div>{{profile_member.last_login}}
+</div>
+{% endif %}
 </div>
 </td>
 <td>

@@ -112,9 +112,9 @@
     
     function showAddTags(){    
             //alert('show add tgs');
-            $('#ac_tags_box').show(0);  
-             $('#add_tags_to_notes').show(0); 
-            $('#remove_tags_from_notes').hide(0);     
+            $('#ac_tags_box').show(3);  
+             $('#add_tags_to_notes').show(3); 
+            $('#remove_tags_from_notes').hide(3);     
             $('.tagit-input').focus();     
             $('.tagit-input').css("background-color","#F5FC9E");
            
@@ -662,18 +662,18 @@
             $('.yasuo').hide();
 		
             $('.kuoda').click(function(){		
-                    $(this).parents("li").find('div.brief_display').hide();
-                    $(this).parents("li").find('div.full_display').show();
+                    $(this).parents("li").find('div.brief_display').hide(100);
+                    $(this).parents("li").find('div.full_display').show(100);
                 
-                    $(this).parents("li").find("div.kuoda").hide();
-                    $(this).parents("li").find("div.yasuo").show();		
+                    $(this).parents("li").find("div.kuoda").hide(100);
+                    $(this).parents("li").find("div.yasuo").show(100);		
             });
 		
             $('.yasuo').click(function(){        
-                    $(this).parents("li").find('div.brief_display').show();
-                    $(this).parents("li").find('div.full_display').hide();		       
-                    $(this).parents("li").find("div.kuoda").show();
-                    $(this).parents("li").find("div.yasuo").hide();		
+                    $(this).parents("li").find('div.brief_display').show(100);
+                    $(this).parents("li").find('div.full_display').hide(100);		       
+                    $(this).parents("li").find("div.kuoda").show(100);
+                    $(this).parents("li").find("div.yasuo").hide(100);		
             });		
 
         
