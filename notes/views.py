@@ -674,10 +674,10 @@ def __get_context(request, note_list,default_tag_id, username, bookname, aspect_
 
 def __get_menu_context(request, username, bookname):  
     F = getFolder(username, bookname)    
-    folders = F.objects.all()   
+    folders = F.objects.filter(deleted=False)   
     if request.user.username != username:
         log.debug('Not the owner, getting public folders only...')      
-        folders = F.objects.filter(private=False)   
+        folders = F.objects.filter(private=False, deleted=False)   
        
     caches = __get_caches(request, username, bookname)
     #TODO: for note cache
@@ -1736,7 +1736,7 @@ def settings_remove_tags_from_wss2(request):
 @login_required
 def settings_folders(request, username, bookname):
     F = getFolder(username, bookname)
-    folders = F.objects.all().order_by('name')
+    folders = F.objects.filter(deleted=False).order_by('name')
     return render_to_response('folders/index.html', {'folders':folders, 'addFolderForm':AddFolderForm(), 'profile_username':username}, context_instance=RequestContext(request))
 
 
