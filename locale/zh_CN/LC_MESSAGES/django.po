@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-09 16:30+0800\n"
+"POT-Creation-Date: 2011-12-01 10:29+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,11 +22,11 @@ msgstr ""
 msgid "self ranking"
 msgstr "原作者的评级"
 
-#: notes/views.py:769
+#: notes/views.py:887
 msgid "note"
 msgstr "条笔记"
 
-#: notes/views.py:770
+#: notes/views.py:888
 msgid "notes"
 msgstr "条笔记"
 
@@ -161,7 +161,7 @@ msgstr[1] ""
 
 #: templates/admin/delete_confirmation.html:10
 #: templates/admin/submit_line.html:4
-#: templates/include/note_list_base.html:881
+#: templates/include/note_list_base.html:890
 msgid "Delete"
 msgstr "删除"
 
@@ -601,10 +601,10 @@ msgstr "网摘"
 #: templates/bookmarkbook/notes/note_list_base.html:20
 #: templates/bookmarkbook/notes/notes.html:11
 #: templates/bookmarkbook/notes/notes.html:13
-#: templates/include/note_list_base.html:898
-#: templates/include/note_list_base.html:900
-#: templates/include/note_list_base.html:964
-#: templates/include/note_list_base.html:966
+#: templates/include/note_list_base.html:907
+#: templates/include/note_list_base.html:909
+#: templates/include/note_list_base.html:973
+#: templates/include/note_list_base.html:975
 #: templates/include/notesdisplay.html:96 templates/notes/folders.html:25
 #: templates/notes/linkagenotesdisplay.html:61
 #: templates/notes/note_list_base.html:24 templates/notes/notes.html:11
@@ -641,12 +641,12 @@ msgstr "在链条里的"
 
 #: templates/bookmarkbook/notes/notes.html:16
 #: templates/bookmarkbook/notes/notes.html:18
-#: templates/include/note_list_base.html:883
-#: templates/include/note_list_base.html:885
-#: templates/include/note_list_base.html:904
-#: templates/include/note_list_base.html:906
-#: templates/include/note_list_base.html:970
-#: templates/include/note_list_base.html:972 templates/notes/notes.html:16
+#: templates/include/note_list_base.html:892
+#: templates/include/note_list_base.html:894
+#: templates/include/note_list_base.html:913
+#: templates/include/note_list_base.html:915
+#: templates/include/note_list_base.html:979
+#: templates/include/note_list_base.html:981 templates/notes/notes.html:16
 #: templates/notes/notes.html.py:18 templates/scrapbook/notes/notes.html:16
 #: templates/scrapbook/notes/notes.html:18
 #: templates/snippetbook/notes/notes.html:16
@@ -787,7 +787,7 @@ msgid "Title"
 msgstr "标题"
 
 #: templates/bookmarkbook/notes/notesdisplay.html:24
-#: templates/include/note_list_base.html:896
+#: templates/include/note_list_base.html:905
 #: templates/include/notesdisplay.html:42 templates/notes/notesdisplay.html:25
 #: templates/scrapbook/notes/notesdisplay.html:29
 #: templates/snippetbook/notes/notesdisplay.html:21
@@ -1060,7 +1060,7 @@ msgstr "学习小组"
 msgid "public"
 msgstr "公开"
 
-#: templates/include/note_list_base.html:427
+#: templates/include/note_list_base.html:436
 #: templates/snippetbook/notes/todelete/displaynotes.html:335
 msgid ""
 "If you join this group, any note you make that is tagged with any of the tag "
@@ -1071,137 +1071,137 @@ msgstr ""
 "被添加到这个小组里。但是隐私的笔记不会。隐私的笔记永远在你的私人笔记本里，除"
 "非你有意的要分享给某个小组。"
 
-#: templates/include/note_list_base.html:867
+#: templates/include/note_list_base.html:876
 msgid "show side menu"
 msgstr "显示侧边菜单"
 
-#: templates/include/note_list_base.html:868
+#: templates/include/note_list_base.html:877
 msgid "hide side menu"
 msgstr "隐藏侧边菜单"
 
-#: templates/include/note_list_base.html:889
-#: templates/include/note_list_base.html:891
-#: templates/include/note_list_base.html:910
-#: templates/include/note_list_base.html:912
+#: templates/include/note_list_base.html:898
+#: templates/include/note_list_base.html:900
+#: templates/include/note_list_base.html:919
+#: templates/include/note_list_base.html:921
 msgid "No"
 msgstr "否"
 
-#: templates/include/note_list_base.html:919
+#: templates/include/note_list_base.html:928
 msgid "Date Range"
 msgstr "时间范围"
 
-#: templates/include/note_list_base.html:924
-#: templates/include/note_list_base.html:926
+#: templates/include/note_list_base.html:933
+#: templates/include/note_list_base.html:935
 msgid "Any day"
 msgstr "任何天"
 
-#: templates/include/note_list_base.html:930
-#: templates/include/note_list_base.html:932
+#: templates/include/note_list_base.html:939
+#: templates/include/note_list_base.html:941
 msgid "Today"
 msgstr "今天"
 
-#: templates/include/note_list_base.html:936
-#: templates/include/note_list_base.html:938
+#: templates/include/note_list_base.html:945
+#: templates/include/note_list_base.html:947
 msgid "Past 7 Days"
 msgstr "过去7天"
 
-#: templates/include/note_list_base.html:942
-#: templates/include/note_list_base.html:944
+#: templates/include/note_list_base.html:951
+#: templates/include/note_list_base.html:953
 msgid "This Month"
 msgstr "本月"
 
-#: templates/include/note_list_base.html:947
+#: templates/include/note_list_base.html:956
 msgid "This Season"
 msgstr "本季度"
 
-#: templates/include/note_list_base.html:950
-#: templates/include/note_list_base.html:952
+#: templates/include/note_list_base.html:959
+#: templates/include/note_list_base.html:961
 msgid "This Year"
 msgstr "今年"
 
-#: templates/include/note_list_base.html:957
+#: templates/include/note_list_base.html:966
 msgid "Pick a Range"
 msgstr "选择一个范围"
 
-#: templates/include/note_list_base.html:962
+#: templates/include/note_list_base.html:971
 msgid "With attachment"
 msgstr "有附件的"
 
-#: templates/include/note_list_base.html:999
+#: templates/include/note_list_base.html:1008
 #: templates/include/sort_menu.html:5 templates/social/sort_menu.html:5
 msgid "Sorting"
 msgstr "排序"
 
-#: templates/include/note_list_base.html:1002
-#: templates/include/note_list_base.html:1004
+#: templates/include/note_list_base.html:1011
+#: templates/include/note_list_base.html:1013
 #: templates/include/sort_menu.html:14 templates/include/sort_menu.html:16
 #: templates/social/sort_menu.html:20 templates/social/sort_menu.html.py:22
 msgid "By Importance"
 msgstr "根据重要性"
 
-#: templates/include/note_list_base.html:1008
-#: templates/include/note_list_base.html:1010
+#: templates/include/note_list_base.html:1017
+#: templates/include/note_list_base.html:1019
 #: templates/include/sort_menu.html:8 templates/include/sort_menu.html:10
 #: templates/social/sort_menu.html:8 templates/social/sort_menu.html.py:10
 msgid "By Creation Date"
 msgstr "根据生成时间"
 
-#: templates/include/note_list_base.html:1014
-#: templates/include/note_list_base.html:1016
+#: templates/include/note_list_base.html:1023
+#: templates/include/note_list_base.html:1025
 #: templates/include/sort_menu.html:20 templates/include/sort_menu.html:22
 #: templates/social/sort_menu.html:26 templates/social/sort_menu.html.py:28
 msgid "By Last Modification Date"
 msgstr "根据最后一次修改时间"
 
-#: templates/include/note_list_base.html:1020
-#: templates/include/note_list_base.html:1022
+#: templates/include/note_list_base.html:1029
+#: templates/include/note_list_base.html:1031
 #: templates/include/sort_menu.html:26 templates/include/sort_menu.html:28
 #: templates/social/sort_menu.html:32 templates/social/sort_menu.html.py:34
 msgid "By Title"
 msgstr "根据标题"
 
-#: templates/include/note_list_base.html:1026
-#: templates/include/note_list_base.html:1028
+#: templates/include/note_list_base.html:1035
+#: templates/include/note_list_base.html:1037
 #: templates/include/sort_menu.html:32 templates/include/sort_menu.html:34
 #: templates/social/sort_menu.html:38 templates/social/sort_menu.html.py:40
 msgid "By Desc"
 msgstr "根据正文"
 
-#: templates/include/note_list_base.html:1031
+#: templates/include/note_list_base.html:1040
 msgid "Order Type"
 msgstr "升降种类"
 
-#: templates/include/note_list_base.html:1033
-#: templates/include/note_list_base.html:1035
+#: templates/include/note_list_base.html:1042
+#: templates/include/note_list_base.html:1044
 msgid "Descend"
 msgstr "降序"
 
-#: templates/include/note_list_base.html:1038
-#: templates/include/note_list_base.html:1040
+#: templates/include/note_list_base.html:1047
+#: templates/include/note_list_base.html:1049
 msgid "Ascend"
 msgstr "升序"
 
-#: templates/include/note_list_base.html:1049
+#: templates/include/note_list_base.html:1058
 msgid "Archive"
 msgstr "存档"
 
-#: templates/include/note_list_base.html:1055
+#: templates/include/note_list_base.html:1064
 msgid "Managing"
 msgstr "管理"
 
-#: templates/include/note_list_base.html:1056 templates/tags/index.html:104
+#: templates/include/note_list_base.html:1065 templates/tags/index.html:104
 msgid "Manage Tags"
 msgstr "管理标签"
 
-#: templates/include/note_list_base.html:1057
+#: templates/include/note_list_base.html:1066
 msgid "Manage Folders"
 msgstr "管理文件夹"
 
-#: templates/include/note_list_base.html:1070
+#: templates/include/note_list_base.html:1079
 msgid "My Learning Groups"
 msgstr "我的学习小组"
 
-#: templates/include/note_list_base.html:1071
+#: templates/include/note_list_base.html:1080
 msgid "Create a Learning Group"
 msgstr "创建一个学习小组"
 
@@ -1608,6 +1608,10 @@ msgid ""
 "level."
 msgstr "最佳浏览效果是使用Chrome和Firefox，并且将浏览器屏幕放大一级。"
 
+#: templates/registration/register.html:7
+msgid "User Registration"
+msgstr ""
+
 #: templates/scrapbook/notes/folders_special_side_menu.html:4
 #: templates/social/folders_special_side_menu.html:12
 msgid ""
@@ -1626,6 +1630,26 @@ msgstr "加新摘录"
 #: templates/scrapbook/notes/search.html:5
 msgid "search scraps"
 msgstr "搜索网摘"
+
+#: templates/settings/binding.html:14
+msgid "Sites already bound"
+msgstr "已经绑定的账号"
+
+#: templates/settings/binding.html:19
+msgid "Remove the site"
+msgstr "移除账号"
+
+#: templates/settings/binding.html:25
+msgid "Sites not bound yet"
+msgstr "未绑定的账号"
+
+#: templates/settings/binding.html:30
+msgid "Bind the site"
+msgstr "绑定账号"
+
+#: templates/settings/binding.html:148
+msgid "Go back to the previous page"
+msgstr "返回"
 
 #: templates/settings/index.html:6 templates/settings/index.html.py:10
 msgid "Settings of your acccount"
@@ -1660,6 +1684,11 @@ msgid "Tags settings"
 msgstr "标签设置"
 
 #: templates/settings/index.html:34
+#, fuzzy
+msgid "Sharing settings"
+msgstr "标签设置"
+
+#: templates/settings/index.html:36
 msgid "Working Sets settings"
 msgstr "工作区设置"
 
@@ -1776,26 +1805,26 @@ msgstr "原作者的评级"
 msgid " %(profile_username)s's Public Profile "
 msgstr "%(profile_username)s的公开主页"
 
-#: templates/social/profile.html:37
+#: templates/social/profile.html:44
 msgid "Add Friend"
 msgstr "加朋友"
 
-#: templates/social/profile.html:43
+#: templates/social/profile.html:50
 #, python-format
 msgid " view %(profile_username)s's notebook "
 msgstr "%(profile_username)s的笔记本"
 
-#: templates/social/profile.html:48
+#: templates/social/profile.html:55
 #, python-format
 msgid "Friends of %(profile_username)s "
 msgstr "%(profile_username)s的朋友"
 
-#: templates/social/profile.html:59
+#: templates/social/profile.html:66
 #, python-format
 msgid " Groups created by %(profile_username)s "
 msgstr "%(profile_username)s的小组"
 
-#: templates/social/profile.html:72
+#: templates/social/profile.html:79
 #, python-format
 msgid " Groups followed by %(profile_username)s "
 msgstr "%(profile_username)s的小组"

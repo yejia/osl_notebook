@@ -10,35 +10,32 @@
 			
     });
 </script>
+
 <div>
-<b>Note id:</b> {{note.note_id}}
+<h2>{{note.title}}</h2>
 </div>
+
 <div>
-<b>Title:</b> {{note.title}}
+<b>Created:</b> {{note.init_date|date:"Y-m-d H:i"}}
 </div>
+
 <div>
-<b>Desc:</b> {{note.desc}}
+{{note.desc}}
 </div>
+
 <div>
-<b>Event:</b> {{note.event}}
+<b><img src="/site_media/img/tags-small.png" class="img_in_notes_section_header"/>:</b> 
+{% for tag in note.get_tags %}
+<a href="/{{profile_username}}/{{bookname}}/notes/tags/{{tag}}/">{{tag}}</a>,
+{% endfor %}
 </div>
-<div>
-<b>tags:</b> {{note.display_tags}}
-</div>
-<div>
-<b>init_date:</b> {{note.init_date|date:"Y-m-d H:i"}}
-</div>
-<div>
-<b>last_modi_date:</b> {{note.last_modi_date|date:"Y-m-d H:i"}}
-</div>
+
+
 <div>
 <b>private:</b> {{note.private}}
 </div>
 <div>
-<b>delete: </b>{{note.delete}}
-</div>
-<div>
-<b>vote: </b>{{note.vote}}
+<b>importance: </b>{{note.vote}}
 </div>
 <div>
 <b>attachment:</b> <a href="/site_media/{{note.attachment.name}}" target="top">{{note.attachment}}</a>

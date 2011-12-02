@@ -565,8 +565,33 @@ class Cache(models.Model):
         return self.note_ids
 
 
+#TODO:should this table be here?
+class UserAuth(models.Model):
+    user = models.ForeignKey(User)
+    site = models.CharField(blank=False,max_length=20)
+    access_token_key = models.CharField(blank=False,max_length=80)
+    access_token_secret  = models.CharField(blank=False,max_length=80)
+    #TODO: store user's profile name on the site?
+    #profile_name = models.CharField(blank=False,max_length=80)
+    
+    class Meta:
+        unique_together = (("user","site"),)
+    
+    
+    def __unicode__(self):
+        return self.user.__unicode__()+'@'+site
+    
+    
+def getAccessKey(username, site):
+    user = User.objects.get(username=username)   
+    ua = UserAuth.objects.get(user=user, site=site) 
+    return ua.access_token_key, ua.access_token_secret
 
-
+def getBoundSites(username):
+    user = User.objects.get(username=username)   
+    uas = UserAuth.objects.filter(user=user)
+    return [ua.site for ua in uas]
+    
 
 from django.contrib import admin    
     

@@ -113,6 +113,10 @@ urlpatterns = patterns('',
     (r'settings/workingsets/workingset/(?P<ws_name>[^/]+)/updateWS/$', 'notebook.notes.views.settings_workingset_update'),
     (r'^deleteWS/$', 'notebook.notes.views.settings_workingset_delete'),   
 
+    (r'settings/bind/$', 'notebook.notes.views.bind'),
+    (r'settings/bind/requestAuth$', 'notebook.notes.views.bind_request_auth'),
+    (r'settings/bindCheck$', 'notebook.notes.views.bind_check'),
+    (r'settings/bind/removeAuth$', 'notebook.notes.views.bind_remove_auth'),
 
     (r'login/$', 'django.contrib.auth.views.login'),
     (r'^loginUser/$', 'notebook.notes.views.login_user'), 

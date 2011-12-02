@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django.http import HttpResponse,HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django import forms
@@ -31,8 +33,14 @@ from datetime import date
 import re
 import operator
 
+import time
+
 import logging
 
+
+        
+#dbs = doubansay.douban()
+#dbs.first_run()
 
 #TODO: group methods together and separate to another view, for example, setting, linkage, folders, cache...
 #  also in url.py, map to those views
@@ -217,6 +225,60 @@ def root(request):
     user = request.user
     username = user.username
     return HttpResponseRedirect('/'+username+'/snippetbook/notes/') 
+
+
+
+from notebook.notes.models import getAccessKey, UserAuth, getBoundSites
+
+
+import weibopy
+from weibopy import OAuthHandler, WeibopError
+from weibopy.api import API
+
+consumer_key = '2247080609' #appkey
+consumer_secret = '41478741052a891677d95dedac979643' # appkey secret
+
+class WebOAuthHandler(OAuthHandler):
+    
+    def get_authorization_url_with_callback(self, callback, signin_with_twitter=False):
+        """Get the authorization URL to redirect the user"""
+        try:
+            # get the request token
+            self.request_token = self._get_request_token()
+
+            # build auth request and return as url
+            if signin_with_twitter:
+                url = self._get_oauth_url('authenticate')
+            else:
+                url = self._get_oauth_url('authorize')
+            request = weibopy.oauth.OAuthRequest.from_token_and_callback(
+                token=self.request_token, callback=callback, http_url=url
+            )
+            return request.to_url()
+        except Exception, e:
+            raise WeibopError(e)
+
+def _get_referer_url(request):
+    referer_url = request.META.get('HTTP_REFERER', '/')
+    host = request.META['HTTP_HOST']
+    if referer_url.startswith('http') and host not in referer_url:
+        referer_url = '/' 
+    return referer_url
+
+def _oauth():
+    """"""
+    return WebOAuthHandler(consumer_key, consumer_secret)
+
+
+
+import douban
+from douban.service import DoubanService
+
+douban_consumer_key =  '06b7d5f0d1251e30142781d2736f5a90'#'06d34ae0f60028101479e0a2e2007830' #'019564eabe5172ac04c02ec03af45804' #appkey
+douban_consumer_secret = 'fdb75b2f20bff4a6'#'8e19a57b11ceb4f4' #'5d20de5ba479a333' #appkey secret
+
+
+
 
 #TODO: verify if notes of private tags are excluded
 def get_public_notes(note_list):    
@@ -897,9 +959,10 @@ def folders(request, username, bookname, folder_name):
     
     return render_to_response(book_template_dict.get(bookname), context, context_instance=RequestContext(request,{'bookname': bookname,}))
 
-  
+
+
 #TODO:add protection
-@login_required
+#below is copied from note_raw except using a different template page
 def note(request, username, bookname, note_id):
     log.debug('Getting the note:'+note_id)
     N = getNote(username, bookname)
@@ -908,6 +971,20 @@ def note(request, username, bookname, note_id):
     UpdateNForm = create_model_form("UpdateNForm_"+str(username), N, fields={'tags':forms.ModelMultipleChoiceField(queryset=__get_ws_tags(request, username, bookname))})
     note_form = UpdateNForm(instance=note)
     return render_to_response('notes/note.html', {'note':note, 'linkages':linkages,'note_form':note_form, 'profile_username':username}, context_instance=RequestContext(request, {'bookname': bookname,'aspect_name':'notes'}))
+    
+
+
+  
+#TODO:add protection
+@login_required
+def note_raw(request, username, bookname, note_id):
+    log.debug('Getting the note:'+note_id)
+    N = getNote(username, bookname)
+    note = N.objects.get(id=note_id)
+    linkages = note.linkagenote_set.all()
+    UpdateNForm = create_model_form("UpdateNForm_"+str(username), N, fields={'tags':forms.ModelMultipleChoiceField(queryset=__get_ws_tags(request, username, bookname))})
+    note_form = UpdateNForm(instance=note)
+    return render_to_response('notes/note_raw.html', {'note':note, 'linkages':linkages,'note_form':note_form, 'profile_username':username}, context_instance=RequestContext(request, {'bookname': bookname,'aspect_name':'notes'}))
     
 
 #below is not used  
@@ -1348,20 +1425,101 @@ def update_tags(request, username):
 #    print 'email sent!'
     
 
+import douban
+from douban import service
+
+@login_required
+def share_todelete(request, username, bookname): 
+    d_service = douban.service.DoubanService(api_key=douban_consumer_key, secret=douban_consumer_secret)
+    access_key, access_secret = getAccessKey(username, 'douban')
+    print  'access_key:', access_key, 'access_secret:', access_secret   
+
+    d_service.client.token = douban.oauth.OAuthToken(str(access_key), str(access_secret))    
+    #status = d_service.GetPeople('/people/yejia')
+    #print 'status:', status.ToString()
+    status = d_service.AddBroadcasting('/miniblog/saying', """<?xml version='1.0' encoding='UTF-8'?><entry xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:db="http://www.douban.com/xmlns/"><content>we got milk</content></entry>""") 
+    print 'status:', status.ToString()
+    return HttpResponse('success', mimetype="text/plain")   
+
+
+
 #TODO: private notes cannot be shared. Might implement the permission control at a finer level
 @login_required
-def share(request, username, bookname): 
-    print 'share in note called'   
+def share(request, username, bookname):     
     note_ids = request.POST.getlist('note_ids')   
     N = getNote(username, bookname)
     msgs = [] 
+    
+    bound_sites = getBoundSites(request.user.username)   
+    if not bound_sites:
+        return HttpResponse(simplejson.dumps({'count_of_notes':len(note_ids), 'count_of_sites':len(bound_sites)}),
+                                                                     "application/json")
+            
+    #weibo
+    if 'sina' in bound_sites:
+        auth_client = _oauth()
+        access_key, access_secret = getAccessKey(username, 'sina')        
+        auth_client.set_access_token(access_key, access_secret)
+        api = API(auth_client)
+    
+    #douban
+    if 'douban' in bound_sites:
+        d_service = DoubanService(api_key=douban_consumer_key, secret=douban_consumer_secret)
+        d_access_key, d_access_secret = getAccessKey(username, 'douban')        
+        d_service.client.token = douban.oauth.OAuthToken(str(d_access_key), str(d_access_secret))
+    if 'tencent' in bound_sites: 
+             #TODO: 
+             pass  
+    if 'twitter' in bound_sites:  
+             #TODO: 
+             pass   
+    if 'facebook' in bound_sites:  
+             #TODO: 
+             pass  
+        
+    #print 'douban_service.client.token:', douban_service.client.token
+    
     for note_id in note_ids:         
-        note = N.objects.get(id=note_id)  
-        msg = (('From osl '+bookname+': '+note.title +' '+note.desc).encode('utf8'), '', 'yejia2000@gmail.com', ['buzz@gmail.com'])   
-        msgs.append(msg)         
+        note = N.objects.get(id=note_id)
+        content = ''
+        if bookname == 'snippetbook':
+            content = note.desc
+        if bookname == 'bookmarkbook':
+            content = note.url
+        if bookname == 'scrapbook':
+            content = note.url + '   ' + note.desc   
+
+#        #send to weibo        
+        if 'sina' in bound_sites:
+            status = api.update_status(status=content)
+            #can only send one weibo at one time? Have to wait a while to send another one?TODO:
+            time.sleep(0.5) #     
+        if 'douban' in bound_sites:
+            saying = u"""<?xml version='1.0' encoding='UTF-8'?><entry xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:db="http://www.douban.com/xmlns/"><content>"""+content+u"""</content></entry>"""    
+            status = d_service.AddBroadcasting('/miniblog/saying', saying.encode('utf8')) 
+            #print 'status:', status.ToString()
+        if 'tencent' in bound_sites: 
+             #TODO: 
+             pass  
+        if 'twitter' in bound_sites:  
+             #TODO: 
+             pass   
+        if 'facebook' in bound_sites:  
+             #TODO: 
+             pass       
+        #buzz
+#===============================================================================
+#        msg = (('From osl '+bookname+': '+note.title +' '+note.desc).encode('utf8'), '', 'yuanliangliu@gmail.com', ['buzz@gmail.com'])   
+#        msgs.append(msg) 
+#        
+#===============================================================================
+               
         #share_note(note_id, username)
-    send_mass_mail(tuple(msgs), fail_silently=False) 
-    return HttpResponse('success', mimetype="text/plain")     
+    #send_mass_mail(tuple(msgs), fail_silently=False)   
+    
+
+    return HttpResponse(simplejson.dumps({'count_of_notes':len(note_ids), 'count_of_sites':len(bound_sites)}),
+                                                                     "application/json")    
 
     
 #TODO: possibly use these below as actions that is used to group update the private field of notes  
@@ -1876,6 +2034,107 @@ def set_language(request):
 
 def for_new_users(request):
     return render_to_response('doc/for_new_users.html', context_instance=RequestContext(request))
+
+
+allbindingsites = ['sina', 'douban', 'tencent', 'facebook', 'twitter']
+
+def bind(request): 
+    back_to_url = _get_referer_url(request)
+    bound_sites = getBoundSites(request.user.username)   
+    if not bound_sites:
+        messages.info(request, 'You have not bound any site for sharing yet. Choose sites below for binding.')
+    unbound_sites = set(allbindingsites) - set(bound_sites)    
+    return render_to_response('settings/binding.html', {'bound_sites':bound_sites, 'unbound_sites': unbound_sites, 'back_to_url':back_to_url}, context_instance=RequestContext(request))
+
+
+def bind_remove_auth(request):
+    site = request.GET.get('site')
+    back_to_url = _get_referer_url(request)
+    if site:
+        sa = UserAuth.objects.get(user=request.user, site=site)
+        sa.delete()
+    return HttpResponseRedirect(back_to_url)     
+        
+
+def bind_request_auth(request):
+    site = request.GET.get('site')
+    back_to_url = _get_referer_url(request)
+    request.session['login_back_to_url'] = back_to_url
+    login_backurl = request.build_absolute_uri('/settings/bindCheck?site='+site)    
+    if site:        
+        if 'sina' == site:
+            log.info('sina authorizing...')              
+            auth_client = _oauth()
+            auth_url = auth_client.get_authorization_url_with_callback(login_backurl)            
+            request.session['sina_oauth_request_token'] = auth_client.request_token             
+            return HttpResponseRedirect(auth_url)
+       
+        if 'douban' == site:
+            log.info('douban authorizing...')           
+            douban_service = DoubanService(api_key=douban_consumer_key, secret=douban_consumer_secret)
+            request_token = douban_service.client.get_request_token()
+            auth_url = douban_service.GetAuthorizationURL(request_token[0], request_token[1], callback=login_backurl)            
+            request.session['douban_oauth_request_token_key'] = request_token[0]
+            request.session['douban_oauth_request_token_secret'] = request_token[1]            
+            return HttpResponseRedirect(auth_url)
+        if 'tencent' == site:  
+             #TODO: 
+             pass  
+        if 'twitter' == site:  
+             #TODO: 
+             pass   
+        if 'facebook' == site:  
+             #TODO: 
+             pass      
+            
+      
+def bind_check(request):
+    """"""
+
+    log.info('bind checking...')    
+    site = request.GET.get('site')
+    if site:        
+        if 'sina' == site:           
+            verifier = request.GET.get('oauth_verifier', None)
+            auth_client = _oauth()            
+            request_token = request.session['sina_oauth_request_token']
+            del request.session['sina_oauth_request_token']            
+            auth_client.set_request_token(request_token.key, request_token.secret)
+            access_token = auth_client.get_access_token(verifier)
+            #print 'access_token is:', access_token
+            if access_token: 
+                ua, created = UserAuth.objects.get_or_create(user=request.user, site='sina')
+                ua.access_token_key = access_token.key
+                ua.access_token_secret = access_token.secret
+                ua.save()
+            else:
+                log.error('no access token obtained for the site sina.')    
+        if 'douban' == site:
+            douban_service = DoubanService(api_key=douban_consumer_key, secret=douban_consumer_secret)
+            access_token = douban_service.client.get_access_token(request.session['douban_oauth_request_token_key'], request.session['douban_oauth_request_token_secret'])
+            if access_token:                
+                uid = access_token[2]
+                ua, created = UserAuth.objects.get_or_create(user=request.user, site='douban')
+                ua.access_token_key = access_token[0]
+                ua.access_token_secret = access_token[1]
+                ua.save()
+            else:
+                log.error('no access token obtained for the site douban.')    
+        if 'tencent' == site:  
+             #TODO: 
+             pass  
+        if 'twitter' == site:  
+             #TODO: 
+             pass   
+        if 'facebook' == site:  
+             #TODO: 
+             pass        
+    # 
+    back_to_url = request.session.get('login_back_to_url', '/')
+    return HttpResponseRedirect(back_to_url)
+
+
+
 
 
 #a test page to try jquery stuff. TODO: might use django's tests
