@@ -1,0 +1,40 @@
+{% load i18n %}
+<link rel="stylesheet" type="text/css" href="/media/css/base.css" /> 
+<link href="/site_media/css/note.css" rel="stylesheet" type="text/css" /> 
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+ <div>
+        <h3>{% trans "Sites already bound" %}:</h3>
+        <ul class="binding_sites">    
+        {% for site in bound_sites %}		
+        <li ><a><img src="/site_media/img/logo/logo_{{site}}.png" class="logo_icon"/></a>            
+            <div >                  
+                     <div><a href="/settings/bind/removeAuth?site={{site}}"  >{% trans "Remove the site" %}</a></div>
+            </div>
+        </li>
+        
+        {% endfor %}       
+       </ul> 
+       <h3>{% trans "Sites not bound yet" %}:</h3>
+       <ul class="binding_sites"> 
+       {% for site in unbound_sites %}		       
+        <li><a><img src="/site_media/img/logo/logo_{{site}}.png"  class="logo_icon"/></a>
+             <div>                    
+                     <div><a  href="/settings/bind/requestAuth?site={{site}}" >{% trans "Bind the site" %}</a></div>
+                 </div></li>
+           {% endfor %}       
+             
+                 </ul>
+  </div>
+ 
+ <br/> <br/> <br/>
+<p> 
+  <a href="{{back_to_url}}">{% trans "Go back to the previous page" %}</a>
+</p>
