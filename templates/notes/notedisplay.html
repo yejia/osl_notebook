@@ -12,40 +12,55 @@
 </script>
 
 <div>
-<h2>{{note.title}}</h2>
+<h2>Note of {{note.get_note_type}}</h2>
 </div>
 
 <div>
-<b>Created:</b> {{note.init_date|date:"Y-m-d H:i"}}
+<h2>{{note.title|default:_('(No Title)')}}</h2>
 </div>
 
 <div>
-{{note.desc}}
+{% trans 'Created' %} : {{note.init_date|date:"Y-m-d H:i"}}
+</div>
+<br/><br/>
+ {% if note.get_note_type == 'Bookmark' %} 
+<div>
+<b>URL :</b> <a href="{{note.bookmark.url}}" target="top">{{note.bookmark.url}}</a>
+</div>
+{% endif %}
+ {% if note.get_note_type == 'Scrap' %} 
+<div>
+<b>URL :</b> <a href="{{note.scrap.url}}" target="top">{{note.scrap.url}}</a>
+</div>
+{% endif %}
+
+<div><p>
+{{note.desc}}</p>
 </div>
 
 <div>
-<b><img src="/site_media/img/tags-small.png" class="img_in_notes_section_header"/>:</b> 
+<img src="/site_media/img/tags-small.png" class="img_in_notes_section_header"/>:
 {% for tag in note.get_tags %}
 <a href="/{{profile_username}}/{{bookname}}/notes/tags/{{tag}}/">{{tag}}</a>,
 {% endfor %}
 </div>
 
+<div>
+<b>{% trans 'importance' %} : </b>{{note.vote}}
+</div>
+<div>
+<b>{% trans 'private' %} :</b> {{note.private}}
+</div>
 
 <div>
-<b>private:</b> {{note.private}}
+<b>{% trans 'attachment' %} :</b> <a href="/site_media/{{note.attachment.name}}" target="top">{{note.attachment}}</a>
 </div>
 <div>
-<b>importance: </b>{{note.vote}}
-</div>
-<div>
-<b>attachment:</b> <a href="/site_media/{{note.attachment.name}}" target="top">{{note.attachment}}</a>
-</div>
-<div>
-<b>linkages: </b>
-{% for linkage in linkages %}
-<a href="/{{profile_username}}/{{bookname}}/linkagenotes/note/{{linkage.id}}/">{{linkage.id}}</a>
+<b>In frames: </b>
+{% for frame in frames %}
+<a href="/{{profile_username}}/notebook/frames/frame/{{frame.id}}/">{{frame.id}}</a>,
 {% empty %}
-No linkage.
+Not in any frame.
 {% endfor %}
 </div>
 

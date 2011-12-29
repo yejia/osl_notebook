@@ -469,6 +469,24 @@ font-weight:800;
 font-weight:700;
 }
 
+
+
+.notebook .brief_display #note_title{
+white-space:nowrap; 
+width:18em; 
+overflow:hidden; 
+text-overflow:ellipsis;
+}
+.notebook .brief_display #note_desc{
+white-space:nowrap; 
+width:22em; 
+overflow:hidden; 
+text-overflow:ellipsis;
+vertical-align:middle;
+}
+
+
+
 .snippetbook .brief_display #note_desc{
 /*
 font-size/line-height:120%/1.5;*/
@@ -653,6 +671,14 @@ margin-bottom:10px;
 
 }
 
+
+span.note_type{
+background-color:#00FFFF;
+padding-right:5px;
+}
+div#note_in_frame{
+margin-top:5px;
+}
 
 .cache_item{
 font-size:10px;

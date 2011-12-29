@@ -72,6 +72,7 @@ sort_dict = {'vote':'Vote', 'title':'Title', 'desc': 'Desc', 'init_date': 'Creat
              'last_modi_date':'Last Modification Date'}
 
 books = ['notebook', 'snippetbook','bookmarkbook', 'scrapbook']
+book_template_dict = {'notebook':'', 'snippetbook':'snippetbook/','bookmarkbook':'bookmarkbook/', 'scrapbook': 'scrapbook/'}
 
 class AddLinkageNoteForm(ModelForm):
     error_css_class = 'error'
@@ -296,6 +297,15 @@ def remove_private_tag_notes(note_list):
     log.debug('after filtering, length of note_list:'+str(len(n_list)))
     return n_list
 
+
+#TODO: also hide notes linked that are private
+def get_public_frames(frame_list):
+    frame_list = frame_list.filter(private=False)
+    b_list = remove_private_tag_notes(frame_list)
+    return b_list 
+
+
+
 #TODO: also hide notes linked that are private
 def get_public_linkages(linkage_list):
     linkage_list = linkage_list.filter(private=False)
@@ -316,6 +326,7 @@ def get_public_tags(tags):
     
 
 book_model_dict = {'notebook':Note, 'snippetbook':Snippet,'bookmarkbook':Bookmark, 'scrapbook': Scrap}
+model_book_dict = {'Note':'notebook', 'Snippet':'snippetbook','Bookmark':'bookmarkbook', 'Scrap':'scrapbook'}
 book_folder_dict = {'notebook':Folder, 'snippetbook':notebook.snippets.models.Snippet_Folder,'bookmarkbook':notebook.bookmarks.models.Bookmark_Folder, 'scrapbook': notebook.scraps.models.Scrap_Folder}
 book_cache_dict = {'notebook':notebook.notes.models.Cache, 'snippetbook':notebook.snippets.models.Snippet_Cache,'bookmarkbook':notebook.bookmarks.models.Bookmark_Cache, 'scrapbook': notebook.scraps.models.Scrap_Cache}
 book_entry_dict = {'notebook':'', 'snippetbook':'__snippet','bookmarkbook':'__bookmark', 'scrapbook': '__scrap'}
@@ -328,7 +339,21 @@ def getFolder(username, bookname):
     return create_model("Folder_"+str(bookname)+"_"+str(username), book_folder_dict.get(bookname), username) 
 
 def getCache(username, bookname):
-    return create_model("Cache_"+str(bookname)+"_"+str(username), book_cache_dict.get(bookname), username)     
+    return create_model("Cache_"+str(bookname)+"_"+str(username), book_cache_dict.get(bookname), username)    
+
+from notebook.bookmarks.models import Linkage_Of_Bookmark
+from notebook.scraps.models import Linkage_Of_Scrap
+from notebook.snippets.models import Linkage_Of_Snippet
+book_linkage_dict = {'notebook': LinkageNote,'snippetbook': Linkage_Of_Snippet, 'bookmarkbook': Linkage_Of_Bookmark, 'scrapbook':Linkage_Of_Scrap}
+
+def getLinkage(username, bookname):
+    return create_model("Linkage_"+str(bookname)+"_"+str(username), book_linkage_dict.get(bookname), username) 
+
+
+from notebook.notes.models import Frame_Of_Note
+def getFrame(username):
+    return create_model("Frame_"+str(username), Frame_Of_Note, username) 
+
 
 
 #TODO: add date range search, votes search
@@ -361,9 +386,7 @@ def index(request, username, bookname):
     extra_context = {'qstr':qstr,'folder_values':folder_values, 'is_in_folders':is_in_folders, 'current_folder':current_folder, 'aspect_name':'notes', 'queries':queries}    
     context.update(extra_context)  
     
-    book_template_dict = {'notebook':'notes/notes.html', 'snippetbook':'snippetbook/notes/notes.html','bookmarkbook':'bookmarkbook/notes/notes.html', 'scrapbook': 'scrapbook/notes/notes.html'}
-    
-    return render_to_response(book_template_dict.get(bookname), context, context_instance=RequestContext(request,{'bookname': bookname}))
+    return render_to_response(book_template_dict.get(bookname)+'notes/notes.html', context, context_instance=RequestContext(request,{'bookname': bookname}))
 
 
 def  __getQStr(request):
@@ -633,16 +656,11 @@ def tags(request, username, bookname, tag_name, aspect_name):
         queries = connection.queries	
         extra_context = {'current_tag':tag_name, 'aspect_name':aspect_name, 'queries':queries}
         context.update(extra_context)
-        
-       
-        book_template_dict = {'notebook':'notes/notes.html', 'snippetbook':'snippetbook/notes/notes.html','bookmarkbook':'bookmarkbook/notes/notes.html', 'scrapbook': 'scrapbook/notes/notes.html'}
-        book_template_linkage_dict = {'notebook':'notes/linkages.html', 'snippetbook':'notes/linkages.html','bookmarkbook':'bookmarkbook/notes/linkages.html', 'scrapbook': 'scrapbook/notes/linkages.html'}
-        
     
         if aspect_name=='notes':
-            return render_to_response(book_template_dict.get(bookname), context, context_instance=RequestContext(request,{'bookname': bookname, 'advanced': get_advanced_setting(request)}))
+            return render_to_response(book_template_dict.get(bookname)+'notes/notes.html', context, context_instance=RequestContext(request,{'bookname': bookname, 'advanced': get_advanced_setting(request)}))
         else:
-            return render_to_response(book_template_dict.get(bookname), context, context_instance=RequestContext(request,{'bookname': bookname, 'advanced': get_advanced_setting(request)}))
+            return render_to_response(book_template_dict.get(bookname)+'notes/linkages.html', context, context_instance=RequestContext(request,{'bookname': bookname, 'advanced': get_advanced_setting(request)}))
 
 
 def get_advanced_setting(request):
@@ -952,12 +970,9 @@ def folders(request, username, bookname, folder_name):
     folder_values, is_in_folders, current_folder = __get_folder_context(folders, qstr)
     
     extra_context = {'qstr':qstr,'folder_values':folder_values, 'is_in_folders':is_in_folders, 'current_folder':current_folder, 'aspect_name':'folders'}    
-    context.update(extra_context)
+    context.update(extra_context)     
     
-    book_template_dict = {'notebook':'notes/folders.html', 'snippetbook':'snippetbook/notes/folders.html','bookmarkbook':'bookmarkbook/notes/folders.html', 'scrapbook': 'scrapbook/notes/folders.html'}
-       
-    
-    return render_to_response(book_template_dict.get(bookname), context, context_instance=RequestContext(request,{'bookname': bookname,}))
+    return render_to_response(book_template_dict.get(bookname)+'notes/folders.html', context, context_instance=RequestContext(request,{'bookname': bookname,}))
 
 
 
@@ -967,10 +982,21 @@ def note(request, username, bookname, note_id):
     log.debug('Getting the note:'+note_id)
     N = getNote(username, bookname)
     note = N.objects.get(id=note_id)
-    linkages = note.linkagenote_set.all()
+    
+    print 'note type is:', note.get_note_type()
+    
+    #linkages = note.linkagenote_set.all()
+    frames = note.frame_of_note_set.all()
     UpdateNForm = create_model_form("UpdateNForm_"+str(username), N, fields={'tags':forms.ModelMultipleChoiceField(queryset=__get_ws_tags(request, username, bookname))})
     note_form = UpdateNForm(instance=note)
-    return render_to_response('notes/note.html', {'note':note, 'linkages':linkages,'note_form':note_form, 'profile_username':username}, context_instance=RequestContext(request, {'bookname': bookname,'aspect_name':'notes'}))
+    
+    #print 'note.bookmark:', note.bookmark
+    #print 'note.scrap:', note.scrap
+    #B = getNote(username, 'bookmarkbook')
+    #b = B.objects.get(note_ptr=note)
+    #print 'b.url:', b.url
+    
+    return render_to_response(book_template_dict.get(bookname)+'notes/note.html', {'note':note, 'frames':frames,'note_form':note_form, 'profile_username':username}, context_instance=RequestContext(request, {'bookname': bookname,'aspect_name':'notes'}))
     
 
 
@@ -984,7 +1010,7 @@ def note_raw(request, username, bookname, note_id):
     linkages = note.linkagenote_set.all()
     UpdateNForm = create_model_form("UpdateNForm_"+str(username), N, fields={'tags':forms.ModelMultipleChoiceField(queryset=__get_ws_tags(request, username, bookname))})
     note_form = UpdateNForm(instance=note)
-    return render_to_response('notes/note_raw.html', {'note':note, 'linkages':linkages,'note_form':note_form, 'profile_username':username}, context_instance=RequestContext(request, {'bookname': bookname,'aspect_name':'notes'}))
+    return render_to_response(book_template_dict.get(bookname)+'notes/note_raw.html', {'note':note, 'linkages':linkages,'note_form':note_form, 'profile_username':username}, context_instance=RequestContext(request, {'bookname': bookname,'aspect_name':'notes'}))
     
 
 #below is not used  
@@ -1169,6 +1195,65 @@ def __get_pre_url(request):
     return pre_url
 
 
+def __get_parent_note_id(noteid, username, bookname):
+    N = getNote(username, bookname)
+    n = N.objects.get(id=noteid)
+    return n.note_ptr_id
+    
+def __get_parent_note_ids(noteids, username, bookname):
+    return  [__get_parent_note_id(id, username, bookname) for id in noteids]
+        
+
+
+
+#TODO: method name seems to overlap with linkagenotes method
+@login_required
+def  frame_notes(request, username, bookname):
+    note_ids = request.POST.get('notes')    
+    notes = note_ids.split(",")   
+    notes = list(set(notes)) 
+    print 'notes are:', notes
+    ptr_notes = __get_parent_note_ids(notes, username, bookname)
+    print 'ptr_notes is:', ptr_notes
+    N = getNote(username, bookname)
+   
+    tag_list = []
+    for note_id in notes:
+        n = N.objects.get(id=note_id)        
+        tag_list.extend(n.get_tags_ids())    
+    
+    tags = list(set(tag_list))  
+    
+    post = request.POST.copy()   
+    post.setlist('notes', notes)
+    post.setlist('tags', tags)
+    post['vote'] = 0 #TODO: should have the default in the model    
+
+    F = getFrame(username)
+    frameNote = F()
+    frameNote.title = post.get('title')
+    frameNote.desc = post.get('desc')
+    frameNote.private = post.get('private', False)
+    
+    file = request.FILES.get('attachment')
+    if file:
+        frameNote.attachment = file 
+    frameNote.save()
+    #TODO: below is not correct since note_ids correspond to those snippet/bookmark/scrap ids instead of notes ids
+    frameNote.notes = ptr_notes 
+    frameNote.tags = tags    
+    
+#    AddLForm = create_model_form("AddLForm_"+str(username), L, options={'exclude':('tags')})
+#    
+#    linkageNote = AddLForm(post, request.FILES, instance=L()) 
+#    print "linkageNote.is_valid():",linkageNote.is_valid()
+#    print "linkageNote.errors:",linkageNote.errors 
+    n = frameNote.save()
+    messages.success(request, "A frame is successfully created!")
+    return HttpResponseRedirect(__get_pre_url(request))  
+
+
+
 
 #TODO: method name seems to overlap with linkagenotes method
 @login_required
@@ -1213,12 +1298,47 @@ def  link_notes(request, username, bookname):
     return HttpResponseRedirect(__get_pre_url(request))      
     
 
+
+
+@login_required
+def frames(request, username, bookname):
+    #TODO: allow filter on delete
+    
+    #TODO: get linkages according to bookname
+    
+    F = getFrame(username)
+    note_list = F.objects.filter(deleted=False)
+    if request.user.username != username:
+        log.debug('Not the owner of the notes requested, getting public notes only...')
+        note_list = get_public_frames(note_list)        
+     
+    view_mode, sort,  delete, private, date_range, order_type, with_attachment, paged_notes, cl = __get_notes_context(request, note_list)  
+    folders, caches, next_cache_id = __get_menu_context(request, username, bookname)
+    qstr = '' #TODO: for now, no query
+    now = date.today()    
+
+    tags = __get_ws_tags(request, username, bookname)
+    if request.user.username != username:
+        tags = get_public_tags(tags)  
+    
+    return render_to_response('notes/frames.html', {'note_list': paged_notes, 
+                                                 'tags':tags, 'view_mode':view_mode, 
+                                                 'sort':sort, 'delete':delete, 'private':private, 'day':now.day, 'month':now.month, 'year':now.year, 'cl':cl,
+                                                 'folders':folders,'qstr':qstr, 'profile_username':username, 'aspect_name':'linkagenotes', 'date_range':date_range, 
+                                                 'order_type':order_type, 'with_attachment':with_attachment, 'users':User.objects.all(), 
+                                                 'current_ws':request.session.get("current_ws", None),'included_aspect_name':'notes'},
+                                                  context_instance=RequestContext(request,{'bookname': bookname,}))
+
+
+
+
 @login_required
 def linkagenotes(request, username, bookname):
     #TODO: allow filter on delete
     
     #TODO: get linkages according to bookname
-    L = getL(username)
+    
+    L = getLinkage(username, bookname)
     note_list = L.objects.filter(deleted=False)
     if request.user.username != username:
         log.debug('Not the owner of the notes requested, getting public notes only...')
@@ -1240,6 +1360,40 @@ def linkagenotes(request, username, bookname):
                                                  'order_type':order_type, 'with_attachment':with_attachment, 'users':User.objects.all(), 
                                                  'current_ws':request.session.get("current_ws", None),'included_aspect_name':'notes'},
                                                   context_instance=RequestContext(request,{'bookname': bookname,}))
+
+
+
+
+@login_required
+def frame(request, frame_id, username, bookname):    
+    F = getFrame(username)    
+    frame = F.objects.get(id=frame_id)
+    #linkage_form = UpdateFrameForm(instance=note)
+    if request.user.username == username:
+        frame_notes_display = frame.display_notes()
+    else:
+        frame_notes_display = frame.display_public_notes()    
+    #tags of each note has to be added as below since it again needs to know which user database to use. 
+    #The same for note type    
+    for n in frame_notes_display:
+        note_id = n[0]        
+        N = getNote(username, 'notebook')
+        note = N.objects.get(id=note_id)  
+        type = note.get_note_type()
+        n.append(type)
+        n.append(note.get_tags())
+        if type == 'Bookmark': 
+            n.append(note.bookmark.url)
+        elif type == 'Scrap':   
+            n.append(note.scrap.url) 
+        else:
+            n.append('')     
+        
+    
+        
+    return render_to_response('notes/frame.html', {'frame':frame, 'frame_notes_display':frame_notes_display, 'profile_username':username}, context_instance=RequestContext(request,{'bookname': bookname,}))
+
+
 
 
 @login_required

@@ -2,10 +2,11 @@
 {% load i18n %}
 
 {% block note_content_section%}
+<div class="notebook">
 <div class="brief_display">
-         <table class="note_table"><tr><td class="note_table_title">
+         <table class="note_table"><tr><td><img src="/site_media/img/{{note.get_note_type}}.png" title="{{note.get_note_type}}"/></td><td class="note_table_td1"> 
             <div id="note_title" title="{% trans 'note title' %}"><a href="/{{profile_username}}/{{bookname}}/notes/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a></div> 		    
-		    </td><td class="note_table_desc">
+		    </td><td class="note_table_td2">
 		    <div  id="note_desc" title="{% trans "note desc" %}">{{note.desc}}</div>		   
 		    </td>
 		    <td class="note_table_tags">
@@ -14,14 +15,16 @@
                     <span><a href="/{{profile_username}}/{{bookname}}/notes/tags/{{tag}}/">{{tag}}</a>,</span>
                 {% endfor %}
             </div>
-		    </td>
+		    </td>   
+            <td class="note_table_td4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		    </td>            
 		    </tr>
         </table>
 </div>
 
 
 <div class="full_display">
- <table class="note_table"><tr><td class="note_table_title">
+ <table class="note_table"><tr><td><img src="/site_media/img/{{note.get_note_type}}.png" title="{{note.get_note_type}}"/></td><td class="note_table_title">
             <div id="note_title" title="{% trans "note title" %}">{% if user.username == profile_username %}<span class="editableText">{% endif %}<a href="/{{profile_username}}/{{bookname}}/notes/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a>{% if user.username == profile_username %}</span>{% endif %}</div> 		    
 		    </td><td class="note_table_desc">
 		    <div  id="note_desc" title="{% trans "note desc" %}">{% if user.username == profile_username %}<span class="editableText">{% endif %}{{note.desc}}{% if user.username == profile_username %}</span>{% endif %}</div>		   
@@ -59,6 +62,6 @@
              
 	        </div>
 </div>
-
+</div>
 
 {% endblock %}

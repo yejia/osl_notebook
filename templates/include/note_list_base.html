@@ -262,7 +262,7 @@
 			
     function	linkNotes(){
 		     selected_notes = getSelectedNoteIds();
-		     $('form#linkNotesForm').before("The following notes are going to be linked together:"+selected_notes);
+		     $('form#linkNotesForm').before("The following notes are going to be put into a frame:"+selected_notes);
 		     $('form#linkNotesForm').prepend('<input type="hidden"  name="notes"  value="'+selected_notes+'"/>');
 		     $('.linkNotes').show();		
     }

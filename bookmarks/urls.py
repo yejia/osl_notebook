@@ -11,9 +11,6 @@ admin.autodiscover()
 
 
 urlpatterns = patterns('', 
-
   
-    (r'^share/$','notebook.bookmarks.views.share'),
-    
 
 )

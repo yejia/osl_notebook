@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.forms import ModelForm
 from django.db.models.query import QuerySet
 from django.db.models import Q
+from django.core.exceptions import ObjectDoesNotExist
 
 from notebook.social.models import Social_Note, Social_Tag, Social_Snippet, Social_Bookmark, Social_Scrap
 
@@ -34,6 +35,8 @@ def getT(username):
 
 def getL(username):
     return create_model("L_"+str(username), LinkageNote, username)
+
+
 
 def getW(username):
     return create_model("W_"+str(username), WorkingSet, username)
@@ -175,6 +178,23 @@ class Note(models.Model):
     def __unicode__(self):
         return self.desc
 
+    
+    def get_note_type(self):
+        try:
+            self.snippet
+            return 'Snippet'
+        except ObjectDoesNotExist:
+            try:
+                self.bookmark
+                return 'Bookmark'    
+            except ObjectDoesNotExist:
+                try:
+                    self.scrap
+                    return 'Scrap'
+                except ObjectDoesNotExist:   
+                    print 'No note type found!'
+                    return 'Note' #TODO:
+                
        
 #TODO: rewrite parts in views that get public notes. It should just use a filter or something with the help of this method
 #or simply add to tempalte (this way is used and it seems to work well, but then in the note list display, the counting of notes
@@ -191,7 +211,8 @@ class Note(models.Model):
 
 
     def display_tags(self):
-        return ','.join([t.name for t in self.tags.all()])
+        #return ','.join([t.name for t in self.tags.all()])
+        return ','.join(self.get_tags())
     
      
     def get_tags_ids(self):
@@ -404,6 +425,122 @@ class Note_Comment(models.Model):
         
         
 
+#TODO:rename to Frame since we don't have frame_of_bookmark and so on
+class Frame_Of_Note(models.Model):       
+    title = models.CharField(blank=True, max_length=2000) #TODO: need title?
+    desc =  models.TextField(blank=True, max_length=2000)
+    tags = models.ManyToManyField(Tag, blank=True)#TODO: get rid of
+    private = models.BooleanField(default=False)
+    init_date = models.DateTimeField('date created', auto_now_add=True)
+    last_modi_date = models.DateTimeField('date last modified', auto_now=True)
+    deleted = models.BooleanField(default=False)
+    vote =  models.IntegerField(default=0, blank=True)#TODO: get rid of
+    attachment = models.FileField(upload_to=get_storage_loc, blank=True, storage=fs)    
+    
+    #TODO: notes reference to the id of Note instead of note_id. Unlike ForeignKey field, ManyToManyField
+    #doesn't allow specifying a to_field argument. Think of whether to reference to note_id.
+    notes = models.ManyToManyField(Note) 
+    
+    
+    class Meta:
+#        unique_together = (("linkage_id","user"),)
+        verbose_name = "frame"
+
+
+    def __unicode__(self):
+        return ','.join([str(note.id) for note in self.notes.all()])     
+    
+    def is_private(self):
+        #check the private field of this Note. if so, private. If not, 
+        #check the tags to see if any tag is private        
+        if self.private == True:
+            return True
+        else:                        
+            for tag in self.tags.all():
+                if tag.private == True:
+                    return True
+
+
+    def get_vote(self):        
+        v = 0  
+        for n in self.notes.all(): 
+            v = v + n.vote
+        return v
+
+    def get_sum_of_note_tags(self):
+        ts = set([])
+        for n in self.notes.all():
+            for t in n.tags.all():
+                ts.add(t.name)
+        return list(ts)    
+
+    def get_display_of_sum_of_note_tags(self):
+        ts = self.get_sum_of_note_tags()
+        return ','.join(ts)        
+    
+    def get_unique_extra_tags(self):
+        ts = self.get_sum_of_note_tags()
+        return list(set(self.get_tags()).difference(set(ts)))
+        
+    def get_display_of_unique_extra_tags(self):    
+        return ','.join(self.get_unique_extra_tags())
+    
+    def get_tags(self):
+        return [t.name for t in self.tags.all()]
+        
+    
+    def display_tags(self):
+        return ','.join(self.get_tags())   
+
+    def get_desc_short(self):
+        if len(self.desc)>97:
+            return self.desc[0:97]+'...'
+        else:
+            return self.desc
+           
+    def get_desc_super_short(self):
+        if len(self.desc)>30:
+            return self.desc[0:30]+'...'
+        else:
+            return self.desc       
+               
+    def display_notes(self):
+        #return [(n.note_id, n.title, n.desc,n.display_tags()) for n in self.notes.all()]
+        return [[n.id, n.title, n.desc, n.vote] for n in self.notes.all()]              
+    
+    def display_public_notes(self):
+        #q = ~Q(tags__private=True)
+        return [[n.id, n.title, n.desc, n.vote] for n in self.notes.all() if n.private==False ] 
+    
+    #TODO: need save?
+    def update_tags(self, tags_str):    
+        new_tags_list = [name.lstrip().rstrip() for name in tags_str.split(',')] #assume distinct here. TODO:       
+        #TODO:for now, just remove all the old tags and then add all the new ones
+        #might want to improve the algorithm later
+        self.tags.clear()
+        for tname in new_tags_list:             
+            t = Tag.objects.using(self.owner_name).get(name=tname) 
+            self.tags.add(t) 
+        #return True
+
+    #TODO: need save?
+    def add_notes(self, noteids_str):
+        note_id_list = [note_id.lstrip().rstrip() for note_id in noteids_str.split(',')]
+        for note_id in note_id_list:          
+            n = Note.objects.using(self.owner_name).get(id=note_id)           
+            self.notes.add(n)
+    
+    #TODO:note_id or id?        
+    def remove_note(self, note_id):
+#        if self.__class__.owner_name:
+#            n = Note.objects.using(self.__class__.owner_name).get(id=note_id)
+#        else:
+#            n = Note.objects.get(id=note_id)
+        n = Note.objects.using(self.owner_name).get(id=note_id)
+        self.notes.remove(n)    
+
+
+
 
 
 
@@ -495,7 +632,7 @@ class LinkageNote(models.Model):
                
     def display_notes(self):
         #return [(n.note_id, n.title, n.desc,n.display_tags()) for n in self.notes.all()]
-        return [(n.id, n.title, n.desc,n.display_tags()) for n in self.notes.all()]  	       
+        return [[n.id, n.title, n.desc] for n in self.notes.all()]  	       
     
     def display_public_notes(self):
         q = ~Q(tags__private=True)

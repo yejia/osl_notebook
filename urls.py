@@ -74,11 +74,9 @@ urlpatterns = patterns('',
     (r'^social/(?P<username>[^/]+)/(?P<bookname>[^/]+)/tags/(?P<tag_name>[^/]+)/$', 'notebook.social.views.notes_tag'),
     (r'^social/(?P<username>[^/]+)/(?P<bookname>[^/]+)/folders/(?P<foldername>[^/]+)/$', 'notebook.social.views.folders'),
 
-    #TODO: seems to be matching to too many things 
+
+    #TODO: seems to be matching too many things 
     (r'^(?P<username>[^/]+)/(?P<bookname>[^/]+)/',include('notebook.notes.urls')),
-
-    
-
 
 
    # (r'^(?P<username>[^/]+)/notebook/',include('notebook.notes.urls')),

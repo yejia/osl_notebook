@@ -5,7 +5,7 @@ from notebook.notes.models import Note, Tag, WorkingSet, Folder, Cache
 
 
 class Bookmark(Note):
-    #We don't want to validate if the url is broken or not for the reason everyone knows :) :(
+    #In China, we don't want to validate if the url is broken or not for the reason everyone knows :) :(
     url = models.CharField(max_length=2000)#models.URLField(max_length=300)
 
     class Meta:
@@ -13,6 +13,10 @@ class Bookmark(Note):
 
     def __unicode__(self):
         return self.url
+    
+    
+    def get_note_type(self):
+        return 'Bookmark'
     
     
 class Bookmark_Folder(Folder):
@@ -37,6 +41,12 @@ class Bookmark_Cache(Cache):
 #    deleted = models.BooleanField(default=False)
 #    vote =  models.IntegerField(default=0) 
     
+
+
+#===============================================================================
+# class Bag_Of_Bookmark(models.Model):
+#    notes = models.ManyToManyField(Bookmark) 
+#===============================================================================
 
 
 
