@@ -38,11 +38,11 @@
 <b>{% trans 'private' %} :</b> {{note.private}}
 </div>
 <div>
-<b>linkages: </b>
-{% for linkage in linkages %}
-<a href="/{{profile_username}}/{{bookname}}/linkagenotes/note/{{linkage.id}}/">{{linkage.id}}</a>
+<b>{% trans 'In frames' %} : </b>
+{% for frame in frames %}
+<a href="/{{profile_username}}/framebook/notes/note/{{frame.id}}/">{{frame.id}}</a>,
 {% empty %}
-No linkage.
+{% trans 'Not in any frame' %} .
 {% endfor %}
 </div>
 

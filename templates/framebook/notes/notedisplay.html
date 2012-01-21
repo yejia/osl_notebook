@@ -43,9 +43,9 @@
 
 
 <b>included notes: </b>
-{% for id, title, desc, vote, type, tags, url in frame_notes_display %}
+{% for id, title, desc, vote, type, note_bookname, tags, url in frame_notes_display %}
 <div id="note_in_frame"><img src="/site_media/img/{{type}}.png" title="{{type}}"/>
-<a href="/{{profile_username}}/notebook/notes/note/{{id}}/">{{title|default:'(No Title)'}}</a> 
+<a href="/{{profile_username}}/{{note_bookname}}/notes/note/{{id}}/">{{title|default:'(No Title)'}}</a> 
 {{desc}} 
  {% if type == 'Bookmark' or type == 'Scrap' %} 
  <a href="{{url}}">
@@ -55,7 +55,11 @@
 
 <img src="/site_media/img/tags-small.png" class="img_in_notes_section_header"/>:
 {% for tag  in tags %}
-<a href="/{{profile_username}}/{{bookname}}/notes/tags/{{tag}}/">{{tag}}</a>,
+ {% if type != 'Frame' %} 
+<a href="/{{profile_username}}/{{note_bookname}}/notes/tags/{{tag}}/">{{tag}}</a>,
+{% else %}
+{{tag}},
+{% endif %}
 {% endfor %}
 <img src="/site_media/img/thumbUp.gif"/>{{vote}}
 </div>

@@ -7,7 +7,8 @@ from django.db.models.query import QuerySet
 from django.db.models import Q
 from django.core.exceptions import ObjectDoesNotExist
 
-from notebook.social.models import Social_Note, Social_Tag, Social_Snippet, Social_Bookmark, Social_Scrap
+from notebook.social.models import Social_Note, Social_Tag, Social_Snippet, Social_Bookmark, Social_Scrap, Social_Frame
+from notebook.notes.constants import *
 
 standalone = False
 
@@ -29,7 +30,7 @@ log = getlogger('notes.models')
 
 #owner_name = ""
 
-
+#TODO:move to util.py
 def getT(username):
     return create_model("T_"+str(username), Tag, username)
 
@@ -38,8 +39,6 @@ def getL(username):
 
 
 
-def getW(username):
-    return create_model("W_"+str(username), WorkingSet, username)
 
 def getNC(username):
     return create_model("NC_"+str(username), Note_Comment, username)
@@ -179,6 +178,7 @@ class Note(models.Model):
         return self.desc
 
     
+    #TODO:better to move this method and the next one outside of this class?
     def get_note_type(self):
         try:
             self.snippet
@@ -191,10 +191,19 @@ class Note(models.Model):
                 try:
                     self.scrap
                     return 'Scrap'
-                except ObjectDoesNotExist:   
-                    print 'No note type found!'
-                    return 'Note' #TODO:
+                except ObjectDoesNotExist:
+                    try:
+                        self.frame
+                        return 'Frame'
+                    except ObjectDoesNotExist:   
+                        log.info('No note type found!')
+                        return 'Note' #TODO:
                 
+      
+        
+    def get_note_bookname(self):        
+        return model_book_dict.get(self.get_note_type())
+      
        
 #TODO: rewrite parts in views that get public notes. It should just use a filter or something with the help of this method
 #or simply add to tempalte (this way is used and it seems to work well, but then in the note list display, the counting of notes
@@ -274,14 +283,7 @@ class Note(models.Model):
                 w.tags.add(t)
                 w.save()                
             except Exception:
-                log.error("Error in add_tags with w "+w.name+' and tag '+t.name)
-#                print type(inst)     # the exception instance
-#                print inst.args      # arguments stored in .args
-#                print inst           # __str__ allows args to printed directly
-#                x, y = inst          # __getitem__ allows args to be unpacked directly
-#                print 'x =', x
-#                print 'y =', y              
-            
+                log.error("Error in add_tags with w "+w.name+' and tag '+t.name)            
             self.tags.add(t)  
             #TODO: there seems to be no need t save this instance, as self.tags.add(t) already saved data to the m2m table  
             # but to update the social note as well, I think below is still needed        
@@ -343,7 +345,7 @@ class Note(models.Model):
     #  not show in tags list. But if that note has other tags, you can still find that note. 
     #The problem with notes of private tags not showing up in social notes is that if a group member sets his own tag such as *** as a private
     #tag, then his notes in *** won't show in the group 
-    def save(self, *args, **kwargs):
+    def save(self, *args, **kwargs):        
         #do_something()
         super(Note, self).save(*args, **kwargs) # Call the "real" save() method.        
         owner = User.objects.get(username=self.owner_name)
@@ -353,16 +355,20 @@ class Note(models.Model):
         if hasattr(self, 'bookmark'):
             sn, created = Social_Bookmark.objects.get_or_create(owner=owner.member, owner_note_id=self.id) 
         if hasattr(self, 'scrap'):
-            sn, created = Social_Scrap.objects.get_or_create(owner=owner.member, owner_note_id=self.id)         
+            sn, created = Social_Scrap.objects.get_or_create(owner=owner.member, owner_note_id=self.id)  
+        if hasattr(self, 'frame'):
+            sn, created = Social_Frame.objects.get_or_create(owner=owner.member, owner_note_id=self.id)            
         
         
         #if the note has sharinggroup: prefixed tag, then it still need to be in the social space
-        if not created and (self.private or self.deleted) and not self.tags.filter(name__startswith="sharinggroup:").exists():   
+        #if not created and (self.private or self.deleted) and not self.tags.filter(name__startswith="sharinggroup:").exists():   
+        if (self.private or self.deleted) and not self.tags.filter(name__startswith="sharinggroup:").exists():  
             #if the note is already in social note, and the note in the original db is changed to priviate or delete
             #   then needs to delete it from the social note
             #TODO: still, deleting the child won't delete the parent. Will this be an issue? So at least disable mixed.
             sn.delete()
-        else:   
+           
+        else:               
             #whether the note is first created or just an update, below applies to both situations
             sts = [] 
             for t in self.tags.all():  
@@ -372,8 +378,22 @@ class Note(models.Model):
                     sts.append(st)
             
             
+            
             if hasattr(self, 'bookmark') or hasattr(self, 'scrap'):
-                sn.url = self.url
+                log.debug('having attribute bookmark or scrap')
+                if hasattr(self, 'bookmark'):
+                    sn.url = self.bookmark.url
+                if hasattr(self, 'scrap'):
+                    sn.url = self.scrap.url
+                        
+            sns_included = []   
+            #TODO:test below 
+            if hasattr(self, 'frame'):
+                for n_included in self.notes.all():
+                    if not n_included.is_private():
+                        sn_included = Social_Note.objects.get(owner=owner.member, owner_note_id=n_included.id)                        
+                        sns_included.append(sn_included)
+                sn.notes = sns_included   
             sn.desc = self.desc
             sn.title = self.title
             #sn.event = self.event            
@@ -425,21 +445,14 @@ class Note_Comment(models.Model):
         
         
 
-#TODO:rename to Frame since we don't have frame_of_bookmark and so on
-class Frame_Of_Note(models.Model):       
-    title = models.CharField(blank=True, max_length=2000) #TODO: need title?
-    desc =  models.TextField(blank=True, max_length=2000)
-    tags = models.ManyToManyField(Tag, blank=True)#TODO: get rid of
-    private = models.BooleanField(default=False)
-    init_date = models.DateTimeField('date created', auto_now_add=True)
-    last_modi_date = models.DateTimeField('date last modified', auto_now=True)
-    deleted = models.BooleanField(default=False)
-    vote =  models.IntegerField(default=0, blank=True)#TODO: get rid of
+#For now, we don't make frame of Snippet/Bookmark/Scrap. There are only frames of Notes. 
+#TODO: clean up code that duplicate with those in Note
+class Frame(Note):       
     attachment = models.FileField(upload_to=get_storage_loc, blank=True, storage=fs)    
     
     #TODO: notes reference to the id of Note instead of note_id. Unlike ForeignKey field, ManyToManyField
     #doesn't allow specifying a to_field argument. Think of whether to reference to note_id.
-    notes = models.ManyToManyField(Note) 
+    notes = models.ManyToManyField(Note, related_name='in_frames') 
     
     
     class Meta:
@@ -450,16 +463,6 @@ class Frame_Of_Note(models.Model):
     def __unicode__(self):
         return ','.join([str(note.id) for note in self.notes.all()])     
     
-    def is_private(self):
-        #check the private field of this Note. if so, private. If not, 
-        #check the tags to see if any tag is private        
-        if self.private == True:
-            return True
-        else:                        
-            for tag in self.tags.all():
-                if tag.private == True:
-                    return True
-
 
     def get_vote(self):        
         v = 0  
@@ -492,24 +495,13 @@ class Frame_Of_Note(models.Model):
     def display_tags(self):
         return ','.join(self.get_tags())   
 
-    def get_desc_short(self):
-        if len(self.desc)>97:
-            return self.desc[0:97]+'...'
-        else:
-            return self.desc
-           
-    def get_desc_super_short(self):
-        if len(self.desc)>30:
-            return self.desc[0:30]+'...'
-        else:
-            return self.desc       
+     
                
     def display_notes(self):
-        #return [(n.note_id, n.title, n.desc,n.display_tags()) for n in self.notes.all()]
-        return [[n.id, n.title, n.desc, n.vote] for n in self.notes.all()]              
+        return [[n.id, n.title, n.desc, n.vote] for n in self.notes.all()] 
+                
     
-    def display_public_notes(self):
-        #q = ~Q(tags__private=True)
+    def display_public_notes(self):        
         return [[n.id, n.title, n.desc, n.vote] for n in self.notes.all() if n.private==False ] 
     
     #TODO: need save?
@@ -544,6 +536,9 @@ class Frame_Of_Note(models.Model):
 
 
 
+
+#TODO:for now LinkageNote is kept, but only for viewing old linkages. Frame is used to "frame" notes together. 
+#TODO:clean up web UI
 #TODO: or merge this with Note field, and add field is_linkage, type_of_linkage.  If you do so, linkage can link linkage, that
 #might make it too complicated. If there is a level of grouping above linkage, make it another thing in the future?
 class LinkageNote(models.Model):
@@ -688,6 +683,11 @@ class Folder(models.Model):
         
     #~ def getName(self, v):
         #~ return 
+
+
+class Frame_Folder(Folder):
+    pass    
+        
 
 
 class Cache(models.Model):

@@ -106,7 +106,7 @@
          <table class="note_table">
                 <tr>
                     <td class="note_table_title">
-                        <div id="note_title"><a href="/{{profile_username}}/{{bookname}}/frames/frame/{{ note.id }}/"><b>{{ note.title|default:_('(No Title)') }}</b></a></div> 	
+                        <div id="note_title"><a href="/{{profile_username}}/framebook/notes/note/{{ note.id }}/"><b>{{ note.title|default:_('(No Title)') }}</b></a></div> 	
                     </td>
                     <td class="note_table_desc">			    
                         <div  id="note_desc">{{note.desc}}</div>
@@ -152,7 +152,7 @@
 <div class="full_display">
             
 		    <table class="note_table"><tr><td class="note_table_title">
-	            <div id="note_title">{% if user.username == profile_username %}<span class="editableText">{% endif %}<a href="/{{profile_username}}/{{bookname}}/frames/frame/{{ note.id }}/"><b>{{ note.title|default:_('(No Title)') }}</b></a>{% if user.username == profile_username %}</span>{% endif %}</div> 	
+	            <div id="note_title">{% if user.username == profile_username %}<span class="editableText">{% endif %}<a href="/{{profile_username}}/framebook/notes/note/{{ note.id }}/"><b>{{ note.title|default:_('(No Title)') }}</b></a>{% if user.username == profile_username %}</span>{% endif %}</div> 	
                      </td><td class="note_table_desc">			    
 		   <div  id="note_desc">{% if user.username == profile_username %}<span class="editableText">{% endif %}{{note.desc}}{% if user.username == profile_username %}</span>{% endif %}</div>
 		    <!-- <div  id="note_desc_short" title="note desc">{{note.get_desc_short}}</div>

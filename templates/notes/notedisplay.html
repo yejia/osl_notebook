@@ -55,14 +55,28 @@
 <div>
 <b>{% trans 'attachment' %} :</b> <a href="/site_media/{{note.attachment.name}}" target="top">{{note.attachment}}</a>
 </div>
+
+ {% if note.get_note_type != 'Frame' %} 
 <div>
-<b>In frames: </b>
+<b>{% trans 'In frames' %} : </b>
 {% for frame in frames %}
-<a href="/{{profile_username}}/notebook/frames/frame/{{frame.id}}/">{{frame.id}}</a>,
+<a href="/{{profile_username}}/framebook/notes/note/{{frame.id}}/">{{frame.id}}</a>,
 {% empty %}
-Not in any frame.
+{% trans 'Not in any frame' %} .
 {% endfor %}
 </div>
+{% endif %}
+
+ {% if note.get_note_type == 'Frame' %} 
+ <div>
+ {% trans 'Notes included in this frame' %} :
+ {% for n in notes_included %}
+<a href="/{{profile_username}}/notebook/notes/note/{{n.id}}/">{{n.id}}</a>,
+{% empty %}
+{% trans 'No Notes included' %} .
+{% endfor %}
+ </div>
+ {% endif %}
 
 <br/><br/>
 

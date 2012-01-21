@@ -1,4 +1,4 @@
-{% extends "snippetbook/notes/note_list_base.html" %}
+{% extends "framebook/notes/note_list_base.html" %}
 {% load i18n %}
 
 {% block content%}
@@ -8,7 +8,7 @@
 {% if user.username != profile_username and note.is_private %}  
 {% trans "This one is private. Sorry you have no permission to view it!" %}
 {% else %}  
-{% include "snippetbook/notes/notedisplay.html" %}
+{% include "framebook/notes/notedisplay.html" %}
 {% endif %}
 </div> 
 </div> 

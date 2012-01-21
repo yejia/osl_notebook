@@ -5,7 +5,14 @@
 <div class="notebook">
 <div class="brief_display">
          <table class="note_table"><tr><td><img src="/site_media/img/{{note.get_note_type}}.png" title="{{note.get_note_type}}"/></td><td class="note_table_td1"> 
-            <div id="note_title" title="{% trans 'note title' %}"><a href="/{{profile_username}}/{{bookname}}/notes/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a></div> 		    
+            <div id="note_title" title="{% trans 'note title' %}"><a href="/{{profile_username}}/{{note.get_note_bookname}}/notes/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a>
+             {% if note.get_note_type == 'Bookmark' %} 
+                <a href="{{note.bookmark.url}}"><img src="/site_media/img/openurl.png" class=""/></a>
+             {% endif %}
+             {% if note.get_note_type == 'Scrap' %}
+                <a href="{{note.scrap.url}}"><img src="/site_media/img/openurl.png" class=""/></a>
+             {% endif %}
+            </div> 		    
 		    </td><td class="note_table_td2">
 		    <div  id="note_desc" title="{% trans "note desc" %}">{{note.desc}}</div>		   
 		    </td>
@@ -25,7 +32,14 @@
 
 <div class="full_display">
  <table class="note_table"><tr><td><img src="/site_media/img/{{note.get_note_type}}.png" title="{{note.get_note_type}}"/></td><td class="note_table_title">
-            <div id="note_title" title="{% trans "note title" %}">{% if user.username == profile_username %}<span class="editableText">{% endif %}<a href="/{{profile_username}}/{{bookname}}/notes/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a>{% if user.username == profile_username %}</span>{% endif %}</div> 		    
+            <div id="note_title" title="{% trans "note title" %}">{% if user.username == profile_username %}<span class="editableText">{% endif %}<a href="/{{profile_username}}/{{note.get_note_bookname}}/notes/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a>{% if user.username == profile_username %}</span>{% endif %}
+              {% if note.get_note_type == 'Bookmark' %} 
+                <a href="{{note.bookmark.url}}"><img src="/site_media/img/openurl.png" class=""/></a>
+             {% endif %}
+             {% if note.get_note_type == 'Scrap' %}
+                <a href="{{note.scrap.url}}"><img src="/site_media/img/openurl.png" class=""/></a>
+             {% endif %}
+             </div> 		    
 		    </td><td class="note_table_desc">
 		    <div  id="note_desc" title="{% trans "note desc" %}">{% if user.username == profile_username %}<span class="editableText">{% endif %}{{note.desc}}{% if user.username == profile_username %}</span>{% endif %}</div>		   
 		    </td>
@@ -34,14 +48,42 @@
 		    </td>
 		    </tr>
 		    </table>
-            
+        
+
            <div>
-           <!--
-		    <div  id="note_event" title="event">e:{% if user.username == profile_username %}<span class="editableText">{% endif %}{ {{note.event}} }{% if user.username == profile_username %}</span>{% endif %}</div>
-		    -->
+        <!--Don't display notes included for now, since it requre adding them for each frame in the view.py code, which may slow down the performance      
+		    {% if note.get_note_type == 'Frame' %}
+           <div  id="notes_included">
+           Notes included in the frame: 
+            {% if user.username == profile_username %}      
+            {{note.frame.display_notes}}
+               {% for id, title, desc, vote in note.frame.display_notes %}    
+                <div linked_note_id="{{n.0}}">show me
+                     <li><a href="/{{profile_username}}/{{bookname}}/{{included_aspect_name}}/note/{{id}}"><strong>{{title|default:'(No Title)'}}-</strong></a>
+                                &nbsp;&nbsp;&nbsp;{{desc|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 
+                                <span title="remove this note from the frame" class="inline_delete" id="linkage_delete_note">&nbsp;&nbsp;&nbsp;</span>
+                     </li>           
+                </div>
+		        {% endfor %}
+              {% else %}              
+               {% for n in note.frame.display_public_notes  %}            
+                <div linked_note_id="{{n.0}}">
+                     <li><a href="/{{profile_username}}/{{bookname}}/{{included_aspect_name}}/note/{{n.0}}"><strong>{{n.1|default:'(No Title)'}}-</strong></a>
+                                &nbsp;&nbsp;&nbsp;{{n.2|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp;{{n.3}} &nbsp;&nbsp;&nbsp;&nbsp; 
+                              </span>
+                     </li>           
+                </div>
+		         {% endfor %}
+              {% endif %}
+           </div>
+            {% endif %}
+           </div>
+            --> 
+           
             <div  id="note_init_date" title="{% trans "initial creation time" %}">{% if user.username == profile_username %}<span  class="editableText">{% endif %}{{note.init_date|date:"Y-m-d H:i"}}{% if user.username == profile_username %}<span>{% endif %}</div>
-		    <div  id="note_last_modi_date" title="{% trans "last modified time" %}">{{note.last_modi_date|date:"Y-m-d H:i"}} </div>
-		    
+		       <!--
+             <div  id="note_last_modi_date" title="{% trans "last modified time" %}">{{note.last_modi_date|date:"Y-m-d H:i"}} </div>
+		     -->
             {% if note.attachment %}
 		    <div  id="note_attachment" title="{% trans "attachment" %}"><a href="/file/{{note.attachment.name}}" target="top">{{note.attachment.name}}</a> </div>
 		    {% endif %}

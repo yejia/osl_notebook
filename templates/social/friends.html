@@ -18,7 +18,7 @@
 
 <div>
 <br/><br/><br/>
-{% blocktrans %}Friends of {{user}} {% endblocktrans %}:
+{% blocktrans %}Friends of {{user}} {% endblocktrans %}:  {% if user.username == profile_username %}<a href="/{{profile_username}}/friends/snippetbook/notes/">{% trans "view all" %}</a>{% endif %}
 {% for f in user.member.get_friends %}		
 <li>
 <a href="/social/{{f.username}}/">{{f.username}}</a><!--TODO:nickname-->

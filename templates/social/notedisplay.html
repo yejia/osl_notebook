@@ -1,0 +1,82 @@
+{% load i18n %}
+
+<script>
+	jQuery(function($){
+
+        $(updateNoteForm).hide();     		
+		$('#edit_note'). click(function(){                       
+		        $(updateNoteForm).show();
+        });		
+			
+    });
+</script>
+
+<div>
+<h2>Public Note of {{note.get_note_type}}</h2>
+</div>
+
+<div>
+<h2>{{note.title|default:_('(No Title)')}}</h2>
+</div>
+
+<div>
+{% trans 'Created' %} : {{note.init_date|date:"Y-m-d H:i"}}
+</div>
+<br/><br/>
+ {% if note.get_note_type == 'Bookmark' %} 
+<div>
+<b>URL :</b> <a href="{{note.social_bookmark.url}}" target="top">{{note.social_bookmark.url}}</a>
+</div>
+{% endif %}
+ {% if note.get_note_type == 'Scrap' %} 
+<div>
+<b>URL :</b> <a href="{{note.social_scrap.url}}" target="top">{{note.social_scrap.url}}</a>
+</div>
+{% endif %}
+
+<div><p>
+{{note.desc}}</p>
+</div>
+
+<div>
+<img src="/site_media/img/tags-small.png" class="img_in_notes_section_header"/>:
+{% for tag in note.get_tags %}
+<a href="/social/{{profile_username}}/{{bookname}}/notes/tags/{{tag}}/">{{tag}}</a>,
+{% endfor %}
+</div>
+
+<div>
+<b>{% trans 'importance' %} : </b>{{note.vote}}
+</div>
+<div>
+<b>{% trans 'private' %} :</b> {{note.private}}
+</div>
+
+<div>
+<b>{% trans 'attachment' %} :</b> <a href="/site_media/{{note.attachment.name}}" target="top">{{note.attachment}}</a>
+</div>
+
+ {% if note.get_note_type != 'Frame' %} 
+<div>
+<b>{% trans 'In frames' %} : </b>
+{% for frame in note.in_frames.all %}
+<a href="/social/{{profile_username}}/framebook/notes/note/{{frame.id}}/">{{frame.id}}</a>,
+{% empty %}
+{% trans 'Not in any frame' %} .
+{% endfor %}
+</div>
+{% endif %}
+
+ {% if note.get_note_type == 'Frame' %} 
+ <div>
+ {% trans 'Notes included in this frame' %} :
+ {% for n in notes_included %}
+<a href="/social/{{profile_username}}/notebook/notes/note/{{n.id}}/">{{n.id}}</a>,
+{% empty %}
+{% trans 'No Notes included' %} .
+{% endfor %}
+ </div>
+ {% endif %}
+
+<br/><br/>
+

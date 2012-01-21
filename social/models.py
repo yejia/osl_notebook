@@ -1,9 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User, UserManager
 from django.db.models import Q
+from django.core.exceptions import ObjectDoesNotExist
 
-
-
+from notebook.notes.constants import *
 
 
 #TODO: refactor out. It is duplicated with the code from notes.models
@@ -102,7 +102,31 @@ class Social_Note(models.Model):
     
     def __unicode__(self):
         return self.desc + u' by ' + self.owner.username
+    
 
+    def get_note_type(self):
+        try:
+            self.social_snippet
+            return 'Snippet'
+        except ObjectDoesNotExist:
+            try:
+                self.social_bookmark
+                return 'Bookmark'    
+            except ObjectDoesNotExist:
+                try:
+                    self.social_scrap
+                    return 'Scrap'
+                except ObjectDoesNotExist:
+                    try:
+                        self.social_frame
+                        return 'Frame'
+                    except ObjectDoesNotExist:   
+                        log.info('No note type found!')
+                        return 'Note' #TODO:
+                
+    def get_note_bookname(self):        
+        return model_book_dict.get(self.get_note_type())
+   
    
     def display_tags(self):
         return ','.join([t.name for t in self.tags.filter(private=False).order_by('name')])
@@ -177,6 +201,17 @@ class Social_Scrap(Social_Note):
     
     def __unicode__(self):
         return self.url + u' by ' + self.owner.username
+
+
+
+class Social_Frame(Social_Note):
+    attachment = models.FileField(upload_to=get_storage_loc, blank=True, storage=fs)   
+    notes = models.ManyToManyField(Social_Note, related_name='in_frames')
+    
+    def __unicode__(self):
+        return ','.join([str(note.id) for note in self.notes.all()])   
+
+
 
 
 class Social_Note_Comment(models.Model):

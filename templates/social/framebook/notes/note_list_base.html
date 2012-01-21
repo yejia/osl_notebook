@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block tite %}
-<title>{{profile_username}}'s Snippets</title> 
+<title>{{profile_username}}'s Frames</title> 
 {% endblock %}
 
 
@@ -15,9 +15,9 @@
 {% block site_apps_menu %}
 
 <div>
-{% trans "All" %}
+{% trans "Frames" %}
 |
-<a href="/{{ profile_username }}/snippetbook/notes/">{% trans "Snippets" %}</span>
+<a href="/{{ profile_username }}/snippetbook/notes/">{% trans "Snippets" %}</a>
   |   
 <a href="/{{ profile_username }}/bookmarkbook/notes/">{% trans "Bookmarks" %}</a>
   |   

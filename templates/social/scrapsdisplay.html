@@ -32,7 +32,7 @@
 
 {% block full_display_td12 %}
            <td class="note_table_td1">
-            <div id="note_title" title="{% trans 'note title' %}">{{ note.title|default:_('(No Title)')}}</div> 		    
+            <div id="note_title" title="{% trans 'note title' %}"><a href="/social/{{profile_username}}/{{note.get_note_bookname}}/notes/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a></div> 		    
 		    </td><td class="note_table_td2">
 		    <div  id="note_desc" title="{% trans "note desc" %}">{% if user.username == profile_username %}<span class="editableText">{% endif %}{{note.desc}}{% if user.username == profile_username %}</span>{% endif %}</div>		   
 		    </td>

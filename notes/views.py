@@ -19,11 +19,13 @@ from django.template import RequestContext
 from django.core.exceptions import ObjectDoesNotExist, FieldError
 from django.core.mail import send_mass_mail
 
-from notebook.notes.models import Note, Tag, LinkageNote, Folder, WorkingSet, create_model, create_model_form, getNC, getW, getT, getL
+from notebook.notes.models import Note, Tag, LinkageNote, Folder, WorkingSet, create_model, create_model_form, getNC, getT, getL
 from notebook.snippets.models import Snippet
 from notebook.bookmarks.models import Bookmark
 from notebook.scraps.models import Scrap
 from notebook.social.models import Member, Friend_Rel
+from notebook.notes.constants import *
+from notebook.notes.util import *
 
 
 import notebook
@@ -65,14 +67,6 @@ log = getlogger('notes.views')
 #among different view according to the username.
 #or maybe subclass QuerySet and for every query, add user__username__exact=username filter. But this might cause slow performance.
 
-ALL_VAR = 'all'
-true_words = [True, 'True', 'true', 'Yes', 'yes', 'Y', 'y']
-#TODO: not used
-sort_dict = {'vote':'Vote', 'title':'Title', 'desc': 'Desc', 'init_date': 'Creation Date', 
-             'last_modi_date':'Last Modification Date'}
-
-books = ['notebook', 'snippetbook','bookmarkbook', 'scrapbook']
-book_template_dict = {'notebook':'', 'snippetbook':'snippetbook/','bookmarkbook':'bookmarkbook/', 'scrapbook': 'scrapbook/'}
 
 class AddLinkageNoteForm(ModelForm):
     error_css_class = 'error'
@@ -325,40 +319,13 @@ def get_public_tags(tags):
     
     
 
-book_model_dict = {'notebook':Note, 'snippetbook':Snippet,'bookmarkbook':Bookmark, 'scrapbook': Scrap}
-model_book_dict = {'Note':'notebook', 'Snippet':'snippetbook','Bookmark':'bookmarkbook', 'Scrap':'scrapbook'}
-book_folder_dict = {'notebook':Folder, 'snippetbook':notebook.snippets.models.Snippet_Folder,'bookmarkbook':notebook.bookmarks.models.Bookmark_Folder, 'scrapbook': notebook.scraps.models.Scrap_Folder}
-book_cache_dict = {'notebook':notebook.notes.models.Cache, 'snippetbook':notebook.snippets.models.Snippet_Cache,'bookmarkbook':notebook.bookmarks.models.Bookmark_Cache, 'scrapbook': notebook.scraps.models.Scrap_Cache}
-book_entry_dict = {'notebook':'', 'snippetbook':'__snippet','bookmarkbook':'__bookmark', 'scrapbook': '__scrap'}
-search_fields_dict = {'notebook':('title','desc'), 'snippetbook':('title','desc'), 'bookmarkbook':('title','desc', 'url'), 'scrapbook':('title','desc', 'url')}
-
-def getNote(username, bookname):
-    return create_model("Note_"+str(bookname)+"_"+str(username), book_model_dict.get(bookname), username) 
-
-def getFolder(username, bookname):
-    return create_model("Folder_"+str(bookname)+"_"+str(username), book_folder_dict.get(bookname), username) 
-
-def getCache(username, bookname):
-    return create_model("Cache_"+str(bookname)+"_"+str(username), book_cache_dict.get(bookname), username)    
-
-from notebook.bookmarks.models import Linkage_Of_Bookmark
-from notebook.scraps.models import Linkage_Of_Scrap
-from notebook.snippets.models import Linkage_Of_Snippet
-book_linkage_dict = {'notebook': LinkageNote,'snippetbook': Linkage_Of_Snippet, 'bookmarkbook': Linkage_Of_Bookmark, 'scrapbook':Linkage_Of_Scrap}
-
-def getLinkage(username, bookname):
-    return create_model("Linkage_"+str(bookname)+"_"+str(username), book_linkage_dict.get(bookname), username) 
-
-
-from notebook.notes.models import Frame_Of_Note
-def getFrame(username):
-    return create_model("Frame_"+str(username), Frame_Of_Note, username) 
-
 
 
 #TODO: add date range search, votes search
 @login_required
-def index(request, username, bookname):         
+def index(request, username, bookname):   
+    if 'framebook' == bookname:
+        return frames(request, username, 'notebook')      
     N = getNote(username, bookname)
     connection.queries = []
     
@@ -529,16 +496,14 @@ def __get_ws_tags_for_menu(request, username, bookname):
     #Don't use the custom model, it seems that it cannot be correctly serialize (fields are empty objects) . Might because it is proxy.TODO:
     #T = getT(username)    
     #W = getW(username)  
-    print 'getting current working set, current_ws is:', request.session.get("current_ws") 
+    
     if not request.session.get("current_ws") or request.session.get("current_ws") in books:
         request.session["current_ws"] = bookname                 
-    current_ws = request.session.get("current_ws")    
-    print 'current_ws is:', current_ws
+    current_ws = request.session.get("current_ws")      
     if current_ws == 'all tags' or current_ws == 'notebook':
         #this annotate get all the note's count instead of just the bookname's 
         tags_qs = Tag.objects.using(username).all().order_by('name')#.annotate(Count('note'+book_entry_dict.get(bookname))).order_by('name') 
-    else:
-        print 'get tags of a working set'
+    else:        
         w = WorkingSet.objects.using(username).get(name__exact = current_ws)
         #tags = w.tags.using(username).all().order_by('name')
         tags_qs = Tag.objects.using(username).filter(workingset=w).order_by('name')#.annotate(Count('note'+book_entry_dict.get(bookname))).order_by('name')
@@ -562,16 +527,14 @@ def __get_ws_tags(request, username, bookname):
     #Don't use the custom model, it seems that it cannot be correctly serialize (fields are empty objects) . Might because it is proxy.TODO:
     #T = getT(username)    
     #W = getW(username)  
-    print 'getting current working set, current_ws is:', request.session.get("current_ws") 
+     
     if not request.session.get("current_ws") or request.session.get("current_ws") in books:
         request.session["current_ws"] = bookname                 
-    current_ws = request.session.get("current_ws")    
-    print 'current_ws is:', current_ws
+    current_ws = request.session.get("current_ws")       
     if current_ws == 'all tags' or current_ws == 'notebook':
         #this annotate get all the note's count instead of just the bookname's 
         tags_qs = Tag.objects.using(username).all().order_by('name')#.annotate(Count('note'+book_entry_dict.get(bookname))).order_by('name') 
-    else:
-        print 'get tags of a working set'
+    else:        
         w = WorkingSet.objects.using(username).get(name__exact = current_ws)
         #tags = w.tags.using(username).all().order_by('name')
         tags_qs = Tag.objects.using(username).filter(workingset=w).order_by('name')#.annotate(Count('note'+book_entry_dict.get(bookname))).order_by('name')
@@ -734,8 +697,7 @@ def __get_context(request, note_list,default_tag_id, username, bookname, aspect_
     #TODO: get private ones
     wss = W.objects.all()
   
-    if request.user.username != username:
-        print 'get public tags...'
+    if request.user.username != username:        
         tags = get_public_tags(tags)          
     
     #AddNForm_notes = create_model_form("AddNForm_"+str(username), N, fields={'tags':forms.ModelMultipleChoiceField(queryset=tags)})
@@ -765,9 +727,8 @@ def __get_menu_context(request, username, bookname):
         cache_ids = caches.values_list('id', flat=True).order_by('id')
     else:     
         cache_ids = caches.values_list('cache_id', flat=True).order_by('cache_id') 
-    if cache_ids.count():
-        print 'cache_ids.count()', cache_ids.count()
-    #TODO: ValuesListQuerySet cannot use negative index, so last filter in template doesn't work    
+    if cache_ids.count():        
+        #TODO: ValuesListQuerySet cannot use negative index, so last filter in template doesn't work    
         next_cache_id = cache_ids[cache_ids.count()-1]+1 
     else:
         next_cache_id = 1
@@ -980,13 +941,19 @@ def folders(request, username, bookname, folder_name):
 #below is copied from note_raw except using a different template page
 def note(request, username, bookname, note_id):
     log.debug('Getting the note:'+note_id)
+    if 'framebook' == bookname:
+        return frame(request, username, note_id)
     N = getNote(username, bookname)
-    note = N.objects.get(id=note_id)
-    
-    print 'note type is:', note.get_note_type()
-    
+    note = N.objects.get(id=note_id)    
     #linkages = note.linkagenote_set.all()
-    frames = note.frame_of_note_set.all()
+    frames = None
+    if note.get_note_type() != 'Frame':
+        frames = note.in_frames.all() #notes_included??TODO:
+    
+    notes_included = None
+    if note.get_note_type() == 'Frame':
+        notes_included = note.frame.notes.using(username).all()       
+    
     UpdateNForm = create_model_form("UpdateNForm_"+str(username), N, fields={'tags':forms.ModelMultipleChoiceField(queryset=__get_ws_tags(request, username, bookname))})
     note_form = UpdateNForm(instance=note)
     
@@ -996,7 +963,7 @@ def note(request, username, bookname, note_id):
     #b = B.objects.get(note_ptr=note)
     #print 'b.url:', b.url
     
-    return render_to_response(book_template_dict.get(bookname)+'notes/note.html', {'note':note, 'frames':frames,'note_form':note_form, 'profile_username':username}, context_instance=RequestContext(request, {'bookname': bookname,'aspect_name':'notes'}))
+    return render_to_response(book_template_dict.get(bookname)+'notes/note.html', {'note':note, 'frames':frames, 'notes_included':notes_included, 'note_form':note_form, 'profile_username':username}, context_instance=RequestContext(request, {'bookname': bookname,'aspect_name':'notes'}))
     
 
 
@@ -1062,8 +1029,7 @@ def update_note_inline(request, username, bookname):
     content =  request.POST.get('content')  
     note_field = request.POST.get('note_field')  
     
-    N = getNote(username, bookname)
-    print 'access db 1'
+    N = getNote(username, bookname)    
     note = N.objects.get(id=note_id)
     if note_field=='note_title':
         note.title = content
@@ -1076,7 +1042,7 @@ def update_note_inline(request, username, bookname):
     #note.tags = content	
     if note_field=='note_init_date':
         note.init_date = datetime.datetime.strptime(content,'%Y-%m-%d %H:%M')    
-    print 'access db 6'
+    
     note.save()
     log.debug( 'note updated')
     #TODO: if error
@@ -1108,6 +1074,7 @@ def delete_comment(request, username, bookname):
 
 @login_required   
 def make_private(request, username, bookname):
+    log.info('making private')
     note_id = request.POST.get('id')
     N = getNote(username, bookname)
     note = N.objects.get(id=note_id)
@@ -1195,7 +1162,7 @@ def __get_pre_url(request):
     return pre_url
 
 
-def __get_parent_note_id(noteid, username, bookname):
+def __get_parent_note_id(noteid, username, bookname):    
     N = getNote(username, bookname)
     n = N.objects.get(id=noteid)
     return n.note_ptr_id
@@ -1209,12 +1176,18 @@ def __get_parent_note_ids(noteids, username, bookname):
 #TODO: method name seems to overlap with linkagenotes method
 @login_required
 def  frame_notes(request, username, bookname):
+    
+    #if making frames in notes viewing page, need to get passed the bookname of each note as well. 
+    if 'notebook' == bookname:
+        pass #TODO
+    
+    
     note_ids = request.POST.get('notes')    
     notes = note_ids.split(",")   
     notes = list(set(notes)) 
-    print 'notes are:', notes
-    ptr_notes = __get_parent_note_ids(notes, username, bookname)
-    print 'ptr_notes is:', ptr_notes
+    #print 'notes are:', notes
+    #ptr_notes = __get_parent_note_ids(notes, username, bookname)
+    #print 'ptr_notes is:', ptr_notes #TODO:should be the same as notes
     N = getNote(username, bookname)
    
     tag_list = []
@@ -1240,7 +1213,7 @@ def  frame_notes(request, username, bookname):
         frameNote.attachment = file 
     frameNote.save()
     #TODO: below is not correct since note_ids correspond to those snippet/bookmark/scrap ids instead of notes ids
-    frameNote.notes = ptr_notes 
+    frameNote.notes = notes 
     frameNote.tags = tags    
     
 #    AddLForm = create_model_form("AddLForm_"+str(username), L, options={'exclude':('tags')})
@@ -1317,12 +1290,13 @@ def frames(request, username, bookname):
     qstr = '' #TODO: for now, no query
     now = date.today()    
 
-    tags = __get_ws_tags(request, username, bookname)
-    if request.user.username != username:
-        tags = get_public_tags(tags)  
+    #tags = __get_ws_tags(request, username, bookname)
+    #if request.user.username != username:
+    #    tags = get_public_tags(tags)  
     
-    return render_to_response('notes/frames.html', {'note_list': paged_notes, 
-                                                 'tags':tags, 'view_mode':view_mode, 
+    return render_to_response('framebook/notes/notes.html', {'note_list': paged_notes, 
+                                                 #'tags':tags,
+                                                  'view_mode':view_mode, 
                                                  'sort':sort, 'delete':delete, 'private':private, 'day':now.day, 'month':now.month, 'year':now.year, 'cl':cl,
                                                  'folders':folders,'qstr':qstr, 'profile_username':username, 'aspect_name':'linkagenotes', 'date_range':date_range, 
                                                  'order_type':order_type, 'with_attachment':with_attachment, 'users':User.objects.all(), 
@@ -1365,7 +1339,7 @@ def linkagenotes(request, username, bookname):
 
 
 @login_required
-def frame(request, frame_id, username, bookname):    
+def frame(request, username, frame_id):    
     F = getFrame(username)    
     frame = F.objects.get(id=frame_id)
     #linkage_form = UpdateFrameForm(instance=note)
@@ -1381,6 +1355,8 @@ def frame(request, frame_id, username, bookname):
         note = N.objects.get(id=note_id)  
         type = note.get_note_type()
         n.append(type)
+        note_bookname = note.get_note_bookname()
+        n.append(note_bookname)
         n.append(note.get_tags())
         if type == 'Bookmark': 
             n.append(note.bookmark.url)
@@ -1391,7 +1367,7 @@ def frame(request, frame_id, username, bookname):
         
     
         
-    return render_to_response('notes/frame.html', {'frame':frame, 'frame_notes_display':frame_notes_display, 'profile_username':username}, context_instance=RequestContext(request,{'bookname': bookname,}))
+    return render_to_response('framebook/notes/note.html', {'frame':frame, 'frame_notes_display':frame_notes_display, 'profile_username':username}, context_instance=RequestContext(request))
 
 
 
@@ -1435,19 +1411,18 @@ def update_linkagenote(request, note_id, username, bookname):
 
 
 @login_required
-def update_linkage_note_inline(request, username, bookname):    
+def update_frame_inline(request, username, bookname):    
     note_id = request.POST.get('note_id')
     content =  request.POST.get('content')  
     note_field = request.POST.get('note_field')  
     
-    L = getL(username)
+    L = getFrame(username)
     note = L.objects.get(id=note_id)
     if note_field=='note_title':
         note.title = content
     if note_field=='note_desc':
         note.desc = content
-    if note_field=='note_type_of_linkage':
-        note.type_of_linkage = content
+
 #    if note_field=='note_tags':
 #        note.update_tags(content)   	
     if note_field=='note_init_date':
@@ -1461,24 +1436,24 @@ def update_linkage_note_inline(request, username, bookname):
 
 #TODO: for all these delete and update things, check the rights first. (might use django's permission management system)
 @login_required
-def delete_linkage(request, username, bookname):    
+def delete_frame(request, username, bookname):    
     note_id = request.POST.get('linkage_id')
-    L = getL(username)
-    note = L.objects.get(id=note_id)
+    F = getFrame(username)
+    note = F.objects.get(id=note_id)
     note.deleted = True    
     note.save()
     return HttpResponse(note.deleted, mimetype="text/plain")      
 
 @login_required
-def delete_note_from_linkage(request, username, bookname):    
-    linkage_id = request.POST.get('linkage_id')
-    log.debug( 'linkage is:'+str(linkage_id))
-    L = getL(username)
-    linkage = L.objects.get(id=linkage_id)
+def delete_note_from_frame(request, username, bookname):    
+    frame_id = request.POST.get('linkage_id')
+    log.debug( 'frame is:'+str(frame_id))
+    F = getFrame(username)
+    frame = F.objects.get(id=frame_id)
     note_id = request.POST.get('note_id')
-    log.debug('note to be deleted from the linkage:'+note_id)
-    linkage.remove_note(note_id)    
-    linkage.save()
+    log.debug('note to be deleted from the frame:'+note_id)
+    frame.remove_note(note_id)    
+    frame.save()
     return HttpResponse('note deleted', mimetype="text/plain")  
 
 @login_required    
@@ -1586,13 +1561,11 @@ from douban import service
 def share_todelete(request, username, bookname): 
     d_service = douban.service.DoubanService(api_key=douban_consumer_key, secret=douban_consumer_secret)
     access_key, access_secret = getAccessKey(username, 'douban')
-    print  'access_key:', access_key, 'access_secret:', access_secret   
-
     d_service.client.token = douban.oauth.OAuthToken(str(access_key), str(access_secret))    
     #status = d_service.GetPeople('/people/yejia')
     #print 'status:', status.ToString()
     status = d_service.AddBroadcasting('/miniblog/saying', """<?xml version='1.0' encoding='UTF-8'?><entry xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:db="http://www.douban.com/xmlns/"><content>we got milk</content></entry>""") 
-    print 'status:', status.ToString()
+    
     return HttpResponse('success', mimetype="text/plain")   
 
 
@@ -1996,7 +1969,7 @@ def settings_add_tags_2_wss2(request):
             t = T.objects.get(name=tag_name) 
             ws.tags.add(t)
             ws.save()    
-            print t, 'is added to ', ws
+            
     
     messages.success(request, "The folloing tags were successfully added to these working sets")     
     return HttpResponse('success', mimetype="text/plain") 

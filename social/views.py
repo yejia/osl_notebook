@@ -16,10 +16,12 @@ import datetime
 from notebook.notes.models import Note, Tag, create_model, WorkingSet
 from notebook.bookmarks.models import Bookmark
 from notebook.scraps.models import Scrap
-from notebook.social.models import Member, Group, Social_Note, Social_Tag, Social_Note_Vote, Social_Note_Comment, Social_Snippet, Social_Bookmark, Social_Scrap, Friend_Rel
+from notebook.social.models import Member, Group, Social_Note, Social_Tag, Social_Note_Vote, Social_Note_Comment, \
+                                Social_Snippet, Social_Bookmark, Social_Scrap, Friend_Rel, Social_Frame
 
-from notebook.notes.views import User, getT, getW, getlogger, getFolder, get_public_notes, __get_folder_context
+from notebook.notes.views import User, getT, getlogger, getFolder, get_public_notes, __get_folder_context
 from notebook.notes.views import getSearchResults,  __getQStr, __get_view_theme, Pl, ALL_VAR
+from notebook.notes.util import *
 
 
 log = getlogger('social.views')  
@@ -142,6 +144,15 @@ def get_groups_following(request, username):
     return gs_created_by_self
 
 
+def get_groups_list(request, username):
+    gs_created_by_self = get_groups_created_by_self(request, username)
+    gs_created_by_self_list = [g for g in gs_created_by_self]
+    gs_following = get_groups_following(request, username)
+    gs_following_list = [g for g in gs_following]
+    group_set = set(gs_created_by_self_list).union(set(gs_following_list))
+    return list(group_set)
+
+    
 @login_required
 def profile(request, username):
     gs_created = get_groups_created_by_self(request, username)
@@ -154,10 +165,25 @@ def profile(request, username):
 
 @login_required
 def friends(request, username):
-    #friends = request.user.member.get_friends()
-    return render_to_response('social/friends.html', {}, context_instance=RequestContext(request))
+    #friends = request.user.member.get_friends()    
+    return render_to_response('social/friends.html', { 'profile_username':username}, context_instance=RequestContext(request))
 
 
+@login_required
+def friends_notes(request, username, bookname):
+    friends = request.user.member.get_friends()
+    q = Q(owner__in=friends, private=False)
+    note_list = book_model_dict.get(bookname).objects.filter(q)   
+    qstr = __getQStr(request)    
+    note_list  = getSearchResults(note_list, qstr)
+    
+    sort, order_type,  paged_notes, cl = __get_notes_context(request, note_list) 
+      
+    #tags = get_group_tags(request, groupname, bookname)
+    return render_to_response('social/friends_notes.html', {'note_list':paged_notes,'sort':sort, 'bookname':bookname, \
+                                                 'tags':None, 'appname':'friends', 'cl':cl, 'profile_username':username},\
+                                                  context_instance=RequestContext(request)) 
+ 
 
 
 #TODO: think of getting username arg, since you can get it from request. Also think of 
@@ -171,8 +197,35 @@ def groups(request, username):
     tags = T.objects.filter(private=False)
     
     return render_to_response('social/groups.html', {'gs_created_by_self':gs_created_by_self, 'gs_following':gs_following,\
-                                                      'addGroupForm':addGroupForm, 'tags':tags}, context_instance=RequestContext(request))
+                                                      'addGroupForm':addGroupForm, 'tags':tags, 'profile_username':username}, context_instance=RequestContext(request))
 
+
+
+@login_required
+def groups_notes(request, username, bookname):
+    group_list = get_groups_list(request, username)
+    
+    tag_names = [tag.name for tag in group_list[0].tags.all()]
+    q0a = Q(tags__name__in=tag_names, owner__in=group_list[0].members.all(), private=False)     
+    q0b = Q(tags__name="sharinggroup:"+group_list[0].name, private=True) 
+    q = q0a | q0b
+    for i in range(1, len(group_list)+1):
+        qa = Q(tags__name__in=tag_names, owner__in=group_list[0].members.all(), private=False)     
+        qb = Q(tags__name="sharinggroup:"+group_list[0].name, private=True) 
+        q = q | (qa | qb)
+        
+   
+    note_list = book_model_dict.get(bookname).objects.filter(q)   
+    qstr = __getQStr(request)    
+    note_list  = getSearchResults(note_list, qstr)
+    
+    sort, order_type,  paged_notes, cl = __get_notes_context(request, note_list) 
+      
+    #tags = get_group_tags(request, groupname, bookname)
+    return render_to_response('social/groups_notes.html', {'note_list':paged_notes,'sort':sort, 'bookname':bookname, \
+                                                 'tags':None, 'appname':'friends', 'cl':cl, 'profile_username':username},\
+                                                  context_instance=RequestContext(request)) 
+    
 
 #TODO: check if the group already exists
 @login_required
@@ -182,6 +235,7 @@ def add_group(request, username):
     
     #TODO: move logic below to group.add_tags
     tag_names = post.getlist('item[tags][]')
+    #So far, only tags already existing in social tags can be used. Otherwise, there will be an error TODO:
     tags = [ST.objects.get(name=tag_name).id for tag_name in tag_names]
     if not tag_names:    
         #TODO: give an error page, also validation on the form       
@@ -212,7 +266,7 @@ def add_group(request, username):
     #TODO: handel tags that are created in the social space (might need to push back to the
     #personal space.)
     
-    print 'newly created group name:', g.name
+    #print 'newly created group name:', g.name
     
     #add sharinggroup:groupname as a new tag for this group
     gtn = "sharinggroup:"+g.name 
@@ -258,24 +312,28 @@ def push_group_tags_back(request, groupname):
         
 
 
-book_model_dict = {'snippetbook':Social_Snippet,'bookmarkbook':Social_Bookmark, 'scrapbook': Social_Scrap}
+book_model_dict = {'notebook':Social_Note, 'snippetbook':Social_Snippet,'bookmarkbook':Social_Bookmark, 'scrapbook': Social_Scrap, 'framebook':Social_Frame}
 
 def getSN(bookname):
     return book_model_dict.get(bookname)
 
 @login_required
 def notes(request, username, bookname):
+    if 'framebook' == bookname:
+        return frames(request, username, 'notebook')   
     #profile_user = 
-    note_list = book_model_dict.get(bookname).objects.filter(owner__username=username)       
+    note_list = book_model_dict.get(bookname).objects.filter(owner__username=username)   
+    #print 'notelist obtained:', note_list    
     qstr = __getQStr(request)    
     note_list  = getSearchResults(note_list, qstr)
-    sort, order_type,  paged_notes, cl = __get_notes_context(request, note_list)    
+    sort, order_type,  paged_notes, cl = __get_notes_context(request, note_list)   
+    #print 'paged_notes:',paged_notes 
     
     #For now, no tags in a user's social page. Later might bring the tags from user's own db and display here.
     tags = []
     
 
-    #So far, get folders from users' personal space, but need to be public folders TODO:
+    #So far, get folders from users' personal space, but need to be public folders TODO:    
     F = getFolder(username, bookname)    
     #folders = F.objects.all()   
 #    if request.user.username != username:
@@ -283,9 +341,114 @@ def notes(request, username, bookname):
     folders = F.objects.filter(private=False).order_by('name') 
     
     
-    return render_to_response('social/social_notes.html', {'note_list':paged_notes,'sort':sort, 'bookname':bookname, \
+    return render_to_response('social/notes/notes.html', {'note_list':paged_notes,'sort':sort, 'bookname':bookname, \
                                'folders':folders, 'profile_username':username, 'appname':'social', 'cl':cl},\
                                                   context_instance=RequestContext(request))
+
+@login_required
+def note(request, username, bookname, note_id):
+    log.debug('Getting the note:'+note_id)
+    if 'framebook' == bookname:
+        return frame(request, username, bookname, note_id)
+    N = getSN(bookname)
+    note = N.objects.filter(owner__username=username).get(id=note_id)
+    
+#===============================================================================
+#    print 'note type is:', note.get_note_type()
+#    
+#    #linkages = note.linkagenote_set.all()
+#    frames = None
+#    if note.get_note_type() != 'Frame':
+#        frames = note.in_frames.all() #notes_included??TODO:
+#    
+#    notes_included = None
+#    if note.get_note_type() == 'Frame':
+#        notes_included = note.social_frame.notes.all()
+#        print 'notes_included:', notes_included
+#===============================================================================
+    
+   
+    
+    return render_to_response('social/social_note.html', {'note':note,\
+                                    #'frames':frames, 'notes_included':notes_included,\
+                                    'profile_username':username}, context_instance=RequestContext(request, {'bookname': bookname,'aspect_name':'notes'}))
+    
+    
+    
+@login_required
+def frames(request, username, bookname):
+    #TODO: allow filter on delete
+    
+    #TODO: get linkages according to bookname
+    
+    
+    note_list = Social_Frame.objects.filter(owner__username=username, deleted=False)
+       
+     
+    sort, order_type,  paged_notes, cl = __get_notes_context(request, note_list)  
+
+
+    #tags = __get_ws_tags(request, username, bookname)
+    #if request.user.username != username:
+    #    tags = get_public_tags(tags)  
+    
+    
+    return render_to_response('social/framebook/notes/notes.html', {'note_list':paged_notes,'sort':sort, 'bookname':bookname, \
+                                'profile_username':username, 'appname':'social', 'cl':cl},\
+                                                  context_instance=RequestContext(request))
+    
+#===============================================================================
+#    
+#    return render_to_response('framebook/notes/notes.html', {'note_list': paged_notes, 
+#                                                 #'tags':tags,
+#                                                  'view_mode':view_mode, 
+#                                                 'sort':sort, 'delete':delete, 'private':private, 'day':now.day, 'month':now.month, 'year':now.year, 'cl':cl,
+#                                                 'folders':folders,'qstr':qstr, 'profile_username':username, 'aspect_name':'linkagenotes', 'date_range':date_range, 
+#                                                 'order_type':order_type, 'with_attachment':with_attachment, 'users':User.objects.all(), 
+#                                                 'current_ws':request.session.get("current_ws", None),'included_aspect_name':'notes'},
+#                                                  context_instance=RequestContext(request,{'bookname': bookname,}))
+#===============================================================================
+
+
+
+
+@login_required
+def frame(request, username, bookname, frame_id):    
+      
+    frame = Social_Frame.objects.get(owner__username=username, id=frame_id)
+    #linkage_form = UpdateFrameForm(instance=note)
+#===============================================================================
+#    if request.user.username == username:
+#        frame_notes_display = frame.display_notes()
+#    else:
+#        frame_notes_display = frame.display_public_notes()    
+#===============================================================================
+    #tags of each note has to be added as below since it again needs to know which user database to use. 
+    #The same for note type    
+#===============================================================================
+#    for n in frame_notes_display:
+#        note_id = n[0]        
+#        N = getNote(username, 'notebook')
+#        note = N.objects.get(id=note_id)  
+#        type = note.get_note_type()
+#        n.append(type)
+#        n.append(note.get_tags())
+#        if type == 'Bookmark': 
+#            n.append(note.bookmark.url)
+#        elif type == 'Scrap':   
+#            n.append(note.scrap.url) 
+#        else:
+#            n.append('')     
+#===============================================================================
+        
+    
+        
+    return render_to_response('social/framebook/notes/note.html', {'frame':frame,\
+                                                             #'frame_notes_display':frame_notes_display, \
+                                                             'profile_username':username}, context_instance=RequestContext(request,{'bookname': bookname,}))
+
+
+
 
 
 @login_required
@@ -365,11 +528,17 @@ def group_delete_member(request, groupname):
     g.admins.remove(member)
     return HttpResponse('successful', mimetype="text/plain")  
     
+
     
 @login_required
 def group_add_tags(request, groupname):
+    """
+    Add tags to a group. Non-existing tags can be added, and they will be pushed back to each user's personal space
+    """
+    
     tag_names = request.POST.getlist('item[tags][]')
-    tags = [ST.objects.get(name=tag_name).name for tag_name in tag_names]
+    #TODO:what is below for?
+    #tags = [ST.objects.get(name=tag_name).name for tag_name in tag_names]
     if not tag_names:    
         #TODO: give an error page, also validation on the form       
         messages.error(request, "No tags are entered!")   
@@ -379,48 +548,45 @@ def group_add_tags(request, groupname):
     
     #group.add_tags(request.username, tags)
     #TODO: separate Tag, workingSet out of notebook.notes.models otherwise cannot import Tag, WorkingSet 
-    for tag_name in tags: 
-            #In the social space, the tag cannot be created alone. It has to be already existing.    
-            t, created = Social_Tag.objects.get_or_create(name=tag_name) 
-            #TODO: if not created, whether add this tag to all three books?
-            if created:
-                #should push back to the user's space
-                user_tag, created = Tag.objects.using(username).get_or_create(name=tag_name)  
+    for tag_name in tag_names: 
+        #TODO: add try block to below to revert back if any error happen in the middle    
+        #In the social space, the tag cannot be created alone. It has to be already existing.    
+        t, created = Social_Tag.objects.get_or_create(name=tag_name) 
+        #TODO: if not created, whether add this tag to all three books?
+        if created:
+            #TODO:should do this for every user in this group
+            #should push back to the user's space
+            for group_member in group.members.all(): 
+                log.info('Push the tag back to the user:',group_member.username)
+                user_tag, created = Tag.objects.using(group_member.username).get_or_create(name=tag_name)  
                 #add this user_tag to users' three books
-                w = WorkingSet.objects.using(username).get(name='snippetbook')                
+                W = getW(group_member.username)
+                w = W.objects.get(name='snippetbook')                
                 try:             
-                    w.tags.add(t)
+                    w.tags.add(user_tag)
                 except Exception as inst:
-                    print type(inst)     
-                    print inst.args      
-                    print inst            
-                    x, y = inst          
-                    print 'x =', x
-                    print 'y =', y   
+                    log.error(type(inst))     
+                    log.error(inst.args)      
+                    log.error(inst)            
                     
-                w = WorkingSet.objects.using(username).get(name='bookmarkbook')                
+                w = W.objects.get(name='bookmarkbook')                
                 try:             
-                    w.tags.add(t)
+                    w.tags.add(user_tag)
                 except Exception as inst:
-                    print type(inst)     
-                    print inst.args      
-                    print inst            
-                    x, y = inst          
-                    print 'x =', x
-                    print 'y =', y    
+                    log.error(type(inst))     
+                    log.error(inst.args)      
+                    log.error(inst)              
+                       
                     
-                w = WorkingSet.objects.using(username).get(name='scrapbook')                
+                w = W.objects.get(name='scrapbook')                
                 try:             
-                    w.tags.add(t)
+                    w.tags.add(user_tag)
                 except Exception as inst:
-                    print type(inst)     
-                    print inst.args      
-                    print inst            
-                    x, y = inst          
-                    print 'x =', x
-                    print 'y =', y           
+                    log.error(type(inst))     
+                    log.error(inst.args)      
+                    log.error(inst)   
             
-            group.tags.add(t)            
+        group.tags.add(t)            
     group.save()   
     
     return HttpResponseRedirect('/groups/'+groupname+'/admin/')
@@ -496,7 +662,7 @@ def notes_tag(request, username, bookname, tag_name):
     #TODO: provide tags for social public notebook
     tags = []#Social_Tag.objects.filter(notes_set=note_list).order_by('name')
     
-    return render_to_response('social/social_notes.html', {'note_list':paged_notes,'sort':sort, 'current_tag':tag_name, 'bookname':bookname,\
+    return render_to_response('social/notes/notes.html', {'note_list':paged_notes,'sort':sort, 'current_tag':tag_name, 'bookname':bookname,\
                                'profile_username':username, 'tags':tags, 'appname':'social', 'cl':cl},\
                                                   context_instance=RequestContext(request)) 
 
@@ -509,7 +675,7 @@ def get_group_tags(request, groupname, bookname):
     SN = getSN(bookname)
     tags = []
     for tag in tags_qs:
-        count = SN.objects.filter(tags=tag).count()
+        count = SN.objects.filter(tags=tag, owner__in=group.members.all(), private=False).count()
         t = {'name':tag.name, 'private':tag.private, 'note_count':count}
         tags.append(t)
     return tags    
@@ -545,8 +711,7 @@ def vote_useful(request):
     snv, created = Social_Note_Vote.objects.get_or_create(note=note,voter=request.user.member)    
     snv.useful=True
     snv.save()  
-    result = str(note.get_useful_votes())+'/'+str(note.get_total_votes())
-    print result  
+    result = str(note.get_useful_votes())+'/'+str(note.get_total_votes())     
     return HttpResponse(result, mimetype="text/plain") 
 
 @login_required
@@ -556,8 +721,7 @@ def vote_unuseful(request):
     snv, created = Social_Note_Vote.objects.get_or_create(note=note,voter=request.user.member)    
     snv.useful=False
     snv.save()  
-    result = str(note.get_useful_votes())+'/'+str(note.get_total_votes())
-    print result  
+    result = str(note.get_useful_votes())+'/'+str(note.get_total_votes())    
     return HttpResponse(result, mimetype="text/plain")          
 
 

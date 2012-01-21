@@ -67,10 +67,13 @@ urlpatterns = patterns('',
     (r'^(?P<username>[^/]+)/groups/$', 'notebook.social.views.groups'),
     (r'^(?P<username>[^/]+)/groups/addGroup$', 'notebook.social.views.add_group'),
     (r'^(?P<username>[^/]+)/friends/$', 'notebook.social.views.friends'),
-     
-
+    (r'^(?P<username>[^/]+)/friends/(?P<bookname>[^/]+)/notes/$', 'notebook.social.views.friends_notes'), 
+    (r'^(?P<username>[^/]+)/groups/(?P<bookname>[^/]+)/notes/$', 'notebook.social.views.groups_notes'),
+    (r'^(?P<username>[^/]+)/groups/(?P<bookname>[^/]+)/$', 'notebook.social.views.groups_notes'),
 
     (r'^social/(?P<username>[^/]+)/(?P<bookname>[^/]+)/$', 'notebook.social.views.notes'),
+    (r'^social/(?P<username>[^/]+)/(?P<bookname>[^/]+)/notes/$', 'notebook.social.views.notes'),
+    (r'^social/(?P<username>[^/]+)/(?P<bookname>[^/]+)/notes/note/(?P<note_id>[^/]+)/$','notebook.social.views.note'),
     (r'^social/(?P<username>[^/]+)/(?P<bookname>[^/]+)/tags/(?P<tag_name>[^/]+)/$', 'notebook.social.views.notes_tag'),
     (r'^social/(?P<username>[^/]+)/(?P<bookname>[^/]+)/folders/(?P<foldername>[^/]+)/$', 'notebook.social.views.folders'),
 
