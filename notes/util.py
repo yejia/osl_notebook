@@ -23,8 +23,7 @@ def getCache(username, bookname):
     return create_model("Cache_"+str(bookname)+"_"+str(username), book_cache_dict.get(bookname), username)    
 
 
-def getW(username):
-    return create_model("W_"+str(username), WorkingSet, username)
+
 
 
 from notebook.bookmarks.models import Linkage_Of_Bookmark

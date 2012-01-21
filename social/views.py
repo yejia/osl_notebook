@@ -13,7 +13,7 @@ from django.core.paginator import Paginator, EmptyPage, InvalidPage
 
 import datetime
 
-from notebook.notes.models import Note, Tag, create_model, WorkingSet
+from notebook.notes.models import Note, Tag, create_model, WorkingSet, getW
 from notebook.bookmarks.models import Bookmark
 from notebook.scraps.models import Scrap
 from notebook.social.models import Member, Group, Social_Note, Social_Tag, Social_Note_Vote, Social_Note_Comment, \
@@ -22,6 +22,7 @@ from notebook.social.models import Member, Group, Social_Note, Social_Tag, Socia
 from notebook.notes.views import User, getT, getlogger, getFolder, get_public_notes, __get_folder_context
 from notebook.notes.views import getSearchResults,  __getQStr, __get_view_theme, Pl, ALL_VAR
 from notebook.notes.util import *
+from notebook.notes.constants import *
 
 
 log = getlogger('social.views')  

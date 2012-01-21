@@ -10,6 +10,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from notebook.social.models import Social_Note, Social_Tag, Social_Snippet, Social_Bookmark, Social_Scrap, Social_Frame
 from notebook.notes.constants import *
 
+
 standalone = False
 
 import logging
@@ -37,7 +38,8 @@ def getT(username):
 def getL(username):
     return create_model("L_"+str(username), LinkageNote, username)
 
-
+def getW(username):
+    return create_model("W_"+str(username), WorkingSet, username)
 
 
 def getNC(username):

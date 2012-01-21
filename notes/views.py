@@ -19,7 +19,7 @@ from django.template import RequestContext
 from django.core.exceptions import ObjectDoesNotExist, FieldError
 from django.core.mail import send_mass_mail
 
-from notebook.notes.models import Note, Tag, LinkageNote, Folder, WorkingSet, create_model, create_model_form, getNC, getT, getL
+from notebook.notes.models import *
 from notebook.snippets.models import Snippet
 from notebook.bookmarks.models import Bookmark
 from notebook.scraps.models import Scrap
