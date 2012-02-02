@@ -391,7 +391,7 @@ class Note(models.Model):
             sns_included = []   
             #TODO:test below 
             if hasattr(self, 'frame'):
-                for n_included in self.notes.all():
+                for n_included in self.frame.notes.all():
                     if not n_included.is_private():
                         sn_included = Social_Note.objects.get(owner=owner.member, owner_note_id=n_included.id)                        
                         sns_included.append(sn_included)

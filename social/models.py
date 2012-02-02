@@ -40,6 +40,9 @@ class Member(User):
     #TODO:
     #timezone = models.CharField(max_length=50, default='Europe/London')
     
+    #viewing mode. Later think of adding other viewing modes here so user can set these in their profile
+    viewing_private = models.CharField(max_length=20, blank=True)
+    
     
     
     def __unicode__(self): 

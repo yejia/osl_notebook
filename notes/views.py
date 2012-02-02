@@ -563,9 +563,13 @@ def __get_view_theme(request):
         
     private = request.GET.get('private')	
     if private:
-        request.session['private'] = private
+        #request.session['private'] = private
+        #TODO:check length of input to prevent injection (database model field already has maximum length)
+        request.user.member.viewing_private = private
+        request.user.member.save()
     else:
-        private = request.session.get('private', 'All')	   
+        #private = request.session.get('private', 'All')
+        private = request.user.member.viewing_private	   
 
     #TODO: make it possible to pick any date by giving something like /2010/8/8 in the url  
     #or pick any period of time 
@@ -675,7 +679,7 @@ def caches(request, cache_id, username, bookname):
 
 def __get_context(request, note_list,default_tag_id, username, bookname, aspect_name='notes'):  
     theme = __get_view_theme(request)
-    in_linkage = theme['in_linkage']
+    in_linkage = theme['in_linkage'] #TODO:get rid of
     if in_linkage in ['All', 'all']:
         pass
     elif in_linkage in true_words:
@@ -1609,12 +1613,18 @@ def share(request, username, bookname):
     for note_id in note_ids:         
         note = N.objects.get(id=note_id)
         content = ''
+        log.info('The current bookname is:'+bookname)
+        if bookname == 'notebook':
+            bookname = note.get_note_bookname()
+            log.info('This note of notebook is actually a note of '+bookname)
         if bookname == 'snippetbook':
             content = note.desc
         if bookname == 'bookmarkbook':
             content = note.url
         if bookname == 'scrapbook':
             content = note.url + '   ' + note.desc   
+        if bookname == 'framebook':
+            content = 'Sharing knowledge package:'+note.title + '   ' + note.desc     
 
 #        #send to weibo        
         if 'sina' in bound_sites:
