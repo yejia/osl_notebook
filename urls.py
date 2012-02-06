@@ -56,6 +56,8 @@ urlpatterns = patterns('',
     #TODO: better regex
     (r'^groups/[^/]+/[^/]+/addComment/$', 'notebook.social.views.add_comment'),
     (r'^social/.+/addComment/$', 'notebook.social.views.add_comment'),
+    (r'^social/(?P<username>[^/]+)/commentsfor/$', 'notebook.social.views.comments_4_user'),
+    (r'^social/(?P<username>[^/]+)/commentsby/$', 'notebook.social.views.comments_by_user'),
     #for now, no deleting of social comments TODO:
     #(r'^groups/[^/]+/[^/]+/deleteComment/$','notebook.social.views.group_delete_comment'),
 

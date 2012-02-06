@@ -739,6 +739,23 @@ def add_comment(request):
                                                                      "application/json")
 
 
+@login_required
+def comments_4_user(request, username):  
+    profile_member = Member.objects.get(username=username) 
+    comments = Social_Note_Comment.objects.filter(note__owner=profile_member)      
+    return render_to_response('social/commentsfor.html', {'comments':comments,'profile_username':username},\
+                                                  context_instance=RequestContext(request)) 
+
+
+
+@login_required
+def comments_by_user(request, username):  
+    profile_member = Member.objects.get(username=username) 
+    comments = Social_Note_Comment.objects.filter(commenter=profile_member)     
+    return render_to_response('social/commentsby.html', {'comments':comments, 'profile_username':username},\
+                                                  context_instance=RequestContext(request)) 
+
+
 @login_required   
 def group_delete_comment(request):
     #note_id = request.POST.get('id')
