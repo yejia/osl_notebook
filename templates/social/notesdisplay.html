@@ -78,7 +78,7 @@
                                     <td><img src="/site_media/img/{{note.get_note_type}}.png" title="{{note.get_note_type}}"/></td>
                                     <td class="note_table_td1">
                                        <div id="note_title" title="{% trans 'note title' %}">
-                                        <a href="/social/{{profile_username}}/{{note.get_note_bookname}}/notes/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a>
+                                        <a href="/social/{{note.owner.username}}/{{note.get_note_bookname}}/notes/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a>
                                        {% if note.get_note_type == 'Bookmark' %} 
                                             <a href="{{note.bookmark.url}}"><img src="/site_media/img/openurl.png" class=""/></a>
                                        {% endif %}
@@ -93,7 +93,7 @@
 		                              <td class="note_table_tags">
 		                                   <div id="note_tags" title="{% trans "note tags" %}">
                                               {% for tag in note.get_tags %}
-                                                     <span><a href="/social/{{profile_username}}/{{bookname}}/tags/{{tag}}/">{{tag}}</a>,</span>
+                                                     <span><a href="/social/{{note.owner.username}}/{{bookname}}/tags/{{tag}}/">{{tag}}</a>,</span>
                                               {% endfor %}
                                             </div>
 		                               </td>   
@@ -114,7 +114,7 @@
             <table class="note_table"><tr>
                 {% block full_display_td12 %}
                     <td class="note_table_td1">
-                        <div id="note_title" title="{% trans 'note title' %}"><a href="/social/{{profile_username}}/{{note.get_note_bookname}}/notes/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a></div> 		    
+                        <div id="note_title" title="{% trans 'note title' %}"><a href="/social/{{note.owner.username}}/{{note.get_note_bookname}}/notes/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a></div> 		    
                     </td>
                     <td class="note_table_td2">
                         <div  id="note_desc" title="{% trans "note desc" %}">{{note.desc}}</div>		   
@@ -128,13 +128,11 @@
             </table>
             
             <div>
-           <!--
-		    <div  id="note_event" title="event">e:{% if user.username == profile_username %}<span class="editableText">{% endif %}{ {{note.event}} }{% if user.username == profile_username %}</span>{% endif %}</div>
-		    -->
+
             
             {% block full_display_div_extra %}
             {% endblock %} 
-            <div  id="note_init_date" title="{% trans "initial creation time" %}" class="grey">{% if user.username == profile_username %}<span  class="editableText">{% endif %}{{note.init_date|date:"Y-m-d H:i"}}{% if user.username == profile_username %}<span>{% endif %}</div>
+            <div  id="note_init_date" title="{% trans "initial creation time" %}" class="grey">{{note.init_date|date:"Y-m-d H:i"}}</div>
 		    <div  id="note_last_modi_date" title="{% trans "last modified time" %}" class="grey structure">{{note.last_modi_date|date:"Y-m-d H:i"}} </div>
 		    
             {% if note.attachment %}
@@ -144,16 +142,7 @@
              <div  id="note_linkages" title="note linkages">Linkages: {{note.display_linkages|default:'Not in any linkages'}}</div>
              -->
              
-             <div id="comments">{% trans "Comment" %}:<br/> 
-                    {% for comment in note.get_comments %}
-                            <div>{{comment}}</div>                    
-                    {% endfor %}
-             </div>
-             <div class="add_comment_button"><img src="/site_media/img/add.gif" title="{% trans "Add Comment" %}" class="click_img"/></div>             
-             
-             <div id="add_comment_box" style="display:none;">{{user.username}}: <textarea id="add_comment" rows="3" cols="90" name="desc"></textarea>
-             <span class="comment_submit"  title="{% trans "Save Comment" %}"><img src="/site_media/img/save.png"/></span>&nbsp;<span class="cancel_comment_submit" title="{% trans "Cancel" %}"><img src="/site_media/img/cancel.png" /></span></div>
-             
+             {% include "social/notes/add_comments_inline.html" %}   
 	        </div>
         </div>
            

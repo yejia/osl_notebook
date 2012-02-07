@@ -8,7 +8,7 @@
     <div class="brief_display">
          <table class="note_table"><tr>
             <td class="note_table_td1">
-            <div id="note_title" title="{% trans 'note title' %}"><a href="/social/{{profile_username}}/{{note.get_note_bookname}}/notes/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a></div> 		    
+            <div id="note_title" title="{% trans 'note title' %}"><a href="/social/{{note.owner.username}}/{{note.get_note_bookname}}/notes/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a></div> 		    
 		    </td>
             <td class="note_table_td2">
 		    <div  id="note_url" title="note url"><a href="{{ note.url}}" target="_blank">{{note.url}}</a></div>	   
@@ -16,7 +16,7 @@
 		    <td class="note_table_tags">
 		    <div id="note_tags" title="{% trans "note tags" %}">
                 {% for tag in note.get_tags %}
-                    <span>{% if appname == 'groups' %}{{tag}}, {% else %}  <a href="/social/{{profile_username}}/{{bookname}}/tags/{{tag}}/">{{tag}}</a>, {% endif %}   </span>
+                    <span>{% if appname == 'groups' %}{% if tag in group.get_tag_names %}<a href="/groups/{{group.name}}/{{bookname}}/tags/{{tag}}/">{{tag}}</a>{% else %}{{tag}}{% endif %}, {% else %}  <a href="/social/{{note.owner.username}}/{{bookname}}/tags/{{tag}}/">{{tag}}</a>, {% endif %}   </span>
                 {% endfor %}
             </div>            
 		    </td>
@@ -33,7 +33,7 @@
 
 {% block full_display_td12 %}
            <td class="note_table_td1">
-            <div id="note_title" title="{% trans 'note title' %}"><a href="/social/{{profile_username}}/{{note.get_note_bookname}}/notes/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a></div> 		    
+            <div id="note_title" title="{% trans 'note title' %}"><a href="/social/{{note.owner.username}}/{{note.get_note_bookname}}/notes/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a></div> 		    
 		    </td>            
             <td class="note_table_td2">
 		    <div  id="note_url" title="note url"><a href="{{ note.url}}" target="_blank">{{note.url}}</a></div>	   

@@ -12,7 +12,7 @@
 		    <td class="note_table_tags">
 		    <div id="note_tags" title="{% trans "note tags" %}">
                 {% for tag in note.get_tags %}
-                    <span>{% if appname == 'groups' %}{{tag}}, {% else %}  <a href="/social/{{profile_username}}/{{bookname}}/tags/{{tag}}/">{{tag}}</a>, {% endif %}   </span>
+                    <span>{% if appname == 'groups' %}{{tag}}, {% else %}  <a href="/social/{{note.owner.username}}/{{bookname}}/tags/{{tag}}/">{{tag}}</a>, {% endif %}   </span>
                 {% endfor %}
             </div>            
 		    </td>
@@ -32,8 +32,8 @@
 
 {% block full_display_td12 %}
            <td class="note_table_td1">
-            <div id="note_title" title="{% trans 'note title' %}"><a href="/social/{{profile_username}}/{{note.get_note_bookname}}/notes/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a></div> 		    
+            <div id="note_title" title="{% trans 'note title' %}"><a href="/social/{{note.owner.username}}/{{note.get_note_bookname}}/notes/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a></div> 		    
 		    </td><td class="note_table_td2">
-		    <div  id="note_desc" title="{% trans "note desc" %}">{% if user.username == profile_username %}<span class="editableText">{% endif %}{{note.desc}}{% if user.username == profile_username %}</span>{% endif %}</div>		   
+		    <div  id="note_desc" title="{% trans "note desc" %}"></div>		   
 		    </td>
 {% endblock %} 

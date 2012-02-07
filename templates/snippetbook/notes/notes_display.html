@@ -46,7 +46,7 @@
 		    <div  id="note_attachment" title="{% trans "attachment" %}"><a href="/file/{{note.attachment.name}}" target="top">{{note.attachment.name}}</a> </div>
 		    {% endif %}
             
-             <div  class="structure advanced" id="note_linkages" title="{% trans "note linkages" %}">Linkages: {{note.display_linkages|default:'Not in any linkages'}}</div>
+             <div  class="structure advanced" id="note_frames" title="{% trans "note in frames" %}">Frames: {{note.display_frames|default:'Not in any frames'}}</div>
              
              
              <div id="comments">{% trans "Comment" %}:<br/> 

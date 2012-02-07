@@ -274,7 +274,9 @@ class Group(models.Model):
     def get_group_tag_name(self):
         return "sharinggroup:"+self.name        
         
-        
+     
+    def get_tag_names(self):
+        return [tag.name for tag in self.tags.all()]     
 
            
             

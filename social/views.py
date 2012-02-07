@@ -757,12 +757,16 @@ def comments_by_user(request, username):
 
 
 @login_required   
-def group_delete_comment(request):
+def delete_comment(request):
     #note_id = request.POST.get('id')
     comment_id = request.POST.get('comment_id')    
     
     nc = Social_Note_Comment.objects.get(id=comment_id)
-    nc.delete()
+    #check permission
+    if nc.commenter.username == request.user.username:
+        nc.delete()
+    else:
+        pass    
     return HttpResponse('successful', mimetype="text/plain")  
 
 

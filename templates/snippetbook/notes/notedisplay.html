@@ -45,7 +45,10 @@
 {% trans 'Not in any frame' %} .
 {% endfor %}
 </div>
-
+<br/><br/>
+<li note_id="{{note.id}}">
+{% include "include/add_comments_inline.html" %}              
+</li>
 <br/><br/>
 
  {% if user.username == profile_username %} 

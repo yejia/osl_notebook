@@ -3,9 +3,9 @@
 <script>
 	jQuery(function($){
 
-        $(updateNoteForm).hide();     		
+        $('#updateNoteForm').hide();     		
 		$('#edit_note'). click(function(){                       
-		        $(updateNoteForm).show();
+		        $('#updateNoteForm').show();
                 });		
 			
         });
@@ -46,6 +46,12 @@
 {% endfor %}
 </div>
 
+<br/><br/>
+<!--li tag is added solely to accomodate the code used in the notes display page where js need to find the parent li tag to locate with note to add comment-->
+<li note_id="{{note.id}}">
+{% include "include/add_comments_inline.html" %}            
+</li>
+<br/><br/>
 
 <br/><br/>
 

@@ -1,5 +1,6 @@
 ALL_VAR = 'all'
 true_words = [True, 'True', 'true', 'Yes', 'yes', 'Y', 'y']
+false_words = [False, 'False', 'false', 'No', 'no', 'N', 'n']
 #TODO: not used
 sort_dict = {'vote':'Vote', 'title':'Title', 'desc': 'Desc', 'init_date': 'Creation Date', 
              'last_modi_date':'Last Modification Date'}

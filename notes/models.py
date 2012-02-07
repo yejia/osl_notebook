@@ -233,7 +233,10 @@ class Note(models.Model):
         return [t.name for t in self.tags.all()]     
     
     def display_linkages(self):
-        return ','.join([str(l.id) for l in self.linkagenote_set.all()])       
+        return ','.join([str(l.id) for l in self.linkagenote_set.all()])     
+    
+    def display_frames(self):
+        return ','.join([str(l.id) for l in self.in_frames.all()])     
 
     def get_desc_short(self):
         if len(self.desc)>97:
@@ -368,7 +371,11 @@ class Note(models.Model):
             #if the note is already in social note, and the note in the original db is changed to priviate or delete
             #   then needs to delete it from the social note
             #TODO: still, deleting the child won't delete the parent. Will this be an issue? So at least disable mixed.
-            sn.delete()
+            try:
+                sn = Social_Note.objects.get(owner=owner.member, owner_note_id=self.id)
+                sn.delete()
+            except ObjectDoesNotExist:    
+                pass
            
         else:               
             #whether the note is first created or just an update, below applies to both situations

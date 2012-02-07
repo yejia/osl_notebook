@@ -1,0 +1,20 @@
+{% extends "include/base2.html" %}
+{% load i18n %}
+
+{% block tite %}
+<title>{% blocktrans %} Comments for {{profile_username}}{% endblocktrans %}</title> 
+{% endblock %}
+
+
+
+{% block content%}
+{% blocktrans %} Comments for {{profile_username}}{% endblocktrans %}
+<ul>
+{% for comment in comments %}	
+<li>
+<div><a href="/social/{{comment.commenter.username}}/">{{comment.commenter.username}}</a>: {{comment.desc}}  <span class="grey">({{comment.init_date}})</span></div>
+<div>{% trans "on my note" %}   <a href="/social/{{comment.note.owner.username}}/{{comment.note.get_note_bookname}}/notes/note/{{ note.id }}">{{comment.note.desc}}</a></div>
+</li>
+{% endfor %}
+</ul>
+{% endblock %}

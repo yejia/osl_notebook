@@ -8,7 +8,7 @@
     <div class="brief_display">
          <table class="note_table"><tr>
              <td class="note_table_td1 structure">
-            <div id="note_title" title="{% trans 'note title' %}"><a href="/{{profile_username}}/{{appname}}/notes/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a></div> 		    
+            <div id="note_title" title="{% trans 'note title' %}"><a href="/{{note.owner.username}}/{{appname}}/notes/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a></div> 		    
 		    </td><td class="note_table_td2">
 		    <div  id="note_desc" title="{% trans "note desc" %}">{{note.desc}}</div>		   
 		    </td>
@@ -17,12 +17,12 @@
             {% if appname == 'groups' %}
                 {% for tag in note.get_all_tags %}
                     {% if not tag.private or tag.name == group.get_group_tag_name %}
-                        <span>{% if appname == 'groups' %}{{tag}}, {% else %}  <a href="/social/{{profile_username}}/{{bookname}}/tags/{{tag}}/">{{tag}}</a>, {% endif %}   </span>
+                        <span>{% if appname == 'groups' %}{{tag}}, {% else %}  <a href="/social/{{note.owner.username}}/{{bookname}}/tags/{{tag}}/">{{tag}}</a>, {% endif %}   </span>
                     {% endif %}
                 {% endfor %}
             {% else %}
                 {% for tag in note.get_tags %}
-                    <span>{% if appname == 'groups' %}{{tag}}, {% else %}  <a href="/social/{{profile_username}}/{{bookname}}/tags/{{tag}}/">{{tag}}</a>, {% endif %}   </span>
+                    <span>{% if appname == 'groups' %}{{tag}}, {% else %}  <a href="/social/{{note.owner.username}}/{{bookname}}/tags/{{tag}}/">{{tag}}</a>, {% endif %}   </span>
                 {% endfor %}  
             {% endif %}
             </div>            
@@ -41,7 +41,7 @@
 
 {% block full_display_td12 %}          
             <td class="note_table_td1">
-                <div id="note_title" title="{% trans 'note title' %}"><a href="/social/{{profile_username}}/{{note.get_note_bookname}}/notes/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a></div> 		    
+                <div id="note_title" title="{% trans 'note title' %}"><a href="/social/{{note.owner.username}}/{{note.get_note_bookname}}/notes/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a></div> 		    
             </td>
             <td class="note_table_td2">
                 <div  id="note_desc" title="{% trans "note desc" %}">{{note.desc}}</div>		   

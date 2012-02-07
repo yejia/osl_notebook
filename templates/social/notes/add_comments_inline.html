@@ -1,0 +1,11 @@
+{% extends "include/add_comments_inline.html" %}
+{% load i18n %}
+
+
+{% block content%}
+      <div comment_id="{{comment.id}}">
+          <a href="/social/{{comment.commenter}}/">{{comment.commenter}}</a>:{{comment.desc}} 
+          {% if comment.commenter.username == user.username %}  <span title="{% trans "remove this comment" %}" class="inline_delete_comment" id="note_delete_comment">&nbsp;&nbsp;&nbsp;</span>
+          {% endif %} 
+      </div>   
+{% endblock %}   

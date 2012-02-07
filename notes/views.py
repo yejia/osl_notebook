@@ -758,15 +758,16 @@ def __get_notes_context(request, note_list):
         note_list = note_list.filter(deleted=True)
     else:
         note_list = note_list.filter(deleted=False)           
+        
     
-    
-    if private in ['All', 'all']:
+    if private in true_words:
+            note_list = note_list.filter(private=True)
+    elif private in false_words:          
+            note_list = note_list.filter(private=False) 
+    elif private in ['All', 'all']:
         pass
     else:
-        if private in true_words:
-            note_list = note_list.filter(private=True)
-        else:          
-            note_list = note_list.filter(private=False)    
+        pass           
         
     now = date.today()
 #    if month in ['All', 'all']:
