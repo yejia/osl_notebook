@@ -14,17 +14,7 @@
 		    </td>
 		    <td class="note_table_tags">
 		    <div id="note_tags" title="{% trans "note tags" %}">
-            {% if appname == 'groups' %}
-                {% for tag in note.get_all_tags %}
-                    {% if not tag.private or tag.name == group.get_group_tag_name %}
-                        <span>{% if appname == 'groups' %}{{tag}}, {% else %}  <a href="/social/{{note.owner.username}}/{{bookname}}/tags/{{tag}}/">{{tag}}</a>, {% endif %}   </span>
-                    {% endif %}
-                {% endfor %}
-            {% else %}
-                {% for tag in note.get_tags %}
-                    <span>{% if appname == 'groups' %}{{tag}}, {% else %}  <a href="/social/{{note.owner.username}}/{{bookname}}/tags/{{tag}}/">{{tag}}</a>, {% endif %}   </span>
-                {% endfor %}  
-            {% endif %}
+            {% include "social/include/note_tags_inline.html" %}     
             </div>            
 		    </td>
             <td><span id="note_owner" title="{% trans "snippet's owner"  %}"><a href="/social/{{note.owner.username}}/">{{note.owner.username}}</a></span>

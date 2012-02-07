@@ -10,11 +10,7 @@
             </td> 
             <td class="note_table_td2"><div  id="note_desc" title="{% trans "note desc" %}">{{note.desc|striptags}}</div>	
 		    <td class="note_table_tags">
-		    <div id="note_tags" title="{% trans "note tags" %}">
-                {% for tag in note.get_tags %}
-                    <span>{% if appname == 'groups' %}{{tag}}, {% else %}  <a href="/social/{{note.owner.username}}/{{bookname}}/tags/{{tag}}/">{{tag}}</a>, {% endif %}   </span>
-                {% endfor %}
-            </div>            
+		    {% include "social/include/note_tags_inline.html" %}     
 		    </td>
             <td><span id="note_owner" title="{% trans "snippet's owner"  %}"><a href="">{{note.owner.username}}</a></span>
             </td>
