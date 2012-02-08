@@ -13,7 +13,7 @@
 <li>
  <div>{{comment.desc}}  <span class="grey">({{comment.init_date}})</span></div>
  <div>Comments on <a href="/social/{{comment.note.owner.username}}/">{{comment.note.owner.username}}</a>'s note :
- <a href="/social/{{comment.note.owner.username}}/{{comment.note.get_note_bookname}}/notes/note/{{ note.id }}">{{comment.note.desc}}</a>
+ <a href="/social/{{comment.note.owner.username}}/{{comment.note.get_note_bookname}}/notes/note/{{ comment.note.id }}">{{comment.note.desc}}</a>
  </div>
 </li>
 {% endfor %}

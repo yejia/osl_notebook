@@ -68,8 +68,7 @@
 </div>
 
 
-<br/><br/><br/>
-{% if user.username == profile_username %}<a href="/{{profile_username}}/groups/snippetbook/notes/">{% trans "view all group notes" %}</a>{% endif %}
+<br/>
 <div>
 {% blocktrans %} Groups followed by {{user}} {% endblocktrans %}:
 {% for g in gs_following %}		
@@ -79,6 +78,8 @@
 {% endfor %}
 </div>
 
+<br/><br/>
+{% if user.username == profile_username %}<a href="/{{profile_username}}/groups/snippetbook/notes/">{% trans "view all group notes" %}</a>{% endif %}
 
 </div>
 
