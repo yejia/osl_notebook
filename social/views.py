@@ -742,7 +742,7 @@ def add_comment(request):
 @login_required
 def comments_4_user(request, username):  
     profile_member = Member.objects.get(username=username) 
-    comments = Social_Note_Comment.objects.filter(note__owner=profile_member)      
+    comments = Social_Note_Comment.objects.filter(note__owner=profile_member).order_by('-init_date')        
     return render_to_response('social/commentsfor.html', {'comments':comments,'profile_username':username},\
                                                   context_instance=RequestContext(request)) 
 
@@ -751,7 +751,7 @@ def comments_4_user(request, username):
 @login_required
 def comments_by_user(request, username):  
     profile_member = Member.objects.get(username=username) 
-    comments = Social_Note_Comment.objects.filter(commenter=profile_member)     
+    comments = Social_Note_Comment.objects.filter(commenter=profile_member).order_by('-init_date')     
     return render_to_response('social/commentsby.html', {'comments':comments, 'profile_username':username},\
                                                   context_instance=RequestContext(request)) 
 
