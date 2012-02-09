@@ -14,7 +14,7 @@ admin.autodiscover()
 import settings
 import os
 import imp
-import postman
+#import postman
 
 #databrowse.site.register(Note)
 #databrowse.site.register(Tag)
@@ -25,7 +25,7 @@ urlpatterns = patterns('',
     # Example:
     #(r'^notebook/', include('notebook.foo.urls')),
      
-    (r'^messages/', include('postman.urls')),
+    #(r'^messages/', include('postman.urls')),
 
 
     (r'^$','notebook.notes.views.root'),
