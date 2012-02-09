@@ -11,14 +11,22 @@ from env_setting import MEDIA_ROOT, DB_ROOT
 from django.contrib import admin
 admin.autodiscover()
 
+import settings
+import os
+import imp
+import postman
 
 #databrowse.site.register(Note)
 #databrowse.site.register(Tag)
 
+
+
 urlpatterns = patterns('',
     # Example:
     #(r'^notebook/', include('notebook.foo.urls')),
-        
+     
+    (r'^messages/', include('postman.urls')),
+
 
     (r'^$','notebook.notes.views.root'),
     (r'^myadmin/doc/', include('django.contrib.admindocs.urls')),

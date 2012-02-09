@@ -7,6 +7,8 @@ from django.db.models.query import QuerySet
 from django.db.models import Q
 from django.core.exceptions import ObjectDoesNotExist
 
+from django.utils.translation import ugettext as _
+
 from notebook.social.models import Social_Note, Social_Tag, Social_Snippet, Social_Bookmark, Social_Scrap, Social_Frame
 from notebook.notes.constants import *
 
@@ -155,11 +157,11 @@ from django.utils.translation import ugettext_lazy
 # list of events with the experience. From the number of events, you can tell the importance.
 class Note(models.Model):
     #For bookmarks or scraps from some sites, the title can be quite long. Force users to truncate it?
-    title = models.CharField(blank=True,max_length=2000, help_text="The size of the title is limited to 2000 characaters.") #maybe 20 is enough
+    title = models.CharField(blank=True,max_length=2000, help_text=_("The size of the title is limited to 2000 characaters.")) #maybe 20 is enough
     #event = models.CharField(blank=True,max_length=300)
     #enforce in views to limit the length for snippet or enforce in save(), or move this field down to snippet
-    desc =  models.TextField(max_length=2000, blank=True,  help_text="The size of the desc is limited to 200 characaters.")
-    tags = models.ManyToManyField(Tag, blank=True,  help_text="Default tag is 'random thought'.")	#TODO: NOT NULL?? #TODO: set default as random thoughts?
+    desc =  models.TextField(max_length=2000, blank=True,  help_text=_("The size of the desc is limited to 200 characaters."))
+    tags = models.ManyToManyField(Tag, blank=True,  help_text=_("Default tag is 'random thought'."))	#TODO: NOT NULL?? #TODO: set default as random thoughts?
     private = models.BooleanField(default=False)
     init_date = models.DateTimeField('date created', auto_now_add=True)
     last_modi_date = models.DateTimeField('date last modified', auto_now=True)

@@ -224,6 +224,7 @@ class Social_Note_Comment(models.Model):
     init_date = models.DateTimeField('date created', auto_now_add=True)
     
     def __unicode__(self):
+        #TODO:use ugettext for translation
         return self.commenter.username+" on "+self.note.owner.username+"'s note: "+self.desc 
 
 

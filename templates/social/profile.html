@@ -35,6 +35,10 @@
 <div>{{profile_member.last_login}}
 </div>
 {% endif %}
+<br/>
+<div>
+<span class="clickable" onclick="window.location.replace('/messages/write/?recipients={{profile_member.username}}')"><img src="/site_media/img/email.png"/> {% trans "Private Message" %}</span>
+</div>
 </div>
 </td>
 <td>

@@ -1,8 +1,8 @@
 {% extends "include/base2.html" %}
 {% load i18n %}
 
-{% block tite %}
-<title>{% blocktrans %} Comments by {{profile_username}}{% endblocktrans %}</title> 
+{% block title %}
+{% blocktrans %} Comments by {{profile_username}}{% endblocktrans %}
 {% endblock %}
 
 
@@ -12,7 +12,7 @@
 {% for comment in comments %}	
 <li>
  <div>{{comment.desc}}  <span class="grey">({{comment.init_date}})</span></div>
- <div>Comments on <a href="/social/{{comment.note.owner.username}}/">{{comment.note.owner.username}}</a>'s note :
+ <div>{% trans "Comments on" %} <a href="/social/{{comment.note.owner.username}}/">{{comment.note.owner.username}}</a>{% trans "'s note" %} :
  <a href="/social/{{comment.note.owner.username}}/{{comment.note.get_note_bookname}}/notes/note/{{ comment.note.id }}">{{comment.note.desc}}</a>
  </div>
 </li>
