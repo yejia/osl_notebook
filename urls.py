@@ -25,7 +25,7 @@ urlpatterns = patterns('',
     # Example:
     #(r'^notebook/', include('notebook.foo.urls')),
      
-    #(r'^messages/', include('postman.urls')),
+    (r'^messages/', include('postman.urls')),
 
 
     (r'^$','notebook.notes.views.root'),
