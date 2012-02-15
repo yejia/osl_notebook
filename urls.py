@@ -19,7 +19,8 @@ import imp
 #databrowse.site.register(Note)
 #databrowse.site.register(Tag)
 
-
+#import django_cron
+#django_cron.autodiscover()
 
 urlpatterns = patterns('',
     # Example:
@@ -27,6 +28,10 @@ urlpatterns = patterns('',
      
     (r'^messages/', include('postman.urls')),
 
+    (r'^notification/', include('notification.urls')),
+
+    (r'^getNotices/', 'notebook.notes.views.get_notices'),
+   
 
     (r'^$','notebook.notes.views.root'),
     (r'^myadmin/doc/', include('django.contrib.admindocs.urls')),

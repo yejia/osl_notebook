@@ -725,6 +725,11 @@ def vote_unuseful(request):
     result = str(note.get_useful_votes())+'/'+str(note.get_total_votes())    
     return HttpResponse(result, mimetype="text/plain")          
 
+import settings
+if "notification" in settings.INSTALLED_APPS:
+    from notification import models as notification
+else:
+    notification = None
 
 @login_required
 def add_comment(request):  
@@ -735,14 +740,23 @@ def add_comment(request):
     #NC = getNC(username)
     nc = Social_Note_Comment(note=note, commenter=request.user.member, desc=content)
     nc.save()
+    #send notice to the user
+    print 'sending notice'
+    if notification:
+      notification.send([note.owner], "comment_receive", {"from_user": request.user})
+      print 'notices sent'
     return  HttpResponse(simplejson.dumps({'note_id':note_id, 'content':content}),
                                                                      "application/json")
 
+
+from notification.models import Notice
 
 @login_required
 def comments_4_user(request, username):  
     profile_member = Member.objects.get(username=username) 
     comments = Social_Note_Comment.objects.filter(note__owner=profile_member).order_by('-init_date')        
+    #clear notifications related to comment receive
+    Notice.objects.filter(notice_type__label='comment_receive').update(unseen=False)    
     return render_to_response('social/commentsfor.html', {'comments':comments,'profile_username':username},\
                                                   context_instance=RequestContext(request)) 
 

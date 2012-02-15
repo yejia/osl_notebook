@@ -222,9 +222,17 @@ def root(request):
     return HttpResponseRedirect('/'+username+'/snippetbook/notes/') 
 
 
+from notification.models import Notice
+
+def get_notices(request):
+    notice_url_dict={'postman_message':'/messages/','comment_receive':'/social/'+request.user.username+'/commentsfor/'}
+    notices = Notice.objects.filter(recipient=request.user, unseen=True)    
+    #TODO:get count of each type of notice
+    ns = [(n.notice_type.label, n.notice_type.display,notice_url_dict.get(n.notice_type.label)) for n in notices]    
+    return HttpResponse(simplejson.dumps(list(set(ns))), "application/json")
+
 
 from notebook.notes.models import getAccessKey, UserAuth, getBoundSites
-
 
 import weibopy
 from weibopy import OAuthHandler, WeibopError

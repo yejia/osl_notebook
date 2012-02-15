@@ -244,6 +244,27 @@ span.tag_section .module h2{
 float:right;/*TODO:change to not floating*/
 }
 
+.notices{
+float:right;
+width: 100px;
+padding:5px;
+margin-right: 10px;  
+margin-top: -20px; 
+border:1px solid #bbb;
+z-index:50000;
+position:relative;
+background-color:#E0FF85;
+}
+
+.hide_notice 
+{
+position:absolute;
+right:0px;
+top:-5px;
+cursor:pointer;
+}
+
+
 div.notesbar{
 margin-bottom:12px;
 width: 100%;
@@ -598,7 +619,7 @@ bottom:0px;
 	
 
 
-/*inline_delete is for deleteing notes in linkage, change naming TODO:*/
+/*inline_delete is for deleteing notes in frame, change naming TODO:*/
 .inline_delete, .inline_delete_comment, .inline_delete_member{
    background-image:url("../img/inline-delete-middle.png");
    background-repeat:no-repeat;
@@ -725,7 +746,7 @@ margin-bottom:20px;
    cursor:pointer;
    left:4px;
    
-   z-index:10;
+   z-index:3;
    outline:0;
    top:6px
 
