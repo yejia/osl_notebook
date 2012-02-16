@@ -4,7 +4,8 @@
 
 <span class="notices">
 <span class="hide_notice" title="{% trans "hide notices" %}"><img src="/site_media/img/delete-cross-small.gif"/></span>
-
+<ul>
+</ul>
 </span>
 
 <script type="text/javascript">    
@@ -17,13 +18,13 @@ $(document).ready(function(){
                       
         function gotNotices(notices){    
                  if  (notices.length == 0){
-                         $('.notices').hide(0);
+                         //$('.notices').hide(0);
                  }else{                 
                       for(var i = 0; i < notices.length; i++){
                            //TODO:not able to translate inside js?
-                             $('.notices').append(' <li notice_id="'+notices[i][0]+'"><span class="notice"><a  href="'+notices[i][2]+'">'+{% trans "notices[i][1]" %}+'</a></span></li>');                 
+                             $('.notices').find('ul').append(' <li notice_id="'+notices[i][0]+'"><a  href="'+notices[i][2]+'">'+notices[i][1]+'</a></li>');                 
                       }
-                            $('.notices').show(0);
+                    $('.notices').show(0);
                   }                   
         }
         

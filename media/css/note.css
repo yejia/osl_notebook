@@ -246,15 +246,21 @@ float:right;/*TODO:change to not floating*/
 
 .notices{
 float:right;
-width: 100px;
-padding:5px;
-margin-right: 10px;  
+width: 120px; 
 margin-top: -20px; 
 border:1px solid #bbb;
 z-index:50000;
 position:relative;
 background-color:#E0FF85;
 }
+
+.notices ul{
+padding:0; 
+margin-left: 2px; 
+margin-bottom: 2px;
+ 
+}
+
 
 .hide_notice 
 {
