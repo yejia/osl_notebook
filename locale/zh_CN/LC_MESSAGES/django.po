@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-09 11:33+0800\n"
+"POT-Creation-Date: 2012-02-16 08:30+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,13 +18,37 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
+#: manage.py:22
+msgid "Invitation Received"
+msgstr "收到新的邀请"
+
+#: manage.py:22
+msgid "you have received an invitation"
+msgstr "你收到了一份邀请"
+
+#: manage.py:23
+msgid "Acceptance Received"
+msgstr "邀请被接受了"
+
+#: manage.py:23
+msgid "an invitation you sent has been accepted"
+msgstr "你发出的邀请被接受了"
+
+#: manage.py:24
+msgid "Comment Received"
+msgstr "收到新的评论"
+
+#: manage.py:24
+msgid "you have received a comment"
+msgstr "你收到了新的评论"
+
 #: notes/models.py:160
 msgid "The size of the title is limited to 2000 characaters."
-msgstr ""
+msgstr "标题的长度应小于2000字。"
 
 #: notes/models.py:163
 msgid "The size of the desc is limited to 200 characaters."
-msgstr ""
+msgstr "正文的长度应小于200字。"
 
 #: notes/models.py:164
 msgid "Default tag is 'random thought'."
@@ -34,11 +58,11 @@ msgstr "缺省的标签是'random thought'。"
 msgid "self ranking"
 msgstr "原作者的评级"
 
-#: notes/views.py:871
+#: notes/views.py:879
 msgid "note"
 msgstr "条笔记"
 
-#: notes/views.py:872
+#: notes/views.py:880
 msgid "notes"
 msgstr "条笔记"
 
@@ -56,15 +80,15 @@ msgstr "你要访问的网页不存在。请检查url拼写是否正确。"
 msgid ""
 "An internal server error happened. An error report is sent to the admin, and "
 "it will be fixed shortly. Please come back later."
-msgstr ""
+msgstr "出现错误。已经将错误报告给了管理员并会被立即修复。请你过一会再回来。谢谢你的耐心和支持！"
 
 #: templates/admin/404.html:4 templates/admin/404.html.py:8
 msgid "Page not found"
-msgstr ""
+msgstr "没找到页面"
 
 #: templates/admin/404.html:10
 msgid "We're sorry, but the requested page could not be found."
-msgstr ""
+msgstr "抱歉，你要访问的页面不存在"
 
 #: templates/admin/500.html:4 templates/admin/app_index.html:8
 #: templates/admin/base.html:55 templates/admin/change_form.html:18
@@ -74,25 +98,25 @@ msgstr ""
 #: templates/admin/auth/user/change_password.html:11
 #: templates/registration/base.html:55
 msgid "Home"
-msgstr ""
+msgstr "主页"
 
 #: templates/admin/500.html:4
 msgid "Server error"
-msgstr ""
+msgstr "服务器出错"
 
 #: templates/admin/500.html:6
 msgid "Server error (500)"
-msgstr ""
+msgstr "服务器出错 (500)"
 
 #: templates/admin/500.html:9
 msgid "Server Error <em>(500)</em>"
-msgstr ""
+msgstr "服务器出错 <em>(500)</em>"
 
 #: templates/admin/500.html:10
 msgid ""
 "There's been an error. It's been reported to the site administrators via e-"
 "mail and should be fixed shortly. Thanks for your patience."
-msgstr ""
+msgstr "出现错误。已经将错误报告给了管理员并会被立即修复。谢谢你的耐心和支持！"
 
 #: templates/admin/actions.html:4
 msgid "Run the selected action"
@@ -133,7 +157,7 @@ msgstr ""
 #: templates/admin/auth/user/change_password.html:48
 #: templates/include/sites_header.html:55 templates/registration/base.html:41
 msgid "Change password"
-msgstr ""
+msgstr "修改密码"
 
 #: templates/admin/base.html:48 templates/include/sites_header.html:56
 #: templates/registration/base.html:48
@@ -173,7 +197,7 @@ msgstr[1] ""
 
 #: templates/admin/delete_confirmation.html:10
 #: templates/admin/submit_line.html:4
-#: templates/include/note_list_base.html:890
+#: templates/include/note_list_base.html:901
 msgid "Delete"
 msgstr "删除"
 
@@ -647,10 +671,10 @@ msgstr "网摘"
 #: templates/framebook/notes/folders.html:25
 #: templates/framebook/notes/note_list_base.html:26
 #: templates/framebook/notes/notesdisplay.html:61
-#: templates/include/note_list_base.html:907
-#: templates/include/note_list_base.html:909
-#: templates/include/note_list_base.html:973
-#: templates/include/note_list_base.html:975
+#: templates/include/note_list_base.html:918
+#: templates/include/note_list_base.html:920
+#: templates/include/note_list_base.html:984
+#: templates/include/note_list_base.html:986
 #: templates/include/notesdisplay.html:96 templates/notes/folders.html:25
 #: templates/notes/linkagenotesdisplay.html:61
 #: templates/notes/note_list_base.html:18
@@ -768,12 +792,12 @@ msgstr "在链条里的"
 
 #: templates/bookmarkbook/notes/notes.html:16
 #: templates/bookmarkbook/notes/notes.html:18
-#: templates/include/note_list_base.html:892
-#: templates/include/note_list_base.html:894
-#: templates/include/note_list_base.html:913
-#: templates/include/note_list_base.html:915
-#: templates/include/note_list_base.html:979
-#: templates/include/note_list_base.html:981 templates/notes/notes.html:16
+#: templates/include/note_list_base.html:903
+#: templates/include/note_list_base.html:905
+#: templates/include/note_list_base.html:924
+#: templates/include/note_list_base.html:926
+#: templates/include/note_list_base.html:990
+#: templates/include/note_list_base.html:992 templates/notes/notes.html:16
 #: templates/notes/notes.html.py:18 templates/scrapbook/notes/notes.html:16
 #: templates/scrapbook/notes/notes.html:18
 #: templates/snippetbook/notes/notes.html:16
@@ -912,7 +936,7 @@ msgid "Title"
 msgstr "标题"
 
 #: templates/bookmarkbook/notes/notesdisplay.html:24
-#: templates/include/note_list_base.html:905
+#: templates/include/note_list_base.html:916
 #: templates/include/notesdisplay.html:42 templates/notes/notesdisplay.html:25
 #: templates/scrapbook/notes/notesdisplay.html:29
 #: templates/snippetbook/notes/notesdisplay.html:21
@@ -1308,137 +1332,137 @@ msgstr ""
 "被添加到这个小组里。但是隐私的笔记不会。隐私的笔记永远在你的私人笔记本里，除"
 "非你有意的要分享给某个小组。"
 
-#: templates/include/note_list_base.html:876
+#: templates/include/note_list_base.html:887
 msgid "show side menu"
 msgstr "显示侧边菜单"
 
-#: templates/include/note_list_base.html:877
+#: templates/include/note_list_base.html:888
 msgid "hide side menu"
 msgstr "隐藏侧边菜单"
 
-#: templates/include/note_list_base.html:898
-#: templates/include/note_list_base.html:900
-#: templates/include/note_list_base.html:919
-#: templates/include/note_list_base.html:921
+#: templates/include/note_list_base.html:909
+#: templates/include/note_list_base.html:911
+#: templates/include/note_list_base.html:930
+#: templates/include/note_list_base.html:932
 msgid "No"
 msgstr "否"
 
-#: templates/include/note_list_base.html:928
+#: templates/include/note_list_base.html:939
 msgid "Date Range"
 msgstr "时间范围"
 
-#: templates/include/note_list_base.html:933
-#: templates/include/note_list_base.html:935
+#: templates/include/note_list_base.html:944
+#: templates/include/note_list_base.html:946
 msgid "Any day"
 msgstr "任何天"
 
-#: templates/include/note_list_base.html:939
-#: templates/include/note_list_base.html:941
+#: templates/include/note_list_base.html:950
+#: templates/include/note_list_base.html:952
 msgid "Today"
 msgstr "今天"
 
-#: templates/include/note_list_base.html:945
-#: templates/include/note_list_base.html:947
+#: templates/include/note_list_base.html:956
+#: templates/include/note_list_base.html:958
 msgid "Past 7 Days"
 msgstr "过去7天"
 
-#: templates/include/note_list_base.html:951
-#: templates/include/note_list_base.html:953
+#: templates/include/note_list_base.html:962
+#: templates/include/note_list_base.html:964
 msgid "This Month"
 msgstr "本月"
 
-#: templates/include/note_list_base.html:956
+#: templates/include/note_list_base.html:967
 msgid "This Season"
 msgstr "本季度"
 
-#: templates/include/note_list_base.html:959
-#: templates/include/note_list_base.html:961
+#: templates/include/note_list_base.html:970
+#: templates/include/note_list_base.html:972
 msgid "This Year"
 msgstr "今年"
 
-#: templates/include/note_list_base.html:966
+#: templates/include/note_list_base.html:977
 msgid "Pick a Range"
 msgstr "选择一个范围"
 
-#: templates/include/note_list_base.html:971
+#: templates/include/note_list_base.html:982
 msgid "With attachment"
 msgstr "有附件的"
 
-#: templates/include/note_list_base.html:1008
+#: templates/include/note_list_base.html:1019
 #: templates/include/sort_menu.html:5 templates/social/sort_menu.html:5
 msgid "Sorting"
 msgstr "排序"
 
-#: templates/include/note_list_base.html:1011
-#: templates/include/note_list_base.html:1013
+#: templates/include/note_list_base.html:1022
+#: templates/include/note_list_base.html:1024
 #: templates/include/sort_menu.html:14 templates/include/sort_menu.html:16
 #: templates/social/sort_menu.html:20 templates/social/sort_menu.html.py:22
 msgid "By Importance"
 msgstr "根据重要性"
 
-#: templates/include/note_list_base.html:1017
-#: templates/include/note_list_base.html:1019
+#: templates/include/note_list_base.html:1028
+#: templates/include/note_list_base.html:1030
 #: templates/include/sort_menu.html:8 templates/include/sort_menu.html:10
 #: templates/social/sort_menu.html:8 templates/social/sort_menu.html.py:10
 msgid "By Creation Date"
 msgstr "根据生成时间"
 
-#: templates/include/note_list_base.html:1023
-#: templates/include/note_list_base.html:1025
+#: templates/include/note_list_base.html:1034
+#: templates/include/note_list_base.html:1036
 #: templates/include/sort_menu.html:20 templates/include/sort_menu.html:22
 #: templates/social/sort_menu.html:26 templates/social/sort_menu.html.py:28
 msgid "By Last Modification Date"
 msgstr "根据最后一次修改时间"
 
-#: templates/include/note_list_base.html:1029
-#: templates/include/note_list_base.html:1031
+#: templates/include/note_list_base.html:1040
+#: templates/include/note_list_base.html:1042
 #: templates/include/sort_menu.html:26 templates/include/sort_menu.html:28
 #: templates/social/sort_menu.html:32 templates/social/sort_menu.html.py:34
 msgid "By Title"
 msgstr "根据标题"
 
-#: templates/include/note_list_base.html:1035
-#: templates/include/note_list_base.html:1037
+#: templates/include/note_list_base.html:1046
+#: templates/include/note_list_base.html:1048
 #: templates/include/sort_menu.html:32 templates/include/sort_menu.html:34
 #: templates/social/sort_menu.html:38 templates/social/sort_menu.html.py:40
 msgid "By Desc"
 msgstr "根据正文"
 
-#: templates/include/note_list_base.html:1040
+#: templates/include/note_list_base.html:1051
 msgid "Order Type"
 msgstr "升降种类"
 
-#: templates/include/note_list_base.html:1042
-#: templates/include/note_list_base.html:1044
+#: templates/include/note_list_base.html:1053
+#: templates/include/note_list_base.html:1055
 msgid "Descend"
 msgstr "降序"
 
-#: templates/include/note_list_base.html:1047
-#: templates/include/note_list_base.html:1049
+#: templates/include/note_list_base.html:1058
+#: templates/include/note_list_base.html:1060
 msgid "Ascend"
 msgstr "升序"
 
-#: templates/include/note_list_base.html:1058
+#: templates/include/note_list_base.html:1069
 msgid "Archive"
 msgstr "存档"
 
-#: templates/include/note_list_base.html:1064
+#: templates/include/note_list_base.html:1075
 msgid "Managing"
 msgstr "管理"
 
-#: templates/include/note_list_base.html:1065 templates/tags/index.html:104
+#: templates/include/note_list_base.html:1076 templates/tags/index.html:104
 msgid "Manage Tags"
 msgstr "管理标签"
 
-#: templates/include/note_list_base.html:1066
+#: templates/include/note_list_base.html:1077
 msgid "Manage Folders"
 msgstr "管理文件夹"
 
-#: templates/include/note_list_base.html:1079
+#: templates/include/note_list_base.html:1090
 msgid "My Learning Groups"
 msgstr "我的学习小组"
 
-#: templates/include/note_list_base.html:1080
+#: templates/include/note_list_base.html:1091
 msgid "Create a Learning Group"
 msgstr "创建一个学习小组"
 
@@ -1618,6 +1642,14 @@ msgstr ""
 msgid "Add comment"
 msgstr "增加评论"
 
+#: templates/include/notice_alert.html:12
+msgid "notices[i][1]"
+msgstr ""
+
+#: templates/include/notice_alert.html:32
+msgid "hide notices"
+msgstr ""
+
 #: templates/include/profile_header.html:10
 #: templates/include/profile_header.html:12
 #: templates/include/sites_header.html:19
@@ -1759,7 +1791,7 @@ msgstr "最后修改时间"
 
 #: templates/notes/notes_display.html:91
 msgid "note linkages"
-msgstr "在链条里的"
+msgstr "在包里的"
 
 #: templates/notes/notesdisplay.html:10
 #: templates/snippetbook/notes/notesdisplay.html:10
@@ -1785,6 +1817,50 @@ msgstr "事件"
 #: templates/notes/search.html:5
 msgid "search all notes"
 msgstr "搜索所有便条"
+
+#: templates/notification/notices.html:5
+msgid "Notices"
+msgstr "通知"
+
+#: templates/notification/notices.html:8
+msgid "Type"
+msgstr "类型"
+
+#: templates/notification/notices.html:9
+msgid "Message"
+msgstr "私信"
+
+#: templates/notification/notices.html:10
+msgid "Date of the Notice"
+msgstr "通知日期"
+
+#: templates/notification/notices.html:22
+msgid "ago"
+msgstr "以前"
+
+#: templates/postman/base.html:3
+msgid "Messaging"
+msgstr "私信"
+
+#: templates/postman/base.html:6
+msgid "Inbox"
+msgstr "收件箱"
+
+#: templates/postman/base.html:7
+msgid "Sent Messages"
+msgstr "私信"
+
+#: templates/postman/base.html:8
+msgid "Write"
+msgstr "写信"
+
+#: templates/postman/base.html:9
+msgid "Archives"
+msgstr "存档"
+
+#: templates/postman/base.html:10
+msgid "Trash"
+msgstr "垃圾"
 
 #: templates/registration/login.html:7
 msgid "A simple notebook that helps you learn"
@@ -1918,6 +1994,7 @@ msgstr "便条的原作者"
 
 #: templates/social/commentsby.html:5 templates/social/commentsby.html:10
 #: templates/social/profile.html:57
+#, python-format
 msgid " Comments by %(profile_username)s"
 msgstr "%(profile_username)s发布的评论"
 
@@ -1931,6 +2008,7 @@ msgstr "的笔记"
 
 #: templates/social/commentsfor.html:5 templates/social/commentsfor.html:11
 #: templates/social/profile.html:56
+#, python-format
 msgid " Comments for %(profile_username)s"
 msgstr "%(profile_username)s收到的评论"
 
@@ -1954,6 +2032,7 @@ msgstr "浏览所有的"
 
 #: templates/social/friends_notes.html:7
 #: templates/social/friends_notes.html:15
+#, python-format
 msgid " %(user)s's Friends  Notes"
 msgstr "%(user)s的朋友的笔记"
 
@@ -2021,6 +2100,7 @@ msgid "view all group notes"
 msgstr "浏览所有小组的笔记"
 
 #: templates/social/groups_notes.html:7 templates/social/groups_notes.html:15
+#, python-format
 msgid " %(user)s's Groups Notes"
 msgstr "%(user)s的小组"
 

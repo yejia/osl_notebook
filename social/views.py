@@ -756,7 +756,7 @@ def comments_4_user(request, username):
     profile_member = Member.objects.get(username=username) 
     comments = Social_Note_Comment.objects.filter(note__owner=profile_member).order_by('-init_date')        
     #clear notifications related to comment receive
-    Notice.objects.filter(notice_type__label='comment_receive').update(unseen=False)    
+    Notice.objects.filter(notice_type__label='comment_receive', recipient=request.user).update(unseen=False)    
     return render_to_response('social/commentsfor.html', {'comments':comments,'profile_username':username},\
                                                   context_instance=RequestContext(request)) 
 

@@ -39,6 +39,11 @@
 <div>
 <span class="clickable" onclick="window.location.replace('/messages/write/?recipients={{profile_member.username}}')"><img src="/site_media/img/email.png"/> {% trans "Private Message" %}</span>
 </div>
+<br/>
+{% if  user.username == profile_member.username%}
+<p><a href="/social/{{profile_username}}/commentsfor/">{% blocktrans %} Comments for {{profile_username}}{% endblocktrans %}</a></p>
+<p><a href="/social/{{profile_username}}/commentsby/">{% blocktrans %} Comments by {{profile_username}}{% endblocktrans %}</a></p>
+{% endif %}
 </div>
 </td>
 <td>
@@ -53,8 +58,7 @@
 <br/><br/>
 <p>{% blocktrans %} view {{profile_username}}'s notebook {% endblocktrans %}: <a href="/social/{{profile_username}}/snippetbook/"><img src="/site_media/img/notebook-small.png"/></a></p>
 
-<p><a href="/social/{{profile_username}}/commentsfor/">{% blocktrans %} Comments for {{profile_username}}{% endblocktrans %}</a></p>
-<p><a href="/social/{{profile_username}}/commentsby/">{% blocktrans %} Comments by {{profile_username}}{% endblocktrans %}</a></p>
+
 <br/><br/>
 <div>
 {% blocktrans %}Friends of {{profile_username}} {% endblocktrans %}:
