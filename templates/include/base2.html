@@ -57,34 +57,12 @@
 
 	
  
-<script>          
-        //displaying notifications
-        $.get('/getNotices/',{}, gotNotices, 'json');            
-                      
-        function gotNotices(notices){    
-                 if  (notices.length == 0){
-                         $('.notices').hide(0);
-                 }else{                 
-                      for(var i = 0; i < notices.length; i++){
-                           //TODO:not able to translate inside js?
-                             $('.notices').append(' <li notice_id="'+notices[i][0]+'"><span class="notice"><a  href="'+notices[i][2]+'">'+{% trans "notices[i][1]" %}+'</a></span></li>');                 
-                      }
-                            $('.notices').show(0);
-                  }                   
-        }
- </script>     
 
 	
-<script>
+<script type="text/javascript">
 	$(document).ready(function(){	   
 
-$(function(){
-         $('.notices').hide(0);
-        
-         $('.hide_notice'). click(function(){
-                        $(this).parents('span.notices').hide(0);
-                });		
-        });
+
             
 		    $("#ac_tags").tagit({
 			    availableTags: [{% for tag in tags %}"{{tag}}",{% endfor %}]

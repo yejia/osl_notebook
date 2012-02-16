@@ -4,8 +4,8 @@
 <h4>{% trans "Tag" %} </h4>
 -->
 
-<script>
-
+<script type="text/javascript">
+$(document).ready(function(){	
             $(":input[name='workingset']").change(function(){              
                     $('#loading').show(0);     
                     $.get('/{{profile_username}}/{{bookname}}/getWsTags/',{'ws':$(this).val()}, loadTags, 'json');  
@@ -13,8 +13,7 @@
 
             $.get('/{{profile_username}}/{{bookname}}/getWsTags/',{}, loadTags, 'json');  
                  
-            function loadTags(tags){              
-            
+            function loadTags(tags){                   
                    //tag_choices = ''
                    $('.tag_list').empty();
                    for(var i = 0; i < tags.length; i++){
@@ -29,14 +28,13 @@
                        //tag_choices = tags[i].name+','+tag_choices                       
                    }
                    
-                   $('#loading').hide(0);     
-
-                 
-
-
-            
+                   $('#loading').hide(0);    
                  
             }
+            
+            	});
+	
+            
 </script>
 
 
