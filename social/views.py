@@ -725,7 +725,7 @@ def vote_unuseful(request):
     result = str(note.get_useful_votes())+'/'+str(note.get_total_votes())    
     return HttpResponse(result, mimetype="text/plain")          
 
-import settings
+import notebook.settings as settings
 if "notification" in settings.INSTALLED_APPS:
     from notification import models as notification
 else:
@@ -751,6 +751,7 @@ def add_comment(request):
 
 from notification.models import Notice
 
+#TODO:check if profile_member is the same as requesting user. If not, don't allow viewing (Currently already hidden in html)
 @login_required
 def comments_4_user(request, username):  
     profile_member = Member.objects.get(username=username) 
