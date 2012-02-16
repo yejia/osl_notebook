@@ -59,7 +59,7 @@
  
 <script>          
         //displaying notifications
-        $.post('/getNotices/',{}, gotNotices, 'json');            
+        $.get('/getNotices/',{}, gotNotices, 'json');            
                       
         function gotNotices(notices){    
                  if  (notices.length == 0){

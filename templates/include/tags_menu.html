@@ -8,10 +8,10 @@
 
             $(":input[name='workingset']").change(function(){              
                     $('#loading').show(0);     
-                    $.post('/{{profile_username}}/{{bookname}}/getWsTags/',{'ws':$(this).val()}, loadTags, 'json');  
+                    $.get('/{{profile_username}}/{{bookname}}/getWsTags/',{'ws':$(this).val()}, loadTags, 'json');  
              });
 
-            $.post('/{{profile_username}}/{{bookname}}/getWsTags/',{}, loadTags, 'json');  
+            $.get('/{{profile_username}}/{{bookname}}/getWsTags/',{}, loadTags, 'json');  
                  
             function loadTags(tags){              
             
