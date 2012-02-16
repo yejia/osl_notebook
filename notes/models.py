@@ -424,7 +424,7 @@ class Note(models.Model):
 from time import gmtime, strftime  
 def get_storage_loc(instance, filename):    
     timepath= strftime('/%Y/%m/%d/')    
-    return 'noteattachments/'+instance.owner_name+'/'+timepath+filename   #TODO: test added '/'+
+    return 'noteattachments/'+instance.owner_name+timepath+filename   #TODO: test added '/'+
 
 from django.core.files.storage import FileSystemStorage    
 from notebook.env_setting import DB_ROOT

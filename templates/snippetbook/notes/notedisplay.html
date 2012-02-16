@@ -35,7 +35,7 @@
 <b>{% trans 'private' %} :</b> {{note.private}}
 </div>
 <div>
-<b>attachment:</b> <a href="/site_media/{{note.attachment.name}}" target="top">{{note.attachment}}</a>
+<b>attachment:</b> <a href="/file/{{note.attachment.name}}" target="top">{{note.attachment}}</a>
 </div>
 <div>
 <b>{% trans 'In frames' %}: </b>
@@ -63,7 +63,7 @@
 <p>{{ note_form.private.label_tag }}: {{note_form.private}}</p> 
 <p>{{ note_form.delete.label_tag }}: {{note_form.delete}}</p> 
 <p>{{ note_form.vote.label_tag }}: {{note_form.vote}}</p> 
-<p>{{ note_form.attachment.label_tag }}: Currently: <a href="/site_media/{{note.attachment.name}}" target="top">{{note.attachment}}</a>{{note_form.attachment}}</p> 
+<p>{{ note_form.attachment.label_tag }}:{{note_form.attachment}}</p> 
 <p>{{ note_form.tags.label_tag }}: {{note_form.tags}}</p> 
 <input type="submit" value="Submit" />
 </form> 
