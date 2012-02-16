@@ -1,5 +1,13 @@
 {% load i18n %}
 
+
+
+<span class="notices">
+<span class="hide_notice" title="{% trans "hide notices" %}"><img src="/site_media/img/delete-cross-small.gif"/></span>
+
+</span>
+
+
 <script>          
         //displaying notifications
         $.post('/getNotices/',{}, gotNotices, 'json');            
@@ -26,10 +34,3 @@ jQuery(function($){
         });
 	
 </script>
-
-
-
-<span class="notices">
-<span class="hide_notice" title="{% trans "hide notices" %}"><img src="/site_media/img/delete-cross-small.gif"/></span>
-
-</span>
