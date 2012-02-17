@@ -57,7 +57,7 @@ class CacheAdmin(MultiDBModelAdmin):
     pass
     
 class UserAdmin(MultiDBModelAdmin):
-    pass   
+     list_display = ('username', 'email', 'last_login')  
 
 class GroupAdmin(MultiDBModelAdmin):
     pass
