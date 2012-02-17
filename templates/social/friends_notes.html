@@ -4,7 +4,7 @@
 
 
 {% block tite %}
-<title>>{% blocktrans %} {{user}}'s Friends  Notes{% endblocktrans %}</title> 
+<title>{% blocktrans %} {{user}}'s Friends  Notes{% endblocktrans %}</title> 
 {% endblock %}
 
 
@@ -35,21 +35,23 @@
 
 
 {% block search_box %}
-{% include "social/search.html" %}
+{% include "social/search_in_friends_notes.html" %}
 {% endblock %}
 
 
 {% block special_side_menu %}
+{% comment %}
 <div class="module"> 
         <h2>{% trans "Members" %}</h2>  
 <ul>        
 	{% for m in group.members.all %}	
 		<li><a href="/social/{{ m.username }}/">{{m.username}}</a></li>
         {% endfor %} 
-</ul>       
+</ul>
 </div> 
-
+{% endcomment %}
 {% endblock %}
+
 
 {% block content%}
 <!--

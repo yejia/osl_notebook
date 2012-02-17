@@ -1,8 +1,8 @@
 {% load i18n %}
 
-<form id="search" action="/{{profile_username}}/{{bookname}}/{{aspect_name}}/" method="get">      
+<form id="search" action="" method="get">      
 		<label for="searchbar"><img src="/media/img/admin/icon_searchbox.png" alt="Search" /></label> 
-		<input type="text" size="23" name="q" value="" id="searchbar"  placeholder="{% trans "search snippets"  %}" /> 
+		<input type="text" size="23" name="q" value="" id="searchbar"  placeholder="{% block search_hint %}{% endblock %}" /> 
 		<input type="submit" value="{% trans "Search"  %}" />  	
 </form>
 <!--
