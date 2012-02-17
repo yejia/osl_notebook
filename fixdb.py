@@ -169,6 +169,12 @@ init_date=n.init_date, last_modi_date=n.last_modi_date, vote=n.vote) #attachment
                 s.save()       
     
 
+#notes from personal notebook deleted(or privated) before implemenation of "withdrawn from social notebook if 
+#deleted or made private from personal" are still in social notebook (for example, those with private=True, deleted=False) 
+#should be removed from db by the following script (although they cannot be viewed in social notebook now)   TODO:privacy
+#def cleanup_social():
+     #check inconsistence of db, and fix them
+#    pass
 
 if __name__ == "__main__": 
     if len(sys.argv) == 1:

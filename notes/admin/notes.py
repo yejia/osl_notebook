@@ -1,7 +1,10 @@
 from notebook.notes.models import Note, Tag, LinkageNote, Folder, Cache, WorkingSet
-from notebook.social.models import Group, Social_Note, Social_Tag, Member
+from notebook.social.models import Group, Social_Note, Social_Tag, Member, Social_Note_Comment, Social_Note_Vote, Friend_Rel
 from django.contrib import admin
 from django.contrib.auth.models import User #, Group
+
+from notification.models import Notice, NoticeType
+from postman.models import Message
 
 
 class MultiDBModelAdmin(admin.ModelAdmin):
@@ -62,6 +65,31 @@ class UserAdmin(MultiDBModelAdmin):
 class GroupAdmin(MultiDBModelAdmin):
     pass
 
+class Social_NoteAdmin(MultiDBModelAdmin):
+     list_display = ('title', 'desc', 'private', 'deleted','init_date', 'owner', 'owner_note_id') 
+     select_related = ('tags')  
+
+class Social_Note_CommentAdmin(MultiDBModelAdmin):
+     list_display = ('note', 'desc', 'commenter', 'init_date') 
+
+class Social_Note_VoteAdmin(MultiDBModelAdmin):
+     list_display = ('note', 'voter', 'useful', 'init_date') 
+
+class Friend_RelAdmin(MultiDBModelAdmin):
+     list_display = ('friend1', 'friend2', 'init_date', 'confirmed')  
+
+     
+class NoticeAdmin(MultiDBModelAdmin):
+     list_display = ('recipient', 'sender', 'message', 'added') 
+
+class NoticeTypeAdmin(MultiDBModelAdmin):
+     list_display = ('label', 'display', 'description') 
+
+class MessageAdmin(MultiDBModelAdmin):
+     list_display = ('subject', 'body', 'sender','recipient','sent_at','read_at') 
+
+
+
 site = admin.AdminSite()
 
 site.register(Note,NotesAdmin)
@@ -71,11 +99,24 @@ site.register(Folder, FolderAdmin)
 site.register(Cache, CacheAdmin)
 site.register(WorkingSet)
 site.register(Group)
-site.register(Social_Note)
+site.register(Social_Note, Social_NoteAdmin)
 site.register(Social_Tag)
 site.register(Member)
 site.register(User, UserAdmin)
+site.register(Social_Note_Comment, Social_Note_CommentAdmin)
+site.register(Social_Note_Vote, Social_Note_VoteAdmin)
+site.register(Friend_Rel, Friend_RelAdmin)
+
+
+
 #site.register(Group, GroupAdmin)
+
+#should comment out below
+site.register(Notice, NoticeAdmin)
+site.register(NoticeType, NoticeTypeAdmin)
+site.register(Message, MessageAdmin)
+
+
 
 #TODO: register Site as well
 

@@ -286,7 +286,8 @@ class Group(models.Model):
 #    pass
 
 
-#one relation has one entry in this table (although two entries make it easy for query).  TODO: enforce no redundance?          
+#one relation has one entry in this table (although two entries make it easy for query).  TODO: enforce no redundance?
+#TODO: confirm          
 class Friend_Rel(models.Model): 
     confirmed = models.BooleanField(default=False) 
     friend1 = models.ForeignKey(Member, related_name='friend1')
