@@ -125,7 +125,7 @@ class ProfileForm(ModelForm):
     class Meta:
         model = Member
         exclude = ('username','password', 'is_staff', 'is_active', 'is_superuser',\
-                    'id', 'user_permissions', 'groups', 'role', 'last_login', 'date_joined')  
+                    'id', 'user_permissions', 'groups', 'role', 'last_login', 'date_joined', 'viewing_private')  
         
 
 #class RegistrationForm(ModelForm): 
