@@ -191,17 +191,10 @@
            
             selected_notes = getSelectedNoteIds();		  
             
-              $.ajax({url: 'addTags2Notes2/'+
+              $.post('addTags2Notes2/'+
                                     '?note_ids='+selected_notes+
-                                    '&tags_to_add='+selected_tags,
-                            success:  processReturn,
-                            async:   false
-            })
-            window.location.reload(false);     
-            return false;
-   
-   
-   
+                                    '&tags_to_add='+selected_tags, {},
+                          tagsChanged, 'json');
     }
 	
 	function removeTags(){
@@ -245,17 +238,27 @@
            
             selected_notes = getSelectedNoteIds();		  
             
-              $.ajax({url: 'removeTagsFromNotes2/'+
+              $.post('removeTagsFromNotes2/'+
                                     '?note_ids='+selected_notes+
                                     '&tags_to_add='+selected_tags,
-                            success:  processReturn,
-                            async:   false
-            })
-            window.location.reload(false);     
-            return false;
+                            {}, tagsChanged, 'json');
+            //window.location.reload(false);     
+            //return false;
     
     
     
+    }
+    
+    function tagsChanged(result){
+         $('#ac_tags_box').hide(0);    
+        for (var i=0; i < result.length; i++){
+            toappend = ""        
+            for (var j=0; j < (result[i][1]).length; j++){
+                toappend = toappend+'<span><a href="/{{profile_username}}/{{bookname}}/notes/tags/'+result[i][1][j]+'/">'+result[i][1][j]+'</a>,</span>'
+            }        
+           $("li[note_id='"+result[i][0]+"']").find('div.brief_display').find('div#note_tags').empty().append(toappend);
+           $("li[note_id='"+result[i][0]+"']").find('div.full_display').find('div#note_tags').find('span').empty().append(result[i][2]);
+        }    
     }
 		 
 	
@@ -366,16 +369,33 @@
         
     function set_notes_private(){
              selected_notes = getSelectedNoteIds();
-             $.post('/{{profile_username}}/{{bookname}}/setNotesPrivate/',{'note_ids':selected_notes});
+             $.post('/{{profile_username}}/{{bookname}}/setNotesPrivate/',{'note_ids':selected_notes},  set_notes_private_callback, 'json');
              //TODO: maybe no reload
-             window.location.reload( true);   
+            // window.location.reload( true);   
     }
+    
+    function  set_notes_private_callback(note_ids){                 
+                    for (var i=0;i<note_ids.length;i++){
+                          $("li[note_id='"+note_ids[i]+"']").find('span.lock').show();
+                          $("li[note_id='"+note_ids[i]+"']").find('span.unlock').hide();          
+                    }
+    }
+    
     
     function set_notes_public(){
              selected_notes = getSelectedNoteIds();
-             $.post('/{{profile_username}}/{{bookname}}/setNotesPublic/',{'note_ids':selected_notes});   
-             window.location.reload( true);                
+             $.post('/{{profile_username}}/{{bookname}}/setNotesPublic/',{'note_ids':selected_notes}, set_notes_public_callback, 'json');   
+             //window.location.reload( true);               
+         
     }
+    
+    function set_notes_public_callback(note_ids){                  
+                    for (var i=0;i<note_ids.length;i++){
+                          $("li[note_id='"+note_ids[i]+"']").find('span.lock').hide();
+                          $("li[note_id='"+note_ids[i]+"']").find('span.unlock').show();          
+                    }
+    }
+    
     
      function share(){
              selected_notes = getSelectedNoteIds();

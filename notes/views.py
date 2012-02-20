@@ -1519,14 +1519,15 @@ def add_tags_to_notes2(request, username, bookname):
     tags_to_add = request.GET.getlist('tags_to_add')[0].split(',')
     log.debug( 'The following tags are going to added:'+str(tags_to_add))    
     N = getNote(username, bookname)    
-     
+    result = [] 
     for note_id in note_ids:
         note = N.objects.get(id=note_id)
         note.add_tags(tags_to_add, bookname)
-        
+        result.append([note_id, note.get_tags(), note.display_tags()])
         
     log.debug('tag added') 
-    return HttpResponse('success', mimetype="text/plain") 
+    return  HttpResponse(simplejson.dumps(result), "application/json")
+    #return HttpResponse('success', mimetype="text/plain") 
 
 
 @login_required    
@@ -1675,15 +1676,17 @@ def set_notes_private(request, username, bookname):
     N = getNote(username, bookname)
     notes = N.objects.filter(id__in=note_ids)
     notes.update(private = True)
-    return HttpResponse('success', mimetype="text/plain") 
+    return HttpResponse(simplejson.dumps(note_ids), "application/json")   
+    #return HttpResponse('success', mimetype="text/plain") 
 
 @login_required
 def set_notes_public(request, username, bookname): 
     note_ids = request.POST.getlist('note_ids')   
     N = getNote(username, bookname)
-    notes = N.objects.filter(id__in=note_ids)
+    notes = N.objects.filter(id__in=note_ids)    
     notes.update(private = False)
-    return HttpResponse('success', mimetype="text/plain")
+    return HttpResponse(simplejson.dumps(note_ids), "application/json")  
+    #return HttpResponse('success', mimetype="text/plain")
 
 @login_required    
 def set_notes_delete(request, username, bookname):
@@ -1747,10 +1750,14 @@ def remove_tags_from_notes2(request, username, bookname):
     log.debug( 'The following tags are going to removed:'+str(tags_to_remove))    
     N = getNote(username, bookname)
     T = getT(username)
+    result = []
     for note_id in note_ids:
         note = N.objects.get(id=note_id)
         note.remove_tags(tags_to_remove)   
-    return HttpResponse('success', mimetype="text/plain") 
+        result.append([note_id, note.get_tags(), note.display_tags()])
+    
+    return  HttpResponse(simplejson.dumps(result), "application/json")
+    #return HttpResponse('success', mimetype="text/plain") 
     
 
 #TODO: get the folder of the snippets
