@@ -109,6 +109,123 @@
     }
 	
     
+       function addNote(){    
+          
+            desc = $('#id_desc').val();
+         
+            //alert('desc:'+desc);
+             
+            priv = $('#id_private').attr('checked');
+          //   alert('priv:'+priv);
+            $.post('/{{profile_username}}/{{bookname}}/notes/addNote/',{'desc':desc, 'private':priv}, noteAdded, 'json');          
+                        
+    } 
+    
+     function noteAdded(note){
+       // alert('note added:'+note);
+        pri_part = ""
+        if (note.private=='true'){
+            pri_part =  '<span class="lock" title="{% trans "private"  %}" style="display:inline;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>'
+        }else{
+           pri_part =  '<span class="unlock" title="{% trans "public"  %}" style="display:inline;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>'
+        }
+        tags = ''
+        for (var i=0;i<note.tags.length;i++){
+            tags = tags +  '<span><a href="/{{profile_username}}/{{bookname}}/notes/tags/'+note.tags[i]+'/">'+note.tags[i]+'</a>,</span>'
+        }
+    //    alert('tags:'+tags);
+        toprepend = '<li class="note_display" note_id="'+note.note_id+'"><input type="checkbox" name="note_selected"  value="'+
+                      note.note_id+'" class="note_selection" /><div class="kuoda"></div><div class="yasuo"></div> <span class="lockunlock">'+pri_part+'</span>'+
+                               
+                      '<span class="thumb"><span class="thumbup hover"  title="{% trans "Rank Up Importance"  %}"><img src="/site_media/img/thumbUp.gif"/></span>'+
+			                                                 '<span class="thumbdown hover"  title="{% trans "Rank Down Importance"  %}"><img src="/site_media/img/thumbDown.gif"/></span>'+
+                      '<span id="note_rank" title="{% trans "Importance"  %}">'+note.vote+'</span></span><span class="delete_img hover" title="{% trans "soft delete" %}"><img src="/site_media/img/delete.png"/></span>'+
+                      '<div class="snippetbook"><div class="brief_display"><table class="note_table"><tr><td class="note_table_td1 structure"><div id="note_title" title="{% trans "note title" %}">'+
+                      '<a href="/{{profile_username}}/{{bookname}}/notes/note/'+note.id +'/">'+note.title+'</a></div> </td><td class="note_table_td2"><div  id="note_desc" title="{% trans "note desc" %}">'+note.desc+'</div>'+	
+                      '</td> <td class="note_table_tags">  <div id="note_tags" title="{% trans "note tags" %}">'+tags+'</div></td> <td class="note_table_td4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr></table></div>'+
+                      '<div class="full_display">'+
+                                '<table class="note_table"><tr><td class="note_table_td1 structure">'+
+                                       '<div id="note_title" title="{% trans "note title" %}"><span class="editableText"><a href="/{{profile_username}}/{{bookname}}/notes/note/'+note.id+'/">'+note.title+'</a></span></div></td><td class="note_table_td2"> '+	
+                                       '<div  id="note_desc" title="{% trans "note desc" %}"><span class="editableText">'+note.desc+'</span></div></td><td class="note_table_tags">'+
+                                       '<div id="note_tags" title="{% trans "note tags" %}"><span class="editableText">'+note.display_tags+'</span></div> </td></tr></table>'+
+                       '</div></div></div>'+                
+                                       
+                      '</li>';
+     //      alert('toprepend:'+toprepend);         
+        $('div.notes_display').find('ul').prepend(toprepend);
+          $('li.note_display').mouseenter(function(){	    
+                        $(this).find('.hover').show(0);
+                        
+                });
+                
+           $('li.note_display').mouseleave(function(){	    
+                        $(this).find('.hover').hide(0);
+                        
+                });     
+                
+                 $('.stream').show(0);    
+            $('.structure').hide(0);
+            
+             $('div.brief_display').show();
+            $('div.full_display').hide();	
+            
+            $('.yasuo').hide();
+		
+          $('.kuoda').click(function(){		
+                    $(this).parents("li").find('div.brief_display').hide(100);
+                    $(this).parents("li").find('div.full_display').show(100);
+                
+                    $(this).parents("li").find("div.kuoda").hide(100);
+                    $(this).parents("li").find("div.yasuo").show(100);		
+            });
+		
+            $('.yasuo').click(function(){        
+                    $(this).parents("li").find('div.brief_display').show(100);
+                    $(this).parents("li").find('div.full_display').hide(100);		       
+                    $(this).parents("li").find("div.kuoda").show(100);
+                    $(this).parents("li").find("div.yasuo").hide(100);		
+            });		
+        
+            
+        
+        
+        
+        
+        
+                        $('span.editableText').editableText({
+                        newlinesEnabled: false
+                });
+			
+                $.editableText.defaults.newlinesEnabled = true;
+
+                $('div.editableText, p.editableText').editableText();
+			
+                $('.editableText').change(function(){
+                        var newValue = $(this).text();
+                        $(this).load('updateNoteInline/',{ 'id':$(this).parents('li').attr('note_id'), 'note_field':$(this).parents('div').attr('id'), 'content':  newValue})
+                });
+			
+                //move below to a separate file
+                $('.thumbup'). click(function(){                
+                        $(this).parents(".thumb").find("#note_rank").load('voteUpNote/',{ 'id':$(this).parents("li").attr('note_id')});
+                });
+		
+                $('.thumbdown'). click(function(){
+                        $(this).parents(".thumb").find("#note_rank").load('voteDownNote/',{ 'id':$(this).parents("li").attr('note_id')});
+                });
+		
+                $('.delete_img'). click(function(){
+                        $(this).load('deleteNote/',{ 'id':$(this).parents("li").attr('note_id')});
+                        $(this).parents("li").remove();
+                });		
+                
+        
+        
+        
+
+        
+    }
+    
     
     function showAddTags(){    
             //alert('show add tgs');
@@ -671,20 +788,20 @@
 		
 		     
 		        
-            $('#addnoteSubmit').click(function(){		   
-                    var form = $(this).parents('form');			
-                    $(this).load('addNote/',{'title':form.find('#id_title').val(),'desc':form.find('#id_desc').val(),'event':form.find('#id_event').val(), 
-			                                       'vote':form.find('#id_vote').val(),'tags':form.find('#id_tags').val(),'private':form.find('#id_private').val(), 'attachment':form.find('#id_attachment').val()}); //TODO: broken pipe issue on the server side
+           // $('#addnoteSubmit').click(function(){		   
+            //        var form = $(this).parents('form');			
+            //        $(this).load('addNote/',{'title':form.find('#id_title').val(),'desc':form.find('#id_desc').val(),'event':form.find('#id_event').val(), 
+		//	                                       'vote':form.find('#id_vote').val(),'tags':form.find('#id_tags').val(),'private':form.find('#id_private').val(), 'attachment':form.find('#id_attachment').val()}); //TODO: broken pipe issue on the server side
 		
-                    return false; //need this to prevent flashing the page again, e.g. requesting the same page again, which is nice in my case (although causing broken pipe -- seems avoidable if  server don't return response), but it is still refreshs the page
-            });	
+          //          return false; //need this to prevent flashing the page again, e.g. requesting the same page again, which is nice in my case (although causing broken pipe -- seems avoidable if  server don't return response), but it is still refreshs the page
+         //   });	
 
 		
 		
             //TODO: where to define the call back
-            function addNoteCallback(n){
+      //      function addNoteCallback(n){
 	                //alert("note added");     
-            }			
+      //      }			
 	     
 	   	
             $('div.brief_display').show();

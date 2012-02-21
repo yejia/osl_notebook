@@ -1161,8 +1161,14 @@ def add_note(request, username, bookname):
     n.save()
     n.add_tags(tags, bookname)
     n.save()
-    messages.success(request, "Note is successfully added!") #TODO     
-    return HttpResponseRedirect(__get_pre_url(request))    
+    #messages.success(request, "Note is successfully added!") #TODO    
+    #print 'note is added' 
+    
+    #'init_date':n.init_date
+    return  HttpResponse(simplejson.dumps({'note_id':n.id, 'private':n.private, 'tags':n.get_tags(),'display_tags':n.display_tags(),
+                                           'title':n.title,'desc':n.desc, 'vote':n.vote}),  "application/json")
+
+    #return HttpResponseRedirect(__get_pre_url(request))    
     
 
 #TODO: other better ways of implementation
