@@ -472,9 +472,8 @@ def getSearchResults(root_note_list, qstr, search_fields = ('title','desc')):
 
 
 @login_required
-def get_ws_tags(request, username, bookname):
-    
-    ws = request.POST.get('ws')
+def get_ws_tags(request, username, bookname):    
+    ws = request.GET.get('ws')    
     if ws:
         request.session["current_ws"] = ws    
     
@@ -512,8 +511,8 @@ def __get_ws_tags_for_menu(request, username, bookname):
         #this annotate get all the note's count instead of just the bookname's 
         tags_qs = Tag.objects.using(username).all().order_by('name')#.annotate(Count('note'+book_entry_dict.get(bookname))).order_by('name') 
     else:        
-        w = WorkingSet.objects.using(username).get(name__exact = current_ws)
-        #tags = w.tags.using(username).all().order_by('name')
+        w = WorkingSet.objects.using(username).get(name__exact = current_ws)        
+        #tags_qs = w.tags.using(username).all().order_by('name')
         tags_qs = Tag.objects.using(username).filter(workingset=w).order_by('name')#.annotate(Count('note'+book_entry_dict.get(bookname))).order_by('name')
         
     tags = []
@@ -707,7 +706,7 @@ def __get_context(request, note_list,default_tag_id, username, bookname, aspect_
     
     W = getW(username)
     #TODO: get private ones
-    wss = W.objects.all()
+    wss = W.objects.all().order_by('name')
   
     if request.user.username != username:        
         tags = get_public_tags(tags)          
@@ -2084,7 +2083,7 @@ def settings_folder_update(request, username, bookname, folder_name):
 def settings_workingsets(request): 
     username = request.user.username 
     W = getW(username)
-    workingsets = W.objects.all()
+    workingsets = W.objects.all().order_by('name')
     current = request.GET.get("current")
     #print 'current is:', current
     if current:
