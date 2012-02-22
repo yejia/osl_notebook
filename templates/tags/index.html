@@ -19,7 +19,7 @@
 <script>
 	jQuery(function($){
 
-                $('span.editableText').editableText({
+          $('span.editableText').editableText({
 				newlinesEnabled: false
 		});
 			
@@ -40,7 +40,8 @@
                 });		
 			
         });
-  
+        
+      //TODO: change the naming of variables
         function  selectAll(){
 		     $('.note_selection').attr('checked',true);
 		
@@ -52,35 +53,47 @@
 		}
         
         
-        //TODO: change the naming of variables
-        function	  add2WSs(){
-		    var selected_tags = [];		    
+    
+        function	  add2WSs(){        
+		    var selected_wss = [];		    
 		    $('.tag_selection').each(function(){
 			if ($(this).attr('checked')==true){
 				//alert('selected');
-				selected_tags.push($(this).val());	
+				selected_wss.push($(this).val());	
 			}			
 		     });		       
-		       selected_notes = getSelectedNoteIds();
-		       $(this).load('addTags2WSs/', {'tag_ids': selected_notes, 'wss': selected_tags});		       
-		        setTimeout( "window.location.reload(false)", 1000); //TODO: only load the changed notes using response from the server
+		       selected_tags = getSelectedTagIds();
+		  //     $(this).load('addTags2WSs/', {'tag_ids': selected_tags, 'wss': selected_wss},);	
+              $.ajax({url: 'addTags2WSs/'+
+                                    '?wss='+selected_wss+
+                                    '&tag_ids='+selected_tags,
+                            success:  processReturn,
+                            async:   false
+               })                    
+		      setTimeout( "window.location.reload(false)", 1000); //TODO: only load the changed notes using response from the server
 	}
     
         function removeTagsFromWSs(){
-            var selected_tags = [];		    
+            var selected_wss = [];		    
 		    $('.tag_selection').each(function(){
 			if ($(this).attr('checked')==true){
 				//alert('selected');
-				selected_tags.push($(this).val());	
+				selected_wss.push($(this).val());	
 			}			
 		     });		       
-		       selected_notes = getSelectedNoteIds();
-		       $(this).load('removeTagsFromWSs/', {'tag_ids': selected_notes, 'wss': selected_tags});		       
+		       selected_tags = getSelectedTagIds();
+		    //   $.post('removeTagsFromWSs/', {'tag_ids': selected_tags, 'wss': selected_wss}, );	
+              $.ajax({url: 'removeTagsFromWSs/'+
+                                    '?wss='+selected_wss+
+                                    '&tag_ids='+selected_tags,
+                            success:  processReturn,
+                            async:   false
+              })               
 		       setTimeout( "window.location.reload(false)", 1000); //TODO: only load the changed notes using response from the server        
         }
        
         //TODO:refactor this function out as it is the same in note_list_base.html
-        function	getSelectedNoteIds(){
+        function	getSelectedTagIds(){
 		    	   // alert('clicked');
 		    var selected_notes = [];	
 		    $('.note_selection').each(function(){
@@ -93,6 +106,10 @@
 		     return selected_notes;
 		}
       
+      
+          function processReturn(data){
+         ;    
+    }
 
 
 </script>
