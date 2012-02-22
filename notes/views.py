@@ -1988,14 +1988,16 @@ def settings_tag_update(request, tag_name):
 @login_required
 def settings_add_tags_2_wss2(request):
     username = request.user.username
-    tag_ids= request.GET.getlist('tag_ids')[0].split(',')    
-    wss = request.GET.getlist('wss')[0].split(',')   
+    tag_names= request.GET.getlist('tags_to_add')[0].split(',')    
+    
+    wss = request.GET.getlist('wss')[0].split(',')
+    #print   'wss:',wss 
     W = getW(username)
     T = getT(username)
     for ws_id in wss:
         ws = W.objects.get(id=ws_id)
-        for tag_id in tag_ids:
-            t = T.objects.get(id=tag_id) 
+        for tag_name in tag_names:
+            t = T.objects.get(name=tag_name) 
             ws.tags.add(t)
             ws.save()        
     messages.success(request, "The tags were successfully added to these working sets")     
@@ -2006,14 +2008,14 @@ def settings_add_tags_2_wss2(request):
 @login_required
 def settings_remove_tags_from_wss2(request):
     username = request.user.username
-    tag_ids= request.GET.getlist('tag_ids')[0].split(',')    
+    tag_names= request.GET.getlist('tags_to_add')[0].split(',')    
     wss = request.GET.getlist('wss')[0].split(',')    
     W = getW(username)
     T = getT(username)
     for ws_id in wss:
         ws = W.objects.get(id=ws_id)
-        for tag_id in tag_ids:
-            t = T.objects.get(id=tag_id) 
+        for tag_name in tag_names:
+            t = T.objects.get(name=tag_name) 
             ws.tags.remove(t)
             ws.save()    
     messages.success(request, "The tags were successfully removed from the working sets.")  

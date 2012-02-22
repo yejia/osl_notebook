@@ -60,13 +60,14 @@
 			if ($(this).attr('checked')==true){
 				//alert('selected');
 				selected_wss.push($(this).val());	
+                     
 			}			
 		     });		       
 		       selected_tags = getSelectedTagIds();
 		  //     $(this).load('addTags2WSs/', {'tag_ids': selected_tags, 'wss': selected_wss},);	
               $.ajax({url: 'addTags2WSs/'+
                                     '?wss='+selected_wss+
-                                    '&tag_ids='+selected_tags,
+                                    '&tags_to_add='+selected_tags,
                             success:  processReturn,
                             async:   false
                })                    
@@ -85,7 +86,7 @@
 		    //   $.post('removeTagsFromWSs/', {'tag_ids': selected_tags, 'wss': selected_wss}, );	
               $.ajax({url: 'removeTagsFromWSs/'+
                                     '?wss='+selected_wss+
-                                    '&tag_ids='+selected_tags,
+                                    '&tags_to_add='+selected_tags,
                             success:  processReturn,
                             async:   false
               })               
@@ -95,15 +96,16 @@
         //TODO:refactor this function out as it is the same in note_list_base.html
         function	getSelectedTagIds(){
 		    	   // alert('clicked');
-		    var selected_notes = [];	
+		    var selected_tags = [];	
 		    $('.note_selection').each(function(){
 			if ($(this).attr('checked')==true){
 				//alert('selected');
-				selected_notes.push($(this).val());	
+				//selected_notes.push($(this).val());	
+                      selected_tags.push($(this).attr('tag_name'));	     
 			}			
 		     });
 		     	
-		     return selected_notes;
+		     return selected_tags;
 		}
       
       
@@ -202,7 +204,7 @@
  
     <li class="tag_display"  tag_id="{{tag.id}}">
  
-    <input type="checkbox" name="note_selected"  value="{{ tag.id }}" class="note_selection" />
+    <input type="checkbox" name="note_selected" tag_name="{{tag.name}}"  value="{{ tag.id }}" class="note_selection" />
 
     <span class="editableText"><a href="tag/{{tag.name}}">{{tag.name}}</a></span>  &nbsp;&nbsp;&nbsp; {{tag.private|yesno:"private, public, unknown"}}    &nbsp;&nbsp;&nbsp;&nbsp; 
      
