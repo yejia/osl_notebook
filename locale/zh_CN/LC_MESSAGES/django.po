@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-23 18:32+0800\n"
+"POT-Creation-Date: 2012-02-23 19:10+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1194,6 +1194,11 @@ msgid "Folders"
 msgstr "文件夹"
 
 #: templates/framebook/notes/notedisplay.html:15
+#: templates/social/framebook/notes/notedisplay.html:15
+msgid "Frame"
+msgstr "包"
+
+#: templates/framebook/notes/notedisplay.html:15
 #: templates/notes/todelete/framedisplay.html:15
 #: templates/social/framebook/notes/notedisplay.html:15
 msgid "View all frames"
@@ -1228,6 +1233,27 @@ msgstr "包含的笔记"
 #: templates/framebook/notes/notedisplay.html:77
 msgid "Edit this Frame"
 msgstr "编辑这个包"
+
+#: templates/framebook/notes/notesdisplay.html:56
+#: templates/include/notesdisplay.html:82
+#: templates/social/notesdisplay-backup.html:18
+#: templates/social/notesdisplay.html:18
+msgid "Show"
+msgstr "显示"
+
+#: templates/framebook/notes/notesdisplay.html:56
+#: templates/include/notesdisplay.html:83
+#: templates/social/notesdisplay-backup.html:18
+#: templates/social/notesdisplay.html:18
+msgid "Expanded"
+msgstr "展开"
+
+#: templates/framebook/notes/notesdisplay.html:56
+#: templates/include/notesdisplay.html:84
+#: templates/social/notesdisplay-backup.html:18
+#: templates/social/notesdisplay.html:18
+msgid "List"
+msgstr "表单"
 
 #: templates/framebook/notes/notesdisplay.html:61
 #: templates/include/notesdisplay.html:96
@@ -1565,24 +1591,6 @@ msgstr "搜索词条是"
 #: templates/include/notesdisplay.html:69
 msgid "Save this search as a folder"
 msgstr "将这个搜索存为一个文件夹"
-
-#: templates/include/notesdisplay.html:82
-#: templates/social/notesdisplay-backup.html:18
-#: templates/social/notesdisplay.html:18
-msgid "Show"
-msgstr "显示"
-
-#: templates/include/notesdisplay.html:83
-#: templates/social/notesdisplay-backup.html:18
-#: templates/social/notesdisplay.html:18
-msgid "Expanded"
-msgstr "展开"
-
-#: templates/include/notesdisplay.html:84
-#: templates/social/notesdisplay-backup.html:18
-#: templates/social/notesdisplay.html:18
-msgid "List"
-msgstr "表单"
 
 #: templates/include/notesdisplay.html:87
 #: templates/social/notesdisplay-backup.html:20
