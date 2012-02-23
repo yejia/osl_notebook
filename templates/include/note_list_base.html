@@ -117,12 +117,16 @@
              
             priv = $('#id_private').attr('checked');
           //   alert('priv:'+priv);
-            $.post('/{{profile_username}}/{{bookname}}/notes/addNote/',{'desc':desc, 'private':priv}, noteAdded, 'json');          
+            $.post('/{{profile_username}}/{{bookname}}/notes/addNote/',{'desc':desc, 'private':priv}, noteAdded, 'json');         
+               
                         
     } 
     
      function noteAdded(note){
-       // alert('note added:'+note);
+       // TODO: how to show error when error happened?
+        //   $('ul.messages').append('<li class="error">{% trans "An error happened when adding a note." %} </li>');     
+        $('ul.messages').append('<li class="success">{% trans "Note is successfully added!" %} </li>');
+       
         pri_part = ""
         if (note.private=='true'){
             pri_part =  '<span class="lock" title="{% trans "private"  %}" style="display:inline;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>'
@@ -155,6 +159,8 @@
         $('div.notes_display').find('ul').prepend(toprepend);
         
         $('#id_desc').val('');
+        
+
         
         //TODO: duplicated, merge 
           $('li.note_display').mouseenter(function(){	    
@@ -370,8 +376,10 @@
     
     }
     
-    function tagsChanged(result){
+    function tagsChanged(result){         
          $('#ac_tags_box').hide(0);    
+           //$('ul.messages').empty();//TODO:set timeout for message displayed? Like how gmail does
+         $('ul.messages').append('<li class="success">{% trans "Tags are successfully updated!" %} </li>');
         for (var i=0; i < result.length; i++){
             toappend = ""        
             for (var j=0; j < (result[i][1]).length; j++){
@@ -909,7 +917,7 @@
                
                
                  function privacyChanged(result){                 
-                     note_id = result.note_id
+                    note_id = result.note_id
                     if (result.private == 'y'){
                     //alert('is true');                          
                           $("li[note_id='"+note_id+"']").find('span.lock').show();
@@ -1007,13 +1015,15 @@ jQuery('.note_display').accordion({
 {% block help_message_if_none %}
 {% endblock %}
 
-{% if messages %}
+
 <ul class="messages">
+{% if messages %}
     {% for message in messages %}
     <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
     {% endfor %}
+{% endif %}   
 </ul>
-{% endif %}
+
 
 
 

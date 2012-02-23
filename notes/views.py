@@ -1493,44 +1493,34 @@ def  toggle_show_caches_mode(request):
     return HttpResponse(show_caches_mode, mimetype="text/plain")  
    
 @login_required    
-def add_tags_to_notes(request, username, bookname):
-    log.debug('add_tags_to_notes')
-    note_ids= request.GET.getlist('note_ids')[0].split(',')    
-    log.debug( 'Adding tags to the following notes:'+str(note_ids))
-    tags_to_add = request.GET.getlist('tags_to_add')[0].split(',')
-    log.debug( 'The following tags are going to added:'+str(tags_to_add))	
+def add_tags_to_notes(request, username, bookname):    
+    note_ids= request.GET.getlist('note_ids')[0].split(',')        
+    tags_to_add = request.GET.getlist('tags_to_add')[0].split(',')    	
     N = getNote(username, bookname)
     T = getT(username)
     for note_id in note_ids:
-        note = N.objects.get(id=note_id)
-        log.debug('got the note')
+        note = N.objects.get(id=note_id)    
         for tag_id in tags_to_add:
             log.debug('adding a tag')
-            t = T.objects.get(id=tag_id) 
-            log.debug('got the tag')
-            note.tags.add(t)
-            log.debug('note of '+str(note_id)+' is added with tag id '+str(tag_id))
+            t = T.objects.get(id=tag_id)     
+            note.tags.add(t)    
             note.save()      
-    log.debug('tag added') 
+    log.info('tag added') 
     return HttpResponse('success', mimetype="text/plain") 
     
 
 
 @login_required    
-def add_tags_to_notes2(request, username, bookname):
-    log.debug('add_tags_to_notes2')
-    note_ids= request.GET.getlist('note_ids')[0].split(',')    
-    log.debug( 'Adding tags to the following notes:'+str(note_ids))
-    tags_to_add = request.GET.getlist('tags_to_add')[0].split(',')
-    log.debug( 'The following tags are going to added:'+str(tags_to_add))    
+def add_tags_to_notes2(request, username, bookname):    
+    note_ids= request.GET.getlist('note_ids')[0].split(',')      
+    tags_to_add = request.GET.getlist('tags_to_add')[0].split(',')      
     N = getNote(username, bookname)    
     result = [] 
     for note_id in note_ids:
         note = N.objects.get(id=note_id)
         note.add_tags(tags_to_add, bookname)
-        result.append([note_id, note.get_tags(), note.display_tags()])
-        
-    log.debug('tag added') 
+        result.append([note_id, note.get_tags(), note.display_tags()])        
+    log.info('tag added') 
     return  HttpResponse(simplejson.dumps(result), "application/json")
     #return HttpResponse('success', mimetype="text/plain") 
 
