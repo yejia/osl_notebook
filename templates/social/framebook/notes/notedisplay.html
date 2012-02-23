@@ -55,7 +55,7 @@
 
 <img src="/site_media/img/tags-small.png" class="img_in_notes_section_header"/>:
 {% for tag  in n.tags.all %}
-<a href="/{{profile_username}}/{{bookname}}/notes/tags/{{tag}}/">{{tag}}</a>,
+<a href="/social/{{profile_username}}/{{n.get_note_bookname}}/tags/{{tag}}/">{{tag}}</a>,
 {% endfor %}
 <img src="/site_media/img/thumbUp.gif"/>{{n.vote}}
 </div>
@@ -66,19 +66,14 @@
 </div>
 
 <br/><br/>
-
-<!--TODO: change the way frames are updated here.  For now, just hide it-->
- {% if user.username == profile_username %} 
-<div>
-<span id="edit_linkage"><a href="#">Edit this Frame:</a></span>
-<div>
-<form action="updateFrame/" method="post" enctype="multipart/form-data" id="updateFrameForm">
-{{frame_form.as_p}}
-<input type="submit" value="Submit" />
-</form> 
-</div>
-</div>
-{% endif %}
+<!--li tag is added solely to accomodate the code used in the notes display page where js need to find the parent li tag to locate with note to add comment-->
+<li note_id="{{note.id}}">
+<!---change variable name-->
+{% with note=frame %}
+{% include "social/notes/add_comments_inline.html" %} 
+{% endwith %}
+</li>
+<br/><br/>
 
 
 

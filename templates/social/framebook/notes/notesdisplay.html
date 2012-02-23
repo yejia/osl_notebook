@@ -126,18 +126,18 @@
              {% if user.username == profile_username %} 
                {% for n in note.display_notes %}            
                 <div linked_note_id="{{n.0}}">
-                     <li><a href="/{{profile_username}}/{{bookname}}/{{included_aspect_name}}/note/{{n.0}}"><strong>{{n.1|default:'(No Title)'}}-</strong></a>
+                     <li><a href="/social/{{profile_username}}/{{bookname}}/notes/note/{{n.0}}"><strong>{{n.1|default:'(No Title)'}}-</strong></a>
                                 &nbsp;&nbsp;&nbsp;{{n.2|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp;{{n.3}} &nbsp;&nbsp;&nbsp;&nbsp; 
-                                <span title="remove this note from the linkage" class="inline_delete" id="linkage_delete_note">&nbsp;&nbsp;&nbsp;<!--TODO:get rid of &nbsp; use the style instead--></span>
+                               
                      </li>           
                 </div>
 		        {% endfor %}
               {% else %}              
                {% for n in note.display_public_notes  %}            
                 <div linked_note_id="{{n.0}}">
-                     <li><a href="/{{profile_username}}/{{bookname}}/{{included_aspect_name}}/note/{{n.0}}"><strong>{{n.1|default:'(No Title)'}}-</strong></a>
+                     <li><a href="/social/{{profile_username}}/{{bookname}}/notes/note/{{n.0}}"><strong>{{n.1|default:'(No Title)'}}-</strong></a>
                                 &nbsp;&nbsp;&nbsp;{{n.2|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp;{{n.3}} &nbsp;&nbsp;&nbsp;&nbsp; 
-                                <!--TODO:get rid of &nbsp; use the style instead--></span>
+                              
                      </li>           
                 </div>
 		         {% endfor %}
@@ -149,20 +149,18 @@
 </div>
 
 
-<div class="full_display">
-            
-		    <table class="note_table"><tr><td class="note_table_title">
-	            <div id="note_title">{% if user.username == profile_username %}<span class="editableText">{% endif %}<a href="/{{profile_username}}/framebook/notes/note/{{ note.id }}/"><b>{{ note.title|default:_('(No Title)') }}</b></a>{% if user.username == profile_username %}</span>{% endif %}</div> 	
-                     </td><td class="note_table_desc">			    
-		   <div  id="note_desc">{% if user.username == profile_username %}<span class="editableText">{% endif %}{{note.desc}}{% if user.username == profile_username %}</span>{% endif %}</div>
-		    <!-- <div  id="note_desc_short" title="note desc">{{note.get_desc_short}}</div>
-		    <div  id="note_desc_supershort" title="note desc">{{note.desc|truncatewords:"18" }}</div>-->
-		    </td>
-		    <td class="note_table_tags">
-		    <div id="note_tags">{{note.display_tags}}</div>
-		    
-		    </td>
-		    </tr>
+<div class="full_display">            
+		    <table class="note_table">
+                 <tr><td class="note_table_title">
+	                   <div id="note_title"><a href="/social/{{profile_username}}/framebook/notes/note/{{ note.id }}/"><b>{{ note.title|default:_('(No Title)') }}</b></a></div> 	
+                  </td>
+                  <td class="note_table_desc">	
+		              <div  id="note_desc">{{note.desc}}</div>		   
+		          </td>
+		          <td class="note_table_tags">
+		              <div id="note_tags">{{note.display_tags}}</div>		    
+		          </td>
+		         </tr>
 		    </table>
             
            
@@ -174,18 +172,18 @@
              {% if user.username == profile_username %} 
                {% for n in note.display_notes %}            
                 <div linked_note_id="{{n.0}}">
-                     <li><a href="/{{profile_username}}/{{bookname}}/{{included_aspect_name}}/note/{{n.0}}"><strong>{{n.1|default:'(No Title)'}}-</strong></a>
+                     <li><a href="/social/{{profile_username}}/{{bookname}}/notes/note/{{n.0}}"><strong>{{n.1|default:'(No Title)'}}-</strong></a>
                                 &nbsp;&nbsp;&nbsp;{{n.2|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp;{{n.3}} &nbsp;&nbsp;&nbsp;&nbsp; 
-                                <span title="remove this note from the linkage" class="inline_delete" id="linkage_delete_note">&nbsp;&nbsp;&nbsp;<!--TODO:get rid of &nbsp; use the style instead--></span>
+                               
                      </li>           
                 </div>
 		        {% endfor %}
               {% else %}              
                {% for n in note.display_public_notes  %}            
                 <div linked_note_id="{{n.0}}">
-                     <li><a href="/{{profile_username}}/{{bookname}}/{{included_aspect_name}}/note/{{n.0}}"><strong>{{n.1|default:'(No Title)'}}-</strong></a>
+                     <li><a href="/social/{{profile_username}}/{{bookname}}/notes/note/{{n.0}}"><strong>{{n.1|default:'(No Title)'}}-</strong></a>
                                 &nbsp;&nbsp;&nbsp;{{n.2|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp;{{n.3}} &nbsp;&nbsp;&nbsp;&nbsp; 
-                               <!--TODO:get rid of &nbsp; use the style instead--></span>
+                              
                      </li>           
                 </div>
 		         {% endfor %}
@@ -195,14 +193,16 @@
 		    </div>
             
            <div>
-		     <div  id="note_add_notes">{% if user.username == profile_username %}<span  class="editableText"></span>&nbsp;&nbsp;&nbsp;add more notes to the frame <a href="javascript:alert('{% trans "When editing, replace content with comma separated note ids. And those notes will be included in this frame." %}');"><img src="/media/img/admin/icon-unknown.gif"/></a>{% endif %}
-              </div>
-		    <div  id="note_init_date" title="initial creation time">{% if user.username == profile_username %}<span  class="editableText">{% endif %}{{note.init_date|date:"Y-m-d H:i"}}{% if user.username == profile_username %}<span>{% endif %}</div>
-		    <div  id="note_last_modi_date" title="last modified time">{{note.last_modi_date|date:"Y-m-d H:i"}} </div>
+		     
+		    <div  id="note_init_date" title="initial creation time" class="grey">{{note.init_date|date:"Y-m-d H:i"}}</div>
+		    <div  id="note_last_modi_date" title="last modified time" class="grey structure">{{note.last_modi_date|date:"Y-m-d H:i"}} </div>
 		    {% if note.attachment %}
 		    <div  id="note_attachment" title="attachment"><a href="/file/{{note.attachment.name}}" target="top">{{note.attachment.name}}</a> </div>
 		    {% endif %}
-	        </div>
+	        
+            {% include "social/notes/add_comments_inline.html" %}   
+            </div>
+            
             
 </div>            
           {% endif %}      

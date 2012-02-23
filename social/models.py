@@ -214,6 +214,12 @@ class Social_Frame(Social_Note):
     def __unicode__(self):
         return ','.join([str(note.id) for note in self.notes.all()])   
 
+    def display_notes(self):
+        return [[n.id, n.title, n.desc, n.vote] for n in self.notes.all()] 
+                
+    
+    def display_public_notes(self):        
+        return [[n.id, n.title, n.desc, n.vote] for n in self.notes.all() if n.private==False ] 
 
 
 

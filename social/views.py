@@ -414,38 +414,30 @@ def frames(request, username, bookname):
 
 
 @login_required
-def frame(request, username, bookname, frame_id):    
-      
-    frame = Social_Frame.objects.get(owner__username=username, id=frame_id)
-    #linkage_form = UpdateFrameForm(instance=note)
-#===============================================================================
-#    if request.user.username == username:
-#        frame_notes_display = frame.display_notes()
-#    else:
-#        frame_notes_display = frame.display_public_notes()    
-#===============================================================================
-    #tags of each note has to be added as below since it again needs to know which user database to use. 
-    #The same for note type    
-#===============================================================================
-#    for n in frame_notes_display:
-#        note_id = n[0]        
-#        N = getNote(username, 'notebook')
-#        note = N.objects.get(id=note_id)  
-#        type = note.get_note_type()
-#        n.append(type)
-#        n.append(note.get_tags())
-#        if type == 'Bookmark': 
-#            n.append(note.bookmark.url)
-#        elif type == 'Scrap':   
-#            n.append(note.scrap.url) 
-#        else:
-#            n.append('')     
-#===============================================================================
-        
-    
-        
+def frame(request, username, bookname, frame_id):         
+    frame = Social_Frame.objects.get(owner__username=username, id=frame_id)    
+    if request.user.username == username:
+        frame_notes_display = frame.display_notes()
+    else:
+        frame_notes_display = frame.display_public_notes()    
+    #tags of each note has to be added as below since it again needs to know which user database to use.
+    #The same for note type    TODO: but for Social_Frame, it acutally is all in default db. So?
+    for n in frame_notes_display:
+        note_id = n[0]        
+        N = getSN('notebook')
+        note = N.objects.get(id=note_id)  
+        type = note.get_note_type()
+        n.append(type)
+        n.append(note.get_tags())
+        if type == 'Bookmark': 
+            n.append(note.bookmark.url)
+        elif type == 'Scrap':   
+            n.append(note.scrap.url) 
+        else:
+            n.append('')     
+    print 'frame_notes_display:',frame_notes_display    
     return render_to_response('social/framebook/notes/note.html', {'frame':frame,\
-                                                             #'frame_notes_display':frame_notes_display, \
+                                                             'frame_notes_display':frame_notes_display, \
                                                              'profile_username':username}, context_instance=RequestContext(request,{'bookname': bookname,}))
 
 
