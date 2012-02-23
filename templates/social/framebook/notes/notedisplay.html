@@ -45,7 +45,7 @@
 <b>{% trans 'notes included' %} : </b>
 {% for n in frame.notes.all %}
 <div id="note_in_frame"><img src="/site_media/img/{{n.get_note_type}}.png" title="{{n.get_note_type}}"/>
-<a href="/social/{{profile_username}}/{{n.get_note_bookname}}/notes/note/{{n.id}}/">{{n.title|default:'(No Title)'}}</a> 
+<a href="/social/{{profile_username}}/{{n.get_note_bookname}}/notes/note/{{n.id}}/">{{ n.title|default:_('(No Title)')}} </a> 
 {{n.desc}} 
  {% if n.get_note_type == 'Bookmark' or n.get_note_type == 'Scrap' %} 
  <a href="{{n.url}}">

@@ -120,13 +120,13 @@
            
         
         <div  id="note_notes">
-            notes in this frame:
+            {% trans 'Notes included in this frame' %}:
             <ul>
             <!--TODO: refactor-->
              {% if user.username == profile_username %} 
                {% for n in note.display_notes %}            
                 <div linked_note_id="{{n.0}}">
-                     <li><a href="/{{profile_username}}/{{bookname}}/{{included_aspect_name}}/note/{{n.0}}"><strong>{{n.1|default:'(No Title)'}}-</strong></a>
+                     <li><a href="/{{profile_username}}/{{bookname}}/{{included_aspect_name}}/note/{{n.0}}"><strong>{{n.1|default:_('(No Title)')}}-</strong></a>
                                 &nbsp;&nbsp;&nbsp;{{n.2|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp;{{n.3}} &nbsp;&nbsp;&nbsp;&nbsp; 
                                 <span title="remove this note from the linkage" class="inline_delete" id="linkage_delete_note">&nbsp;&nbsp;&nbsp;<!--TODO:get rid of &nbsp; use the style instead--></span>
                      </li>           
@@ -135,7 +135,7 @@
               {% else %}              
                {% for n in note.display_public_notes  %}            
                 <div linked_note_id="{{n.0}}">
-                     <li><a href="/{{profile_username}}/{{bookname}}/{{included_aspect_name}}/note/{{n.0}}"><strong>{{n.1|default:'(No Title)'}}-</strong></a>
+                     <li><a href="/{{profile_username}}/{{bookname}}/{{included_aspect_name}}/note/{{n.0}}"><strong>{{n.1|default:_('(No Title)')}}-</strong></a>
                                 &nbsp;&nbsp;&nbsp;{{n.2|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp;{{n.3}} &nbsp;&nbsp;&nbsp;&nbsp; 
                                 <!--TODO:get rid of &nbsp; use the style instead--></span>
                      </li>           
@@ -168,13 +168,13 @@
            
 		   
 		    <div  id="note_notes">
-            notes in this frame:
+             {% trans 'Notes included in this frame' %}:
             <ul>
             <!--TODO: refactor-->
              {% if user.username == profile_username %} 
                {% for n in note.display_notes %}            
                 <div linked_note_id="{{n.0}}">
-                     <li><a href="/{{profile_username}}/{{bookname}}/{{included_aspect_name}}/note/{{n.0}}"><strong>{{n.1|default:'(No Title)'}}-</strong></a>
+                     <li><a href="/{{profile_username}}/{{bookname}}/{{included_aspect_name}}/note/{{n.0}}"><strong>{{n.1|default:_('(No Title)')}}-</strong></a>
                                 &nbsp;&nbsp;&nbsp;{{n.2|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp;{{n.3}} &nbsp;&nbsp;&nbsp;&nbsp; 
                                 <span title="remove this note from the linkage" class="inline_delete" id="linkage_delete_note">&nbsp;&nbsp;&nbsp;<!--TODO:get rid of &nbsp; use the style instead--></span>
                      </li>           
@@ -183,7 +183,7 @@
               {% else %}              
                {% for n in note.display_public_notes  %}            
                 <div linked_note_id="{{n.0}}">
-                     <li><a href="/{{profile_username}}/{{bookname}}/{{included_aspect_name}}/note/{{n.0}}"><strong>{{n.1|default:'(No Title)'}}-</strong></a>
+                     <li><a href="/{{profile_username}}/{{bookname}}/{{included_aspect_name}}/note/{{n.0}}"><strong>{{n.1|default:_('(No Title)')}}-</strong></a>
                                 &nbsp;&nbsp;&nbsp;{{n.2|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp;{{n.3}} &nbsp;&nbsp;&nbsp;&nbsp; 
                                <!--TODO:get rid of &nbsp; use the style instead--></span>
                      </li>           
@@ -195,7 +195,7 @@
 		    </div>
             
            <div>
-		     <div  id="note_add_notes">{% if user.username == profile_username %}<span  class="editableText"></span>&nbsp;&nbsp;&nbsp;add more notes to the frame <a href="javascript:alert('{% trans "When editing, replace content with comma separated note ids. And those notes will be included in this frame." %}');"><img src="/media/img/admin/icon-unknown.gif"/></a>{% endif %}
+		     <div  id="note_add_notes">{% if user.username == profile_username %}<span  class="editableText"></span>&nbsp;&nbsp;&nbsp;{% trans 'add more notes to the frame' %} <a href="javascript:alert('{% trans "When editing, replace content with comma separated note ids. And those notes will be included in this frame." %}');"><img src="/media/img/admin/icon-unknown.gif"/></a>{% endif %}
               </div>
 		    <div  id="note_init_date" title="initial creation time">{% if user.username == profile_username %}<span  class="editableText">{% endif %}{{note.init_date|date:"Y-m-d H:i"}}{% if user.username == profile_username %}<span>{% endif %}</div>
 		    <div  id="note_last_modi_date" title="last modified time">{{note.last_modi_date|date:"Y-m-d H:i"}} </div>

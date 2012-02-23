@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-23 19:10+0800\n"
+"POT-Creation-Date: 2012-02-23 19:44+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -724,7 +724,11 @@ msgstr "链条"
 #: templates/bookmarkbook/notes/notes_display.html:27
 #: templates/framebook/notes/notedisplay.html:19
 #: templates/framebook/notes/notesdisplay.html:109
+#: templates/framebook/notes/notesdisplay.html:129
+#: templates/framebook/notes/notesdisplay.html:138
 #: templates/framebook/notes/notesdisplay.html:155
+#: templates/framebook/notes/notesdisplay.html:177
+#: templates/framebook/notes/notesdisplay.html:186
 #: templates/notes/linkagenotesdisplay.html:109
 #: templates/notes/linkagenotesdisplay.html:155
 #: templates/notes/notedisplay.html:19 templates/notes/notes_display.html:8
@@ -747,8 +751,13 @@ msgstr "链条"
 #: templates/social/snippetsdisplay.html:11
 #: templates/social/snippetsdisplay.html:34
 #: templates/social/framebook/notes/notedisplay.html:19
+#: templates/social/framebook/notes/notedisplay.html:48
 #: templates/social/framebook/notes/notesdisplay.html:109
+#: templates/social/framebook/notes/notesdisplay.html:129
+#: templates/social/framebook/notes/notesdisplay.html:138
 #: templates/social/framebook/notes/notesdisplay.html:155
+#: templates/social/framebook/notes/notesdisplay.html:175
+#: templates/social/framebook/notes/notesdisplay.html:184
 msgid "(No Title)"
 msgstr "（无标题）"
 
@@ -1238,6 +1247,7 @@ msgstr "编辑这个包"
 #: templates/include/notesdisplay.html:82
 #: templates/social/notesdisplay-backup.html:18
 #: templates/social/notesdisplay.html:18
+#: templates/social/framebook/notes/notesdisplay.html:56
 msgid "Show"
 msgstr "显示"
 
@@ -1245,6 +1255,7 @@ msgstr "显示"
 #: templates/include/notesdisplay.html:83
 #: templates/social/notesdisplay-backup.html:18
 #: templates/social/notesdisplay.html:18
+#: templates/social/framebook/notes/notesdisplay.html:56
 msgid "Expanded"
 msgstr "展开"
 
@@ -1252,6 +1263,7 @@ msgstr "展开"
 #: templates/include/notesdisplay.html:84
 #: templates/social/notesdisplay-backup.html:18
 #: templates/social/notesdisplay.html:18
+#: templates/social/framebook/notes/notesdisplay.html:56
 msgid "List"
 msgstr "表单"
 
@@ -1290,6 +1302,18 @@ msgstr "底"
 #: templates/social/framebook/notes/notesdisplay.html:71
 msgid "Expand all"
 msgstr "扩展所有的"
+
+#: templates/framebook/notes/notesdisplay.html:123
+#: templates/framebook/notes/notesdisplay.html:171
+#: templates/notes/notedisplay.html:72 templates/social/notedisplay.html:73
+#: templates/social/framebook/notes/notesdisplay.html:123
+#: templates/social/framebook/notes/notesdisplay.html:169
+msgid "Notes included in this frame"
+msgstr "包里所含笔记"
+
+#: templates/framebook/notes/notesdisplay.html:198
+msgid "add more notes to the frame"
+msgstr "把更多的笔记放入这个包内"
 
 #: templates/framebook/notes/notesdisplay.html:198
 #: templates/notes/todelete/framesdisplay.html:198
@@ -1804,10 +1828,6 @@ msgstr "同一个主题"
 #: templates/snippetbook/notes/linkages.html:14
 msgid "Same Event"
 msgstr "同一个事件"
-
-#: templates/notes/notedisplay.html:72 templates/social/notedisplay.html:73
-msgid "Notes included in this frame"
-msgstr "包里所含笔记"
 
 #: templates/notes/notedisplay.html:76 templates/social/notedisplay.html:77
 msgid "No Notes included"

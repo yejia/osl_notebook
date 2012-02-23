@@ -221,6 +221,11 @@ class Social_Frame(Social_Note):
     def display_public_notes(self):        
         return [[n.id, n.title, n.desc, n.vote] for n in self.notes.all() if n.private==False ] 
 
+    def get_vote(self):        
+        v = 0  
+        for n in self.notes.all(): 
+            v = v + n.vote
+        return v
 
 
 class Social_Note_Comment(models.Model):

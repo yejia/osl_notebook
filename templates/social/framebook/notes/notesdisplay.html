@@ -53,7 +53,7 @@
 
 
 <div class="section_header">
-<span class="item">Show:</span><span class="item"><a href="javascript:expandall();">Expanded</span><span class="item"><a href="javascript:collapseall();">List</a></span><span class="show_notes_section"><img title="show {{included_aspect_name}} section" src="/site_media/img/down-arrow.jpg"/></span><span class="hide_notes_section"><img title="hide {{included_aspect_name}} section" src="/site_media/img/collapse-arrow.jpg"/></span> 
+<span class="item">{% trans 'Show' %}:</span><span class="item"><a href="javascript:expandall();">{% trans 'Expanded' %}</span><span class="item"><a href="javascript:collapseall();">{% trans 'List' %}</a></span><span class="show_notes_section"><img title="show {{included_aspect_name}} section" src="/site_media/img/down-arrow.jpg"/></span><span class="hide_notes_section"><img title="hide {{included_aspect_name}} section" src="/site_media/img/collapse-arrow.jpg"/></span> 
 </div>
 
 <table width="100%"><tr>
@@ -120,13 +120,13 @@
            
         
         <div  id="note_notes">
-            notes in this frame:
+            {% trans 'Notes included in this frame' %}:
             <ul>
             <!--TODO: refactor-->
              {% if user.username == profile_username %} 
                {% for n in note.display_notes %}            
                 <div linked_note_id="{{n.0}}">
-                     <li><a href="/social/{{profile_username}}/{{bookname}}/notes/note/{{n.0}}"><strong>{{n.1|default:'(No Title)'}}-</strong></a>
+                     <li><a href="/social/{{profile_username}}/{{bookname}}/notes/note/{{n.0}}"><strong>{{ n.1|default:_('(No Title)') }} </strong></a>
                                 &nbsp;&nbsp;&nbsp;{{n.2|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp;{{n.3}} &nbsp;&nbsp;&nbsp;&nbsp; 
                                
                      </li>           
@@ -135,7 +135,7 @@
               {% else %}              
                {% for n in note.display_public_notes  %}            
                 <div linked_note_id="{{n.0}}">
-                     <li><a href="/social/{{profile_username}}/{{bookname}}/notes/note/{{n.0}}"><strong>{{n.1|default:'(No Title)'}}-</strong></a>
+                     <li><a href="/social/{{profile_username}}/{{bookname}}/notes/note/{{n.0}}"><strong>{{ n.1|default:_('(No Title)') }} </strong></a>
                                 &nbsp;&nbsp;&nbsp;{{n.2|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp;{{n.3}} &nbsp;&nbsp;&nbsp;&nbsp; 
                               
                      </li>           
@@ -166,13 +166,13 @@
            
 		   
 		    <div  id="note_notes">
-            notes in this frame:
+             {% trans 'Notes included in this frame' %}:
             <ul>
             <!--TODO: refactor-->
              {% if user.username == profile_username %} 
                {% for n in note.display_notes %}            
                 <div linked_note_id="{{n.0}}">
-                     <li><a href="/social/{{profile_username}}/{{bookname}}/notes/note/{{n.0}}"><strong>{{n.1|default:'(No Title)'}}-</strong></a>
+                     <li><a href="/social/{{profile_username}}/{{bookname}}/notes/note/{{n.0}}"><strong>{{ n.1|default:_('(No Title)') }} </strong></a>
                                 &nbsp;&nbsp;&nbsp;{{n.2|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp;{{n.3}} &nbsp;&nbsp;&nbsp;&nbsp; 
                                
                      </li>           
@@ -181,7 +181,7 @@
               {% else %}              
                {% for n in note.display_public_notes  %}            
                 <div linked_note_id="{{n.0}}">
-                     <li><a href="/social/{{profile_username}}/{{bookname}}/notes/note/{{n.0}}"><strong>{{n.1|default:'(No Title)'}}-</strong></a>
+                     <li><a href="/social/{{profile_username}}/{{bookname}}/notes/note/{{n.0}}"><strong>{{ n.1|default:_('(No Title)') }} </strong></a>
                                 &nbsp;&nbsp;&nbsp;{{n.2|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp;{{n.3}} &nbsp;&nbsp;&nbsp;&nbsp; 
                               
                      </li>           
