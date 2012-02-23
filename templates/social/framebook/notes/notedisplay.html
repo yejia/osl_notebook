@@ -69,7 +69,7 @@
 <!--li tag is added solely to accomodate the code used in the notes display page where js need to find the parent li tag to locate with note to add comment-->
 <li note_id="{{note.id}}">
 <!---change variable name-->
-{% with note=frame %}
+{% with frame as note %}
 {% include "social/notes/add_comments_inline.html" %} 
 {% endwith %}
 </li>
