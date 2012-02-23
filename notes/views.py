@@ -1629,8 +1629,9 @@ def share(request, username, bookname):
         if bookname == 'scrapbook':
             content = note.url + '   ' + note.desc   
         if bookname == 'framebook':
-            content = 'Sharing knowledge package:'+note.title + '   ' + note.desc     
+            content = _('Sharing knowledge package:')+note.title + '   ' + note.desc     
 
+        content = content + '  http://opensourcelearning.org/social/'+username+'/'+bookname+'/notes/note/'+str(note.id)+'/'
 #        #send to weibo        
         if 'sina' in bound_sites:
             status = api.update_status(status=content)

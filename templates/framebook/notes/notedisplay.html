@@ -12,7 +12,7 @@
 </script>
 
 <div>
-<h2>Frame</h2><a href="/{{profile_username}}/notebook/frames/">{% trans 'View all frames' %}</a>
+<h2>{% trans 'Frame' %}</h2><a href="/{{profile_username}}/notebook/frames/">{% trans 'View all frames' %}</a>
 </div>
 
 <div>
@@ -25,24 +25,24 @@
 <b>{% trans 'desc' %}:</b> {{frame.desc}}
 </div>
 <div>
-<b>tags:</b> {{frame.display_tags}}
+<b>{% trans 'tags' %}:</b> {{frame.display_tags}}
 </div>
 
 
 <div>
-<b>private:</b> {{frame.private}}
+<b>{% trans 'private' %}:</b> {{frame.private}}
 </div>
 
 <div>
 <b>{% trans 'importance' %}:</b> {{frame.vote}}
 </div>
 <div>
-<b>attachment:</b> {{frame.attachment}}
+<b>{% trans 'attachment' %}:</b> {{frame.attachment}}
 </div>
 <div>
 
 
-<b>included notes: </b>
+<b>{% trans 'notes included' %}: </b>
 {% for id, title, desc, vote, type, note_bookname, tags, url in frame_notes_display %}
 <div id="note_in_frame"><img src="/site_media/img/{{type}}.png" title="{{type}}"/>
 <a href="/{{profile_username}}/{{note_bookname}}/notes/note/{{id}}/">{{title|default:'(No Title)'}}</a> 
@@ -74,7 +74,7 @@
 <!--TODO: change the way frames are updated here.  For now, just hide it-->
  {% if user.username == profile_username %} 
 <div>
-<span id="edit_linkage"><a href="#">Edit this Frame:</a></span>
+<span id="edit_linkage"><a href="#">{% trans 'Edit this Frame' %}:</a></span>
 <div>
 <form action="updateFrame/" method="post" enctype="multipart/form-data" id="updateFrameForm">
 {{frame_form.as_p}}
