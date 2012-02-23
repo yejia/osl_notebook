@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-23 19:44+0800\n"
+"POT-Creation-Date: 2012-02-24 00:05+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2374,6 +2374,13 @@ msgstr "所有工作区"
 #: templates/workingset/index.html:341
 msgid "Make Current"
 msgstr "设成当前"
+
+#, fuzzy
+#~ msgid "Public Note of %(note.get_note_type)s"
+#~ msgstr "公开%(profile_username)s"
+
+#~ msgid "Public Note of "
+#~ msgstr "公开"
 
 #~ msgid "Linking"
 #~ msgstr "组成链条"

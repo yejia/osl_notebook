@@ -18,7 +18,7 @@
                 <tr class="notice">
             {% endif %}
                 <td class="notice_type">[{% trans notice.notice_type.display %}]</td>
-                <td class="notice_message">{{ notice.message|safe }}</td>
+                <td class="notice_message"><a href="{% if notice.notice_type.label == 'comment_receive' %}/social/{{user}}/commentsfor/"{% else %}/messages/{% endif %}">{{ notice.message|safe }}</a></td>
                 <td class="notice_time">{{ notice.added|timesince }} {% trans "ago" %}</td>
             </tr>
         {% endfor %}

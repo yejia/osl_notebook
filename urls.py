@@ -90,6 +90,8 @@ urlpatterns = patterns('',
     (r'^social/(?P<username>[^/]+)/(?P<bookname>[^/]+)/notes/$', 'notebook.social.views.notes'),
     (r'^social/(?P<username>[^/]+)/(?P<bookname>[^/]+)/notes/note/(?P<note_id>[^/]+)/$','notebook.social.views.note'),
     (r'^social/(?P<username>[^/]+)/(?P<bookname>[^/]+)/tags/(?P<tag_name>[^/]+)/$', 'notebook.social.views.notes_tag'),
+    #might delete this one or the above one
+    (r'^social/(?P<username>[^/]+)/(?P<bookname>[^/]+)/notes/tags/(?P<tag_name>[^/]+)/$', 'notebook.social.views.notes_tag'),
     (r'^social/(?P<username>[^/]+)/(?P<bookname>[^/]+)/folders/(?P<foldername>[^/]+)/$', 'notebook.social.views.folders'),
 
 
