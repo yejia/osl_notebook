@@ -153,6 +153,10 @@
                       '</li>';
      //      alert('toprepend:'+toprepend);         
         $('div.notes_display').find('ul').prepend(toprepend);
+        
+        $('#id_desc').val('');
+        
+        //TODO: duplicated, merge 
           $('li.note_display').mouseenter(function(){	    
                         $(this).find('.hover').show(0);
                         
