@@ -32,7 +32,7 @@
 <b>{% trans 'importance' %} : </b>{{note.vote}}
 </div>
 <div>
-<b>{% trans 'private' %} :</b> {{note.private}}
+<b>{% trans 'private' %} :</b> {{note.private|yesno:"yeah,no,maybe" }}
 </div>
 <div>
 <b>attachment:</b> <a href="/file/{{note.attachment.name}}" target="top">{{note.attachment}}</a>
