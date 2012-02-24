@@ -30,7 +30,7 @@
 
 
 <div>
-<b>{% trans 'private' %}:</b> {{frame.private}}
+<b>{% trans 'private' %}:</b> {{frame.private|yesno:"yeah,no,maybe" }}
 </div>
 
 <div>
