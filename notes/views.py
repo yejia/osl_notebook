@@ -1582,7 +1582,7 @@ def share_todelete(request, username, bookname):
 
 #TODO: private notes cannot be shared. Might implement the permission control at a finer level
 @login_required
-def share(request, username, bookname):     
+def share(request, bookname):     
     note_ids = request.POST.getlist('note_ids')   
     N = getSN(bookname)
     msgs = [] 
@@ -1595,14 +1595,14 @@ def share(request, username, bookname):
     #weibo
     if 'sina' in bound_sites:
         auth_client = _oauth()
-        access_key, access_secret = getAccessKey(username, 'sina')        
+        access_key, access_secret = getAccessKey(request.user.username, 'sina')        
         auth_client.set_access_token(access_key, access_secret)
         api = API(auth_client)
     
     #douban
     if 'douban' in bound_sites:
         d_service = DoubanService(api_key=douban_consumer_key, secret=douban_consumer_secret)
-        d_access_key, d_access_secret = getAccessKey(username, 'douban')        
+        d_access_key, d_access_secret = getAccessKey(request.user.username, 'douban')        
         d_service.client.token = douban.oauth.OAuthToken(str(d_access_key), str(d_access_secret))
     if 'tencent' in bound_sites: 
              #TODO: 
@@ -1631,8 +1631,11 @@ def share(request, username, bookname):
             content = _('Sharing scrap:')+note.desc[0:120] + '   '+ note.url   
         if bookname == 'framebook':
             content = _('Sharing knowledge package:')+note.title + '   ' + note.desc[0:120]     
-
-        content = content +'    '+ _('Original Note:')+'  http://opensourcelearning.org/social/'+username+'/'+bookname+'/notes/note/'+str(note.id)+'/'
+        if request.user.username == note.owner.username:
+            source_str = _('Original Note:')
+        else:
+            source_str = _('Forwarded Note:')    
+        content = content +'    '+ source_str +'  http://opensourcelearning.org/social/'+note.owner.username+'/'+bookname+'/notes/note/'+str(note.id)+'/'
 #        #send to weibo        
         if 'sina' in bound_sites:
             status = api.update_status(status=content)

@@ -175,7 +175,7 @@ def friends(request, username):
 def friends_notes(request, username, bookname):
     friends = request.user.member.get_friends()
     q = Q(owner__in=friends, private=False)
-    note_list = book_model_dict.get(bookname).objects.filter(q)   
+    note_list = getSN(bookname).objects.filter(q)   
     qstr = __getQStr(request)    
     note_list  = getSearchResults(note_list, qstr)
     
@@ -217,7 +217,7 @@ def groups_notes(request, username, bookname):
         q = q | (qa | qb)
         
    
-    note_list = book_model_dict.get(bookname).objects.filter(q)   
+    note_list = getSN(bookname).objects.filter(q)   
     qstr = __getQStr(request)    
     note_list  = getSearchResults(note_list, qstr)
     
@@ -619,7 +619,7 @@ def group(request, groupname, bookname):
         
     q1 = Q(tags__name__in=tag_names, owner__in=group.members.all(), private=False)   
     q2 = Q(tags__name="sharinggroup:"+groupname, private=True) 
-    note_list = book_model_dict.get(bookname).objects.filter(q1 | q2)    
+    note_list = getSN(bookname).objects.filter(q1 | q2)    
         
     #log.debug('All snippets of the group '+groupname+' :'+str(notes))
         
@@ -684,7 +684,7 @@ def group_tag(request, groupname, bookname, tag_name):
 #        #default snippets
 #        note_list = Social_Snippet.objects.filter(tags__name=tag_name, owner__in=group.members.all())
     #print 'getting notes of tag:', tag_name, ' of bookname:', bookname
-    note_list = book_model_dict.get(bookname).objects.filter(tags__name=tag_name, owner__in=group.members.all())
+    note_list = getSN(bookname).objects.filter(tags__name=tag_name, owner__in=group.members.all())
     #print 'notes of the tag:', note_list
     qstr = __getQStr(request)    
     note_list  = getSearchResults(note_list, qstr)

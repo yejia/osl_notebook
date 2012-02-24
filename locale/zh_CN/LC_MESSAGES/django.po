@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-24 15:21+0800\n"
+"POT-Creation-Date: 2012-02-24 17:30+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -85,6 +85,10 @@ msgstr "分享知识包："
 #: notes/views.py:1635
 msgid "Original Note:"
 msgstr "原笔记："
+
+#: notes/views.py:1637
+msgid "Forwarded Note:"
+msgstr "转发的笔记："
 
 #: notes/templatetags/admin_list.py:257
 msgid "All dates"
@@ -1306,7 +1310,7 @@ msgid "Save Comment"
 msgstr "增加评论"
 
 #: templates/include/add_comments_inline.html:18
-#: templates/social/notes/add_comments_inline.html:32
+#: templates/social/notes/add_comments_inline.html:22
 #: templates/social/todelete/add_comments_inline.html:3
 msgid "remove this comment"
 msgstr "去除这个评论"
@@ -1682,39 +1686,34 @@ msgstr "画图"
 msgid "Diff"
 msgstr "不同"
 
-#: templates/include/notesdisplay.html:171
-#: templates/social/notes/add_comments_inline.html:39
-msgid "Share"
-msgstr "分享"
-
-#: templates/include/notesdisplay.html:172 templates/tags/index.html:168
+#: templates/include/notesdisplay.html:171 templates/tags/index.html:168
 #: templates/workingset/index.html:307
 msgid "Make private"
 msgstr "变隐私"
 
-#: templates/include/notesdisplay.html:173 templates/tags/index.html:169
+#: templates/include/notesdisplay.html:172 templates/tags/index.html:169
 #: templates/workingset/index.html:308
 msgid "Make public"
 msgstr "变公开"
 
-#: templates/include/notesdisplay.html:174 templates/tags/index.html:170
+#: templates/include/notesdisplay.html:173 templates/tags/index.html:170
 #: templates/workingset/index.html:309
 msgid "Soft Delete"
 msgstr "软删除"
 
-#: templates/include/notesdisplay.html:175
+#: templates/include/notesdisplay.html:174
 msgid "Change the creation date"
 msgstr "改变生成的时间"
 
-#: templates/include/notesdisplay.html:176
+#: templates/include/notesdisplay.html:175
 msgid "Apply a vote"
 msgstr "自评一个重要值"
 
-#: templates/include/notesdisplay.html:177
+#: templates/include/notesdisplay.html:176
 msgid "Add event"
 msgstr ""
 
-#: templates/include/notesdisplay.html:178
+#: templates/include/notesdisplay.html:177
 msgid "Add comment"
 msgstr "增加评论"
 
@@ -2302,6 +2301,10 @@ msgstr "小组的标签"
 #: templates/social/admin/group.html:61
 msgid "remove this tag"
 msgstr "去除标签"
+
+#: templates/social/notes/add_comments_inline.html:29
+msgid "Share"
+msgstr "分享"
 
 #: templates/tags/index.html:125
 msgid "Please be aware that all apps share the same tags management page."
