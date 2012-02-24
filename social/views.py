@@ -419,7 +419,7 @@ def frame(request, username, bookname, frame_id):
     else:
         frame_notes_display = frame.display_public_notes()    
     #tags of each note has to be added as below since it again needs to know which user database to use.
-    #The same for note type    TODO: but for Social_Frame, it acutally is all in default db. So?
+    #The same for note type    TODO: but for Social_Frame, it actually is all in default db. So?
     for n in frame_notes_display:
         note_id = n[0]        
         N = getSN('notebook')
@@ -428,12 +428,12 @@ def frame(request, username, bookname, frame_id):
         n.append(type)
         n.append(note.get_tags())
         if type == 'Bookmark': 
-            n.append(note.bookmark.url)
+            n.append(note.social_bookmark.url)
         elif type == 'Scrap':   
-            n.append(note.scrap.url) 
+            n.append(note.social_scrap.url) 
         else:
             n.append('')     
-    print 'frame_notes_display:',frame_notes_display    
+    #print 'frame_notes_display:',frame_notes_display    
     return render_to_response('social/framebook/notes/note.html', {'frame':frame,\
                                                              'frame_notes_display':frame_notes_display, \
                                                              'profile_username':username}, context_instance=RequestContext(request,{'bookname': bookname,}))
