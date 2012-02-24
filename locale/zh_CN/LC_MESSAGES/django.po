@@ -68,15 +68,15 @@ msgstr "条笔记"
 
 #: notes/views.py:1627
 msgid "Sharing snippet:"
-msgstr "分享便条"
+msgstr "分享便条："
 
 #: notes/views.py:1629
 msgid "Sharing bookmark:"
-msgstr "分享网址"
+msgstr "分享网址："
 
 #: notes/views.py:1631
 msgid "Sharing scrap:"
-msgstr "分享网摘"
+msgstr "分享网摘："
 
 #: notes/views.py:1633
 msgid "Sharing knowledge package:"
