@@ -1678,7 +1678,11 @@ def set_notes_private(request, username, bookname):
     note_ids = request.POST.getlist('note_ids')    
     N = getNote(username, bookname)
     notes = N.objects.filter(id__in=note_ids)
-    notes.update(private = True)
+    #below doesn't call note.save9)? It seems that it doesn't withdrawn notes made private from public. why? TODO:
+    #notes.update(private = True)
+    for note in notes:
+        note.private = True
+        note.save()
     return HttpResponse(simplejson.dumps(note_ids), "application/json")   
     #return HttpResponse('success', mimetype="text/plain") 
 
@@ -1687,7 +1691,10 @@ def set_notes_public(request, username, bookname):
     note_ids = request.POST.getlist('note_ids')   
     N = getNote(username, bookname)
     notes = N.objects.filter(id__in=note_ids)    
-    notes.update(private = False)
+    #notes.update(private = False)
+    for note in notes:
+        note.private = False
+        note.save()
     return HttpResponse(simplejson.dumps(note_ids), "application/json")  
     #return HttpResponse('success', mimetype="text/plain")
 

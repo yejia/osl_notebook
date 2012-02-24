@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-24 18:54+0800\n"
+"POT-Creation-Date: 2012-02-24 22:15+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1820,6 +1820,11 @@ msgstr "同一个主题"
 #: templates/snippetbook/notes/linkages.html:14
 msgid "Same Event"
 msgstr "同一个事件"
+
+#: templates/notes/note_list_base.html:5
+#python-format
+msgid "All notes of %(profile_username)s"
+msgstr "%(profile_username)s的所有笔记"
 
 #: templates/notes/notedisplay.html:76 templates/social/notedisplay.html:77
 msgid "No Notes included"
