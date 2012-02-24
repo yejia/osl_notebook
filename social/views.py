@@ -28,6 +28,7 @@ from notebook.notes.constants import *
 log = getlogger('social.views')  
 
 #TODO: make this the same as in notebook.notes.views
+#TODO:belows seems not useful at all. Think of removing them 
 book_entry_dict = {'notebook':'note', 'snippetbook':'snippet','bookmarkbook':'bookmark', 'scrapbook': 'scrap'}
   
 
@@ -313,17 +314,14 @@ def push_group_tags_back(request, groupname):
         
 
 
-book_model_dict = {'notebook':Social_Note, 'snippetbook':Social_Snippet,'bookmarkbook':Social_Bookmark, 'scrapbook': Social_Scrap, 'framebook':Social_Frame}
 
-def getSN(bookname):
-    return book_model_dict.get(bookname)
 
 @login_required
 def notes(request, username, bookname):
     if 'framebook' == bookname:
         return frames(request, username, 'notebook')   
     #profile_user = 
-    note_list = book_model_dict.get(bookname).objects.filter(owner__username=username)   
+    note_list = getSN(bookname).objects.filter(owner__username=username)   
     #print 'notelist obtained:', note_list    
     qstr = __getQStr(request)    
     note_list  = getSearchResults(note_list, qstr)
@@ -733,11 +731,11 @@ def add_comment(request):
     nc = Social_Note_Comment(note=note, commenter=request.user.member, desc=content)
     nc.save()
     #send notice to the user
-    print 'sending notice'
+    #print 'sending notice'
     if notification:
       notification.send([note.owner], "comment_receive", {"from_user": request.user})
-      print 'notices sent'
-    return  HttpResponse(simplejson.dumps({'note_id':note_id, 'content':content}),
+      #print 'notices sent'
+    return  HttpResponse(simplejson.dumps({'note_id':note_id, 'content':content, 'commenter':nc.commenter.username}),
                                                                      "application/json")
 
 

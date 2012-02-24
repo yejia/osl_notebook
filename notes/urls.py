@@ -74,7 +74,7 @@ urlpatterns = patterns('',
     (r'^setNotesPrivate/$','notebook.notes.views.set_notes_private'),
     (r'^setNotesPublic/$','notebook.notes.views.set_notes_public'),
 
-    (r'^share/$','notebook.notes.views.share'),
+ 
 
 
 

@@ -526,21 +526,9 @@
     }
     
     
-     function share(){
-             selected_notes = getSelectedNoteIds();
-             $.post('/{{profile_username}}/{{bookname}}/share/',{'note_ids':selected_notes}, shared, 'json');
+
      
-     }
-     
-      function shared(result){      
-           if (result.count_of_sites==0){
-                alert('You have not set up sites for sharing. Please set it up in the settings.');
-           }
-           else{           
-                alert(result.count_of_notes+' notes are shared with '+ result.count_of_sites+' sites! You can change sites for sharing in the settings. ');
-           }
-		
-      }  
+       
         
     function expandall(){       
               $('div.brief_display').hide();
@@ -601,6 +589,25 @@
 	
 <script type="text/javascript">
 	$(document).ready(function(){	
+    
+        
+             $('.share_button').click(function(){	
+                //selected_notes = getSelectedNoteIds();
+                //$.post('/{{profile_username}}/{{bookname}}/share/',{'note_ids':selected_notes}, shared, 'json');
+                $.post('/social/{{profile_username}}/{{bookname}}/share/',{'note_ids':$(this).parents('li').attr('note_id')}, shared, 'json');
+     
+           });
+           
+            function shared(result){      
+                if (result.count_of_sites==0){
+                        alert('You have not set up sites for sharing. Please set it up in the settings.');
+                }
+                else{           
+                        alert(result.count_of_notes+' notes are shared with '+ result.count_of_sites+' sites! You can change sites for sharing in the settings. ');
+                }
+		
+      }
+
     
 
           $('li.note_display').mouseenter(function(){	    
@@ -882,11 +889,11 @@
                 
                 function commentAdded(result){
                      note_id = result.note_id;
-                     $("li[note_id='"+note_id+"']").find('div#comments').append("<div>"+result.content+"</div>");            
+                     $("li[note_id='"+note_id+"']").find('div#comments').append({% block comment_display  %}"<div>"+result.content+"</div>"{% endblock %});   
                      
                     comment_box = $("li[note_id='"+note_id+"']").find('div#add_comment_box');
                     comment_box.find("#add_comment").val('')
-                    comment_box.hide();
+                    //comment_box.hide();
                 
                 }
                 

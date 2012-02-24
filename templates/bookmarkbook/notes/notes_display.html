@@ -44,22 +44,9 @@
 		    <div  id="note_last_modi_date" title="last modified time" class="grey structure">{{note.last_modi_date|date:"Y-m-d H:i"}} </div>
 		    
             <div  class="structure advanced" id="note_frames" title="{% trans "note in frames" %}">Frames: {{note.display_frames|default:'Not in any frames'}}</div>
-             <div id="comments">{% trans "Comment" %}:<br/> 
-                    {% for comment in note.get_comments %}
-                            <div comment_id="{{comment.id}}">{{comment}}  <span title="{% trans "remove this comment" %}" class="inline_delete_comment" id="note_delete_comment">&nbsp;&nbsp;&nbsp;</span></div>                    
-                    {% endfor %}
-             </div>
-             <div class="add_comment_button"><!--<button>{% trans "Comment" %}</button>--><img src="/site_media/img/add.gif" title="{% trans "Add Comment" %}" class="clickable"/></div>
              
-             
-             <div id="add_comment_box" style="display:none;">{{user.username}}: <textarea id="add_comment" rows="3" cols="90" name="desc"></textarea><!--<button class="comment_submit">{% trans "Add Comment" %}</button>-->
-             <span class="comment_submit"  title="{% trans "Save Comment" %}"><img src="/site_media/img/save.png"/></span>&nbsp;<span class="cancel_comment_submit" title="{% trans "Cancel" %}"><img src="/site_media/img/cancel.png" /></span></div>
-             
-	        
-        
-         
-	        </div>
-
+               {% include "include/add_comments_inline.html" %}   
+            </div>
 </div>
 </div>
 {% endblock %}

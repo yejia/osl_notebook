@@ -4,6 +4,7 @@ from notebook.notes.models import Note, Tag, Frame, LinkageNote, Folder, Working
 from notebook.snippets.models import Snippet
 from notebook.bookmarks.models import Bookmark
 from notebook.scraps.models import Scrap
+from notebook.social.models import Social_Note, Social_Snippet, Social_Bookmark, Social_Scrap, Social_Frame
 
 
 
@@ -22,7 +23,10 @@ def getFolder(username, bookname):
 def getCache(username, bookname):
     return create_model("Cache_"+str(bookname)+"_"+str(username), book_cache_dict.get(bookname), username)    
 
+social_book_model_dict = {'notebook':Social_Note, 'snippetbook':Social_Snippet,'bookmarkbook':Social_Bookmark, 'scrapbook': Social_Scrap, 'framebook':Social_Frame}
 
+def getSN(bookname):
+    return social_book_model_dict.get(bookname)
 
 
 

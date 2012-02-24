@@ -1,6 +1,30 @@
 {% extends "include/add_comments_inline.html" %}
 {% load i18n %}
 
+<script type="text/javascript">
+	$(document).ready(function(){	
+
+           
+           
+            function shared(result){      
+                if (result.count_of_sites==0){
+                        alert('You have not set up sites for sharing. Please set it up in the settings.');
+                }
+                else{           
+                        alert(result.count_of_notes+' notes are shared with '+ result.count_of_sites+' sites! You can change sites for sharing in the settings. ');
+                }
+		
+      }
+     
+    });
+     	
+</script>
+
+
+
+{% block comment_display %}"<div><a href='/social/"+result.commenter+"/'>"+result.commenter+"</a>:"+result.content+"</div>"{% endblock %}
+
+
 
 {% block content%}
       <div comment_id="{{comment.id}}">
@@ -9,3 +33,8 @@
           {% endif %} 
       </div>   
 {% endblock %}   
+
+
+{% block other_buttons %}
+<span class="share_button"><a href="javascript:void(0);">{% trans "Share" %}</a></span>
+{% endblock %}

@@ -252,15 +252,21 @@ border:1px solid #bbb;
 z-index:50000;
 position:relative;
 background-color:#E0FF85;
+opacity:0.8;
+	
 }
 
 .notices ul{
 padding:0; 
 margin-left: 2px; 
 margin-bottom: 2px;
- 
-}
 
+}
+/*
+.notices ul li a{
+color:#0000FF; 
+}
+*/
 
 .hide_notice 
 {

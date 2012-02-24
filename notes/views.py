@@ -1579,11 +1579,12 @@ def share_todelete(request, username, bookname):
 
 
 
+
 #TODO: private notes cannot be shared. Might implement the permission control at a finer level
 @login_required
 def share(request, username, bookname):     
     note_ids = request.POST.getlist('note_ids')   
-    N = getNote(username, bookname)
+    N = getSN(bookname)
     msgs = [] 
     
     bound_sites = getBoundSites(request.user.username)   
@@ -1623,15 +1624,15 @@ def share(request, username, bookname):
             bookname = note.get_note_bookname()
             log.info('This note of notebook is actually a note of '+bookname)
         if bookname == 'snippetbook':
-            content = note.desc
+            content = _('Sharing snippet:')+note.desc[0:120]
         if bookname == 'bookmarkbook':
-            content = note.url
+            content = _('Sharing bookmark:')+note.title+'   '+note.url
         if bookname == 'scrapbook':
-            content = note.url + '   ' + note.desc   
+            content = _('Sharing scrap:')+note.desc[0:120] + '   '+ note.url   
         if bookname == 'framebook':
-            content = _('Sharing knowledge package:')+note.title + '   ' + note.desc     
+            content = _('Sharing knowledge package:')+note.title + '   ' + note.desc[0:120]     
 
-        content = content + '  http://opensourcelearning.org/social/'+username+'/'+bookname+'/notes/note/'+str(note.id)+'/'
+        content = content + _('Original Note:')+'  http://opensourcelearning.org/social/'+username+'/'+bookname+'/notes/note/'+str(note.id)+'/'
 #        #send to weibo        
         if 'sina' in bound_sites:
             status = api.update_status(status=content)
