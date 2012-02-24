@@ -646,7 +646,7 @@ def group(request, groupname, bookname):
 
 @login_required
 def notes_tag(request, username, bookname, tag_name):   
-    note_list = book_model_dict.get(bookname).objects.filter(tags__name=tag_name, owner__username=username)
+    note_list = getSN(bookname).objects.filter(tags__name=tag_name, owner__username=username)
     qstr = __getQStr(request)    
     note_list  = getSearchResults(note_list, qstr)
     sort, order_type,  paged_notes, cl  = __get_notes_context(request, note_list) 
