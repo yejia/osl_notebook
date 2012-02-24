@@ -1635,7 +1635,10 @@ def share(request, bookname):
             source_str = _('Original Note:')
         else:
             source_str = _('Forwarded Note:')    
-        content = content +'    '+ source_str +'  http://opensourcelearning.org/social/'+note.owner.username+'/'+bookname+'/notes/note/'+str(note.id)+'/'
+        content = content +'    '+ source_str +'  http://opensourcelearning.org/social/'+\
+                  note.owner.username+'/'+bookname+'/notes/note/'+str(note.id)+'/'+'    '+_('from')+\
+                   note.owner.username#+'    http://opensourcelearning.org/social/'+note.owner.username+'/'
+        
 #        #send to weibo        
         if 'sina' in bound_sites:
             status = api.update_status(status=content)

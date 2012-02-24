@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-24 17:30+0800\n"
+"POT-Creation-Date: 2012-02-24 18:54+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -89,6 +89,10 @@ msgstr "原笔记："
 #: notes/views.py:1637
 msgid "Forwarded Note:"
 msgstr "转发的笔记："
+
+#: notes/views.py:1639
+msgid "from"
+msgstr "来自"
 
 #: notes/templatetags/admin_list.py:257
 msgid "All dates"
