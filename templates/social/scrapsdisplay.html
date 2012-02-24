@@ -30,6 +30,6 @@
            <td class="note_table_td1">
             <div id="note_title" title="{% trans 'note title' %}"><a href="/social/{{note.owner.username}}/{{note.get_note_bookname}}/notes/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a></div> 		    
 		    </td><td class="note_table_td2">
-		    <div  id="note_desc" title="{% trans "note desc" %}"></div>		   
+		    <div  id="note_desc" title="{% trans "note desc" %}">{{note.desc}}</div>		   
 		    </td>
 {% endblock %} 
