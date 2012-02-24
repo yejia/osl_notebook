@@ -84,7 +84,7 @@ msgstr "分享知识包："
 
 #: notes/views.py:1635
 msgid "Original Note:"
-msgstr "原笔记"
+msgstr "原笔记："
 
 #: notes/templatetags/admin_list.py:257
 msgid "All dates"
