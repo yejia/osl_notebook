@@ -172,7 +172,8 @@ from notebook.newuser import create_member, create_db
 @user_passes_test(lambda u: u.username=='leon')
 @login_required
 def register_user(request): 
-    if request.method == 'POST':         
+    if request.method == 'POST':  
+        log.info('Registering a new user...')       
         username = request.POST.get('username')
         password1 = request.POST.get('password1')
         password2 = request.POST.get('password2')
@@ -187,12 +188,15 @@ def register_user(request):
         #TODO: validate email
         
         if User.objects.filter(username=username).exists():
-            messages.error(request, "Username is already used by someone else. Please pick another one.")  
+            messages.error(request, _("Username is already used by someone else. Please pick another one.")) 
+            log.info('Registration failed. Username is already used by someone else.')  
             return HttpResponseRedirect('/registre/')          
         if password1 == password2:        
             m, created = create_member(username, email, password1)
             if created:
+                log.info('A new user is created!')  
                 create_db(username)
+                log.info('DB is created for the new user!') 
                 #automatically add the invited person to the inviter's friends        
                 #notebook.social.views.add_friend(request, username)
                 m1 = request.user.member
@@ -201,12 +205,14 @@ def register_user(request):
                 #So far, make it confirmed automcatically. TODO:
                 fr.comfirmed = True
                 fr.save()
-                messages.success(request, "New member created and added as your friend!")  
+                log.info('New member created and added as a friend of the inviter!') 
+                messages.success(request, _("New member created and added as your friend!"))  
                 return HttpResponseRedirect('/registre/') 
             else:
-                messages.error(request, "Error creating a member!")  
+                log.error('Error creating a member!')
+                messages.error(request, _("Error creating a member!"))                 
                 return HttpResponseRedirect('/registre/')   
-        messages.error(request, "Passwords don't match!")
+        messages.error(request, _("Passwords don't match!"))
         return HttpResponseRedirect('/registre/')               
     else:     
         #registerForm = UserCreationForm()
@@ -1628,15 +1634,15 @@ def share(request, bookname):
         if bookname == 'bookmarkbook':
             content = _('Sharing bookmark:')+note.title+'   '+note.url
         if bookname == 'scrapbook':
-            content = _('Sharing scrap:')+note.desc[0:120] + '   '+ note.url   
+            content = _('Sharing scrap:')+note.desc[0:100] + '   '+ note.url   
         if bookname == 'framebook':
-            content = _('Sharing knowledge package:')+note.title + '   ' + note.desc[0:120]     
+            content = _('Sharing knowledge package:')+note.title + '   ' + note.desc[0:100]     
         if request.user.username == note.owner.username:
             source_str = _('Original Note:')
         else:
             source_str = _('Forwarded Note:')    
         content = content +'    '+ source_str +'  http://opensourcelearning.org/social/'+\
-                  note.owner.username+'/'+bookname+'/notes/note/'+str(note.id)+'/'+'    '+_('from')+\
+                  note.owner.username+'/'+bookname+'/notes/note/'+str(note.id)+'/'+'    '+_('from')+' '+\
                    note.owner.username#+'    http://opensourcelearning.org/social/'+note.owner.username+'/'
         
 #        #send to weibo        
