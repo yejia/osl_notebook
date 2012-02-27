@@ -15,9 +15,11 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.sites.models import Site
 from django.template import RequestContext
 from django.core.exceptions import ObjectDoesNotExist, FieldError
 from django.core.mail import send_mass_mail
+
 
 from notebook.notes.models import *
 from notebook.snippets.models import Snippet
@@ -1622,6 +1624,8 @@ def share(request, bookname):
         
     #print 'douban_service.client.token:', douban_service.client.token
     
+    current_site = Site.objects.get_current()   
+    #print 'current_site.domain:',current_site.domain
     for note_id in note_ids:         
         note = N.objects.get(id=note_id)
         content = ''
@@ -1641,9 +1645,9 @@ def share(request, bookname):
             source_str = _('Original Note:')
         else:
             source_str = _('Forwarded Note:')    
-        content = content +'    '+ source_str +'  http://opensourcelearning.org/social/'+\
+        content = content +'    '+ source_str +'  http://'+current_site.domain+'/social/'+\
                   note.owner.username+'/'+bookname+'/notes/note/'+str(note.id)+'/'+'    '+_('from')+' '+\
-                   note.owner.username#+'    http://opensourcelearning.org/social/'+note.owner.username+'/'
+                   note.owner.username
         
 #        #send to weibo        
         if 'sina' in bound_sites:
