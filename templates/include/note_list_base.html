@@ -128,7 +128,7 @@
         $('ul.messages').append('<li class="success">{% trans "Note is successfully added!" %} </li>');
        
         pri_part = ""
-        if (note.private=='true'){
+        if (note.private==true){
             pri_part =  '<span class="lock" title="{% trans "private"  %}" style="display:inline;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>'
         }else{
            pri_part =  '<span class="unlock" title="{% trans "public"  %}" style="display:inline;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>'
