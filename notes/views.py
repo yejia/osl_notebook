@@ -1164,7 +1164,11 @@ def add_note(request, username, bookname):
     
     n = N(desc=post.get('desc'))  
     n.vote = 0
-    n.private = post.get('private', False)
+    private = post.get('private', False)
+    if private == 'true':
+        n.private = True
+    else:
+        n.private = False     
     n.save()
     n.add_tags(tags, bookname)
     n.save()
