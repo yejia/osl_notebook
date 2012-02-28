@@ -373,7 +373,7 @@ def note(request, username, bookname, note_id):
                                     'profile_username':username}, context_instance=RequestContext(request, {'bookname': bookname,'aspect_name':'notes'}))
     
     
-    
+#TODO: think of whether get rid of appname    
 @login_required
 def frames(request, username, bookname):
     #TODO: allow filter on delete

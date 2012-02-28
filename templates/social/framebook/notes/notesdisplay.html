@@ -81,7 +81,8 @@
 <div class="notes_display" view_mode="{{view_mode}}">
 <ul>
     {% for note in note_list.object_list %}    
-     
+     {% if appname == 'social' and note.private %}  <!--for social public notebook, not private social notes will be shown. But in the group app, it is ok.-->
+        {% else %}  
          <li class="note_display" note_id="{{ note.id }}"  style="position:relative;">
          {% if user.username != profile_username and note.is_private %} 
              Private linkage. No permisson to view.         
@@ -207,6 +208,7 @@
 </div>            
           {% endif %}      
 	</li>
+    {% endif %} 
     {% endfor %}
 </ul>
 </div>

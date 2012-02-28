@@ -1,4 +1,4 @@
-from notebook.notes.models import Note, Tag, LinkageNote, Folder, Cache, WorkingSet
+from notebook.notes.models import Note, Tag, LinkageNote, Folder, Cache, WorkingSet, UserAuth
 from notebook.social.models import Group, Social_Note, Social_Tag, Member, Social_Note_Comment, Social_Note_Vote, Friend_Rel
 from django.contrib import admin
 from django.contrib.auth.models import User #, Group
@@ -61,6 +61,7 @@ class CacheAdmin(MultiDBModelAdmin):
     
 class UserAdmin(MultiDBModelAdmin):
      list_display = ('username', 'email', 'last_login')  
+     ordering = ('-last_login',)
 
 class GroupAdmin(MultiDBModelAdmin):
     pass
@@ -78,7 +79,11 @@ class Social_Note_VoteAdmin(MultiDBModelAdmin):
 class Friend_RelAdmin(MultiDBModelAdmin):
      list_display = ('friend1', 'friend2', 'init_date', 'confirmed')  
 
-     
+class UserAuthAdmin(MultiDBModelAdmin):
+     list_display = ('user', 'site')  
+
+  
+   
 class NoticeAdmin(MultiDBModelAdmin):
      list_display = ('recipient', 'sender', 'message', 'added') 
 
@@ -106,6 +111,8 @@ site.register(User, UserAdmin)
 site.register(Social_Note_Comment, Social_Note_CommentAdmin)
 site.register(Social_Note_Vote, Social_Note_VoteAdmin)
 site.register(Friend_Rel, Friend_RelAdmin)
+site.register(UserAuth, UserAuthAdmin)
+
 
 
 
