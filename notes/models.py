@@ -97,7 +97,8 @@ class Tag(models.Model):
 #        objects = MultiUserManager(owner_name)
 
     class Meta:
-        unique_together = (("name"),)
+        unique_together = (("name"),)           
+        ordering = ['name']
 
     def __unicode__(self):
         return self.name
@@ -121,6 +122,7 @@ class WorkingSet(models.Model):
 
     class Meta:
         unique_together = (("name"),)
+        ordering = ['name']
 
     def __unicode__(self):
         return self.name 
@@ -173,9 +175,11 @@ class Note(models.Model):
   
     #user = models.ForeignKey(User)
     
-#    class Meta:
+    class Meta:
+        ordering = ['-init_date','vote','desc','title']
 #        unique_together = (("note_id","user"),)
 #        abstract = True
+         
 
 
     def __unicode__(self):
@@ -460,7 +464,9 @@ class Note_Comment(models.Model):
     def __unicode__(self):
         return self.desc  
         
-        
+    class Meta:
+        ordering = ['-init_date','note','desc']
+                
 
 #For now, we don't make frame of Snippet/Bookmark/Scrap. There are only frames of Notes. 
 #TODO: clean up code that duplicate with those in Note
@@ -474,8 +480,8 @@ class Frame(Note):
     
     class Meta:
 #        unique_together = (("linkage_id","user"),)
-        verbose_name = "frame"
-
+        verbose_name = "frame"           
+       
 
     def __unicode__(self):
         return ','.join([str(note.id) for note in self.notes.all()])     
@@ -692,7 +698,8 @@ class Folder(models.Model):
     #folder_id = models.IntegerField()
     #user = models.ForeignKey(User)
     
-#    class Meta:
+    class Meta:            
+        ordering = ['-init_date','name']
 #        unique_together = (("folder_id","user"), ("name","user"),)
 
     def __unicode__(self):

@@ -835,7 +835,7 @@ def __get_notes_context(request, note_list):
     
 #    sorted_note_list = note_list    
 #    if order_field != 'usefulness':  
-    sorted_note_list = note_list.order_by('%s%s' % ((order_type == 'desc' and '-' or ''), order_field)) 
+    sorted_note_list = note_list.order_by('%s%s' % ((order_type == 'desc' and '-' or ''), order_field),'-init_date','desc') 
 #    else:       
 #        #Social_Note has usefulness
 #        sorted_notes = [(note, note.get_usefulness()) for note in note_list]   

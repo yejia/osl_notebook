@@ -43,6 +43,8 @@ class Member(User):
     #viewing mode. Later think of adding other viewing modes here so user can set these in their profile
     viewing_private = models.CharField(max_length=20, blank=True)
     
+    class Meta:
+        ordering = ['username']
     
     
     def __unicode__(self): 
@@ -74,7 +76,8 @@ class Social_Tag(models.Model):
     private = models.BooleanField(default=False)
     
     class Meta:
-        unique_together = (("name"),)
+        unique_together = (("name"),)    
+        ordering = ['name']
     
     def __unicode__(self):
         return self.name
@@ -102,6 +105,8 @@ class Social_Note(models.Model):
     #attachment = models.FileField(upload_to=get_storage_loc,blank=True, storage=fs)
     
     
+    class Meta:
+        ordering = ['-init_date','vote','desc','title']
     
     def __unicode__(self):
         return self.desc + u' by ' + self.owner.username
@@ -239,6 +244,8 @@ class Social_Note_Comment(models.Model):
         #TODO:use ugettext for translation
         return self.commenter.username+" on "+self.note.owner.username+"'s note: "+self.desc 
 
+    class Meta:
+        ordering = ['-init_date','note','desc']
 
 
 class Social_Note_Vote(models.Model):      
@@ -248,7 +255,8 @@ class Social_Note_Vote(models.Model):
     init_date = models.DateTimeField('date created', auto_now_add=True)
 
     class Meta:
-        unique_together = (("note","voter"),)  
+        unique_together = (("note","voter"),)             
+        ordering = ['-init_date','note'] 
     
     def __unicode__(self): 
         return self.note.__unicode__()+" voted by "+self.voter.__unicode__()
@@ -267,7 +275,8 @@ class Group(models.Model):
     
     
     class Meta:
-        unique_together = (("name"),)
+        unique_together = (("name"),)           
+        ordering = ['name','-init_date']
     
     
     def __unicode__(self):
