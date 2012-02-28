@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-24 22:15+0800\n"
+"POT-Creation-Date: 2012-02-28 09:42+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -58,39 +58,55 @@ msgstr "缺省的标签是'random thought'。"
 msgid "self ranking"
 msgstr "原作者的评级"
 
-#: notes/views.py:878
+#: notes/views.py:193
+msgid "Username is already used by someone else. Please pick another one."
+msgstr ""
+
+#: notes/views.py:211
+msgid "New member created and added as your friend!"
+msgstr ""
+
+#: notes/views.py:215
+msgid "Error creating a member!"
+msgstr ""
+
+#: notes/views.py:217
+msgid "Passwords don't match!"
+msgstr ""
+
+#: notes/views.py:886
 msgid "note"
 msgstr "条笔记"
 
-#: notes/views.py:879
+#: notes/views.py:887
 msgid "notes"
 msgstr "条笔记"
 
-#: notes/views.py:1627
+#: notes/views.py:1641
 msgid "Sharing snippet:"
 msgstr "分享便条："
 
-#: notes/views.py:1629
+#: notes/views.py:1643
 msgid "Sharing bookmark:"
 msgstr "分享网址："
 
-#: notes/views.py:1631
+#: notes/views.py:1645
 msgid "Sharing scrap:"
 msgstr "分享网摘："
 
-#: notes/views.py:1633
+#: notes/views.py:1647
 msgid "Sharing knowledge package:"
 msgstr "分享知识包："
 
-#: notes/views.py:1635
+#: notes/views.py:1649
 msgid "Original Note:"
 msgstr "原笔记："
 
-#: notes/views.py:1637
+#: notes/views.py:1651
 msgid "Forwarded Note:"
 msgstr "转发的笔记："
 
-#: notes/views.py:1639
+#: notes/views.py:1653
 msgid "from"
 msgstr "来自"
 
@@ -1439,6 +1455,10 @@ msgstr "笔记正文"
 msgid "Tags are successfully updated!"
 msgstr "标签更新成功！"
 
+#: templates/include/note_list_base.html:397
+msgid "The following notes are going to be put into a frame:"
+msgstr "下面的这些笔记将被放入一个包里："
+
 #: templates/include/note_list_base.html:573
 #: templates/snippetbook/notes/todelete/displaynotes.html:335
 msgid ""
@@ -1821,8 +1841,9 @@ msgstr "同一个主题"
 msgid "Same Event"
 msgstr "同一个事件"
 
+# python-format
 #: templates/notes/note_list_base.html:5
-#python-format
+#, python-format
 msgid "All notes of %(profile_username)s"
 msgstr "%(profile_username)s的所有笔记"
 
