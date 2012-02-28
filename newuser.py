@@ -2,7 +2,7 @@
 
 import sys, os
 
-from env_setting import HOME_PATH
+from env_settings import HOME_PATH
 
 sys.path.append(HOME_PATH)
 
