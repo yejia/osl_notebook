@@ -5,7 +5,7 @@ from django.contrib import databrowse
 
 from django.views.generic import list_detail
 
-from env_setting import MEDIA_ROOT, DB_ROOT
+from env_settings import MEDIA_ROOT, DB_ROOT
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin

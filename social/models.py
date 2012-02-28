@@ -13,7 +13,7 @@ def get_storage_loc(instance, filename):
     return 'icons/'+instance.username+'/'+filename   
 
 from django.core.files.storage import FileSystemStorage    
-from notebook.env_setting import DB_ROOT
+from notebook.env_settings import DB_ROOT
 fs = FileSystemStorage(location=DB_ROOT)
 
 

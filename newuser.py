@@ -6,7 +6,7 @@ from env_settings import HOME_PATH
 
 sys.path.append(HOME_PATH)
 
-from notebook.env_setting import *
+from notebook.env_settings import *
 
 
 

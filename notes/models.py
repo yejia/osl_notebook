@@ -433,7 +433,7 @@ def get_storage_loc(instance, filename):
     return 'noteattachments/'+instance.owner_name+timepath+filename   #TODO: test added '/'+
 
 from django.core.files.storage import FileSystemStorage    
-from notebook.env_setting import DB_ROOT
+from notebook.env_settings import DB_ROOT
 fs = FileSystemStorage(location=DB_ROOT)
 
 
