@@ -165,7 +165,8 @@ class Note(models.Model):
     desc =  models.TextField(max_length=2000, blank=True,  help_text=_("The size of the desc is limited to 200 characaters."))
     tags = models.ManyToManyField(Tag, blank=True,  help_text=_("Default tag is 'random thought'."))	#TODO: NOT NULL?? #TODO: set default as random thoughts?
     private = models.BooleanField(default=False)
-    init_date = models.DateTimeField('date created', auto_now_add=True)
+    #the current django implementation, setting auto_now or auto_now_add to True will cause the field to have editable=False and blank=True set.
+    init_date = models.DateTimeField('date created', auto_now_add=True, editable=True)
     last_modi_date = models.DateTimeField('date last modified', auto_now=True)
     deleted = models.BooleanField(default=False)
     #TODO: how to display the Chinese of this one with ugettext_lazy??
@@ -349,6 +350,10 @@ class Note(models.Model):
         #print 'comments is:', comments
         return comments 
         #return ''.join([comment.desc for comment in comments])
+    
+    def display_comments(self):
+        comments = self.get_comments()
+        return [{'id':comment.id,'desc':comment.desc} for comment in comments]
     
 
     #TODO:so far, notes of private tag cannot be viewed by others in the person's notebook. But should it be viewed by others in a group?

@@ -1060,8 +1060,10 @@ def update_note_inline(request, username, bookname):
     if note_field=='note_tags':
         note.update_tags(content)    
     #note.tags = content	
+    print 'note.init_date:',note.init_date 
     if note_field=='note_init_date':
-        note.init_date = datetime.datetime.strptime(content,'%Y-%m-%d %H:%M')    
+        note.init_date = datetime.datetime.strptime(content,'%Y-%m-%d %H:%M')   
+        print 'note.init_date:',note.init_date  
     
     note.save()
     log.debug( 'note updated')
@@ -1177,7 +1179,8 @@ def add_note(request, username, bookname):
     
     #'init_date':n.init_date
     return  HttpResponse(simplejson.dumps({'note_id':n.id, 'private':n.private, 'tags':n.get_tags(),'display_tags':n.display_tags(),
-                                           'title':n.title,'desc':n.desc, 'vote':n.vote}),  "application/json")
+                                           'title':n.title,'desc':n.desc, 'vote':n.vote, 'init_date':n.init_date.strftime("%Y-%m-%d %H:%M"),
+                                            'last_modi_date':n.last_modi_date.strftime("%Y-%m-%d %H:%M"),'comments':n.display_comments()}),  "application/json")
 
     #return HttpResponseRedirect(__get_pre_url(request))    
     

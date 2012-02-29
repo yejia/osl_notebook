@@ -46,7 +46,7 @@
 		    <div  id="note_attachment" title="{% trans "attachment" %}"><a href="/file/{{note.attachment.name}}" target="top">{{note.attachment.name}}</a> </div>
 		    {% endif %}
             
-             <div  class="structure advanced" id="note_frames" title="{% trans "note in frames" %}">Frames: {{note.display_frames|default:'Not in any frames'}}</div>
+             <div  class="structure advanced" id="note_frames" title="{% trans "note in frames" %}">{% trans "Frames" %}: {{note.display_frames|default:_('Not in any frame')}}</div>
              
               {% include "include/add_comments_inline.html" %}   
              </div>

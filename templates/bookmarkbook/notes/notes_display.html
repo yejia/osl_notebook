@@ -43,7 +43,7 @@
             <div  id="note_init_date" title="initial creation time" class="grey">{% if user.username == profile_username %}<span  class="editableText">{% endif %}{{note.init_date|date:"Y-m-d H:i"}}{% if user.username == profile_username %}<span>{% endif %}</div>
 		    <div  id="note_last_modi_date" title="last modified time" class="grey structure">{{note.last_modi_date|date:"Y-m-d H:i"}} </div>
 		    
-            <div  class="structure advanced" id="note_frames" title="{% trans "note in frames" %}">Frames: {{note.display_frames|default:'Not in any frames'}}</div>
+            <div  class="structure advanced" id="note_frames" title="{% trans "note in frames" %}">{% trans "Frames" %}: {{note.display_frames|default:_('Not in any frame')}}</div>
              
                {% include "include/add_comments_inline.html" %}   
             </div>

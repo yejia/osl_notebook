@@ -123,7 +123,7 @@
     } 
     
      function noteAdded(note){
-       // TODO: how to show error when error happened?
+       // TODO: how to show error when error happened?      
         //   $('ul.messages').append('<li class="error">{% trans "An error happened when adding a note." %} </li>');     
         $('ul.messages').append('<li class="success">{% trans "Note is successfully added!" %} </li>');
        
@@ -137,6 +137,12 @@
         for (var i=0;i<note.tags.length;i++){
             tags = tags +  '<span><a href="/{{profile_username}}/{{bookname}}/notes/tags/'+note.tags[i]+'/">'+note.tags[i]+'</a>,</span>'
         }
+        
+        comments = ''
+         for (var i=0;i<note.comments.length;i++){               
+                     comments=comments+'<div comment_id="'+note.comments[i].id+'">'+note.comments[i].desc+'<span title="{% trans "remove this comment" %}" class="inline_delete_comment" id="note_delete_comment">&nbsp;&nbsp;&nbsp;</span></div>';                      
+      }
+        
     //    alert('tags:'+tags);
         toprepend = '<li class="note_display" note_id="'+note.note_id+'"><input type="checkbox" name="note_selected"  value="'+
                       note.note_id+'" class="note_selection" /><div class="kuoda"></div><div class="yasuo"></div> <span class="lockunlock">'+pri_part+'</span>'+
@@ -152,12 +158,31 @@
                                        '<div id="note_title" title="{% trans "note title" %}"><span class="editableText"><a href="/{{profile_username}}/{{bookname}}/notes/note/'+note.id+'/">'+note.title+'</a></span></div></td><td class="note_table_td2"> '+	
                                        '<div  id="note_desc" title="{% trans "note desc" %}"><span class="editableText">'+note.desc+'</span></div></td><td class="note_table_tags">'+
                                        '<div id="note_tags" title="{% trans "note tags" %}"><span class="editableText">'+note.display_tags+'</span></div> </td></tr></table>'+
+                                       //time and comments
+                                       ' <div>'+
+                                            '<div  class="grey" id="note_init_date" title="{% trans "initial creation time" %}"><span  class="editableText">'+note.init_date+'<span></div>'+
+                                            '<div class="grey structure" id="note_last_modi_date" title="{% trans "last modified time" %}">'+note.last_modi_date+'</div>'+
+                                            '<div  class="structure advanced" id="note_frames" title="{% trans "note in frames" %}">{% trans "Frames" %}: {{note.display_frames|default:_("Not in any frame")}}</div>'+                              
+                                         //comments
+                                            '<span class="add_comment_button"><a href="javascript:void(0);">{% trans "Comment" %}(0)</a></span>'+
+                                                ' &nbsp;&nbsp;'+
+                                            '<div  id="add_comment_box" style="display:none;"> '+            
+                                                        '<div>{{user.username}}: <textarea id="add_comment" rows="3" cols="90" name="desc"></textarea>'+
+                                                                '<span class="comment_submit"  title="{% trans "Save Comment" %}"><img src="/site_media/img/save.png"/></span>&nbsp;'+
+                                                                '<span class="cancel_comment_submit" title="{% trans "Cancel" %}"><img src="/site_media/img/cancel.png" /></span>'+
+                                                        '</div>'+             
+                                                        '<div id="comments"><br/>'+ 
+                                                                    comments+
+                                                        '</div>'+             
+                                            '</div>'+                                           
+                                        '</div>'+
                        '</div></div></div>'+                
                                        
                       '</li>';
      //      alert('toprepend:'+toprepend);         
         $('div.notes_display').find('ul').prepend(toprepend);
         
+        //clear the form's desc textarea field
         $('#id_desc').val('');
         
 
@@ -173,13 +198,14 @@
                         
                 });     
                 
-                 $('.stream').show(0);    
-            $('.structure').hide(0);
+                  $("li[note_id='"+note.note_id+"']  .stream").show(0);    
+                  $("li[note_id='"+note.note_id+"']  .structure").hide(0);
             
-             $('div.brief_display').show();
-            $('div.full_display').hide();	
             
-            $('.yasuo').hide();
+              $("li[note_id='"+note.note_id+"']  div.brief_display").show();
+              $("li[note_id='"+note.note_id+"']  div.full_display").hide();	
+            
+             $("li[note_id='"+note.note_id+"']  .yasuo").hide();
 		
           $('.kuoda').click(function(){		
                     $(this).parents("li").find('div.brief_display').hide(100);
@@ -194,23 +220,18 @@
                     $(this).parents("li").find('div.full_display').hide(100);		       
                     $(this).parents("li").find("div.kuoda").show(100);
                     $(this).parents("li").find("div.yasuo").hide(100);		
-            });		
-        
-            
+            });		        
         
         
-        
-        
-        
-                        $('span.editableText').editableText({
+                $("li[note_id='"+note.note_id+"']").find('span.editableText').editableText({
                         newlinesEnabled: false
                 });
 			
-                $.editableText.defaults.newlinesEnabled = true;
+            //    $.editableText.defaults.newlinesEnabled = true;
 
-                $('div.editableText, p.editableText').editableText();
-			
-                $('.editableText').change(function(){
+                //$("li[note_id='"+note.note_id+"']").find('div.editableText, p.editableText').editableText();
+	
+                $("li[note_id='"+note.note_id+"'] .editableText").change(function(){
                         var newValue = $(this).text();
                         $(this).load('updateNoteInline/',{ 'id':$(this).parents('li').attr('note_id'), 'note_field':$(this).parents('div').attr('id'), 'content':  newValue})
                 });
@@ -231,6 +252,43 @@
                 
         
         
+           $("li[note_id='"+note.note_id+"'] .comment_submit").click(function(){  
+                        var newValue = $(this).parents("#add_comment_box").find("#add_comment").val();
+                        $.post('addComment/',{ 'id':$(this).parents('li').attr('note_id'), 'content':  newValue}, commentAdded ,'json');              
+      
+                });
+                
+                $('.cancel_comment_submit').click(function(){                   
+                        comment_box  = $(this).parents("#add_comment_box")
+                        comment_box.find("#add_comment").val('');
+                        comment_box.hide();
+      
+                });
+                
+               
+                
+                function commentAdded(result){
+                     note_id = result.note_id;
+                     $("li[note_id='"+note_id+"']").find('div#comments').append("<div>"+result.content+"</div>");   
+                     
+                    comment_box = $("li[note_id='"+note_id+"']").find('div#add_comment_box');
+                    comment_box.find("#add_comment").val('')
+                    //comment_box.hide();
+                
+                }
+                
+                
+                 $('.add_comment_button').click(function(){                   
+                        $(this).parents('li').find('#add_comment_box').show();               
+      
+                });
+                
+                
+                $('span.inline_delete_comment').click(function(){	                
+                    $(this).load('deleteComment/',{'comment_id':$(this).parents('div').attr('comment_id')});
+                    $(this).parents("div[comment_id]").remove();
+                });
+                
         
 
         
@@ -466,7 +524,7 @@
             if (cache.created==true){
                     window.location.reload( false ); //for now, just refresh the page. Because the new item added to note menu cannot be clicked. (might because it is not recognized by the jd_menu plugin) TODO:
 		  
-                    $('div#cache').prepend('<div class="cache_item"><span id="cache_'+cache.cache_id+'">{% trans 'cache' %} ' +cache.cache_id+':' +cache.note_ids+'</span> &nbsp;&nbsp;&nbsp;<a href="/mynotes/caches/'+cache.cache_id+'/">{% trans 'View' %}</a> | <a href="javascript:clearCache('+cache.cache_id+');">{% trans 'Clear' %}</a>');		 
+                    $('div#cache').prepend('<div class="cache_item"><span id="cache_'+cache.cache_id+'">{% trans 'cache' %} ' +cache.cache_id+':' +cache.note_ids+'</span> &nbsp;&nbsp;&nbsp;<a href="/{{profile_username}}/{{bookname}}/caches/'+cache.cache_id+'/">{% trans 'View' %}</a> | <a href="javascript:clearCache('+cache.cache_id+');">{% trans 'Clear' %}</a>');		 
                     previous_cache_id = cache.cache_id-1;
                     next_cache_id = parseInt(cache.cache_id)+1;
                     //alert('<li  id="add_to_cache_'+cache.id+'"><a href="javascript:addNotes2Cache('+cache.id+');">Add selection to cache '+cache.id+'</a></li>');
