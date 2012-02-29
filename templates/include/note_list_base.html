@@ -528,14 +528,18 @@
                     previous_cache_id = cache.cache_id-1;
                     next_cache_id = parseInt(cache.cache_id)+1;
                     //alert('<li  id="add_to_cache_'+cache.id+'"><a href="javascript:addNotes2Cache('+cache.id+');">Add selection to cache '+cache.id+'</a></li>');
-                    $("li#add_to_cache_"+previous_cache_id).after('<li  id="add_to_cache_'+cache.cache_id+'"><a href="javascript:addNotes2Cache('+cache.cache_id+');">Add selection to cache '+cache.cache_id+'</a></li>' );
+                    $("li#add_to_cache_"+previous_cache_id).after('<li  id="add_to_cache_'+cache.cache_id+'"><a href="javascript:addNotes2Cache('+cache.cache_id+');">{% trans "Add selection to cache" %}'+cache.cache_id+'</a></li>' );
                     $("li#add_to_another_cache").find('a').attr('href','javascript:addNotes2Cache('+next_cache_id+');')
                     //even after adding below, it still cannot recognize the newly added li 
-                    $('ul.jd_menu').jdMenu();                    
+                 //  $('ul.jd_menu  li[id="add_to_cache_'+cache.cache_id+'"]').jdMenu(); 
+// $('ul.jd_menu'). jdMenu();                  
+
            }
             if (cache.created==false){
                     $('span#cache_'+cache.cache_id).text("{% trans 'cache' %} " +cache.cache_id+":" +cache.note_ids);		 
             }		
+            
+             $('ul.jd_menu'). jdMenu();       
     }
 		
     function clearCache(cache_id){	
