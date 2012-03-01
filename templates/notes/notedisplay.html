@@ -52,6 +52,13 @@
 <b>{% trans 'private' %} :</b> {{note.private|yesno:"yeah,no,maybe" }}
 </div>
 
+
+ {% if note.deleted %} 
+<div>
+<b>{% trans 'deleted' %} :</b> {{note.deleted|yesno:"yeah,no,maybe" }}
+</div>
+{% endif %}
+
 <div>
 <b>{% trans 'attachment' %} :</b> <a href="/site_media/{{note.attachment.name}}" target="top">{{note.attachment}}</a>
 </div>
@@ -79,6 +86,12 @@
  {% endif %}
 
 <br/><br/>
+
+ {% if note.get_social_note %} 
+ <b>{% trans 'View the social one' %} :</b><a href="/social/{{profile_username}}/notebook/notes/note/{{note.get_social_note.id}}/">{{note.get_social_note.id}}</a>
+ {% endif %}
+<br/><br/>
+
 
  {% if user.username == profile_username %} 
 <div>

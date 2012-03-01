@@ -356,15 +356,41 @@ class Note(models.Model):
         return [{'id':comment.id,'desc':comment.desc} for comment in comments]
     
 
+    def get_social_note(self): 
+        try:       
+            sn = Social_Note.objects.get(owner__username=self.owner_name, owner_note_id=self.id)
+            return sn
+        except ObjectDoesNotExist:    
+            return ''
+        
+
+
     #TODO:so far, notes of private tag cannot be viewed by others in the person's notebook. But should it be viewed by others in a group?
     #  maybe the logic should be notes of private tags are not really private. It is just that the tag is private and that private tag will not
     #  not show in tags list. But if that note has other tags, you can still find that note. 
     #The problem with notes of private tags not showing up in social notes is that if a group member sets his own tag such as *** as a private
     #tag, then his notes in *** won't show in the group 
-    def save(self, *args, **kwargs):        
+    #TODO:refactor out to several sync methods
+   
+    def save(self, *args, **kwargs):             
         #do_something()
         super(Note, self).save(*args, **kwargs) # Call the "real" save() method.        
         owner = User.objects.get(username=self.owner_name)
+        
+        #TODO:if note is set deleted=True, then it should be removed from frames it is in. How about the frame in the social notebook?
+        #below doesn't work. Not sure why. TODO:
+#===============================================================================
+#        if self.deleted:
+#            print 'deleted'
+#            if self.in_frames.all():#TODO:need self.owner_name?
+#                print 'in frame'
+#                for f in self.in_frames.using(self.owner_name).all():
+#                    print 'remove self from frame:', f.id
+#                    f.notes.remove(self)
+#                    f.save()
+#===============================================================================
+        
+        
         #TODO: consider moving this into various subclasses
         if hasattr(self, 'snippet'):
             sn, created = Social_Snippet.objects.get_or_create(owner=owner.member, owner_note_id=self.id) 
@@ -409,15 +435,17 @@ class Note(models.Model):
             sns_included = []   
             #TODO:test below 
             if hasattr(self, 'frame'):
-                print 'is frame'
-                print 'self.frame.notes.all():',self.frame.notes.using(self.owner_name).all() 
+                self.vote = self.frame.get_vote()
+                #print 'is frame'
+                #print 'self.frame.notes.all():',self.frame.notes.using(self.owner_name).all() 
                 for n_included in self.frame.notes.using(self.owner_name).all():
-                    print 'n_included:',n_included
+                    #print 'n_included:',n_included
+                    #TODO:how about deleted?
                     if not n_included.is_private():
                         sn_included = Social_Note.objects.get(owner=owner.member, owner_note_id=n_included.id)                        
                         sns_included.append(sn_included)
-                        print 'sn_included:',sn_included,' appended'
-                print 'sns_included:',sns_included
+                        #print 'sn_included:',sn_included,' appended'
+                #print 'sns_included:',sns_included
                 sn.notes = sns_included   
                 
             sn.desc = self.desc
@@ -494,12 +522,14 @@ class Frame(Note):
 
     def get_vote(self):        
         v = 0  
+        #TODO:using(self.owner_name)?
         for n in self.notes.all(): 
             v = v + n.vote
         return v
 
     def get_sum_of_note_tags(self):
         ts = set([])
+        #TODO:using(self.owner_name)?
         for n in self.notes.all():
             for t in n.tags.all():
                 ts.add(t.name)

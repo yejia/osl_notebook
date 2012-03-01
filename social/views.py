@@ -360,16 +360,17 @@ def note(request, username, bookname, note_id):
 #    if note.get_note_type() != 'Frame':
 #        frames = note.in_frames.all() #notes_included??TODO:
 #    
-#    notes_included = None
-#    if note.get_note_type() == 'Frame':
-#        notes_included = note.social_frame.notes.all()
+    notes_included = None
+    if note.get_note_type() == 'Frame':
+        notes_included = note.social_frame.notes.all()
 #        print 'notes_included:', notes_included
 #===============================================================================
     
    
     
     return render_to_response('social/social_note.html', {'note':note,\
-                                    #'frames':frames, 'notes_included':notes_included,\
+                                    #'frames':frames, \
+                                    'notes_included':notes_included,\
                                     'profile_username':username}, context_instance=RequestContext(request, {'bookname': bookname,'aspect_name':'notes'}))
     
     
@@ -434,6 +435,7 @@ def frame(request, username, bookname, frame_id):
         else:
             n.append('')     
     #print 'frame_notes_display:',frame_notes_display    
+    
     return render_to_response('social/framebook/notes/note.html', {'frame':frame,\
                                                              'frame_notes_display':frame_notes_display, \
                                                              'profile_username':username}, context_instance=RequestContext(request,{'bookname': bookname,}))
