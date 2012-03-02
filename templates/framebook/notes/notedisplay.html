@@ -1,51 +1,24 @@
+{% extends "include/notedisplay.html" %}
 {% load i18n %}
 
-<script>
-	jQuery(function($){
+{% block note_type%}
+<div>
+<h2>{% trans 'Frame' %}</h2><a href="/{{url_front}}/framebook/notes/">{% trans 'View all frames' %}</a>
+</div>
+{% endblock %}
 
-        $(updateFrameForm).hide();     		
-		$('#edit_linkage'). click(function(){                       
-		        $(updateFrameForm).show();
-                });		
-			
-        });
-</script>
-
+{% block note_tags%}{% comment %}For now, no viewing of frame by tag (need to implement cache for frame){% endcomment %}
 <div>
-<h2>{% trans 'Frame' %}</h2><a href="/{{profile_username}}/framebook/notes/">{% trans 'View all frames' %}</a>
+<b><img src="/site_media/img/tags-small.png" class="img_in_notes_section_header"/>:</b> {{note.display_tags}}
 </div>
-
-<div>
-<h2>{{frame.title|default:_('(No Title)')}}</h2>
-</div>
-<div>
-{% trans 'Created' %} : {{frame.init_date|date:"Y-m-d H:i"}}
-</div>
-<div>
-<b>{% trans 'desc' %}:</b> {{frame.desc}}
-</div>
-<div>
-<b>{% trans 'tags' %}:</b> {{frame.display_tags}}
-</div>
+{% endblock %}
 
 
-<div>
-<b>{% trans 'private' %}:</b> {{frame.private|yesno:"yeah,no,maybe" }}
-</div>
-
-<div>
-<b>{% trans 'importance' %}:</b> {{frame.vote}}
-</div>
-<div>
-<b>{% trans 'attachment' %}:</b> {{frame.attachment}}
-</div>
-<div>
-
-
+{% block notes_in_frame%}
 <b>{% trans 'notes included' %}: </b>
 {% for id, title, desc, vote, type, note_bookname, tags, url in frame_notes_display %}
 <div id="note_in_frame"><img src="/site_media/img/{{type}}.png" title="{{type}}"/>
-<a href="/{{profile_username}}/{{note_bookname}}/notes/note/{{id}}/">{{title|default:'(No Title)'}}</a> 
+<a href="/{{url_front}}/{{note_bookname}}/notes/note/{{id}}/">{{title|default:'(No Title)'}}</a> 
 {{desc}} 
  {% if type == 'Bookmark' or type == 'Scrap' %} 
  <a href="{{url}}">
@@ -56,7 +29,7 @@
 <img src="/site_media/img/tags-small.png" class="img_in_notes_section_header"/>:
 {% for tag  in tags %}
  {% if type != 'Frame' %} 
-<a href="/{{profile_username}}/{{note_bookname}}/notes/tags/{{tag}}/">{{tag}}</a>,
+<a href="/{{url_front}}/{{note_bookname}}/notes/tags/{{tag}}/">{{tag}}</a>,
 {% else %}
 {{tag}},
 {% endif %}
@@ -65,24 +38,21 @@
 </div>
 {% endfor %}
 
+ {% endblock %}
 
 
-</div>
+{% block note_form_tags%}
+{% endblock %}
 
-<br/><br/>
+{% block note_form_vote%}
+<input type="hidden" name="vote" value="{{note.vote}}" id="id_vote" />
+{% endblock %}
 
-<!--TODO: change the way frames are updated here.  For now, just hide it-->
- {% if user.username == profile_username %} 
+{% block note_attachment%}
 <div>
-<span id="edit_linkage"><a href="#">{% trans 'Edit this Frame' %}:</a></span>
-<div>
-<form action="updateFrame/" method="post" enctype="multipart/form-data" id="updateFrameForm">
-{{frame_form.as_p}}
-<input type="submit" value="Submit" />
-</form> 
+<b>{% trans 'attachment' %} :</b> <a href="/file/{{note.attachment.name}}" target="top">{{note.attachment}}</a>
 </div>
-</div>
-{% endif %}
+{% endblock %}
 
 
 

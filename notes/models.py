@@ -371,7 +371,7 @@ class Note(models.Model):
     #The problem with notes of private tags not showing up in social notes is that if a group member sets his own tag such as *** as a private
     #tag, then his notes in *** won't show in the group 
     #TODO:refactor out to several sync methods
-   
+   #TODO:when a note become public again, should the frame that it is in get a save too so that the social frame can be updated?
     def save(self, *args, **kwargs):             
         #do_something()
         super(Note, self).save(*args, **kwargs) # Call the "real" save() method.        
@@ -545,13 +545,7 @@ class Frame(Note):
         
     def get_display_of_unique_extra_tags(self):    
         return ','.join(self.get_unique_extra_tags())
-    
-    def get_tags(self):
-        return [t.name for t in self.tags.all()]
-        
-    
-    def display_tags(self):
-        return ','.join(self.get_tags())   
+ 
 
      
                

@@ -371,7 +371,8 @@ def note(request, username, bookname, note_id):
     return render_to_response('social/social_note.html', {'note':note,\
                                     #'frames':frames, \
                                     'notes_included':notes_included,\
-                                    'profile_username':username}, context_instance=RequestContext(request, {'bookname': bookname,'aspect_name':'notes'}))
+                                    'profile_username':username,\
+                                    'url_front':'social\\'+username}, context_instance=RequestContext(request, {'bookname': bookname,'aspect_name':'notes'}))
     
     
 #TODO: think of whether get rid of appname    

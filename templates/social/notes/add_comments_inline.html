@@ -1,14 +1,7 @@
 {% extends "include/add_comments_inline.html" %}
 {% load i18n %}
 
-<script type="text/javascript">
-	$(document).ready(function(){	
-  
 
-     
-    });
-     	
-</script>
 
 
 
@@ -26,5 +19,10 @@
 
 
 {% block other_buttons %}
-<span class="share_button"><a href="javascript:void(0);">{% trans "Share" %}</a></span>
+<span class="share_button"><a href="javascript:void(0);">{% trans "Share" %}</a></span>&nbsp;&nbsp;
+{% if user.username == profile_username %}  
+<span>
+<a href="/{{user.username}}/{{bookname}}/notes/note/{{note.owner_note_id}}/">{% trans 'View in personal' %}</a>
+</span>
+{% endif %}
 {% endblock %}

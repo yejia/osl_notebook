@@ -1,76 +1,12 @@
+{% extends "include/notedisplay.html" %}
 {% load i18n %}
 
-
-<script>
-	jQuery(function($){
-
-        $(updateNoteForm).hide();     		
-		$('#edit_note'). click(function(){                       
-		        $(updateNoteForm).show();
-        });		
-			
-    });
-</script>
-<div>
-<h2> {{note.title|default:_('(No Title)')}}</h2>
-</div>
-<div>
-<b>{% trans 'Created' %} :</b> {{note.init_date|date:"Y-m-d H:i"}}
-</div>
+{% block note_url%}
 <div>
 <b>URL:</b> <a href="{{note.url}}" target="top">{{note.url}}</a>
 </div>
-<div>
- {{note.desc}}
-</div>
+{% endblock %}
 
-<div>
-<b><img src="/site_media/img/tags-small.png" class="img_in_notes_section_header"/>:</b> 
-{% for tag in note.get_tags %}
-<a href="/{{profile_username}}/{{bookname}}/notes/tags/{{tag}}/">{{tag}}</a>,
-{% endfor %}
-</div>
-
-<div>
-<b>{% trans 'importance' %} : </b>{{note.vote}}
-</div>
-<div>
-<b>{% trans 'private' %} :</b> {{note.private|yesno:"yeah,no,maybe" }}
-</div>
-<div>
-<b>{% trans 'In frames' %} : </b>
-{% for frame in frames %}
-<a href="/{{profile_username}}/framebook/notes/note/{{frame.id}}/">{{frame.id}}</a>,
-{% empty %}
-{% trans 'Not in any frame' %} .
-{% endfor %}
-</div>
-
-
-<br/><br/>
-<!--li tag is added solely to accomodate the code used in the notes display page where js need to find the parent li tag to locate with note to add comment-->
-<li note_id="{{note.id}}">
-{% include "include/add_comments_inline.html" %}            
-</li>
-<br/><br/>
-
- {% if user.username == profile_username %} 
-<div>
-<span id="edit_note"><a href="#">Edit this note:</a></span>
-<div>
-<form action="updateNote/" method="post" enctype="multipart/form-data" id="updateNoteForm">
-
-<p> {{ note_form.title.label_tag }}: {{note_form.title}}</p> 
-<p>{{ note_form.desc.label_tag }}: {{note_form.desc}}</p> 
+{% block note_form_url%}
 <p> {{ note_form.url.label_tag }}: {{note_form.url}} </p> 
-<p>{{ note_form.extra.label_tag }}: {{note_form.extra}}</p> 
-<p>{{ note_form.private.label_tag }}: {{note_form.private}}</p> 
-<p>{{ note_form.delete.label_tag }}: {{note_form.delete}}</p> 
-<p>{{ note_form.vote.label_tag }}: {{note_form.vote}}</p> 
-
-<p>{{ note_form.tags.label_tag }}: {{note_form.tags}}</p> 
-<input type="submit" value="Submit" />
-</form> 
-</div>
-</div>
-{% endif %}
+{% endblock %}

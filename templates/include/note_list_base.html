@@ -1112,7 +1112,7 @@ jQuery('.note_display').accordion({
 
 
 
-
+{% comment%}
 <!--
 {% if user.username == profile_username %}
 
@@ -1220,7 +1220,7 @@ jQuery('.note_display').accordion({
        
 -->    
     
-
+{% endcomment%}
 
 
 
@@ -1232,8 +1232,8 @@ jQuery('.note_display').accordion({
 {% block special_side_menu %}
 {% endblock %}
 
+{% comment %}
 <!--
-
 <div class="module"> 
         <h2>{% trans "Sorting" %}</h2>  
 
@@ -1310,7 +1310,7 @@ jQuery('.note_display').accordion({
          <a href="javascript:alert('Not implemented yet!');">{% trans "Create a Learning Group" %}</a><br/>             
 </div>
 -->
-
+{% endcomment%}
 
 </div> 
 {% comment %}

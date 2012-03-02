@@ -1,29 +1,13 @@
+{% extends "notes/notedisplay.html" %}
 {% load i18n %}
 
-<script>
-	jQuery(function($){
-
-        $(updateNoteForm).hide();     		
-		$('#edit_note'). click(function(){                       
-		        $(updateNoteForm).show();
-        });		
-			
-    });
-</script>
 
 
-<div>
-<h2>{{note.get_note_type}}</h2>
-</div>
 
-<div>
-<h2>{{note.title|default:_('(No Title)')}}</h2>
-</div>
 
-<div>
-{% trans 'Created' %} : {{note.init_date|date:"Y-m-d H:i"}}
-</div>
-<br/><br/>
+
+
+{% block note_url%}
  {% if note.get_note_type == 'Bookmark' %} 
 <div>
 <b>URL :</b> <a href="{{note.social_bookmark.url}}" target="top">{{note.social_bookmark.url}}</a>
@@ -34,56 +18,38 @@
 <b>URL :</b> <a href="{{note.social_scrap.url}}" target="top">{{note.social_scrap.url}}</a>
 </div>
 {% endif %}
+{% endblock %}
 
-<div><p>
-{{note.desc}}</p>
-</div>
 
-<div>
-<img src="/site_media/img/tags-small.png" class="img_in_notes_section_header"/>:
-{% for tag in note.get_tags %}
-<a href="/social/{{profile_username}}/{{bookname}}/notes/tags/{{tag}}/">{{tag}}</a>,
-{% endfor %}
-</div>
 
-<div>
-<b>{% trans 'importance' %} : </b>{{note.vote}}
-</div>
-<div>
-<b>{% trans 'private' %} :</b> {{note.private|yesno:"yeah,no,maybe" }}
-</div>
 
-<div>
-<b>{% trans 'attachment' %} :</b> <a href="/site_media/{{note.attachment.name}}" target="top">{{note.attachment}}</a>
-</div>
 
- {% if note.get_note_type != 'Frame' %} 
+{% block note_attachment%}
+ {% if note.get_note_type == 'Snippet' %} 
 <div>
-<b>{% trans 'In frames' %} : </b>
-{% for frame in note.in_frames.all %}
-<a href="/social/{{profile_username}}/framebook/notes/note/{{frame.id}}/">{{frame.id}}</a>,
-{% empty %}
-{% trans 'Not in any frame' %} .
-{% endfor %}
+<b>{% trans 'attachment' %} :</b> <a href="/file/{{note.snippet.attachment.name}}" target="top">{{note.social_snippet.attachment}}</a>
 </div>
 {% endif %}
-
  {% if note.get_note_type == 'Frame' %} 
  <div>
- {% trans 'Notes included in this frame' %} :
- {% for n in notes_included %}
-<a href="/social/{{profile_username}}/notebook/notes/note/{{n.id}}/">{{n.id}}</a>,
-{% empty %}
-{% trans 'No Notes included' %} .
-{% endfor %}
- </div>
+<b>{% trans 'attachment' %} :</b> <a href="/file/{{note.frame.attachment.name}}" target="top">{{note.social_frame.attachment}}</a>
+</div>
  {% endif %}
+{% endblock %}
 
-<br/><br/>
-<!--li tag is added solely to accomodate the code used in the notes display page where js need to find the parent li tag to locate with note to add comment-->
+
+
+
+{% block note_comments%}
 <li note_id="{{note.id}}">
 {% include "social/notes/add_comments_inline.html" %}            
 </li>
-<br/><br/>
+{% endblock %}
+
+
+{% block note_form%}
+{% endblock %}
+
+
 
 

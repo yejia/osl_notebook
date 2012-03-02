@@ -1,0 +1,136 @@
+{% load i18n %}
+
+<script>
+	jQuery(function($){
+           $('#updateNoteForm').hide();     
+           $('#hide_edit_note').hide();		
+		$('#edit_note'). click(function(){                       
+		        $('#updateNoteForm').show();
+                   $('#hide_edit_note').show();
+                   $('#edit_note').hide();
+                
+            });		
+           $('#hide_edit_note'). click(function(){                       
+		        $('#updateNoteForm').hide();
+                   $('#hide_edit_note').hide();
+                   $('#edit_note').show();
+            });     
+                
+			
+        });
+</script>
+
+
+{% block note_type%}
+{% endblock %}
+
+<div>
+<h2> {{note.title|default:_('(No Title)')}}</h2>
+</div>
+<div class="grey">
+{% trans 'Created' %} :{{note.init_date|date:"Y-m-d H:i"}}
+</div>
+<br/>
+
+{% block note_url%}
+{% endblock %}
+
+<div>
+ {{note.desc}}
+</div>
+<br/>
+
+{% block note_tags%}
+<div>
+<b><img src="/site_media/img/tags-small.png" class="img_in_notes_section_header"/>:</b> 
+{% for tag in note.get_tags %}
+<a href="/{{url_front}}/{{bookname}}/notes/tags/{{tag}}/">{{tag}}</a>,
+{% endfor %}
+</div>
+{% endblock %}
+
+<div>
+<b>{% trans 'importance' %} : </b>{{note.vote}}
+</div>
+<div>
+<b>{% trans 'private' %} :</b> {{note.private|yesno:"yeah,no,maybe" }}
+</div>
+
+
+{% block note_deleted%} 
+{% endblock %}
+
+{% block note_attachment%}
+{% endblock %}
+
+{% block note_in_frames%}
+<div>
+<b>{% trans 'In frames' %} : </b>
+{% for frame in frames %}
+<a href="/{{url_front}}/framebook/notes/note/{{frame.id}}/">{{frame.id}}</a>,
+{% empty %}
+{% trans 'Not in any frame' %} .
+{% endfor %}
+</div>
+{% endblock %}
+
+{% block notes_in_frame%}
+{% endblock %}
+
+
+
+
+
+<br/>
+{% block note_comments%}
+{% comment%}
+<!--li tag is added solely to accomodate the code used in the notes display page where js need to find the parent li tag to locate with note to add comment-->
+{% endcomment%}
+<li note_id="{{note.id}}">
+{% include "notes/add_comments_inline.html" %}            
+</li>
+{% endblock %}
+
+
+
+
+
+<br/><br/>
+
+{% block note_form%}
+ {% if user.username == profile_username %} 
+<div>
+<span id="edit_note"><a href="#">{% trans 'Edit this note' %}:</a></span>
+<span id="hide_edit_note"><a href="#">{% trans 'Hide edit form' %}</a></span>
+<div>
+<form action="updateNote/" method="post" enctype="multipart/form-data" id="updateNoteForm">
+
+<p> {{ note_form.title.label_tag }}: {{note_form.title}}</p> 
+<p>{{ note_form.desc.label_tag }}: {{note_form.desc}}</p> 
+
+{% block note_form_url%}
+{% endblock %}
+
+<p>{{ note_form.private.label_tag }}: {{note_form.private}}</p>
+
+{% comment%}<!--Don't show this for now. TODO:-->
+<p>{{ note_form.deleted.label_tag }}: {{note_form.deleted}}</p> 
+{% endcomment%}
+
+{% block note_form_vote%}
+<p>{{ note_form.vote.label_tag }}: {{note_form.vote}}</p>
+{% endblock %}
+
+{% block note_form_tags%}
+<p>{{ note_form.tags.label_tag }}: {{note_form.tags}}</p>
+{% endblock %}
+
+<p>{{ note_form.init_date.label_tag }}: {{note_form.init_date}}</p> 
+{% block note_form_attachment%}
+{% endblock %}
+<input type="submit" value="Submit" />
+</form> 
+</div>
+</div>
+{% endif %}
+{% endblock %}

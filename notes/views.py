@@ -983,7 +983,11 @@ def note(request, username, bookname, note_id):
     #b = B.objects.get(note_ptr=note)
     #print 'b.url:', b.url
     
-    return render_to_response(book_template_dict.get(bookname)+'notes/note.html', {'note':note, 'frames':frames, 'notes_included':notes_included, 'note_form':note_form, 'profile_username':username}, context_instance=RequestContext(request, {'bookname': bookname,'aspect_name':'notes'}))
+    return render_to_response(book_template_dict.get(bookname)+'notes/note.html', {'note':note, 'frames':frames, 'notes_included':notes_included, \
+                                                                                   'note_form':note_form, 'profile_username':username, \
+                                                                                   'url_front':username},
+                                                                                    context_instance=RequestContext(request, {'bookname': bookname,\
+                                                                                                                              'aspect_name':'notes'}))
     
 
 
@@ -1398,9 +1402,13 @@ def frame(request, username, frame_id):
         else:
             n.append('')     
         
-    
+    UpdateNForm = create_model_form("UpdateNForm_"+str(username), N, options={'exclude':('tags','vote')})
+    note_form = UpdateNForm(instance=frame)
         
-    return render_to_response('framebook/notes/note.html', {'frame':frame, 'frame_notes_display':frame_notes_display, 'profile_username':username}, context_instance=RequestContext(request))
+    return render_to_response('framebook/notes/note.html', {'note':frame, 'frame_notes_display':frame_notes_display,\
+                                                             'profile_username':username, 'note_form':note_form,
+                                                             'url_front':username}, \
+                                                             context_instance=RequestContext(request,{'bookname': 'framebook'}))
 
 
 
