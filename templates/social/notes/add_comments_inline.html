@@ -22,7 +22,7 @@
 <span class="share_button"><a href="javascript:void(0);">{% trans "Share" %}</a></span>&nbsp;&nbsp;
 {% if user.username == profile_username %}  
 <span>
-<a href="/{{user.username}}/{{bookname}}/notes/note/{{note.owner_note_id}}/">{% trans 'View in personal' %}</a>
+<a href="/{{user.username}}/{{bookname}}/notes/note/{{note.owner_note_id}}/" title="{% trans 'View this note in your personal notebook' %}">{% trans 'View personal' %}</a>
 </span>
 {% endif %}
 {% endblock %}
