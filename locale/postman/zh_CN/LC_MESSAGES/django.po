@@ -489,7 +489,7 @@ msgstr "收到的"
 #: .\templates\postman\reply.html.py:3 .\templates\postman\view.html.py:25
 #: .\templates\postman\view.html.py:28 .\templates\postman\view.html.py:31
 msgid "Reply"
-msgstr "回复的"
+msgstr "回复"
 
 #: .\templates\postman\sent.html.py:6
 msgid "Sent"

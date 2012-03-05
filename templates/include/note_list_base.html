@@ -354,6 +354,9 @@
                             success:  processReturn,
                             async:   false
             })
+            
+          
+            
             window.location.reload(false);     
 		       //return true;
 		
@@ -380,6 +383,7 @@
                                     '?note_ids='+selected_notes+
                                     '&tags_to_add='+selected_tags, {},
                           tagsChanged, 'json');
+           
     }
 	
 	function removeTags(){

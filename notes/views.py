@@ -233,10 +233,10 @@ def root(request):
 from notification.models import Notice
 
 def get_notices(request):
-    notice_url_dict={'postman_message':'/messages/','comment_receive':'/social/'+request.user.username+'/commentsfor/'}
+    notice_url_dict={'postman_message':'/messages/', 'postman_reply':'/messages/', 'comment_receive':'/social/'+request.user.username+'/commentsfor/'}
     notices = Notice.objects.filter(recipient=request.user, unseen=True)    
     #TODO:get count of each type of notice
-    ns = [(n.notice_type.label, n.notice_type.display,notice_url_dict.get(n.notice_type.label)) for n in notices]    
+    ns = [(n.notice_type.label, n.notice_type.display, notice_url_dict.get(n.notice_type.label)) for n in notices]    
     return HttpResponse(simplejson.dumps(list(set(ns))), "application/json")
 
 
