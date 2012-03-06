@@ -366,8 +366,19 @@ border:2px solid;
 box-shadow: 10px 10px 5px #888888;
 }
 
-input.tagit-input{
+
+.tagit input{
 background-color:#F5FC9E;
+}
+
+
+#add_note_tags_box{
+position:relative;
+left:80px;
+top:-20px;
+width:250px;
+margin-bottom:-35px;
+
 }
 
 #sort_drop_down{

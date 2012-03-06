@@ -2,31 +2,61 @@
 <html>
 <head>
 <!--TODO:useful?-->
-<meta charset="utf-8">
+    <link href="/site_media/css/tag-it/reset.css" rel="stylesheet" type="text/css" />       
+	<link href="/site_media/css/tag-it/master.css" rel="stylesheet" type="text/css" />
 
+ <!-- These 2 CSS files are required: any 1 jQuery UI theme CSS, plus the Tag-it base CSS. -->
+    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
+      <link href="/site_media/css/tag-it/jquery.tagit.css" rel="stylesheet" type="text/css" />
 
-  <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+    <!-- This is an optional CSS theme that only applies to this widget. Use it in addition to the jQuery UI theme. -->
+    <!--
+    <link href="css/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
+-->
+
+    <!-- jQuery and jQuery UI are required dependencies. -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+
   
-  
+    <!-- The real deal -->
+<script src="/site_media/js/tag-it.js" type="text/javascript" charset="utf-8"></script>
+
   
   <script>
-  $(document).ready(function() {
-    $("#tabs").tabs();
-    //$("#tabs").css('color','red')
+$(function(){
+     var sampleTags = ['c++', 'java', 'php', 'coldfusion', 'javascript', 'asp', 'ruby', 'python', 'c', 'scala', 'groovy', 'haskell', 'perl', 'erlang', 'apl', 'cobol', 'go', 'lua'];
+     
+       $("#ac_tags").tagit({
+			    availableTags: sampleTags
+            });    
+            
+              $("#add_note_tags").tagit({
+		    availableTags:sampleTags
+          });    
+          
+     
+
+     
+     
   });
+  
+  
+  
   </script>
 </head>
 <body style="font-size:62.5%;">
   
 <div id="tabs">
-    <ul>
-        <li><a href="/leon/snippetbook/notes/"><span>One</span></a></li>
-        <li><a href="/leon/bookmarkbook/notes/"><span>Two</span></a></li>
-        <li><a href="/leon/scrapbook/notes/"><span>Three</span></a></li>
-    </ul>
-    
+first:
+<ul id="add_note_tags"></ul>
+ <br/>
+second:
+<ul id="ac_tags"></ul>
+
+third:
+<ul id="myTags"></ul>
+<input type="submit" value="Submit">
 </div>
 </body>
 </html>

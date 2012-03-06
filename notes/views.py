@@ -1161,16 +1161,16 @@ def add_note(request, username, bookname):
     #have to add tags below specifically. Otherwise, error in db matching.
     #AddNForm = create_model_form("AddNForm_add_note_"+str(username), N, fields={'tags':forms.ModelMultipleChoiceField(queryset=tags)})      
     
-    post = request.POST.copy()    
+    #post = request.POST.copy()    
     
-    tags = post.getlist('tags')
+    tags = request.GET.getlist('tags')[0].split(',')  
     if not tags:
         tags = ['untagged']
         #post.setlist('tags', tags)
     
-    n = N(desc=post.get('desc'))  
+    n = N(desc=request.GET.get('desc'))  
     n.vote = 0
-    private = post.get('private', False)
+    private = request.GET.get('private', False)
     if private == 'true':
         n.private = True
     else:
@@ -1517,6 +1517,7 @@ def  toggle_show_caches_mode(request):
    
 @login_required    
 def add_tags_to_notes(request, username, bookname):    
+    #TODO:use POST
     note_ids= request.GET.getlist('note_ids')[0].split(',')        
     tags_to_add = request.GET.getlist('tags_to_add')[0].split(',')    	
     N = getNote(username, bookname)

@@ -133,31 +133,10 @@
 					
                                 {% endif %}
 					
-                                <!--<li><a href="javascript:showSelectedPlusCachedNoteIds();">Get the list of selected note id </a></li> 	-->				
+                             
                             </ul> 
                         </li>      
-                        <li class="accessible" style="display:none;"><a href="#" class="accessible">{% trans "Add Tags" %} <img src="/site_media/img/arrow.gif"/>&nbsp;&nbsp;</a> 
-                
-                        <ul> 
-				        
-				        {% for tag in tags %}					
-                            <li  class="noclick"><input type="checkbox" name="tag_selected"  value="{{ tag.id }}" class="tag_selection">{{tag.name}}</input></li>   
-                        {% endfor %}
-                            <li><a href="/{{profile_username}}/settings/tags/">{% trans "Create new" %}</a></li> 	
-                            <li><a href="javascript:addTags();">{% trans "Add tags selected" %}</a></li> 
-                        </ul> 
-                    </li> 
-			
-                    <li class="accessible" style="display:none;"><a href="#" class="accessible">{% trans "Remove Tags" %} <img src="/site_media/img/arrow.gif"/>&nbsp;&nbsp;</a> 
- 
-                    <ul> <!--
-				         <li><input type="text" size="30" name="q" value="" class="tagsearchbar" /></li>--> <!--TODO: creat the margin at the bottom-->	
-				        {% for tag in tags %}					
-						<li  class="noclick"><input type="checkbox" name="tag_selected"  value="{{ tag.id }}" class="tag_selection">{{tag.name}}</input></li>   
-                        {% endfor %}
-                        <li><a href="javascript:removeTags();">{% trans "Remove tags selected" %}</a></li> 	
-                    </ul> 
-                </li> 
+
 		
                 <li  class="accessible"><a href="#" class="accessible">{% trans "More actions" %} <img src="/site_media/img/arrow.gif"/></a> 
 				<ul> 
@@ -182,7 +161,7 @@
         
 <span class="right_menu_bar">
 <span>
-{% include "include/sort_menu.html" %} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+{% include "include/sort_menu.html" %} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 {% include "include/toggle_tag_menu.html" %} 
 </span>
 </span>        

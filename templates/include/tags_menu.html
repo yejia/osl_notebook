@@ -3,6 +3,8 @@
 <!--
 <h4>{% trans "Tag" %} </h4>
 -->
+{% block extra_script %}
+
 
 <script type="text/javascript">
 $(document).ready(function(){	
@@ -13,7 +15,8 @@ $(document).ready(function(){
 
             $.get('/{{profile_username}}/{{bookname}}/getWsTags/',{}, loadTags, 'json');  
                  
-            function loadTags(tags){                   
+            function loadTags(tags){                 
+                          
                    //tag_choices = ''
                    $('.tag_list').empty();
                    for(var i = 0; i < tags.length; i++){
@@ -27,8 +30,8 @@ $(document).ready(function(){
                        
                        //tag_choices = tags[i].name+','+tag_choices                       
                    }
-                   
-                   $('#loading').hide(0);    
+                  // alert('showme');
+                   $('#loading').hide();         
                  
             }
             
@@ -37,7 +40,7 @@ $(document).ready(function(){
             
 </script>
 
-
+{% endblock %}
 
   <ul class="tag_menu">
   <li>

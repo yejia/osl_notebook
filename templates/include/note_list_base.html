@@ -9,8 +9,8 @@
 {% block tite %}
 {% endblock %}
 
-
-
+ <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
+<link href="/site_media/css/tag-it/jquery.tagit.css" rel="stylesheet" type="text/css" />
 
 
 <link rel="stylesheet" type="text/css" href="/media/css/base.css" /> 
@@ -36,11 +36,11 @@
   
        <script src="/site_media/js/jquery-1.4.js" type="text/javascript"></script>	
   -->
-  
-     
-
-    <script src="/site_media/js/jquery.min.js" type="text/javascript"></script>	
-
+ <!--
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+ 
+-->
+    <script src="/site_media/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>	
 
 
 
@@ -62,14 +62,18 @@
     <script src="/site_media/js/jquery.AddIncSearch.js"  type="text/javascript" ></script>
 
 	
- 
+  <!--    
     <link href="/site_media/css/tag-it/reset.css" rel="stylesheet" type="text/css" />
-       
+ 
 	<link href="/site_media/css/tag-it/master.css" rel="stylesheet" type="text/css" />
+    -->
     
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+ <!--
 	<link href="/site_media/css/jquery-ui/jquery.ui.autocomplete.custom.css" rel="stylesheet" type="text/css"  />
     <script src="/site_media/js/jquery-ui/jquery-ui-1.8.core-and-interactions.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="/site_media/js/jquery-ui/jquery-ui-1.8.autocomplete.min.js" type="text/javascript" charset="utf-8"></script>
+       -->
 	<script src="/site_media/js/tag-it.js" type="text/javascript" charset="utf-8"></script>
 
 
@@ -109,15 +113,20 @@
     }
 	
     
-       function addNote(){    
-          
-            desc = $('#id_desc').val();
-         
-            //alert('desc:'+desc);
-             
+       function addNote(){              
+            desc = $('#id_desc').val();         
+            //alert('desc:'+desc);             
             priv = $('#id_private').attr('checked');
-          //   alert('priv:'+priv);
-            $.post('/{{profile_username}}/{{bookname}}/notes/addNote/',{'desc':desc, 'private':priv}, noteAdded, 'json');         
+          //   alert('priv:'+priv);           
+           
+            var selected_tags = [];	
+            $('ul#add_note_tags').find('li.tagit-choice').each(function(){               
+                   	   // alert('find a tag:'+$(this).find(':input').val());
+                            selected_tags.push($(this).find(':input').val());	                  			
+            });	
+             
+           //$.post('/{{profile_username}}/{{bookname}}/notes/addNote/',{'desc':desc, 'private':priv,'tags':selected_tags}, noteAdded, 'json');         
+          $.post('/{{profile_username}}/{{bookname}}/notes/addNote/?desc='+desc+'&private='+priv+'&tags='+selected_tags,{}, noteAdded, 'json');         
                
                         
     } 
@@ -189,17 +198,17 @@
         
         //TODO: duplicated, merge 
           $('li.note_display').mouseenter(function(){	    
-                        $(this).find('.hover').show(0);
+                        $(this).find('.hover').show();
                         
                 });
                 
            $('li.note_display').mouseleave(function(){	    
-                        $(this).find('.hover').hide(0);
+                        $(this).find('.hover').hide();
                         
                 });     
                 
-                  $("li[note_id='"+note.note_id+"']  .stream").show(0);    
-                  $("li[note_id='"+note.note_id+"']  .structure").hide(0);
+                  $("li[note_id='"+note.note_id+"']  .stream").show();    
+                  $("li[note_id='"+note.note_id+"']  .structure").hide();
             
             
               $("li[note_id='"+note.note_id+"']  div.brief_display").show();
@@ -300,8 +309,10 @@
             $('#ac_tags_box').show(3);  
              $('#add_tags_to_notes').show(3); 
             $('#remove_tags_from_notes').hide(3);     
-            $('.tagit-input').focus();     
-            $('.tagit-input').css("background-color","#F5FC9E");
+            $('#ac_tags_box').find('li.tagit-new input').focus();     
+           $('#ac_tags_box').css("background-color","#F5FC9E");//not working for now. It is probably better without it.
+            
+        //alert('the tags in the widgit:'+  $("#ac_tags").tagit("assignedTags"));
            
            // $('#ac_tags').css("border","groove");
                         
@@ -311,16 +322,16 @@
     
     function cancelChangeTags(){    
             //alert('cancel add tgs');
-            $('#ac_tags_box').hide(0);  
+            $('#ac_tags_box').hide();  
             //Below cannot succesfully remove tags entered earlier. I guess it is ok to leave those tags there for now
             //$('ul#ac_tags').text('')
     }
     
     function showRemoveTags(){    
             //alert('show remove tgs');
-            $('#ac_tags_box').show(0);  
-            $('#remove_tags_from_notes').show(0);   
-            $('#add_tags_to_notes').hide(0);     
+            $('#ac_tags_box').show();  
+            $('#remove_tags_from_notes').show();   
+            $('#add_tags_to_notes').hide();     
             $('.tagit-input').focus();     
             $('.tagit-input').css("background-color","#F5FC9E");            
     }
@@ -370,7 +381,8 @@
     function  addTags_new(){
     //alert('adding tags new...');
           var selected_tags = [];	
-          $('li.tagit-choice').each(function(){               
+         
+            $('ul#ac_tags').find('li.tagit-choice').each(function(){               
                    	   // alert('find a tag:'+$(this).find(':input').val());
                             selected_tags.push($(this).find(':input').val());	
                     			
@@ -438,8 +450,10 @@
     
     }
     
-    function tagsChanged(result){         
-         $('#ac_tags_box').hide(0);    
+    function tagsChanged(result){ 
+//clear the tags for next input    
+$("#ac_tags").tagit("removeAll");
+         $('#ac_tags_box').hide();    
            //$('ul.messages').empty();//TODO:set timeout for message displayed? Like how gmail does
          $('ul.messages').append('<li class="success">{% trans "Tags are successfully updated!" %} </li>');
         for (var i=0; i < result.length; i++){
@@ -618,20 +632,20 @@
     
     //TODO: the ones in base2.html are not updated with the change here.
     function structure(){
-              $('.structure').show(0);
-              //$('.stream').hide(0);
+              $('.structure').show();
+              //$('.stream').hide();
     
             {% ifequal request.session.advanced 'on' %}                       
-                    $('.advanced').show(0);                  
+                    $('.advanced').show();                  
 		    {% else %}                   
-                    $('.advanced').hide(0);                   
+                    $('.advanced').hide();                   
 		    {% endifequal %}     
     }
     
     function stream(){
    
-          //$('.stream').show(0);    
-          $('.structure').hide(0);
+          //$('.stream').show();    
+          $('.structure').hide();
     }
     
     
@@ -646,7 +660,22 @@
     }
     
     
-
+function showAddNoteTags(){    
+            //alert('show add tgs');
+           $('#add_note_tags_box').show();  
+            $('#add_note_tags').show();  
+          //   $('#add_tags_to_note').show(3); 
+            $('#add_note_tags_box').find('.tagit-input').focus();     
+            $('#add_note_tags_box').find('.tagit-input').css("background-color","#05FC9E");
+           
+           // $('#ac_tags').css("border","groove");
+                        
+    }
+    
+      function  addNoteTags(){
+   
+           $('#add_note_tags_box').hide();  
+    }
 
         
 
@@ -677,32 +706,32 @@
     
 
           $('li.note_display').mouseenter(function(){	    
-                        $(this).find('.hover').show(0);
+                        $(this).find('.hover').show();
                         
                 });
                 
            $('li.note_display').mouseleave(function(){	    
-                        $(this).find('.hover').hide(0);
+                        $(this).find('.hover').hide();
                         
                 });     
     
     
-            $('#ac_tags_box').hide(0);
+            $('#ac_tags_box').hide();
            
     
-            $('.stream').show(0);    
-            $('.structure').hide(0);
+            $('.stream').show();    
+            $('.structure').hide();
             
-            $('.show_tags_section').show(0);
-            $('.hide_tags_section').hide(0);
-            $('.tag_menu_box').hide(0);
+            $('.show_tags_section').show();
+            $('.hide_tags_section').hide();
+            $('.tag_menu_box').hide();
             
-            $('.show_side_menu').hide(0);
+            $('.show_side_menu').hide();
             $('.hide_side_menu').click(function(){	  
                         
-                $('.show_side_menu').show(0);
-                $('.hide_side_menu').hide(0);
-                $('#content-related').hide(0);
+                $('.show_side_menu').show();
+                $('.hide_side_menu').hide();
+                $('#content-related').hide();
                 if (screen.availWidth > 1300){           
                     $('#main').css({'width':'1120px'});
                     $('.note_table td.note_table_td1').css({'width': '14em'});
@@ -729,9 +758,9 @@
                 });
                 
             $('.show_side_menu').click(function(){	               
-                    $('.show_side_menu').hide(0);
-                    $('.hide_side_menu').show(0);
-                    $('#content-related').show(0);
+                    $('.show_side_menu').hide();
+                    $('.hide_side_menu').show();
+                    $('#content-related').show();
                     if (screen.availWidth > 1300){           
                         $('#main').css({'width':'897px'});
                         $('.note_table td.note_table_td1').css({'width': '14em'});
@@ -760,15 +789,15 @@
              
             $('.hide_tags_section').click(function(){	  
                         
-                        $('.show_tags_section').show(0);
-                        $('.hide_tags_section').hide(0);
-                         $('.tag_menu_box').hide(0);
+                        $('.show_tags_section').show();
+                        $('.hide_tags_section').hide();
+                         $('.tag_menu_box').hide();
                 });
                 
             $('.show_tags_section').click(function(){	    
-                        $('.show_tags_section').hide(0);
-                        $('.hide_tags_section').show(0);
-                         $('.tag_menu_box').show(0);
+                        $('.show_tags_section').hide();
+                        $('.hide_tags_section').show();
+                         $('.tag_menu_box').show();
                 });
     
 
@@ -782,22 +811,22 @@
             });
             
             {% ifequal request.session.advanced 'on' %}                       
-                    $('.advanced').show(0);
-                    $('.stream').show(0);    
-                    $('.structure').hide(0);
+                    $('.advanced').show();
+                    $('.stream').show();    
+                    $('.structure').hide();
 		    {% else %}                   
-                    $('.advanced').hide(0);                   
+                    $('.advanced').hide();                   
 		    {% endifequal %}
 	
 	
             {% ifequal addnote_mode 'on' %}	             
-                    $('.show_add_note_section').hide(0);
-                    $('.hide_add_note_section').show(0);
-                    $('.addnote').show(0);				
+                    $('.show_add_note_section').hide();
+                    $('.hide_add_note_section').show();
+                    $('.addnote').show();				
 		    {% else %}
-                    $('.show_add_note_section').show(0);
-                    $('.hide_add_note_section').hide(0);
-                    $('.addnote').hide(0);
+                    $('.show_add_note_section').show();
+                    $('.hide_add_note_section').hide();
+                    $('.addnote').hide();
 		    {% endifequal %}
 		     //$('.hide_add_note_section').hide();
 		    $('.show_add_note_section').click(function(){
@@ -817,13 +846,13 @@
             });
 		
             {% ifequal show_notes_mode 'on' %}	             
-                    $('.show_notes_section').hide(0);
-                    $('.hide_notes_section').show(0);
-                    $('div#notes_section').show(0);				
+                    $('.show_notes_section').hide();
+                    $('.hide_notes_section').show();
+                    $('div#notes_section').show();				
             {% else %}
-                    $('.show_notes_section').show(0);
-                    $('.hide_notes_section').hide(0);
-                    $('div#notes_section').hide(0);
+                    $('.show_notes_section').show();
+                    $('.hide_notes_section').hide();
+                    $('div#notes_section').hide();
 		    {% endifequal %}
 		
 		
@@ -845,13 +874,13 @@
 		
 		
 		    {% ifequal show_caches_mode 'on' %}	             
-                    $('.show_caches_section').hide(0);
-                    $('.hide_caches_section').show(0);
-                    $('div#caches_section').show(0);				
+                    $('.show_caches_section').hide();
+                    $('.hide_caches_section').show();
+                    $('div#caches_section').show();				
 		    {% else %}
-                    $('.show_caches_section').show(0);
-                    $('.hide_caches_section').hide(0);
-                    $('div#caches_section').hide(0);
+                    $('.show_caches_section').show();
+                    $('.hide_caches_section').hide();
+                    $('div#caches_section').hide();
 		    {% endifequal %}
 		
 		
@@ -919,10 +948,10 @@
             $("li.note_display:even").css("background-color", "#F5FFD6");
             //$("li.note_display:even").css("background-color", "#9DB25D");
 		
-        
+        tagsAvailable = [{% for tag in tags %}"{{tag}}",{% endfor %}];
 
 		    $("#ac_tags").tagit({
-			    availableTags: [{% for tag in tags %}"{{tag}}",{% endfor %}]
+			    availableTags: tagsAvailable
             });    
 
 
@@ -1029,9 +1058,18 @@
               $('.scrapbook .brief_display #note_desc').css({'width': '35em'});
         }
                 
-                
+
+                                    
+         // tagsAvailable = [{% for tag in tags %}"{{tag}}",{% endfor %}];
+        $("#add_note_tags").tagit({
+			    availableTags: tagsAvailable
+            });    
             
-        
+            $('#add_note_tags').hide(); 
+            
+          $('#add_note_tags_box').hide(); 
+                
+         
     
     });
     

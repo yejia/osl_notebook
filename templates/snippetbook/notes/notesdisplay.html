@@ -1,6 +1,11 @@
 {% extends "include/notesdisplay.html" %}
 {% load i18n %}
 
+{% block extra_script %}
+ <script type="text/javascript">
+
+</script>
+{% endblock %}
 
 {% block add_note_section %}
 
@@ -20,28 +25,19 @@
 {% endif %}    
     <textarea id="id_desc" rows="3" cols="90" name="desc"></textarea>
     <div>{% trans "Private" %} <input type="checkbox" name="private" id="id_private"/>
-        {% comment %} 
-    <span class="tags_img"><img src="/site_media/img/tags-small.png" class="img_in_notes_section_header"/></span>
-       {% endcomment %}	 
-    </div>
-     {% comment %}	 
-<div id="add_note_tags_box">                       
+
+<span>
+    <span class="tags_img" onclick="javascript:showAddNoteTags();" title="{% trans 'Add tags' %}"><img src="/site_media/img/tags-small.png" class="img_in_notes_section_header"/></span>
+    <div id="add_note_tags_box">                       
 <ul id="add_note_tags"></ul>
- <button  id="add_tags_to_note"  onclick="javascript:addTags_new();">{% trans 'Add Tags' %}</button>
- <button  id="remove_tag_from_notes" onclick="javascript:removeTags_new();">{% trans 'Remove Tags' %}</button>&nbsp;
+<!--
+ <button  id="add_tags_to_note"  onclick="javascript:addNoteTags();">{% trans 'Add Tags' %}</button>
+ 
   <button  id="cancel_change_note_tags" onclick="javascript:cancelChangeTags();">{% trans 'Cancel' %}</button>
-</div> 
-              
-                        <ul> 
-				        
-				        {% for tag in tags %}					
-                            <li  class="noclick"><input type="checkbox" name="tag_selected"  value="{{ tag.id }}" class="tag_selection">{{tag.name}}</input></li>   
-                        {% endfor %}
-                            <li><a href="/{{profile_username}}/settings/tags/">{% trans "Create new" %}</a></li> 	
-                            <li><a href="javascript:addTags();">{% trans "Add tags selected" %}</a></li> 
-                        </ul> 
-       {% endcomment %}	 
-    
+  -->
+</div>
+</span>
+</div>    
     <br/><button id="add_note_submit"  onclick="javascript:addNote();"/>{% trans 'Add' %}</button>
     {% trans "Short snippet is recommended (less than 300 characters)" %}
     <a href="javascript:alert('{% trans "A short snippet is enough to represent a significant experience. Practice on that. :-)" %}');"><img src="/media/img/admin/icon-unknown.gif"/></a>

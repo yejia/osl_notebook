@@ -15,14 +15,12 @@ a {
 a:hover {
     text-decoration:none;
 }
-/*
 hr {
     border: none;
     background-color: #ccc;
     height: 6px;
     margin: 1em 0;
 }
-*/
 em {
     font-style:italic;
 }
