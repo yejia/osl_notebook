@@ -138,9 +138,9 @@
        
         pri_part = ""
         if (note.private==true){
-            pri_part =  '<span class="lock" title="{% trans "private"  %}" style="display:inline;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>'
+            pri_part =  '<span class="lock" title="{% trans "private"  %}" style="display:inline;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>' +'<span class="unlock" title="{% trans "public"  %}" style="display:none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>'
         }else{
-           pri_part =  '<span class="unlock" title="{% trans "public"  %}" style="display:inline;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>'
+           pri_part =  '<span class="unlock" title="{% trans "public"  %}" style="display:inline;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>'+'<span class="lock" title="{% trans "private"  %}" style="display:none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>'
         }
         tags = ''
         for (var i=0;i<note.tags.length;i++){
@@ -299,6 +299,28 @@
                 });
                 
         
+                            
+                $('span.unlock').click(function(){	                   
+                    $.post('makePrivate/',{'id':$(this).parents('li').attr('note_id')}, privacyChanged, 'json');                   
+                });
+                
+                 $('span.lock').click(function(){	                   
+                    $.post('makePublic/',{'id':$(this).parents('li').attr('note_id')}, privacyChanged, 'json');                   
+                });
+                
+                
+                  function privacyChanged(result){                 
+                    note_id = result.note_id
+                    if (result.private == 'y'){
+                    //alert('is true');                          
+                          $("li[note_id='"+note_id+"']").find('span.lock').show();
+                          $("li[note_id='"+note_id+"']").find('span.unlock').hide();
+                    }else{
+                   //alert('is fale');
+                          $("li[note_id='"+note_id+"']").find('span.unlock').show();
+                          $("li[note_id='"+note_id+"']").find('span.lock').hide();
+                    }
+                }
 
         
     }

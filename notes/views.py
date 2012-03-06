@@ -1164,7 +1164,8 @@ def add_note(request, username, bookname):
     #post = request.POST.copy()    
     
     tags = request.GET.getlist('tags')[0].split(',')  
-    if not tags:
+    #print 'tags:',tags
+    if not tags or (len(tags) == 1 and tags[0] == u''):
         tags = ['untagged']
         #post.setlist('tags', tags)
     
