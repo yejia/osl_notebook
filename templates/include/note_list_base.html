@@ -452,7 +452,7 @@
     function removeTags_new(){
           
           var selected_tags = [];	
-          $('li.tagit-choice').each(function(){               
+          $('ul#ac_tags').find('li.tagit-choice').each(function(){               
                    	    //alert('find a tag:'+$(this).find(':input').val());
                             selected_tags.push($(this).find(':input').val());	
                     			
@@ -684,7 +684,8 @@ $("#ac_tags").tagit("removeAll");
     
 function showAddNoteTags(){    
             //alert('show add tgs');
-           $('#add_note_tags_box').show();  
+            $("#add_note_tags").tagit("removeAll");
+           $('#add_note_tags_box').toggle();  
             $('#add_note_tags').show();  
           //   $('#add_tags_to_note').show(3); 
             $('#add_note_tags_box').find('.tagit-new input').focus();     
