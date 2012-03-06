@@ -1825,7 +1825,7 @@ msgstr "收件箱"
 
 #: templates/postman/base.html:7
 msgid "Sent Messages"
-msgstr "私信"
+msgstr "发出的信件"
 
 #: templates/postman/base.html:8
 msgid "Write"
