@@ -2137,12 +2137,12 @@ msgstr "%(profile_username)s的朋友"
 #: templates/social/profile.html:75
 #, python-format
 msgid " Groups created by %(profile_username)s "
-msgstr "%(profile_username)s的小组"
+msgstr "%(profile_username)s创建的小组"
 
 #: templates/social/profile.html:88
 #, python-format
 msgid " Groups followed by %(profile_username)s "
-msgstr "%(profile_username)s的小组"
+msgstr "%(profile_username)s加入的小组"
 
 #: templates/social/search_in_friends_notes.html:4
 #, python-format
