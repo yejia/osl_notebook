@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us" > 
 <head> 
 <title>Manage Working Set</title> 
+ <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
 <link href="/site_media/css/tag-it/jquery.tagit.css" rel="stylesheet" type="text/css" />
 
 <link rel="stylesheet" type="text/css" href="/media/css/base.css" /> 
@@ -321,7 +322,6 @@ Create a new working set:
  <button  id="remove_tags_from_notes" onclick="javascript:removeTagsFromWSs_new();">{% trans 'Remove Tags' %}</button>&nbsp;
   <button  id="cancel_change_tags" onclick="javascript:cancelChangeTags();">{% trans 'Cancel' %}</button>
 </div> 
-
 <ul class="jd_menu">                        
 			 <li class="accessible"><a href="#" class="accessible" href="javascript:changeTags();">{% trans "Change Tags" %}  <img src="/site_media/img/arrow.gif"/>&nbsp;&nbsp;</a>
                             <ul>  
