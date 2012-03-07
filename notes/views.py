@@ -1061,6 +1061,7 @@ def update_note_inline(request, username, bookname):
         note.desc = content
     if note_field=='note_event':
         note.event = content.lstrip("{").rstrip("}") #TODO: change Note's event to extra, the same as bookmarks and scraps
+    #below is not used anymore. Instead, update_note_tags_inline is used.
     if note_field=='note_tags':
         note.update_tags(content)    
     #note.tags = content	
@@ -1074,6 +1075,22 @@ def update_note_inline(request, username, bookname):
     #TODO: if error
     return HttpResponse(content, mimetype="text/plain") 
     
+
+
+@login_required    
+def update_note_tags_inline(request, username, bookname): 
+    note_id = request.POST.get('id')
+    tags =  request.POST.get('tags')  
+    N = getNote(username, bookname)    
+    note = N.objects.get(id=note_id)
+    note.update_tags(tags) 
+    note.save() 
+    return HttpResponse(simplejson.dumps({'note_id':note.id, 'display_tags':note.display_tags()}),
+                                                                     "application/json")
+
+
+
+
 
 @login_required   
 def add_comment(request, username, bookname):  

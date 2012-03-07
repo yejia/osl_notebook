@@ -306,11 +306,13 @@ color: red;
 position:relative;
 }
 
-li.note_display input{
+li.note_display input.note_selection{
 position:absolute;
 left:-20px;
 top:0px;
 }
+
+
 
 .tag_display{
 position:relative;
@@ -381,6 +383,17 @@ width:250px;
 margin-bottom:-35px;
 
 }
+
+#update_tags_inline_box{
+position:relative;
+left:40px;
+top:-20px;
+width:250px;
+margin-bottom:0px;
+background-color:#F5FC9E;
+
+}
+
 
 #sort_drop_down{
 margin-top:-5px;
@@ -667,6 +680,30 @@ bottom:0px;
 .inline_delete_member:hover{
    background-position:-12px 0;
 }
+
+
+span.tags_edit{	
+   background: url("../img/icon_changelink.gif");
+   background-repeat:no-repeat;
+   cursor:pointer;
+   
+}
+
+span.tags_save{
+   background: url("../img/edit_big.png") -16px 0;
+   cursor:pointer;
+
+margin: 2px;
+
+}
+span.tags_cancel{
+   background: url("../img/edit_big.png") 25px 0;
+   cursor:pointer;
+   
+margin: 2px;
+}
+
+
 
 
 /*Below has no effect*/

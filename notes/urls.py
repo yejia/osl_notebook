@@ -31,7 +31,8 @@ urlpatterns = patterns('',
     #this below can also match url settings/tags/addTag/. But since it is put after setting's url patterns, it should be fine. TODO:better
     (r'^(?P<aspect_name>[^/]+)/tags/(?P<tag_name>[^/]+)/$','notebook.notes.views.tags'), #TODO:regex here
 
-    (r'/updateNoteInline/$','notebook.notes.views.update_note_inline'), #TODO:maybe no / after updateNote    
+    (r'/updateNoteInline/$','notebook.notes.views.update_note_inline'), #TODO:maybe no / after updateNote   
+    (r'/updateNoteTagsInline/$','notebook.notes.views.update_note_tags_inline'), 
 
     (r'/addComment/$','notebook.notes.views.add_comment'),
     (r'/deleteComment/$','notebook.notes.views.delete_comment'),
