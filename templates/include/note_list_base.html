@@ -1107,7 +1107,7 @@ function showAddNoteTags(){
                        editable.find('span.tags_text').hide();
                        //TODO: think of if better to move below into the html code and use show/hide instead of spitting out from js on the fly and remove later. Also the functions defined here can be moved out.
                         editable.prepend('<span class="tags_save">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="tags_cancel">&nbsp;&nbsp;&nbsp;&nbsp;</span>');                        
-                        $(this).parents('span.editable').find("#update_tags_inline_box").show();
+                        editable.find("#update_tags_inline_box").show();
                         
                         editable.find("#update_tags_inline").tagit({
 			              availableTags: tagsAvailable,
@@ -1130,7 +1130,8 @@ function showAddNoteTags(){
                          
                         $('span.tags_save'). click(function(){                  
                                  var selected_tags = [];	
-                                 $('ul#update_tags_inline').find('li.tagit-choice').each(function(){                      	                    
+                                 var  editable =    $(this).parents('span.editable') ;  
+                                 editable.find('li.tagit-choice').each(function(){                      	                    
                                             // selected_tags = selected_tags+$(this).find(':input').val()+',';	   
                                             selected_tags.push($(this).find(':input').val());	                            
                                 });	                        
