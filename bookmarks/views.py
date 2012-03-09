@@ -61,7 +61,7 @@ def add_bookmark(request):
         from django.forms import TextInput
         #by adding the tags field specifically here, we avoided it using tags of another user (a strange error which repeat even after changing class names and variable names)
         AddNForm = create_model_form("AddNForm_"+str(username), N, fields={'tags':forms.ModelMultipleChoiceField(queryset=tags)}, options={'exclude':['deleted'],
-                                                             'fields':['url','title','tags','desc','extra','vote','private'],
+                                                             'fields':['url','title','tags','desc','vote','private'],
                                                              'widgets':{'title': TextInput(attrs={'size': 60}),
                                                                        }})
         url = request.GET.get('url')

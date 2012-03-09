@@ -237,7 +237,7 @@ def import_with_tags2(username, bookmark_file, default_vote=0, common_tag=None, 
     
     count_tag_created = 0
     
-    w = W.objects.get(name="bookmarks")    
+    w = W.objects.get(name="bookmarkbook")    
     
     count_note_created = 0
     duplicate = []
@@ -270,7 +270,7 @@ def import_with_tags2(username, bookmark_file, default_vote=0, common_tag=None, 
                 for url in urls:    
                     #print 'url in the popped out stack is: ', url                 
                     url.tags.add(t) 
-                    num_of_tags_created = url.add_tags(common_tag)
+                    num_of_tags_created = url.add_tags(common_tag, 'bookmarkbook')
                     count_tag_created = count_tag_created + num_of_tags_created
                     url.save()         
         if line.find('<DT><A') != -1:

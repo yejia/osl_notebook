@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import notebook
 
 from notebook.notes.models import Note, Tag, Frame, LinkageNote, Folder, WorkingSet, create_model, create_model_form, getNC, getT, getL

@@ -35,7 +35,31 @@ $(document).ready(function(){
                  
             }
             
-            	});
+            
+            var view_by_tags = $("#view_by_tags")
+             view_by_tags.tagit({
+			    availableTags: tagsAvailable,
+                   allowSpaces: true,
+                   onTagClicked: function(evt, tag) {
+                          //alert('clicked '+view_by_tags.tagit('tagLabel', tag));        
+                          tagClicked = view_by_tags.tagit('tagLabel', tag)  
+                          window.location.assign('/{{profile_username}}/{{bookname}}/notes/tags/'+tagClicked+'/') ;                         
+                },
+                onTagAdded:function(evt, tag) {
+                          //alert('added tag '+view_by_tags.tagit('tagLabel', tag));      
+                          tag.find('a.tagit-close').remove();
+                          tag.find('a').css('text-decoration','decoration:underline')
+                          tag.parents('ul').find('tagit-new').remove();
+                                                    
+                                
+                }
+            });    
+            
+            
+           
+            
+            
+    });
 	
             
 </script>
@@ -50,6 +74,8 @@ $(document).ready(function(){
   <span><a href="/{{profile_username}}/{{bookname}}/{{aspect_name}}/">{% trans "all tags" %}</a> </span> 
  {% endif %}
  </li>
+ 
+ {% trans "Search and click" %}:<ul id="view_by_tags"></ul>
  
  <span id="loading"><img src="/site_media/img/ui-anim_basic_16x16.gif"/>{% trans "Loading tags..." %}</span>
  

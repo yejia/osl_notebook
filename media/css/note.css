@@ -394,6 +394,26 @@ background-color:#F5FC9E;
 
 }
 
+ul#view_by_tags{
+position:relative;
+left:30px;
+top:-20px;
+width:100px;
+/*height:40px;*/
+margin-bottom:-20px;
+}
+ul#view_by_tags li{
+width:80px;
+height:18px;
+margin:0px;
+padding:0px;
+}
+ul#view_by_tags input{
+width:80px;
+height:14px;
+margin:0px;
+padding:0px;
+}
 
 #sort_drop_down{
 margin-top:-5px;

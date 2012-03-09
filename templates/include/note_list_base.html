@@ -1103,12 +1103,13 @@ function showAddNoteTags(){
          
         $('span.tags_edit'). click(function(){
                 //alert('tags edit clicked');
-                       $(this).parents('span.editable').find('span.tags_text').hide();
+                      var  editable =    $(this).parents('span.editable') ; 
+                       editable.find('span.tags_text').hide();
                        //TODO: think of if better to move below into the html code and use show/hide instead of spitting out from js on the fly and remove later. Also the functions defined here can be moved out.
-                        $(this).parents('span.editable').prepend('<span class="tags_save">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="tags_cancel">&nbsp;&nbsp;&nbsp;&nbsp;</span>');                        
+                        editable.prepend('<span class="tags_save">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="tags_cancel">&nbsp;&nbsp;&nbsp;&nbsp;</span>');                        
                         $(this).parents('span.editable').find("#update_tags_inline_box").show();
                         
-                        $(this).parents('span.editable').find("#update_tags_inline").tagit({
+                        editable.find("#update_tags_inline").tagit({
 			              availableTags: tagsAvailable,
                               allowSpaces: true,
                               
@@ -1117,11 +1118,12 @@ function showAddNoteTags(){
                          $(this).hide();
                          
                          
-                          $('span.tags_cancel'). click(function(){                         
-                                $(this).parents('span.editable').find("#update_tags_inline_box").hide();                    
-                                $(this).parents('span.editable').find('span.tags_save').remove();
-                                $(this).parents('span.editable').find('span.tags_edit').show();
-                                $(this).parents('span.editable').find('span.tags_text').show();
+                          $('span.tags_cancel'). click(function(){     
+                                var  editable =    $(this).parents('span.editable') ;                      
+                                editable.find("#update_tags_inline_box").hide();                    
+                                editable.find('span.tags_save').remove();
+                                editable.find('span.tags_edit').show();
+                                editable.find('span.tags_text').show();
                                 $(this).remove();
                                 
                                  }); 
@@ -1140,12 +1142,13 @@ function showAddNoteTags(){
                         });
                      
                      
-                     function tags_updated_inline(result){                                   
-                            $('li[note_id="'+result.note_id+'"] span.editable').find('span.tags_cancel').remove();
+                     function tags_updated_inline(result){           
+                            var  editable =     $('li[note_id="'+result.note_id+'"] span.editable') ;              
+                            editable.find('span.tags_cancel').remove();
                             //TODO:define variable with jquery
-                             $('li[note_id='+result.note_id+'] span.editable').find("#update_tags_inline_box").hide();                    
-                            $('li[note_id='+result.note_id+'] span.editable').find('span.tags_save').remove();
-                            $('li[note_id='+result.note_id+'] span.editable').find('span.tags_edit').show();
+                             editable.find("#update_tags_inline_box").hide();                    
+                            editable.find('span.tags_save').remove();
+                            editable.find('span.tags_edit').show();
                             $('li[note_id='+result.note_id+'] span.tags_text').text(result.display_tags);
                             $('li[note_id='+result.note_id+'] span.tags_text').show();
                     }                   

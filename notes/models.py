@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django.db import models
 
 from django.contrib.auth.models import User
@@ -285,6 +287,7 @@ class Note(models.Model):
         #TODO: not right. Should tell bookname base on the instance. After using hasattr, no need to consider the case of 'notebook'
         if bookname == 'notebook':
             bookname = 'snippetbook'   
+        num_of_tags_created = 0
         W = getW(self.owner_name)             
         w = W.objects.get(name=bookname)     
         for tag_name in tags_to_add:    
@@ -299,7 +302,10 @@ class Note(models.Model):
             self.tags.add(t)  
             #TODO: there seems to be no need t save this instance, as self.tags.add(t) already saved data to the m2m table  
             # but to update the social note as well, I think below is still needed        
-            self.save()    
+            self.save() 
+            if created:
+                num_of_tags_created += 1
+        return num_of_tags_created       
             
     
     #tags_to_add is a list of tag names
