@@ -1,90 +1,10 @@
+{% extends "include/addNote.html" %}
 {% load i18n %}
-<html>
-<head>
-<link rel="stylesheet" type="text/css" href="/media/css/base.css" /> 
-<link href="/site_media/css/note.css" rel="stylesheet" type="text/css"> 
-
-<script src="/site_media/js/jquery.min.js" type="text/javascript"></script>	
-
-<link href="/site_media/css/tag-it/reset.css" rel="stylesheet" type="text/css" />       
-<link href="/site_media/css/tag-it/master.css" rel="stylesheet" type="text/css" />    
-<link href="/site_media/css/jquery-ui/jquery.ui.autocomplete.custom.css" rel="stylesheet" type="text/css"  />
-<script src="/site_media/js/jquery-ui/jquery-ui-1.8.core-and-interactions.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="/site_media/js/jquery-ui/jquery-ui-1.8.autocomplete.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="/site_media/js/tag-it.js" type="text/javascript" charset="utf-8"></script>
 
 
-<script>
-
-$(document).ready(function(){	
-
-   $('.hide_more_section').hide(0);
-   
-   $('.hide_more_section').click(function(){
-                    $('div#more_section').hide();
-             		$(this).hide();   
-                    $('.show_more_section').show();                  
-                    return false;
-        });
-		
-    $('.show_more_section').click(function(){
-                    $('div#more_section').show();	
-                    $(this).hide();   	
-                    $('.hide_more_section').show();                    
-                    return false;
-        });
-
-	$("#ac_tags").tagit({
-			availableTags: [{% for tag in tags %}"{{tag}}",{% endfor %}]
-		}); 
-        
-    });   
-</script>
-
-</head>
-
-<body>
-<div class="addnote"  style="margin-left:15px;margin-top:15px;">
-<h1>{% trans "Add a scrap" %}:</h1><br/>
-<form action="" method="post" enctype="multipart/form-data" id="addNoteForm"> <!--TODO:get ok? it still send an extra request to the server-->
-	<input type="submit" value="{% trans "Submit" %}"/>&nbsp;&nbsp;<input type="submit" name="btnC" value="{% trans "Cancel" %}" onclick="window.close();"><br/><br/>
-    
-    <p>
-    {{addNoteForm.url.label_tag}}:  {{url}}
-    <input type="hidden" name="url" value="{{url}}"/>
-     </p>
-    <p>
-     {% trans "title" %}:  {{addNoteForm.title}}
-   </p>
+{% block show_default_extra %}
     <p>   
    {% trans "Desc" %}:   {{addNoteForm.desc}}
    </p>
- 
-   <div>
-   {% trans "Add Tags" %}:
-<ul id="ac_tags"></ul> 
-</div>
-
-<p> 
-{% trans "More" %}:
-<span class="show_more_section"><img title="" src="/site_media/img/right-arrow.jpg"/></span><span class="hide_more_section"><img title="" src="/site_media/img/down-arrow.jpg"/></span> 
-</p>
-
-<div id="more_section" style="display:none;">
-<p>   
-    {% trans "Vote" %}: {{addNoteForm.vote}}
-   </p>
-   <p>   
-    {% trans "private" %}:  {{addNoteForm.private}}
-   </p>
-
-  
-</div>
-    
-    
-
-</form> 
-</div>
-
-</body>
-</html>
+{% endblock %}
+   
