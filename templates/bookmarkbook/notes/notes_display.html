@@ -31,7 +31,18 @@
 		    
 		    </td>
 		    <td class="note_table_tags">
-		    <div id="note_tags" title="note tags">{% if user.username == profile_username %}<span class="editableText">{% endif %}{{note.display_tags}}{% if user.username == profile_username %}</span>{% endif %}</div>
+		    <div id="note_tags" title="{% trans "note tags" %}">
+                 {% if user.username == profile_username %}<span class="editable"><span class="tags_edit">&nbsp;&nbsp;&nbsp;&nbsp;</span>{% endif %}
+                    <div id="update_tags_inline_box" style="display: none;">
+                        <ul id="update_tags_inline">
+                                {% for tag in note.get_tags %}
+                                   <li>{{tag}}</li>
+                                {% endfor %}
+                        </ul>
+                    </div>
+                    <span class="tags_text">{{note.display_tags}}</span>
+                {% if user.username == profile_username %}</span>{% endif %}
+            </div>
 		    </td>
 		    </tr>
 		    </table>            
