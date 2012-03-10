@@ -35,3 +35,7 @@
 		    <div  id="note_url" title="note url"><a href="{{ note.url}}" target="_blank">{{note.url}}</a></div>	   
 		    </td>
 {% endblock %} 
+	   
+{% block full_display_div_extra %}
+<div  id="note_desc" title="note desc">{{note.desc}}</div>	
+{% endblock %} 
