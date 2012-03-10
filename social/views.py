@@ -12,6 +12,7 @@ from django.template import RequestContext
 from django.core.exceptions import ObjectDoesNotExist, FieldError
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
+from django.utils.translation import ugettext as _
 
 import datetime
 
@@ -239,11 +240,19 @@ def add_group(request, username):
     
     #TODO: move logic below to group.add_tags
     tag_names = post.getlist('item[tags][]')
-    #So far, only tags already existing in social tags can be used. Otherwise, there will be an error TODO:
-    tags = [ST.objects.get(name=tag_name).id for tag_name in tag_names]
+    #print 'tag_names', tag_names
     if not tag_names:    
         #TODO: give an error page, also validation on the form       
-        messages.error(request, "No tags are entered!")     
+        
+        messages.error(request, _("No tags are entered!"))  
+        log.error("No tags are entered when generating a group!") 
+        #print 'no tags'
+        #addGroupForm = AddGroupForm(initial={'admins': [username],'name':post.get('name'),'desc':post.get('desc'),'private':post.get('private'})
+        return HttpResponseRedirect('/'+username+'/groups/')
+    
+    #So far, only tags already existing in social tags can be used. Otherwise, there will be an error TODO:
+    tags = [ST.objects.get(name=tag_name).id for tag_name in tag_names]
+     
     post.setlist('tags', tags) 
     g = G()
     
