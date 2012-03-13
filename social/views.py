@@ -201,6 +201,55 @@ def groups(request, username):
     T = getT(username) 
     tags = T.objects.filter(private=False)
     
+    
+    #posting for adding a group
+    if request.method == 'POST':
+        post = request.POST.copy()    
+        #TODO: move logic below to group.add_tags
+        tag_names = post.getlist('item[tags][]')
+        #print 'tag_names', tag_names
+        #if not tag_names:               
+        #    messages.error(request, _("No tags are entered!"))  
+        #    log.error("No tags are entered when generating a group!") 
+        #    return HttpResponseRedirect('/'+username+'/groups/')
+        
+        #So far, only tags already existing in social tags can be used. Otherwise, there will be an error TODO:
+        tag_ids = [ST.objects.get(name=tag_name).id for tag_name in tag_names]
+         
+        post.setlist('tags', tag_ids) 
+        #TODO: check if the group already exists
+        g = G()
+    
+        
+        #TODO: whether new tags can be created in the social space?
+        
+        f = AddGroupForm(post, instance=g)
+        if not f.is_valid(): 
+            log.debug("add group form errors:"+str(f.errors))
+            addGroupForm = f
+        else:
+            f.save()    
+            #TODO: handel tags that are created in the social space (might need to push back to the
+            #personal space.)
+            
+            #print 'newly created group name:', g.name
+            
+            #add sharinggroup:groupname as a new tag for this group
+            gtn = "sharinggroup:"+g.name 
+            st = ST(name=gtn, private=g.private)
+            st.save()
+            g.tags.add(st)
+            
+            #TODO: might modify Group model's save method to push group tags all back to user personal space
+            #push this group tag back to the user's personal space
+            #T = getT(username=gtn)
+            #T.objects.get_or_create(name=gtn, private=g.private)
+            
+            push_group_tags_back(request, g.name)
+    
+                  
+    print 'tags:', tags
+    
     return render_to_response('social/groups.html', {'gs_created_by_self':gs_created_by_self, 'gs_following':gs_following,\
                                                       'addGroupForm':addGroupForm, 'tags':tags, 'profile_username':username}, context_instance=RequestContext(request))
 
@@ -231,72 +280,6 @@ def groups_notes(request, username, bookname):
                                                  'tags':None, 'appname':'friends', 'cl':cl, 'profile_username':username},\
                                                   context_instance=RequestContext(request)) 
     
-
-#TODO: check if the group already exists
-@login_required
-def add_group(request, username):
-    #T = getT(username) 
-    post = request.POST.copy()
-    
-    #TODO: move logic below to group.add_tags
-    tag_names = post.getlist('item[tags][]')
-    #print 'tag_names', tag_names
-    if not tag_names:    
-        #TODO: give an error page, also validation on the form       
-        
-        messages.error(request, _("No tags are entered!"))  
-        log.error("No tags are entered when generating a group!") 
-        #print 'no tags'
-        #addGroupForm = AddGroupForm(initial={'admins': [username],'name':post.get('name'),'desc':post.get('desc'),'private':post.get('private'})
-        return HttpResponseRedirect('/'+username+'/groups/')
-    
-    #So far, only tags already existing in social tags can be used. Otherwise, there will be an error TODO:
-    tags = [ST.objects.get(name=tag_name).id for tag_name in tag_names]
-     
-    post.setlist('tags', tags) 
-    g = G()
-    
-#    g.creator = request.user
-#    
-#    g.name = post.get('name')
-#    g.desc = post.get('desc')
-#    g.private = post.get('private')
-#    g.save()
-#    
-#    g.members.add(request.user)
-#    g.admins.add(request.user)
-#    
-#    
-#    g.tags = tags
-    
-    #TODO: whether new tags can be created in the social space?
-    
-    f = AddGroupForm(post, instance=g)
-    
-    log.debug("add group form errors:"+str(f.errors))
-    
-    f.save()    
-    #TODO: handel tags that are created in the social space (might need to push back to the
-    #personal space.)
-    
-    #print 'newly created group name:', g.name
-    
-    #add sharinggroup:groupname as a new tag for this group
-    gtn = "sharinggroup:"+g.name 
-    st = ST(name=gtn, private=g.private)
-    st.save()
-    g.tags.add(st)
-    
-    #TODO: might modify Group model's save method to push group tags all back to user personal space
-    #push this group tag back to the user's personal space
-    #T = getT(username=gtn)
-    #T.objects.get_or_create(name=gtn, private=g.private)
-    
-    push_group_tags_back(request, g.name)
-    
-    
-    
-    return HttpResponseRedirect('/'+username+'/groups/')    
 
 
 
@@ -533,6 +516,19 @@ def group_delete_member(request, groupname):
     g.admins.remove(member)
     return HttpResponse('successful', mimetype="text/plain")  
     
+
+
+@login_required
+def group_update_tags(request, groupname):
+    tag_names = request.POST.getlist('item[tags][]')
+    group = G.objects.get(name=groupname)     
+    for tag_name in tag_names: 
+        if not tag_name in group.get_tag_names():
+            group_add_tags(request, groupname)
+    for tag_name in group.get_tag_names():
+        if not tag_name in tag_names:
+            group_remove_tag(request, groupname)
+                     
 
     
 @login_required

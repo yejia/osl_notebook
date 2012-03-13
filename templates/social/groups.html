@@ -27,12 +27,16 @@
 </div>
 <div class="addgroup">
 <form action="addGroup" method="post" id="addGroupForm"> 
-    <p>
-               {% trans "Name" %}<span class="required">*</span>: {{addGroupForm.name}}
+    <p>   
+               {% trans "Name" %} <span class="required">*</span>: 
+                {{ addGroupForm.name.errors }}
+               {{addGroupForm.name}}
     </p>
 
     <div>
-   {% trans "Add Tags" %} <span class="required">*</span>:
+   
+   {% trans "Add Tags" %}  <span class="required">*</span>: 
+   {{ addGroupForm.tags.errors }}
     <ul id="ac_tags"></ul> 
     </div>
     <p>

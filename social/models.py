@@ -302,6 +302,8 @@ class Group(models.Model):
     def get_tag_names(self):
         return [tag.name for tag in self.tags.all()]     
 
+    def display_tags(self):      
+        return ','.join(self.get_tag_names())
            
             
 #Activity Stream such as adding friend, posting...

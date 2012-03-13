@@ -391,7 +391,6 @@ top:-20px;
 width:250px;
 margin-bottom:0px;
 background-color:#F5FC9E;
-
 }
 
 ul#view_by_tags{
@@ -414,6 +413,11 @@ height:14px;
 margin:0px;
 padding:0px;
 }
+
+ul#ac_tags{
+width:300px;
+}
+
 
 #sort_drop_down{
 margin-top:-5px;

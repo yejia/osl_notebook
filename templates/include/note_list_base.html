@@ -414,8 +414,12 @@
 		     });	
           // alert('selected_tags is:'+selected_tags );        
            
-            selected_notes = getSelectedNoteIds();		  
-            
+            selected_notes = getSelectedNoteIds();		 
+           
+           if (selected_notes == ""){
+               alert('{% trans "Please select the notes!" %}');
+               return ;
+            }
               $.post('addTags2Notes2/'+
                                     '?note_ids='+selected_notes+
                                     '&tags_to_add='+selected_tags, {},
@@ -463,7 +467,10 @@
            //alert('selected_tags is:'+selected_tags );        
            
             selected_notes = getSelectedNoteIds();		  
-            
+            if (selected_notes == ""){
+               alert('{% trans "Please select the notes!" %}');
+               return ;
+            }
               $.post('removeTagsFromNotes2/'+
                                     '?note_ids='+selected_notes+
                                     '&tags_to_add='+selected_tags,

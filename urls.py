@@ -81,7 +81,7 @@ urlpatterns = patterns('',
     (r'/voteUnuseful/$','notebook.social.views.vote_unuseful'), 
 
     (r'^(?P<username>[^/]+)/groups/$', 'notebook.social.views.groups'),
-    (r'^(?P<username>[^/]+)/groups/addGroup$', 'notebook.social.views.add_group'),
+    (r'^(?P<username>[^/]+)/groups/addGroup$', 'notebook.social.views.groups'),
     (r'^(?P<username>[^/]+)/friends/$', 'notebook.social.views.friends'),
     (r'^(?P<username>[^/]+)/friends/(?P<bookname>[^/]+)/notes/$', 'notebook.social.views.friends_notes'), 
     (r'^(?P<username>[^/]+)/groups/(?P<bookname>[^/]+)/notes/$', 'notebook.social.views.groups_notes'),

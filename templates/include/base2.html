@@ -63,7 +63,12 @@
 	<script src="/site_media/js/tag-it.js" type="text/javascript" charset="utf-8"></script>
 
 	
- 
+ {% block extra_css %}
+{% endblock %}
+
+{% block extra_script %}
+{% endblock %}
+
 
 	
 <script type="text/javascript">
@@ -72,8 +77,9 @@
 
             
 		    $("#ac_tags").tagit({
-			    availableTags: [{% for tag in tags %}"{{tag}}",{% endfor %}]
-            });  
+			    availableTags: [{% for tag in tags %}"{{tag}}",{% endfor %}],
+                   allowSpaces: true
+                  });  
             
             //TODO: make the tag-it lib able to take several auto complete input boxes
             //$("#ab_tags").tagit({

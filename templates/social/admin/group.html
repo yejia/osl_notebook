@@ -27,7 +27,7 @@
 <div style="display:none;">{% trans "Group Name" %}: <span class="editableText">{{group.name}}</span> <button onclick="removeGroup/">{% trans "remove this group" %}</button>
 </div>
 <br/><br/>
-<div>This is a {{ group.private|yesno:"private, public, public"}} group
+<div> {{group.private|yesno:"private, public, public"}}{% trans "group" %}
 </div>
 <br/><br/>
 <div>
@@ -52,14 +52,14 @@
 
 
 <div>
-{% trans "Group Tags:" %}
+{% trans "Group Tags" %}:
 <ul>
 {% for t in group.tags.all %}		
 <li tag_id="{{t.id}}">
 <a href="/groups/{{group.name}}/snippetbook/tags/{{t}}/">{{t.name}}</a> 
-
+{% if "sharinggroup" not in t.name %}
 <span title="{% trans "remove this tag" %}" class="inline_delete" id="group_delete_tag">&nbsp;&nbsp;&nbsp;</span>
-
+{% endif %} 
 </li>
 {% endfor %}
 <li>
