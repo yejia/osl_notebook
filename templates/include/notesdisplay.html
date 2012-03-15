@@ -1,13 +1,9 @@
 {% load i18n %}
 
 
-
-
-
-
-
 {% if user.username == profile_username %}    
 
+{% comment %}If no notes, show the add note(bookmark/scrap) button{% endcomment %}
 {% if not note_list.object_list %}
 {% block add_js_button_section %}
 {% endblock %}
@@ -19,9 +15,6 @@
 {% block add_note_section %}
 {% endblock %}
 {% endif %}  
-
-
-
 
 
 
@@ -89,10 +82,7 @@
 
 <div id='notes_section'>
 <div id='notes_section_menu'>
-{% if user.username == profile_username %}   
-
-
-
+{% if user.username == profile_username %} 
 <div class="menu_bar"><span>{% trans "Select" %}: <a href="javascript:selectAll();">{% trans "All" %}</a>, <a href="javascript:selectNone();">{% trans "None" %}</a></span>
 
 <div id="ac_tags_box">                       

@@ -2,9 +2,7 @@
 
 
 <script type="text/javascript">
-	$(document).ready(function(){	   
-
-
+	$(document).ready(function(){	
                 $('span.editableText').editableText({
                         newlinesEnabled: false
                 });
@@ -30,7 +28,7 @@
                 $('.delete_img'). click(function(){
                         $(this).load('deleteNote/',{ 'id':$(this).parents("li").attr('note_id')});
                         $(this).parents("li").remove();
-                });		
+                });	
                 
                 
          

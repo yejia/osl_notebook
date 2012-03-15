@@ -37,10 +37,10 @@
 
 {% block site_apps_menu %}
 
-
+{% comment %}
 
 <!--TODO: refactor-->
-<!--
+
 <div>
 {% if aspect_name == 'notes' %}
  <span style="font-size:18px" class="noteshome"  onclick="window.open('/{{ profile_username }}/snippetbook/notes/', '_self')">{% trans "Notes" %}</span>
@@ -58,5 +58,6 @@
 <a href="/{{ profile_username }}/snippetbook/folders//">{% trans "Folders" %}</a>    
 {% endif %}     
 </div>
--->
+{% endcomment %}
+
 {% endblock %}

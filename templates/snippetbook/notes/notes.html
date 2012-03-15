@@ -1,9 +1,7 @@
 {% extends "snippetbook/notes/note_list_base.html" %}
 {% load i18n %}
 
-{% block tags_menu %}
-{% include "include/tags_menu.html" %} 
-{% endblock %}
+
 
 {% block linkage_filter %}
        <h4>{% trans "In linkages" %}</h4>
@@ -16,8 +14,7 @@
              <span style="font-size:15px">{% trans "Yes" %}</span><br/>
         {% else %}
             <a href="?in_linkage=True">{% trans "Yes" %}</a><br/>      
-        {% endif %}
-               
+        {% endif %}           
        
 {% endblock %}
 

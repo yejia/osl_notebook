@@ -91,11 +91,7 @@
 		                                 <div  id="note_desc" title="{% trans "note desc" %}">{{note.desc}}</div>		   
 		                              </td>
 		                              <td class="note_table_tags">
-		                                   <div id="note_tags" title="{% trans "note tags" %}">
-                                              {% for tag in note.get_tags %}
-                                                     <span><a href="/social/{{note.owner.username}}/{{bookname}}/tags/{{tag}}/">{{tag}}</a>,</span>
-                                              {% endfor %}
-                                            </div>
+		                                   {% include "social/include/note_tags_inline.html" %}     
 		                               </td>   
                                        <td class="note_table_td4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                        </td>            

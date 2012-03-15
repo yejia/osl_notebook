@@ -745,7 +745,7 @@ def add_comment(request):
     if notification:
       notification.send([note.owner], "comment_receive", {"from_user": request.user})
       #print 'notices sent'
-    return  HttpResponse(simplejson.dumps({'note_id':note_id, 'content':content, 'commenter':nc.commenter.username}),
+    return  HttpResponse(simplejson.dumps({'note_id':note_id, 'comment_id':nc.id, 'comment_desc':nc.desc, 'commenter':nc.commenter.username}),
                                                                      "application/json")
 
 

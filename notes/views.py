@@ -1101,7 +1101,7 @@ def add_comment(request, username, bookname):
     NC = getNC(username)
     nc = NC(note=note, desc=content)
     nc.save()
-    return  HttpResponse(simplejson.dumps({'note_id':note_id, 'content':content}),
+    return  HttpResponse(simplejson.dumps({'note_id':note_id, 'comment_id':nc.id, 'comment_desc':nc.desc}),
                                                                      "application/json")
     
     

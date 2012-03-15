@@ -4,8 +4,8 @@
 
 
 
-
-{% block comment_display %}"<div><a href='/social/"+result.commenter+"/'>"+result.commenter+"</a>:"+result.content+"</div>"{% endblock %}
+<!--below doesn't seem to work. TODO:-->
+{% block comment_display %}+'<div><a href="/social/'+result.commenter+'"/>'+result.commenter+'</a>:'+result.desc+'</div>'+{% endblock %}
 
 
 
