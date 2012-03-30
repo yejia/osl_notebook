@@ -171,7 +171,9 @@ def friends(request, username):
 
 
 @login_required
-def friends_notes(request, username, bookname):
+def friends_notes2(request, username, bookname):
+    print 'username:',username
+    print 'bookname:',bookname
     friends = request.user.member.get_friends()
     q = Q(owner__in=friends, private=False)
     note_list = getSN(bookname).objects.filter(q)   

@@ -69,6 +69,7 @@ urlpatterns = patterns('',
     #TODO: better regex
     (r'^groups/[^/]+/[^/]+/addComment/$', 'notebook.social.views.add_comment'),
     (r'^social/.+/addComment/$', 'notebook.social.views.add_comment'),
+     (r'/friends/.+/notes/addComment/$', 'notebook.social.views.add_comment'),
     (r'^social/(?P<username>[^/]+)/commentsfor/$', 'notebook.social.views.comments_4_user'),
     (r'^social/(?P<username>[^/]+)/commentsby/$', 'notebook.social.views.comments_by_user'),
     #for now, no deleting of social comments TODO:
@@ -83,7 +84,7 @@ urlpatterns = patterns('',
     (r'^(?P<username>[^/]+)/groups/$', 'notebook.social.views.groups'),
     (r'^(?P<username>[^/]+)/groups/addGroup$', 'notebook.social.views.groups'),
     (r'^(?P<username>[^/]+)/friends/$', 'notebook.social.views.friends'),
-    (r'^(?P<username>[^/]+)/friends/(?P<bookname>[^/]+)/notes/$', 'notebook.social.views.friends_notes'), 
+    (r'^(?P<username>[^/]+)/friends/(?P<bookname>[^/]+)/notes/$', 'notebook.social.views.friends_notes2'), 
     (r'^(?P<username>[^/]+)/groups/(?P<bookname>[^/]+)/notes/$', 'notebook.social.views.groups_notes'),
     (r'^(?P<username>[^/]+)/groups/(?P<bookname>[^/]+)/$', 'notebook.social.views.groups_notes'),
 
