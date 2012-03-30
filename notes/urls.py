@@ -51,7 +51,7 @@ urlpatterns = patterns('',
     (r'^linkagenotes/note/(?P<note_id>[^/]+)/$','notebook.notes.views.linkagenote'),
     (r'/updateLinkageNoteInline/$','notebook.notes.views.update_frame_inline'),
     (r'/deleteLinkage/$','notebook.notes.views.delete_frame'),
-    (r'/deleteNoteFromLinkage/$','notebook.notes.views.delete_note_from_frame'),    
+    (r'/deleteNoteFromFrame/$','notebook.notes.views.delete_note_from_frame'),    
     (r'/addTags2Notes/$','notebook.notes.views.add_tags_to_notes'),
     #(r'/removeTagsFromNotes/$','notebook.notes.views.remove_tags_from_notes'),
 

@@ -1,0 +1,70 @@
+{% extends "include/notes/notes_display.html" %}
+{% load i18n %}
+
+
+
+
+
+{% block framebook_only_div%}	 
+                         
+        <div  id="note_notes">
+            {% trans 'Notes included in this frame' %}:
+            <ul>
+            <!--TODO: refactor-->
+             {% if user.username == profile_username %} 
+               {% for n in note.display_notes %}            
+                <div linked_note_id="{{n.0}}">
+                     <li><a href="/{{profile_username}}/{{bookname}}/{{included_aspect_name}}/note/{{n.0}}"><strong>{{n.1|default:_('(No Title)')}}-</strong></a>
+                                &nbsp;&nbsp;&nbsp;{{n.2|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp;{{n.3}} &nbsp;&nbsp;&nbsp;&nbsp; 
+                                <span title="remove this note from the frame" class="inline_delete" id="frame_delete_note">&nbsp;&nbsp;&nbsp;<!--TODO:get rid of &nbsp; use the style instead--></span>
+                     </li>           
+                </div>
+		        {% endfor %}
+              {% else %}              
+               {% for n in note.display_public_notes  %}            
+                <div linked_note_id="{{n.0}}">
+                     <li><a href="/{{profile_username}}/{{bookname}}/{{included_aspect_name}}/note/{{n.0}}"><strong>{{n.1|default:_('(No Title)')}}-</strong></a>
+                                &nbsp;&nbsp;&nbsp;{{n.2|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp;{{n.3}} &nbsp;&nbsp;&nbsp;&nbsp; 
+                                <!--TODO:get rid of &nbsp; use the style instead--></span>
+                     </li>           
+                </div>
+		         {% endfor %}
+              {% endif %}
+		    
+            </ul>
+         </div>   
+{% endblock %}     		   
+
+		    
+{% block full_display_div_extra %}
+     <div  id="note_notes">
+             {% trans 'Notes included in this frame' %}:
+            <ul>
+            <!--TODO: refactor-->
+             {% if user.username == profile_username %} 
+               {% for n in note.display_notes %}            
+                <div linked_note_id="{{n.0}}">
+                     <li><a href="/{{profile_username}}/{{bookname}}/{{included_aspect_name}}/note/{{n.0}}"><strong>{{n.1|default:_('(No Title)')}}-</strong></a>
+                                &nbsp;&nbsp;&nbsp;{{n.2|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp;{{n.3}} &nbsp;&nbsp;&nbsp;&nbsp; 
+                                <span title="remove this note from the frame" class="inline_delete" id="frame_delete_note">&nbsp;&nbsp;&nbsp;<!--TODO:get rid of &nbsp; use the style instead--></span>
+                     </li>           
+                </div>
+		        {% endfor %}
+              {% else %}              
+               {% for n in note.display_public_notes  %}            
+                <div linked_note_id="{{n.0}}">
+                     <li><a href="/{{profile_username}}/{{bookname}}/{{included_aspect_name}}/note/{{n.0}}"><strong>{{n.1|default:_('(No Title)')}}-</strong></a>
+                                &nbsp;&nbsp;&nbsp;{{n.2|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp;{{n.3}} &nbsp;&nbsp;&nbsp;&nbsp; 
+                               <!--TODO:get rid of &nbsp; use the style instead--></span>
+                     </li>           
+                </div>
+		         {% endfor %}
+              {% endif %}
+		    
+            </ul>
+		    </div>
+
+            <div>
+                <div  id="note_add_notes">{% if user.username == profile_username %}<span  class="editableText"></span>&nbsp;&nbsp;&nbsp;{% trans 'add more notes to the frame' %} <a href="javascript:alert('{% trans "When editing, replace content with comma separated note ids. And those notes will be included in this frame." %}');"><img src="/media/img/admin/icon-unknown.gif"/></a>{% endif %}
+            </div>
+{% endblock %} 	

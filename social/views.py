@@ -32,32 +32,27 @@ log = getlogger('social.views')
 
 #TODO: make this the same as in notebook.notes.views
 #TODO:belows seems not useful at all. Think of removing them 
-book_entry_dict = {'notebook':'note', 'snippetbook':'snippet','bookmarkbook':'bookmark', 'scrapbook': 'scrap'}
+#book_entry_dict = {'notebook':'note', 'snippetbook':'snippet','bookmarkbook':'bookmark', 'scrapbook': 'scrap'}
   
-
-def getN(username):
-    return create_model("N_"+str(username), Note, username)
-
-def getB(username):
-    return create_model("B_"+str(username), Bookmark, username)
-
-def getS(username):
-    return create_model("S_"+str(username), Scrap, username)
+#below are not used except in wall implementation, which is commented out for now
+#===============================================================================
+# def getN(username):
+#    return create_model("N_"+str(username), Note, username)
+# 
+# def getB(username):
+#    return create_model("B_"+str(username), Bookmark, username)
+# 
+# def getS(username):
+#    return create_model("S_"+str(username), Scrap, username)
+#===============================================================================
 
 #TODO: for now, social db is not used. Instead default is used to put those social data because social data needs user which is in default db
 #otherwise, need to copy the user table over to social
-#def getG():
-#    return create_model("G", Group, 'default') 
+
 
 G = Group
 
-#def getSN():
-#    return create_model("SN", Social_Note, 'default')
-
 SN = Social_Note
-
-#def getST():
-#    return create_model("ST", Social_Tag, 'default')
 
 ST = Social_Tag
 
@@ -78,58 +73,59 @@ class AddGroupForm(ModelForm):
 
 
 
-
-
-@login_required
-def wall_snippets(request, username):
-    N = getN(username) 
-    ns = N.objects.all().order_by('-init_date')[:30]
-    #get groups for this user
-    gs = G.objects.filter(members__username=username)    
-    return render_to_response('social/wall_snippets.html', {'ns':ns, 'gs':gs,  'profile_username':username, 'book_name': 'snippets'}, context_instance=RequestContext(request))
-
-
-@login_required
-def wall_bookmarks(request, username):
-    N = getN(username) 
-    ns = N.objects.all().order_by('init_date')[:30]
-    #get groups for this user
-    gs = G.objects.filter(members__username=username)    
-    return render_to_response('social/wall_snippets.html', {'ns':ns, 'gs':gs,  'profile_username':username, 'book_name': 'snippets'}, context_instance=RequestContext(request))
-
-
-@login_required
-def wall_scraps(request, username):
-    N = getN(username) 
-    ns = N.objects.all().order_by('init_date')[:30]
-    #get groups for this user
-    gs = G.objects.filter(members__username=username)    
-    return render_to_response('social/wall_snippets.html', {'ns':ns, 'gs':gs,  'profile_username':username, 'book_name': 'snippets'}, context_instance=RequestContext(request))
-
-
-
-@login_required
-def wall(request, username):
-    N = getN(username)
-    B = getB(username)
-    S = getS(username)
-    today = datetime.date.today()
-    yesterday  = today - datetime.timedelta(1)
-    day_bf_yest = today - datetime.timedelta(2)
-    ns = N.objects.all().order_by('init_date')[:10]
-    bs = B.objects.all().order_by('init_date')[:10]
-    ss = S.objects.all().order_by('init_date')[:10]
-        
-    #get groups for this user
-    gs = G.objects.filter(members__username=username)    
-    
-    return render_to_response('social/wall.html', {'ns':ns, 'bs':bs, 'ss':ss, 'gs':gs}, context_instance=RequestContext(request))
-
+#===============================================================================
+# 
+# 
+# @login_required
+# def wall_snippets(request, username):
+#    N = getN(username) 
+#    ns = N.objects.all().order_by('-init_date')[:30]
+#    #get groups for this user
+#    gs = G.objects.filter(members__username=username)    
+#    return render_to_response('social/wall_snippets.html', {'ns':ns, 'gs':gs,  'profile_username':username, 'book_name': 'snippets'}, context_instance=RequestContext(request))
+# 
+# 
+# @login_required
+# def wall_bookmarks(request, username):
+#    N = getN(username) 
+#    ns = N.objects.all().order_by('init_date')[:30]
+#    #get groups for this user
+#    gs = G.objects.filter(members__username=username)    
+#    return render_to_response('social/wall_snippets.html', {'ns':ns, 'gs':gs,  'profile_username':username, 'book_name': 'snippets'}, context_instance=RequestContext(request))
+# 
+# 
+# @login_required
+# def wall_scraps(request, username):
+#    N = getN(username) 
+#    ns = N.objects.all().order_by('init_date')[:30]
+#    #get groups for this user
+#    gs = G.objects.filter(members__username=username)    
+#    return render_to_response('social/wall_snippets.html', {'ns':ns, 'gs':gs,  'profile_username':username, 'book_name': 'snippets'}, context_instance=RequestContext(request))
+# 
+# 
+# 
+# @login_required
+# def wall(request, username):
+#    N = getN(username)
+#    B = getB(username)
+#    S = getS(username)
+#    today = datetime.date.today()
+#    yesterday  = today - datetime.timedelta(1)
+#    day_bf_yest = today - datetime.timedelta(2)
+#    ns = N.objects.all().order_by('init_date')[:10]
+#    bs = B.objects.all().order_by('init_date')[:10]
+#    ss = S.objects.all().order_by('init_date')[:10]
+#        
+#    #get groups for this user
+#    gs = G.objects.filter(members__username=username)    
+#    
+#    return render_to_response('social/wall.html', {'ns':ns, 'bs':bs, 'ss':ss, 'gs':gs}, context_instance=RequestContext(request))
+#===============================================================================
 
 @login_required
 def group_index(request, groupname):
     
-    return HttpResponseRedirect('/groups/'+groupname+'/snippetbook/') 
+    return HttpResponseRedirect('/groups/'+groupname+'/snippetbook/notes/') 
 
 
 
@@ -185,9 +181,10 @@ def friends_notes(request, username, bookname):
     sort, order_type,  paged_notes, cl = __get_notes_context(request, note_list) 
       
     #tags = get_group_tags(request, groupname, bookname)
-    return render_to_response('social/friends_notes.html', {'note_list':paged_notes,'sort':sort, 'bookname':bookname, \
-                                                 'tags':None, 'appname':'friends', 'cl':cl, 'profile_username':username},\
-                                                  context_instance=RequestContext(request)) 
+    return render_to_response('social/notes/friends_notes.html', {'note_list':paged_notes,'sort':sort, 'bookname':bookname, \
+                                                 'tags':None, 'qstr':qstr, \
+                                                 'appname':'friends', 'cl':cl, 'profile_username':username},\
+                                                  context_instance=RequestContext(request, {'book_uri_prefix':'/'+username+'/friends'})) 
  
 
 
@@ -250,8 +247,9 @@ def groups(request, username):
                   
     print 'tags:', tags
     
-    return render_to_response('social/groups.html', {'gs_created_by_self':gs_created_by_self, 'gs_following':gs_following,\
-                                                      'addGroupForm':addGroupForm, 'tags':tags, 'profile_username':username}, context_instance=RequestContext(request))
+    return render_to_response('social/group/groups.html', {'gs_created_by_self':gs_created_by_self, 'gs_following':gs_following,\
+                                                      'addGroupForm':addGroupForm, 'tags':tags, 'profile_username':username}, \
+                                                      context_instance=RequestContext(request))
 
 
 
@@ -276,9 +274,10 @@ def groups_notes(request, username, bookname):
     sort, order_type,  paged_notes, cl = __get_notes_context(request, note_list) 
       
     #tags = get_group_tags(request, groupname, bookname)
-    return render_to_response('social/groups_notes.html', {'note_list':paged_notes,'sort':sort, 'bookname':bookname, \
-                                                 'tags':None, 'appname':'friends', 'cl':cl, 'profile_username':username},\
-                                                  context_instance=RequestContext(request)) 
+    return render_to_response('social/notes/groups_notes.html', {'note_list':paged_notes,'sort':sort, 'bookname':bookname, \
+                                                 'tags':None, 'qstr':qstr,\
+                                                 'appname':'friends', 'cl':cl, 'profile_username':username},\
+                                                  context_instance=RequestContext(request, {'book_uri_prefix':'/'+username+'/groups'})) 
     
 
 
@@ -312,8 +311,10 @@ def push_group_tags_back(request, groupname):
 
 @login_required
 def notes(request, username, bookname):
-    if 'framebook' == bookname:
-        return frames(request, username, 'notebook')   
+#===============================================================================
+#    if 'framebook' == bookname:
+#        return frames(request, username, 'notebook')   
+#===============================================================================
     #profile_user = 
     note_list = getSN(bookname).objects.filter(owner__username=username)   
     #print 'notelist obtained:', note_list    
@@ -334,9 +335,9 @@ def notes(request, username, bookname):
     folders = F.objects.filter(private=False).order_by('name') 
     
     
-    return render_to_response('social/notes/notes.html', {'note_list':paged_notes,'sort':sort, 'bookname':bookname, \
+    return render_to_response('social/include/notes/notes.html', {'note_list':paged_notes,'sort':sort, 'bookname':bookname, \
                                'folders':folders, 'profile_username':username, 'appname':'social', 'cl':cl},\
-                                                  context_instance=RequestContext(request))
+                                                  context_instance=RequestContext(request,  {'book_uri_prefix':'/social/'+username}))
 
 @login_required
 def note(request, username, bookname, note_id):
@@ -362,35 +363,36 @@ def note(request, username, bookname, note_id):
     
    
     
-    return render_to_response('social/social_note.html', {'note':note,\
+    return render_to_response('social/include/notes/note/note.html', {'note':note,\
                                     #'frames':frames, \
                                     'notes_included':notes_included,\
                                     'profile_username':username,\
-                                    'url_front':'social\\'+username}, context_instance=RequestContext(request, {'bookname': bookname,'aspect_name':'notes'}))
+                                    },\
+                                     context_instance=RequestContext(request, {'bookname': bookname,'aspect_name':'notes',\
+                                                                               'book_uri_prefix':'/social/'+username}))
     
     
-#TODO: think of whether get rid of appname    
-@login_required
-def frames(request, username, bookname):
-    #TODO: allow filter on delete
-    
-    #TODO: get linkages according to bookname
-    
-    
-    note_list = Social_Frame.objects.filter(owner__username=username, deleted=False)
-       
-     
-    sort, order_type,  paged_notes, cl = __get_notes_context(request, note_list)  
-
-
-    #tags = __get_ws_tags(request, username, bookname)
-    #if request.user.username != username:
-    #    tags = get_public_tags(tags)  
-    
-    
-    return render_to_response('social/framebook/notes/notes.html', {'note_list':paged_notes,'sort':sort, 'bookname':bookname, \
-                                'profile_username':username, 'appname':'social', 'cl':cl},\
-                                                  context_instance=RequestContext(request))
+#===============================================================================
+# #TODO: think of whether get rid of appname    
+# @login_required
+# def frames(request, username, bookname):
+#    #TODO: allow filter on delete
+#    
+#    #TODO: get linkages according to bookname
+#    
+#    
+#    note_list = Social_Frame.objects.filter(owner__username=username, deleted=False)
+#       
+#     
+#    sort, order_type,  paged_notes, cl = __get_notes_context(request, note_list)  
+# 
+# 
+#    
+#    
+#    return render_to_response('social/framebook/notes/notes.html', {'note_list':paged_notes,'sort':sort, 'bookname':bookname, \
+#                                'profile_username':username, 'appname':'social', 'cl':cl},\
+#                                                  context_instance=RequestContext(request))
+#===============================================================================
     
 #===============================================================================
 #    
@@ -431,9 +433,11 @@ def frame(request, username, bookname, frame_id):
             n.append('')     
     #print 'frame_notes_display:',frame_notes_display    
     
-    return render_to_response('social/framebook/notes/note.html', {'frame':frame,\
+    return render_to_response('social/framebook/notes/note/note.html', {'frame':frame,\
                                                              'frame_notes_display':frame_notes_display, \
-                                                             'profile_username':username}, context_instance=RequestContext(request,{'bookname': bookname,}))
+                                                             'profile_username':username}, \
+                                                             context_instance=RequestContext(request,{'bookname': bookname,\
+                                                                                                      'book_uri_prefix':'/social/'+username}))
 
 
 
@@ -459,9 +463,10 @@ def folders(request, username, bookname, foldername):
     sort, order_type,  paged_notes, cl = __get_notes_context(request, note_list)           
     folders = F.objects.filter(private=False).order_by('name') 
     
-    return render_to_response('social/social_folders.html',  {'note_list':paged_notes,'sort':sort, 'bookname':bookname, \
+    return render_to_response('social/folders.html',  {'note_list':paged_notes,'sort':sort, 'bookname':bookname, \
                               'folders':folders, 'is_in_folders':True, 'current_folder':current_folder,
-                               'profile_username':username, 'appname':'social', 'cl':cl}, context_instance=RequestContext(request))
+                               'profile_username':username, 'appname':'social', 'cl':cl},\
+                                context_instance=RequestContext(request,{'book_uri_prefix':'/social/'+username}))
      
 
 
@@ -647,9 +652,10 @@ def group(request, groupname, bookname):
     #group.tags.all()
     #tags = Social_Tag.objects.filter(group=group).order_by('name')#.annotate(Count('social_'+book_entry_dict.get(bookname))).order_by('name')
     tags = get_group_tags(request, groupname, bookname)
-    return render_to_response('social/group_notes.html', {'group':group, 'gs':gs, 'note_list':paged_notes,'sort':sort, 'bookname':bookname, \
-                                                 'tags':tags, 'appname':'groups', 'cl':cl},\
-                                                  context_instance=RequestContext(request))
+    return render_to_response('social/notes/group_notes.html', {'group':group, 'gs':gs, 'note_list':paged_notes,'sort':sort, 'bookname':bookname, \
+                                                 'tags':tags, 'qstr':qstr,\
+                                                  'appname':'groups', 'cl':cl},\
+                                                  context_instance=RequestContext(request, {'book_uri_prefix':'/groups/'+groupname}))
 
 
 
@@ -663,9 +669,9 @@ def notes_tag(request, username, bookname, tag_name):
     #TODO: provide tags for social public notebook
     tags = []#Social_Tag.objects.filter(notes_set=note_list).order_by('name')
     
-    return render_to_response('social/notes/notes.html', {'note_list':paged_notes,'sort':sort, 'current_tag':tag_name, 'bookname':bookname,\
+    return render_to_response('social/include/notes/notes.html', {'note_list':paged_notes,'sort':sort, 'current_tag':tag_name, 'bookname':bookname,\
                                'profile_username':username, 'tags':tags, 'appname':'social', 'cl':cl},\
-                                                  context_instance=RequestContext(request)) 
+                                                  context_instance=RequestContext(request,  {'book_uri_prefix':'/social/'+username})) 
 
 
 
@@ -700,7 +706,7 @@ def group_tag(request, groupname, bookname, tag_name):
     note_list  = getSearchResults(note_list, qstr)
     sort, order_type,  paged_notes, cl  = __get_notes_context(request, note_list) 
     tags = get_group_tags(request, groupname, bookname)
-    return render_to_response('social/group_notes.html', {'group':group, 'note_list':paged_notes,'sort':sort, 'current_tag':tag_name, 'bookname':bookname,\
+    return render_to_response('social/notes/group_notes.html', {'group':group, 'note_list':paged_notes,'sort':sort, 'current_tag':tag_name, 'bookname':bookname,\
                                                  'tags':tags, 'appname':'groups', 'cl':cl},\
                                                   context_instance=RequestContext(request))
     

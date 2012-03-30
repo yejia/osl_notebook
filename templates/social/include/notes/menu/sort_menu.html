@@ -1,0 +1,13 @@
+{% extends "include/notes/menu/sort_menu.html" %}
+{% load i18n %}
+
+
+
+{% block extra_sort_option %}
+{% if sort == 'usefulness' %}
+<option value="usefulness" selected="selected">{% trans "By User Vote" %}</option>
+{% else %}
+<option value="usefulness">{% trans "By User Vote" %}</option>
+{% endif %}
+{% endblock %}
+

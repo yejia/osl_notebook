@@ -1,0 +1,81 @@
+{% load i18n %}
+
+<script>
+	jQuery(function($){
+
+        $(updateFrameForm).hide();     		
+		$('#edit_linkage'). click(function(){                       
+		        $(updateFrameForm).show();
+                });		
+			
+        });
+</script>
+
+<div>
+<h2>{% trans 'Frame' %}</h2><a href="/social/{{profile_username}}/framebook/notes/">{% trans 'View all frames' %}</a>
+</div>
+
+<div>
+<h2>{{frame.title|default:_('(No Title)')}}</h2>
+</div>
+<div>
+{% trans 'Created' %} : {{frame.init_date|date:"Y-m-d H:i"}}
+</div>
+<div>
+<b>{% trans 'desc' %}:</b> {{frame.desc}}
+</div>
+<div>
+<b>{% trans 'tags' %}:</b> {{frame.display_tags}}
+</div>
+
+
+<div>
+<b>{% trans 'private' %}:</b> {{frame.private|yesno:"yeah,no,maybe" }}
+</div>
+
+<div>
+<b>{% trans 'importance' %}:</b> {{frame.vote}}
+</div>
+<div>
+<b>{% trans 'attachment' %}:</b> {{frame.attachment}}
+</div>
+<div>
+
+
+<b>{% trans 'notes included' %} : </b>
+{% for n in frame.notes.all %}
+<div id="note_in_frame"><img src="/site_media/img/{{n.get_note_type}}.png" title="{{n.get_note_type}}"/>
+<a href="/social/{{profile_username}}/{{n.get_note_bookname}}/notes/note/{{n.id}}/">{{ n.title|default:_('(No Title)')}} </a> 
+{{n.desc}} 
+ {% if n.get_note_type == 'Bookmark' or n.get_note_type == 'Scrap' %} 
+ <a href="{{n.url}}">
+<img src="/site_media/img/openurl.png" class=""/>
+</a>
+{% endif %}
+
+<img src="/site_media/img/tags-small.png" class="img_in_notes_section_header"/>:
+{% for tag  in n.tags.all %}
+<a href="/social/{{profile_username}}/{{n.get_note_bookname}}/tags/{{tag}}/">{{tag}}</a>,
+{% endfor %}
+<img src="/site_media/img/thumbUp.gif"/>{{n.vote}}
+</div>
+{% endfor %}
+
+
+
+</div>
+
+<br/><br/>
+<!--li tag is added solely to accomodate the code used in the notes display page where js need to find the parent li tag to locate with note to add comment-->
+<li note_id="{{note.id}}">
+<!---change variable name-->
+{% with frame as note %}
+{% include "social/include/notes/inlines/add_comments_inline.html" %} 
+{% endwith %}
+</li>
+<br/><br/>
+
+
+
+
+

@@ -1,0 +1,13 @@
+{% extends "include/notes/note/notedisplay.html" %}
+{% load i18n %}
+
+{% block note_attachment%}
+<div>
+<b>{% trans 'attachment' %} :</b> <a href="/file/{{note.attachment.name}}" target="top">{{note.attachment}}</a>
+</div>
+{% endblock %}
+
+
+{% block note_form_attachment%}
+<p>{{ note_form.attachment.label_tag }}:{{note_form.attachment}}</p> 
+{% endblock %}

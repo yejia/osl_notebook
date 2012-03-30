@@ -1,9 +1,0 @@
-{% load i18n %}
-
-<div class="module"> 
-        <h2>{% trans "Snippetbook" %}<a href="javascript:alert('{% trans "A snippetbook is dynamic set of snippets that are selected based on certain queries." %}');">
-<img src="/media/img/admin/icon-unknown.gif"/></a>  <span class="setting-in-r-menu"><a href="/{{profile_username}}/{{bookname}}/settings/folders/">{% trans "Settings" %}</a></span></h2>       
-	{% for folder in folders %}	
-		<a href="/{{ profile_username }}/{{bookname}}/folders/{{folder.name}}/" title="{{folder.value}}">{{folder.name}}</a><br/> 
-        {% endfor %} 
-</div> 

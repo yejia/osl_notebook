@@ -1,0 +1,7 @@
+{% load i18n %}
+
+<div id="note_tags" title="{% trans "note tags" %}">
+                {% for tag in note.get_tags %}
+                    <span><a href="/{{profile_username}}/{{bookname}}/notes/tags/{{tag}}/">{{tag}}</a>,</span>
+                {% endfor %}
+</div>

@@ -1,0 +1,52 @@
+{% extends "include/note_list_base.html" %}
+{% load i18n %}
+
+
+{% block title %}
+{% blocktrans %}Public notes of {{profile_username}}{% endblocktrans %} 
+{% endblock %}
+
+{% block site_branding %}
+
+{% endblock %}
+
+{% block special_side_menu %}
+{% if bookname == 'snippetbook' %}  
+    {% include "social/snippetbook/folders_special_side_menu.html" %}
+{% endif %} 
+{% if bookname == 'bookmarkbook' %}  
+   {% include "social/bookmarkbook/folders_special_side_menu.html" %}
+{% endif %}  
+{% if bookname == 'scrapbook' %}  
+   {% include "social/scrapbook/folders_special_side_menu.html" %}
+{% endif %}     
+{% if bookname == 'notebook' %}   
+   {% include "social/notebook/folders_special_side_menu.html" %}
+{% endif %}   
+{% endblock %}
+
+
+
+{% block header_title %}
+    {% blocktrans %}Public notes of {{profile_username}}{% endblocktrans %}
+{% endblock %}
+
+
+
+
+
+
+
+
+{% block content%}
+<!--
+<div class="grid-16-8" > 
+<div class="article"> 
+-->
+<div id="content-main"> 
+<div>
+   {% include "social/include/notes/notesdisplay_picker.html" %}
+</div> 
+</div> 
+
+{% endblock %}

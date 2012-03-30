@@ -734,7 +734,7 @@ class Folder(models.Model):
     #user = models.ForeignKey(User)
     
     class Meta:            
-        ordering = ['-init_date','name']
+        ordering = ['name', '-init_date']
 #        unique_together = (("folder_id","user"), ("name","user"),)
 
     def __unicode__(self):
@@ -759,6 +759,12 @@ class Cache(models.Model):
     
     def __unicode__(self):
         return self.note_ids
+
+
+class Frame_Cache(Cache):
+    cache_id = models.AutoField(primary_key=True)
+
+
 
 
 #TODO:should this table be here?

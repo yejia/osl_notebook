@@ -1,0 +1,7 @@
+{% load i18n %}
+
+<div id="note_title" title="note title">
+        {% if user.username == profile_username %}<span class="editableText">{% endif %}
+            <a href="/{{profile_username}}/scrapbook/notes/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a>
+        {% if user.username == profile_username %}</span>{% endif %}
+</div> 		    	   

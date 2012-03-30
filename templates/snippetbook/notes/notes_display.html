@@ -1,67 +1,11 @@
-{% extends "include/notes_display.html" %}
+{% extends "include/notes/notes_display.html" %}
 {% load i18n %}
 
-{% block note_content_section%}
-<div class="snippetbook">
-<div class="brief_display">
-         <table class="note_table"><tr><td class="note_table_td1 structure">
-            <div id="note_title" title="{% trans 'note title' %}"><a href="/{{profile_username}}/{{bookname}}/notes/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a></div> 		    
-		    </td><td class="note_table_td2">
-		    <div  id="note_desc" title="{% trans "note desc" %}">{{note.desc}}</div>		   
-		    </td>
-		    <td class="note_table_tags">
-		    <div id="note_tags" title="{% trans "note tags" %}">
-                {% for tag in note.get_tags %}
-                    <span><a href="/{{profile_username}}/{{bookname}}/notes/tags/{{tag}}/">{{tag}}</a>,</span>
-                {% endfor %}
-            </div>
-		    </td>
-            <td class="note_table_td4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		    </td>
-		    </tr>
-        </table>
-</div>
 
 
-<div class="full_display">
- <table class="note_table"><tr><td class="note_table_td1 structure">
-            <div id="note_title" title="{% trans "note title" %}">{% if user.username == profile_username %}<span class="editableText">{% endif %}<a href="/{{profile_username}}/{{bookname}}/notes/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a>{% if user.username == profile_username %}</span>{% endif %}</div> 		    
-		    </td><td class="note_table_td2">
-		    <div  id="note_desc" title="{% trans "note desc" %}">{% if user.username == profile_username %}<span class="editableText">{% endif %}{{note.desc}}{% if user.username == profile_username %}</span>{% endif %}</div>		   
-		    </td>
-		    <td class="note_table_tags">
-		    <div id="note_tags" title="{% trans "note tags" %}">
-                 {% if user.username == profile_username %}<span class="editable"><span class="tags_edit">&nbsp;&nbsp;&nbsp;&nbsp;</span>{% endif %}
-                    <div id="update_tags_inline_box" style="display: none;">
-                        <ul id="update_tags_inline">
-                                {% for tag in note.get_tags %}
-                                   <li>{{tag}}</li>
-                                {% endfor %}
-                        </ul>
-                    </div>
-                    <span class="tags_text">{{note.display_tags}}</span>
-                {% if user.username == profile_username %}</span>{% endif %}
-            </div>
-		    </td>
-		    </tr>
-		    </table>
-            
-           <div>
-           <!--
-		    <div  id="note_event" title="event">e:{% if user.username == profile_username %}<span class="editableText">{% endif %}{ {{note.event}} }{% if user.username == profile_username %}</span>{% endif %}</div>
-		    -->
-            <div  class="grey" id="note_init_date" title="{% trans "initial creation time" %}">{% if user.username == profile_username %}<span  class="editableText">{% endif %}{{note.init_date|date:"Y-m-d H:i"}}{% if user.username == profile_username %}<span>{% endif %}</div>
-		    <div class="grey structure" id="note_last_modi_date" title="{% trans "last modified time" %}">{{note.last_modi_date|date:"Y-m-d H:i"}} </div>
-		    
-            {% if note.attachment %}
-		    <div  id="note_attachment" title="{% trans "attachment" %}"><a href="/file/{{note.attachment.name}}" target="top">{{note.attachment.name}}</a> </div>
-		    {% endif %}
-            
-             <div  class="structure advanced" id="note_frames" title="{% trans "note in frames" %}">{% trans "Frames" %}: {{note.display_frames|default:_('Not in any frame')}}</div>
+
+		   
+      
+
              
-              {% include "notes/add_comments_inline.html" %}   
-             </div>
-</div>
-</div>
-
-{% endblock %}
+           

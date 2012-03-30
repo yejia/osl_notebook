@@ -1,0 +1,13 @@
+{% extends "include/folders_special_side_menu.html" %}
+{% load i18n %}
+
+
+
+ {% block folder_setting %}         
+{% endblock %}  
+
+{% block folder_url %}
+    /social/{{ profile_username }}/{{bookname}}/folders/{{folder.name}}/
+{% endblock %}
+
+

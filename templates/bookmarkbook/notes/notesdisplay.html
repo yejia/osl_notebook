@@ -1,4 +1,4 @@
-{% extends "include/notesdisplay.html" %}
+{% extends "include/notes/notesdisplay.html" %}
 {% load i18n %}
 
 
@@ -10,6 +10,7 @@
 {% block add_note_section %}
 <div id="add_note_section">
  {% trans "Want to create a new bookmark" %}?  {% trans "See" %} <a href="/forNewUsers">{% trans "how" %}</a>  {% trans "you can add a button to your browser" %}.  {% trans "Or you can" %} <a href="importBookmark/"> {% trans "import" %}</a>.
+ {% comment %}   
 <!--
 <div class="section_header">
 {% trans "Add a new bookmark" %}:<span class="show_add_note_section"><img title="" src="/site_media/img/down-arrow.jpg"/></span><span class="hide_add_note_section"><img title="" src="/site_media/img/collapse-arrow.jpg"/></span> 
@@ -34,6 +35,7 @@
 </form> 
 </div>
 -->
+ {% endcomment %}  
 </div>
 {% endblock %}
 

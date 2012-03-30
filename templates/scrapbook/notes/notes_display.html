@@ -1,65 +1,37 @@
-{% extends "include/notes_display.html" %}
+{% extends "include/notes/notes_display.html" %}
 {% load i18n %}
 
-{% block note_content_section%}
-<div class="scrapbook">
-<div class="brief_display">
-                 <table class="note_table">
-                    <tr><td class="note_table_td1"><div id="note_url" title="{% trans "note url" %}"><a href="{{ note.url}}" target="_blank">{{ note.url}}</a></div> 		    
-                            </td>
-                            <td class="note_table_td2"><div  id="note_desc" title="{% trans "note desc" %}">{{note.desc|striptags}}</div>		   
-		                    </td>
-                            <td class="note_table_tags"><div id="note_tags" title="{% trans "note tags" %}">
-                                {% for tag in note.get_tags %}
-                                    <span><a href="/{{profile_username}}/{{bookname}}/{{aspect_name}}/tags/{{tag}}/">{{tag}}</a>,</span>
-                                {% endfor %}
-                            </div>
-                            </td>
-                    </tr>
-                </table>
-</div>
 
-<div class="full_display">
-		    <table class="note_table"><tr><td class="note_table_td1">
-	            <div id="note_url" title="note url">{% if user.username == profile_username %}<span class="editableText">{% endif %}<a href="{{ note.url}}" target="_blank">{{ note.url}}</a>{% if user.username == profile_username %}</span>{% endif %}</div> 		    
-		    </td><td class="note_table_td2">
-		    <div  id="note_desc" title="note desc">{% if user.username == profile_username %}<span class="editableText">{% endif %}<pre>{{note.desc}}</pre>{% if user.username == profile_username %}</span>{% endif %}</div>		   
-		    </td>
-		    <td class="note_table_tags">		    
-            <div id="note_tags" title="{% trans "note tags" %}">
-                 {% if user.username == profile_username %}<span class="editable"><span class="tags_edit">&nbsp;&nbsp;&nbsp;&nbsp;</span>{% endif %}
-                    <div id="update_tags_inline_box" style="display: none;">
-                        <ul id="update_tags_inline">
-                                {% for tag in note.get_tags %}
-                                   <li>{{tag}}</li>
-                                {% endfor %}
-                        </ul>
-                    </div>
-                    <span class="tags_text">{{note.display_tags}}</span>
-                {% if user.username == profile_username %}</span>{% endif %}
-            </div>
-		    </td>
-		    </tr>
-		    </table>
-            
-            
-           <div>
-           <div id="note_title" title="note title">{% if user.username == profile_username %}<span class="editableText">{% endif %}<a href="/{{profile_username}}/scrapbook/notes/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a>{% if user.username == profile_username %}</span>{% endif %}</div> 		    
-   <!--		   
-           <div  id="note_event" title="event">e:{% if user.username == profile_username %}<span class="editableText">{% endif %}{ {{note.extra}} }{% if user.username == profile_username %}</span>{% endif %}</div>
--->		 
-            <div  id="note_init_date" title="initial creation time" class="grey">{% if user.username == profile_username %}<span  class="editableText">{% endif %}{{note.init_date|date:"Y-m-d H:i"}}{% if user.username == profile_username %}<span>{% endif %}</div>
-		    <div  id="note_last_modi_date" title="last modified time" class="grey structure">{{note.last_modi_date|date:"Y-m-d H:i"}} </div>
-		    <div  class="structure advanced" id="note_frames" title="{% trans "note in frames" %}">{% trans "Frames" %}: {{note.display_frames|default:_('Not in any frame')}}</div>
-                           
-            {% include "notes/add_comments_inline.html" %}   
-
-
-            <!--
-             <div  id="note_linkages" title="note linkages">Linkages: {{note.display_linkages|default:'Not in any linkages'}}</div>
-             -->
-	        </div>
-</div>
-</div>
-
+{% block note_brief_table_td1%}
+    <td class="note_table_td1">
+            {% include "include/notes/inlines/notes_brief_url_inline.html" %}  
+    </td>         
 {% endblock %}
+
+{% block note_brief_table_td2%}
+    <td class="note_table_td2">
+              {% include "include/notes/inlines/notes_brief_desc_inline.html" %}   	
+    </td>         
+{% endblock %} 
+
+                    
+{% block note_full_table_td1%}    
+            <td class="note_table_td1">
+                    {% include "include/notes/inlines/notes_full_url_inline.html" %}	               
+		    </td>
+{% endblock %} 
+	
+{% block note_full_table_td2%}  
+    <td class="note_table_td2">
+		    {% include "include/notes/inlines/notes_scrap_full_desc_inline.html" %}	    
+    </td>      
+{% endblock %} 
+
+            
+           
+            
+{% block full_display_div_extra %}
+     {% include "include/notes/inlines/notes_full_title_inline.html" %}	   
+{% endblock %}             
+		  
+    

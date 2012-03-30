@@ -1,0 +1,3 @@
+{% load i18n %}
+
+ <div id="note_title" title="{% trans 'note title' %}"><a href="/{{profile_username}}/{{bookname}}/notes/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a></div>	 

@@ -1,0 +1,101 @@
+{% load i18n %}
+
+{% block notes_extra_scripts %}
+{% endblock %}
+
+{% if user.username == profile_username %}    
+    {% block forms_section %}
+       
+		{% comment %}If no notes, show the add note(bookmark/scrap) button{% endcomment %}
+		{% if not note_list.object_list %}
+			{% block add_js_button_section %}
+			{% endblock %}
+		{% endif %}
+		
+		
+		<!--So far,  folders are only for viewing notes, no adding note in folders view. TODO:-->
+		{% if aspect_name != 'folders' %}
+			{% block add_note_section %}
+			{% endblock %}
+		{% endif %}  
+		
+		
+		
+		<br/><br/>
+		<div class="linkNotes">
+			{% trans "Create a frame" %}:
+			<form action="linkNotes/" method="post" enctype="multipart/form-data" id="linkNotesForm"> <!--TODO:get ok? it still send an extra request to the server-->
+			<input type="hidden" name="user" id="id_user"  value="{{user.id}}"/>
+				<table> 
+					<tr><!--<th><label for="id_type_of_linkage">{% trans "Type of linkage" %}:</label></th><td>{{addLinkNoteForm.type_of_linkage}}</td>-->
+					        <th>{{addLinkNoteForm.desc.errors }}<label for="id_desc">{% trans "Desc" %}:</label></th><td>{{addLinkNoteForm.desc}}</td>
+					<!--	<th><label for="id_tags">{% trans "Tags" %}:</label></th><td>{{addLinkNoteForm.tags}}</td>--><!--TODO:automatically select the current_tag if it is available-->			
+					</tr> 
+					<tr><th>{{addLinkNoteForm.title.errors }}<label for="id_title">{% trans "Title" %}:</label></th><td><input id="id_title" type="text" name="title" maxlength="30" size="30"/></td> 		
+			{% if bookname == "snippetbook" %}                
+			                        <th>{{addLinkNoteForm.attachment.errors }}<label for="id_attachment">{% trans "Attachment" %}:</label></th><td>{{addLinkNoteForm.attachment}}</td>
+			{% endif %}                        
+						<th><label for="id_private">{% trans "Private" %}:</label></th><td>{{addLinkNoteForm.private}}</td>			 
+					</tr> 
+					<tr>
+						<td><input type="submit" value="Submit"/></td>
+					</tr> 
+				</table>
+			        
+			</form>    
+		</div>
+		
+		
+		{% include "include/notes/caches_section.html" %}
+
+    {% endblock %}
+{% endif %}
+
+<div class="search_term">
+	{% if qstr %}
+		{% if is_in_folders %} 
+		      {% trans "Folder" %}: {{current_folder.name}} = {{current_folder.value}}
+		{% else %}
+		      <form action="saveSearch/" method="post">
+		                {% trans "Search term is" %}: {{qstr}} &nbsp;&nbsp;
+                {% block seach_form_inputs %}        {% comment %}  open up some editing features in social notebook? TODO:     {% endcomment %}     
+				<input type="hidden" name="folder_value" value="{{qstr}}"/>
+		        <input type="hidden" name="username" value="{{profile_username}}"/>
+				<input type="text" name="folder_name" value="" id="id_folder_name" size="50"/>
+		        {% if user.username == profile_username %}     
+				<button id="show_folder_name_input"  onclick="this.disabled=true;return true;" >{% trans "Save this search as a folder" %}</button>
+				<input type="submit" id="submit_saveSearch" value="Save this search as a folder"/>                
+		        {% endif %}
+                {% endblock %}
+			</form> 
+		{% endif %}	
+	{% endif %}
+</div>
+
+
+{% block notes %}
+
+{% if note_list.object_list %}
+
+    {% block notes_section_header %}
+        {% include "include/notes/notes_section_header.html" %}   
+    {% endblock %}	
+	
+	<div id='notes_section'>
+        {% block notes_section_menu %}
+            {% include "include/notes/menu/notes_section_menu.html" %}  	
+        {% endblock %}	
+		
+       
+		<div id="notes_section_notes">
+			{% block notes_section %}
+			{% endblock %}
+		</div>
+     </div>   
+{% endif %}
+
+{% endblock %}
+
+
+
+

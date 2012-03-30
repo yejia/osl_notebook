@@ -1,0 +1,16 @@
+{% extends "include/base2.html" %}
+{% load i18n %}
+
+
+
+
+{% block title %}
+{% trans "Group" %} {{group.name}}
+{% endblock %}
+
+
+{% block site_branding %}
+<div id="branding">
+<h1 id="site-name">{% trans "Group" %} {{group.name}}</h1>
+</div>
+{% endblock %}

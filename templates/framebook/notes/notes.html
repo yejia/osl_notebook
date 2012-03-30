@@ -1,11 +1,11 @@
-{% extends "framebook/notes/note_list_base.html" %}
+{% extends "framebook/note_list_base.html" %}
 {% load i18n %}
 
 
-{% block tags_menu %}
-{% include "include/tags_menu.html" %} 
-{% endblock %}
 
+{% block search_box %}
+{% include "framebook/search.html" %}
+{% endblock %}
 
 
 {% block content%}

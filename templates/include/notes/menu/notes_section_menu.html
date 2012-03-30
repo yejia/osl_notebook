@@ -1,0 +1,84 @@
+ {% load i18n %}
+ 
+ <div id='notes_section_menu'>
+			    {% if user.username == profile_username %} 
+			        <div class="menu_bar"><span>{% trans "Select" %}: <a href="javascript:selectAll();">{% trans "All" %}</a>, <a href="javascript:selectNone();">{% trans "None" %}</a></span>
+					
+						<div id="ac_tags_box">                       
+						    <ul id="ac_tags"></ul>
+						 	<button  id="add_tags_to_notes"  onclick="javascript:addTags_new();">{% trans 'Add Tags' %}</button>
+							<button  id="remove_tags_from_notes" onclick="javascript:removeTags_new();">{% trans 'Remove Tags' %}</button>&nbsp;
+						    <button  id="cancel_change_tags" onclick="javascript:cancelChangeTags();">{% trans 'Cancel' %}</button>
+						</div> 
+						<ul class="jd_menu">
+                                                {% block update_tags_menu%}	 
+                                                    <li class="accessible"><a href="#" class="accessible" href="javascript:changeTags();">{% trans "Change Tags" %}  <img src="/site_media/img/arrow.gif"/>&nbsp;&nbsp;</a>
+                                                        <ul>  
+                                                            <li><a href="javascript:showAddTags();">{% trans "Add Tags" %}</a></li> 
+                                                            <li><a href="javascript:showRemoveTags();">{% trans "Remove Tags" %}</a></li>
+                                                        </ul>                       
+                                                    </li>                      
+						                        {% endblock %}     	
+						                        
+						                        <li class="accessible advanced"><a href="#" class="accessible">{% trans "Pack" %} <img src="/site_media/img/arrow.gif"/>&nbsp;&nbsp;</a> 
+						                            <ul>  
+						                                <li><a href="javascript:linkNotes();">{% trans "Put selected notes into a frame" %}</a></li> 
+						                            </ul>
+						                        <li class="accessible advanced"><a href="#" class="accessible">{% trans "Cache" %} <img src="/site_media/img/arrow.gif"/>&nbsp;&nbsp;</a> 
+						                            <ul>  				
+						                                {% for cache in caches %}		
+						                                    {% if bookname == 'notebook' %}
+						                                        <li  id="add_to_cache_{{cache.id}}"><a href="javascript:addNotes2Cache({{cache.id}});">{% trans "Add selection to cache" %}{{cache.id}}</a></li>   
+						                                    {% else %}
+						                                        <li  id="add_to_cache_{{cache.cache_id}}"><a href="javascript:addNotes2Cache({{cache.cache_id}});">{% trans "Add selection to cache" %}{{cache.cache_id}}</a></li>                        
+						                                    {% endif %}                       
+						                                {% endfor %}
+						                                {% if caches|length =  0 %}
+						                                    <li id="add_to_cache_1"><a href="javascript:addNotes2Cache(1);">{% trans "Add selection to cache" %} 1</a></li> 
+						                                {% endif %}
+						                                {% if caches|length >  0 %}
+						                                    <!--<li id="add_to_another_cache"><a href="javascript:addNotes2Cache({{cache_ids|last|add:"1"}});">Add selection to another cache</a></li> -->
+						                                    <li id="add_to_another_cache"><a href="javascript:addNotes2Cache({{next_cache_id}});">{% trans "Add selection to another cache" %}</a></li> 
+											
+						                                {% endif %}
+											
+						                             
+						                            </ul> 
+						                        </li>      
+						
+								
+						                <li  class="accessible"><a href="#" class="accessible">{% trans "More actions" %} <img src="/site_media/img/arrow.gif"/></a> 
+										<ul> 
+											<li  style="display:none;">{% trans "Notes analysis" %} &raquo;
+												<ul> 
+													<li><a href="javascript:alert('Not implemented yet!');" class="NotImplementedYet">{% trans "Similar notes" %}</a></li> 
+													<li><a href="javascript:alert('Not implemented yet!');" class="NotImplementedYet">{% trans "Draw the map" %}</a></li> 
+													<li><a href="javascript:alert('Not implemented yet!');" class="NotImplementedYet">{% trans "Diff" %}</a></li> 
+												</ul> 
+												</li>                    
+											<li><a href="javascript:set_notes_private();">{% trans "Make private" %}</a></li> 
+											<li> <a href="javascript:set_notes_public();" class="NotImplementedYet">{% trans "Make public" %}</a></li> 
+											<li style="display:none;"><a href="javascript:alert('Not implemented yet!');" class="NotImplementedYet">{% trans "Soft Delete" %}</a></li> 					
+											<li style="display:none;"><a href="javascript:alert('Not implemented yet!');" class="NotImplementedYet">{% trans "Change the creation date" %}</a></li> 
+						                    <li style="display:none;"><a href="javascript:alert('Not implemented yet!');" class="NotImplementedYet">{% trans "Apply a vote" %}</a></li> 
+											<li style="display:none;"><a href="javascript:alert('Not implemented yet!');" class="NotImplementedYet">{% trans "Add event" %}</a></li> 
+											<li style="display:none;"><a href="javascript:alert('Not implemented yet!');" class="NotImplementedYet">{% trans "Add comment" %}</a></li> 
+										</ul> 
+									</li> 
+									
+						</ul> 
+						        
+						<span class="right_menu_bar">
+						<span>
+						{% include "include/notes/menu/sort_menu.html" %} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                        {% block toggle_tag_menu%}    
+                            {% include "include/notes/menu/toggle_tag_menu.html" %} 
+                        {% endblock %} 
+						</span>
+						</span>        
+					        
+				  </div><!--menu_bar-->
+			
+			
+			  {% endif %}
+	   </div><!--notes_section_menu-->

@@ -1,9 +1,5 @@
-{% extends "bookmarkbook/notes/note_list_base.html" %}
+{% extends "bookmarkbook/note_list_base.html" %}
 {% load i18n %}
-
-{% block tags_menu %}
-{% include "include/tags_menu.html" %} 
-{% endblock %}
 
 {% block linkage_filter %}
        <h4>{% trans "In linkages" %}</h4>
@@ -23,7 +19,7 @@
 
 
 {% block search_box %}
-{% include "bookmarkbook/notes/search.html" %}
+{% include "bookmarkbook/search.html" %}
 {% endblock %}
 
 

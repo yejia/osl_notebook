@@ -1,0 +1,60 @@
+{% extends "include/notes/note/notedisplay.html" %}
+{% load i18n %}
+
+{% block note_type%}
+<div>
+<h2>{% trans 'Frame' %}</h2><a href="{{book_uri_prefix}}/framebook/notes/">{% trans 'View all frames' %}</a>
+</div>
+{% endblock %}
+
+{% block note_tags%}{% comment %}For now, no viewing of frame by tag (need to implement cache for frame){% endcomment %}
+<div>
+<b><img src="/site_media/img/tags-small.png" class="img_in_notes_section_header"/>:</b> {{note.display_tags}}
+</div>
+{% endblock %}
+
+
+{% block notes_in_frame%}
+<b>{% trans 'notes included' %}: </b>
+{% for id, title, desc, vote, type, note_bookname, tags, url in frame_notes_display %}
+<div id="note_in_frame"><img src="/site_media/img/{{type}}.png" title="{{type}}"/>
+<a href="{{book_uri_prefix}}/{{note_bookname}}/notes/note/{{id}}/">{{title|default:'(No Title)'}}</a> 
+{{desc}} 
+ {% if type == 'Bookmark' or type == 'Scrap' %} 
+ <a href="{{url}}">
+<img src="/site_media/img/openurl.png" class=""/>
+</a>
+{% endif %}
+
+<img src="/site_media/img/tags-small.png" class="img_in_notes_section_header"/>:
+{% for tag  in tags %}
+ {% if type != 'Frame' %} 
+<a href="{{book_uri_prefix}}/{{note_bookname}}/notes/tags/{{tag}}/">{{tag}}</a>,
+{% else %}
+{{tag}},
+{% endif %}
+{% endfor %}
+<img src="/site_media/img/thumbUp.gif"/>{{vote}}
+</div>
+{% endfor %}
+
+ {% endblock %}
+
+
+{% block note_form_tags%}
+{% endblock %}
+
+{% block note_form_vote%}
+<input type="hidden" name="vote" value="{{note.vote}}" id="id_vote" />
+{% endblock %}
+
+{% block note_attachment%}
+<div>
+<b>{% trans 'attachment' %} :</b> <a href="/file/{{note.attachment.name}}" target="top">{{note.attachment}}</a>
+</div>
+{% endblock %}
+
+
+
+
+

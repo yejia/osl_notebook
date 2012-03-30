@@ -1,0 +1,70 @@
+{% extends "social/include/notes/notesdisplay.html" %}
+{% load i18n %}
+
+
+
+
+           
+           
+       
+            {% block brief_display %}
+            <div class="notebook">
+                <div class="brief_display">
+                      <table class="note_table">
+                             <tr>
+                                    <td><img src="/site_media/img/{{note.get_note_type}}.png" title="{{note.get_note_type}}"/></td>
+                                    <td class="note_table_td1">
+                                       <div id="note_title" title="{% trans 'note title' %}">
+                                        <a href="/social/{{note.owner.username}}/{{note.get_note_bookname}}/notes/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a>
+                                       {% if note.get_note_type == 'Bookmark' %} 
+                                            <a href="{{note.social_bookmark.url}}"><img src="/site_media/img/openurl.png" class=""/></a>
+                                       {% endif %}
+                                       {% if note.get_note_type == 'Scrap' %}
+                                             <a href="{{note.social_scrap.url}}"><img src="/site_media/img/openurl.png" class=""/></a>
+                                       {% endif %}
+                                       </div> 		    
+		                            </td>
+                                    <td class="note_table_td2">
+		                                 <div  id="note_desc" title="{% trans "note desc" %}">{{note.desc}}</div>		   
+		                              </td>
+		                              <td class="note_table_tags">
+		                                   {% include "social/include/notes/inlines/notes_brief_tags_inline.html" %}     
+		                               </td>   
+                                       <td class="note_table_td4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                       </td>            
+		                         </tr>
+                      </table>
+                </div>
+            </div>
+            
+            
+            {% endblock %}
+
+
+
+
+
+ {% block full_display_td12 %}
+ 
+ 
+ {% block note_full_table_td_note_type%}
+            <td><img src="/site_media/img/{{note.get_note_type}}.png" title="{{note.get_note_type}}"/></td>
+        {% endblock %}   
+ 
+ <td class="note_table_td1">
+    <div id="note_title" title="{% trans "note title" %}"><a href="/social/{{note.owner.username}}/{{note.get_note_bookname}}/notes/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a>
+                {% if note.get_note_type == 'Bookmark' %} 
+                    <a href="{{note.social_bookmark.url}}"><img src="/site_media/img/openurl.png" class=""/></a>
+                {% endif %}
+                {% if note.get_note_type == 'Scrap' %}
+                    <a href="{{note.social_scrap.url}}"><img src="/site_media/img/openurl.png" class=""/></a>
+                {% endif %}
+</td><td class="note_table_td2">   
+    <div  id="note_desc" title="{% trans "note desc" %}">{{note.desc}}</div>		   
+		    </td>             
+    </div> 	        
+ {% endblock %}
+        
+           
+           
+

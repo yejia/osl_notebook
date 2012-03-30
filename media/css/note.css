@@ -80,6 +80,7 @@ border:2px solid #696969;
 padding-top:6px;
 padding-left:3px;
 padding-right:30px;
+padding-bottom:8px;
 background-color:#EBEBEB; /*#CCCCFF;*/
 -moz-border-radius:25px 5px 0px 0; /* Firefox */
 border-top-left-radius:25px;
@@ -512,7 +513,7 @@ overflow:hidden;
 }
 
 
-div#linkage.brief_display{
+div#frame.brief_display{
 height:100px;
 overflow:hidden;
 }
@@ -921,6 +922,6 @@ a.NotImplementedYet{
 .grid-4-14-6 .article { float: left; width: 540px; padding-right: 10px }
 .grid-4-14-6 .aside { float: right; width: 230px }
 
-#footer {clear: both; width: 100%; color: #999; padding-top: 6px; margin-top: 40px; overflow: auto; zoom: 1; border-top: 1px dashed #ddd }
+#footer {text-align:center; clear: both; width: 100%; color: #999; padding-top: 6px; margin-top: 40px; overflow: auto; zoom: 1; border-top: 1px dashed #ddd }
 
 

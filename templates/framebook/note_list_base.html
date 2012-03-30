@@ -1,0 +1,28 @@
+{% extends "include/note_list_base.html" %}
+{% load i18n %}
+
+{% block title %}
+{{profile_username}}'s Frames 
+{% endblock %}
+
+
+{% block extra_ready_script %}			
+            $('span#frame_delete_note').click(function(){	
+                    $(this).load('deleteNoteFromFrame/',{ 'linkage_id':$(this).parents('li.note_display').attr('note_id'), 'note_id':$(this).parents('div[linked_note_id]').attr('linked_note_id')});
+                    $(this).parents("div[linked_note_id]").remove();
+            });
+{% endblock %}
+
+
+
+{% block site_branding %}
+<div id="branding">
+<h1 id="site-name">{% blocktrans %}Notetbook of {{profile_username}}{% endblocktrans %}</h1>
+</div>
+{% endblock %}
+
+{% block special_side_menu %}
+{% include "framebook/folders_special_side_menu.html" %} 
+{% include "include/groups_menu.html" %}
+{% include "include/friends_menu.html" %}
+{% endblock %}

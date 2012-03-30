@@ -1,0 +1,47 @@
+{% extends "include/note_list_base.html" %}
+{% load i18n %}
+
+{% block title %}
+     {% blocktrans %}Personal notebook of {{profile_username}}{% endblocktrans %} 
+{% endblock %}
+
+
+{% block header_title %}
+    {% blocktrans %}Personal notebook of {{profile_username}}{% endblocktrans %} 
+{% endblock %}
+
+
+{% block site_branding %}
+<div id="branding">
+<h1 id="site-name">{% blocktrans %}{{profile_username}}'s Folder {{current_folder}}{% endblocktrans %}</h1>
+</div>
+{% endblock %}
+
+
+
+
+
+{% block help_message_if_none %}
+{% include "include/folders_help_message_if_none.html" %} 
+{% endblock %}
+
+<!--
+{% block special_side_menu %}
+{% include "include/folders_special_side_menu.html" %} 
+{% endblock %}
+-->
+
+
+{% block content%}
+<div id="content-main"> 
+<div> 
+{% if folders %} 
+{% if not current_folder %} 
+{% trans "Please select a folder from the right menu." %}
+{% else %}
+{% include "notebook/notes/notesdisplay.html" %}
+{% endif %}
+{% endif %}
+</div>
+</div> 
+{% endblock %}

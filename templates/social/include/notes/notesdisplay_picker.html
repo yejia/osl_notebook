@@ -1,0 +1,15 @@
+{% if bookname == 'notebook' %}  
+   {% include "social/notebook/notes/notesdisplay.html" %}
+{% endif %}   
+{% if bookname == 'snippetbook' %}  
+    {% include "social/snippetbook/notes/notesdisplay.html" %}
+{% endif %} 
+{% if bookname == 'bookmarkbook' %}  
+   {% include "social/bookmarkbook/notes/notesdisplay.html" %}
+{% endif %}  
+{% if bookname == 'scrapbook' %}  
+   {% include "social/scrapbook/notes/notesdisplay.html" %}
+{% endif %}     
+{% if bookname == 'framebook' %}  
+   {% include "social/framebook/notes/notesdisplay.html" %}
+{% endif %}     

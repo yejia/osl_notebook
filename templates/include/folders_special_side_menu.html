@@ -1,9 +1,17 @@
 {% load i18n %}
 
 <div class="module"> 
-        <h2>{% trans "Notebook" %}<a href="javascript:alert('{% trans "A notebook is dynamic set of snippets/bookmarks/scraps that are selected based on certain queries." %}');">
-<img src="/media/img/admin/icon-unknown.gif"/></a>  <span class="setting-in-r-menu"><a href="/{{profile_username}}/{{bookname}}/settings/folders/">{% trans "Settings" %}</a></span></h2>       
+   
+    <h2> 
+            {% block book_name %}{% trans "Notebook" %}{% endblock %}   
+            <a href="javascript:alert('{% block help_message %}{% trans "A notebook is dynamic set of snippets/bookmarks/scraps that are selected based on certain queries." %}{% endblock %}');">   
+                <img src="/media/img/admin/icon-unknown.gif"/>
+            </a>  
+           {% block folder_setting %} 
+                <span class="setting-in-r-menu"><a href="/{{profile_username}}/{{bookname}}/settings/folders/">{% trans "Settings" %}</a></span>
+           {% endblock %}   
+    </h2>       
 	{% for folder in folders %}	
-		<a href="/{{ profile_username }}/{{bookname}}/folders/{{folder.name}}/" title="{{folder.value}}">{{folder.name}}</a><br/> 
-        {% endfor %} 
+		<a href="{% block folder_url %}/{{ profile_username }}/{{bookname}}/folders/{{folder.name}}/{% endblock %}" title="{{folder.value}}">{{folder.name}}</a><br/> 
+    {% endfor %} 
 </div> 

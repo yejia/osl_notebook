@@ -6,8 +6,10 @@
 <!--TODO:useful?-->
 <meta charset="utf-8">
 
-{% block tite %}
+<title>
+{% block title %}
 {% endblock %}
+</title>
 
  <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
 <link href="/site_media/css/tag-it/jquery.tagit.css" rel="stylesheet" type="text/css" />
@@ -83,8 +85,6 @@
 {% block extra_css %}
 {% endblock %}
 
-{% block extra_script %}
-{% endblock %}
 
 
 
@@ -1180,7 +1180,11 @@ function showAddNoteTags(){
         });
         
         
+        {% block extra_ready_script %}
+        {% endblock %}
+
         
+
                 
                 
                 
@@ -1221,9 +1225,7 @@ jQuery('.note_display').accordion({
 
 
 <div id="container">
-<!--
-{% include "include/profile_header.html" %}
--->
+
 
 
 {% include "include/notice_alert.html" %}
@@ -1474,8 +1476,26 @@ jQuery('.note_display').accordion({
 {% endcomment %}
 
 <div id='main'>
+
+
 {% block header %}
+<div id="header">
+<div id="branding">
+<h1 id="site-name">{% block header_title %}{% blocktrans %}Personal notes of {{profile_username}}{% endblocktrans %}{% endblock %}</h1>
+</div>
+
+<div class="book_tabs">
+<span class="book_tabs_item {% if bookname == 'snippetbook' %}current{% endif %}" onclick="window.location.replace('{{ book_uri_prefix }}/snippetbook/notes/')">{% trans "Snippets" %}</span>
+<span class="book_tabs_item {% if bookname == 'bookmarkbook' %}current{% endif %}" onclick="window.location.replace('{{ book_uri_prefix }}/bookmarkbook/notes/')">{% trans "Bookmarks" %}</span>
+<span class="book_tabs_item {% if bookname == 'scrapbook' %}current{% endif %}" onclick="window.location.replace('{{ book_uri_prefix }}/scrapbook/notes/')">{% trans "Scraps" %}</span>
+
+<span class="book_tabs_item advanced {% if bookname == 'framebook' %}current{% endif %}" onclick="window.location.replace('{{ book_uri_prefix }}/framebook/notes/')">{% trans "Frames" %}</span>
+<span class="book_tabs_item advanced {% if bookname == 'notebook' %}current{% endif %}" onclick="window.location.replace('{{ book_uri_prefix }}/notebook/notes/')">{% trans "All" %}</a></span> 
+</div>
+</div>
 {% endblock %}
+
+
 
 {% block content %}
 
@@ -1493,6 +1513,7 @@ jQuery('.note_display').accordion({
 
 
 <div id="footer"/>
+{% include "include/footer.html" %}
 </div>
 
 

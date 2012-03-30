@@ -1,0 +1,49 @@
+{% extends "social/include/note_list_base.html" %}
+{% load i18n %}
+
+
+
+{% block title %}
+{% trans "Group" %} {{group.name}}
+{% endblock %}
+
+
+{% block header_title %}
+{% trans "Group" %} {{group.name}}
+{% endblock %}
+
+{% block header_tabs %}
+<div class="book_tabs">
+<span class="book_tabs_item {% if bookname == 'snippetbook' %}current{% endif %} " onclick="window.location.replace('/groups/{{group.name}}/snippetbook/')">{% trans "Snippets" %}</span>
+<span class="book_tabs_item {% if bookname == 'bookmarkbook' %}current{% endif %} " onclick="window.location.replace('/groups/{{group.name}}/bookmarkbook/')">{% trans "Bookmarks" %}</span>
+<span class="book_tabs_item {% if bookname == 'scrapbook' %}current{% endif %} " onclick="window.location.replace('/groups/{{group.name}}/scrapbook/')">{% trans "Scraps" %}</span>
+<span> 
+<a href="/groups/{{group.name}}/notebook/">{% trans "All" %}</a> 
+</span> 
+{% comment %}
+<span class="disabled" style="float:right;"><a href="/groups/{{group.name}}/framebook/">{% trans "frames" %}</a></span>
+{% endcomment %}
+</div>
+
+{% endblock %}
+
+
+
+
+{% block special_side_menu %}
+<div class="module"> 
+        <h2>{% trans "Members" %}</h2>  
+<ul>        
+	{% for m in group.members.all %}	
+		<li><a href="/social/{{ m.username }}/">{{m.username}}</a></li>
+        {% endfor %} 
+</ul>       
+</div> 
+
+{% endblock %}
+
+
+
+{% block search_box %}
+{% include "social/search/search_in_group_notes.html" %}
+{% endblock %}

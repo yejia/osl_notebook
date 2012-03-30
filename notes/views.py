@@ -340,8 +340,8 @@ def get_public_tags(tags):
 #TODO: add date range search, votes search
 @login_required
 def index(request, username, bookname):   
-    if 'framebook' == bookname:
-        return frames(request, username, 'notebook')      
+    #if 'framebook' == bookname:
+    #    return frames(request, username, 'notebook')      
     N = getNote(username, bookname)
     connection.queries = []
     
@@ -368,8 +368,9 @@ def index(request, username, bookname):
     
     extra_context = {'qstr':qstr,'folder_values':folder_values, 'is_in_folders':is_in_folders, 'current_folder':current_folder, 'aspect_name':'notes', 'queries':queries}    
     context.update(extra_context)  
-    
-    return render_to_response(book_template_dict.get(bookname)+'notes/notes.html', context, context_instance=RequestContext(request,{'bookname': bookname}))
+    #TODO: see if I don't have to write book_uri_prifix everywhere
+    return render_to_response(book_template_dict.get(bookname)+'notes/notes.html', context, \
+                              context_instance=RequestContext(request,{'bookname': bookname,'book_uri_prefix':'/'+username}))
 
 
 def  __getQStr(request):
@@ -640,9 +641,13 @@ def tags(request, username, bookname, tag_name, aspect_name):
         context.update(extra_context)
     
         if aspect_name=='notes':
-            return render_to_response(book_template_dict.get(bookname)+'notes/notes.html', context, context_instance=RequestContext(request,{'bookname': bookname, 'advanced': get_advanced_setting(request)}))
+            return render_to_response(book_template_dict.get(bookname)+'notes/notes.html', context, \
+                                      context_instance=RequestContext(request,{'bookname': bookname, 'advanced': get_advanced_setting(request),\
+                                                                               'book_uri_prefix':'/'+username}))
         else:
-            return render_to_response(book_template_dict.get(bookname)+'notes/linkages.html', context, context_instance=RequestContext(request,{'bookname': bookname, 'advanced': get_advanced_setting(request)}))
+            return render_to_response(book_template_dict.get(bookname)+'notes/linkages.html', context,\
+                                       context_instance=RequestContext(request,{'bookname': bookname, 'advanced': get_advanced_setting(request),\
+                                                                                'book_uri_prefix':'/'+username}))
 
 
 def get_advanced_setting(request):
@@ -688,7 +693,8 @@ def caches(request, cache_id, username, bookname):
     T = getT(username)
     default_tag_id = T.objects.get(name='untagged').id    
     context = __get_context(request, note_list, default_tag_id, username, bookname)	
-    return render_to_response('notes/note_list.html', context, context_instance=RequestContext(request,{'bookname': bookname, 'aspect_name':'notes'}))
+    return render_to_response(book_template_dict.get(bookname)+'notes/note_list.html', context, context_instance=RequestContext(request,{'bookname': bookname, 'aspect_name':'notes',\
+                                                                                                        'book_uri_prefix':'/'+username}))
 
 
 
@@ -710,14 +716,18 @@ def __get_context(request, note_list,default_tag_id, username, bookname, aspect_
     
     now = date.today()
     
-    tags = __get_ws_tags(request, username, bookname)
-    
-    W = getW(username)
-    #TODO: get private ones
-    wss = W.objects.all().order_by('name')
+    if bookname == 'framebook':
+        tags = None
+        wss = None
+    else:    
+        tags = __get_ws_tags(request, username, bookname)
+        
+        W = getW(username)
+        #TODO: get private ones
+        wss = W.objects.all().order_by('name')
   
-    if request.user.username != username:        
-        tags = get_public_tags(tags)          
+        if request.user.username != username:        
+            tags = get_public_tags(tags)          
     
     #AddNForm_notes = create_model_form("AddNForm_"+str(username), N, fields={'tags':forms.ModelMultipleChoiceField(queryset=tags)})
     #addNoteForm = AddNForm_notes(initial={'tags': [default_tag_id]}) #TODO: is this form used at all?
@@ -953,7 +963,7 @@ def folders(request, username, bookname, folder_name):
     extra_context = {'qstr':qstr,'folder_values':folder_values, 'is_in_folders':is_in_folders, 'current_folder':current_folder, 'aspect_name':'folders'}    
     context.update(extra_context)     
     
-    return render_to_response(book_template_dict.get(bookname)+'notes/folders.html', context, context_instance=RequestContext(request,{'bookname': bookname,}))
+    return render_to_response(book_template_dict.get(bookname)+'folders.html', context, context_instance=RequestContext(request,{'bookname': bookname,'book_uri_prefix':'/'+username}))
 
 
 
@@ -983,11 +993,12 @@ def note(request, username, bookname, note_id):
     #b = B.objects.get(note_ptr=note)
     #print 'b.url:', b.url
     
-    return render_to_response(book_template_dict.get(bookname)+'notes/note.html', {'note':note, 'frames':frames, 'notes_included':notes_included, \
-                                                                                   'note_form':note_form, 'profile_username':username, \
-                                                                                   'url_front':username},
+    return render_to_response(book_template_dict.get(bookname)+'notes/note/note.html', {'note':note, 'frames':frames, 'notes_included':notes_included, \
+                                                                                   'note_form':note_form, 'profile_username':username \
+                                                                                   },
                                                                                     context_instance=RequestContext(request, {'bookname': bookname,\
-                                                                                                                              'aspect_name':'notes'}))
+                                                                                                                              'aspect_name':'notes',\
+                                                                                                                              'book_uri_prefix':'/'+username }))
     
 
 
@@ -1328,35 +1339,32 @@ def  link_notes(request, username, bookname):
 
 
 
-@login_required
-def frames(request, username, bookname):
-    #TODO: allow filter on delete
-    
-    #TODO: get linkages according to bookname
-    
-    F = getFrame(username)
-    note_list = F.objects.filter(deleted=False)
-    if request.user.username != username:
-        log.debug('Not the owner of the notes requested, getting public notes only...')
-        note_list = get_public_frames(note_list)        
-     
-    view_mode, sort,  delete, private, date_range, order_type, with_attachment, paged_notes, cl = __get_notes_context(request, note_list)  
-    folders, caches, next_cache_id = __get_menu_context(request, username, bookname)
-    qstr = '' #TODO: for now, no query
-    now = date.today()    
-
-    #tags = __get_ws_tags(request, username, bookname)
-    #if request.user.username != username:
-    #    tags = get_public_tags(tags)  
-    
-    return render_to_response('framebook/notes/notes.html', {'note_list': paged_notes, 
-                                                 #'tags':tags,
-                                                  'view_mode':view_mode, 
-                                                 'sort':sort, 'delete':delete, 'private':private, 'day':now.day, 'month':now.month, 'year':now.year, 'cl':cl,
-                                                 'folders':folders,'qstr':qstr, 'profile_username':username, 'aspect_name':'linkagenotes', 'date_range':date_range, 
-                                                 'order_type':order_type, 'with_attachment':with_attachment, 'users':User.objects.all(), 
-                                                 'current_ws':request.session.get("current_ws", None),'included_aspect_name':'notes'},
-                                                  context_instance=RequestContext(request,{'bookname': bookname,}))
+#===============================================================================
+# @login_required
+# def frames(request, username, bookname):
+#    #TODO: allow filter on delete
+#    
+#    #TODO: get linkages according to bookname
+#    
+#    F = getFrame(username)
+#    note_list = F.objects.filter(deleted=False)
+#    if request.user.username != username:
+#        log.debug('Not the owner of the notes requested, getting public notes only...')
+#        note_list = get_public_frames(note_list)        
+#     
+#    view_mode, sort,  delete, private, date_range, order_type, with_attachment, paged_notes, cl = __get_notes_context(request, note_list)  
+#    folders, caches, next_cache_id = __get_menu_context(request, username, bookname)
+#    qstr = '' #TODO: for now, no query
+#    now = date.today()        
+#    return render_to_response('framebook/notes/notes.html', {'note_list': paged_notes, 
+#                                                 #'tags':tags,
+#                                                  'view_mode':view_mode, 
+#                                                 'sort':sort, 'delete':delete, 'private':private, 'day':now.day, 'month':now.month, 'year':now.year, 'cl':cl,
+#                                                 'folders':folders,'qstr':qstr, 'profile_username':username, 'aspect_name':'linkagenotes', 'date_range':date_range, 
+#                                                 'order_type':order_type, 'with_attachment':with_attachment, 'users':User.objects.all(), 
+#                                                 'current_ws':request.session.get("current_ws", None),'included_aspect_name':'notes'},
+#                                                  context_instance=RequestContext(request,{'bookname': bookname,}))
+#===============================================================================
 
 
 
@@ -1423,10 +1431,10 @@ def frame(request, username, frame_id):
     UpdateNForm = create_model_form("UpdateNForm_"+str(username), N, options={'exclude':('tags','vote')})
     note_form = UpdateNForm(instance=frame)
         
-    return render_to_response('framebook/notes/note.html', {'note':frame, 'frame_notes_display':frame_notes_display,\
-                                                             'profile_username':username, 'note_form':note_form,
-                                                             'url_front':username}, \
-                                                             context_instance=RequestContext(request,{'bookname': 'framebook'}))
+    return render_to_response('framebook/notes/note/note.html', {'note':frame, 'frame_notes_display':frame_notes_display,\
+                                                             'profile_username':username, 'note_form':note_form
+                                                              }, \
+                                                             context_instance=RequestContext(request,{'bookname': 'framebook','book_uri_prefix':'/'+username}))
 
 
 
@@ -1469,39 +1477,9 @@ def update_linkagenote(request, note_id, username, bookname):
     return HttpResponseRedirect(__get_pre_url(request))    
 
 
-@login_required
-def update_frame_inline(request, username, bookname):    
-    note_id = request.POST.get('note_id')
-    content =  request.POST.get('content')  
-    note_field = request.POST.get('note_field')  
-    
-    L = getFrame(username)
-    note = L.objects.get(id=note_id)
-    if note_field=='note_title':
-        note.title = content
-    if note_field=='note_desc':
-        note.desc = content
 
-#    if note_field=='note_tags':
-#        note.update_tags(content)   	
-    if note_field=='note_init_date':
-        note.init_date = datetime.datetime.strptime(content,'%Y-%m-%d %H:%M')    
-    if note_field=='note_add_notes':
-        note.add_notes(content) 	    
-    note.save()
-    log.debug('linkagenote updated')
-    #TODO: if error
-    return HttpResponse(content, mimetype="text/plain") 
 
-#TODO: for all these delete and update things, check the rights first. (might use django's permission management system)
-@login_required
-def delete_frame(request, username, bookname):    
-    note_id = request.POST.get('linkage_id')
-    F = getFrame(username)
-    note = F.objects.get(id=note_id)
-    note.deleted = True    
-    note.save()
-    return HttpResponse(note.deleted, mimetype="text/plain")      
+#  
 
 @login_required
 def delete_note_from_frame(request, username, bookname):    
@@ -1869,8 +1847,8 @@ def get_cache(request, username, bookname, cache_id):
 
 @login_required
 def add_notes_to_cache(request,username, bookname, cache_id):
-    note_ids= request.POST.getlist('selected_note_ids')
-    log.debug( 'selected_note_ids is:'+str(note_ids))    
+    note_ids= request.POST.getlist('selected_note_ids[]')#TODO:why need to add []?
+    #print  'selected_note_ids is:'+str(note_ids)   
     cache_id= request.POST.get('cache_id')    
     C = getCache(username, bookname)
 #    if cache_id > C.objects.all().count():
@@ -1904,14 +1882,55 @@ def add_notes_to_cache(request,username, bookname, cache_id):
     return  HttpResponse(simplejson.dumps({'cache_id':cache.cache_id, 'note_ids':cache.note_ids,'created':created}),
                                                                      "application/json")
 
+
+
+#TODO: delete...
 @login_required
 def clear_cache(request, username, bookname, cache_id):
     C = getCache(username, bookname)
-    if bookname == 'notebook':
-        cache = C.objects.get(id=cache_id)
+    #It seems that dynamic class had a problem to find the parent or child in the right user db to delete
+    #So the following code used. Might think of a better solution TODO:
+    N_C = getCache(username, 'notebook')
+    Sn_C = getCache(username, 'snippetbook')
+    B_C = getCache(username, 'bookmarkbook')
+    Sc_C = getCache(username, 'scrapbook')
+    F_C = getCache(username, 'framebook')
+    if bookname == 'notebook':        
+        cache = C.objects.get(id=cache_id)        
+        try:
+            cache.snippet_cache            
+            #cache.snippet_cache.delete()   
+            snc = Sn_C.objects.get(id=cache_id)            
+            snc.delete()         
+        except ObjectDoesNotExist:
+            try:
+                cache.bookmark_cache                
+                #cache.bookmark_cache.delete()
+                bc = B_C.objects.get(id=cache_id)            
+                bc.delete()      
+            except ObjectDoesNotExist:
+                try:
+                    cache.scrap_cache                    
+                    #cache.scrap_cache.delete()  
+                    scc = Sc_C.objects.get(id=cache_id)            
+                    scc.delete()                     
+                except ObjectDoesNotExist:
+                    try:
+                        cache.frame_cache                        
+                        #cache.frame_cache.delete() 
+                        fc = F_C.objects.get(id=cache_id)            
+                        fc.delete()                           
+                    except ObjectDoesNotExist:                         
+                        log.error('No cache type found!')
+                        
+        cache.delete()
     else:
-        cache = C.objects.get(cache_id=cache_id)
-    cache.delete() #TODO: below doesn't delete the entry in the parent Cache
+        cache = C.objects.get(cache_id=cache_id)        
+        cache.delete() 
+        #deleting the parent
+        nc = N_C.objects.get(id=cache.id)            
+        nc.delete()          
+        
     return  HttpResponse(cache_id, "text/plain")
     
     

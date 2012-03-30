@@ -1,0 +1,37 @@
+{% extends "social/include/note_list_base.html" %}
+{% load i18n %}
+
+
+
+{% block title %}
+{% blocktrans %} {{user}}'s Groups Notes{% endblocktrans %}
+{% endblock %}
+
+{% block header_title %}
+{% blocktrans %} {{user}}'s Groups Notes{% endblocktrans %}
+{% endblock %}
+
+{% block header_tabs %}
+<div class="book_tabs">
+<span class="book_tabs_item {% if bookname == 'snippetbook' %}current{% endif %} " onclick="window.location.replace('/{{user.username}}/groups/snippetbook/')">{% trans "Snippets" %}</span>
+<span class="book_tabs_item {% if bookname == 'bookmarkbook' %}current{% endif %} " onclick="window.location.replace('/{{user.username}}/groups/bookmarkbook/')">{% trans "Bookmarks" %}</span>
+<span class="book_tabs_item {% if bookname == 'scrapbook' %}current{% endif %} " onclick="window.location.replace('/{{user.username}}/groups/scrapbook/')">{% trans "Scraps" %}</span>
+<span class="disabled">  |
+<a href="/{{ profile_username }}/notebook/notes/">{% trans "All" %}</a> </span> <span class="disabled" style="float:right;"><a href="../linkagenotes">{% trans "linkiages" %}</a></span>
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+{% block search_box %}
+{% include "social/search/search_in_groups_notes.html" %}
+{% endblock %}
+
+
+{% block special_side_menu %}
+
+{% endblock %}

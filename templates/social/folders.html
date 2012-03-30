@@ -1,0 +1,65 @@
+{% extends "social/include/note_list_base.html" %}
+{% load i18n %}
+
+{% comment %}
+folders is done differently from personal notebook.
+{% endcomment %}
+
+
+
+{% block title %}
+{% blocktrans %}Public Notetbook of {{profile_username}}{% endblocktrans %} 
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+ 
+ 
+
+{% block content%}
+<!--
+<div class="grid-16-8" > 
+<div class="article"> 
+-->
+<div id="content-main"> 
+<div>
+
+
+<!--For displaying folders, below is done a little different from personal notebook. Might merge the two. Also merge the naming, probably get rid of the name 'Folder'-->
+{% if bookname == 'snippetbook' %}  
+    {% if current_folder %} 
+        <div id="folder_info">{% trans "Snippetbook based on a custom query" %}:&nbsp;&nbsp;  "{{current_folder.name}}"  &nbsp;&nbsp;=&nbsp;&nbsp;  {% trans "Searching" %} &nbsp;&nbsp; "{{current_folder.value}}"</div>
+    {% endif %}   
+    {% include "social/snippetbook/notes/notesdisplay.html" %}
+{% endif %} 
+{% if bookname == 'bookmarkbook' %}  
+    {% if current_folder %} 
+        <div id="folder_info">{% trans "Bookmarkbook based on a custom query" %}: &nbsp;&nbsp; "{{current_folder.name}}"  &nbsp;&nbsp;=&nbsp;&nbsp;  {% trans "Searching" %} &nbsp;&nbsp; "{{current_folder.value}}"</div>
+    {% endif %} 
+   {% include "social/bookmarkbook/notes/notesdisplay.html" %}
+{% endif %}  
+{% if bookname == 'scrapbook' %}  
+    {% if current_folder %} 
+        <div id="folder_info">{% trans "Scrapbook based on a custom query" %}: &nbsp;&nbsp; "{{current_folder.name}}"  &nbsp;&nbsp;=&nbsp;&nbsp;  {% trans "Searching" %} &nbsp;&nbsp;  "{{current_folder.value}}"</div>
+    {% endif %} 
+   {% include "social/scrapbook/notes/notesdisplay.html" %}
+{% endif %}     
+{% if bookname == 'notebook' %}  
+    {% if current_folder %} 
+        <div id="folder_info">{% trans "Notebook based on a custom query" %}: &nbsp;&nbsp; "{{current_folder.name}}"  &nbsp;&nbsp;=&nbsp;&nbsp;  {% trans "Searching" %} &nbsp;&nbsp;  "{{current_folder.value}}"</div>
+    {% endif %} 
+   {% include "social/notebook/notes/notesdisplay.html" %}
+{% endif %}   
+
+</div> 
+</div> 
+
+{% endblock %}

@@ -1,0 +1,16 @@
+{% load i18n %}
+
+<div id="note_tags" title="{% trans "note tags" %}">
+                {% for tag in note.get_tags %}
+                    {% if not tag.private or tag.name == group.get_group_tag_name %}
+                        <span>
+                            {% if appname == 'groups' %}
+                                {% if tag in group.get_tag_names %}<a href="/groups/{{group.name}}/{{bookname}}/tags/{{tag}}/">{{tag}}</a>
+                                {% else %}{{tag}}
+                                {% endif %}, 
+                            {% else %}<a href="/social/{{note.owner.username}}/{{bookname}}/tags/{{tag}}/">{{tag}}</a>, 
+                            {% endif %}  
+                    </span>
+                    {% endif %}
+                {% endfor %}
+</div>        

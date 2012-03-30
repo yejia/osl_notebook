@@ -1,0 +1,36 @@
+{% extends "social/include/note_list_base.html" %}
+{% load i18n %}
+
+
+
+{% block title %}
+{% blocktrans %} {{user}}'s Friends  Notes{% endblocktrans %}
+{% endblock %}
+
+
+
+
+{% block header_title %}
+{% blocktrans %} {{user}}'s Friends  Notes{% endblocktrans %}
+{% endblock %}
+
+
+{% block header_tabs %}
+<div class="book_tabs">
+<span class="book_tabs_item {% if bookname == 'snippetbook' %}current{% endif %} " onclick="window.location.replace('/{{user.username}}/friends/snippetbook/notes/')">{% trans "Snippets" %}</span>
+<span class="book_tabs_item {% if bookname == 'bookmarkbook' %}current{% endif %} " onclick="window.location.replace('/{{user.username}}/friends/bookmarkbook/notes/')">{% trans "Bookmarks" %}</span>
+<span class="book_tabs_item {% if bookname == 'scrapbook' %}current{% endif %} " onclick="window.location.replace('/{{user.username}}/friends/scrapbook/notes/')">{% trans "Scraps" %}</span>
+<span> 
+<a href="/{{user.username}}/friends/notebook/notes/">{% trans "All" %}</a> 
+</span> 
+{% comment %}
+<span class="disabled" style="float:right;"><a href="/{{user.username}}/friends/framebook/">{% trans "frames" %}</a></span>
+{% endcomment %}
+</div>
+
+{% endblock %}
+
+
+{% block search_box %}
+{% include "social/search/search_in_friends_notes.html" %}
+{% endblock %}

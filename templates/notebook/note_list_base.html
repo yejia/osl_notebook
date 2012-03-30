@@ -1,0 +1,23 @@
+{% extends "include/note_list_base.html" %}
+{% load i18n %}
+
+{% block title %}
+{% blocktrans %}All notes of {{profile_username}}{% endblocktrans %}
+{% endblock %}
+
+
+{% block site_branding %}
+<div id="branding">
+<h1 id="site-name">{% blocktrans %}Notetbook of {{profile_username}}{% endblocktrans %}</h1>
+</div>
+{% endblock %}
+
+
+{% block special_side_menu %}
+{% include "notebook/folders_special_side_menu.html" %} 
+{% include "include/groups_menu.html" %}
+{% include "include/friends_menu.html" %}
+{% endblock %}
+
+
+

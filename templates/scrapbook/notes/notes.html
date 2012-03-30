@@ -1,9 +1,6 @@
-{% extends "scrapbook/notes/note_list_base.html" %}
+{% extends "scrapbook/note_list_base.html" %}
 {% load i18n %}
 
-{% block tags_menu %}
-{% include "include/tags_menu.html" %} 
-{% endblock %}
 
 {% block linkage_filter %}
        <h4>{% trans "In linkages" %}</h4>
@@ -23,7 +20,7 @@
 
 
 {% block search_box %}
-{% include "scrapbook/notes/search.html" %}
+{% include "scrapbook/search.html" %}
 {% endblock %}
 
 

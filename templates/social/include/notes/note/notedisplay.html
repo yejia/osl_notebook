@@ -1,0 +1,55 @@
+{% extends "include/notes/note/notedisplay.html" %}
+{% load i18n %}
+
+
+
+
+
+
+
+{% block note_url%}
+ {% if note.get_note_type == 'Bookmark' %} 
+<div>
+<b>URL :</b> <a href="{{note.social_bookmark.url}}" target="top">{{note.social_bookmark.url}}</a>
+</div>
+{% endif %}
+ {% if note.get_note_type == 'Scrap' %} 
+<div>
+<b>URL :</b> <a href="{{note.social_scrap.url}}" target="top">{{note.social_scrap.url}}</a>
+</div>
+{% endif %}
+{% endblock %}
+
+
+
+
+
+{% block note_attachment%}
+ {% if note.get_note_type == 'Snippet' %} 
+<div>
+<b>{% trans 'attachment' %} :</b> <a href="/file/{{note.snippet.attachment.name}}" target="top">{{note.social_snippet.attachment}}</a>
+</div>
+{% endif %}
+ {% if note.get_note_type == 'Frame' %} 
+ <div>
+<b>{% trans 'attachment' %} :</b> <a href="/file/{{note.frame.attachment.name}}" target="top">{{note.social_frame.attachment}}</a>
+</div>
+ {% endif %}
+{% endblock %}
+
+
+
+
+{% block note_comments%}
+<li note_id="{{note.id}}">
+{% include "social/include/notes/inlines/add_comments_inline.html" %}            
+</li>
+{% endblock %}
+
+
+{% block note_form%}
+{% endblock %}
+
+
+
+

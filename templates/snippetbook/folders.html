@@ -1,0 +1,41 @@
+{% extends "snippetbook/note_list_base.html" %}
+{% load i18n %}
+
+{% comment %}
+cannot use multiple inheritance with django template TODO:
+{% endcomment %}
+
+{% block title %}
+     {% blocktrans %}Personal snippetbook of {{profile_username}}{% endblocktrans %} 
+{% endblock %}
+
+
+{% block header_title %}
+    {% blocktrans %}Personal snippetbook of {{profile_username}}{% endblocktrans %} 
+{% endblock %}
+
+{% block help_message_if_none %}
+{% include "include/folders_help_message_if_none.html" %} 
+{% endblock %}
+
+
+{% block special_side_menu %}
+{% include "snippetbook/folders_special_side_menu.html" %} 
+{% endblock %}
+
+
+{% block content%}
+<div id="content-main"> 
+<div> 
+{% if folders %} 
+    {% if not current_folder %} 
+        {% trans "Please select a folder from the right menu." %}
+    {% else %}
+        {% block notesdisplay %}
+            {% include "notebook/notes/notesdisplay.html" %}
+        {% endblock %}
+    {% endif %}
+{% endif %}
+</div>
+</div> 
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "notebook/note_list_base.html" %}
+{% load i18n %}
+
+
+
+{% block linkage_filter %}
+       <h4>{% trans "In linkages" %}</h4>
+        {% if in_linkage == 'All' %}
+             <span style="font-size:15px">{% trans "All" %}</span><br/>
+        {% else %}
+            <a href="?in_linkage=All">{% trans "All" %}</a><br/>      
+        {% endif %}       
+        {% if in_linkage == 'True' %}
+             <span style="font-size:15px">{% trans "Yes" %}</span><br/>
+        {% else %}
+            <a href="?in_linkage=True">{% trans "Yes" %}</a><br/>      
+        {% endif %}
+               
+       
+{% endblock %}
+
+
+{% block search_box %}
+{% include "notebook/search.html" %}
+{% endblock %}
+
+
+
+
+{% block content%}
+<div id="content-main"> 
+<div>
+
+{# request.session.django_language #}
+
+{% include "notebook/notes/notesdisplay.html" %}
+</div> 
+</div> 
+{% endblock %}

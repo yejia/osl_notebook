@@ -1,0 +1,26 @@
+{% load i18n %}
+
+            
+             <span class="add_comment_button"><a href="javascript:void(0);">{% trans "Comment" %}({{note.get_comments.count}})</a><!--<img src="/site_media/img/add.gif" title="{% trans "Add Comment" %}" class="clickable"/>--></span>
+             &nbsp;&nbsp;
+             {% block other_buttons %}
+                {% if note.get_social_note %} 
+                    <span>
+                        <a href="/social/{{profile_username}}/notebook/notes/note/{{note.get_social_note.id}}/" title="{% trans 'View this note in public notebook' %}">{% trans 'View social' %}</a>
+                    </span>
+                {% endif %}        
+            {% endblock %}
+             
+             <div  id="add_comment_box" style="display:none;">             
+             <div>{{user.username}}: <textarea id="add_comment" rows="3" cols="90" name="desc"></textarea><!--<button class="comment_submit">{% trans "Add Comment" %}</button>-->
+             <span class="comment_submit"  title="{% trans "Save Comment" %}"><img src="/site_media/img/save.png"/></span>&nbsp;<span class="cancel_comment_submit" title="{% trans "Cancel" %}"><img src="/site_media/img/cancel.png" /></span></div>
+             <br/> 
+             <div id="comments">
+                {% for comment in note.get_comments %}
+                    {% block content%}
+                     <div comment_id="{{comment.id}}">{{comment}}  <span title="{% trans "remove this comment" %}" class="inline_delete_comment" id="note_delete_comment">&nbsp;&nbsp;&nbsp;</span></div>   
+                    {% endblock %}     
+                {% endfor %}
+             </div>
+             
+             </div>

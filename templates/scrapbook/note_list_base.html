@@ -1,0 +1,17 @@
+{% extends "include/note_list_base.html" %}
+{% load i18n %}
+
+{% block title %}
+{{profile_username}}'s Scraps 
+{% endblock %}
+
+
+
+
+
+
+{% block special_side_menu %}
+{% include "scrapbook/folders_special_side_menu.html" %} 
+{% include "include/groups_menu.html" %}
+{% include "include/friends_menu.html" %}
+{% endblock %}

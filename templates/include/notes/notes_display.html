@@ -1,0 +1,170 @@
+{% load adminmedia admin_list i18n %}
+
+
+<script type="text/javascript">
+	$(document).ready(function(){	
+                $('span.editableText').editableText({
+                        newlinesEnabled: false
+                });
+			
+                $.editableText.defaults.newlinesEnabled = true;
+
+                $('div.editableText, p.editableText').editableText();
+			
+                $('.editableText').change(function(){
+                        var newValue = $(this).text();
+                        $(this).load('updateNoteInline/',{ 'id':$(this).parents('li').attr('note_id'), 'note_field':$(this).parents('div').attr('id'), 'content':  newValue})
+                });
+			
+                //move below to a separate file
+                $('.thumbup'). click(function(){                
+                        $(this).parents(".thumb").find("#note_rank").load('voteUpNote/',{ 'id':$(this).parents("li").attr('note_id')});
+                });
+		
+                $('.thumbdown'). click(function(){
+                        $(this).parents(".thumb").find("#note_rank").load('voteDownNote/',{ 'id':$(this).parents("li").attr('note_id')});
+                });
+		
+                $('.delete_img'). click(function(){
+                        $(this).load('deleteNote/',{ 'id':$(this).parents("li").attr('note_id')});
+                        $(this).parents("li").remove();
+                });	
+                
+                
+         
+			
+        });
+        
+    
+</script>
+
+
+<!--With pagination, the web page will disapper first and appear. Without pagination, although it is still slower than before (probably due to the search stuff), the webpage doesn't seem to disapper.-->
+
+ {% block pagination_top %}{% pagination cl %}{% endblock %}  
+
+<div class="notes_display" view_mode="{{view_mode}}">
+<ul>
+    {% for note in note_list.object_list %}
+        {% if user.username != profile_username and note.is_private %}  
+        {% else %}     
+         <li class="note_display" note_id="{{ note.id }}">
+         {% if user.username == profile_username %}     
+	            <input type="checkbox" name="note_selected"  value="{{ note.id }}" class="note_selection" />
+        {% endif %}      
+	          <div class="kuoda"></div><div class="yasuo"></div>
+            
+            {% if user.username == profile_username %}  
+            <span class="lockunlock">               
+                <span class="lock" title="{% trans 'private'  %}" style="display:{% if note.private %}inline{% else %}none{% endif %};">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;              
+                </span>                           
+                <span class="unlock" title="{% trans 'public'  %}" style="display:{% if note.private %}none{% else %}inline{% endif %};">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;          
+                </span>                   
+            </span>
+            {% endif %}  
+		    <span class="thumb">			
+            {% if user.username == profile_username %}  
+			<span class="thumbup hover"  title="{% trans "Rank Up Importance"  %}"><img src="/site_media/img/thumbUp.gif"/></span>
+			<span class="thumbdown hover"  title="{% trans "Rank Down Importance"  %}"><img src="/site_media/img/thumbDown.gif"/></span>
+            {% endif %}
+            <span id="note_rank" title="{% trans "Importance"  %}">{{note.vote}}</span>
+		    </span>
+             {% if user.username == profile_username %}  
+		    <span class="delete_img hover" title="{% trans "soft delete" %}"><img src="/site_media/img/delete.png"/></span><!--TODO:move delete to css as background img-->
+		    {% endif %}
+            
+            
+            <!-- block note_content_section -->
+            <div class="{{bookname}}">
+                <div class="brief_display">
+			         <table class="note_table">
+			            <tr>
+				             {% block note_brief_table_td_note_type%}                
+				             {% endblock %}   
+				             {% block note_brief_table_td1%}
+				                <td class="note_table_td1 structure">            
+				                         {% include "include/notes/inlines/notes_brief_title_inline.html" %}   
+				                </td>           
+				             {% endblock %}
+						    
+				            
+					         {% block note_brief_table_td2%}
+						          <td class="note_table_td2">
+								     	  {% include "include/notes/inlines/notes_brief_desc_inline.html" %}   
+						          </td> 
+					         {% endblock %}            
+							    
+						     <td class="note_table_tags">
+						         {% include "include/notes/inlines/notes_brief_tags_inline.html" %}   
+						     </td>   
+				             <td class="note_table_td4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						     </td>            
+					    </tr>
+			        </table>
+                     {% block framebook_only_div%}						         
+                    {% endblock %}          
+			  </div>
+
+
+			  <div class="full_display">
+				 <table class="note_table">
+				    <tr>
+				        {% block note_full_table_td_note_type%}           
+				        {% endblock %}    
+					    {% block note_full_table_td1%}                
+					        <td class="note_full_table_td1 structure">             
+					                {% include "include/notes/inlines/notes_brief_tags_inline.html" %}   
+					        </td>
+					     {% endblock %}  
+				         {% block note_full_table_td2%}
+				         <td class=""note_full_table_td2"">            
+				               {% include "include/notes/inlines/notes_full_desc_inline.html" %}        
+				         </td>
+				         {% endblock %} 
+						    <td class="note_table_tags">
+				              {% include "include/notes/inlines/notes_full_tags_inline.html" %}   		    
+						    </td>
+					 </tr>
+				   </table>
+				        
+				
+		           <div>				           
+		            {% block full_display_div_extra %}
+		            {% endblock %} 
+		           
+		            <div  id="note_init_date" title="{% trans "initial creation time" %}" class="grey">{% if user.username == profile_username %}<span  class="editableText">{% endif %}{{note.init_date|date:"Y-m-d H:i"}}{% if user.username == profile_username %}<span>{% endif %}</div>
+		            <div class="grey structure" id="note_last_modi_date" title="{% trans "last modified time" %}">{{note.last_modi_date|date:"Y-m-d H:i"}} </div>
+		            {% if note.attachment %}
+				    		    <div  id="note_attachment" title="{% trans "attachment" %}"><a href="/file/{{note.attachment.name}}" target="top">{{note.attachment.name}}</a> </div>
+				    {% endif %}
+		
+		            <div  class="structure advanced" id="note_frames" title="{% trans "note in frames" %}">{% trans "Frames" %}: {{note.display_frames|default:_('Not in any frame')}}</div>
+		            
+                    {% block comments_inline %}
+                         {% include "include/notes/inlines/add_comments_inline.html" %}   
+		            {% endblock %} 
+		           
+				             
+			    </div>
+			 </div>
+            
+            
+            
+            
+            
+           
+	     </li>
+    {% endif %} 
+    {% endfor %}
+</ul>
+
+
+ {% block pagination_bottom %}{% pagination cl %}{% endblock %}
+</div>
+
+</div>
+<!--
+<a name="bottom"/>
+<a href="#top">{% trans "top" %}</a>
+-->
+</div>

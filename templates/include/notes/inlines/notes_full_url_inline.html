@@ -1,0 +1,7 @@
+{% load i18n %}
+
+<div id="note_url" title="note url">
+                    {% if user.username == profile_username %}<span class="editableText">{% endif %}
+                        <a href="{{ note.url}}" target="_blank">{{ note.url}}</a>
+                    {% if user.username == profile_username %}</span>{% endif %}
+</div> 	
