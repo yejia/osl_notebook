@@ -373,6 +373,11 @@ def note(request, username, bookname, note_id):
                                      context_instance=RequestContext(request, {'bookname': bookname,'aspect_name':'notes',\
                                                                                'book_uri_prefix':'/social/'+username}))
     
+
+
+    
+    
+
     
 #===============================================================================
 # #TODO: think of whether get rid of appname    

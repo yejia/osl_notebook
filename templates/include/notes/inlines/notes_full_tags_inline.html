@@ -1,7 +1,7 @@
 {% load i18n %}
 
 {% if user.username == profile_username %}<span class="editable"><span class="tags_edit">&nbsp;&nbsp;&nbsp;&nbsp;</span>{% endif %}
-                    <div id="update_tags_inline_box" style="display: none;">
+                    <div id="update_tags_inline_box" style="display: none;"  title="{% trans "note tags" %}">
                         <ul id="update_tags_inline">
                                 {% for tag in note.get_tags %}
                                    <li>{{tag}}</li>

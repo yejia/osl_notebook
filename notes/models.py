@@ -212,7 +212,7 @@ class Note(models.Model):
                 
       
         
-    def get_note_bookname(self):        
+    def get_note_bookname(self):           
         return model_book_dict.get(self.get_note_type())
       
        
@@ -556,11 +556,11 @@ class Frame(Note):
      
                
     def display_notes(self):
-        return [[n.id, n.title, n.desc, n.vote] for n in self.notes.all()] 
+        return [[n.id, n.title, n.desc, n.vote, n.get_note_bookname, n.get_note_type] for n in self.notes.all()] 
                 
     
     def display_public_notes(self):        
-        return [[n.id, n.title, n.desc, n.vote] for n in self.notes.all() if n.private==False ] 
+        return [[n.id, n.title, n.desc, n.vote, n.get_note_bookname, n.get_note_type] for n in self.notes.all() if n.private==False ] 
     
     #TODO: need save?
     def update_tags(self, tags_str):    

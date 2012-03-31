@@ -12,13 +12,13 @@
  <table class="note_table">
                 <tr>
                     <td class="note_table_title">
-                        <div id="note_title"><a href="/social/{{profile_username}}/framebook/notes/note/{{ note.id }}/"><b>{{ note.title|default:_('(No Title)') }}</b></a></div> 	
+                        <div id="note_title" title="{% trans 'note title' %}"><a href="/social/{{note.owner.username}}/framebook/notes/note/{{ note.id }}/"><b>{{ note.title|default:_('(No Title)') }}</b></a></div> 	
                     </td>
                     <td class="note_table_desc">			    
                         <div  id="note_desc">{{note.desc}}</div>
                     </td>
                     <td class="note_table_tags">
-                        <div id="note_tags">{{note.display_tags}}</div>		    
+                        {% include "social/include/notes/inlines/notes_brief_tags_inline.html" %}     		    
                     </td>
                 </tr>
         </table>
@@ -29,10 +29,10 @@
             {% trans 'Notes included in this frame' %}:
             <ul>
             <!--TODO: refactor-->
-             {% if user.username == profile_username %} 
+             {% if user.username == note.owner.username %} 
                {% for n in note.display_notes %}            
                 <div linked_note_id="{{n.0}}">
-                     <li><a href="/social/{{profile_username}}/{{bookname}}/notes/note/{{n.0}}"><strong>{{ n.1|default:_('(No Title)') }} </strong></a>
+                     <li><img src="/site_media/img/{{n.5}}.png" title="{{n.5}}"/><a href="/social/{{note.owner.username}}/{{n.4}}/notes/note/{{n.0}}"><strong>{{ n.1|default:_('(No Title)') }} </strong></a>
                                 &nbsp;&nbsp;&nbsp;{{n.2|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp;{{n.3}} &nbsp;&nbsp;&nbsp;&nbsp; 
                                
                      </li>           
@@ -41,7 +41,7 @@
               {% else %}              
                {% for n in note.display_public_notes  %}            
                 <div linked_note_id="{{n.0}}">
-                     <li><a href="/social/{{profile_username}}/{{bookname}}/notes/note/{{n.0}}"><strong>{{ n.1|default:_('(No Title)') }} </strong></a>
+                     <li><img src="/site_media/img/{{n.5}}.png" title="{{n.5}}"/><a href="/social/{{note.owner.username}}/{{n.4}}/notes/note/{{n.0}}"><strong>{{ n.1|default:_('(No Title)') }} </strong></a>
                                 &nbsp;&nbsp;&nbsp;{{n.2|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp;{{n.3}} &nbsp;&nbsp;&nbsp;&nbsp; 
                               
                      </li>           
@@ -63,10 +63,10 @@
              {% trans 'Notes included in this frame' %}:
             <ul>
             <!--TODO: refactor-->
-             {% if user.username == profile_username %} 
+             {% if user.username == note.owner.username %} 
                {% for n in note.display_notes %}            
                 <div linked_note_id="{{n.0}}">
-                     <li><a href="/social/{{profile_username}}/{{bookname}}/notes/note/{{n.0}}"><strong>{{ n.1|default:_('(No Title)') }} </strong></a>
+                     <li><img src="/site_media/img/{{n.5}}.png" title="{{n.5}}"/><a href="/social/{{note.owner.username}}/{{ n.4 }}/notes/note/{{n.0}}"><strong>{{ n.1|default:_('(No Title)') }} </strong></a>
                                 &nbsp;&nbsp;&nbsp;{{n.2|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp;{{n.3}} &nbsp;&nbsp;&nbsp;&nbsp; 
                                
                      </li>           
@@ -75,7 +75,7 @@
               {% else %}              
                {% for n in note.display_public_notes  %}            
                 <div linked_note_id="{{n.0}}">
-                     <li><a href="/social/{{profile_username}}/{{bookname}}/notes/note/{{n.0}}"><strong>{{ n.1|default:_('(No Title)') }} </strong></a>
+                     <li><img src="/site_media/img/{{n.5}}.png" title="{{n.5}}"/><a href="/social/{{note.owner.username}}/{{ n.4 }}/notes/note/{{n.0}}"><strong>{{ n.1|default:_('(No Title)') }} </strong></a>
                                 &nbsp;&nbsp;&nbsp;{{n.2|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp;{{n.3}} &nbsp;&nbsp;&nbsp;&nbsp; 
                               
                      </li>           

@@ -113,7 +113,7 @@
 				        {% endblock %}    
 					    {% block note_full_table_td1%}                
 					        <td class="note_full_table_td1 structure">             
-					                {% include "include/notes/inlines/notes_brief_tags_inline.html" %}   
+					                {% include "include/notes/inlines/notes_full_title_inline.html" %}   
 					        </td>
 					     {% endblock %}  
 				         {% block note_full_table_td2%}
@@ -141,7 +141,7 @@
 		            <div  class="structure advanced" id="note_frames" title="{% trans "note in frames" %}">{% trans "Frames" %}: {{note.display_frames|default:_('Not in any frame')}}</div>
 		            
                     {% block comments_inline %}
-                         {% include "include/notes/inlines/add_comments_inline.html" %}   
+                         {% include "include/notes/inlines/add_comments_and_etc_inline.html" %}   
 		            {% endblock %} 
 		           
 				             

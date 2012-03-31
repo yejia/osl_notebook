@@ -1,4 +1,4 @@
-{% extends "include/notes/inlines/add_comments_inline.html" %}
+{% extends "include/notes/inlines/add_comments_and_etc_inline.html" %}
 {% load i18n %}
 
 
@@ -19,7 +19,7 @@
 
 
 {% block other_buttons %}
-<span class="share_button"><a href="javascript:void(0);">{% trans "Share" %}</a></span>&nbsp;&nbsp;
+<span class="share_button" title="{% trans "Share this note with other sites that you have bound with your account" %}"><a href="javascript:void(0);">{% trans "Share" %}</a></span>&nbsp;&nbsp;
 {% if user.username == profile_username %}  
 <span>
 <a href="/{{user.username}}/{{bookname}}/notes/note/{{note.owner_note_id}}/" title="{% trans 'View this note in your personal notebook' %}">{% trans 'View personal' %}</a>
