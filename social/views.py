@@ -343,7 +343,7 @@ def notes(request, username, bookname):
 
 @login_required
 def note(request, username, bookname, note_id):
-    log.debug('Getting the note:'+note_id)
+    log.debug('Getting the note:'+note_id)   
     if 'framebook' == bookname:
         return frame(request, username, bookname, note_id)
     N = getSN(bookname)
@@ -417,7 +417,7 @@ def note(request, username, bookname, note_id):
 
 
 @login_required
-def frame(request, username, bookname, frame_id):         
+def frame(request, username, bookname, frame_id):     
     frame = Social_Frame.objects.get(owner__username=username, id=frame_id)    
     if request.user.username == username:
         frame_notes_display = frame.display_notes()
@@ -440,7 +440,7 @@ def frame(request, username, bookname, frame_id):
             n.append('')     
     #print 'frame_notes_display:',frame_notes_display    
     
-    return render_to_response('social/framebook/notes/note/note.html', {'frame':frame,\
+    return render_to_response('social/framebook/notes/note/note.html', {'note':frame,\
                                                              'frame_notes_display':frame_notes_display, \
                                                              'profile_username':username}, \
                                                              context_instance=RequestContext(request,{'bookname': bookname,\

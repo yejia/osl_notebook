@@ -16,7 +16,7 @@
 
 {% block notes_in_frame%}
 <b>{% trans 'notes included' %}: </b>
-{% for id, title, desc, vote, type, note_bookname, tags, url in frame_notes_display %}
+{% for id, title, desc, vote,   type, note_bookname, tags, url in frame_notes_display %}
 <div id="note_in_frame"><img src="/site_media/img/{{type}}.png" title="{{type}}"/>
 <a href="{{book_uri_prefix}}/{{note_bookname}}/notes/note/{{id}}/">{{title|default:'(No Title)'}}</a> 
 {{desc}} 

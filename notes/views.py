@@ -1417,16 +1417,16 @@ def frame(request, username, frame_id):
         N = getNote(username, 'notebook')
         note = N.objects.get(id=note_id)  
         type = note.get_note_type()
-        n.append(type)
+        n.insert(4, type)
         note_bookname = note.get_note_bookname()
-        n.append(note_bookname)
-        n.append(note.get_tags())
+        n.insert(5, note_bookname)
+        n.insert(6, note.get_tags())
         if type == 'Bookmark': 
-            n.append(note.bookmark.url)
+            n.insert(7, note.bookmark.url)
         elif type == 'Scrap':   
-            n.append(note.scrap.url) 
+            n.insert(7, note.scrap.url) 
         else:
-            n.append('')     
+            n.insert(7, '')     
         
     UpdateNForm = create_model_form("UpdateNForm_"+str(username), N, options={'exclude':('tags','vote')})
     note_form = UpdateNForm(instance=frame)
