@@ -47,9 +47,9 @@ urlpatterns = patterns('',
     (r'^social/(?P<username>[^/]+)/addFriend/$', 'notebook.social.views.add_friend'),
 
 #below seem not used
-    (r'^users/(?P<username>[^/]+)/wall/snippets/$', 'notebook.social.views.wall_snippets'),
-    (r'^users/(?P<username>[^/]+)/wall/bookmarks/$', 'notebook.social.views.wall_bookmarks'),
-    (r'^users/(?P<username>[^/]+)/wall/scraps/$', 'notebook.social.views.wall_scraps'),
+    #(r'^users/(?P<username>[^/]+)/wall/snippets/$', 'notebook.social.views.wall_snippets'),
+    #(r'^users/(?P<username>[^/]+)/wall/bookmarks/$', 'notebook.social.views.wall_bookmarks'),
+    #(r'^users/(?P<username>[^/]+)/wall/scraps/$', 'notebook.social.views.wall_scraps'),
     (r'^groups/(?P<groupname>[^/]+)/$', 'notebook.social.views.group_index'),
 
     (r'^groups/(?P<groupname>[^/]+)/joinGroup/$', 'notebook.social.views.join_group'),
