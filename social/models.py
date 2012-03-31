@@ -223,11 +223,11 @@ class Social_Frame(Social_Note):
         return ','.join([str(note.id) for note in self.notes.all()])   
 
     def display_notes(self):
-        return [[n.id, n.title, n.desc, n.vote, n.get_note_bookname, n.get_note_type] for n in self.notes.all()] 
+        return [[n.id, n.title, n.desc, n.vote, n.get_note_bookname(), n.get_note_type()] for n in self.notes.all()] 
                 
     
     def display_public_notes(self):        
-        return [[n.id, n.title, n.desc, n.vote, n.get_note_bookname, n.get_note_type] for n in self.notes.all() if n.private==False ] 
+        return [[n.id, n.title, n.desc, n.vote, n.get_note_bookname(), n.get_note_type()] for n in self.notes.all() if n.private==False ] 
 
     def get_vote(self):        
         v = 0  
