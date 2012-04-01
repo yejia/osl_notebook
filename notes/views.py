@@ -1076,10 +1076,13 @@ def update_note_inline(request, username, bookname):
     if note_field=='note_tags':
         note.update_tags(content)    
     #note.tags = content	
-    print 'note.init_date:',note.init_date 
+    #print 'note.init_date:',note.init_date 
     if note_field=='note_init_date':
         note.init_date = datetime.datetime.strptime(content,'%Y-%m-%d %H:%M')   
-        print 'note.init_date:',note.init_date  
+        #print 'note.init_date:',note.init_date  
+    
+    if note_field=='note_add_notes':
+        note.add_notes(content)
     
     note.save()
     log.debug( 'note updated')
