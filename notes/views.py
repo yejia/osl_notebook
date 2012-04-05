@@ -1645,9 +1645,7 @@ def share(request, bookname):
         note = N.objects.get(id=note_id)
         content = ''
         log.info('The current bookname is:'+bookname)
-        if bookname == 'notebook':
-            bookname = note.get_note_bookname()
-            log.info('This note of notebook is actually a note of '+bookname)
+        
         if bookname == 'snippetbook':
             content = _('Sharing snippet:')+note.desc[0:120]
         if bookname == 'bookmarkbook':
@@ -1655,7 +1653,18 @@ def share(request, bookname):
         if bookname == 'scrapbook':
             content = _('Sharing scrap:')+note.desc[0:100] + '   '+ note.url   
         if bookname == 'framebook':
-            content = _('Sharing knowledge package:')+note.title + '   ' + note.desc[0:100]     
+            content = _('Sharing knowledge package:')+note.title + '   ' + note.desc[0:100] 
+        if bookname == 'notebook':
+            bookname = note.get_note_bookname()
+            log.info('This note of notebook is actually a note of '+bookname)
+            if bookname == 'snippetbook':
+                content = _('Sharing snippet:')+note.desc[0:120]
+            if bookname == 'bookmarkbook':
+                content = _('Sharing bookmark:')+note.title+'   '+note.bookmark.url
+            if bookname == 'scrapbook':
+                content = _('Sharing scrap:')+note.desc[0:100] + '   '+ note.scrap.url   
+            if bookname == 'framebook':
+                content = _('Sharing knowledge package:')+note.title + '   ' + note.desc[0:100]         
         if request.user.username == note.owner.username:
             source_str = _('Original Note:')
         else:
