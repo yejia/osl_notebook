@@ -596,6 +596,8 @@ def __get_view_theme(request):
     else:
         date_range = request.session.get('date_range', 'All')     
     
+    #print 'date_range is now:', date_range
+    
     in_linkage = request.GET.get('in_linkage')    
     if in_linkage:
         request.session['in_linkage'] = in_linkage
@@ -606,10 +608,37 @@ def __get_view_theme(request):
     if with_attachment:
         request.session['with_attachment'] = with_attachment
     else:
-        with_attachment = request.session.get('with_attachment', 'All')     
+        with_attachment = request.session.get('with_attachment', 'All')  
+        
+        
+    #  TODO: make month RESTFUL
+    month = request.GET.get('month')    
+    if month:
+        request.session['month'] = month
+    else:
+        month = request.session.get('month', 'All')    
+       
+    year = request.GET.get('year')    
+    if year:
+        request.session['year'] = year
+    else:
+        year = request.session.get('year', 'All')    
+
+    day = request.GET.get('day')    
+    if day:
+        request.session['day'] = day
+    else:
+        day = request.session.get('day', 'All')    
+        
+    week = request.GET.get('week')    
+    if week:
+        request.session['week'] = week
+    else:
+        week = request.session.get('week', 'All')            
     
     #return dict(view_mode=view_mode, sort=sort, delete=delete, private=private, month=month, year=year, day=day, week=week)	   
-    return dict(view_mode=view_mode, sort=sort, delete=delete, private=private, date_range=date_range, in_linkage=in_linkage, with_attachment=with_attachment)
+    return dict(view_mode=view_mode, sort=sort, delete=delete, private=private, date_range=date_range, in_linkage=in_linkage, with_attachment=with_attachment,
+                day=day, week=week, month=month, year=year)
 
 
 #TODO:refactor similar code as in index method into another method
@@ -773,11 +802,13 @@ def __get_notes_context(request, note_list):
     private =    theme['private']   
     date_range = theme['date_range']
     with_attachment = theme['with_attachment']
-#    month =    theme['month']  
-#    year =    theme['year']
-#    day =    theme['day']
-#    week =    theme['week']
+    month =    theme['month']  
+    year =    theme['year']
+    day =    theme['day']
+    week =    theme['week']
     
+    #print 'month:',month, ' year:',year
+    #print 'day:',day, ' week:',week
     
     if delete in true_words:
         note_list = note_list.filter(deleted=True)
@@ -795,24 +826,28 @@ def __get_notes_context(request, note_list):
         pass           
         
     now = date.today()
-#    if month in ['All', 'all']:
-#        pass
-#    else:
-#        note_list = note_list.filter(init_date__month=month, init_date__year= now.year) 
-#    if year in ['All', 'all']:
-#        pass
-#    else:
-#        note_list = note_list.filter(init_date__year= year) 
-#    if day in ['All', 'all']:
-#        pass
-#    else:
-#        note_list = note_list.filter(init_date__day= day, init_date__month=now.month, init_date__year= now.year)      
-#    if week in ['All', 'all']:
-#        pass
-#    elif week=='this': #TODO:
-#        one_week_ago = now - datetime.timedelta(days=7)
-#        note_list = note_list.filter(init_date__gte=one_week_ago.strftime('%Y-%m-%d'),  init_date__lte=now.strftime('%Y-%m-%d 23:59:59')
-#                                            )    
+    if month in ['All', 'all']:
+        pass
+    else:
+        note_list = note_list.filter(init_date__month=month, init_date__year= now.year) 
+    #print   'after month, note_list:',len(note_list)  
+    if year in ['All', 'all']:
+        pass
+    else:
+        note_list = note_list.filter(init_date__year= year) 
+    #print   'after year, note_list:',len(note_list)
+    if day in ['All', 'all']:
+        pass
+    else:
+        note_list = note_list.filter(init_date__day= day, init_date__month=now.month, init_date__year= now.year)      
+    if week in ['All', 'all']:
+        pass
+    elif week=='this': #TODO:
+        one_week_ago = now - datetime.timedelta(days=7)
+        note_list = note_list.filter(init_date__gte=one_week_ago.strftime('%Y-%m-%d'),  init_date__lte=now.strftime('%Y-%m-%d 23:59:59')
+                                            )    
+    #print 'date_range:', date_range
+    #print 'before date_range:', len(note_list)
     if date_range in ['All', 'all']:
         pass
     elif date_range == 'today':
@@ -825,6 +860,7 @@ def __get_notes_context(request, note_list):
     elif date_range == 'this_year':  
         note_list = note_list.filter(init_date__year= now.year) 
     
+    #print 'after date_range:', len(note_list)
         
     if with_attachment in ['All', 'all']:
         pass
