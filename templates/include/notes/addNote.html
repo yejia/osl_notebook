@@ -42,7 +42,8 @@ $(document).ready(function(){
         });
 
 	$("#ac_tags").tagit({
-			availableTags: [{% for tag in tags %}"{{tag}}",{% endfor %}]
+			availableTags: [{% for tag in tags %}"{{tag}}",{% endfor %}],
+                 allowSpaces: true
 		}); 
         
     });   
