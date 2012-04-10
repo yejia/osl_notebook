@@ -157,6 +157,8 @@ def login_user(request):
             login(request, user)
             next = request.POST.get('next')            
             if next:
+                if next.find('anonymous') != -1:
+                    next = next.replace('anonymous', username)
                 return HttpResponseRedirect(next)           
             return HttpResponseRedirect('/'+username+'/snippetbook/notes/') 
         else:
@@ -577,15 +579,18 @@ def __get_view_theme(request):
     else:
         delete = request.session.get('delete', 'False')	 
         
-    private = request.GET.get('private')	
-    if private:
-        #request.session['private'] = private
-        #TODO:check length of input to prevent injection (database model field already has maximum length)
-        request.user.member.viewing_private = private
-        request.user.member.save()
-    else:
-        #private = request.session.get('private', 'All')
-        private = request.user.member.viewing_private	   
+    private = request.GET.get('private')
+    if request.user.is_anonymous:
+        private = 'n'
+    else:    	
+        if private:
+            #request.session['private'] = private
+            #TODO:check length of input to prevent injection (database model field already has maximum length)
+            request.user.member.viewing_private = private
+            request.user.member.save()
+        else:
+            #private = request.session.get('private', 'All')
+            private = request.user.member.viewing_private	   
 
     #TODO: make it possible to pick any date by giving something like /2010/8/8 in the url  
     #or pick any period of time 

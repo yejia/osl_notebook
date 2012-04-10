@@ -4,13 +4,13 @@
 <div id="sites_header">
 <span>
 <span class="item">
-<a href="/{{ user.username }}/snippetbook/notes/">{% trans 'Notebook' %}</a>
+<a href="/{{ user.username|default:'anonymous' }}/snippetbook/notes/">{% trans 'Notebook' %}</a>
 </span>
 <span class="item">
-<a href="/{{ user.username }}/groups/">{% trans 'Learning Groups' %}</a>
+<a href="/{{ user.username|default:'anonymous' }}/groups/">{% trans 'Learning Groups' %}</a>
 </span>
 <span class="item">
-<a href="/{{ user.username }}/friends/">{% trans 'Friends' %}</a>
+<a href="/{{ user.username|default:'anonymous' }}/friends/">{% trans 'Friends' %}</a>
 </span>
 
 <!--
@@ -52,8 +52,12 @@
     <a href="/settings/">{% trans 'Settings' %}</a>
 </span>
 <span class="item">
+{% if user.is_anonymous %}
+    <a href="/login/">{% trans "Log in" %}</a>
+{% else %}
     <a href="/passwordChange/">{% trans 'Change password' %}</a> /
     <a href="/logout/">{% trans "Log out" %}</a>
+{% endif %}    
 </span> 
 <span class="item">
      <a href="/setLang/?language=zh-cn">中文</a> |  <a href="/setLang/?language=en_US">English</a> &nbsp;&nbsp;&nbsp;&nbsp;

@@ -311,7 +311,7 @@ def push_group_tags_back(request, groupname):
 
 
 
-@login_required
+
 def notes(request, username, bookname):
 #===============================================================================
 #    if 'framebook' == bookname:
@@ -341,7 +341,7 @@ def notes(request, username, bookname):
                                'folders':folders, 'profile_username':username, 'appname':'social', 'cl':cl},\
                                                   context_instance=RequestContext(request,  {'book_uri_prefix':'/social/'+username}))
 
-@login_required
+
 def note(request, username, bookname, note_id):
     log.debug('Getting the note:'+note_id)   
     if 'framebook' == bookname:
@@ -416,7 +416,7 @@ def note(request, username, bookname, note_id):
 
 
 
-@login_required
+
 def frame(request, username, bookname, frame_id):     
     frame = Social_Frame.objects.get(owner__username=username, id=frame_id)    
     if request.user.username == username:
@@ -450,7 +450,7 @@ def frame(request, username, bookname, frame_id):
 
 
 
-@login_required
+
 def folders(request, username, bookname, foldername):
     F = getFolder(username, bookname)    
     #T = getT(username)
