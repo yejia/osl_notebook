@@ -49,7 +49,9 @@
     <a href="javascript:alert('Not implemented yet!');" class="NotImplementedYet">{% trans 'Doc' %}</a>
 </span>
 <span class="item">
+{% if not user.is_anonymous %}
     <a href="/settings/">{% trans 'Settings' %}</a>
+{% endif %}       
 </span>
 <span class="item">
 {% if user.is_anonymous %}

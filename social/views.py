@@ -667,7 +667,7 @@ def group(request, groupname, bookname):
 
 
 
-@login_required
+
 def notes_tag(request, username, bookname, tag_name):   
     note_list = getSN(bookname).objects.filter(tags__name=tag_name, owner__username=username)
     qstr = __getQStr(request)    

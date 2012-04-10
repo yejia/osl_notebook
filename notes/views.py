@@ -2297,13 +2297,14 @@ def settings_set_advanced(request):
 
 
 
-@login_required
+
 def set_language(request):
     language = request.GET.get('language')
     log.debug( 'language from request is:'+language)
     request.session['django_language'] = language
     log.debug( 'The preferred langauge is set to:'+request.session.get('django_language', 'no language'))     
-    return HttpResponseRedirect(__get_pre_url(request))  
+    #return HttpResponseRedirect(__get_pre_url(request))  
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))
 
 def for_new_users(request):
     return render_to_response('doc/for_new_users.html', context_instance=RequestContext(request))
