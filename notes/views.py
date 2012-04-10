@@ -1086,6 +1086,10 @@ def update_note(request, note_id, username, bookname):
     note.tags = request.POST.getlist('tags')
     #note.init_date = request.POST.get('init_date')
     note.vote = request.POST.get('vote')
+    url = request.POST.get('url')
+    if url:
+        #TODO: if note type is note
+        note.url = url
     file = request.FILES.get('attachment')
     if file:
         note.attachment = file 
@@ -1263,7 +1267,7 @@ def add_note(request, username, bookname):
     
 
 #TODO: other better ways of implementation
-#TODO: use HttpRequest.META['HTTP_REFERER']
+#TODO: use HttpRequest.META['HTTP_REFERER'] such as return request.META.get('HTTP_REFERER','/')
 def __get_pre_url(request):
     full_path =  request.get_full_path() 
     s = full_path[:full_path.rfind('/')]#get rid of the last slash, assuming url always ends with a slash

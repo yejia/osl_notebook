@@ -2,7 +2,6 @@
 {% load i18n %}
 
 {% block note_type%}
-<div>
 <h2>{{note.get_note_type}}{%comment%}translate{%endcomment%}</h2>
 </div>
 {% endblock %}
@@ -57,15 +56,32 @@
  </div>
  {% endif %}
  {% endblock %}
- 
- 
-{% if note.get_note_type == 'Frame' %} 
+
+
 {% block note_form_tags%}
-{% endblock %}
-{% block note_form_vote%}
-<input type="hidden" name="vote" value="{{note.vote}}" id="id_vote" />
-{% endblock %}
+{% if note.get_note_type == 'Frame' %} 
+{% else %}
+<p>{{ note_form.tags.label_tag }}: {{note_form.tags}}</p>
 {% endif %}
+{% endblock %}
+
+{% block note_form_vote%}
+{% if note.get_note_type == 'Frame' %} 
+<input type="hidden" name="vote" value="{{note.vote}}" id="id_vote" />
+{% else %}
+<p>{{ note_form.vote.label_tag }}: {{note_form.vote}}</p>
+{% endif %}
+{% endblock %}
+
+
+{% comment %}
+{% block note_form_url%}
+{% if note.get_note_type == 'Bookmark'  or note.get_note_type == 'Scrap' %} 
+<p> {{ note_form.url.label_tag }}: {{note_form.url}} </p> 
+{% endif %}
+{% endblock %}
+{% endcomment %}
+
   
 
 
