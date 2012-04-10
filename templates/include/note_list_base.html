@@ -142,10 +142,14 @@
         }else{
            pri_part =  '<span class="unlock" title="{% trans "public"  %}" style="display:inline;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>'+'<span class="lock" title="{% trans "private"  %}" style="display:none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>'
         }
-        tags = ''
+        tags = '';
+        tags_in_full = '';
         for (var i=0;i<note.tags.length;i++){
-            tags = tags +  '<span><a href="/{{profile_username}}/{{bookname}}/notes/tags/'+note.tags[i]+'/">'+note.tags[i]+'</a>,</span>'
+            tags = tags +  '<span><a href="/{{profile_username}}/{{bookname}}/notes/tags/'+note.tags[i]+'/">'+note.tags[i]+'</a>,</span>';
+            tags_in_full = tags_in_full + '<li>'+note.tags[i]+'</li>';
         }
+        
+        
         
         comments = ''
          for (var i=0;i<note.comments.length;i++){               
@@ -166,7 +170,15 @@
                                 '<table class="note_table"><tr><td class="note_table_td1 structure">'+
                                        '<div id="note_title" title="{% trans "note title" %}"><span class="editableText"><a href="/{{profile_username}}/{{bookname}}/notes/note/'+note.id+'/">'+note.title+'</a></span></div></td><td class="note_table_td2"> '+	
                                        '<div  id="note_desc" title="{% trans "note desc" %}"><span class="editableText">'+note.desc+'</span></div></td><td class="note_table_tags">'+
-                                       '<div id="note_tags" title="{% trans "note tags" %}"><span class="editableText">'+note.display_tags+'</span></div> </td></tr></table>'+
+                                       '<span class="editable"><span class="tags_edit">&nbsp;&nbsp;&nbsp;&nbsp;</span>'+
+                                       '<div id="update_tags_inline_box" style="display: none;"  title="{% trans "note tags" %}">'+
+                                                '<ul id="update_tags_inline">'+tags_in_full+'</ul>'+
+                                        '</div>'+
+                                         '<span class="tags_text">'+note.display_tags+'</span></span>' +                                       
+                                                     
+                                       
+                                      // '<div id="note_tags" title="{% trans "note tags" %}"><span class="editableText">'+note.display_tags+'</span></div> '
+                                      '</td></tr></table>'+
                                        //time and comments
                                        ' <div>'+
                                             '<div  class="grey" id="note_init_date" title="{% trans "initial creation time" %}"><span  class="editableText">'+note.init_date+'<span></div>'+
@@ -189,7 +201,7 @@
                                        
                       '</li>';
      //      alert('toprepend:'+toprepend);         
-        $('div.notes_display').find('ul').prepend(toprepend);
+        $('div.notes_display').find('ul.notes_display').prepend(toprepend);
         
         //clear the form's desc textarea field
         $('#id_desc').val('');
@@ -333,6 +345,65 @@
                           $("li[note_id='"+note_id+"']").find('span.lock').hide();
                     }
                 }
+                
+                
+                
+            $("li[note_id='"+note.note_id+"']  span.tags_edit"). click(function(){
+                //alert('tags edit clicked');
+                      var  editable =    $(this).parents('span.editable') ; 
+                       editable.find('span.tags_text').hide();
+                       //TODO: think of if better to move below into the html code and use show/hide instead of spitting out from js on the fly and remove later. Also the functions defined here can be moved out.
+                        editable.prepend('<span class="tags_save">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="tags_cancel">&nbsp;&nbsp;&nbsp;&nbsp;</span>');                        
+                        editable.find("#update_tags_inline_box").show();
+                        
+                        editable.find("#update_tags_inline").tagit({
+			              availableTags: tagsAvailable,
+                              allowSpaces: true,
+                              
+                         }); 
+                         
+                         $(this).hide();
+                         
+                         
+                          $("li[note_id='"+note.note_id+"']  span.tags_cancel"). click(function(){     
+                                var  editable =    $(this).parents('span.editable') ;                      
+                                editable.find("#update_tags_inline_box").hide();                    
+                                editable.find('span.tags_save').remove();
+                                editable.find('span.tags_edit').show();
+                                editable.find('span.tags_text').show();
+                                $(this).remove();
+                                
+                                 }); 
+                         
+                         $("li[note_id='"+note.note_id+"']  span.tags_save"). click(function(){                  
+                                 var selected_tags = [];	
+                                 var  editable =    $(this).parents('span.editable') ;  
+                                 editable.find('li.tagit-choice').each(function(){                      	                    
+                                            // selected_tags = selected_tags+$(this).find(':input').val()+',';	   
+                                            selected_tags.push($(this).find(':input').val());	                            
+                                });	                        
+                                selected_tags_str =  selected_tags.join();                            
+                                $.post('updateNoteTagsInline/',{ 'id':$(this).parents('li').attr('note_id'), 'tags':  selected_tags_str}, tags_updated_inline ,'json');                  
+                                //$(this).load('updateNoteInline/',{ 'id':$(this).parents('li').attr('note_id'),'note_field':'note_tags', 'content':  selected_tags_str});
+                    
+                    
+                        });
+                     
+                     
+                     function tags_updated_inline(result){           
+                            var  editable =     $('li[note_id="'+result.note_id+'"] span.editable') ;              
+                            editable.find('span.tags_cancel').remove();
+                            //TODO:define variable with jquery
+                             editable.find("#update_tags_inline_box").hide();                    
+                            editable.find('span.tags_save').remove();
+                            editable.find('span.tags_edit').show();
+                            $('li[note_id='+result.note_id+'] span.tags_text').text(result.display_tags);
+                            $('li[note_id='+result.note_id+'] span.tags_text').show();
+                    }                   
+                         
+                  
+        });
+                
 
         
     }

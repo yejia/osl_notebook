@@ -44,7 +44,7 @@
  {% block pagination_top %}{% pagination cl %}{% endblock %}  
 
 <div class="notes_display" view_mode="{{view_mode}}">
-<ul>
+<ul class="notes_display">
     {% for note in note_list.object_list %}
         {% if user.username != profile_username and note.is_private %}  
         {% else %}     
