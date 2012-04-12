@@ -16,7 +16,11 @@
 <a href="/social/{{profile_username}}/{{n.get_note_bookname}}/notes/note/{{n.id}}/">{{ n.title|default:_('(No Title)')}} </a> 
 {{n.desc}} 
  {% if n.get_note_type == 'Bookmark' or n.get_note_type == 'Scrap' %} 
- <a href="{{n.url}}">
+    {% if n.get_note_type == 'Bookmark'  %}
+        <a href="{{n.social_bookmark.url}}">
+    {% else %}    
+        <a href="{{n.social_scrap.url}}">
+    {% endif %} 
 <img src="/site_media/img/openurl.png" class=""/>
 </a>
 {% endif %}
