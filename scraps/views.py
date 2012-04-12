@@ -11,6 +11,7 @@ from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import send_mass_mail
+from django.utils.translation import ugettext as _
 
 from notebook.notes.models import create_model, create_model_form
 from notebook.scraps.models import Scrap, Folder
@@ -58,8 +59,9 @@ def add_scrap(request):
             #TODO:handle errors such as url broken
             f.save()
             n.save() #called this specifically to save the url to the social db as well
-            return HttpResponse('Scrap is successfully added! You can close this window.', 
-                                mimetype="text/plain") 
+            return render_to_response("include/notes/addNote_result.html",\
+                                      {'message':_('Scrap is successfully added! You can close this window, or it will be closed for you in 2 seconds.')})
+       
     else:
         
         tags = __get_ws_tags(request, username, 'scrapbook')        

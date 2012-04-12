@@ -1314,13 +1314,8 @@ jQuery('.note_display').accordion({
 {% endblock %}
 
 
-<ul class="messages">
-{% if messages %}
-    {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
-{% endif %}   
-</ul>
+
+{% include "include/message.html" %}
 
 
 

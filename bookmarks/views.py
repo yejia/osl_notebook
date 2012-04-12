@@ -3,7 +3,8 @@ from django.shortcuts import render_to_response
 from django import forms
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
-
+from django.utils.translation import ugettext as _
+from django.contrib import messages
 
 from notebook.notes.views import __get_ws_tags, getlogger, getNote, getT, getW, create_model_form
 import notebook
@@ -35,7 +36,9 @@ def add_bookmark(request):
         AddNForm = create_model_form("AddNForm_"+str(username), N, fields={'tags':forms.ModelMultipleChoiceField(queryset=tags)})     
         n = N()  
         post = request.POST.copy()
-        
+        url = post.get('url')
+        if N.objects.filter(url=url).exists():            
+            return render_to_response("include/notes/addNote_result.html",{'message':_('This bookmark aready exists! You can close this window, or it will be closed for you in 2 seconds.')})
         tag_names = post.getlist('item[tags][]')
         #tags = [T.objects.get(name=tag_name).id for tag_name in tag_names]
         tags = []
@@ -53,9 +56,10 @@ def add_bookmark(request):
         f = AddNForm(post, instance=n)
         log.debug("f.errors:"+str(f.errors))
         f.save()
-        n.save()
-        return HttpResponse('Bookmark is successfully added! You can close this window.', 
-                                mimetype="text/plain") 
+        #TODO:below seems redundant, since f.save() may have saved the instance as well
+        n.save()        
+        return render_to_response("include/notes/addNote_result.html",{'message':_('Bookmark is successfully added! You can close this window, or it will be closed for you in 2 seconds.')})
+       
     else:
         tags = __get_ws_tags(request, username, 'bookmarkbook')  
         from django.forms import TextInput

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-10 17:34+0800\n"
+"POT-Creation-Date: 2012-04-12 21:22+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,6 +41,21 @@ msgstr "收到新的评论"
 #: manage.py:34
 msgid "you have received a comment"
 msgstr "你收到了新的评论"
+
+#: bookmarks/views.py:41
+msgid ""
+"This bookmark aready exists! You can close this window, or it will be closed "
+"for you in 2 seconds."
+msgstr ""
+"这个网址已经在您的网址本里。您可以关闭这个窗口，或者其会在2秒后自动关闭。"
+
+#: bookmarks/views.py:61
+msgid ""
+"Bookmark is successfully added! You can close this window, or it will be "
+"closed for you in 2 seconds."
+msgstr ""
+"这个网址已经成功添加到您的网址本里。您可以关闭这个窗口，或者其会在2秒后自动关"
+"闭。"
 
 #: notes/models.py:164
 msgid "The size of the title is limited to 2000 characaters."
@@ -82,37 +97,50 @@ msgstr "条笔记"
 msgid "notes"
 msgstr "条笔记"
 
-#: notes/views.py:1691 notes/views.py:1702
+#: notes/views.py:1102
+#, fuzzy
+msgid "Note is successfully updated!"
+msgstr "笔记添加成功！"
+
+#: notes/views.py:1695 notes/views.py:1706
 msgid "Sharing snippet:"
 msgstr "分享便条："
 
-#: notes/views.py:1693 notes/views.py:1704
+#: notes/views.py:1697 notes/views.py:1708
 msgid "Sharing bookmark:"
 msgstr "分享网址："
 
-#: notes/views.py:1695 notes/views.py:1706
+#: notes/views.py:1699 notes/views.py:1710
 msgid "Sharing scrap:"
 msgstr "分享网摘："
 
-#: notes/views.py:1697 notes/views.py:1708
+#: notes/views.py:1701 notes/views.py:1712
 msgid "Sharing knowledge package:"
 msgstr "分享知识包："
 
-#: notes/views.py:1710
+#: notes/views.py:1714
 msgid "Original Note:"
 msgstr "原笔记："
 
-#: notes/views.py:1712
+#: notes/views.py:1716
 msgid "Forwarded Note:"
 msgstr "转发的笔记："
 
-#: notes/views.py:1714
+#: notes/views.py:1718
 msgid "from"
 msgstr "来自"
 
 #: notes/templatetags/admin_list.py:257
 msgid "All dates"
 msgstr ""
+
+#: scraps/views.py:62
+msgid ""
+"Scrap is successfully added! You can close this window, or it will be closed "
+"for you in 2 seconds."
+msgstr ""
+"这个网摘已经成功添加到您的网址本里。您可以关闭这个窗口，或者其会在2秒后自动关"
+"闭。"
 
 #: templates/404.html:3
 msgid ""
@@ -571,7 +599,7 @@ msgstr "在链条里的"
 #: templates/bookmarkbook/notes/notes.html:7
 #: templates/bookmarkbook/notes/notes.html:9
 #: templates/framebook/notes/todelete/folders.html:25
-#: templates/include/note_list_base.html:1564
+#: templates/include/note_list_base.html:1559
 #: templates/include/notes/menu/notes_section_menu.html:5
 #: templates/include/notes/todelete/linkagenotesdisplay.html:61
 #: templates/notebook/notes/notes.html:9
@@ -847,7 +875,7 @@ msgstr "搜索包"
 
 #: templates/framebook/notes/notes_display.html:11
 #: templates/framebook/notes/notes_display.html:41
-#: templates/notebook/notes/note/notedisplay.html:52
+#: templates/notebook/notes/note/notedisplay.html:51
 #: templates/social/framebook/notes/notesdisplay.html:29
 #: templates/social/framebook/notes/notesdisplay.html:63
 msgid "Notes included in this frame"
@@ -911,8 +939,8 @@ msgstr "包含的笔记"
 
 #: templates/framebook/notes/note/notedisplay.html:54
 #: templates/include/notes/notes_display.html:138
-#: templates/notebook/notes/note/notedisplay.html:38
-#: templates/notebook/notes/note/notedisplay.html:43
+#: templates/notebook/notes/note/notedisplay.html:37
+#: templates/notebook/notes/note/notedisplay.html:42
 #: templates/snippetbook/notes/note/notedisplay.html:6
 #: templates/social/include/notes/notesdisplay.html:110
 #: templates/social/include/notes/note/notedisplay.html:30
@@ -931,7 +959,7 @@ msgid "%(profile_username)s's Folder %(current_folder)s"
 msgstr "%(profile_username)s的文件夹%(current_folder)s"
 
 #: templates/framebook/notes/todelete/folders.html:19
-#: templates/include/note_list_base.html:1559
+#: templates/include/note_list_base.html:1554
 #: templates/social/wall_snippets.html:25
 #: templates/social/notes/friends_notes.html:20
 #: templates/social/notes/group_notes.html:17
@@ -940,7 +968,7 @@ msgid "Snippets"
 msgstr "便条"
 
 #: templates/framebook/notes/todelete/folders.html:21
-#: templates/include/note_list_base.html:1560
+#: templates/include/note_list_base.html:1555
 #: templates/include/sites_header.html:26
 #: templates/include/sites_header.html:28
 #: templates/social/wall_snippets.html:28
@@ -953,7 +981,7 @@ msgid "Bookmarks"
 msgstr "网址"
 
 #: templates/framebook/notes/todelete/folders.html:23
-#: templates/include/note_list_base.html:1561
+#: templates/include/note_list_base.html:1556
 #: templates/social/wall_snippets.html:33
 #: templates/social/wall_snippets.html:35
 #: templates/social/wall_snippets.html:43
@@ -1118,7 +1146,7 @@ msgid "note in frames"
 msgstr "在包里的"
 
 #: templates/include/note_list_base.html:186
-#: templates/include/note_list_base.html:1563
+#: templates/include/note_list_base.html:1558
 #: templates/include/notes/notes_display.html:141
 msgid "Frames"
 msgstr "包"
@@ -1197,16 +1225,16 @@ msgstr ""
 "被添加到这个小组里。但是隐私的笔记不会。隐私的笔记永远在你的私人笔记本里，除"
 "非你有意的要分享给某个小组。"
 
-#: templates/include/note_list_base.html:1335
+#: templates/include/note_list_base.html:1330
 msgid "show side menu"
 msgstr "显示侧边菜单"
 
-#: templates/include/note_list_base.html:1336
+#: templates/include/note_list_base.html:1331
 msgid "hide side menu"
 msgstr "隐藏侧边菜单"
 
 # python-format
-#: templates/include/note_list_base.html:1555
+#: templates/include/note_list_base.html:1550
 #, python-format
 msgid "Personal notes of %(profile_username)s"
 msgstr "%(profile_username)s的个人笔记"
@@ -1635,11 +1663,11 @@ msgstr "一个短的便条足够表达一个重要的感受。练习一下。:-)
 msgid "Event"
 msgstr "事件"
 
-#: templates/notebook/notes/note/notedisplay.html:30
+#: templates/notebook/notes/note/notedisplay.html:29
 msgid "deleted"
 msgstr "删除"
 
-#: templates/notebook/notes/note/notedisplay.html:56
+#: templates/notebook/notes/note/notedisplay.html:55
 msgid "No Notes included"
 msgstr "不含任何笔记"
 
@@ -2196,6 +2224,13 @@ msgstr "所有工作区"
 #: templates/workingset/index.html:370
 msgid "Make Current"
 msgstr "设成当前"
+
+#, fuzzy
+#~ msgid ""
+#~ "This scrap aready exists! You can close this window, or it will be closed "
+#~ "for you in 2 seconds."
+#~ msgstr ""
+#~ "这个网址已经在您的网址本里。您可以关闭这个窗口，或者其会在2秒后自动关闭。"
 
 #~ msgid "desc"
 #~ msgstr "笔记正文"

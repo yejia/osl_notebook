@@ -1099,7 +1099,7 @@ def update_note(request, note_id, username, bookname):
     full_path =  request.get_full_path()  
     pre_url = full_path[:-11] #remove "addNote/"
     log.debug( 'redirect to the page that add note form is submitted from:'+pre_url)
-    messages.success(request, "Note is successfully updated!") #TODO
+    messages.success(request, _("Note is successfully updated!")) #TODO
     return HttpResponseRedirect(pre_url)   
 
 
