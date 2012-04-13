@@ -235,7 +235,7 @@ def root(request):
 from notification.models import Notice
 
 def get_notices(request):
-    if request.user.is_anonymous:
+    if request.user.is_anonymous():
         return HttpResponse(simplejson.dumps([]), "application/json")
     notice_url_dict={'postman_message':'/messages/', 'postman_reply':'/messages/', 'comment_receive':'/social/'+request.user.username+'/commentsfor/'}
     notices = Notice.objects.filter(recipient=request.user, unseen=True)    
@@ -581,13 +581,13 @@ def __get_view_theme(request):
     else:
         delete = request.session.get('delete', 'False')	 
         
-    private = request.GET.get('private')
-    if request.user.is_anonymous:
+    private = request.GET.get('private')    
+    if request.user.is_anonymous():        
         private = 'n'
-    else:    	
+    else:         	
         if private:
             #request.session['private'] = private
-            #TODO:check length of input to prevent injection (database model field already has maximum length)
+            #TODO:check length of input to prevent injection (database model field already has maximum length)            
             request.user.member.viewing_private = private
             request.user.member.save()
         else:
@@ -2203,7 +2203,7 @@ def settings_folder_update(request, username, bookname, folder_name):
     folder_form.save()
     messages.success(request, "folder is successfully updated!") 
     #TODO: might be better to return to the changed folder page (url changed to the new folder name)
-    return HttpResponseRedirect('/'+username+'/snippetbook/settings/folders/')   
+    return HttpResponseRedirect('/'+username+'/'+bookname+'/settings/folders/')   
 
 
 @login_required

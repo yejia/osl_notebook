@@ -1,10 +1,15 @@
+{% extends "include/base2.html" %}
 {% load i18n %}
 
 
+{% block title %}
+{% trans 'New User Guide' %}
+{% endblock %}
+
 <h1>{% trans 'New User Guide' %}</h1>
 
-
-
+{% block content%}
+<br/><br/>
 {% trans 'Notebook so far has three books: snippetbook (a collection of snippets or notes), bookmarks book (a collection of bookmarks), scrapbook (a collection of scraps).' %}
 <br/><br/>
 
@@ -63,6 +68,6 @@ stuff that has "thinking" in = thinking'
 {% trans 'About linkage' %}:{% trans 'Linkage is a set of notes/bookmarks/scraps linked together because they are tightly related. For example, they come from the same event, or they are of the same topic.' %}
 <br/><br/>
 
-
+{% endblock %}
 
 

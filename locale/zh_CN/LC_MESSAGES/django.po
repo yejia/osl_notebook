@@ -98,9 +98,8 @@ msgid "notes"
 msgstr "条笔记"
 
 #: notes/views.py:1102
-#, fuzzy
 msgid "Note is successfully updated!"
-msgstr "笔记添加成功！"
+msgstr "笔记更新成功！"
 
 #: notes/views.py:1695 notes/views.py:1706
 msgid "Sharing snippet:"
@@ -1930,14 +1929,12 @@ msgid "Bookmarkbook based on a custom query"
 msgstr "基于某一搜索的网址本"
 
 #: templates/social/folders.html:51
-#, fuzzy
 msgid "Scrapbook based on a custom query"
-msgstr "基于某一搜索的便条本"
+msgstr "基于某一搜索的网摘本"
 
 #: templates/social/folders.html:57
-#, fuzzy
 msgid "Notebook based on a custom query"
-msgstr "基于某一搜索的便条本"
+msgstr "基于某一搜索的笔记本"
 
 #: templates/social/friends.html:6 templates/social/friends.html.py:12
 #, python-format
@@ -2020,7 +2017,6 @@ msgid "remove this group"
 msgstr "去除这个小组"
 
 #: templates/social/admin/group.html:30
-#, fuzzy
 msgid "group"
 msgstr "小组"
 
