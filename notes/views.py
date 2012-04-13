@@ -235,6 +235,8 @@ def root(request):
 from notification.models import Notice
 
 def get_notices(request):
+    if request.user.is_anonymous:
+        return HttpResponse(simplejson.dumps([]), "application/json")
     notice_url_dict={'postman_message':'/messages/', 'postman_reply':'/messages/', 'comment_receive':'/social/'+request.user.username+'/commentsfor/'}
     notices = Notice.objects.filter(recipient=request.user, unseen=True)    
     #TODO:get count of each type of notice
