@@ -1694,7 +1694,7 @@ def share(request, bookname):
         log.info('The current bookname is:'+bookname)
         
         if bookname == 'snippetbook':
-            content = _('Sharing snippet:')+note.desc[0:120]
+            content = _('Sharing snippet:')+note.desc[0:100]
         if bookname == 'bookmarkbook':
             content = _('Sharing bookmark:')+note.title+'   '+note.url
         if bookname == 'scrapbook':
@@ -1705,7 +1705,7 @@ def share(request, bookname):
             bookname = note.get_note_bookname()
             log.info('This note of notebook is actually a note of '+bookname)
             if bookname == 'snippetbook':
-                content = _('Sharing snippet:')+note.desc[0:120]
+                content = _('Sharing snippet:')+note.desc[0:100]
             if bookname == 'bookmarkbook':
                 content = _('Sharing bookmark:')+note.title+'   '+note.bookmark.url
             if bookname == 'scrapbook':
