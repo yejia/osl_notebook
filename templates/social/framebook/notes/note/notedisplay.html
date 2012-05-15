@@ -17,9 +17,9 @@
 {{n.desc}} 
  {% if n.get_note_type == 'Bookmark' or n.get_note_type == 'Scrap' %} 
     {% if n.get_note_type == 'Bookmark'  %}
-        <a href="{{n.social_bookmark.url}}">
+        <a href="{{n.social_bookmark.url}}" target="top">
     {% else %}    
-        <a href="{{n.social_scrap.url}}">
+        <a href="{{n.social_scrap.url}}" target="top">
     {% endif %} 
 <img src="/site_media/img/openurl.png" class=""/>
 </a>

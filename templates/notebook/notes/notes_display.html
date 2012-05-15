@@ -10,10 +10,10 @@
                 <td class="note_full_table_td1">  
                     <div id="note_title" title="{% trans 'note title' %}"><a href="/{{profile_username}}/{{note.get_note_bookname}}/notes/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a>
                     {% if note.get_note_type == 'Bookmark' %} 
-                        <a href="{{note.bookmark.url}}"><img src="/site_media/img/openurl.png" class=""/></a>
+                        <a href="{{note.bookmark.url}}" target="top"><img src="/site_media/img/openurl.png" class=""/></a>
                     {% endif %}
                     {% if note.get_note_type == 'Scrap' %}
-                        <a href="{{note.scrap.url}}"><img src="/site_media/img/openurl.png" class=""/></a>
+                        <a href="{{note.scrap.url}}" target="top"><img src="/site_media/img/openurl.png" class=""/></a>
                     {% endif %}
                     </div> 	
                 </td>            
