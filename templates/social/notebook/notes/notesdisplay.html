@@ -17,10 +17,10 @@
                                        <div id="note_title" title="{% trans 'note title' %}">
                                         <a href="/social/{{note.owner.username}}/{{note.get_note_bookname}}/notes/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a>
                                        {% if note.get_note_type == 'Bookmark' %} 
-                                            <a href="{{note.social_bookmark.url}}"><img src="/site_media/img/openurl.png" class=""/></a>
+                                            <a href="{{note.social_bookmark.url}}" target="top"><img src="/site_media/img/openurl.png" class=""/></a>
                                        {% endif %}
                                        {% if note.get_note_type == 'Scrap' %}
-                                             <a href="{{note.social_scrap.url}}"><img src="/site_media/img/openurl.png" class=""/></a>
+                                             <a href="{{note.social_scrap.url}}" target="top"><img src="/site_media/img/openurl.png" class=""/></a>
                                        {% endif %}
                                        </div> 		    
 		                            </td>
@@ -54,10 +54,10 @@
  <td class="note_table_td1">
     <div id="note_title" title="{% trans "note title" %}"><a href="/social/{{note.owner.username}}/{{note.get_note_bookname}}/notes/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a>
                 {% if note.get_note_type == 'Bookmark' %} 
-                    <a href="{{note.social_bookmark.url}}"><img src="/site_media/img/openurl.png" class=""/></a>
+                    <a href="{{note.social_bookmark.url}}" target="top"><img src="/site_media/img/openurl.png" class=""/></a>
                 {% endif %}
                 {% if note.get_note_type == 'Scrap' %}
-                    <a href="{{note.social_scrap.url}}"><img src="/site_media/img/openurl.png" class=""/></a>
+                    <a href="{{note.social_scrap.url}}" target="top"><img src="/site_media/img/openurl.png" class=""/></a>
                 {% endif %}
 </td><td class="note_table_td2">   
     <div  id="note_desc" title="{% trans "note desc" %}">{{note.desc}}</div>		   

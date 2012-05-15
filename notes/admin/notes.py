@@ -67,8 +67,9 @@ class GroupAdmin(MultiDBModelAdmin):
     pass
 
 class Social_NoteAdmin(MultiDBModelAdmin):
-     list_display = ('title', 'desc', 'private', 'deleted','init_date', 'owner', 'owner_note_id') 
+     list_display = ('id','title', 'desc', 'private', 'deleted','init_date', 'owner', 'owner_note_id') 
      select_related = ('tags')  
+     search_fields = ['title','desc','owner_note_id']
 
 class Social_Note_CommentAdmin(MultiDBModelAdmin):
      list_display = ('note', 'desc', 'commenter', 'init_date') 
