@@ -86,9 +86,9 @@
 {% comment%}
 <!--li tag is added solely to accomodate the code used in the notes display page where js need to find the parent li tag to locate with note to add comment-->
 {% endcomment%}
-<li note_id="{{note.id}}">
+<div note_id="{{note.id}}">
 {% include "include/notes/inlines/add_comments_and_etc_inline.html" %}            
-</li>
+</div>
 {% endblock %}
 
 

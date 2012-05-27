@@ -21,6 +21,8 @@ from django.core.exceptions import ObjectDoesNotExist, FieldError
 from django.core.mail import send_mass_mail
 
 
+
+
 from notebook.notes.models import *
 from notebook.snippets.models import Snippet
 from notebook.bookmarks.models import Bookmark
@@ -1105,6 +1107,20 @@ def update_note(request, note_id, username, bookname):
     return HttpResponseRedirect(pre_url)   
 
 
+#set the order for the notes in a frame. So this only is supposed to be for framebook
+@login_required
+def set_notes_order_in_frame(request, note_id, username, bookname): 
+    log.debug( 'setting the order of the notes in a frame:'+note_id)
+    ordered_notes = request.GET.get('ordered_notes').split(',')   
+    #print 'ordered_notes:',ordered_notes
+    N = getNote(username, bookname)
+    f = N.objects.get(id=note_id)  
+    f.set_notes_order(ordered_notes)
+    return HttpResponse('successful', mimetype="text/plain")  
+    
+
+
+
 @login_required    
 def update_note_inline(request, username, bookname):    
     note_id = request.POST.get('id')
@@ -1241,7 +1257,8 @@ def add_note(request, username, bookname):
     
     #post = request.POST.copy()    
     
-    tags = request.GET.getlist('tags')[0].split(',')  
+    #tags = request.GET.getlist('tags')[0].split(',')  
+    tags = request.GET.get('tags').split(',')  
     #print 'tags:',tags
     if not tags or (len(tags) == 1 and tags[0] == u''):
         tags = ['untagged']
@@ -1329,7 +1346,7 @@ def  frame_notes(request, username, bookname):
         frameNote.attachment = file 
     frameNote.save()
     #TODO: below is not correct since note_ids correspond to those snippet/bookmark/scrap ids instead of notes ids
-    frameNote.notes = notes 
+    frameNote.add_notes(','.join(notes)) 
     frameNote.tags = tags    
     
 #    AddLForm = create_model_form("AddLForm_"+str(username), L, options={'exclude':('tags')})
@@ -1455,37 +1472,65 @@ def linkagenotes(request, username, bookname):
 def frame(request, username, frame_id):    
     F = getFrame(username)    
     frame = F.objects.get(id=frame_id)
-    #linkage_form = UpdateFrameForm(instance=note)
-    if request.user.username == username:
-        frame_notes_display = frame.display_notes()
-    else:
-        frame_notes_display = frame.display_public_notes()    
-    #tags of each note has to be added as below since it again needs to know which user database to use. 
-    #The same for note type    
-    for n in frame_notes_display:
-        note_id = n[0]        
-        N = getNote(username, 'notebook')
-        note = N.objects.get(id=note_id)  
-        type = note.get_note_type()
-        n.insert(4, type)
-        note_bookname = note.get_note_bookname()
-        n.insert(5, note_bookname)
-        n.insert(6, note.get_tags())
-        if type == 'Bookmark': 
-            n.insert(7, note.bookmark.url)
-        elif type == 'Scrap':   
-            n.insert(7, note.scrap.url) 
-        else:
-            n.insert(7, '')     
-        
+   
+#===============================================================================
+#    if request.user.username == username:
+#        frame_notes_display = frame.display_notes()
+#    else:
+#        frame_notes_display = frame.display_public_notes()    
+#    #tags of each note has to be added as below since it again needs to know which user database to use. 
+#    #The same for note type    
+#    for n in frame_notes_display:
+#        note_id = n[0]        
+#        N = getNote(username, 'notebook')
+#        note = N.objects.get(id=note_id)  
+#        type = note.get_note_type()
+#        n.insert(4, type)
+#        note_bookname = note.get_note_bookname()
+#        n.insert(5, note_bookname)
+#        n.insert(6, note.get_tags())
+#        if type == 'Bookmark': 
+#            n.insert(7, note.bookmark.url)
+#        elif type == 'Scrap':   
+#            n.insert(7, note.scrap.url) 
+#        else:
+#            n.insert(7, '')     
+#===============================================================================
+    N = getNote(username, 'notebook')    
     UpdateNForm = create_model_form("UpdateNForm_"+str(username), N, options={'exclude':('tags','vote')})
     note_form = UpdateNForm(instance=frame)
-        
-    return render_to_response('framebook/notes/note/note.html', {'note':frame, 'frame_notes_display':frame_notes_display,\
+    sort =  request.GET.get('sort')  
+    if request.user.username == username:
+        notes_in_frame = frame.get_notes_in_order(sort) 
+    else:
+        notes_in_frame = frame.get_public_notes_in_order(sort)     
+   
+    #add_owner_name(frame, 0)  
+    
+    
+    return render_to_response('framebook/notes/note/note.html', {'note':frame, 'notes_in_frame':notes_in_frame, 'sort':sort, \
                                                              'profile_username':username, 'note_form':note_form
                                                               }, \
                                                              context_instance=RequestContext(request,{'bookname': 'framebook','book_uri_prefix':'/'+username}))
 
+
+
+#Trasveral of the tree and and owner_name to each one. Not used anymore, 
+#since the tag get owner_name from context directly  
+#===============================================================================
+# def add_owner_name(parent_note, level):
+#    prefix = '    '
+#    for i in range(level):
+#        prefix = prefix + '    '
+#    level = level + 1    
+#    print prefix +    parent_note.desc + ' :'+ parent_note.owner_name
+#    if parent_note.get_note_type() == 'Frame':        
+#        parent_note.frame.owner_name = parent_note.owner_name
+#        for n in parent_note.frame.get_notes_in_order(): 
+#            n.owner_name = parent_note.owner_name                     
+#            add_owner_name(n, level)
+#    return None     
+#===============================================================================
 
 
 

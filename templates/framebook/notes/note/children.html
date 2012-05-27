@@ -1,0 +1,48 @@
+ {% load tree_view %}  
+ 
+
+        {% for n in children %} 
+            <li class="note_in_frame {% if n.get_note_type == 'Frame' %}expandable{% endif %} {% if forloop.last %}last{% endif %}" note_id="{{n.id}}">
+                {% if n.get_note_type == 'Frame' %}<div class="hitarea expandable-hitarea"></div>{% endif %}
+                <img src="/site_media/img/{{n.get_note_type}}.png" title="{{n.get_note_type}}"/>
+                <a href="{{book_uri_prefix}}/{{n.get_note_bookname}}/notes/note/{{n.id}}/">{{n.title|default:_('(No Title)')}}</a> 
+                <span>{{n.desc}} </span>
+                {% if n.get_note_type == 'Bookmark' or n.get_note_type == 'Scrap' %} 
+                    {% if n.get_note_type == 'Bookmark' %} 
+                        {% if  'social' in book_uri_prefix %} 
+                            <a href="{{n.social_bookmark.url}}" target="top">
+                        {% else %}
+                            <a href="{{n.bookmark.url}}" target="top">
+                        {% endif %}                             
+                        
+                    {% else %}                        
+                        {% if  'social' in book_uri_prefix %} 
+                             <a href="{{n.social_scrap.url}}" target="top"> 
+                        {% else %}    
+                            <a href="{{n.scrap.url}}" target="top">                            
+                        {% endif %}                           
+                    {% endif %}                     
+                        <img src="/site_media/img/openurl.png" class=""/>
+                    </a>
+                {% endif %}   
+
+                <img src="/site_media/img/tags-small.png" class="img_in_notes_section_header"/>:
+                {% for tag  in n.get_tags %}                    
+                        <a href="{{book_uri_prefix}}/{{n.get_note_bookname}}/notes/tags/{{tag}}/">{{tag}}</a>,                 
+                {% endfor %}
+                <img src="/site_media/img/thumbUp.gif"/>{{n.vote}}
+                
+                
+                {% if n.get_note_type == 'Frame' %}  
+                    <ul style="display: none;">
+                       {% if  'social' in book_uri_prefix %}                       
+                            {% social_tree_view_tag n.social_frame %}
+                      {% else %}                    
+                            {% tree_view_tag n.frame %}
+                      {% endif %}   
+                    </ul> 
+                {% endif %}
+                
+                
+            </li>
+        {% endfor %}

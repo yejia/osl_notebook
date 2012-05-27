@@ -217,23 +217,48 @@ class Social_Scrap(Social_Note):
 
 class Social_Frame(Social_Note):
     attachment = models.FileField(upload_to=get_storage_loc, blank=True, storage=fs)   
-    notes = models.ManyToManyField(Social_Note, related_name='in_frames')
+    notes = models.ManyToManyField(Social_Note, related_name='in_frames', through="Social_Frame_Notes")
     
     def __unicode__(self):
         return ','.join([str(note.id) for note in self.notes.all()])   
 
-    def display_notes(self):
-        return [[n.id, n.title, n.desc, n.vote, n.get_note_bookname(), n.get_note_type()] for n in self.notes.all()] 
-                
+    def get_notes_in_order(self, sort=None):
+        print 'get_notes_in_order in social frame called for note:', self.desc
+        ns = [n for n in self.notes.all().order_by('in_frames')]
+        print 'ns:', ns
+        if sort and sort == 'vote':
+            ns.sort(key=lambda r: r.vote, reverse=True)  
+        return ns
     
-    def display_public_notes(self):        
-        return [[n.id, n.title, n.desc, n.vote, n.get_note_bookname(), n.get_note_type()] for n in self.notes.all() if n.private==False ] 
+    
+    def get_public_notes_in_order(self, sort=None):
+        ns = [n for n in self.notes.all().order_by('in_frames') if n.private==False]
+        if sort and sort == 'vote':
+            ns.sort(key=lambda r: r.vote, reverse=True)  
+        return 
+        
+#===============================================================================
+#    def display_notes(self):
+#        return [[n.id, n.title, n.desc, n.vote, n.get_note_bookname(), n.get_note_type()] for n in self.notes.all().order_by('in_frames')] 
+#                
+#    
+#    def display_public_notes(self):        
+#        return [[n.id, n.title, n.desc, n.vote, n.get_note_bookname(), n.get_note_type()] for n in self.notes.all().order_by('in_frames') if n.private==False ] 
+#===============================================================================
 
     def get_vote(self):        
         v = 0  
         for n in self.notes.all(): 
             v = v + n.vote
         return v
+
+
+class Social_Frame_Notes(models.Model):
+    social_frame = models.ForeignKey(Social_Frame, related_name='note_and_frame') #TODO:
+    social_note = models.ForeignKey(Social_Note)
+    
+    class Meta:
+        order_with_respect_to = 'social_frame'
 
 
 class Social_Note_Comment(models.Model):

@@ -1,6 +1,41 @@
 {% extends "social/include/note_list_base.html" %}
 {% load i18n %}
 
+
+
+{% block extra_css %}
+
+<link rel="stylesheet" href="/site_media/css/jquery.treeview.css" />
+
+{% endblock %}
+
+{% block extra_script%}
+
+ <script src="/site_media/js/jquery.treeview.js" type="text/javascript"></script>
+ 
+ <script>
+
+ 
+   $(function() {
+			$(".frame_tree").treeview({
+				collapsed: true,
+				animated: "fast",
+				control:"#sidetreecontrol",
+				prerendered: true,
+				persist: "location"
+			});
+		
+          
+	});
+    	</script>
+    
+    
+    
+{% endblock %}
+
+
+
+
 {% block content%}
 
 <div id="content-main"> 

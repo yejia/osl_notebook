@@ -5,6 +5,66 @@
 {{profile_username}}'s Frames 
 {% endblock %}
 
+{% block extra_css %}
+
+<link rel="stylesheet" href="/site_media/css/jquery.treeview.css" />
+
+{% endblock %}
+
+
+{% block extra_script%}
+
+	
+
+	<script src="/site_media/js/ui/jquery.ui.sortable.js"></script>
+    
+    <script src="/site_media/js/jquery.treeview.js" type="text/javascript"></script>
+
+    
+    <script>
+	$(function() {
+		$( "#sortable" ).sortable();
+		$( "#sortable" ).disableSelection();
+        
+         // $(".frame_tree").treeview();
+          
+        
+			$(".frame_tree").treeview({
+				collapsed: true,
+				animated: "fast",
+				control:"#sidetreecontrol",
+				prerendered: true,
+				persist: "location"
+			});
+		
+          
+	});
+    
+    function set_the_order(){           
+            var ordered_notes = [];
+            
+            //only get the first level children
+            $("#sortable > .note_in_frame").each(function(){                       
+                    ordered_notes.push($(this).attr('note_id'));	
+            });           
+            
+             $.post('/{{profile_username}}/framebook/notes/note/{{note.id}}/setOrder/?ordered_notes='+ordered_notes,{}, reordered, 'text');
+    
+    }
+    
+      function reordered(result){
+       // TODO: how to show error when error happened?      
+        //   $('ul.messages').append('<li class="error">{% trans "An error happened when adding a note." %} </li>');     
+        $('ul.messages').append('<li class="success">{% trans "The order of the notes included in this frame is reset successfully!" %} </li>');
+        }
+        
+     
+    
+	</script>
+    
+    
+    
+{% endblock %}
 
 {% block extra_ready_script %}			
             $('span#frame_delete_note').click(function(){	

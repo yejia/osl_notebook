@@ -11,7 +11,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from django.utils.translation import ugettext as _
 
-from notebook.social.models import Social_Note, Social_Tag, Social_Snippet, Social_Bookmark, Social_Scrap, Social_Frame
+from notebook.social.models import Social_Note, Social_Tag, Social_Snippet, Social_Bookmark, Social_Scrap, Social_Frame, Social_Frame_Notes
 from notebook.notes.constants import *
 
 
@@ -442,17 +442,22 @@ class Note(models.Model):
             #TODO:test below 
             if hasattr(self, 'frame'):
                 self.vote = self.frame.get_vote()
-                #print 'is frame'
-                #print 'self.frame.notes.all():',self.frame.notes.using(self.owner_name).all() 
-                for n_included in self.frame.notes.using(self.owner_name).all():
-                    #print 'n_included:',n_included
+                #for n_included in self.frame.notes.using(self.owner_name).all():
+                self.frame.owner_name = self.owner_name
+                order = self.frame.get_notes_order()
+                for note_id in order:
                     #TODO:how about deleted?
+                    n_included = Note.objects.using(self.owner_name).get(id=note_id)
                     if not n_included.is_private():
                         sn_included = Social_Note.objects.get(owner=owner.member, owner_note_id=n_included.id)                        
                         sns_included.append(sn_included)
+                        sfn, created = Social_Frame_Notes.objects.get_or_create(social_frame=sn, social_note=sn_included)
+                        sfn._order = order.index(note_id)
+                        sfn.save()
+                        #TODO: build the order for the sns_included too, and set the order
                         #print 'sn_included:',sn_included,' appended'
                 #print 'sns_included:',sns_included
-                sn.notes = sns_included   
+                #sn.notes = sns_included   
                 
             sn.desc = self.desc
             sn.title = self.title
@@ -514,7 +519,7 @@ class Frame(Note):
     
     #TODO: notes reference to the id of Note instead of note_id. Unlike ForeignKey field, ManyToManyField
     #doesn't allow specifying a to_field argument. Think of whether to reference to note_id.
-    notes = models.ManyToManyField(Note, related_name='in_frames') 
+    notes = models.ManyToManyField(Note, related_name='in_frames', through="Frame_Notes") 
     
     
     class Meta:
@@ -525,6 +530,15 @@ class Frame(Note):
     def __unicode__(self):
         return ','.join([str(note.id) for note in self.notes.all()])     
     
+
+#===============================================================================
+#    def get_note_order(self):
+#        return [n.id for n in self.notes.all()]
+#    
+#    def set_note_order(self, ordered_ids):
+#        
+#===============================================================================
+        
 
     def get_vote(self):        
         v = 0  
@@ -551,16 +565,45 @@ class Frame(Note):
         
     def get_display_of_unique_extra_tags(self):    
         return ','.join(self.get_unique_extra_tags())
+    
  
-
+    def get_notes_in_order(self, sort=None):
+        order = self.get_notes_order()
+        ns = []
+        for note_id in order:
+            n = Note.objects.using(self.owner_name).get(id=note_id)
+            #add below so it can keep pointing to the right db
+            n.owner_name = self.owner_name
+            ns.append(n)
+        if sort and sort == 'vote':
+            ns.sort(key=lambda r: r.vote, reverse=True)  
+        return ns
+    
+    
+ 
+    
+    def get_public_notes_in_order(self):
+        order = self.get_notes_order()
+        ns = []
+        for note_id in order:
+            n = Note.objects.using(self.owner_name).get(id=note_id)
+            n.owner_name = self.owner_name
+            if n.private == False:
+                ns.append(n)
+        if sort and sort == 'vote':
+            ns.sort(key=lambda r: r.vote, reverse=True)  
+        return ns
      
                
-    def display_notes(self):
-        return [[n.id, n.title, n.desc, n.vote, n.get_note_bookname, n.get_note_type] for n in self.notes.all()] 
-                
-    
-    def display_public_notes(self):        
-        return [[n.id, n.title, n.desc, n.vote, n.get_note_bookname, n.get_note_type] for n in self.notes.all() if n.private==False ] 
+#===============================================================================
+#    def display_notes(self):        
+#        return [[n.id, n.title, n.desc, n.vote, n.get_note_bookname, n.get_note_type] for n in self.get_notes_in_order()]    
+#                
+#    
+#    def display_public_notes(self):         
+#        return [[n.id, n.title, n.desc, n.vote, n.get_note_bookname, n.get_note_type] for n in self.get_public_notes_in_order()]   
+#===============================================================================
+            
     
     #TODO: need save?
     def update_tags(self, tags_str):    
@@ -575,10 +618,16 @@ class Frame(Note):
 
     #TODO: need save?
     def add_notes(self, noteids_str):
-        note_id_list = [note_id.lstrip().rstrip() for note_id in noteids_str.split(',')]
+        note_id_list = [note_id.lstrip().rstrip() for note_id in noteids_str.split(',')]        
+        current_num_of_notes = len(self.get_notes_order())
+        self.db = self.owner_name
         for note_id in note_id_list:          
-            n = Note.objects.using(self.owner_name).get(id=note_id)           
-            self.notes.add(n)
+            n = Note.objects.using(self.owner_name).get(id=note_id)              
+            fn,created = Frame_Notes.objects.using(self.owner_name).get_or_create(frame=self, note=n)
+            if created:
+                fn._order=current_num_of_notes
+                current_num_of_notes += 1         
+            #self.notes.add(n)
     
     #TODO:note_id or id?        
     def remove_note(self, note_id):
@@ -590,9 +639,47 @@ class Frame(Note):
         self.notes.remove(n)    
 
 
+#===============================================================================
+#   def get_owner_name(self):
+#       if self.owner_name:
+#           return  self.owner_name
+#       else:
+#           if 
+#===============================================================================
 
 
+    #replace the original get_frame_notes_order coming with the django model for order_with_respect_to 
+    def get_notes_order(self):  
+        id = self.id      
+        fns = Frame_Notes.objects.using(self.owner_name).filter(frame__id=self.id).order_by('id')
+        fns_list = [fn for fn in fns]
+        for fn in fns_list:
+            fn.owner_name = self.owner_name
+        if None in [fn._order for fn in fns_list]:
+            return [fn.note.id for fn in fns]
+        else:
+            
+            fns_list.sort(key=lambda r: r._order)            
+            return [fn.note.id for fn in fns_list]
+            
 
+
+    def set_notes_order(self, order):        
+        seq = 0
+        for note_id in order:
+            fn = Frame_Notes.objects.using(self.owner_name).get(frame__id=self.id, note__id=note_id)
+            fn.owner_name = self.owner_name
+            fn._order = seq            
+            fn.save()
+            seq = seq + 1
+        self.save() #save the order to the social note
+
+class Frame_Notes(models.Model):
+    frame = models.ForeignKey(Frame, related_name='note_and_frame') #TODO:
+    note = models.ForeignKey(Note)
+    
+    class Meta:
+        order_with_respect_to = 'frame'
 
 
 #TODO:for now LinkageNote is kept, but only for viewing old linkages. Frame is used to "frame" notes together. 

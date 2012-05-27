@@ -1,5 +1,8 @@
 {% extends "include/notes/note/notedisplay.html" %}
 {% load i18n %}
+{% load tree_view %} 
+
+
 
 {% block note_type%}
 <div>
@@ -15,30 +18,30 @@
 
 
 {% block notes_in_frame%}
-<b>{% trans 'notes included' %}: </b>
-{% for id, title, desc, vote,   type, note_bookname, tags, url in frame_notes_display %}
-<div id="note_in_frame"><img src="/site_media/img/{{type}}.png" title="{{type}}"/>
-<a href="{{book_uri_prefix}}/{{note_bookname}}/notes/note/{{id}}/">{{title|default:'(No Title)'}}</a> 
-{{desc}} 
- {% if type == 'Bookmark' or type == 'Scrap' %} 
- <a href="{{url}}" target="top">
-<img src="/site_media/img/openurl.png" class=""/>
-</a>
-{% endif %}
+    <b>{% trans 'notes included' %}: </b> 
+    {% trans "Sorting" %}
+    <select id="sort_drop_down"  name="sort">
+            {% if sort == '' %}
+                <option value="" selected="selected">{% trans "By default" %}</option>
+            {% else %}
+                <option value="">{% trans "By default" %}</option>
+            {% endif %}
+            {% if sort == 'vote' %}
+                <option value="vote" selected="selected">{% trans "By Importance" %}</option>
+            {% else %}
+                <option value="vote">{% trans "By Importance" %}</option>
+            {% endif %}
+    </select>   
 
-<img src="/site_media/img/tags-small.png" class="img_in_notes_section_header"/>:
-{% for tag  in tags %}
- {% if type != 'Frame' %} 
-<a href="{{book_uri_prefix}}/{{note_bookname}}/notes/tags/{{tag}}/">{{tag}}</a>,
-{% else %}
-{{tag}},
-{% endif %}
-{% endfor %}
-<img src="/site_media/img/thumbUp.gif"/>{{vote}}
-</div>
-{% endfor %}
-
+    <button title="{% trans 'You can drag the notes to change the ordering and save it' %}" onclick="javascript:set_the_order();">{% trans 'Save the order' %}</button>
+    
+    <div id="sidetreecontrol"> <a href="?#">{% trans 'List' %}</a> | <a href="?#">{% trans 'Expanded' %}</a> </div>
+    <ul id="sortable" class="frame_tree" >
+        {% tree_view_tag note %}
+    </ul> 
  {% endblock %}
+ 
+
 
 
 {% block note_form_tags%}

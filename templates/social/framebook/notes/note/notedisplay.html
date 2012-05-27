@@ -1,6 +1,6 @@
 {% extends "social/include/notes/note/notedisplay.html" %}
 {% load i18n %}
-
+{% load tree_view %} 
 
 {% block note_type%}
 <div>
@@ -10,28 +10,25 @@
 
 {% block notes_in_frame%}
 
-<b>{% trans 'notes included' %} : </b>
-{% for n in note.notes.all %}
-<div id="note_in_frame"><img src="/site_media/img/{{n.get_note_type}}.png" title="{{n.get_note_type}}"/>
-<a href="/social/{{profile_username}}/{{n.get_note_bookname}}/notes/note/{{n.id}}/">{{ n.title|default:_('(No Title)')}} </a> 
-{{n.desc}} 
- {% if n.get_note_type == 'Bookmark' or n.get_note_type == 'Scrap' %} 
-    {% if n.get_note_type == 'Bookmark'  %}
-        <a href="{{n.social_bookmark.url}}" target="top">
-    {% else %}    
-        <a href="{{n.social_scrap.url}}" target="top">
-    {% endif %} 
-<img src="/site_media/img/openurl.png" class=""/>
-</a>
-{% endif %}
+<b>{% trans 'notes included' %} : </b> 
+    {% trans "Sorting" %}
+    <select id="sort_drop_down"  name="sort">
+            {% if sort == '' %}
+                <option value="" selected="selected">{% trans "By default" %}</option>
+            {% else %}
+                <option value="">{% trans "By default" %}</option>
+            {% endif %}
+            {% if sort == 'vote' %}
+                <option value="vote" selected="selected">{% trans "By Importance" %}</option>
+            {% else %}
+                <option value="vote">{% trans "By Importance" %}</option>
+            {% endif %}
+    </select>   
 
-<img src="/site_media/img/tags-small.png" class="img_in_notes_section_header"/>:
-{% for tag  in n.tags.all %}
-<a href="/social/{{profile_username}}/{{n.get_note_bookname}}/tags/{{tag}}/">{{tag}}</a>,
-{% endfor %}
-<img src="/site_media/img/thumbUp.gif"/>{{n.vote}}
-</div>
-{% endfor %}
+   <div id="sidetreecontrol"> <a href="?#">{% trans 'List' %}</a> | <a href="?#">{% trans 'Expanded' %}</a> </div>
+    <ul class="frame_tree" >
+        {% social_tree_view_tag note %}
+    </ul> 
 
 
 {% endblock %}

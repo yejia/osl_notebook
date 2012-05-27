@@ -5,26 +5,26 @@
 
 
 
-{% block framebook_only_div%}	 
+{% block framebook_only_div%}	
                          
-        <div  id="note_notes">
+        <div  id="note_notes"> 
             {% trans 'Notes included in this frame' %}:
             <ul>
             <!--TODO: refactor-->
-             {% if user.username == profile_username %} 
-               {% for n in note.display_notes %}            
-                <div linked_note_id="{{n.0}}">
-                     <li><a href="/{{profile_username}}/{{bookname}}/{{included_aspect_name}}/note/{{n.0}}"><strong>{{n.1|default:_('(No Title)')}}-</strong></a>
-                                &nbsp;&nbsp;&nbsp;{{n.2|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp;{{n.3}} &nbsp;&nbsp;&nbsp;&nbsp; 
+             {% if user.username == profile_username %}   
+               {% for n in note.get_notes_in_order %}       
+                <div linked_note_id="{{n.id}}">
+                     <li><a href="/{{profile_username}}/{{bookname}}/{{included_aspect_name}}/note/{{n.id}}"><strong>{{n.title|default:_('(No Title)')}}-</strong></a>
+                                &nbsp;&nbsp;&nbsp;{{n.desc|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp;{{n.vote}} &nbsp;&nbsp;&nbsp;&nbsp; 
                                 <span title="remove this note from the frame" class="inline_delete" id="frame_delete_note">&nbsp;&nbsp;&nbsp;<!--TODO:get rid of &nbsp; use the style instead--></span>
                      </li>           
                 </div>
 		        {% endfor %}
               {% else %}              
                {% for n in note.display_public_notes  %}            
-                <div linked_note_id="{{n.0}}">
-                     <li><a href="/{{profile_username}}/{{bookname}}/{{included_aspect_name}}/note/{{n.0}}"><strong>{{n.1|default:_('(No Title)')}}-</strong></a>
-                                &nbsp;&nbsp;&nbsp;{{n.2|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp;{{n.3}} &nbsp;&nbsp;&nbsp;&nbsp; 
+                <div linked_note_id="{{n.id}}">
+                     <li><a href="/{{profile_username}}/{{bookname}}/{{included_aspect_name}}/note/{{n.id}}"><strong>{{n.title|default:_('(No Title)')}}-</strong></a>
+                                &nbsp;&nbsp;&nbsp;{{n.desc|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp;{{n.vote}} &nbsp;&nbsp;&nbsp;&nbsp; 
                                 <!--TODO:get rid of &nbsp; use the style instead--></span>
                      </li>           
                 </div>
@@ -42,19 +42,19 @@
             <ul>
             <!--TODO: refactor-->
              {% if user.username == profile_username %} 
-               {% for n in note.display_notes %}            
-                <div linked_note_id="{{n.0}}">
-                     <li><a href="/{{profile_username}}/{{bookname}}/{{included_aspect_name}}/note/{{n.0}}"><strong>{{n.1|default:_('(No Title)')}}-</strong></a>
-                                &nbsp;&nbsp;&nbsp;{{n.2|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp;{{n.3}} &nbsp;&nbsp;&nbsp;&nbsp; 
+               {% for n in note.get_notes_in_order %}            
+                <div linked_note_id="{{n.id}}">
+                     <li><a href="/{{profile_username}}/{{bookname}}/{{included_aspect_name}}/note/{{n.id}}"><strong>{{n.title|default:_('(No Title)')}}-</strong></a>
+                                &nbsp;&nbsp;&nbsp;{{n.desc|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp;{{n.vote}} &nbsp;&nbsp;&nbsp;&nbsp; 
                                 <span title="remove this note from the frame" class="inline_delete" id="frame_delete_note">&nbsp;&nbsp;&nbsp;<!--TODO:get rid of &nbsp; use the style instead--></span>
                      </li>           
                 </div>
 		        {% endfor %}
               {% else %}              
-               {% for n in note.display_public_notes  %}            
-                <div linked_note_id="{{n.0}}">
-                     <li><a href="/{{profile_username}}/{{bookname}}/{{included_aspect_name}}/note/{{n.0}}"><strong>{{n.1|default:_('(No Title)')}}-</strong></a>
-                                &nbsp;&nbsp;&nbsp;{{n.2|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp;{{n.3}} &nbsp;&nbsp;&nbsp;&nbsp; 
+               {% for n in note.get_public_notes_in_order  %}            
+                <div linked_note_id="{{n.id}}">
+                     <li><a href="/{{profile_username}}/{{bookname}}/{{included_aspect_name}}/note/{{n.id}}"><strong>{{n.title|default:_('(No Title)')}}-</strong></a>
+                                &nbsp;&nbsp;&nbsp;{{n.desc|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp;{{n.vote}} &nbsp;&nbsp;&nbsp;&nbsp; 
                                <!--TODO:get rid of &nbsp; use the style instead--></span>
                      </li>           
                 </div>

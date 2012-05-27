@@ -105,12 +105,12 @@ def import_bookmark(request):
         else:
             count_urls_in_file, count_note_created, duplicate, count_tag_created = import_with_tags2(username, bookmark_file, default_vote, common_tag, common_ws) 
         
-        return render_to_response('bookmarkbook/notes/import_success.html', {'profile_username':username, 'ignore_folders':ignore_folders, 'count_urls_in_file':count_urls_in_file,                                                                              
+        return render_to_response('bookmarkbook/import_success.html', {'profile_username':username, 'ignore_folders':ignore_folders, 'count_urls_in_file':count_urls_in_file,                                                                              
                                                                              'count_note_created':count_note_created, 'duplicate':duplicate, 'count_tag_created':count_tag_created},
                                                   context_instance=RequestContext(request,{'bookname': 'bookmarkbook','aspect_name':'bookmarks'}))
 
     else:
-        return render_to_response('bookmarkbook/notes/import.html',{'profile_username':username,},context_instance=RequestContext(request, {'bookname': 'bookmarkbook','aspect_name':'bookmarks'}))
+        return render_to_response('bookmarkbook/import.html',{'profile_username':username,},context_instance=RequestContext(request, {'bookname': 'bookmarkbook','aspect_name':'bookmarks'}))
 
 
 

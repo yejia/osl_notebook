@@ -75,6 +75,10 @@ urlpatterns = patterns('',
     (r'^setNotesPrivate/$','notebook.notes.views.set_notes_private'),
     (r'^setNotesPublic/$','notebook.notes.views.set_notes_public'),
 
+    (r'^notes/note/(?P<note_id>[^/]+)/setOrder/$','notebook.notes.views.set_notes_order_in_frame'),
+
+
+
  
 
 

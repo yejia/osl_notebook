@@ -76,7 +76,7 @@
             
             <!-- block note_content_section -->
             <div class="{{bookname}}">
-                <div class="brief_display">
+                <div class="brief_display"   {% if bookname == 'framebook' %}id="frame" {% endif %} >
 			         <table class="note_table">
 			            <tr>
 				             {% block note_brief_table_td_note_type%}                
