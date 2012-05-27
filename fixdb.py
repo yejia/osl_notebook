@@ -169,6 +169,18 @@ init_date=n.init_date, last_modi_date=n.last_modi_date, vote=n.vote) #attachment
                 s.save()       
     
 
+from django.db import connections,  transaction
+def fix_table(sql):    
+    for alias in connections.databases.keys():
+        if alias not in ['leon', 'default']: #TODO: get rid of this
+            print 'for db ', alias
+            cursor = connections[alias].cursor()
+            cursor.execute(sql)
+            transaction.commit_unless_managed(using=alias)
+        
+
+
+
 #notes from personal notebook deleted(or privated) before implemenation of "withdrawn from social notebook if 
 #deleted or made private from personal" are still in social notebook (for example, those with private=True, deleted=False) 
 #should be removed from db by the following script (although they cannot be viewed in social notebook now)   TODO:privacy
@@ -200,6 +212,10 @@ if __name__ == "__main__":
         if command=='restore_bookmark':
              restore_bookmark(username)
         if command=='restore_scrap':
-             restore_scrap(username)
+            restore_scrap(username)
+        if command=='fix_table':
+            print "add _order column to all db's notes_frame_notes table..."
+            #TODO: get sql from command input
+            fix_table('ALTER TABLE notes_frame_notes ADD COLUMN _order integer;')
           
          
