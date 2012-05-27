@@ -98,10 +98,11 @@ def cleanup_tags():
     
                                     
                 
-      
+#TODO: this sync didn't sync the default db      
 def sync_all_dbs():
     users = User.objects.all()
     for user in users:
+        print 'sync db for user:', user
         os.system('python manage.py syncdb --database='+user.username)
         
 
