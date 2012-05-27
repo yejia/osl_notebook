@@ -170,13 +170,19 @@ init_date=n.init_date, last_modi_date=n.last_modi_date, vote=n.vote) #attachment
     
 
 from django.db import connections,  transaction
+from  django.db.utils import DatabaseError
 def fix_table(sql):    
     for alias in connections.databases.keys():
         if alias not in ['leon', 'default']: #TODO: get rid of this
             print 'for db ', alias
             cursor = connections[alias].cursor()
-            cursor.execute(sql)
-            transaction.commit_unless_managed(using=alias)
+            try:
+                cursor.execute(sql)
+                transaction.commit_unless_managed(using=alias)
+            except DatabaseError, e:
+                print 'Error updating db ', alias, 'probably it already had the change.'
+                print e
+                  
         
 
 
