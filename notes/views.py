@@ -1163,10 +1163,10 @@ def update_note_inline(request, username, bookname):
     if note_field=='note_tags':
         note.update_tags(content)    
     #note.tags = content	
-    #print 'note.init_date:',note.init_date 
+    
     if note_field=='note_init_date':
         note.init_date = datetime.datetime.strptime(content,'%Y-%m-%d %H:%M')   
-        #print 'note.init_date:',note.init_date  
+        
     
     if note_field=='note_add_notes':
         note.add_notes(content)
@@ -1283,7 +1283,7 @@ def add_note(request, username, bookname):
     
     #tags = request.GET.getlist('tags')[0].split(',')  
     tags = request.GET.get('tags').split(',')  
-    #print 'tags:',tags
+    
     if not tags or (len(tags) == 1 and tags[0] == u''):
         tags = ['untagged']
         #post.setlist('tags', tags)
@@ -1299,7 +1299,7 @@ def add_note(request, username, bookname):
     n.add_tags(tags, bookname)
     n.save()
     #messages.success(request, "Note is successfully added!") #TODO    
-    #print 'note is added' 
+    
     
     #'init_date':n.init_date
     return  HttpResponse(simplejson.dumps({'note_id':n.id, 'private':n.private, 'tags':n.get_tags(),'display_tags':n.display_tags(),
@@ -1342,7 +1342,7 @@ def  frame_notes(request, username, bookname):
     note_ids = request.POST.get('notes')    
     notes = note_ids.split(",")   
     notes = list(set(notes)) 
-    #print 'notes are:', notes
+    
     #ptr_notes = __get_parent_note_ids(notes, username, bookname)
     #print 'ptr_notes is:', ptr_notes #TODO:should be the same as notes
     N = getNote(username, bookname)
@@ -1376,7 +1376,7 @@ def  frame_notes(request, username, bookname):
 #    AddLForm = create_model_form("AddLForm_"+str(username), L, options={'exclude':('tags')})
 #    
 #    linkageNote = AddLForm(post, request.FILES, instance=L()) 
-#    print "linkageNote.is_valid():",linkageNote.is_valid()
+#    #print "linkageNote.is_valid():",linkageNote.is_valid()
 #    print "linkageNote.errors:",linkageNote.errors 
     frameNote.save()
     messages.success(request, "A frame is successfully created!")
