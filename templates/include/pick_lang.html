@@ -1,0 +1,19 @@
+{% load i18n %}
+
+<span id="pick_lang">
+ {% if note.get_lang  %}
+    {% trans "Pick a language" %}
+    <select id="lang_drop_down"  name="pick_lang">
+            {% if pick_lang == 'C' or not pick_lang  and note.get_lang == 'C'  %}
+                <option value="C" selected="selected">{% trans "Chinese" %}</option>
+            {% else %}
+                <option value="C">{% trans "Chinese" %}</option>
+            {% endif %}
+            {% if pick_lang == 'E'  or not pick_lang  and note.get_lang == 'E'  %}
+                <option value="E" selected="selected">{% trans "English" %}</option>
+            {% else %}
+                <option value="E">{% trans "English" %}</option>
+            {% endif %}
+    </select>   
+{% endif %}    
+</span>

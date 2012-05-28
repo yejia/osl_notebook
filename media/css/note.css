@@ -22,7 +22,10 @@ margin-right:10px;
 span.sites_right_header{
 float:right;
 }
-
+span#pick_lang
+{
+float:right;
+}
 .small_font{
 font-size: 9px;
 }

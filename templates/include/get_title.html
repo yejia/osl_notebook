@@ -1,0 +1,5 @@
+{% if pick_lang == 'C'  or not pick_lang  and note.get_lang == 'C'  %}
+    {{note.get_title_cn|default:'（无标题）'}}
+{% else %}
+    {{note.get_title_en|default:'(No Title)'}}
+{% endif %}   

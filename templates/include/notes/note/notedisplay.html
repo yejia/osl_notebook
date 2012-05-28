@@ -4,18 +4,38 @@
 	jQuery(function($){
            $('#updateNoteForm').hide();     
            $('#hide_edit_note').hide();		
+           $('#updateNoteTransForm').hide(); 
+            $('#hide_trans').hide();
+            
 		$('#edit_note'). click(function(){                       
 		        $('#updateNoteForm').show();
                    $('#hide_edit_note').show();
                    $('#edit_note').hide();
-                
+                  
             });		
            $('#hide_edit_note'). click(function(){                       
 		        $('#updateNoteForm').hide();
                    $('#hide_edit_note').hide();
                    $('#edit_note').show();
-            });     
+            });    
+
+           $('#edit_trans'). click(function(){                       
+		        $('#updateNoteTransForm').show();
+                   $('#hide_trans').show();
+                   $('#edit_trans').hide();     
+                              
+            });	
+            $('#hide_trans'). click(function(){                       
+		        $('#updateNoteTransForm').hide();
+                   $('#hide_trans').hide();
+                   $('#edit_trans').show();                
+            });	
                 
+                
+            $(":input[name='pick_lang']").change(function(){       
+                window.location.replace('?pick_lang='+$(this).val())
+             });
+                 
 			
         });
 </script>
@@ -24,19 +44,25 @@
 {% block note_type%}
 {% endblock %}
 
+{% include "include/pick_lang.html" %}         
+
 <div>
-<h2> {{note.title|default:_('(No Title)')}}</h2>
+<h2> 
+ {% include "include/get_title.html" %}   
+</h2>
 </div>
 <div class="grey">
 {% trans 'Created' %} :{{note.init_date|date:"Y-m-d H:i"}}
 </div>
 <br/>
-
+ {% include "include/get_desc.html" %}     
+ 
 {% block note_url%}
 {% endblock %}
 
 <div>
- {{note.desc}}
+
+
 </div>
 <br/>
 
@@ -100,39 +126,48 @@
 {% block note_form%}
  {% if user.username == profile_username %} 
 <div>
-<span id="edit_note"><a href="#">{% trans 'Edit this note' %}:</a></span>
-<span id="hide_edit_note"><a href="#">{% trans 'Hide edit form' %}</a></span>
+    <span id="edit_note"><a href="#">{% trans 'Edit this note' %}</a></span>
+    <span id="hide_edit_note"><a href="#">{% trans 'Hide edit form' %}</a></span>
+
+    <form action="updateNote/" method="post" enctype="multipart/form-data" id="updateNoteForm">
+        <p> {{ note_form.title.label_tag }}: {{note_form.title}}</p> 
+        <p>{{ note_form.desc.label_tag }}: {{note_form.desc}}</p> 
+        {% block note_form_url%}
+        {% endblock %}
+        <p>{{ note_form.private.label_tag }}: {{note_form.private}}</p>
+
+        {% comment%}<!--Don't show this for now. TODO:-->
+            <p>{{ note_form.deleted.label_tag }}: {{note_form.deleted}}</p> 
+        {% endcomment%}
+
+        {% block note_form_vote%}
+            <p>{{ note_form.vote.label_tag }}: {{note_form.vote}}</p>
+        {% endblock %}
+
+        {% block note_form_tags%}
+            <p>{{ note_form.tags.label_tag }}: {{note_form.tags}}</p>
+        {% endblock %}
+
+        <p>{{ note_form.init_date.label_tag }}: {{note_form.init_date}}</p> 
+
+        {% block note_form_attachment%}
+        {% endblock %}
+
+        <input type="submit" value="Submit" />
+    </form> 
+</div>
+<br/>
 <div>
-<form action="updateNote/" method="post" enctype="multipart/form-data" id="updateNoteForm">
-
-<p> {{ note_form.title.label_tag }}: {{note_form.title}}</p> 
-<p>{{ note_form.desc.label_tag }}: {{note_form.desc}}</p> 
-
-{% block note_form_url%}
-{% endblock %}
-
-<p>{{ note_form.private.label_tag }}: {{note_form.private}}</p>
-
-{% comment%}<!--Don't show this for now. TODO:-->
-<p>{{ note_form.deleted.label_tag }}: {{note_form.deleted}}</p> 
-{% endcomment%}
-
-{% block note_form_vote%}
-<p>{{ note_form.vote.label_tag }}: {{note_form.vote}}</p>
-{% endblock %}
-
-{% block note_form_tags%}
-<p>{{ note_form.tags.label_tag }}: {{note_form.tags}}</p>
-{% endblock %}
-
-<p>{{ note_form.init_date.label_tag }}: {{note_form.init_date}}</p> 
-
-{% block note_form_attachment%}
-{% endblock %}
-
-<input type="submit" value="Submit" />
-</form> 
+    <span id="edit_trans"><a href="#">{% trans 'Add or edit the translation' %}</a></span>
+    <span id="hide_trans"><a href="#">{% trans 'Hide the translation form' %}</a></span>
+    <form action="updateNoteTrans/" method="post" enctype="multipart/form-data" id="updateNoteTransForm">
+        <p> {{ note_trans_form.original_lang.label_tag }}: {{note_trans_form.original_lang}}</p> 
+        <p> {{ note_trans_form.lang.label_tag }}: {{note_trans_form.lang}}</p>         
+        <p> {{ note_trans_form.title.label_tag }}: {{note_trans_form.title}}</p> 
+        <p>{{ note_trans_form.desc.label_tag }}: {{note_trans_form.desc}}</p> 
+        <input type="submit" value="Submit" />
+    </form> 
 </div>
-</div>
+
 {% endif %}
 {% endblock %}

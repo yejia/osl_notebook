@@ -1032,14 +1032,19 @@ def note(request, username, bookname, note_id):
     UpdateNForm = create_model_form("UpdateNForm_"+str(username), N, fields={'tags':forms.ModelMultipleChoiceField(queryset=__get_ws_tags(request, username, bookname))})
     note_form = UpdateNForm(instance=note)
     
-    #print 'note.bookmark:', note.bookmark
-    #print 'note.scrap:', note.scrap
-    #B = getNote(username, 'bookmarkbook')
-    #b = B.objects.get(note_ptr=note)
-    #print 'b.url:', b.url
+    N_T = getNoteTranslation(username)
+    UpdateNoteTransForm = create_model_form("UpdateNoteTransForm_"+str(username), N_T)          
+    if not note.get_lang():
+        note_trans_form = UpdateNoteTransForm()
+    else:    
+        note_trans = Note_Translation.objects.using(username).get(note=note)            
+        note_trans_form = UpdateNoteTransForm(instance=note_trans)
     
+    pick_lang =  request.GET.get('pick_lang')  
     return render_to_response(book_template_dict.get(bookname)+'notes/note/note.html', {'note':note, 'frames':frames, 'notes_included':notes_included, \
-                                                                                   'note_form':note_form, 'profile_username':username \
+                                                                                   'note_form':note_form, 'profile_username':username, \
+                                                                                   'note_trans_form':note_trans_form,\
+                                                                                   'pick_lang':pick_lang
                                                                                    },
                                                                                     context_instance=RequestContext(request, {'bookname': bookname,\
                                                                                                                               'aspect_name':'notes',\
@@ -1104,7 +1109,26 @@ def update_note(request, note_id, username, bookname):
     pre_url = full_path[:-11] #remove "addNote/"
     log.debug( 'redirect to the page that add note form is submitted from:'+pre_url)
     messages.success(request, _("Note is successfully updated!")) #TODO
-    return HttpResponseRedirect(pre_url)   
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))    
+
+
+@login_required
+def update_note_trans(request, note_id, username, bookname): 
+    #note_id is the id of the original note
+    N = getNote(username, bookname)
+    note = N.objects.get(id=note_id) 
+    #trans, created =  Note_Translation.objects.using(username).get_or_create(note=note)
+ 
+    title = request.POST.get('title')
+    desc = request.POST.get('desc')   
+    lang = request.POST.get('lang')   
+    original_lang = request.POST.get('original_lang')  
+    note.set_translation(original_lang, lang, title, desc) 
+    note.save()
+    #trans.owner_name = username
+    #trans.save() 
+    #TODO: use below to replace all return HttpResponseRedirect(__get_pre_url(request))  
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))  
 
 
 #set the order for the notes in a frame. So this only is supposed to be for framebook
@@ -1507,9 +1531,20 @@ def frame(request, username, frame_id):
    
     #add_owner_name(frame, 0)  
     
+    N_T = getNoteTranslation(username)
+    UpdateNoteTransForm = create_model_form("UpdateNoteTransForm_"+str(username), N_T)          
+    if not frame.get_lang():
+        note_trans_form = UpdateNoteTransForm()
+    else:    
+        note_trans = Note_Translation.objects.using(username).get(note=frame)            
+        note_trans_form = UpdateNoteTransForm(instance=note_trans)
+    
+    pick_lang =  request.GET.get('pick_lang')  
+    
     
     return render_to_response('framebook/notes/note/note.html', {'note':frame, 'notes_in_frame':notes_in_frame, 'sort':sort, \
-                                                             'profile_username':username, 'note_form':note_form
+                                                             'profile_username':username, 'note_form':note_form,\
+                                                             'note_trans_form':note_trans_form,'pick_lang':pick_lang\
                                                               }, \
                                                              context_instance=RequestContext(request,{'bookname': 'framebook','book_uri_prefix':'/'+username}))
 

@@ -172,8 +172,8 @@ def friends(request, username):
 
 @login_required
 def friends_notes2(request, username, bookname):
-    print 'username:',username
-    print 'bookname:',bookname
+    #print 'username:',username
+    #print 'bookname:',bookname
     friends = request.user.member.get_friends()
     q = Q(owner__in=friends, private=False)
     note_list = getSN(bookname).objects.filter(q)   
@@ -247,7 +247,7 @@ def groups(request, username):
             push_group_tags_back(request, g.name)
     
                   
-    print 'tags:', tags
+    #print 'tags:', tags
     
     return render_to_response('social/group/groups.html', {'gs_created_by_self':gs_created_by_self, 'gs_following':gs_following,\
                                                       'addGroupForm':addGroupForm, 'tags':tags, 'profile_username':username}, \
@@ -363,12 +363,13 @@ def note(request, username, bookname, note_id):
 #        print 'notes_included:', notes_included
 #===============================================================================
     
-   
+    pick_lang =  request.GET.get('pick_lang')  
     
     return render_to_response('social/include/notes/note/note.html', {'note':note,\
                                     #'frames':frames, \
                                     'notes_included':notes_included,\
                                     'profile_username':username,\
+                                    'pick_lang':pick_lang
                                     },\
                                      context_instance=RequestContext(request, {'bookname': bookname,'aspect_name':'notes',\
                                                                                'book_uri_prefix':'/social/'+username}))
@@ -448,9 +449,11 @@ def frame(request, username, bookname, frame_id):
     else:
         notes_in_frame = frame.get_public_notes_in_order(sort) 
     
+    pick_lang =  request.GET.get('pick_lang') 
     return render_to_response('social/framebook/notes/note/note.html', {'note':frame, 'notes_in_frame':notes_in_frame,'sort':sort, \
                                                              #'frame_notes_display':frame_notes_display, \
-                                                             'profile_username':username}, \
+                                                             'profile_username':username,\
+                                                             'pick_lang':pick_lang}, \
                                                              context_instance=RequestContext(request,{'bookname': bookname,\
                                                                                                       'book_uri_prefix':'/social/'+username}))
 

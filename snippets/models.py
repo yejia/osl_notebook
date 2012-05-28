@@ -1,4 +1,7 @@
+from django.utils.translation import ugettext_lazy
 from django.db import models
+
+
 
 from notebook.notes.models import Note, Tag, WorkingSet, Folder, Cache, get_storage_loc, fs
 
@@ -6,7 +9,7 @@ from notebook.notes.models import Note, Tag, WorkingSet, Folder, Cache, get_stor
 
     
 class Snippet(Note):
-    attachment = models.FileField(upload_to=get_storage_loc,blank=True, storage=fs) #TODO:validate the file for security reason    
+    attachment = models.FileField(upload_to=get_storage_loc,blank=True, storage=fs, verbose_name=ugettext_lazy('Attachment'),) #TODO:validate the file for security reason    
                 
     def __unicode__(self):
         return self.desc

@@ -70,6 +70,7 @@ urlpatterns = patterns('',
     (r'^notes/note/(?P<note_id>[^/]+)/$','notebook.notes.views.note'),
     (r'^notes/note_raw/(?P<note_id>[^/]+)/$','notebook.notes.views.note_raw'),
     (r'^notes/note/(?P<note_id>[^/]+)/updateNote/$','notebook.notes.views.update_note'),
+    (r'^notes/note/(?P<note_id>[^/]+)/updateNoteTrans/$','notebook.notes.views.update_note_trans'),
     (r'^linkagenotes/note/(?P<note_id>[^/]+)/updateLinkageNote/$','notebook.notes.views.update_linkagenote'),
 
     (r'^setNotesPrivate/$','notebook.notes.views.set_notes_private'),

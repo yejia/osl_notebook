@@ -45,4 +45,8 @@ from notebook.notes.models import Frame
 def getFrame(username):
     return create_model("Frame_"+str(username), Frame, username) 
 
+from notebook.notes.models import Note_Translation
+def getNoteTranslation(username):
+    return create_model("Note_Trans_"+str(username), Note_Translation, username) 
+
 

@@ -4,6 +4,8 @@ from django.db import models
 from django.contrib.auth.models import User, UserManager
 from django.db.models import Q
 from django.core.exceptions import ObjectDoesNotExist
+from django.utils.translation import ugettext_lazy
+from django.utils.translation import ugettext as _
 
 from notebook.notes.constants import *
 
@@ -113,6 +115,69 @@ class Social_Note(models.Model):
     def __unicode__(self):
         return self.desc + u' by ' + self.owner.username
     
+    
+    def set_translation(self, original_lang, lang, title, desc):
+        trans, created =  Social_Note_Translation.objects.get_or_create(note=self)
+        trans.original_lang = original_lang
+        trans.lang = lang
+        trans.title = title
+        trans.desc = desc        
+        trans.save()
+        
+    
+    
+    def get_owner_note(self):
+        pass
+        
+
+    def get_desc_en(self):
+        if not self.get_lang():
+            return self.desc
+        elif self.get_lang() == 'E':
+            return self.desc
+        else:
+           trans =  Social_Note_Translation.objects.get(note=self)
+           return trans.desc 
+       
+       
+    #get the Chinese version   
+    def get_desc_cn(self):
+        if not self.get_lang():
+            return self.desc
+        elif self.get_lang() == 'C':
+            return self.desc
+        else:
+           trans =  Social_Note_Translation.objects.get(note=self)
+           return trans.desc 
+    
+    
+    def get_title_en(self):
+        if not self.get_lang():
+            return self.title
+        elif self.get_lang() == 'E':
+            return self.title
+        else:
+           trans =  Social_Note_Translation.objects.get(note=self)
+           return trans.title 
+       
+       
+    #get the Chinese version   
+    def get_title_cn(self):
+        if not self.get_lang():
+            return self.title
+        elif self.get_lang() == 'C':
+            return self.title
+        else:
+           trans =  Social_Note_Translation.objects.get(note=self)
+           return trans.title 
+          
+    
+    def get_lang(self):
+        if Social_Note_Translation.objects.filter(note=self).exists():
+            trans =  Social_Note_Translation.objects.get(note=self)            
+            return trans.original_lang
+        else:
+            return ''
 
     def get_note_type(self):
         try:
@@ -224,7 +289,7 @@ class Social_Frame(Social_Note):
 
     def get_notes_in_order(self, sort=None):        
         ns = [n for n in self.notes.all().order_by('in_frames')]
-        print 'ns:', ns
+        #print 'ns:', ns
         if sort and sort == 'vote':
             ns.sort(key=lambda r: r.vote, reverse=True)  
         return ns
@@ -368,3 +433,19 @@ class Fan(models.Model):
     def get_feed_display(self):
         return u'<a href="/user/'+unicode(self.fan.id)+'/">'+ self.fan.__unicode__() + u'</a>' +\
                u'followed' + u'<a href="/user/' + unicode(self.idol.id) + u'/">' + self.idol.__unicode__()+ u'</a>'    
+
+
+
+#Store the alternative language translation for notes.
+class Social_Note_Translation(models.Model):
+    note = models.ForeignKey(Social_Note)
+    LANG_TYPE_CHOICES = (
+        ('C', 'Chinese'),
+        ('E', 'English'),
+    )
+    lang = models.CharField(max_length=1, choices=LANG_TYPE_CHOICES, verbose_name=ugettext_lazy('Language'),) #mark the language in the original note
+    original_lang = models.CharField(max_length=1, choices=LANG_TYPE_CHOICES, verbose_name=ugettext_lazy('Original language'),)
+    title = models.CharField(verbose_name=ugettext_lazy('Title'), blank=True,max_length=2000, help_text=_("The size of the title is limited to 2000 characaters."))
+    desc =  models.TextField(verbose_name=ugettext_lazy('Description'), max_length=2000, blank=True,  help_text=_("The size of the desc is limited to 2000 characaters."))
+    
+    

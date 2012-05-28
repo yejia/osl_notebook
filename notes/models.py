@@ -161,15 +161,15 @@ from django.utils.translation import ugettext_lazy
 # list of events with the experience. From the number of events, you can tell the importance.
 class Note(models.Model):
     #For bookmarks or scraps from some sites, the title can be quite long. Force users to truncate it?
-    title = models.CharField(blank=True,max_length=2000, help_text=_("The size of the title is limited to 2000 characaters.")) #maybe 20 is enough
+    title = models.CharField(verbose_name=ugettext_lazy('Title'), blank=True,max_length=2000, help_text=_("The size of the title is limited to 2000 characaters.")) #maybe 20 is enough
     #event = models.CharField(blank=True,max_length=300)
     #enforce in views to limit the length for snippet or enforce in save(), or move this field down to snippet
-    desc =  models.TextField(max_length=2000, blank=True,  help_text=_("The size of the desc is limited to 200 characaters."))
-    tags = models.ManyToManyField(Tag, blank=True,  help_text=_("Default tag is 'random thought'."))	#TODO: NOT NULL?? #TODO: set default as random thoughts?
-    private = models.BooleanField(default=False)
+    desc =  models.TextField(verbose_name=ugettext_lazy('Description'), max_length=2000, blank=True,  help_text=_("The size of the desc is limited to 2000 characaters."))
+    tags = models.ManyToManyField(Tag, verbose_name=ugettext_lazy('Tags'), blank=True,  help_text=_("Default tag is 'random thought'."))	#TODO: NOT NULL?? #TODO: set default as random thoughts?
+    private = models.BooleanField(verbose_name=ugettext_lazy('Private'), default=False)
     #the current django implementation, setting auto_now or auto_now_add to True will cause the field to have editable=False and blank=True set.
-    init_date = models.DateTimeField('date created', auto_now_add=True, editable=True)
-    last_modi_date = models.DateTimeField('date last modified', auto_now=True)
+    init_date = models.DateTimeField(verbose_name=ugettext_lazy('date created'), auto_now_add=True, editable=True)
+    last_modi_date = models.DateTimeField(verbose_name=ugettext_lazy('date last modified'), auto_now=True)
     deleted = models.BooleanField(default=False)
     #TODO: how to display the Chinese of this one with ugettext_lazy??
     vote =  models.IntegerField(verbose_name=ugettext_lazy('self ranking'), default=0)  #TODO: change to rank  
@@ -188,6 +188,66 @@ class Note(models.Model):
     def __unicode__(self):
         return self.desc
 
+
+    def set_translation(self, original_lang, lang, title, desc):
+        trans, created =  Note_Translation.objects.using(self.owner_name).get_or_create(note=self)
+        trans.original_lang = original_lang
+        trans.lang = lang
+        trans.title = title
+        trans.desc = desc
+        trans.owner_name = self.owner_name
+        trans.save()
+        
+    
+    def get_desc_en(self):
+        if not self.get_lang():
+            return self.desc
+        elif self.get_lang() == 'E':
+            return self.desc
+        else:
+           trans =  Note_Translation.objects.using(self.owner_name).get(note=self)
+           return trans.desc 
+       
+       
+    #get the Chinese version   
+    def get_desc_cn(self):
+        if not self.get_lang():
+            return self.desc
+        elif self.get_lang() == 'C':
+            return self.desc
+        else:
+           trans =  Note_Translation.objects.using(self.owner_name).get(note=self)
+           return trans.desc 
+    
+    
+    def get_title_en(self):        
+        if not self.get_lang():
+            return self.title
+        elif self.get_lang() == 'E':
+            return self.title
+        else:
+           trans =  Note_Translation.objects.using(self.owner_name).get(note=self)
+           return trans.title 
+       
+       
+    #get the Chinese version   
+    def get_title_cn(self):
+        if not self.get_lang():            
+            return self.title
+        elif self.get_lang() == 'C':            
+            return self.title
+        else:
+           trans =  Note_Translation.objects.using(self.owner_name).get(note=self)            
+           return trans.title 
+          
+    
+    def get_lang(self):
+        if Note_Translation.objects.using(self.owner_name).filter(note=self).exists():
+            trans =  Note_Translation.objects.using(self.owner_name).get(note=self)            
+            return trans.original_lang
+        else:
+            return ''
+    
     
     #TODO:better to move this method and the next one outside of this class?
     def get_note_type(self):
@@ -344,16 +404,13 @@ class Note(models.Model):
             if created:
                 count_tag_created += 1  
             w.tags.add(t)           
-            w.save()
+            w.save()            
             
-            #print 'working set is saved:', w.tags
         return  count_tag_created              
 
 
-    def get_comments(self):  
-        #print 'getting comments...'
-        comments = Note_Comment.objects.using(self.owner_name).filter(note=self) 
-        #print 'comments is:', comments
+    def get_comments(self):        
+        comments = Note_Comment.objects.using(self.owner_name).filter(note=self)         
         return comments 
         #return ''.join([comment.desc for comment in comments])
     
@@ -386,10 +443,8 @@ class Note(models.Model):
         #TODO:if note is set deleted=True, then it should be removed from frames it is in. How about the frame in the social notebook?
         #below doesn't work. Not sure why. TODO:
 #===============================================================================
-#        if self.deleted:
-#            print 'deleted'
-#            if self.in_frames.all():#TODO:need self.owner_name?
-#                print 'in frame'
+#        if self.deleted:#            
+#            if self.in_frames.all():#TODO:need self.owner_name?#                
 #                for f in self.in_frames.using(self.owner_name).all():
 #                    print 'remove self from frame:', f.id
 #                    f.notes.remove(self)
@@ -453,10 +508,8 @@ class Note(models.Model):
                         sns_included.append(sn_included)
                         sfn, created = Social_Frame_Notes.objects.get_or_create(social_frame=sn, social_note=sn_included)
                         sfn._order = order.index(note_id)
-                        sfn.save()
-                        #TODO: build the order for the sns_included too, and set the order
-                        #print 'sn_included:',sn_included,' appended'
-                #print 'sns_included:',sns_included
+                        sfn.save()                                            
+              
                 #sn.notes = sns_included   
                 
             sn.desc = self.desc
@@ -470,6 +523,15 @@ class Note(models.Model):
             sn.tags.clear()
             for st in sts:
                 sn.tags.add(st)
+            
+            
+            #save the translation
+            if self.get_lang():
+                trans =  Note_Translation.objects.using(self.owner_name).get(note=self)
+                sn.set_translation(trans.original_lang, trans.lang, trans.title, trans.desc)
+            
+            
+            
             sn.save()        
 
 
@@ -852,7 +914,20 @@ class Frame_Cache(Cache):
     cache_id = models.AutoField(primary_key=True)
 
 
-
+#Store the alternative language translation for notes.
+class Note_Translation(models.Model):
+    note = models.ForeignKey(Note)
+    LANG_TYPE_CHOICES = (
+        ('C', 'Chinese'),
+        ('E', 'English'),
+    )
+    lang = models.CharField(max_length=1, choices=LANG_TYPE_CHOICES, verbose_name=ugettext_lazy('Language'),) #mark the language in the original note
+    original_lang = models.CharField(max_length=1, choices=LANG_TYPE_CHOICES, verbose_name=ugettext_lazy('Original language'),)
+    title = models.CharField(verbose_name=ugettext_lazy('Title'), blank=True,max_length=2000, help_text=_("The size of the title is limited to 2000 characaters."))
+    desc =  models.TextField(verbose_name=ugettext_lazy('Description'), max_length=2000, blank=True,  help_text=_("The size of the desc is limited to 2000 characaters."))
+    
+    
+       
 
 #TODO:should this table be here?
 class UserAuth(models.Model):
@@ -946,8 +1021,7 @@ def create_model_form(name, model, base=ModelForm, fields={}, options={}):
             fields.update({'tags':forms.ModelMultipleChoiceField(queryset=Tag.objects.using(model.owner_name).all().order_by('name'))})
     
     if 'notes' in dir(model):   
-        if (not options.get('exclude')) or ('notes' not in options.get('exclude')): 
-            #print 'update notes choices'       
+        if (not options.get('exclude')) or ('notes' not in options.get('exclude')):                 
     #    fields.update({'tags':forms.ModelMultipleChoiceField(queryset=Tag.objects.filter(user__username__exact=model.objects.owner_name).order_by('name'))})
             fields.update({'notes':forms.ModelMultipleChoiceField(queryset=Note.objects.using(model.owner_name).all().order_by('id'))})
     
