@@ -222,8 +222,7 @@ class Social_Frame(Social_Note):
     def __unicode__(self):
         return ','.join([str(note.id) for note in self.notes.all()])   
 
-    def get_notes_in_order(self, sort=None):
-        print 'get_notes_in_order in social frame called for note:', self.desc
+    def get_notes_in_order(self, sort=None):        
         ns = [n for n in self.notes.all().order_by('in_frames')]
         print 'ns:', ns
         if sort and sort == 'vote':
