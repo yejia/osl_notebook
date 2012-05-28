@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-27 08:52+0800\n"
+"POT-Creation-Date: 2012-05-28 11:09+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -662,7 +662,7 @@ msgstr "导入"
 #: templates/scrapbook/notes/note/note.html:9
 #: templates/snippetbook/notes/note/linkagenote.html:9
 #: templates/snippetbook/notes/note/note.html:9
-#: templates/social/framebook/notes/note/note.html:9
+#: templates/social/framebook/notes/note/note.html:44
 #: templates/social/include/notes/note/note.html:12
 msgid "This one is private. Sorry you have no permission to view it!"
 msgstr "隐私部分。你没有权限浏览。"
@@ -893,6 +893,7 @@ msgstr "包里所含笔记"
 #: templates/framebook/notes/notes_display.html:26
 #: templates/framebook/notes/notes_display.html:47
 #: templates/framebook/notes/notes_display.html:56
+#: templates/framebook/notes/note/children.html:8
 #: templates/include/notes/inlines/notes_brief_title_inline.html:3
 #: templates/include/notes/inlines/notes_full_title_inline.html:5
 #: templates/include/notes/note/notedisplay.html:28
@@ -909,7 +910,7 @@ msgstr "包里所含笔记"
 #: templates/social/framebook/notes/notesdisplay.html:44
 #: templates/social/framebook/notes/notesdisplay.html:69
 #: templates/social/framebook/notes/notesdisplay.html:78
-#: templates/social/framebook/notes/note/notedisplay.html:29
+#: templates/social/framebook/notes/note/delete/children.html:6
 #: templates/social/include/notes/notesdisplay.html:88
 #: templates/social/notebook/notes/notesdisplay.html:18
 #: templates/social/notebook/notes/notesdisplay.html:55
@@ -976,12 +977,18 @@ msgid "Save the order"
 msgstr "保存当前排序"
 
 #: templates/framebook/notes/note/notedisplay.html:39
-msgid "Collapse All"
-msgstr "压缩"
+#: templates/include/notes/notes_section_header.html:6
+#: templates/social/framebook/notes/note/notedisplay.html:28
+#: templates/social/include/notes/notes_section_header.html:4
+msgid "List"
+msgstr "表单"
 
 #: templates/framebook/notes/note/notedisplay.html:39
-msgid "Expand All"
-msgstr "扩展"
+#: templates/include/notes/notes_section_header.html:5
+#: templates/social/framebook/notes/note/notedisplay.html:28
+#: templates/social/include/notes/notes_section_header.html:4
+msgid "Expanded"
+msgstr "展开"
 
 #: templates/framebook/notes/note/notedisplay.html:57
 #: templates/include/notes/notes_display.html:138
@@ -1334,6 +1341,7 @@ msgid "Add Tags"
 msgstr "加标签"
 
 #: templates/include/notes/addNote.html:76
+#: templates/include/notes/notes_section_header.html:9
 msgid "More"
 msgstr "更多"
 
@@ -1362,25 +1370,9 @@ msgstr "顶"
 msgid "Show"
 msgstr "显示"
 
-#: templates/include/notes/notes_section_header.html:5
-#: templates/social/include/notes/notes_section_header.html:4
-msgid "Expanded"
-msgstr "展开"
-
-#: templates/include/notes/notes_section_header.html:6
-#: templates/social/include/notes/notes_section_header.html:4
-msgid "List"
-msgstr "表单"
-
 #: templates/include/notes/notes_section_header.html:9
-#: templates/social/include/notes/notes_section_header.html:6
-msgid "Stream"
-msgstr "流"
-
-#: templates/include/notes/notes_section_header.html:9
-#: templates/social/include/notes/notes_section_header.html:6
-msgid "Structuralize"
-msgstr "结构化"
+msgid "Less"
+msgstr "更少"
 
 #: templates/include/notes/notesdisplay.html:27
 msgid "Create a frame"
@@ -2254,6 +2246,18 @@ msgstr "所有工作区"
 #: templates/workingset/index.html:370
 msgid "Make Current"
 msgstr "设成当前"
+
+#~ msgid "Collapse All"
+#~ msgstr "压缩"
+
+#~ msgid "Expand All"
+#~ msgstr "扩展"
+
+#~ msgid "Stream"
+#~ msgstr "流"
+
+#~ msgid "Structuralize"
+#~ msgstr "结构化"
 
 #, fuzzy
 #~ msgid ""

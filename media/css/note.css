@@ -240,6 +240,15 @@ span.tag_section .module h2{
   text-align:left;*/
 }
 
+button{
+font-size:11px;
+}
+
+select{
+font-size:10px;
+margin-bottom:-3px;
+}
+
 .addnotebutton, .doneaddingbutton
 {
 float:right;/*TODO:change to not floating*/
