@@ -1,5 +1,9 @@
-{% if pick_lang == 'C'  or not pick_lang and note.get_lang == 'C'  %}
+{% if not pick_lang  %}
+    {{note.desc}}
+{% endif %}    
+{% if pick_lang == 'C'  %}
     {{note.get_desc_cn}}
-{% else %}
+{% endif %}      
+{% if pick_lang == 'E'  %}
     {{note.get_desc_en}}
 {% endif %}  
