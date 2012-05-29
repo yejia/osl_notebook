@@ -1,0 +1,22 @@
+{% extends "include/base2.html" %}
+{% load i18n %}
+
+
+
+{% block title %}
+{% trans 'About' %}
+{% endblock %}
+
+
+
+{% block content%}
+<br/>
+<h1>{% trans 'About' %}</h1>
+<br/><br/>
+{% trans 'Notebook is to help your learn by simply making and editing notes. ' %} {% trans '9 notes a day, is 1 day not wasted!' %}
+<br/><br/>
+
+<a href="http://blog.opensourcelearning.org" target="top">{% trans 'Official blog' %}</a>
+
+<br/><br/>
+{% endblock %}

@@ -13,6 +13,7 @@ from django.core.exceptions import ObjectDoesNotExist, FieldError
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
 from django.utils.translation import ugettext as _
+from django.core.mail import send_mail
 
 import datetime
 
@@ -809,7 +810,16 @@ def delete_comment(request):
     return HttpResponse('successful', mimetype="text/plain")  
 
 
-
+def suggest(request):
+    if request.method == 'POST': 
+        content = request.POST.get('content')
+        content = "A suggestion to the site is sent to you by "+request.user.username+":\n"+content
+        send_mail('suggestions to the site', content.encode('utf8'), u'sys@opensourcelearning.org', [u'sys@opensourcelearning.org'])
+        messages.success(request, _("Your suggestion is successfully sent to the sys admin! Thank you for your valuable suggestion!")) 
+    
+    return render_to_response('doc/suggest.html', {},\
+                                                  context_instance=RequestContext(request)) 
+    
 
 
 def __get_notes_context(request, note_list):

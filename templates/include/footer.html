@@ -1,12 +1,15 @@
+{% load i18n %}
+
 <div> 
-    <a href="/about" class="NotImplementedYet">about</a>  | 
-    <a href="/about?topic=team" class="NotImplementedYet">team</a>  |
-    <a href="/about?topic=contactus" class="NotImplementedYet">contact</a>  |
-    <a href="/about?policy=disclaimer" class="NotImplementedYet">disclaimer</a>  |
+    <a href="/about">{% trans 'about' %}</a>  | 
+    <a href="/suggest">{% trans 'suggest' %}</a>  |
+    <a href="/about?topic=team" class="NotImplementedYet">{% trans 'team' %}</a>  |
+    <a href="/about?topic=contact">{% trans 'contact' %}</a>  |    
+    <a href="/about?policy=disclaimer" class="NotImplementedYet">{% trans 'disclaimer' %}</a>  |
     
-    <a href="/help/" class="NotImplementedYet">help</a>  |
+    <a href="/help/" class="NotImplementedYet">{% trans 'help' %}</a>  |
     <a href="/service/" class="NotImplementedYet">API</a>  |
-    <a href="/mobile/" class="NotImplementedYet">mobile</a> 
+    <a href="/mobile/" class="NotImplementedYet">{% trans 'mobile' %}</a> 
     <a href="/partner/" class="NotImplementedYet"></a> 
  
 </div> 

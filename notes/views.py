@@ -2396,6 +2396,14 @@ def for_new_users(request):
     return render_to_response('doc/for_new_users.html', context_instance=RequestContext(request))
 
 
+def about(request):
+    topic = request.GET.get('topic')
+    if not topic:
+        return render_to_response('doc/about.html', context_instance=RequestContext(request))
+    elif topic == 'contact':
+        return render_to_response('doc/contact.html', context_instance=RequestContext(request))
+
+
 allbindingsites = ['sina', 'douban', 'tencent', 'facebook', 'twitter']
 
 def bind(request): 

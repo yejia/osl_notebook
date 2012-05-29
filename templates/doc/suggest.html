@@ -1,0 +1,20 @@
+{% extends "include/base2.html" %}
+{% load i18n %}
+
+
+{% block title %}
+{% trans 'Make suggestions to the site' %}
+{% endblock %}
+
+
+
+{% block content%}
+<br/>
+<h1>{% trans 'Make a suggestion to the site' %}</h1>
+
+<form action="/suggest/" method="post" enctype="multipart/form-data" id="suggestForm">          
+        <p><textarea id="content" rows="10" cols="40" name="content"></textarea></p> 
+        <input type="submit" value="Submit" /> <span>{% trans 'by' %} {{request.user.username}}</span>
+    </form> 
+    
+{% endblock %}    
