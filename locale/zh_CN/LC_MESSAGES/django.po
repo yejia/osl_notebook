@@ -1019,7 +1019,7 @@ msgstr ""
 #: templates/framebook/notes/note/notedisplay.html:9
 #: templates/social/framebook/notes/note/notedisplay.html:7
 msgid "View all frames"
-msgstr "浏览所有的包"
+msgstr "浏览所有的知识包"
 
 #: templates/framebook/notes/note/notedisplay.html:22
 #: templates/social/framebook/notes/note/notedisplay.html:13
