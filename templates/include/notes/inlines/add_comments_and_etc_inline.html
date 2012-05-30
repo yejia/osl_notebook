@@ -6,7 +6,7 @@
              {% block other_buttons %}
                 {% if note.get_social_note %} 
                     <span>
-                        <a href="/social/{{profile_username}}/notebook/notes/note/{{note.get_social_note.id}}/" title="{% trans 'View this note in public notebook' %}">{% trans 'View social' %}</a>
+                        <a href="/social/{{profile_username}}/{{bookname}}/notes/note/{{note.get_social_note.id}}/" title="{% trans 'View this note in public notebook' %}">{% trans 'View social' %}</a>
                     </span>
                 {% endif %}        
             {% endblock %}

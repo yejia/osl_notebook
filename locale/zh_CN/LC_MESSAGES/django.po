@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-30 06:15+0800\n"
+"POT-Creation-Date: 2012-05-30 09:46+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -193,7 +193,7 @@ msgstr "附件"
 msgid ""
 "Your suggestion is successfully sent to the sys admin! Thank you for your "
 "valuable suggestion!"
-msgstr ""
+msgstr "您的建议已经成功地发给了系统管理员！谢谢您的宝贵意见！"
 
 #: templates/404.html:3
 msgid ""
@@ -969,7 +969,7 @@ msgstr "搜索包"
 
 #: templates/framebook/notes/notes_display.html:11
 #: templates/framebook/notes/notes_display.html:41
-#: templates/notebook/notes/note/notedisplay.html:51
+#: templates/notebook/notes/note/notedisplay.html:53
 #: templates/social/framebook/notes/notesdisplay.html:29
 #: templates/social/framebook/notes/notesdisplay.html:63
 msgid "Notes included in this frame"
@@ -1015,11 +1015,6 @@ msgid ""
 "will be included in this frame."
 msgstr ""
 "编辑时将内容替换成逗号分隔的note ids，所有的在内的便条都会被加到包里去。"
-
-#: templates/framebook/notes/note/notedisplay.html:9
-#: templates/social/framebook/notes/note/notedisplay.html:7
-msgid "Frame"
-msgstr "包"
 
 #: templates/framebook/notes/note/notedisplay.html:9
 #: templates/social/framebook/notes/note/notedisplay.html:7
@@ -1077,8 +1072,8 @@ msgstr "展开"
 
 #: templates/framebook/notes/note/notedisplay.html:57
 #: templates/include/notes/notes_display.html:138
-#: templates/notebook/notes/note/notedisplay.html:37
-#: templates/notebook/notes/note/notedisplay.html:42
+#: templates/notebook/notes/note/notedisplay.html:39
+#: templates/notebook/notes/note/notedisplay.html:44
 #: templates/snippetbook/notes/note/notedisplay.html:6
 #: templates/social/include/notes/notesdisplay.html:110
 #: templates/social/include/notes/note/notedisplay.html:30
@@ -1167,16 +1162,16 @@ msgid "about"
 msgstr "关于"
 
 #: templates/include/footer.html:5
+msgid "suggest"
+msgstr "建议"
+
+#: templates/include/footer.html:6
 msgid "team"
 msgstr "团队"
 
-#: templates/include/footer.html:6
+#: templates/include/footer.html:7
 msgid "contact"
 msgstr "联系"
-
-#: templates/include/footer.html:7
-msgid "suggest"
-msgstr "建议"
 
 #: templates/include/footer.html:8
 msgid "disclaimer"
@@ -1203,7 +1198,7 @@ msgstr "学习小组"
 #: templates/include/note_list_base.html:144
 #: templates/include/notes/addNote.html:85
 #: templates/include/notes/notes_display.html:59
-#: templates/include/notes/note/notedisplay.html:82
+#: templates/include/notes/note/notedisplay.html:85
 #: templates/social/group/groups.html:64
 msgid "private"
 msgstr "隐私"
@@ -1315,7 +1310,7 @@ msgstr "包"
 
 #: templates/include/note_list_base.html:187
 #: templates/include/notes/notes_display.html:141
-#: templates/include/notes/note/notedisplay.html:98
+#: templates/include/notes/note/notedisplay.html:101
 msgid "Not in any frame"
 msgstr "不在任何包里"
 
@@ -1692,31 +1687,31 @@ msgstr "属于"
 msgid "You can use the working set to pick a set of tags to work with."
 msgstr "你可以用工作区来选择一组你用来工作的标签。"
 
-#: templates/include/notes/note/notedisplay.html:55
+#: templates/include/notes/note/notedisplay.html:57
 msgid "Created"
 msgstr "生成时间"
 
-#: templates/include/notes/note/notedisplay.html:79
+#: templates/include/notes/note/notedisplay.html:82
 msgid "importance"
 msgstr "重要性"
 
-#: templates/include/notes/note/notedisplay.html:94
+#: templates/include/notes/note/notedisplay.html:97
 msgid "In frames"
 msgstr "在包里"
 
-#: templates/include/notes/note/notedisplay.html:129
+#: templates/include/notes/note/notedisplay.html:132
 msgid "Edit this note"
 msgstr "编辑这个笔记"
 
-#: templates/include/notes/note/notedisplay.html:130
+#: templates/include/notes/note/notedisplay.html:133
 msgid "Hide edit form"
 msgstr "隐藏编辑表格"
 
-#: templates/include/notes/note/notedisplay.html:162
+#: templates/include/notes/note/notedisplay.html:165
 msgid "Add or edit the translation"
 msgstr "添加或更新翻译"
 
-#: templates/include/notes/note/notedisplay.html:163
+#: templates/include/notes/note/notedisplay.html:166
 msgid "Hide the translation form"
 msgstr "隐藏翻译表格"
 
@@ -1798,11 +1793,15 @@ msgstr "一个短的便条足够表达一个重要的感受。练习一下。:-)
 msgid "Event"
 msgstr "事件"
 
-#: templates/notebook/notes/note/notedisplay.html:29
+#: templates/notebook/notes/note/notedisplay.html:5
+msgid "Note Type"
+msgstr "笔记类型"
+
+#: templates/notebook/notes/note/notedisplay.html:31
 msgid "deleted"
 msgstr "删除"
 
-#: templates/notebook/notes/note/notedisplay.html:55
+#: templates/notebook/notes/note/notedisplay.html:57
 msgid "No Notes included"
 msgstr "不含任何笔记"
 
@@ -2238,7 +2237,7 @@ msgstr "原作者的评级"
 
 #: templates/social/include/notes/inlines/add_comments_and_etc_inline.html:22
 msgid "Share this note with other sites that you have bound with your account"
-msgstr ""
+msgstr "将该笔记分享到你绑定的网站去"
 
 #: templates/social/include/notes/inlines/add_comments_and_etc_inline.html:22
 msgid "Share"
@@ -2357,6 +2356,9 @@ msgstr "所有工作区"
 msgid "Make Current"
 msgstr "设成当前"
 
+#~ msgid "Frame"
+#~ msgstr "包"
+
 #~ msgid "Development blog"
 #~ msgstr "开发博客"
 
@@ -2456,9 +2458,6 @@ msgstr "设成当前"
 
 #~ msgid "With attachment"
 #~ msgstr "有附件的"
-
-#~ msgid "Order Type"
-#~ msgstr "升降种类"
 
 #~ msgid "Descend"
 #~ msgstr "降序"

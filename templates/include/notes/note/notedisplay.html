@@ -41,19 +41,22 @@
 </script>
 
 
-{% block note_type%}
-{% endblock %}
+
 
 {% include "include/pick_lang.html" %}         
 
 <div>
 <h2> 
+<img src="/site_media/img/{{note.get_note_type}}.png" title="{{note.get_note_type}}"/>
  {% include "include/get_title.html" %}   
 </h2>
 </div>
+{% block note_type%}
+{% endblock %}
 <div class="grey">
-{% trans 'Created' %} :{{note.init_date|date:"Y-m-d H:i"}}
+{% trans 'Created' %} :{{note.init_date|date:"Y-m-d H:i"}}       
 </div>
+
 <br/>
  {% include "include/get_desc.html" %}     
  
