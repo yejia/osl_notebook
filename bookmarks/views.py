@@ -58,7 +58,7 @@ def add_bookmark(request):
         f.save()
         #TODO:below seems redundant, since f.save() may have saved the instance as well
         n.save()        
-        return render_to_response("include/notes/addNote_result.html",{'message':_('Bookmark is successfully added! You can close this window, or it will be closed for you in 2 seconds.')})
+        return render_to_response("include/notes/addNote_result.html",{'message':_('Bookmark is successfully added! You can close this window, or it will be closed for you in 1 second.')})
        
     else:
         tags = __get_ws_tags(request, username, 'bookmarkbook')  

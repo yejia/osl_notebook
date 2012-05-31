@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-30 09:46+0800\n"
+"POT-Creation-Date: 2012-05-31 12:17+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -52,9 +52,9 @@ msgstr ""
 #: bookmarks/views.py:61
 msgid ""
 "Bookmark is successfully added! You can close this window, or it will be "
-"closed for you in 2 seconds."
+"closed for you in 1 second."
 msgstr ""
-"这个网址已经成功添加到您的网址本里。您可以关闭这个窗口，或者其会在2秒后自动关"
+"这个网址已经成功添加到您的网址本里。您可以关闭这个窗口，或者其会在1秒后自动关"
 "闭。"
 
 #: notes/models.py:164 notes/models.py:926 social/models.py:448
@@ -179,9 +179,9 @@ msgstr ""
 #: scraps/views.py:63
 msgid ""
 "Scrap is successfully added! You can close this window, or it will be closed "
-"for you in 2 seconds."
+"for you in 1 second."
 msgstr ""
-"这个网摘已经成功添加到您的网址本里。您可以关闭这个窗口，或者其会在2秒后自动关"
+"这个网摘已经成功添加到您的网址本里。您可以关闭这个窗口，或者其会在1秒后自动关"
 "闭。"
 
 #: snippets/models.py:12 templates/include/notes/notesdisplay.html:37
@@ -969,7 +969,7 @@ msgstr "搜索包"
 
 #: templates/framebook/notes/notes_display.html:11
 #: templates/framebook/notes/notes_display.html:41
-#: templates/notebook/notes/note/notedisplay.html:53
+#: templates/notebook/notes/note/notedisplay.html:57
 #: templates/social/framebook/notes/notesdisplay.html:29
 #: templates/social/framebook/notes/notesdisplay.html:63
 msgid "Notes included in this frame"
@@ -1072,8 +1072,8 @@ msgstr "展开"
 
 #: templates/framebook/notes/note/notedisplay.html:57
 #: templates/include/notes/notes_display.html:138
-#: templates/notebook/notes/note/notedisplay.html:39
-#: templates/notebook/notes/note/notedisplay.html:44
+#: templates/notebook/notes/note/notedisplay.html:43
+#: templates/notebook/notes/note/notedisplay.html:48
 #: templates/snippetbook/notes/note/notedisplay.html:6
 #: templates/social/include/notes/notesdisplay.html:110
 #: templates/social/include/notes/note/notedisplay.html:30
@@ -1793,15 +1793,15 @@ msgstr "一个短的便条足够表达一个重要的感受。练习一下。:-)
 msgid "Event"
 msgstr "事件"
 
-#: templates/notebook/notes/note/notedisplay.html:5
+#: templates/notebook/notes/note/notedisplay.html:9
 msgid "Note Type"
 msgstr "笔记类型"
 
-#: templates/notebook/notes/note/notedisplay.html:31
+#: templates/notebook/notes/note/notedisplay.html:35
 msgid "deleted"
 msgstr "删除"
 
-#: templates/notebook/notes/note/notedisplay.html:57
+#: templates/notebook/notes/note/notedisplay.html:61
 msgid "No Notes included"
 msgstr "不含任何笔记"
 

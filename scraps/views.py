@@ -60,7 +60,7 @@ def add_scrap(request):
             f.save()
             n.save() #called this specifically to save the url to the social db as well
             return render_to_response("include/notes/addNote_result.html",\
-                                      {'message':_('Scrap is successfully added! You can close this window, or it will be closed for you in 2 seconds.')})
+                                      {'message':_('Scrap is successfully added! You can close this window, or it will be closed for you in 1 second.')})
        
     else:
         
