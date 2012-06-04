@@ -922,6 +922,11 @@ a.NotImplementedYet{
 }
 
 
+img.attachment{
+height:450px;
+width:450px;
+}
+
 
 #panel{width:1080px;margin-left:auto;margin-right:auto;}
 

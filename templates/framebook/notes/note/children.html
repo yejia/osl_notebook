@@ -36,6 +36,18 @@
                 <img src="/site_media/img/thumbUp.gif"/>{{note.vote}}
                 
                 
+                {% if  note.get_note_type == 'Snippet' %}  
+                    <div>
+                        {% if note.is_img %}
+                             {% if  'social' in book_uri_prefix %} 
+                                <img src="/file/{{note.social_snippet.attachment.name}}" class="attachment"/>
+                             {% else %}
+                                <img src="/file/{{note.snippet.attachment.name}}" class="attachment"/>
+                             {% endif %}
+                        {% endif %}
+                    </div> 
+                {% endif %}
+                
                 {% if note.get_note_type == 'Frame' %}  
                     <ul style="display: none;">
                        {% if  'social' in book_uri_prefix %}                       

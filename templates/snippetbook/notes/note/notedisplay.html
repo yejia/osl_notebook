@@ -4,6 +4,9 @@
 {% block note_attachment%}
 <div>
 <b>{% trans 'attachment' %} :</b> <a href="/file/{{note.attachment.name}}" target="top">{{note.attachment}}</a>
+ {% if note.is_img %} <br/>
+ <img src="/file/{{note.snippet.attachment.name}}" class="attachment"/>
+ {% endif %}
 </div>
 {% endblock %}
 

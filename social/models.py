@@ -257,9 +257,27 @@ class Social_Note(models.Model):
     
 
    
+       #is attachment img?
+    def is_img(self):
+        file_type = None
+        if self.get_note_type() == 'Snippet':
+            if self.social_snippet.attachment.name:
+                file_type = self.social_snippet.attachment.name.split('.')[1]
+                
+        elif self.get_note_type() == 'Frame':
+            if self.social_frame.attachment.name:
+                file_type = self.social_frame.attachment.name.split('.')[1]
+        
+        if file_type in ['jpg','JPG','jpeg','JPEG','png','PNG']:
+            return True
+        else: 
+            return False      
+   
 
 class Social_Snippet(Social_Note):
-    pass
+    attachment = models.FileField(upload_to=get_storage_loc,blank=True, storage=fs, verbose_name=ugettext_lazy('Attachment'),)
+    
+
 
 
 class Social_Bookmark(Social_Note):
@@ -281,7 +299,7 @@ class Social_Scrap(Social_Note):
 
 
 class Social_Frame(Social_Note):
-    attachment = models.FileField(upload_to=get_storage_loc, blank=True, storage=fs)   
+    attachment = models.FileField(upload_to=get_storage_loc, blank=True, storage=fs, verbose_name=ugettext_lazy('Attachment'),)   
     notes = models.ManyToManyField(Social_Note, related_name='in_frames', through="Social_Frame_Notes")
     
     def __unicode__(self):

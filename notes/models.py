@@ -428,6 +428,24 @@ class Note(models.Model):
         
 
 
+           #is attachment img?
+    def is_img(self):
+        file_type = None
+        if self.get_note_type() == 'Snippet':
+            if self.snippet.attachment.name:
+                file_type = self.snippet.attachment.name.split('.')[1]
+                
+        elif self.get_note_type() == 'Frame':
+            if self.frame.attachment.name:
+                file_type = self.frame.attachment.name.split('.')[1]
+        
+        if file_type in ['jpg','JPG','jpeg','JPEG','png','PNG']:
+            return True
+        else: 
+            return False    
+
+
+
     #TODO:so far, notes of private tag cannot be viewed by others in the person's notebook. But should it be viewed by others in a group?
     #  maybe the logic should be notes of private tags are not really private. It is just that the tag is private and that private tag will not
     #  not show in tags list. But if that note has other tags, you can still find that note. 
@@ -492,6 +510,15 @@ class Note(models.Model):
                     sn.url = self.bookmark.url
                 if hasattr(self, 'scrap'):
                     sn.url = self.scrap.url
+            
+            
+            if hasattr(self, 'snippet') or hasattr(self, 'frame'):
+                log.debug('having attribute snippet or frame')
+                if hasattr(self, 'snippet'):
+                    sn.attachment = self.snippet.attachment
+                if hasattr(self, 'frame'):
+                    sn.attachment = self.frame.attachment
+            
                         
             sns_included = []   
             #TODO:test below 
