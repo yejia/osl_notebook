@@ -9,6 +9,7 @@ from notebook.notes.models import Note, Tag, WorkingSet, Folder, Cache, get_stor
 
     
 class Snippet(Note):
+    #TODO: make a special attachment class, which will include attachment of files or urls (single or multiple)
     attachment = models.FileField(upload_to=get_storage_loc,blank=True, storage=fs, verbose_name=ugettext_lazy('Attachment'),) #TODO:validate the file for security reason    
                 
     def __unicode__(self):
