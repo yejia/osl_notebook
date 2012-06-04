@@ -17,13 +17,7 @@ class Snippet(Note):
     def get_note_type(self):
         return 'Snippet'  
     
-        #is attachment img?
-    def is_img(self):
-        if self.attachment.name.endswith('jpg') or self.attachment.name.endswith('JPG') or self.attachment.name.endswith('jpeg') \
-           or self.attachment.name.endswith('JPEG') or self.attachment.name.endswith('png') or self.attachment.name.endswith('PNG'):
-            return True
-        else: 
-            return False  
+ 
     
                     
 class Snippet_Folder(Folder):

@@ -433,12 +433,12 @@ class Note(models.Model):
         file_type = None
         if self.get_note_type() == 'Snippet':
             if self.snippet.attachment.name:
-                file_type = self.snippet.attachment.name.split('.')[1]
-                
+                splits = self.snippet.attachment.name.split('.')
+                file_type = splits[len(splits)-1]
         elif self.get_note_type() == 'Frame':
             if self.frame.attachment.name:
-                file_type = self.frame.attachment.name.split('.')[1]
-        
+                splits = self.frame.attachment.name.split('.')
+                file_type = splits[len(splits)-1]
         if file_type in ['jpg','JPG','jpeg','JPEG','png','PNG']:
             return True
         else: 

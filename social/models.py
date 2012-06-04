@@ -262,11 +262,12 @@ class Social_Note(models.Model):
         file_type = None
         if self.get_note_type() == 'Snippet':
             if self.social_snippet.attachment.name:
-                file_type = self.social_snippet.attachment.name.split('.')[1]
-                
+                splits = self.social_snippet.attachment.name.split('.') #TODO: if no file type specified
+                file_type = splits[len(splits)-1]
         elif self.get_note_type() == 'Frame':
             if self.social_frame.attachment.name:
-                file_type = self.social_frame.attachment.name.split('.')[1]
+                splits = self.social_frame.attachment.name.split('.')
+                file_type = splits[len(splits)-1]
         
         if file_type in ['jpg','JPG','jpeg','JPEG','png','PNG']:
             return True
