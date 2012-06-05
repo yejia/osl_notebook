@@ -4,6 +4,9 @@
 {% block note_attachment%}
 <div>
 <b>{% trans 'attachment' %} :</b> <a href="/file/{{note.attachment.name}}" target="top">{{note.attachment}}</a>
+{% if note.attachment %}
+     {% include "include/notes/note/display_attachment.html" %}         
+{% endif %}
  {% if note.is_img %} <br/>
  <img src="/file/{{note.snippet.attachment.name}}" class="attachment"/>
  {% endif %}
@@ -12,5 +15,5 @@
 
 
 {% block note_form_attachment%}
-<p>{{ note_form.attachment.label_tag }}:{{note_form.attachment}}</p> 
+<p>{{ note_form.attachment.label_tag }}:{{note_form.attachment}}</p>
 {% endblock %}

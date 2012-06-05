@@ -1243,13 +1243,24 @@ function showAddNoteTags(){
                             editable.find('span.tags_edit').show();
                             $('li[note_id='+result.note_id+'] span.tags_text').text(result.display_tags);
                             $('li[note_id='+result.note_id+'] span.tags_text').show();
-                    }                   
+                    }                  
+ 
                          
                   
         });
         
         
-
+           $('span#hide_attachment').hide();	
+           $('span#show_attachment'). click(function(){          
+		        $('img.attachment').show();
+                   $('span#hide_attachment').show();
+                   $('span#show_attachment').hide();                  
+            });		
+           $('#hide_attachment'). click(function(){            
+		        $('img.attachment').hide();
+                   $('span#hide_attachment').hide();
+                   $('span#show_attachment').show();
+            });  
         
         
         {% block extra_ready_script %}

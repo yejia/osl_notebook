@@ -25,7 +25,8 @@
             {% endif %}
     </select>   
 
-   <div id="sidetreecontrol"> <a href="?#">{% trans 'List' %}</a> | <a href="?#">{% trans 'Expanded' %}</a> </div>
+   <div id="sidetreecontrol"> <a href="?#">{% trans 'List' %}</a> | <a href="?#">{% trans 'Expanded' %}</a></div>
+    {% include "include/notes/note/display_attachment.html" %}     
     <ul class="frame_tree" >
         {% social_tree_view_tag note %}
     </ul> 

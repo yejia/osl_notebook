@@ -28,9 +28,12 @@
  {% if note.get_note_type == 'Snippet'  %} 
 <div>
 <b>{% trans 'attachment' %} :</b> <a href="/file/{{note.social_snippet.attachment.name}}" target="top">{{note.social_snippet.attachment}}</a>
+ {% if note.attachment %}
+     {% include "include/notes/note/display_attachment.html" %}         
+{% endif %}
  {% if note.is_img %} <br/>
  <img src="/file/{{note.social_snippet.attachment.name}}" class="attachment"/>
- {% endif %}
+ {% endif %} 
 </div>
 {% endif %}
  {% if note.get_note_type == 'Frame' %} 
