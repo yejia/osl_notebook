@@ -35,7 +35,11 @@
 
     <button title="{% trans 'You can drag the notes to change the ordering and save it' %}" onclick="javascript:set_the_order();">{% trans 'Save the order' %}</button>
     
-    <div id="sidetreecontrol"> <a href="?#">{% trans 'List' %}</a> | <a href="?#">{% trans 'Expanded' %}</a> </div>
+    <div id="sidetreecontrol"> <a href="?#">{% trans 'List' %}</a> | <a href="?#">{% trans 'Expanded' %}</a></div>    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   
+    <div id="show_attachment">    
+        <span id="show_attachment"><a href="#">{% trans 'Show attachment' %}</a></span>
+        <span id="hide_attachment"><a href="#">{% trans 'Hide attachment' %}</a></span>
+    </div>
     <ul id="sortable" class="frame_tree" >
         {% tree_view_tag note %}
     </ul> 

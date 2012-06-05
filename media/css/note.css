@@ -923,9 +923,15 @@ a.NotImplementedYet{
 
 
 img.attachment{
+display:none;
 height:375px;
 width:500px;
 }
+
+div#show_attachment{
+float:right;
+}
+
 
 
 #panel{width:1080px;margin-left:auto;margin-right:auto;}

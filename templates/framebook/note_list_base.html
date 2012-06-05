@@ -23,6 +23,19 @@
     
     <script>
 	$(function() {
+    
+            $('span#hide_attachment').hide();	
+           $('span#show_attachment'). click(function(){          
+		        $('img.attachment').show();
+                   $('span#hide_attachment').show();
+                   $('span#show_attachment').hide();                  
+            });		
+           $('#hide_attachment'). click(function(){            
+		        $('img.attachment').hide();
+                   $('span#hide_attachment').hide();
+                   $('span#show_attachment').show();
+            });  
+    
 		$( "#sortable" ).sortable();
 		$( "#sortable" ).disableSelection();
         
@@ -37,6 +50,10 @@
 				persist: "location"
 			});
 		
+        
+            
+        
+        
           
 	});
     
@@ -58,6 +75,10 @@
         $('ul.messages').append('<li class="success">{% trans "The order of the notes included in this frame is reset successfully!" %} </li>');
         }
         
+     
+     
+     
+     
      
     
 	</script>
