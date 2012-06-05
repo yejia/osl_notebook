@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-31 12:17+0800\n"
+"POT-Creation-Date: 2012-06-05 17:23+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -57,22 +57,22 @@ msgstr ""
 "这个网址已经成功添加到您的网址本里。您可以关闭这个窗口，或者其会在1秒后自动关"
 "闭。"
 
-#: notes/models.py:164 notes/models.py:926 social/models.py:448
+#: notes/models.py:164 notes/models.py:953 social/models.py:467
 #: templates/include/notes/notesdisplay.html:35
 #: templates/notebook/notes/notesdisplay.html:27
 #: templates/scrapbook/notes/notesdisplay.html:28
 msgid "Title"
 msgstr "标题"
 
-#: notes/models.py:164 notes/models.py:926 social/models.py:448
+#: notes/models.py:164 notes/models.py:953 social/models.py:467
 msgid "The size of the title is limited to 2000 characaters."
 msgstr "标题的长度应小于2000字。"
 
-#: notes/models.py:167 notes/models.py:927 social/models.py:449
+#: notes/models.py:167 notes/models.py:954 social/models.py:468
 msgid "Description"
 msgstr "正文"
 
-#: notes/models.py:167 notes/models.py:927 social/models.py:449
+#: notes/models.py:167 notes/models.py:954 social/models.py:468
 msgid "The size of the desc is limited to 2000 characaters."
 msgstr "正文的长度应小于2000字。"
 
@@ -108,11 +108,11 @@ msgstr "最后修改时间"
 msgid "self ranking"
 msgstr "原作者的评级"
 
-#: notes/models.py:924 social/models.py:446
+#: notes/models.py:951 social/models.py:465
 msgid "Language"
 msgstr "语言"
 
-#: notes/models.py:925 social/models.py:447
+#: notes/models.py:952 social/models.py:466
 msgid "Original language"
 msgstr "原来的语言"
 
@@ -184,7 +184,8 @@ msgstr ""
 "这个网摘已经成功添加到您的网址本里。您可以关闭这个窗口，或者其会在1秒后自动关"
 "闭。"
 
-#: snippets/models.py:12 templates/include/notes/notesdisplay.html:37
+#: snippets/models.py:14 social/models.py:279 social/models.py:303
+#: templates/include/notes/notesdisplay.html:37
 #: templates/notebook/notes/notesdisplay.html:29
 msgid "Attachment"
 msgstr "附件"
@@ -652,7 +653,7 @@ msgstr "在链条里的"
 #: templates/bookmarkbook/notes/notes.html:7
 #: templates/bookmarkbook/notes/notes.html:9
 #: templates/framebook/notes/todelete/folders.html:25
-#: templates/include/note_list_base.html:1557
+#: templates/include/note_list_base.html:1560
 #: templates/include/notes/menu/notes_section_menu.html:5
 #: templates/include/notes/todelete/linkagenotesdisplay.html:61
 #: templates/notebook/notes/notes.html:9
@@ -948,16 +949,16 @@ msgstr "一个知识包本是一组动态的基于某个搜索的知识包。"
 msgid "Settings"
 msgstr "设置"
 
-#: templates/framebook/note_list_base.html:57
+#: templates/framebook/note_list_base.html:74
 #: templates/include/note_list_base.html:137
 msgid "An error happened when adding a note."
 msgstr "添加笔记时发生错误。"
 
-#: templates/framebook/note_list_base.html:58
+#: templates/framebook/note_list_base.html:75
 msgid "The order of the notes included in this frame is reset successfully!"
 msgstr "包里笔记的顺序成功的更改了！"
 
-#: templates/framebook/note_list_base.html:80
+#: templates/framebook/note_list_base.html:101
 #: templates/notebook/note_list_base.html:11
 #, python-format
 msgid "Notetbook of %(profile_username)s"
@@ -980,6 +981,8 @@ msgstr "包里所含笔记"
 #: templates/framebook/notes/notes_display.html:47
 #: templates/framebook/notes/notes_display.html:56
 #: templates/include/get_title.html:2
+#: templates/include/note_list_base.html:168
+#: templates/include/note_list_base.html:172
 #: templates/include/notes/inlines/notes_brief_title_inline.html:3
 #: templates/include/notes/inlines/notes_full_title_inline.html:5
 #: templates/include/notes/todelete/linkagenotesdisplay.html:109
@@ -1070,14 +1073,22 @@ msgstr "表单"
 msgid "Expanded"
 msgstr "展开"
 
-#: templates/framebook/notes/note/notedisplay.html:57
+#: templates/framebook/notes/note/notedisplay.html:41
+msgid "Show attachment"
+msgstr "显示附件"
+
+#: templates/framebook/notes/note/notedisplay.html:42
+msgid "Hide attachment"
+msgstr "隐藏附件"
+
+#: templates/framebook/notes/note/notedisplay.html:61
 #: templates/include/notes/notes_display.html:138
 #: templates/notebook/notes/note/notedisplay.html:43
 #: templates/notebook/notes/note/notedisplay.html:48
 #: templates/snippetbook/notes/note/notedisplay.html:6
 #: templates/social/include/notes/notesdisplay.html:110
 #: templates/social/include/notes/note/notedisplay.html:30
-#: templates/social/include/notes/note/notedisplay.html:35
+#: templates/social/include/notes/note/notedisplay.html:38
 msgid "attachment"
 msgstr "附件"
 
@@ -1092,7 +1103,7 @@ msgid "%(profile_username)s's Folder %(current_folder)s"
 msgstr "%(profile_username)s的文件夹%(current_folder)s"
 
 #: templates/framebook/notes/todelete/folders.html:19
-#: templates/include/note_list_base.html:1552
+#: templates/include/note_list_base.html:1555
 #: templates/social/wall_snippets.html:25
 #: templates/social/notes/friends_notes.html:20
 #: templates/social/notes/group_notes.html:17
@@ -1101,7 +1112,7 @@ msgid "Snippets"
 msgstr "便条"
 
 #: templates/framebook/notes/todelete/folders.html:21
-#: templates/include/note_list_base.html:1553
+#: templates/include/note_list_base.html:1556
 #: templates/include/sites_header.html:29
 #: templates/include/sites_header.html:31
 #: templates/social/wall_snippets.html:28
@@ -1114,7 +1125,7 @@ msgid "Bookmarks"
 msgstr "网址"
 
 #: templates/framebook/notes/todelete/folders.html:23
-#: templates/include/note_list_base.html:1554
+#: templates/include/note_list_base.html:1557
 #: templates/social/wall_snippets.html:33
 #: templates/social/wall_snippets.html:35
 #: templates/social/wall_snippets.html:43
@@ -1198,7 +1209,7 @@ msgstr "学习小组"
 #: templates/include/note_list_base.html:144
 #: templates/include/notes/addNote.html:85
 #: templates/include/notes/notes_display.html:59
-#: templates/include/notes/note/notedisplay.html:85
+#: templates/include/notes/note/notedisplay.html:84
 #: templates/social/group/groups.html:64
 msgid "private"
 msgstr "隐私"
@@ -1303,14 +1314,14 @@ msgid "note in frames"
 msgstr "在包里的"
 
 #: templates/include/note_list_base.html:187
-#: templates/include/note_list_base.html:1556
+#: templates/include/note_list_base.html:1559
 #: templates/include/notes/notes_display.html:141
 msgid "Frames"
 msgstr "包"
 
 #: templates/include/note_list_base.html:187
 #: templates/include/notes/notes_display.html:141
-#: templates/include/notes/note/notedisplay.html:101
+#: templates/include/notes/note/notedisplay.html:100
 msgid "Not in any frame"
 msgstr "不在任何包里"
 
@@ -1382,16 +1393,16 @@ msgstr ""
 "被添加到这个小组里。但是隐私的笔记不会。隐私的笔记永远在你的私人笔记本里，除"
 "非你有意的要分享给某个小组。"
 
-#: templates/include/note_list_base.html:1328
+#: templates/include/note_list_base.html:1331
 msgid "show side menu"
 msgstr "显示侧边菜单"
 
-#: templates/include/note_list_base.html:1329
+#: templates/include/note_list_base.html:1332
 msgid "hide side menu"
 msgstr "隐藏侧边菜单"
 
 # python-format
-#: templates/include/note_list_base.html:1548
+#: templates/include/note_list_base.html:1551
 #, python-format
 msgid "Personal notes of %(profile_username)s"
 msgstr "%(profile_username)s的个人笔记"
@@ -1687,31 +1698,31 @@ msgstr "属于"
 msgid "You can use the working set to pick a set of tags to work with."
 msgstr "你可以用工作区来选择一组你用来工作的标签。"
 
-#: templates/include/notes/note/notedisplay.html:57
+#: templates/include/notes/note/notedisplay.html:56
 msgid "Created"
 msgstr "生成时间"
 
-#: templates/include/notes/note/notedisplay.html:82
+#: templates/include/notes/note/notedisplay.html:81
 msgid "importance"
 msgstr "重要性"
 
-#: templates/include/notes/note/notedisplay.html:97
+#: templates/include/notes/note/notedisplay.html:96
 msgid "In frames"
 msgstr "在包里"
 
-#: templates/include/notes/note/notedisplay.html:132
+#: templates/include/notes/note/notedisplay.html:131
 msgid "Edit this note"
 msgstr "编辑这个笔记"
 
-#: templates/include/notes/note/notedisplay.html:133
+#: templates/include/notes/note/notedisplay.html:132
 msgid "Hide edit form"
 msgstr "隐藏编辑表格"
 
-#: templates/include/notes/note/notedisplay.html:165
+#: templates/include/notes/note/notedisplay.html:164
 msgid "Add or edit the translation"
 msgstr "添加或更新翻译"
 
-#: templates/include/notes/note/notedisplay.html:166
+#: templates/include/notes/note/notedisplay.html:165
 msgid "Hide the translation form"
 msgstr "隐藏翻译表格"
 
@@ -2455,9 +2466,6 @@ msgstr "设成当前"
 
 #~ msgid "This Year"
 #~ msgstr "今年"
-
-#~ msgid "With attachment"
-#~ msgstr "有附件的"
 
 #~ msgid "Descend"
 #~ msgstr "降序"
