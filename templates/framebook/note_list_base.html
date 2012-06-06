@@ -78,6 +78,14 @@
 {% block extra_ready_script %}			
             $('span#frame_delete_note').click(function(){	
                     $(this).load('deleteNoteFromFrame/',{ 'linkage_id':$(this).parents('li.note_display').attr('note_id'), 'note_id':$(this).parents('div[linked_note_id]').attr('linked_note_id')});
+                    //remove the one in brief_display (if this is in full_display)
+                    var linked_note_id = $(this).parents("div[linked_note_id]").attr('linked_note_id');                   
+                    var display = $(this).parents("div[linked_note_id]").parents('div#frame').attr('class');                  
+                    if (display=="brief_display"){
+                           $(this).parents('div.framebook').find('div.full_display').find('div#note_notes ul').find('div[linked_note_id="'+linked_note_id+'"]').remove();
+                    }else{
+                           $(this).parents('div.framebook').find('div.brief_display').find('div#note_notes ul').find("div[linked_note_id='"+linked_note_id+"']").remove();          
+                    }
                     $(this).parents("div[linked_note_id]").remove();
             });
 {% endblock %}

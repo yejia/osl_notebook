@@ -1074,27 +1074,27 @@ def note_raw(request, username, bookname, note_id):
 @login_required
 def update_note(request, note_id, username, bookname): 
     log.debug( 'updating note :'+note_id)
-    N = getNote(username, bookname)
-    note = N.objects.get(id=note_id)  
-    #TODO: so far there are something wrong with using form. Together with update linkage, sometimes
-    #it succeeds, sometime error saying tags is required field.
-    
-    #need to create a customized form since the field of the form will be popluated with choices based on the model
-#    UpdateNForm = create_model_form("UpdateNForm", N)
-#    form = UpdateNForm(request.POST, request.FILES, instance=note)
-#    #TODO: validate
-#    print "form.fields:", form.fields
-#    print "form.errors:",form.errors
-#    form.save()
+    #N = getNote(username, bookname)
+#    note = N.objects.get(id=note_id)  
+    note = Note.objects.using(username).get(id=note_id)  
+    #TODO: probably there is no need with the complicated dynamic class generation anymore. Just use the way below
+    note.owner_name = username
+ 
 
     note.title = request.POST.get('title')
     note.desc = request.POST.get('desc')
     note.event = request.POST.get('event')
     note.private = request.POST.get('private', False)
     note.deleted = request.POST.get('delete', False)
-    note.tags = request.POST.getlist('tags')
+    
     #note.init_date = request.POST.get('init_date')
-    note.vote = request.POST.get('vote')
+    if note.get_note_type() == 'Frame':
+        note.frame.owner_name = username
+        note.vote = note.frame.get_vote()
+        note.tags = note.frame.get_sum_of_note_tag_ids()
+    else:    
+        note.vote = request.POST.get('vote')
+        note.tags = request.POST.getlist('tags')
     url = request.POST.get('url')
     if url:
         #TODO: if note type is note
@@ -1167,7 +1167,7 @@ def update_note_inline(request, username, bookname):
     if note_field=='note_init_date':
         note.init_date = datetime.datetime.strptime(content,'%Y-%m-%d %H:%M')   
         
-    
+    #below is not used anymore. update_note_included_notes_inline is used to add notes instead
     if note_field=='note_add_notes':
         note.add_notes(content)
     
@@ -1186,9 +1186,43 @@ def update_note_tags_inline(request, username, bookname):
     note = N.objects.get(id=note_id)
     note.update_tags(tags) 
     note.save() 
-    return HttpResponse(simplejson.dumps({'note_id':note.id, 'display_tags':note.display_tags()}),
+    return HttpResponse(simplejson.dumps({'note_id':note.id, 'display_tags':note.display_tags(),\
+                                          'note_tags':note.get_tags()}),
                                                                      "application/json")
 
+
+@login_required  
+def add_notes_to_frame(request, username, bookname): 
+    note_id = request.POST.get('id')
+    included_notes_added =  request.POST.get('included_notes_added')  
+    N = getNote(username, bookname)    
+    note = N.objects.get(id=note_id)
+    note.add_notes(included_notes_added) 
+    note.owner_name = username
+    note.vote = note.get_vote()
+    note.tags = note.get_sum_of_note_tag_ids()    
+    note.save() 
+    added_notes = __get_notes_by_ids(included_notes_added.split(','), username, 'notebook')
+     #TODO: find or write function that mimic truncatewords in template
+    notes_added = [[n.id, n.title, n.desc[0:200], n.vote, n.get_note_bookname(), n.get_note_type()]  for n in added_notes]
+    return HttpResponse(simplejson.dumps({'note_id':note.id, 'notes_added':notes_added}),
+                                                                     "application/json")
+
+
+@login_required
+def delete_note_from_frame(request, username, bookname):    
+    frame_id = request.POST.get('linkage_id')
+    log.debug( 'frame is:'+str(frame_id))
+    F = getFrame(username)
+    frame = F.objects.get(id=frame_id)
+    note_id = request.POST.get('note_id')
+    log.debug('note to be deleted from the frame:'+note_id)
+    frame.remove_note(note_id)  
+    frame.owner_name = username
+    frame.vote = frame.get_vote()
+    frame.tags = frame.get_sum_of_note_tag_ids()   
+    frame.save()
+    return HttpResponse('note deleted', mimetype="text/plain")  
 
 
 
@@ -1611,17 +1645,6 @@ def update_linkagenote(request, note_id, username, bookname):
 
 #  
 
-@login_required
-def delete_note_from_frame(request, username, bookname):    
-    frame_id = request.POST.get('linkage_id')
-    log.debug( 'frame is:'+str(frame_id))
-    F = getFrame(username)
-    frame = F.objects.get(id=frame_id)
-    note_id = request.POST.get('note_id')
-    log.debug('note to be deleted from the frame:'+note_id)
-    frame.remove_note(note_id)    
-    frame.save()
-    return HttpResponse('note deleted', mimetype="text/plain")  
 
 @login_required    
 def toggle_add_note_mode(request):

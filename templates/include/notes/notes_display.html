@@ -106,7 +106,7 @@
 			  </div>
 
 
-			  <div class="full_display">
+			  <div class="full_display" {% if bookname == 'framebook' %}id="frame" {% endif %} >
 				 <table class="note_table">
 				    <tr>
 				        {% block note_full_table_td_note_type%}           

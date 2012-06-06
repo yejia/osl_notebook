@@ -399,7 +399,7 @@ margin-bottom:-35px;
 
 #update_tags_inline_box{
 position:relative;
-left:40px;
+left:45px;
 top:-20px;
 width:250px;
 margin-bottom:0px;
@@ -718,7 +718,7 @@ bottom:0px;
 }
 
 
-span.tags_edit{	
+span.tags_edit, span.included_notes_edit {	
    background: url("../img/icon_changelink.gif");
    background-repeat:no-repeat;
    cursor:pointer;
@@ -726,20 +726,46 @@ span.tags_edit{
 }
 
 span.tags_save{
+/*
    background: url("../img/edit_big.png") -16px 0;
    cursor:pointer;
 
 margin: 2px;
+*/
+ background: url("../img/save.png");
+   background-repeat:no-repeat;
+   cursor:pointer;
+   margin: 2px;
+   padding:3px;
 
 }
 span.tags_cancel{
+/*
    background: url("../img/edit_big.png") 25px 0;
    cursor:pointer;
    
 margin: 2px;
+*/
+ background: url("../img/cancel.png");
+   background-repeat:no-repeat;
+   cursor:pointer;
+   margin: 2px;
+   padding:3px;
 }
-
-
+span.included_notes_save{
+   background: url("../img/save.png");
+   background-repeat:no-repeat;
+   cursor:pointer;
+   margin: 2px;
+   padding:3px;
+}
+span.included_notes_cancel{
+   background: url("../img/cancel.png");
+   background-repeat:no-repeat;
+   cursor:pointer;
+   margin: 2px;
+   padding:3px;
+}
 
 
 /*Below has no effect*/

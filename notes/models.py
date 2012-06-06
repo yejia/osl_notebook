@@ -520,19 +520,22 @@ class Note(models.Model):
                     sn.attachment = self.frame.attachment
             
                         
-            sns_included = []   
+            #sns_included = []   
             #TODO:test below 
             if hasattr(self, 'frame'):
+                self.frame.owner_name = self.owner_name
                 self.vote = self.frame.get_vote()
                 #for n_included in self.frame.notes.using(self.owner_name).all():
-                self.frame.owner_name = self.owner_name
+                
                 order = self.frame.get_notes_order()
+                #clear the included notes for the social note first
+                sn.notes.clear()
                 for note_id in order:
                     #TODO:how about deleted?
                     n_included = Note.objects.using(self.owner_name).get(id=note_id)
                     if not n_included.is_private():
                         sn_included = Social_Note.objects.get(owner=owner.member, owner_note_id=n_included.id)                        
-                        sns_included.append(sn_included)
+                        #sns_included.append(sn_included)
                         sfn, created = Social_Frame_Notes.objects.get_or_create(social_frame=sn, social_note=sn_included)
                         sfn._order = order.index(note_id)
                         sfn.save()                                            
@@ -632,22 +635,33 @@ class Frame(Note):
     def get_vote(self):        
         v = 0  
         #TODO:using(self.owner_name)?
-        for n in self.notes.all(): 
-            v = v + n.vote
+        for n in self.notes.using(self.owner_name).all(): 
+            v = v + n.vote            
         return v
 
     def get_sum_of_note_tags(self):
         ts = set([])
         #TODO:using(self.owner_name)?
-        for n in self.notes.all():
-            for t in n.tags.all():
+        for n in self.notes.using(self.owner_name).all():
+            for t in n.tags.using(self.owner_name).all():
                 ts.add(t.name)
         return list(ts)    
+
+    
+    def get_sum_of_note_tag_ids(self): 
+        ts = set([])
+        #TODO:using(self.owner_name)?
+        for n in self.notes.using(self.owner_name).all():
+            for t in n.tags.using(self.owner_name).all():
+                ts.add(t.id)
+        return list(ts) 
+
 
     def get_display_of_sum_of_note_tags(self):
         ts = self.get_sum_of_note_tags()
         return ','.join(ts)        
     
+    #not useful anymore, since a frame's tags should just be the sum of its included notes' tags
     def get_unique_extra_tags(self):
         ts = self.get_sum_of_note_tags()
         return list(set(self.get_tags()).difference(set(ts)))
@@ -720,12 +734,14 @@ class Frame(Note):
     
     #TODO:note_id or id?        
     def remove_note(self, note_id):
-#        if self.__class__.owner_name:
-#            n = Note.objects.using(self.__class__.owner_name).get(id=note_id)
-#        else:
-#            n = Note.objects.get(id=note_id)
         n = Note.objects.using(self.owner_name).get(id=note_id)
-        self.notes.remove(n)    
+        #self.notes.remove(n)   
+        fn = Frame_Notes.objects.using(self.owner_name).get(frame=self, note=n) 
+        #TODO: need to move the seq number over?
+        fn.owner_name = self.owner_name
+        fn.delete()
+        #Need to update the social one
+        self.save()
 
 
 #===============================================================================
@@ -762,6 +778,7 @@ class Frame(Note):
             fn.save()
             seq = seq + 1
         self.save() #save the order to the social note
+
 
 class Frame_Notes(models.Model):
     frame = models.ForeignKey(Frame, related_name='note_and_frame') #TODO:

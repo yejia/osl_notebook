@@ -347,7 +347,10 @@
                     }
                 }
                 
-                
+               
+
+                     
+
                 
             $("li[note_id='"+note.note_id+"']  span.tags_edit"). click(function(){
                 //alert('tags edit clicked');
@@ -386,20 +389,28 @@
                                 selected_tags_str =  selected_tags.join();                            
                                 $.post('updateNoteTagsInline/',{ 'id':$(this).parents('li').attr('note_id'), 'tags':  selected_tags_str}, tags_updated_inline ,'json');                  
                                 //$(this).load('updateNoteInline/',{ 'id':$(this).parents('li').attr('note_id'),'note_field':'note_tags', 'content':  selected_tags_str});
+                                
+                                
                     
                     
                         });
                      
                      
-                     function tags_updated_inline(result){           
+                     function tags_updated_inline(result){          
                             var  editable =     $('li[note_id="'+result.note_id+'"] span.editable') ;              
                             editable.find('span.tags_cancel').remove();
                             //TODO:define variable with jquery
-                             editable.find("#update_tags_inline_box").hide();                    
+                            editable.find("#update_tags_inline_box").hide();                    
                             editable.find('span.tags_save').remove();
                             editable.find('span.tags_edit').show();
                             $('li[note_id='+result.note_id+'] span.tags_text').text(result.display_tags);
                             $('li[note_id='+result.note_id+'] span.tags_text').show();
+                            toappend = ''
+                            for (var i=0;i<result.note_tags.length;i++){ 
+                                 toappend = toappend+ '<span><a href="/{{profile_username}}/{{bookname}}/notes/tags/'+result.note_tags[i]+'/">'+result.note_tags[i]+'</a>,</span>';
+                            }                            
+                            $('li[note_id='+result.note_id+']  div.brief_display  div#note_tags').empty().append(toappend);
+                            
                     }                   
                          
                   
@@ -1243,11 +1254,114 @@ function showAddNoteTags(){
                             editable.find('span.tags_edit').show();
                             $('li[note_id='+result.note_id+'] span.tags_text').text(result.display_tags);
                             $('li[note_id='+result.note_id+'] span.tags_text').show();
+                            
+                            toappend = ''
+                            for (var i=0;i<result.note_tags.length;i++){ 
+                                 toappend = toappend+ '<span><a href="/{{profile_username}}/{{bookname}}/notes/tags/'+result.note_tags[i]+'/">'+result.note_tags[i]+'</a>,</span>';
+                            }                            
+                            $('li[note_id='+result.note_id+']  div.brief_display  div#note_tags').empty().append(toappend);
                     }                  
  
                          
                   
         });
+        
+        
+        
+        
+        
+             $("span.included_notes_edit"). click(function(){
+                //alert('included_notes_edit clicked'); 
+                      var  editable =    $(this).parents('span.editable') ; 
+                      editable.prepend('<span class="included_notes_save">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="included_notes_cancel">&nbsp;&nbsp;&nbsp;&nbsp;</span>');                        
+                      editable.find("#update_included_notes_inline_box").show();
+                      $(this).hide();
+                           
+                       // alert('after hiding this');     
+                         $("span.included_notes_cancel"). click(function(){     
+                                var  editable =    $(this).parents('span.editable') ;                      
+                                editable.find("#update_included_notes_inline_box").hide();                    
+                                editable.find('span.included_notes_save').remove();
+                                editable.find('span.included_notes_edit').show();
+                                
+                                $(this).remove();
+                                
+                                 }); 
+                       //  alert('after cancel');     
+                         
+                         $("span.included_notes_save"). click(function(){                  
+                                 var included_notes_added = $(this).parents('span.editable').find(':input').val();	
+                                 //alert('included_notes_added is:'+included_notes_added);
+                                 var  editable =    $(this).parents('span.editable') ;                               
+
+                                 // alert('in save, before post');    
+
+                             $.post('addNotesToFrame/',{ 'id':$(this).parents('li').attr('note_id'), 'included_notes_added':  included_notes_added}, included_notes_updated_inline ,'json');           
+              
+           
+                            });            
+
+                           // alert('after save');     
+
+                            function included_notes_updated_inline(result){           
+                                        var  editable =     $('li[note_id="'+result.note_id+'"] div.full_display  div#note_add_notes span.editable') ;         
+
+                                        editable.find('span.included_notes_cancel').remove();
+                                        //TODO:define variable with jquery
+                                        editable.find("#update_included_notes_inline_box").hide();                    
+                                        editable.find('span.included_notes_save').remove();
+                                        editable.find('span.included_notes_edit').show();
+                                        
+                                        var full_display = editable.parents('div.full_display');
+                                        var ul_full = full_display.find('div div#note_notes ul');                                  
+                                         
+                                        var ul_brief  = full_display.parents('div.framebook').find('div.brief_display').find('div#note_notes ul');
+                                         //alert('ul_brief is:'+ul_brief.html());     
+                                         
+                                        for (var i=0;i<result.notes_added.length;i++){ 
+                                        // alert('i is'+i);
+                                            if (result.notes_added[i][1] == ''){
+                                                title = '{% trans "(No Title)" %}';
+                                            }else{
+                                                title  = result.notes_added[i][1];
+                                            }
+                                          // alert('title:'+title);
+                                            var toappend = '<div linked_note_id="'+result.notes_added[i][0]+'">'+
+                                                                           '<li><img src="/site_media/img/'+result.notes_added[i][5]+'.png" title="'+result.notes_added[i][5]+'"/><a href="/{{profile_username}}/'+result.notes_added[i][4]+'/notes/note/'+result.notes_added[i][0]+'"><strong>'+title+'</strong></a>'+
+                                                                                '&nbsp;&nbsp;&nbsp;'+result.notes_added[i][2]+'&nbsp;&nbsp;&nbsp;&nbsp;'+result.notes_added[i][3]+' &nbsp;&nbsp;&nbsp;&nbsp;'+
+                                                                                '<span title="remove this note from the frame" class="inline_delete" id="frame_delete_note">&nbsp;&nbsp;&nbsp;</span>'+
+                                                                            '</li>'+           
+                                                                    '</div>';
+                                             ul_full.append(toappend);
+                                             ul_brief.append(toappend);
+                                             
+                                             //add event to the newly added included note
+                                            //has to get the num out instead of using result.notes_added[i][0] directly in the event function. TODO: why?
+                                             linked_note_id = result.notes_added[i][0]
+                                            $('li[note_id="'+result.note_id+'"] div.full_display  div[linked_note_id="'+linked_note_id+'"]  span#frame_delete_note').click(function(){	
+                                             //alert('linked_note_id:'+linked_note_id);
+                                                    $.post('deleteNoteFromFrame/',{ 'linkage_id':$(this).parents('li.note_display').attr('note_id'), 'note_id':$(this).parents('div[linked_note_id]').attr('linked_note_id')});
+                                                    //need to remove the one in brief_display as well
+                                                    $(this).parents('div.framebook').find('div.brief_display').find('div#note_notes ul').find("div[linked_note_id='"+linked_note_id+"']").remove();                                              
+                                                    $(this).parents("div[linked_note_id]").remove();                                                   
+                                            });
+                                            
+                                             $('li[note_id="'+result.note_id+'"] div.brief_display  div[linked_note_id="'+linked_note_id+'"]  span#frame_delete_note').click(function(){	
+                                                    $.post('deleteNoteFromFrame/',{ 'linkage_id':$(this).parents('li.note_display').attr('note_id'), 'note_id':$(this).parents('div[linked_note_id]').attr('linked_note_id')});                                                   
+                                                     //need to remove the one in brief_display as well
+                                                    $(this).parents('div.framebook').find('div.full_display').find('div#note_notes ul').find('div[linked_note_id="'+linked_note_id+'"]').remove();
+                                                    $(this).parents("div[linked_note_id]").remove();                                                   
+                                            });
+                                           
+                          
+                                         } 
+                            }        
+            
+                            // alert('after callback');     
+            
+                    });          
+             
+             
         
         
            $('span#hide_attachment').hide();	

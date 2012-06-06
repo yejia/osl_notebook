@@ -14,7 +14,7 @@
              {% if user.username == profile_username %}   
                {% for n in note.get_notes_in_order %}       
                 <div linked_note_id="{{n.id}}">
-                     <li><a href="/{{profile_username}}/{{bookname}}/{{included_aspect_name}}/note/{{n.id}}"><strong>{{n.title|default:_('(No Title)')}}-</strong></a>
+                     <li><img src="/site_media/img/{{n.get_note_type}}.png" title="{{n.get_note_type}}"/><a href="/{{profile_username}}/{{n.get_note_bookname}}/notes/note/{{n.id}}"><strong>{{n.title|default:_('(No Title)')}}-</strong></a>
                                 &nbsp;&nbsp;&nbsp;{{n.desc|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp;{{n.vote}} &nbsp;&nbsp;&nbsp;&nbsp; 
                                 <span title="remove this note from the frame" class="inline_delete" id="frame_delete_note">&nbsp;&nbsp;&nbsp;<!--TODO:get rid of &nbsp; use the style instead--></span>
                      </li>           
@@ -23,7 +23,7 @@
               {% else %}              
                {% for n in note.display_public_notes  %}            
                 <div linked_note_id="{{n.id}}">
-                     <li><a href="/{{profile_username}}/{{bookname}}/{{included_aspect_name}}/note/{{n.id}}"><strong>{{n.title|default:_('(No Title)')}}-</strong></a>
+                     <li><img src="/site_media/img/{{n.get_note_type}}.png" title="{{n.get_note_type}}"/><a href="/{{profile_username}}/{{n.get_note_bookname}}/notes/note/{{n.id}}"><strong>{{n.title|default:_('(No Title)')}}-</strong></a>
                                 &nbsp;&nbsp;&nbsp;{{n.desc|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp;{{n.vote}} &nbsp;&nbsp;&nbsp;&nbsp; 
                                 <!--TODO:get rid of &nbsp; use the style instead--></span>
                      </li>           
@@ -44,7 +44,7 @@
              {% if user.username == profile_username %} 
                {% for n in note.get_notes_in_order %}            
                 <div linked_note_id="{{n.id}}">
-                     <li><a href="/{{profile_username}}/{{bookname}}/{{included_aspect_name}}/note/{{n.id}}"><strong>{{n.title|default:_('(No Title)')}}-</strong></a>
+                     <li><img src="/site_media/img/{{n.get_note_type}}.png" title="{{n.get_note_type}}"/><a href="/{{profile_username}}/{{n.get_note_bookname}}/notes/note/{{n.id}}"><strong>{{n.title|default:_('(No Title)')}}-</strong></a>
                                 &nbsp;&nbsp;&nbsp;{{n.desc|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp;{{n.vote}} &nbsp;&nbsp;&nbsp;&nbsp; 
                                 <span title="remove this note from the frame" class="inline_delete" id="frame_delete_note">&nbsp;&nbsp;&nbsp;<!--TODO:get rid of &nbsp; use the style instead--></span>
                      </li>           
@@ -53,7 +53,7 @@
               {% else %}              
                {% for n in note.get_public_notes_in_order  %}            
                 <div linked_note_id="{{n.id}}">
-                     <li><a href="/{{profile_username}}/{{bookname}}/{{included_aspect_name}}/note/{{n.id}}"><strong>{{n.title|default:_('(No Title)')}}-</strong></a>
+                     <li><img src="/site_media/img/{{n.get_note_type}}.png" title="{{n.get_note_type}}"/><a href="/{{profile_username}}/{{n.get_note_bookname}}/notes/note/{{n.id}}"><strong>{{n.title|default:_('(No Title)')}}-</strong></a>
                                 &nbsp;&nbsp;&nbsp;{{n.desc|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp;{{n.vote}} &nbsp;&nbsp;&nbsp;&nbsp; 
                                <!--TODO:get rid of &nbsp; use the style instead--></span>
                      </li>           
@@ -62,9 +62,19 @@
               {% endif %}
 		    
             </ul>
-		    </div>
+    </div>
 
-            <div>
-                <div  id="note_add_notes">{% if user.username == profile_username %}<span  class="editableText"></span>&nbsp;&nbsp;&nbsp;{% trans 'add more notes to the frame' %} <a href="javascript:alert('{% trans "When editing, replace content with comma separated note ids. And those notes will be included in this frame." %}');"><img src="/media/img/admin/icon-unknown.gif"/></a>{% endif %}
-            </div>
+    <div>
+                <div  id="note_add_notes">
+                    {% if user.username == profile_username %}
+                        <span class="editable">
+                        <span  class="included_notes_edit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <input type="text" name="included_notes_added" id="update_included_notes_inline_box"  style="display: none;"   placeholder="{% trans "Enter comma separated note ids" %}"/>
+                       {% trans 'add more notes to the frame' %} 
+                        <a href="javascript:alert('{% trans "Enter comma separated note ids. And those notes will be included in this frame." %}');">
+                            <img src="/media/img/admin/icon-unknown.gif"/>
+                        </a>
+                        </span>
+                    {% endif %}
+        </div>
 {% endblock %} 	
