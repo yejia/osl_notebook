@@ -1,3 +1,5 @@
+{% load i18n %}
+
 <script>
 	jQuery(function($){
 
@@ -39,7 +41,7 @@
 <b>attachment:</b> {{note.attachment}}
 </div>
 <div>
-<b>linkages: </b>
+<b>linkages: </b>  <span title="View notes included in note list"><a href="/{{profile_username}}/notebook/linkages/linkage/{{note.id}}/notes/">{% trans 'View in note list' %}</a></span>
  {% if user.username == profile_username %} 
 {% for id, title, desc, display_tags in note.display_notes %}
 <div>

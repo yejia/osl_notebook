@@ -67,7 +67,11 @@ urlpatterns = patterns('',
 
     (r'^caches/(?P<cache_id>[^/]+)/addNotes2Cache/$','notebook.notes.views.add_notes_to_cache'), 
     (r'^caches/(?P<cache_id>[^/]+)/clearCache/$','notebook.notes.views.clear_cache'), 
+    #TODO:Might need to update the url for caches. It seems better to be r'^caches/cache/(?P<cache_id>[^/]+)/notes/$'
     (r'^caches/(?P<cache_id>[^/]+)/$','notebook.notes.views.caches'), 
+    #below is only for after notebook/  . 
+    (r'^frames/frame/(?P<frame_id>[^/]+)/notes/$','notebook.notes.views.included_notes_in_frame'), 
+    (r'^linkages/linkage/(?P<linkage_id>[^/]+)/notes/$','notebook.notes.views.included_notes_in_linkage'), 
 
     (r'^notes/note/(?P<note_id>[^/]+)/$','notebook.notes.views.note'),
     (r'^notes/note_raw/(?P<note_id>[^/]+)/$','notebook.notes.views.note_raw'),

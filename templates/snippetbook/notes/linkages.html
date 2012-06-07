@@ -3,7 +3,7 @@
 
 
 {% block tags_menu %}
-{% include "include/tags_menu.html" %} 
+{% include "include/notes/menu/tags_menu.html" %} 
 {% endblock %}
 
 {% block special_side_menu %}
@@ -16,9 +16,9 @@
 {% endblock %}
 
 {% block content%}
-<div id="content-main"> 
+<div id="content-main">
 <div> 
-{% include "notes/linkagenotesdisplay.html" %}
+{% include "snippetbook/notes/linkagenotesdisplay.html" %}
 </div> 
 </div> 
 {% endblock %}

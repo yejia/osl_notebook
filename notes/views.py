@@ -736,6 +736,49 @@ def caches(request, cache_id, username, bookname):
 
 
 
+#view included notes in a frame 
+@login_required
+def included_notes_in_frame(request, frame_id, username, bookname):    
+    F = getFrame(username)
+    f = F.objects.get(id=frame_id)
+    f.owner_name = username
+    notes = f.get_notes_in_order()
+    note_ids_list = [n.id for n in notes]
+    if note_ids_list:        
+        note_list = __get_notes_by_ids(note_ids_list, username, bookname)
+    else:
+        note_list = __get_notes_by_ids([], username, bookname)
+    qstr = __getQStr(request)
+    note_list = getSearchResults(note_list, qstr, search_fields_dict.get(bookname))
+    T = getT(username)
+    default_tag_id = T.objects.get(name='untagged').id    
+    context = __get_context(request, note_list, default_tag_id, username, bookname)    
+    return render_to_response(book_template_dict.get(bookname)+'notes/note_list.html', context, context_instance=RequestContext(request,{'bookname': bookname, 'aspect_name':'notes',\
+                                                                                                        'book_uri_prefix':'/'+username}))
+
+
+#view included notes in a linkage 
+@login_required
+def included_notes_in_linkage(request, linkage_id, username, bookname):      
+    l = LinkageNote.objects.using(username).get(id=linkage_id)
+    l.owner_name = username
+    notes = l.notes.using(username).all()
+    note_ids_list = [n.id for n in notes]
+    if note_ids_list:        
+        note_list = __get_notes_by_ids(note_ids_list, username, bookname)
+    else:
+        note_list = __get_notes_by_ids([], username, bookname)
+    
+    
+    qstr = __getQStr(request)
+    note_list = getSearchResults(note_list, qstr, search_fields_dict.get(bookname))
+    T = getT(username)
+    default_tag_id = T.objects.get(name='untagged').id    
+    context = __get_context(request, note_list, default_tag_id, username, bookname)    
+    return render_to_response(book_template_dict.get(bookname)+'notes/note_list.html', context, context_instance=RequestContext(request,{'bookname': bookname, 'aspect_name':'notes',\
+                                                                                                        'book_uri_prefix':'/'+username}))
+
+
 def __get_context(request, note_list,default_tag_id, username, bookname, aspect_name='notes'):  
     theme = __get_view_theme(request)
     in_linkage = theme['in_linkage'] #TODO:get rid of
@@ -1501,12 +1544,14 @@ def linkagenotes(request, username, bookname):
     
     #TODO: get linkages according to bookname
     
-    L = getLinkage(username, bookname)
-    note_list = L.objects.filter(deleted=False)
+    #L = getLinkage(username, bookname)
+    L = getL(username)
+    note_list = L.objects.using(username).all()
+    
     if request.user.username != username:
         log.debug('Not the owner of the notes requested, getting public notes only...')
         note_list = get_public_linkages(note_list)        
-     
+    
     view_mode, sort,  delete, private, date_range, order_type, with_attachment, paged_notes, cl = __get_notes_context(request, note_list)  
     folders, caches, next_cache_id = __get_menu_context(request, username, bookname)
     qstr = '' #TODO: for now, no query
@@ -1516,7 +1561,7 @@ def linkagenotes(request, username, bookname):
     if request.user.username != username:
         tags = get_public_tags(tags)  
     
-    return render_to_response('notes/linkages.html', {'note_list': paged_notes, 
+    return render_to_response(book_template_dict.get(bookname)+'notes/linkages.html', {'note_list': paged_notes, 
                                                  'tags':tags, 'view_mode':view_mode, 
                                                  'sort':sort, 'delete':delete, 'private':private, 'day':now.day, 'month':now.month, 'year':now.year, 'cl':cl,
                                                  'folders':folders,'qstr':qstr, 'profile_username':username, 'aspect_name':'linkagenotes', 'date_range':date_range, 
@@ -1609,7 +1654,7 @@ def linkagenote(request, note_id, username, bookname):
     L = getL(username)
     note = L.objects.get(id=note_id)
     linkage_form = UpdateLinkageNoteForm(instance=note)
-    return render_to_response('notes/linkagenote.html', {'note':note, 'linkage_form':linkage_form, 'profile_username':username}, context_instance=RequestContext(request,{'bookname': bookname,}))
+    return render_to_response(book_template_dict.get(bookname)+'notes/note/linkagenote.html', {'note':note, 'linkage_form':linkage_form, 'profile_username':username}, context_instance=RequestContext(request,{'bookname': bookname,}))
 
 
 @login_required

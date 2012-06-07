@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-07 07:34+0800\n"
+"POT-Creation-Date: 2012-06-07 15:43+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -57,22 +57,22 @@ msgstr ""
 "这个网址已经成功添加到您的网址本里。您可以关闭这个窗口，或者其会在1秒后自动关"
 "闭。"
 
-#: notes/models.py:164 notes/models.py:970 social/models.py:467
+#: notes/models.py:164 notes/models.py:972 social/models.py:467
 #: templates/include/notes/notesdisplay.html:35
 #: templates/notebook/notes/notesdisplay.html:27
 #: templates/scrapbook/notes/notesdisplay.html:28
 msgid "Title"
 msgstr "标题"
 
-#: notes/models.py:164 notes/models.py:970 social/models.py:467
+#: notes/models.py:164 notes/models.py:972 social/models.py:467
 msgid "The size of the title is limited to 2000 characaters."
 msgstr "标题的长度应小于2000字。"
 
-#: notes/models.py:167 notes/models.py:971 social/models.py:468
+#: notes/models.py:167 notes/models.py:973 social/models.py:468
 msgid "Description"
 msgstr "正文"
 
-#: notes/models.py:167 notes/models.py:971 social/models.py:468
+#: notes/models.py:167 notes/models.py:973 social/models.py:468
 msgid "The size of the desc is limited to 2000 characaters."
 msgstr "正文的长度应小于2000字。"
 
@@ -108,11 +108,11 @@ msgstr "最后修改时间"
 msgid "self ranking"
 msgstr "原作者的评级"
 
-#: notes/models.py:968 social/models.py:465
+#: notes/models.py:970 social/models.py:465
 msgid "Language"
 msgstr "语言"
 
-#: notes/models.py:969 social/models.py:466
+#: notes/models.py:971 social/models.py:466
 msgid "Original language"
 msgstr "原来的语言"
 
@@ -132,43 +132,43 @@ msgstr "注册成员错误"
 msgid "Passwords don't match!"
 msgstr "密码不一致！"
 
-#: notes/views.py:941
+#: notes/views.py:984
 msgid "note"
 msgstr "条笔记"
 
-#: notes/views.py:942
+#: notes/views.py:985
 msgid "notes"
 msgstr "条笔记"
 
-#: notes/views.py:1111
+#: notes/views.py:1154
 msgid "Note is successfully updated!"
 msgstr "笔记更新成功！"
 
-#: notes/views.py:1800 notes/views.py:1811
+#: notes/views.py:1845 notes/views.py:1856
 msgid "Sharing snippet:"
 msgstr "分享便条："
 
-#: notes/views.py:1802 notes/views.py:1813
+#: notes/views.py:1847 notes/views.py:1858
 msgid "Sharing bookmark:"
 msgstr "分享网址："
 
-#: notes/views.py:1804 notes/views.py:1815
+#: notes/views.py:1849 notes/views.py:1860
 msgid "Sharing scrap:"
 msgstr "分享网摘："
 
-#: notes/views.py:1806 notes/views.py:1817
+#: notes/views.py:1851 notes/views.py:1862
 msgid "Sharing knowledge package:"
 msgstr "分享知识包："
 
-#: notes/views.py:1819
+#: notes/views.py:1864
 msgid "Original Note:"
 msgstr "原笔记："
 
-#: notes/views.py:1821
+#: notes/views.py:1866
 msgid "Forwarded Note:"
 msgstr "转发的笔记："
 
-#: notes/views.py:1823
+#: notes/views.py:1868
 msgid "from"
 msgstr "来自"
 
@@ -1021,8 +1021,7 @@ msgstr "把更多的笔记放入这个包内"
 msgid ""
 "Enter comma separated note ids. And those notes will be included in this "
 "frame."
-msgstr ""
-"编辑时输入逗号分隔的note ids，所有的在内的便条都会被加到包里去。"
+msgstr "编辑时输入逗号分隔的note ids，所有的在内的便条都会被加到包里去。"
 
 #: templates/framebook/notes/note/notedisplay.html:9
 #: templates/social/framebook/notes/note/notedisplay.html:7
@@ -1064,21 +1063,30 @@ msgstr "你可以拖拽下面的笔记来改变它们的排序"
 msgid "Save the order"
 msgstr "保存当前排序"
 
-#: templates/framebook/notes/note/notedisplay.html:39
+#: templates/framebook/notes/note/notedisplay.html:38
+msgid "View notes included in note list"
+msgstr "在笔记列表里浏览包含的笔记"
+
+#: templates/framebook/notes/note/notedisplay.html:38
+#: templates/snippetbook/notes/note/linkagenotedisplay.html:44
+msgid "View in note list"
+msgstr "在笔记列表里浏览"
+
+#: templates/framebook/notes/note/notedisplay.html:40
 #: templates/include/notes/notes_section_header.html:6
 #: templates/social/framebook/notes/note/notedisplay.html:28
 #: templates/social/include/notes/notes_section_header.html:4
 msgid "List"
 msgstr "表单"
 
-#: templates/framebook/notes/note/notedisplay.html:39
+#: templates/framebook/notes/note/notedisplay.html:40
 #: templates/include/notes/notes_section_header.html:5
 #: templates/social/framebook/notes/note/notedisplay.html:28
 #: templates/social/include/notes/notes_section_header.html:4
 msgid "Expanded"
 msgstr "展开"
 
-#: templates/framebook/notes/note/notedisplay.html:58
+#: templates/framebook/notes/note/notedisplay.html:59
 #: templates/include/notes/notes_display.html:138
 #: templates/notebook/notes/note/notedisplay.html:43
 #: templates/notebook/notes/note/notedisplay.html:48

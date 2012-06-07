@@ -913,6 +913,8 @@ class LinkageNote(models.Model):
 
 
 
+
+
 #TODO: should folder be universal for snippets/bookmarks/scraps??
 
 #search can be saved as dynamic folder
