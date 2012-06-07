@@ -1412,6 +1412,7 @@ def  frame_notes(request, username, bookname):
 #    linkageNote = AddLForm(post, request.FILES, instance=L()) 
 #    #print "linkageNote.is_valid():",linkageNote.is_valid()
 #    print "linkageNote.errors:",linkageNote.errors 
+    frameNote.vote = frameNote.get_vote()
     frameNote.save()
     messages.success(request, "A frame is successfully created!")
     return HttpResponseRedirect(__get_pre_url(request))  
