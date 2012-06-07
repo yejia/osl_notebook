@@ -138,7 +138,13 @@
 				    		    <div  id="note_attachment" title="{% trans "attachment" %}"><a href="/file/{{note.attachment.name}}" target="top">{{note.attachment.name}}</a> </div>
 				    {% endif %}
 		
-		            <div  class="structure advanced" id="note_frames" title="{% trans "note in frames" %}">{% trans "Frames" %}: {{note.display_frames|default:_('Not in any frame')}}</div>
+		            <div  class="structure advanced" id="note_frames" title="{% trans "note in frames" %}">{% trans "Frames" %}:
+                       {% for f_id in note.get_frame_ids %}
+                            <a href="/{{profile_username}}/framebook/notes/note/{{f_id}}">{{f_id}}</a>  {% if not forloop.last %},{% endif %}
+                       {% empty %}
+                            {% trans 'Not in any frame' %}
+                       {% endfor %}
+                    </div>
 		            
                     {% block comments_inline %}
                          {% include "include/notes/inlines/add_comments_and_etc_inline.html" %}   
