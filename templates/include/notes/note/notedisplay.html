@@ -1,5 +1,7 @@
 {% load i18n %}
 
+{{ form.media }}
+
 <script>
 	jQuery(function($){
            $('#updateNoteForm').hide();     
@@ -58,7 +60,7 @@
 {% block note_type%}
 {% endblock %}
 <div class="grey">
-{% trans 'Created' %} :{{note.init_date|date:"Y-m-d H:i"}}       
+{% trans 'Created' %} :<a href="{{book_uri_prefix}}/{{bookname}}/notes/?year={{note.init_date|date:"Y"}}">{{note.init_date|date:"Y"}}</a>-<a href="{{book_uri_prefix}}/{{bookname}}/notes/?year={{note.init_date|date:"Y"}}&month={{note.init_date|date:"m"}}">{{note.init_date|date:"m"}}</a>-<a href="{{book_uri_prefix}}/{{bookname}}/notes/?year={{note.init_date|date:"Y"}}&month={{note.init_date|date:"m"}}&day={{note.init_date|date:"d"}}">{{note.init_date|date:"d"}}</a>  {{note.init_date|date:"H"}}:{{note.init_date|date:"i"}}      
 </div>
 
 <br/>
