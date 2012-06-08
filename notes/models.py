@@ -307,8 +307,8 @@ class Note(models.Model):
     def display_frames(self):
         return ','.join([str(l.id) for l in self.in_frames.all()])    
     
-    def get_frame_ids(self):
-        return [str(l.id) for l in self.in_frames.all()] 
+    def get_frame_ids_titles(self):
+        return [(str(l.id), l.title) for l in self.in_frames.all()] 
 
     def get_desc_short(self):
         if len(self.desc)>97:

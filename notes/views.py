@@ -1064,9 +1064,6 @@ def note(request, username, bookname, note_id):
     N = getNote(username, bookname)
     note = N.objects.get(id=note_id)    
     #linkages = note.linkagenote_set.all()
-    frames = None
-    if note.get_note_type() != 'Frame':
-        frames = note.in_frames.all() #notes_included??TODO:
     
     notes_included = None
     if note.get_note_type() == 'Frame':
@@ -1084,7 +1081,7 @@ def note(request, username, bookname, note_id):
         note_trans_form = UpdateNoteTransForm(instance=note_trans)
     
     pick_lang =  request.GET.get('pick_lang')  
-    return render_to_response(book_template_dict.get(bookname)+'notes/note/note.html', {'note':note, 'frames':frames, 'notes_included':notes_included, \
+    return render_to_response(book_template_dict.get(bookname)+'notes/note/note.html', {'note':note, 'notes_included':notes_included, \
                                                                                    'note_form':note_form, 'profile_username':username, \
                                                                                    'note_trans_form':note_trans_form,\
                                                                                    'pick_lang':pick_lang

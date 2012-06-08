@@ -139,8 +139,8 @@
 				    {% endif %}
 		
 		            <div  class="structure advanced" id="note_frames" title="{% trans "note in frames" %}">{% trans "Frames" %}:
-                       {% for f_id in note.get_frame_ids %}
-                            <a href="/{{profile_username}}/framebook/notes/note/{{f_id}}">{{f_id}}</a>  {% if not forloop.last %},{% endif %}
+                       {% for f_id, f_title  in note.get_frame_ids_titles %}
+                            <a href="/{{profile_username}}/framebook/notes/note/{{f_id}}" title="{{f_title}}">{{f_id}}</a>  {% if not forloop.last %},{% endif %}
                        {% empty %}
                             {% trans 'Not in any frame' %}
                        {% endfor %}

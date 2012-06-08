@@ -101,8 +101,8 @@
 {% block note_in_frames%}
 <div>
 <b>{% trans 'In frames' %} : </b>
-{% for frame in frames %}
-<a href="{{book_uri_prefix}}/framebook/notes/note/{{frame.id}}/">{{frame.id}}</a>,
+{% for frame in note.in_frames.all %}
+<a href="{{book_uri_prefix}}/framebook/notes/note/{{frame.id}}/" title="{{frame.title}}">{{frame.id}}</a>,
 {% empty %}
 {% trans 'Not in any frame' %} .
 {% endfor %}
