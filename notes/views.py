@@ -1862,6 +1862,8 @@ def share(request, bookname):
             source_str = _('Original Note:')
         else:
             source_str = _('Forwarded Note:')    
+        #TODO:if on a single note display page, share in js can pass the current url directly.
+        #TODO: think whether still allow bulk sharing.
         content = content +'    '+ source_str +'  http://'+current_site.domain+'/social/'+\
                   note.owner.username+'/'+bookname+'/notes/note/'+str(note.id)+'/'+'    '+_('from')+' '+\
                    note.owner.username
