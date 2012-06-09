@@ -53,13 +53,13 @@
 
 <div>
 <h2> 
-<img src="/site_media/img/{{note.get_note_type}}.png" title="{{note.get_note_type}}"/>
+<img src="/site_media/img/{{note.get_note_type}}.png" title="{{note.get_note_type}}" class="noPrint"/>
  {% include "include/get_title.html" %}   
 </h2>
 </div>
 {% block note_type%}
 {% endblock %}
-<div class="grey">
+<div class="grey noPrint">
 {% trans 'Created' %} :<a href="{{book_uri_prefix}}/{{bookname}}/notes/?year={{note.init_date|date:"Y"}}">{{note.init_date|date:"Y"}}</a>-<a href="{{book_uri_prefix}}/{{bookname}}/notes/?year={{note.init_date|date:"Y"}}&month={{note.init_date|date:"m"}}">{{note.init_date|date:"m"}}</a>-<a href="{{book_uri_prefix}}/{{bookname}}/notes/?year={{note.init_date|date:"Y"}}&month={{note.init_date|date:"m"}}&day={{note.init_date|date:"d"}}">{{note.init_date|date:"d"}}</a>  {{note.init_date|date:"H"}}:{{note.init_date|date:"i"}}      
 </div>
 
@@ -69,14 +69,10 @@
 {% block note_url%}
 {% endblock %}
 
-<div>
-
-
-</div>
 <br/>
 
 {% block note_tags%}
-<div>
+<div class="noPrint">
 <b><img src="/site_media/img/tags-small.png" class="img_in_notes_section_header"/>:</b> 
 {% for tag in note.get_tags %}
 <a href="{{book_uri_prefix}}/{{bookname}}/notes/tags/{{tag}}/">{{tag}}</a>,
@@ -84,10 +80,10 @@
 </div>
 {% endblock %}
 
-<div>
+<div class="noPrint">
 <b>{% trans 'importance' %} : </b>{{note.vote}}
 </div>
-<div>
+<div class="noPrint">
 <b>{% trans 'private' %} :</b> {{note.private|yesno:"yeah,no,maybe" }}
 </div>
 
@@ -99,7 +95,7 @@
 {% endblock %}
 
 {% block note_in_frames%}
-<div>
+<div class="noPrint">
 <b>{% trans 'In frames' %} : </b>
 {% for frame in note.in_frames.all %}
 <a href="{{book_uri_prefix}}/framebook/notes/note/{{frame.id}}/" title="{{frame.title}}">{{frame.id}}</a>,
@@ -121,7 +117,7 @@
 {% comment%}
 <!--li tag is added solely to accomodate the code used in the notes display page where js need to find the parent li tag to locate with note to add comment-->
 {% endcomment%}
-<div note_id="{{note.id}}">
+<div note_id="{{note.id}}" class="noPrint">
 {% include "include/notes/inlines/add_comments_and_etc_inline.html" %}            
 </div>
 {% endblock %}
@@ -134,7 +130,7 @@
 
 {% block note_form%}
  {% if user.username == profile_username %} 
-<div>
+<div class="noPrint">
     <span id="edit_note"><a href="#">{% trans 'Edit this note' %}</a></span>
     <span id="hide_edit_note"><a href="#">{% trans 'Hide edit form' %}</a></span>
 
@@ -166,7 +162,7 @@
     </form> 
 </div>
 <br/>
-<div>
+<div class="noPrint">
     <span id="edit_trans"><a href="#">{% trans 'Add or edit the translation' %}</a></span>
     <span id="hide_trans"><a href="#">{% trans 'Hide the translation form' %}</a></span>
     <form action="updateNoteTrans/" method="post" enctype="multipart/form-data" id="updateNoteTransForm">

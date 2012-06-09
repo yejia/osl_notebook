@@ -11,6 +11,8 @@
 {% endblock %}
 </title>
 
+ <link rel="stylesheet" type="text/css"  href="/site_media/css/print.css"> 
+
  <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
 <link href="/site_media/css/tag-it/jquery.tagit.css" rel="stylesheet" type="text/css" />
 
@@ -19,6 +21,8 @@
 <link rel="stylesheet" type="text/css" href="/media/css/dashboard.css" /> 
 
 <link rel="stylesheet" type="text/css" href="/media/css/changelists.css" /> 
+
+
 
 <!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="/media/css/ie.css" /><![endif]--> 
 <meta name="robots" content="NONE,NOARCHIVE" /> 
@@ -92,7 +96,21 @@
 
     
 <script type="text/javascript">
-	
+	//disalbe print.css
+    document.getElementsByTagName('link')[0].disabled = true;
+     function print(){		
+            document.getElementsByTagName('link')[0].disabled = false;
+            $('#back_icon').show();
+          $( "#sortable" ).sortable( "option", "disabled", true);
+            };
+            
+      function back_from_print(){		
+            document.getElementsByTagName('link')[0].disabled = true;
+             $('#back_icon').hide();
+            $( "#sortable" ).sortable( "option", "disabled", false);
+            };      
+    
+    
 	Array.prototype.unique = function () {
 	var r = new Array();
 	o:for(var i = 0, n = this.length; i < n; i++)
@@ -1452,12 +1470,12 @@ jQuery('.note_display').accordion({
 
  <div  id="content" class="colMS"> 
  
- <span id="toggle_side_menu">
+ <span id="toggle_side_menu" class="noPrint">
 <span class="show_side_menu"><img title="{% trans "show side menu" %}" src="/site_media/img/left-arrow.jpg" class="clickable"/></span>
 <span class="hide_side_menu"><img title="{% trans "hide side menu" %}" src="/site_media/img/down-arrow.jpg" class="clickable"/></span> 
 </span>
 
-<div id="content-related"> 
+<div id="content-related" class="noPrint"> 
 
 
 
@@ -1671,19 +1689,19 @@ jQuery('.note_display').accordion({
 
 
 {% block header %}
-<div id="header">
-<div id="branding">
-<h1 id="site-name">{% block header_title %}{% blocktrans %}Personal notes of {{profile_username}}{% endblocktrans %}{% endblock %}</h1>
-</div>
+<div id="header" class="noPrint">
+    <div id="branding">
+        <h1 id="site-name">{% block header_title %}{% blocktrans %}Personal notes of {{profile_username}}{% endblocktrans %}{% endblock %}</h1>
+    </div>
 
-<div class="book_tabs">
-<span class="book_tabs_item {% if bookname == 'snippetbook' %}current{% endif %}" onclick="window.location.replace('{{ book_uri_prefix }}/snippetbook/notes/')">{% trans "Snippets" %}</span>
-<span class="book_tabs_item {% if bookname == 'bookmarkbook' %}current{% endif %}" onclick="window.location.replace('{{ book_uri_prefix }}/bookmarkbook/notes/')">{% trans "Bookmarks" %}</span>
-<span class="book_tabs_item {% if bookname == 'scrapbook' %}current{% endif %}" onclick="window.location.replace('{{ book_uri_prefix }}/scrapbook/notes/')">{% trans "Scraps" %}</span>
+    <div class="book_tabs">
+        <span class="book_tabs_item {% if bookname == 'snippetbook' %}current{% endif %}" onclick="window.location.replace('{{ book_uri_prefix }}/snippetbook/notes/')">{% trans "Snippets" %}</span>
+        <span class="book_tabs_item {% if bookname == 'bookmarkbook' %}current{% endif %}" onclick="window.location.replace('{{ book_uri_prefix }}/bookmarkbook/notes/')">{% trans "Bookmarks" %}</span>
+        <span class="book_tabs_item {% if bookname == 'scrapbook' %}current{% endif %}" onclick="window.location.replace('{{ book_uri_prefix }}/scrapbook/notes/')">{% trans "Scraps" %}</span>
 
-<span class="book_tabs_item advanced {% if bookname == 'framebook' %}current{% endif %}" onclick="window.location.replace('{{ book_uri_prefix }}/framebook/notes/')">{% trans "Frames" %}</span>
-<span class="book_tabs_item advanced {% if bookname == 'notebook' %}current{% endif %}" onclick="window.location.replace('{{ book_uri_prefix }}/notebook/notes/')">{% trans "All" %}</a></span> 
-</div>
+        <span class="book_tabs_item advanced {% if bookname == 'framebook' %}current{% endif %}" onclick="window.location.replace('{{ book_uri_prefix }}/framebook/notes/')">{% trans "Frames" %}</span>
+        <span class="book_tabs_item advanced {% if bookname == 'notebook' %}current{% endif %}" onclick="window.location.replace('{{ book_uri_prefix }}/notebook/notes/')">{% trans "All" %}</a></span> 
+    </div>
 </div>
 {% endblock %}
 
@@ -1704,7 +1722,7 @@ jQuery('.note_display').accordion({
 
 
 
-<div id="footer"/>
+<div id="footer" class="noPrint">
 {% include "include/footer.html" %}
 </div>
 

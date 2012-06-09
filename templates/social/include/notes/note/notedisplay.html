@@ -37,7 +37,7 @@
 </div>
 {% endif %}
  {% if note.get_note_type == 'Frame' %} 
- <div>
+ <div class="noPrint">
 <b>{% trans 'attachment' %} :</b> <a href="/file/{{note.social_frame.attachment.name}}" target="top">{{note.social_frame.attachment}}</a>
  {% if note.is_img %} <br/>
  <img src="/file/{{note.social_frame.attachment.name}}" class="attachment"/>
@@ -50,9 +50,9 @@
 
 
 {% block note_comments%}
-<li note_id="{{note.id}}">
+<div note_id="{{note.id}}" class="noPrint">
 {% include "social/include/notes/inlines/add_comments_and_etc_inline.html" %}            
-</li>
+</div>
 {% endblock %}
 
 

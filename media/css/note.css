@@ -958,7 +958,12 @@ span#display_attachment{
 float:right;
 }
 
-
+span#print_icon{
+float:right;
+}
+span#back_icon{
+display:none;
+}
 
 #panel{width:1080px;margin-left:auto;margin-right:auto;}
 

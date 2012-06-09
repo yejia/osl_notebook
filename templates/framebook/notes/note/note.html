@@ -8,6 +8,8 @@
 {% if user.username != profile_username and note.is_private %}  
 {% trans "This one is private. Sorry you have no permission to view it!" %}
 {% else %}  
+<span id="print_icon" class="noPrint"><a href="#" onClick="print(); return false"><img src="/site_media/img/print.png"/></a></span>
+<span id="back_icon"><a href="#" onClick="back_from_print(); return false"><img src="/site_media/img/back.png"/></a></span>
 {% include "framebook/notes/note/notedisplay.html" %}
 {% endif %}
 </div> 

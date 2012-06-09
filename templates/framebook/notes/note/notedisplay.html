@@ -5,19 +5,20 @@
 
 
 {% block note_type%}
-<div>
+<div class='noPrint'>
 <a href="{{book_uri_prefix}}/framebook/notes/">{% trans 'View all frames' %}</a>
 </div>
 {% endblock %}
 
 {% block note_tags%}{% comment %}For now, no viewing of frame by tag (need to implement cache for frame){% endcomment %}
-<div>
+<div class='noPrint'>
 <b><img src="/site_media/img/tags-small.png" class="img_in_notes_section_header"/>:</b> {{note.display_tags}}
 </div>
 {% endblock %}
 
 
 {% block notes_in_frame%}
+<div class='noPrint'>
     <b>{% trans 'notes included' %}: </b> 
     {% trans "Sorting" %}
     <select id="sort_drop_down"  name="sort">
@@ -37,7 +38,8 @@
     <span title="{% trans 'View notes included in note list' %}"><a href="/{{profile_username}}/notebook/frames/frame/{{note.id}}/notes/">{% trans 'View in note list' %}</a></span>
     
     <div id="sidetreecontrol"> <a href="?#">{% trans 'List' %}</a> | <a href="?#">{% trans 'Expanded' %}</a></div>    
-     {% include "include/notes/note/display_attachment.html" %}         
+     {% include "include/notes/note/display_attachment.html" %}      
+</div>     
     <ul id="sortable" class="frame_tree" >
         {% tree_view_tag note %}
     </ul> 
@@ -54,7 +56,7 @@
 {% endblock %}
 
 {% block note_attachment%}
-<div>
+<div class="noPrint">
 <b>{% trans 'attachment' %} :</b> <a href="/file/{{note.attachment.name}}" target="top">{{note.attachment}}</a>
 </div>
 {% endblock %}
