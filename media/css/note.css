@@ -959,6 +959,8 @@ float:right;
 }
 
 span#print_icon{
+padding-left:10px;
+
 float:right;
 }
 span#back_icon{
