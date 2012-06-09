@@ -1864,8 +1864,12 @@ def share(request, bookname):
             source_str = _('Forwarded Note:')    
         #TODO:if on a single note display page, share in js can pass the current url directly.
         #TODO: think whether still allow bulk sharing.
+        pick_lang = request.GET.get('pick_lang')
+        if not pick_lang:
+            pick_lang = 'E'
+           
         content = content +'    '+ source_str +'  http://'+current_site.domain+'/social/'+\
-                  note.owner.username+'/'+bookname+'/notes/note/'+str(note.id)+'/'+'    '+_('from')+' '+\
+                  note.owner.username+'/'+bookname+'/notes/note/'+str(note.id)+'/?pick_lang='+pick_lang+'    '+_('from')+' '+\
                    note.owner.username
         
 #        #send to weibo        
