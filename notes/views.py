@@ -1833,31 +1833,37 @@ def share(request, bookname):
     #print 'douban_service.client.token:', douban_service.client.token
     
     current_site = Site.objects.get_current()   
-    #print 'current_site.domain:',current_site.domain
+    pick_lang = request.POST.get('pick_lang')
+    if not pick_lang:
+        pick_lang = 'E'
+    
     for note_id in note_ids:         
         note = N.objects.get(id=note_id)
         content = ''
         log.info('The current bookname is:'+bookname)
-        
+        if pick_lang == 'E':
+            desc = note.get_desc_en()
+        else:
+            desc = note.get_desc_cn()    
         if bookname == 'snippetbook':
-            content = _('Sharing snippet:')+note.desc[0:100]
+            content = _('Sharing snippet:')+desc[0:100]
         if bookname == 'bookmarkbook':
             content = _('Sharing bookmark:')+note.title+'   '+note.url
         if bookname == 'scrapbook':
-            content = _('Sharing scrap:')+note.desc[0:100] + '   '+ note.url   
+            content = _('Sharing scrap:')+desc[0:100] + '   '+ note.url   
         if bookname == 'framebook':
-            content = _('Sharing knowledge package:')+note.title + '   ' + note.desc[0:100] 
+            content = _('Sharing knowledge package:')+note.title + '   ' + desc[0:100] 
         if bookname == 'notebook':
             bookname = note.get_note_bookname()
             log.info('This note of notebook is actually a note of '+bookname)
             if bookname == 'snippetbook':
-                content = _('Sharing snippet:')+note.desc[0:100]
+                content = _('Sharing snippet:')+desc[0:100]
             if bookname == 'bookmarkbook':
                 content = _('Sharing bookmark:')+note.title+'   '+note.bookmark.url
             if bookname == 'scrapbook':
-                content = _('Sharing scrap:')+note.desc[0:100] + '   '+ note.scrap.url   
+                content = _('Sharing scrap:')+desc[0:100] + '   '+ note.scrap.url   
             if bookname == 'framebook':
-                content = _('Sharing knowledge package:')+note.title + '   ' + note.desc[0:100]         
+                content = _('Sharing knowledge package:')+note.title + '   ' + desc[0:100]         
         if request.user.username == note.owner.username:
             source_str = _('Original Note:')
         else:
@@ -1865,9 +1871,7 @@ def share(request, bookname):
         #TODO:if on a single note display page, share in js can pass the current url directly.
         #TODO: think whether still allow bulk sharing.
 #===============================================================================
-#        pick_lang = request.GET.get('pick_lang')
-#        if not pick_lang:
-#            pick_lang = 'E'
+#        
 #        '  http://'+current_site.domain+'/social/'+\
 #                  note.owner.username+'/'+bookname+'/notes/note/'+str(note.id)+'/?pick_lang='+pick_lang
 #===============================================================================

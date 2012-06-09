@@ -820,6 +820,20 @@ function showAddNoteTags(){
            $('#add_note_tags_box').hide();  
     }
 
+
+//TODO:re-implement this in python code, since I pass the whole url in th request anyway
+//below is from stackoverflow. http://stackoverflow.com/questions/901115/get-query-string-values-in-javascript
+  function getParameterByName(name)
+{
+  name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+  var regexS = "[\\?&]" + name + "=([^&#]*)";
+  var regex = new RegExp(regexS);
+  var results = regex.exec(window.location.search);
+  if(results == null)
+    return "";
+  else
+    return decodeURIComponent(results[1].replace(/\+/g, " "));
+}
         
 
 	
@@ -832,16 +846,17 @@ function showAddNoteTags(){
              $('.share_button').click(function(){	
                 //selected_notes = getSelectedNoteIds();
                 //$.post('/{{profile_username}}/{{bookname}}/share/',{'note_ids':selected_notes}, shared, 'json');
-                $.post('/social/{{bookname}}/share/',{'note_ids':$(this).parents('div').attr('note_id'), 'url':document.URL}, shared, 'json');
+                pick_lang = getParameterByName('pick_lang')
+                $.post('/social/{{bookname}}/share/',{'note_ids':$(this).parents('div').attr('note_id'), 'url':document.URL, 'pick_lang':pick_lang}, shared, 'json');
      
            });
            
             function shared(result){      
                 if (result.count_of_sites==0){
-                        alert('You have not set up sites for sharing. Please set it up in the settings.');
+                        alert('{% trans "You have not set up sites for sharing. Please set it up in the settings." %}');
                 }
                 else{           
-                        alert(result.count_of_notes+' notes are shared with '+ result.count_of_sites+' sites! You can change sites for sharing in the settings. ');
+                        alert(result.count_of_notes+'{% trans " notes are shared with" %} '+ result.count_of_sites+' {% trans "sites! You can change sites for sharing in the settings." %} ');
                 }
 		
       }
