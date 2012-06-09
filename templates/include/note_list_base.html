@@ -832,7 +832,7 @@ function showAddNoteTags(){
              $('.share_button').click(function(){	
                 //selected_notes = getSelectedNoteIds();
                 //$.post('/{{profile_username}}/{{bookname}}/share/',{'note_ids':selected_notes}, shared, 'json');
-                $.post('/social/{{bookname}}/share/',{'note_ids':$(this).parents('div').attr('note_id')}, shared, 'json');
+                $.post('/social/{{bookname}}/share/',{'note_ids':$(this).parents('div').attr('note_id'), 'url':document.URL}, shared, 'json');
      
            });
            
