@@ -1844,26 +1844,30 @@ def share(request, bookname):
         if pick_lang == 'E':
             desc = note.get_desc_en()
         else:
-            desc = note.get_desc_cn()    
+            desc = note.get_desc_cn()  
+        if pick_lang == 'E':
+            title = note.get_title_en()
+        else:
+            title = note.get_title_cn()       
         if bookname == 'snippetbook':
             content = _('Sharing snippet:')+desc[0:50]
         if bookname == 'bookmarkbook':
-            content = _('Sharing bookmark:')+note.title[0:30]+'   '+note.url
+            content = _('Sharing bookmark:')+title[0:30]+'   '+note.url
         if bookname == 'scrapbook':
             content = _('Sharing scrap:')+desc[0:50] + '   '+ note.url   
         if bookname == 'framebook':
-            content = _('Sharing knowledge package:')+note.title[0:30] + '   ' + desc[0:50] 
+            content = _('Sharing knowledge package:')+title[0:30] + '   ' + desc[0:50] 
         if bookname == 'notebook':
             bookname = note.get_note_bookname()
             log.info('This note of notebook is actually a note of '+bookname)
             if bookname == 'snippetbook':
                 content = _('Sharing snippet:')+desc[0:50]
             if bookname == 'bookmarkbook':
-                content = _('Sharing bookmark:')+note.title[0:30]+'   '+note.bookmark.url
+                content = _('Sharing bookmark:')+title[0:30]+'   '+note.bookmark.url
             if bookname == 'scrapbook':
                 content = _('Sharing scrap:')+desc[0:50] + '   '+ note.scrap.url   
             if bookname == 'framebook':
-                content = _('Sharing knowledge package:')+note.title[0:30] + '   ' + desc[0:50]         
+                content = _('Sharing knowledge package:')+title[0:30] + '   ' + desc[0:50]         
         if request.user.username == note.owner.username:
             source_str = _('Original Note:')
         else:
