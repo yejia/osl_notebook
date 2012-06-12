@@ -11,6 +11,11 @@
         {% block ws_picker %}
         <span class="advanced">&nbsp;{% trans "in" %}  
         <select id="ws_drop_down"  name="workingset">
+            {% if 'all tags' == current_ws %}
+                <option value="all tags" selected="selected">{% trans "all tags" %}</option>
+            {% else %}                
+                <option value="all tags">{% trans "all tags" %}</option>
+            {% endif %}   
             {% for ws in wss %} 
                 {% if ws.name == current_ws %}
                 <option value="{{ws.name}}" selected="selected">{{ws.name}}</option>
