@@ -12,10 +12,10 @@
 
 <div id="add_note_section">
 <div class="section_header">
-{% trans "Record your experience/thought" %}:&nbsp;&nbsp;&nbsp;&nbsp;
+<!--记录你的感受/想法-->{% trans "Record your experience/thought" %}:&nbsp;&nbsp;&nbsp;&nbsp;
 <span class="show_add_note_section"><img title="{% trans 'Show adding snippet' %}" src="/site_media/img/right-arrow.jpg" class="clickable"/></span>
 <span class="hide_add_note_section"  ><img title="{% trans 'Hide adding snippet' %}" src="/site_media/img/down-arrow.jpg" class="click_img"/></span> 
-<!--记录你的感受/想法-->
+
 </div>
 
 <div class="addnote">
@@ -25,7 +25,7 @@
 {% endif %}    
     <textarea id="id_desc" rows="3" cols="90" name="desc"></textarea>
     <div>{% trans "Private" %} <input type="checkbox" name="private" id="id_private"/>
-
+    
 <span>
     <span class="tags_img clickable" onclick="javascript:showAddNoteTags();" title="{% trans 'Add tags' %}"><img src="/site_media/img/tags-small.png" class="img_in_notes_section_header"/></span>
     <div id="add_note_tags_box">                       
@@ -37,7 +37,9 @@
   -->
 </div>
 </span>
-</div>    
+</div> 
+    <span id="charCount"></span>
+    <span id="charCount_alert"></span>
     <br/><button id="add_note_submit"  onclick="javascript:addNote();"/>{% trans 'Add' %}</button>
     {% trans "Short snippet is recommended (less than 300 characters)" %}
     <a href="javascript:alert('{% trans "A short snippet is enough to represent a significant experience. Practice on that. :-)" %}');"><img src="/media/img/admin/icon-unknown.gif"/></a>

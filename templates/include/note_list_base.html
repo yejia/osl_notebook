@@ -136,6 +136,8 @@
     }
 	
     
+
+    
        function addNote(){              
             desc = $('#id_desc').val();         
             //alert('desc:'+desc);             
@@ -845,6 +847,20 @@ function showAddNoteTags(){
 	
 <script type="text/javascript">
 	$(document).ready(function(){	
+    
+    
+        //borrowed from http://coda-clips.com/textarea-character-count-jquery with modification
+      $('div.addnote textarea#id_desc').keyup(function() {
+                var charLength = $(this).val().length;
+                // Displays count
+                $('span#charCount').html(charLength + '{% trans "characters used" %}');
+                // Alerts when 300 characters is reached
+                if($(this).val().length > 300)
+                        $('span#charCount_alert').html('<strong>{% trans "You have used up 300 characters. It recommended to keep a snippet short." %}</strong>');
+                 else
+                       $('span#charCount_alert').html('')                
+        });
+    
     
         
              $('.share_button').click(function(){	

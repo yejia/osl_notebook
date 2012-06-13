@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-10 07:24+0800\n"
+"POT-Creation-Date: 2012-06-13 11:55+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -144,31 +144,31 @@ msgstr "条笔记"
 msgid "Note is successfully updated!"
 msgstr "笔记更新成功！"
 
-#: notes/views.py:1843 notes/views.py:1854
+#: notes/views.py:1853 notes/views.py:1864
 msgid "Sharing snippet:"
 msgstr "分享便条："
 
-#: notes/views.py:1845 notes/views.py:1856
+#: notes/views.py:1855 notes/views.py:1866
 msgid "Sharing bookmark:"
 msgstr "分享网址："
 
-#: notes/views.py:1847 notes/views.py:1858
+#: notes/views.py:1857 notes/views.py:1868
 msgid "Sharing scrap:"
 msgstr "分享网摘："
 
-#: notes/views.py:1849 notes/views.py:1860
+#: notes/views.py:1859 notes/views.py:1870
 msgid "Sharing knowledge package:"
 msgstr "分享知识包："
 
-#: notes/views.py:1862
+#: notes/views.py:1872
 msgid "Original Note:"
 msgstr "原笔记："
 
-#: notes/views.py:1864
+#: notes/views.py:1874
 msgid "Forwarded Note:"
 msgstr "转发的笔记："
 
-#: notes/views.py:1875
+#: notes/views.py:1883
 msgid "from"
 msgstr "来自"
 
@@ -302,7 +302,7 @@ msgstr "笔记本管理"
 
 #: templates/admin/change_form.html:21 templates/admin/index.html:29
 #: templates/notebook/notes/notesdisplay.html:18
-#: templates/snippetbook/notes/notesdisplay.html:41
+#: templates/snippetbook/notes/notesdisplay.html:43
 msgid "Add"
 msgstr "添加"
 
@@ -653,7 +653,7 @@ msgstr "在链条里的"
 #: templates/bookmarkbook/notes/notes.html:7
 #: templates/bookmarkbook/notes/notes.html:9
 #: templates/framebook/notes/todelete/folders.html:25
-#: templates/include/note_list_base.html:1718
+#: templates/include/note_list_base.html:1738
 #: templates/include/notes/menu/notes_section_menu.html:5
 #: templates/include/notes/todelete/linkagenotesdisplay.html:61
 #: templates/notebook/notes/notes.html:9
@@ -945,12 +945,12 @@ msgstr "一个知识包本是一组动态的基于某个搜索的知识包。"
 #: templates/include/folders_special_side_menu.html:11
 #: templates/include/friends_menu.html:5 templates/include/groups_menu.html:4
 #: templates/include/sites_header.html:56
-#: templates/include/notes/menu/toggle_tag_menu.html:26
+#: templates/include/notes/menu/toggle_tag_menu.html:31
 msgid "Settings"
 msgstr "设置"
 
 #: templates/framebook/note_list_base.html:62
-#: templates/include/note_list_base.html:155
+#: templates/include/note_list_base.html:161
 msgid "An error happened when adding a note."
 msgstr "添加笔记时发生错误。"
 
@@ -981,9 +981,9 @@ msgstr "包里所含笔记"
 #: templates/framebook/notes/notes_display.html:47
 #: templates/framebook/notes/notes_display.html:56
 #: templates/include/get_title.html:2
-#: templates/include/note_list_base.html:186
-#: templates/include/note_list_base.html:190
-#: templates/include/note_list_base.html:1357
+#: templates/include/note_list_base.html:192
+#: templates/include/note_list_base.html:196
+#: templates/include/note_list_base.html:1377
 #: templates/include/notes/inlines/notes_brief_title_inline.html:3
 #: templates/include/notes/inlines/notes_full_title_inline.html:5
 #: templates/include/notes/todelete/linkagenotesdisplay.html:109
@@ -1108,7 +1108,7 @@ msgid "%(profile_username)s's Folder %(current_folder)s"
 msgstr "%(profile_username)s的文件夹%(current_folder)s"
 
 #: templates/framebook/notes/todelete/folders.html:19
-#: templates/include/note_list_base.html:1713
+#: templates/include/note_list_base.html:1733
 #: templates/social/wall_snippets.html:25
 #: templates/social/notes/friends_notes.html:20
 #: templates/social/notes/group_notes.html:17
@@ -1117,7 +1117,7 @@ msgid "Snippets"
 msgstr "便条"
 
 #: templates/framebook/notes/todelete/folders.html:21
-#: templates/include/note_list_base.html:1714
+#: templates/include/note_list_base.html:1734
 #: templates/include/sites_header.html:29
 #: templates/include/sites_header.html:31
 #: templates/social/wall_snippets.html:28
@@ -1130,7 +1130,7 @@ msgid "Bookmarks"
 msgstr "网址"
 
 #: templates/framebook/notes/todelete/folders.html:23
-#: templates/include/note_list_base.html:1715
+#: templates/include/note_list_base.html:1735
 #: templates/social/wall_snippets.html:33
 #: templates/social/wall_snippets.html:35
 #: templates/social/wall_snippets.html:43
@@ -1210,8 +1210,8 @@ msgid "Learning Groups"
 msgstr "学习小组"
 
 #: templates/include/groups_menu.html:8
-#: templates/include/note_list_base.html:160
-#: templates/include/note_list_base.html:162
+#: templates/include/note_list_base.html:166
+#: templates/include/note_list_base.html:168
 #: templates/include/notes/addNote.html:85
 #: templates/include/notes/notes_display.html:59
 #: templates/include/notes/note/notedisplay.html:87
@@ -1220,47 +1220,47 @@ msgid "private"
 msgstr "隐私"
 
 #: templates/include/groups_menu.html:10
-#: templates/include/note_list_base.html:160
-#: templates/include/note_list_base.html:162
+#: templates/include/note_list_base.html:166
+#: templates/include/note_list_base.html:168
 #: templates/include/notes/notes_display.html:61
 #: templates/social/group/groups.html:66
 msgid "public"
 msgstr "公开"
 
-#: templates/include/note_list_base.html:156
+#: templates/include/note_list_base.html:162
 msgid "Note is successfully added!"
 msgstr "笔记添加成功！"
 
-#: templates/include/note_list_base.html:175
-#: templates/include/note_list_base.html:318
-#: templates/include/note_list_base.html:1144
+#: templates/include/note_list_base.html:181
+#: templates/include/note_list_base.html:324
+#: templates/include/note_list_base.html:1164
 #: templates/include/notes/inlines/add_comments_and_etc_inline.html:21
 #: templates/social/include/notes/inlines/add_comments_and_etc_inline.html:15
 msgid "remove this comment"
 msgstr "去除这个评论"
 
-#: templates/include/note_list_base.html:182
+#: templates/include/note_list_base.html:188
 #: templates/include/notes/notes_display.html:67
 msgid "Rank Up Importance"
 msgstr "增加重要性"
 
-#: templates/include/note_list_base.html:183
+#: templates/include/note_list_base.html:189
 #: templates/include/notes/notes_display.html:68
 msgid "Rank Down Importance"
 msgstr "降低重要性"
 
-#: templates/include/note_list_base.html:184
+#: templates/include/note_list_base.html:190
 #: templates/include/notes/notes_display.html:70
 msgid "Importance"
 msgstr "重要性"
 
-#: templates/include/note_list_base.html:184
+#: templates/include/note_list_base.html:190
 #: templates/include/notes/notes_display.html:73
 msgid "soft delete"
 msgstr "软删除"
 
-#: templates/include/note_list_base.html:185
-#: templates/include/note_list_base.html:190
+#: templates/include/note_list_base.html:191
+#: templates/include/note_list_base.html:196
 #: templates/include/notes/inlines/notes_brief_title_inline.html:3
 #: templates/notebook/notes/notes_display.html:11
 #: templates/notebook/notes/notes_display.html:31
@@ -1276,8 +1276,8 @@ msgstr "软删除"
 msgid "note title"
 msgstr "笔记标题"
 
-#: templates/include/note_list_base.html:186
-#: templates/include/note_list_base.html:191
+#: templates/include/note_list_base.html:192
+#: templates/include/note_list_base.html:197
 #: templates/include/notes/inlines/notes_brief_desc_inline.html:3
 #: templates/social/include/notes/notesdisplay.html:91
 #: templates/social/notebook/notes/notesdisplay.html:28
@@ -1289,9 +1289,9 @@ msgstr "笔记标题"
 msgid "note desc"
 msgstr "笔记正文"
 
-#: templates/include/note_list_base.html:187
 #: templates/include/note_list_base.html:193
 #: templates/include/note_list_base.html:199
+#: templates/include/note_list_base.html:205
 #: templates/include/notes/inlines/notes_brief_tags_inline.html:3
 #: templates/include/notes/inlines/notes_full_tags_inline.html:4
 #: templates/social/group/notes/inlines/notes_brief_tags_inline.html:3
@@ -1301,46 +1301,46 @@ msgstr "笔记正文"
 msgid "note tags"
 msgstr "笔记标签"
 
-#: templates/include/note_list_base.html:203
+#: templates/include/note_list_base.html:209
 #: templates/include/notes/notes_display.html:135
 #: templates/social/include/notes/notesdisplay.html:106
 msgid "initial creation time"
 msgstr "生成的时间"
 
-#: templates/include/note_list_base.html:204
+#: templates/include/note_list_base.html:210
 #: templates/include/notes/notes_display.html:136
 #: templates/social/include/notes/notesdisplay.html:107
 msgid "last modified time"
 msgstr "最后修改时间"
 
-#: templates/include/note_list_base.html:205
+#: templates/include/note_list_base.html:211
 #: templates/include/notes/notes_display.html:141
 msgid "note in frames"
 msgstr "在包里的"
 
-#: templates/include/note_list_base.html:205
-#: templates/include/note_list_base.html:1717
+#: templates/include/note_list_base.html:211
+#: templates/include/note_list_base.html:1737
 #: templates/include/notes/notes_display.html:141
 msgid "Frames"
 msgstr "包"
 
-#: templates/include/note_list_base.html:205
+#: templates/include/note_list_base.html:211
 #: templates/include/notes/notes_display.html:145
 #: templates/include/notes/note/notedisplay.html:103
 msgid "Not in any frame"
 msgstr "不在任何包里"
 
-#: templates/include/note_list_base.html:207
+#: templates/include/note_list_base.html:213
 #: templates/include/notes/inlines/add_comments_and_etc_inline.html:4
 msgid "Comment"
 msgstr "评论"
 
-#: templates/include/note_list_base.html:211
+#: templates/include/note_list_base.html:217
 #: templates/include/notes/inlines/add_comments_and_etc_inline.html:16
 msgid "Save Comment"
 msgstr "增加评论"
 
-#: templates/include/note_list_base.html:212
+#: templates/include/note_list_base.html:218
 #: templates/include/notes/addNote.html:57
 #: templates/include/notes/inlines/add_comments_and_etc_inline.html:16
 #: templates/include/notes/menu/notes_section_menu.html:11
@@ -1349,46 +1349,46 @@ msgstr "增加评论"
 msgid "Cancel"
 msgstr "取消"
 
-#: templates/include/note_list_base.html:530
-#: templates/include/note_list_base.html:581
+#: templates/include/note_list_base.html:536
+#: templates/include/note_list_base.html:587
 msgid "Please select the notes!"
 msgstr "请选择笔记"
 
-#: templates/include/note_list_base.html:600
+#: templates/include/note_list_base.html:606
 msgid "Tags are successfully updated!"
 msgstr "标签更新成功！"
 
-#: templates/include/note_list_base.html:615
+#: templates/include/note_list_base.html:621
 msgid "The following notes are going to be put into a frame:"
 msgstr "下面的这些笔记将被放入一个包里："
 
-#: templates/include/note_list_base.html:687
-#: templates/include/note_list_base.html:699
+#: templates/include/note_list_base.html:693
+#: templates/include/note_list_base.html:705
 #: templates/include/notes/caches_section.html:13
 #: templates/include/notes/caches_section.html:15
 msgid "cache"
 msgstr "缓存"
 
-#: templates/include/note_list_base.html:687
+#: templates/include/note_list_base.html:693
 #: templates/include/notes/caches_section.html:13
 #: templates/include/notes/caches_section.html:15
 msgid "View"
 msgstr "浏览"
 
-#: templates/include/note_list_base.html:687
+#: templates/include/note_list_base.html:693
 #: templates/include/notes/caches_section.html:13
 #: templates/include/notes/caches_section.html:15
 msgid "Clear"
 msgstr "清除"
 
-#: templates/include/note_list_base.html:691
+#: templates/include/note_list_base.html:697
 #: templates/include/notes/menu/notes_section_menu.html:31
 #: templates/include/notes/menu/notes_section_menu.html:33
 #: templates/include/notes/menu/notes_section_menu.html:37
 msgid "Add selection to cache"
 msgstr "加选取的到缓存区"
 
-#: templates/include/note_list_base.html:795
+#: templates/include/note_list_base.html:801
 msgid ""
 "If you join this group, any note you make that is tagged with any of the tag "
 "of this group will be pushed to this group. Private note, however, will not "
@@ -1399,28 +1399,37 @@ msgstr ""
 "非你有意的要分享给某个小组。"
 
 #: templates/include/note_list_base.html:856
+msgid "characters used"
+msgstr "字已经输入了"
+
+#: templates/include/note_list_base.html:859
+msgid ""
+"You have used up 300 characters. It recommended to keep a snippet short."
+msgstr "你已经用完了300字的限额。建议保持便条的简短。"
+
+#: templates/include/note_list_base.html:876
 msgid ""
 "You have not set up sites for sharing. Please set it up in the settings."
 msgstr "你还没有设置要分享的网站。你可以在设置里绑定。"
 
-#: templates/include/note_list_base.html:859
+#: templates/include/note_list_base.html:879
 msgid " notes are shared with"
 msgstr "笔记分享到"
 
-#: templates/include/note_list_base.html:859
+#: templates/include/note_list_base.html:879
 msgid "sites! You can change sites for sharing in the settings."
 msgstr "网站！你可以在设置里更改要分享的网站。"
 
-#: templates/include/note_list_base.html:1489
+#: templates/include/note_list_base.html:1509
 msgid "show side menu"
 msgstr "显示侧边菜单"
 
-#: templates/include/note_list_base.html:1490
+#: templates/include/note_list_base.html:1510
 msgid "hide side menu"
 msgstr "隐藏侧边菜单"
 
 # python-format
-#: templates/include/note_list_base.html:1709
+#: templates/include/note_list_base.html:1729
 #, python-format
 msgid "Personal notes of %(profile_username)s"
 msgstr "%(profile_username)s的个人笔记"
@@ -1691,6 +1700,8 @@ msgstr "标签"
 
 #: templates/include/notes/menu/tags_menu.html:72
 #: templates/include/notes/menu/tags_menu.html:74
+#: templates/include/notes/menu/toggle_tag_menu.html:15
+#: templates/include/notes/menu/toggle_tag_menu.html:17
 #: templates/social/include/notes/menu/tags_menu.html:9
 #: templates/social/include/notes/menu/tags_menu.html:11
 msgid "all tags"
@@ -1712,7 +1723,7 @@ msgstr "隐藏标签"
 msgid "in"
 msgstr "属于"
 
-#: templates/include/notes/menu/toggle_tag_menu.html:22
+#: templates/include/notes/menu/toggle_tag_menu.html:27
 msgid "You can use the working set to pick a set of tags to work with."
 msgstr "你可以用工作区来选择一组你用来工作的标签。"
 
@@ -1820,7 +1831,7 @@ msgid "Short snippet is recommended (less than 140 characters)"
 msgstr "建议短便条（少于60字）"
 
 #: templates/notebook/notes/notesdisplay.html:20
-#: templates/snippetbook/notes/notesdisplay.html:43
+#: templates/snippetbook/notes/notesdisplay.html:45
 msgid ""
 "A short snippet is enough to represent a significant experience. Practice on "
 "that. :-)"
@@ -2054,7 +2065,7 @@ msgstr "隐藏加便条"
 msgid "Add tags"
 msgstr "加标签"
 
-#: templates/snippetbook/notes/notesdisplay.html:42
+#: templates/snippetbook/notes/notesdisplay.html:44
 msgid "Short snippet is recommended (less than 300 characters)"
 msgstr "建议短便条（少于60字）"
 
@@ -2392,6 +2403,12 @@ msgstr "所有工作区"
 #: templates/workingset/index.html:370
 msgid "Make Current"
 msgstr "设成当前"
+
+#~ msgid "Record your"
+#~ msgstr "记录你的"
+
+#~ msgid "Significant Experience"
+#~ msgstr "重要体验"
 
 #~ msgid "Frame"
 #~ msgstr "包"
