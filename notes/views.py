@@ -672,6 +672,10 @@ def tags(request, username, bookname, tag_name, aspect_name):
         else:
             note_list = n_list           
         
+        qstr = __getQStr(request)
+    
+        note_list  = getSearchResults(note_list, qstr, search_fields_dict.get(bookname))
+        
         default_tag_id = t.id   
         context = __get_context(request, note_list, default_tag_id, username, bookname, aspect_name)   
         queries = connection.queries	
