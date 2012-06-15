@@ -1,6 +1,5 @@
 {% load i18n %}
 
-{{ form.media }}
 
 <script>
 	jQuery(function($){
@@ -131,8 +130,8 @@
 {% block note_form%}
  {% if user.username == profile_username %} 
 <div class="noPrint">
-    <span id="edit_note"><a href="#">{% trans 'Edit this note' %}</a></span>
-    <span id="hide_edit_note"><a href="#">{% trans 'Hide edit form' %}</a></span>
+    <span id="edit_note"><a href="#edit">{% trans 'Edit this note' %}</a></span>
+    <span id="hide_edit_note"><a href="#edit">{% trans 'Hide edit form' %}</a></span>
 
     <form action="updateNote/" method="post" enctype="multipart/form-data" id="updateNoteForm">
         <p> {{ note_form.title.label_tag }}: {{note_form.title}}</p> 
@@ -163,8 +162,8 @@
 </div>
 <br/>
 <div class="noPrint">
-    <span id="edit_trans"><a href="#">{% trans 'Add or edit the translation' %}</a></span>
-    <span id="hide_trans"><a href="#">{% trans 'Hide the translation form' %}</a></span>
+    <span id="edit_trans"><a href="#translate">{% trans 'Add or edit the translation' %}</a></span>
+    <span id="hide_trans"><a href="#translate">{% trans 'Hide the translation form' %}</a></span>
     <form action="updateNoteTrans/" method="post" enctype="multipart/form-data" id="updateNoteTransForm">
         <p> {{ note_trans_form.original_lang.label_tag }}: {{note_trans_form.original_lang}}</p> 
         <p> {{ note_trans_form.lang.label_tag }}: {{note_trans_form.lang}}</p>         
