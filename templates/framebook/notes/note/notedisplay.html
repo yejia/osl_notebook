@@ -46,7 +46,11 @@
  {% endblock %}
  
 
-
+{% block note_attachment%}
+<div class="noPrint">
+<b>{% trans 'attachment' %} :</b> <a href="/file/{{note.attachment.name}}" target="top">{{note.attachment}}</a>
+</div>
+{% endblock %}
 
 {% block note_form_tags%}
 {% endblock %}
@@ -55,11 +59,13 @@
 <input type="hidden" name="vote" value="{{note.vote}}" id="id_vote" />
 {% endblock %}
 
-{% block note_attachment%}
-<div class="noPrint">
-<b>{% trans 'attachment' %} :</b> <a href="/file/{{note.attachment.name}}" target="top">{{note.attachment}}</a>
-</div>
+
+
+
+{% block note_form_attachment%}
+<p>{{ note_form.attachment.label_tag }}:{{note_form.attachment}}</p>
 {% endblock %}
+
 
 
 

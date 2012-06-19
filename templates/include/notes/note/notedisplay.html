@@ -151,8 +151,13 @@
         {% block note_form_tags%}
             <p>{{ note_form.tags.label_tag }}: {{note_form.tags}}</p>
         {% endblock %}
-
-        <p>{{ note_form.init_date.label_tag }}: {{note_form.init_date}}</p> 
+         
+         
+          {% comment%}
+          init_date might not be editable in django form due to its definition in model. Might want to change this. TODO:
+          <p>{{ note_form.init_date.label_tag }}: {{note_form.init_date}}</p> 
+        {% endcomment%}
+        
 
         {% block note_form_attachment%}
         {% endblock %}

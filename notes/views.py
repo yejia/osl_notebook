@@ -1601,9 +1601,10 @@ def frame(request, username, frame_id):
 #        else:
 #            n.insert(7, '')     
 #===============================================================================
-    N = getNote(username, 'notebook')    
+    N = getNote(username, 'framebook')    
     UpdateNForm = create_model_form("UpdateNForm_"+str(username), N, options={'exclude':('tags','vote')})
     note_form = UpdateNForm(instance=frame)
+
     sort =  request.GET.get('sort')  
     if request.user.username == username:
         notes_in_frame = frame.get_notes_in_order(sort) 
