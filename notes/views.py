@@ -1069,6 +1069,7 @@ def note(request, username, bookname, note_id):
     note = N.objects.get(id=note_id)    
     #linkages = note.linkagenote_set.all()
     
+        
     notes_included = None
     if note.get_note_type() == 'Frame':
         notes_included = note.frame.notes.using(username).all()       
@@ -1118,7 +1119,7 @@ def note_raw(request, username, bookname, note_id):
 @login_required
 def update_note(request, note_id, username, bookname): 
     log.debug( 'updating note :'+note_id)
-    #N = getNote(username, bookname)
+    #N = getNote(username, bookname) #TODO:isn't this better?
 #    note = N.objects.get(id=note_id)  
     note = Note.objects.using(username).get(id=note_id)  
     #TODO: probably there is no need with the complicated dynamic class generation anymore. Just use the way below
@@ -1143,10 +1144,22 @@ def update_note(request, note_id, username, bookname):
     if url:
         #TODO: if note type is note
         note.url = url
-    file = request.FILES.get('attachment')
-    if file:
-        note.attachment = file 
-    note.save()    
+    file = request.FILES.get('attachment')     
+    attachment_clear = request.POST.get('attachment-clear')    
+    #TODO:check the official way of using attachment-clear field or ClearableFileInput
+    if file or attachment_clear:
+        if note.get_note_type() == 'Frame':
+            note.frame.owner_name =  username
+            note.frame.attachment = file 
+            #have to call the subclass' save method since the parent doesn't know about attachment
+            note.frame.save()
+        if note.get_note_type() == 'Snippet':             
+            note.snippet.owner_name =  username
+            note.snippet.attachment = file 
+            note.snippet.save()
+       
+    note.save()  
+   
 
     log.debug( 'the note %s is updated.' % (note_id))
     full_path =  request.get_full_path()  

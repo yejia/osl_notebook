@@ -431,7 +431,7 @@ class Note(models.Model):
         
 
 
-           #is attachment img?
+    #is attachment img? TODO: better ways of telling if the attach is an img or not
     def is_img(self):
         file_type = None
         if self.get_note_type() == 'Snippet':
@@ -518,7 +518,7 @@ class Note(models.Model):
             if hasattr(self, 'snippet') or hasattr(self, 'frame'):
                 log.debug('having attribute snippet or frame')
                 if hasattr(self, 'snippet'):
-                    sn.attachment = self.snippet.attachment
+                    sn.attachment = self.snippet.attachment                    
                 if hasattr(self, 'frame'):
                     sn.attachment = self.frame.attachment
             
