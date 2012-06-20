@@ -1,3 +1,3 @@
 {% load i18n %}
 
-<div  id="note_desc" title="{% trans "note desc" %}">{{note.desc|striptags}}</div>		 
+<div  id="note_desc" title="{% trans "note desc" %}">{% include "include/get_desc.html" %}</div>		 

@@ -1428,6 +1428,11 @@ function showAddNoteTags(){
                    $('span#hide_attachment').hide();
                    $('span#show_attachment').show();
             });  
+            
+            
+            $(":input[name='pick_lang']").change(function(){       
+                window.location.replace('?pick_lang='+$(this).val())
+             });
         
         
         {% block extra_ready_script %}

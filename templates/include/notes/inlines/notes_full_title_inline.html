@@ -2,6 +2,6 @@
 
 <div id="note_title" title="note title">
         {% if user.username == profile_username %}<span class="editableText">{% endif %}
-            <a href="/{{profile_username}}/{{bookname}}/notes/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a>
+            <a href="/{{profile_username}}/{{bookname}}/notes/note/{{ note.id }}/">{% include "include/get_title.html" %}</a>
         {% if user.username == profile_username %}</span>{% endif %}
 </div> 		    	   

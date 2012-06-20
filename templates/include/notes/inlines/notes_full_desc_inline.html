@@ -2,6 +2,6 @@
 
 <div  id="note_desc" title="note desc">
     {% if user.username == profile_username %}<span class="editableText">{% endif %}
-         {{note.desc}}
+         {% include "include/get_desc.html" %} <!--TODO:striptags?-->
     {% if user.username == profile_username %}</span>{% endif %}
 </div>	

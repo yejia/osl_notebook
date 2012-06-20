@@ -816,13 +816,17 @@ def __get_context(request, note_list,default_tag_id, username, bookname, aspect_
     
     #AddNForm_notes = create_model_form("AddNForm_"+str(username), N, fields={'tags':forms.ModelMultipleChoiceField(queryset=tags)})
     #addNoteForm = AddNForm_notes(initial={'tags': [default_tag_id]}) #TODO: is this form used at all?
+    
+    pick_lang =  request.GET.get('pick_lang') 
     return  {'note_list': paged_notes, 'tags':tags, 'view_mode':view_mode,
                    'delete':delete, 'private':private, 'day':now.day, 'month':now.month, 'year':now.year,
                    'addnote_mode':addnote_mode,'sort':sort, #'addNoteForm': addNoteForm,
 		   'addLinkNoteForm':AddLinkageNoteForm(),'folders':folders, 'caches':caches, 
 		   'next_cache_id':next_cache_id, 'show_notes_mode':show_notes_mode, 'show_caches_mode':show_caches_mode,'cl':cl, 
            'profile_username':username, 'date_range':date_range, 'order_type':order_type, 'in_linkage':in_linkage, 
-           'with_attachment':with_attachment, 'users':User.objects.all(), 'wss':wss, 'current_ws':request.session.get("current_ws", None)}      
+           'with_attachment':with_attachment, 'users':User.objects.all(), 'wss':wss, 'current_ws':request.session.get("current_ws", None),
+           'pick_lang':pick_lang
+           }      
     
 
 

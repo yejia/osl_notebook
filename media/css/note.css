@@ -26,6 +26,11 @@ span#pick_lang
 {
 float:right;
 }
+select#lang_drop_down{
+margin-top:-10px;
+font-size: 8px;
+}
+
 .small_font{
 font-size: 9px;
 }

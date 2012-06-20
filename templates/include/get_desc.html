@@ -1,9 +1,9 @@
 {% if not pick_lang  %}
-    {{note.desc}}
+    {{note.desc|striptags}}
 {% endif %}    
 {% if pick_lang == 'C'  %}
-    {{note.get_desc_cn}}
+    {{note.get_desc_cn|striptags}}
 {% endif %}      
 {% if pick_lang == 'E'  %}
-    {{note.get_desc_en}}
+    {{note.get_desc_en|striptags}}
 {% endif %}  
