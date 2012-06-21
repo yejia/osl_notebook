@@ -946,6 +946,18 @@ class Frame_Folder(Folder):
     pass    
         
 
+#think of implementing this with NonSql
+#Fold similiar notes together, and only show the reprensentative one. TODO:
+#For notes folded, if not the representative one, mark them as deleted. So they never show up
+#in normal notes list. And for the representative one, just provide more notes as alternative explanations
+#===============================================================================
+# class Fold(models.Model):
+#    repr =  models.ForeignKey(Note)
+#    note_ids =  models.CharField(blank=False,max_length=800)   
+#    
+#===============================================================================
+       
+
 
 class Cache(models.Model):
     note_ids =  models.CharField(blank=False,max_length=800)

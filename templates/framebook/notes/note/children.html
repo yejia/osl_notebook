@@ -7,10 +7,10 @@
                 <span class='noPrint'>
                 <img src="/site_media/img/{{note.get_note_type}}.png" title="{{note.get_note_type}}" />
                 <a href="{{book_uri_prefix}}/{{note.get_note_bookname}}/notes/note/{{note.id}}/">
-                 {% include "include/get_title.html" %}     
+                 {% if note.get_note_type == 'Frame' %}<b>{% endif %}{% include "include/get_title.html" %} {% if note.get_note_type == 'Frame' %}</b>{% endif %}         
                 </a> 
                 </span>
-                <span> {% include "include/get_desc.html" %}
+                <span>{% if note.get_note_type == 'Frame' %}<b>{% endif %}{% include "include/get_desc.html" %}{% if note.get_note_type == 'Frame' %}</b>{% endif %}        
                 </span>
                 {% if note.get_note_type == 'Bookmark' or note.get_note_type == 'Scrap' %} 
                     {% if note.get_note_type == 'Bookmark' %} 

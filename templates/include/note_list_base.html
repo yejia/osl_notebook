@@ -50,7 +50,7 @@
 -->
     <script src="/site_media/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>	
 
-
+  <script src="/site_media/js/jquery.hotkeys.js" type="text/javascript" charset="utf-8"></script>	
 
    
     <script src="/site_media/js/jquery.editableText.js" type="text/javascript"></script>
@@ -135,9 +135,10 @@
             return a - b;
     }
 	
-    
-
-    
+     //TODO:make it work when the textarea is still focused (without having to leave the textarea input box first)
+      $(document).bind('keydown', 'alt+s', addNote);
+      //$('div.addnote #id_desc').bind('keydown', 'alt+s', addNote);
+     
        function addNote(){              
             desc = $('#id_desc').val();         
             //alert('desc:'+desc);             
@@ -795,6 +796,13 @@ $("#ac_tags").tagit("removeAll");
           //$('.stream').show();    
           $('.structure').hide();
     }
+    
+    
+    $(document).bind('keydown', 'alt+m', structure);
+    
+     $(document).bind('keydown', 'alt+l', stream);
+     
+     
     
     
     function show_confirm(){
