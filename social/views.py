@@ -466,10 +466,11 @@ def frame(request, username, bookname, frame_id):
         notes_in_frame = frame.get_public_notes_in_order(sort) 
     
     pick_lang =  request.GET.get('pick_lang') 
+    
     return render_to_response('social/framebook/notes/note/note.html', {'note':frame, 'notes_in_frame':notes_in_frame,'sort':sort, \
                                                              #'frame_notes_display':frame_notes_display, \
                                                              'profile_username':username,\
-                                                             'pick_lang':pick_lang}, \
+                                                             'pick_lang':pick_lang, 'social_note':frame}, \
                                                              context_instance=RequestContext(request,{'bookname': bookname,\
                                                                                                       'book_uri_prefix':'/social/'+username}))
 

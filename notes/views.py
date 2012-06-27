@@ -1642,11 +1642,11 @@ def frame(request, username, frame_id):
         note_trans_form = UpdateNoteTransForm(instance=note_trans)
     
     pick_lang =  request.GET.get('pick_lang')  
-    
-    
+    social_note = frame.get_social_note()    
     return render_to_response('framebook/notes/note/note.html', {'note':frame, 'notes_in_frame':notes_in_frame, 'sort':sort, \
                                                              'profile_username':username, 'note_form':note_form,\
-                                                             'note_trans_form':note_trans_form,'pick_lang':pick_lang\
+                                                             'note_trans_form':note_trans_form,'pick_lang':pick_lang,\
+                                                             'social_note':social_note
                                                               }, \
                                                              context_instance=RequestContext(request,{'bookname': 'framebook','book_uri_prefix':'/'+username}))
 
