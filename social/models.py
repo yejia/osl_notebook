@@ -255,6 +255,15 @@ class Social_Note(models.Model):
         comments = Social_Note_Comment.objects.filter(note=self) 
         return comments 
     
+    
+    def get_courses(self):          
+        courses = Social_Note_Course.objects.filter(note=self) 
+        return courses 
+    
+    
+    def get_outer_links(self):          
+        backlinks = Social_Note_Backlink.objects.filter(note=self) 
+        return backlinks
 
    
        #is attachment img?
@@ -357,6 +366,35 @@ class Social_Note_Comment(models.Model):
     class Meta:
         ordering = ['-init_date','note','desc']
 
+
+
+class Social_Note_Course(models.Model):
+    note =  models.ForeignKey(Social_Note)
+    submitter = models.ForeignKey(Member)
+    url = models.CharField(max_length=2000)
+    init_date = models.DateTimeField('date created', auto_now_add=True)
+
+    def __unicode__(self):        
+        return self.url
+    
+    class Meta:
+        ordering = ['-init_date','url']
+
+
+#a simple implementation of backlinks. TODO:
+#It tracks request's referrer.If it is from an external site, then put in this table.
+class Social_Note_Backlink(models.Model):
+    note =  models.ForeignKey(Social_Note)    
+    url = models.CharField(max_length=2000)
+    init_date = models.DateTimeField('date created', auto_now_add=True)
+
+    def __unicode__(self):        
+        return self.url
+    
+    class Meta:
+        ordering = ['-init_date','url']
+        
+        
 
 class Social_Note_Vote(models.Model):      
     note = models.ForeignKey(Social_Note)

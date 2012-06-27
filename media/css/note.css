@@ -176,6 +176,16 @@ span#note_owner{
 }
 
 
+span.note_tabs_item{
+color:blue;
+cursor:pointer;
+}
+span.present{
+color:#000000;
+cursor:text;
+}
+
+
 /*
 span.noteshome:hover{
 cursor:pointer;
@@ -718,10 +728,15 @@ bottom:0px;
 .inline_delete_comment:hover{
    background-position:-12px 0;
 }
+
 .inline_delete_member:hover{
    background-position:-12px 0;
 }
 
+
+.add_box{
+padding-top:15px;
+}
 
 span.tags_edit, span.included_notes_edit {	
    background: url("../img/icon_changelink.gif");

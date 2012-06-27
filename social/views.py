@@ -16,12 +16,13 @@ from django.utils.translation import ugettext as _
 from django.core.mail import send_mail
 
 import datetime
+from urlparse import urlparse
 
 from notebook.notes.models import Note, Tag, create_model, WorkingSet, getW
 from notebook.bookmarks.models import Bookmark
 from notebook.scraps.models import Scrap
 from notebook.social.models import Member, Group, Social_Note, Social_Tag, Social_Note_Vote, Social_Note_Comment, \
-                                Social_Snippet, Social_Bookmark, Social_Scrap, Friend_Rel, Social_Frame
+                                Social_Snippet, Social_Bookmark, Social_Scrap, Friend_Rel, Social_Frame, Social_Note_Course, Social_Note_Backlink
 
 from notebook.notes.views import User, getT, getlogger, getFolder, get_public_notes, __get_folder_context
 from notebook.notes.views import getSearchResults,  __getQStr, __get_view_theme, Pl, ALL_VAR
@@ -343,12 +344,26 @@ def notes(request, username, bookname):
                                                   context_instance=RequestContext(request,  {'book_uri_prefix':'/social/'+username}))
 
 
+notebook_host_names = ['www.91biji.com', '91biji.com', 'opensourcelearning.org', 'www.opensourcelearning.org']
+
+
 def note(request, username, bookname, note_id):
     log.debug('Getting the note:'+note_id)   
-    if 'framebook' == bookname:
-        return frame(request, username, bookname, note_id)
+    
+    
+        
     N = getSN(bookname)
     note = N.objects.filter(owner__username=username).get(id=note_id)
+    
+    #get the backlink
+    referer = request.META.get('HTTP_REFERER', '/')       
+    r = urlparse(referer)
+    if r.hostname not in notebook_host_names:
+        snb, created = Social_Note_Backlink.objects.get_or_create(note=note, url=referer)
+    
+    if 'framebook' == bookname:
+        return frame(request, username, bookname, note_id)
+    
     
 #===============================================================================
 #    print 'note type is:', note.get_note_type()
@@ -370,7 +385,7 @@ def note(request, username, bookname, note_id):
                                     #'frames':frames, \
                                     'notes_included':notes_included,\
                                     'profile_username':username,\
-                                    'pick_lang':pick_lang
+                                    'pick_lang':pick_lang, 'social_note':note
                                     },\
                                      context_instance=RequestContext(request, {'bookname': bookname,'aspect_name':'notes',\
                                                                                'book_uri_prefix':'/social/'+username}))
@@ -774,6 +789,17 @@ def add_comment(request):
                                                                      "application/json")
 
 
+@login_required
+def add_course(request):  
+    note_id = request.POST.get('id')    
+    note = SN.objects.get(id=note_id)
+    url = request.POST.get('url')    
+    nc = Social_Note_Course(note=note, submitter=request.user.member, url=url)
+    nc.save()
+    return  HttpResponse(simplejson.dumps({'note_id':note_id, 'course_id':nc.id, 'course_url':nc.url, 'submitter':nc.submitter.username}),
+                                                                     "application/json")    
+
+
 from notification.models import Notice
 
 #TODO:check if profile_member is the same as requesting user. If not, don't allow viewing (Currently already hidden in html)
@@ -808,6 +834,34 @@ def delete_comment(request):
     else:
         pass    
     return HttpResponse('successful', mimetype="text/plain")  
+
+
+@login_required   
+def delete_outer_link(request):
+    #note_id = request.POST.get('id')
+    outer_link_id = request.POST.get('outer_link_id')      
+    snb = Social_Note_Backlink.objects.get(id=outer_link_id)    
+    #check permission
+    if snb.note.owner.username == request.user.username:        
+        snb.delete()        
+    else:        
+        pass    
+    return HttpResponse('successful', mimetype="text/plain")  
+
+
+@login_required   
+def delete_course(request):
+    #note_id = request.POST.get('id')
+    course_id = request.POST.get('course_id')    
+    
+    nc = Social_Note_Course.objects.get(id=course_id)
+    #check permission
+    if nc.submitter.username == request.user.username or nc.note.owner.username == request.user.username:
+        nc.delete()
+    else:
+        pass    
+    return HttpResponse('successful', mimetype="text/plain")  
+
 
 
 def suggest(request):

@@ -275,9 +275,11 @@ class WebOAuthHandler(OAuthHandler):
         except Exception, e:
             raise WeibopError(e)
 
+
 def _get_referer_url(request):
-    referer_url = request.META.get('HTTP_REFERER', '/')
-    host = request.META['HTTP_HOST']
+    referer_url = request.META.get('HTTP_REFERER', '/')    
+    host = request.META['HTTP_HOST']    
+    #if not from notebook site itself, return to the root '/' #TODO: it is better to move this logic outside of this method 
     if referer_url.startswith('http') and host not in referer_url:
         referer_url = '/' 
     return referer_url
@@ -1090,10 +1092,11 @@ def note(request, username, bookname, note_id):
         note_trans_form = UpdateNoteTransForm(instance=note_trans)
     
     pick_lang =  request.GET.get('pick_lang')  
+    social_note = note.get_social_note
     return render_to_response(book_template_dict.get(bookname)+'notes/note/note.html', {'note':note, 'notes_included':notes_included, \
                                                                                    'note_form':note_form, 'profile_username':username, \
                                                                                    'note_trans_form':note_trans_form,\
-                                                                                   'pick_lang':pick_lang
+                                                                                   'pick_lang':pick_lang, 'social_note':social_note
                                                                                    },
                                                                                     context_instance=RequestContext(request, {'bookname': bookname,\
                                                                                                                               'aspect_name':'notes',\

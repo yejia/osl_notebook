@@ -1,26 +1,73 @@
 {% load i18n %}
 
-            
-             <span class="add_comment_button"><a href="javascript:void(0);">{% trans "Comment" %}({{note.get_comments.count}})</a><!--<img src="/site_media/img/add.gif" title="{% trans "Add Comment" %}" class="clickable"/>--></span>
+{% block personal_comments %}
+             <span class="add_comment_button note_tabs_item" id="comments" title="{% trans "Comments by yourself on your personal note" %}">{% trans "Comments" %}({{note.get_comments.count}})</span>             
              &nbsp;&nbsp;
-             {% block other_buttons %}
-                {% if note.get_social_note %} 
+{% endblock %}       
+             <span class="note_tabs_item"  id="public_comments" title="{% trans "Comments by you and others on your public note" %}">{% trans "Public Comments" %}({{social_note.get_comments.count}})</span>             
+             &nbsp;&nbsp;           
+             <span class="note_tabs_item"  id="inner_links"  title="{% trans "Notebook internal references of this note" %}">{% trans "Inner Links" %}</span>
+             &nbsp;&nbsp;                 
+{% block courses %}                
+{% endblock %}              
+             <span class="note_tabs_item"  id="outer_links"  title="{% trans "External references of this note" %}">{% trans "Outer Links" %}({{social_note.get_outer_links.count}})</span>
+              &nbsp;&nbsp;
+{% block other_buttons %}
+            {% if social_note %} 
                     <span>
-                        <a href="/social/{{profile_username}}/{{bookname}}/notes/note/{{note.get_social_note.id}}/" title="{% trans 'View this note in public notebook' %}">{% trans 'View social' %}</a>
+                        <a href="/social/{{profile_username}}/{{bookname}}/notes/note/{{social_note.id}}/" title="{% trans 'View this note in public notebook' %}">{% trans 'View social' %}</a>
                     </span>
-                {% endif %}        
-            {% endblock %}
-             
-             <div  id="add_comment_box" style="display:none;">             
-             <div>{{user.username}}: <textarea id="add_comment" rows="3" cols="90" name="desc"></textarea><!--<button class="comment_submit">{% trans "Add Comment" %}</button>-->
-             <span class="comment_submit"  title="{% trans "Save Comment" %}"><img src="/site_media/img/save.png"/></span>&nbsp;<span class="cancel_comment_submit" title="{% trans "Cancel" %}"><img src="/site_media/img/cancel.png" /></span></div>
+            {% endif %}        
+{% endblock %}           
+            
+            
+{% block add_personal_comments %}
+             <div  class="add_box" id="add_comment_box" style="display:none;">             
+             <div>&nbsp;<textarea id="add_content" rows="3" cols="90" name="desc"></textarea>
+             <span class="personal_comment_submit"  title="{% trans "Save Comment" %}"><img src="/site_media/img/save.png"/></span>&nbsp;
+             <span class="cancel_submit" title="{% trans "Cancel" %}">
+             <img src="/site_media/img/cancel.png" /></span></div>
              <br/> 
-             <div id="comments">
-                {% for comment in note.get_comments %}
-                    {% block content%}
-                     <div comment_id="{{comment.id}}">{{comment}}  <span title="{% trans "remove this comment" %}" class="inline_delete_comment" id="note_delete_comment">&nbsp;&nbsp;&nbsp;</span></div>   
-                    {% endblock %}     
+             <div id="personal_comments">
+                {% for comment in note.get_comments %}                   
+                     <div comment_id="{{comment.id}}">{{comment}}  <span title="{% trans "remove this comment" %}" class="inline_delete" id="note_delete_comment">&nbsp;&nbsp;&nbsp;</span></div>                       
                 {% endfor %}
              </div>
+            </div>
+{% endblock %}
              
-             </div>
+             
+
+             <div  class="add_box" id="add_public_comment_box" style="display:none;">             
+             <div>{{user.username}}: <textarea id="add_content" rows="3" cols="90" name="desc"></textarea>
+             <span class="public_comment_submit"  title="{% trans "Save Comment" %}"><img src="/site_media/img/save.png"/></span>&nbsp;
+             <span class="cancel_submit" title="{% trans "Cancel" %}">
+             <img src="/site_media/img/cancel.png" /></span></div>
+             <br/> 
+             <div id="public_comments">
+                {% for comment in social_note.get_comments %}                    
+                     <div comment_id="{{comment.id}}"><a href="/social/{{comment.commenter}}">{{comment.commenter}}</a>: {{comment.desc}}  {% if user.username == profile_username %}     <span title="{% trans "remove this comment" %}" class="inline_delete" id="note_delete_social_comment">&nbsp;&nbsp;&nbsp;</span> {% endif %}</div>                     
+                {% endfor %}
+             </div> 
+              </div>             
+  
+
+
+{% block add_courses %}          
+{% endblock %}    
+
+
+
+             <div  class="add_box" id="add_outer_links_box" style="display:none;">  
+             <div id="outer_links">
+                {% for outer_link in social_note.get_outer_links %}                    
+                     <div outer_link_id="{{outer_link.id}}"><a href="{{outer_link.url}}">{{outer_link.url}}</a>     {% if user.username == profile_username %}       <span title="{% trans "remove this outer link" %}" class="inline_delete" id="note_delete_outer_link">&nbsp;&nbsp;&nbsp;</span> {% endif %}</div>                     
+                {% endfor %}
+             </div> 
+              </div>             
+      
+              
+              
+
+             
+            

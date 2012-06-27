@@ -70,6 +70,10 @@ urlpatterns = patterns('',
     #TODO: better regex
     (r'^groups/[^/]+/[^/]+/addComment/$', 'notebook.social.views.add_comment'),
     (r'^social/.+/addComment/$', 'notebook.social.views.add_comment'),
+    (r'^social/.+/addCourse/$', 'notebook.social.views.add_course'),
+    (r'^social/.+/deleteOuterlink/$', 'notebook.social.views.delete_outer_link'),
+    (r'^social/.+/deleteCourse/$', 'notebook.social.views.delete_course'),
+
      (r'/friends/.+/notes/addComment/$', 'notebook.social.views.add_comment'),
     (r'^social/(?P<username>[^/]+)/commentsfor/$', 'notebook.social.views.comments_4_user'),
     (r'^social/(?P<username>[^/]+)/commentsby/$', 'notebook.social.views.comments_by_user'),

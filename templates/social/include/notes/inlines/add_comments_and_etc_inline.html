@@ -8,14 +8,35 @@
 {% block comment_display %}+'<div><a href="/social/'+result.commenter+'"/>'+result.commenter+'</a>:'+result.desc+'</div>'+{% endblock %}
 
 
-
-{% block content%}
-      <div comment_id="{{comment.id}}">
-          <a href="/social/{{comment.commenter}}/">{{comment.commenter}}</a>:{{comment.desc}} 
-          {% if comment.commenter.username == user.username %}  <span title="{% trans "remove this comment" %}" class="inline_delete_comment" id="note_delete_comment">&nbsp;&nbsp;&nbsp;</span>
-          {% endif %} 
-      </div>   
+{% block personal_comments %}
 {% endblock %}   
+ 
+{% block add_personal_comments %}
+{% endblock %}   
+
+
+{% block courses %}    
+             <span class="note_tabs_item" id="courses"  title="{% trans "Courses that use this note" %}">{% trans "Courses" %}({{note.get_courses.count}})</span>
+              &nbsp;&nbsp;
+{% endblock %}  
+
+
+{% block add_courses %}
+              <div  class="add_box" id="add_course_box" style="display:none;">             
+             <div>{% trans "Enter course url" %}: <input type="text" id="add_content" size="90" name="url">
+             <span class="course_submit"  title="{% trans "Save  Course" %}"><img src="/site_media/img/save.png"/></span>&nbsp;
+             <span class="cancel_submit" title="{% trans "Cancel" %}">
+             <img src="/site_media/img/cancel.png" /></span></div>
+             <br/> 
+             <div id="courses">
+                {% for course in social_note.get_courses %}                    
+                     <div course_id="{{course.id}}"><a href="{{course.url}}">{{course.url}}</a>      {% if user.username == profile_username %}<span title="{% trans "remove this course" %}" class="inline_delete" id="note_delete_course">&nbsp;&nbsp;&nbsp;</span> {% endif %}</div>
+                {% endfor %}
+             </div> 
+              </div>             
+{% endblock %}    
+
+
 
 
 {% block other_buttons %}
