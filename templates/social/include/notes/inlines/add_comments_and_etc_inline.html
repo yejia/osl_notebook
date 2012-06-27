@@ -10,15 +10,17 @@
 
 {% block personal_comments %}
 {% endblock %}   
- 
-{% block add_personal_comments %}
-{% endblock %}   
 
 
 {% block courses %}    
              <span class="note_tabs_item" id="courses"  title="{% trans "Courses that use this note" %}">{% trans "Courses" %}({{note.get_courses.count}})</span>
               &nbsp;&nbsp;
 {% endblock %}  
+
+ 
+{% block add_personal_comments %}
+{% endblock %}   
+
 
 
 {% block add_courses %}

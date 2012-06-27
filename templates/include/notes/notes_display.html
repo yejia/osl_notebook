@@ -48,7 +48,8 @@
     {% for note in note_list.object_list %}
         {% if user.username != profile_username and note.is_private %}  
         {% else %}     
-         <li class="note_display" note_id="{{ note.id }}">
+         <li class="note_display" note_id="{{ note.id }}"  social_note_id="{{ note.get_social_note.id }}">
+         
          {% if user.username == profile_username %}     
 	            <input type="checkbox" name="note_selected"  value="{{ note.id }}" class="note_selection" />
         {% endif %}      
@@ -147,7 +148,11 @@
                     </div>
 		            
                     {% block comments_inline %}
-                         {% include "include/notes/inlines/add_comments_and_etc_inline.html" %}   
+                    <div  note_id="{{ note.id }}"  social_note_id="{{ note.get_social_note.id }}"><!--To make it consistent with single note display page thus js can be unified. -->
+                        {% with social_note=note.get_social_note %}
+                            {% include "include/notes/inlines/add_comments_and_etc_inline.html" %}   
+                        {% endwith %}
+                     </div>   
 		            {% endblock %} 
 		           
 				             

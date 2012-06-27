@@ -348,7 +348,8 @@
                     $(this).parents("div[comment_id]").remove();
                 });
                 
-        
+                
+    
                             
                   $("li[note_id='"+note.note_id+"']  span.unlock").click(function(){	                   
                     $.post('makePrivate/',{'id':$(this).parents('li').attr('note_id')}, privacyChanged, 'json');                   
@@ -1149,52 +1150,147 @@ function showAddNoteTags(){
          
              
              
+             //handle comments and etc
+             
+                             
+               $('span#personal_comments').click(function(){                   
+                        parent = $(this).parents('div[note_id]');     
+                        parent.find('span.note_tabs_item').removeClass('present');
+                        $(this).addClass("present");        
+                        parent.find('.add_box').hide();                
+                        parent.find('#add_personal_comment_box').show();      
+                });
+                
+                
+                $('span#public_comments').click(function(){                   
+                        parent = $(this).parents('div[note_id]');     
+                        parent.find('span.note_tabs_item').removeClass('present');
+                        $(this).addClass("present");        
+                        parent.find('.add_box').hide();                
+                        parent.find('#add_public_comment_box').show();      
+                });
+                
+            $('span.note_tabs_item#courses'). click(function(){            
+                    parent = $(this).parents('div[note_id]');     
+                        parent.find('span.note_tabs_item').removeClass('present');
+                        $(this).addClass("present");        
+                        parent.find('.add_box').hide();                  
+                    $('#add_course_box').show();          
+            });	
+            
+             $('span.note_tabs_item#outer_links'). click(function(){            
+                   parent = $(this).parents('div[note_id]');     
+                        parent.find('span.note_tabs_item').removeClass('present');
+                        $(this).addClass("present");        
+                        parent.find('.add_box').hide();                   
+                    $('#add_outer_links_box').show();          
+            });	
+            
+                
+                
+             
+                    $('.cancel_submit').click(function(){          
+                        add_box  = $(this).parents(".add_box")
+                        add_box.find("#add_content").val('');
+                        add_box.hide();
+      
+                });
              
              
-                    $('.comment_submit').click(function(){  
-                        var newValue = $(this).parents("#add_comment_box").find("#add_comment").val();
-                        $.post('addComment/',{ 'id':$(this).parents('li').attr('note_id'), 'content':  newValue}, commentAdded ,'json');              
+             
+                    $('.personal_comment_submit').click(function(){ 
+                        var newValue = $(this).parents("#add_personal_comment_box").find("#add_content").val();
+                        $.post('addComment/',{ 'id':$(this).parents('div[note_id]').attr('note_id'), 'content':  newValue}, personal_commentAdded ,'json');              
       
                 });
                 
-                $('.cancel_comment_submit').click(function(){                   
-                        comment_box  = $(this).parents("#add_comment_box")
-                        comment_box.find("#add_comment").val('');
-                        comment_box.hide();
-      
-                });
-                
+         
                
                 
-                function commentAdded(result){
+                function personal_commentAdded(result){
                      note_id = result.note_id;
-                     $("li[note_id='"+note_id+"']").find('div#comments').prepend('<div comment_id="'+result.comment_id+'">'{% block comment_display  %}+result.comment_desc+
-                                                                      {% endblock %}'<span title="{% trans "remove this comment" %}" class="inline_delete_comment" id="note_delete_comment">&nbsp;&nbsp;&nbsp;</span></div>');   
+                     $("div[note_id='"+note_id+"']").find('div#personal_comments').prepend('<div comment_id="'+result.comment_id+'">'{% block comment_display  %}+result.comment_desc+
+                                                                      {% endblock %}'<span title="{% trans "remove this comment" %}" class="inline_delete" id="note_delete_personal_comment">&nbsp;&nbsp;&nbsp;</span></div>');   
                    
-                    $("li[note_id='"+note_id+"']").find('div#comments').find("div[comment_id='"+result.comment_id+"']").find('span.inline_delete_comment').click(function(){	                
+                    $("div[note_id='"+note_id+"']").find('div#personal_comments').find("div[comment_id='"+result.comment_id+"']").find('span.inline_delete').click(function(){	                
                         $(this).load('deleteComment/',{'comment_id':$(this).parents('div').attr('comment_id')});
                         $(this).parents("div[comment_id]").remove();
                    });
                 
-                    comment_box = $("li[note_id='"+note_id+"']").find('div#add_comment_box');
-                    comment_box.find("#add_comment").val('')
-                    //comment_box.hide();
+                    comment_box = $("div[note_id='"+note_id+"']").find('div#add_personal_comment_box');
+                    comment_box.find("#add_content").val('');            
                 
                 }
                 
+             
                 
-                 $('.add_comment_button').click(function(){                   
-                        $(this).parents('li').find('#add_comment_box').show();               
-      
-                });
-                
-                
-                $('span.inline_delete_comment').click(function(){	                
+                $('span#note_delete_personal_comment').click(function(){	                
                     $(this).load('deleteComment/',{'comment_id':$(this).parents('div').attr('comment_id')});
                     $(this).parents("div[comment_id]").remove();
                 });
                 
+
                 
+                
+                   $('.public_comment_submit').click(function(){  
+                        var newValue = $(this).parents("#add_public_comment_box").find("#add_content").val();                       
+                        $.post('/social/{{user.username}}/addComment/',{ 'id':$(this).parents('div[note_id]').attr('social_note_id'), 'content':  newValue}, public_commentAdded ,'json');  
+                });
+                
+              
+                
+                  function public_commentAdded(result){
+                        note_id = result.note_id;
+                        $('div#public_comments').prepend('<div comment_id="'+result.comment_id+'">'+result.comment_desc+
+                                                                      '<span title="{% trans "remove this comment" %}" class="inline_delete" id="note_delete_public_comment">&nbsp;&nbsp;&nbsp;</span></div>');   
+                                                                      
+                         $('div#public_comments').find("div[comment_id='"+result.comment_id+"']").find('span.inline_delete').click(function(){	                
+                                $(this).load('/social/{{user.username}}/deleteComment/',{'comment_id':$(this).parents('div').attr('comment_id')});
+                                $(this).parents("div[comment_id]").remove();
+                        });       
+
+                        comment_box  = $("#add_public_comment_box");
+                        comment_box.find("#add_content").val('');
+                 
+                 }
+                                
+                
+                 $('span#note_delete_public_comment').click(function(){	                
+                    $(this).load('/social/{{user.username}}/deleteComment/',{'comment_id':$(this).parents('div').attr('comment_id')});
+                    $(this).parents("div[comment_id]").remove();
+                });
+                            
+                
+                $('.course_submit').click(function(){ 
+                        var newValue = $(this).parents("#add_course_box").find("#add_content").val();                       
+                        $.post('/social/{{user.username}}/addCourse/',{ 'id':$(this).parents('div[note_id]').attr('social_note_id'), 'url':  newValue}, courseAdded ,'json');              
+    
+                });
+                
+                
+                function courseAdded(result){
+                        note_id = result.note_id;
+                        $('div#courses').prepend('<div course_id="'+result.course_id+'">'+result.course_url+
+                                                                      '<span title="{% trans "remove this course" %}" class="inline_delete" id="note_delete_course">&nbsp;&nbsp;&nbsp;</span></div>');   
+                                                                      
+                         $('div#courses').find("div[course_id='"+result.course_id+"']").find('span.inline_delete').click(function(){	                
+                                $(this).load('/social/{{user.username}}/deleteCourse/',{'course_id':$(this).parents('div').attr('course_id')});
+                                $(this).parents("div[course_id]").remove();
+                        });       
+
+                        course_box  = $("#add_course_box");
+                        course_box.find("#add_content").val('');                 
+                 }
+                 
+                  $('span#note_delete_course').click(function(){	                
+                        $(this).load('/social/{{user.username}}/deleteCourse/',{'course_id':$(this).parents('div').attr('course_id')});
+                        $(this).parents("div[course_id]").remove();
+                });
+                 
+                $('span#note_delete_outer_link').click(function(){	                
+                        $(this).load('/social/{{user.username}}/deleteOuterlink/',{'outer_link_id':$(this).parents('div').attr('outer_link_id')});
+                        $(this).parents("div[outer_link_id]").remove();
+                });
                
                 
                 

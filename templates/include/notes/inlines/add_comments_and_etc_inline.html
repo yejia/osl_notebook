@@ -1,7 +1,7 @@
 {% load i18n %}
 
 {% block personal_comments %}
-             <span class="add_comment_button note_tabs_item" id="comments" title="{% trans "Comments by yourself on your personal note" %}">{% trans "Comments" %}({{note.get_comments.count}})</span>             
+             <span class="note_tabs_item" id="personal_comments" title="{% trans "Comments by yourself on your personal note" %}">{% trans "Comments" %}({{note.get_comments.count}})</span>             
              &nbsp;&nbsp;
 {% endblock %}       
              <span class="note_tabs_item"  id="public_comments" title="{% trans "Comments by you and others on your public note" %}">{% trans "Public Comments" %}({{social_note.get_comments.count}})</span>             
@@ -22,7 +22,7 @@
             
             
 {% block add_personal_comments %}
-             <div  class="add_box" id="add_comment_box" style="display:none;">             
+             <div  class="add_box" id="add_personal_comment_box" style="display:none;">             
              <div>&nbsp;<textarea id="add_content" rows="3" cols="90" name="desc"></textarea>
              <span class="personal_comment_submit"  title="{% trans "Save Comment" %}"><img src="/site_media/img/save.png"/></span>&nbsp;
              <span class="cancel_submit" title="{% trans "Cancel" %}">
@@ -30,7 +30,7 @@
              <br/> 
              <div id="personal_comments">
                 {% for comment in note.get_comments %}                   
-                     <div comment_id="{{comment.id}}">{{comment}}  <span title="{% trans "remove this comment" %}" class="inline_delete" id="note_delete_comment">&nbsp;&nbsp;&nbsp;</span></div>                       
+                     <div comment_id="{{comment.id}}">{{comment}}  <span title="{% trans "remove this comment" %}" class="inline_delete" id="note_delete_personal_comment">&nbsp;&nbsp;&nbsp;</span></div>                       
                 {% endfor %}
              </div>
             </div>
@@ -46,7 +46,7 @@
              <br/> 
              <div id="public_comments">
                 {% for comment in social_note.get_comments %}                    
-                     <div comment_id="{{comment.id}}"><a href="/social/{{comment.commenter}}">{{comment.commenter}}</a>: {{comment.desc}}  {% if user.username == profile_username %}     <span title="{% trans "remove this comment" %}" class="inline_delete" id="note_delete_social_comment">&nbsp;&nbsp;&nbsp;</span> {% endif %}</div>                     
+                     <div comment_id="{{comment.id}}"><a href="/social/{{comment.commenter}}">{{comment.commenter}}</a>: {{comment.desc}}  {% if user.username == profile_username %}     <span title="{% trans "remove this comment" %}" class="inline_delete" id="note_delete_public_comment">&nbsp;&nbsp;&nbsp;</span> {% endif %}</div>                     
                 {% endfor %}
              </div> 
               </div>             

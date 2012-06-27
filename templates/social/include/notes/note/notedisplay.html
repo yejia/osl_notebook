@@ -50,8 +50,10 @@
 
 
 {% block note_comments%}
-<div note_id="{{note.id}}" class="noPrint">
-{% include "social/include/notes/inlines/add_comments_and_etc_inline.html" %}            
+<div note_id="{{note.id}}" social_note_id="{{ note.id }}"  class="noPrint">
+    {% with social_note=note %}
+        {% include "social/include/notes/inlines/add_comments_and_etc_inline.html" %}     
+    {% endwith %}
 </div>
 {% endblock %}
 

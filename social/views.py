@@ -385,7 +385,7 @@ def note(request, username, bookname, note_id):
                                     #'frames':frames, \
                                     'notes_included':notes_included,\
                                     'profile_username':username,\
-                                    'pick_lang':pick_lang, 'social_note':note
+                                    'pick_lang':pick_lang, 
                                     },\
                                      context_instance=RequestContext(request, {'bookname': bookname,'aspect_name':'notes',\
                                                                                'book_uri_prefix':'/social/'+username}))
@@ -470,7 +470,7 @@ def frame(request, username, bookname, frame_id):
     return render_to_response('social/framebook/notes/note/note.html', {'note':frame, 'notes_in_frame':notes_in_frame,'sort':sort, \
                                                              #'frame_notes_display':frame_notes_display, \
                                                              'profile_username':username,\
-                                                             'pick_lang':pick_lang, 'social_note':frame}, \
+                                                             'pick_lang':pick_lang}, \
                                                              context_instance=RequestContext(request,{'bookname': bookname,\
                                                                                                       'book_uri_prefix':'/social/'+username}))
 
