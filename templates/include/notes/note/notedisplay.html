@@ -117,7 +117,7 @@
 <!--li tag is added solely to accomodate the code used in the notes display page where js need to find the parent li tag to locate with note to add comment-->
 {% endcomment%}
 <div note_id="{{note.id}}" social_note_id="{{ note.get_social_note.id }}" class="noPrint">
-    {% with social_note=note.get_social_note %}
+    {% with note.get_social_note  as  social_note %}
         {% include "include/notes/inlines/add_comments_and_etc_inline.html" %}     
     {% endwith %}
 </div>

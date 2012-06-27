@@ -51,7 +51,7 @@
 
 {% block note_comments%}
 <div note_id="{{note.id}}" social_note_id="{{ note.id }}"  class="noPrint">
-    {% with social_note=note %}
+    {% with note as  social_note  %}
         {% include "social/include/notes/inlines/add_comments_and_etc_inline.html" %}     
     {% endwith %}
 </div>

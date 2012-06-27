@@ -149,7 +149,7 @@
 		            
                     {% block comments_inline %}
                     <div  note_id="{{ note.id }}"  social_note_id="{{ note.get_social_note.id }}"><!--To make it consistent with single note display page thus js can be unified. -->
-                        {% with social_note=note.get_social_note %}
+                        {% with note.get_social_note as social_note  %}
                             {% include "include/notes/inlines/add_comments_and_etc_inline.html" %}   
                         {% endwith %}
                      </div>   
