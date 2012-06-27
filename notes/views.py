@@ -1092,7 +1092,7 @@ def note(request, username, bookname, note_id):
         note_trans_form = UpdateNoteTransForm(instance=note_trans)
     
     pick_lang =  request.GET.get('pick_lang')  
-    social_note = note.get_social_note
+    social_note = note.get_social_note()
     return render_to_response(book_template_dict.get(bookname)+'notes/note/note.html', {'note':note, 'notes_included':notes_included, \
                                                                                    'note_form':note_form, 'profile_username':username, \
                                                                                    'note_trans_form':note_trans_form,\
