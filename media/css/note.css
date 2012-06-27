@@ -708,7 +708,7 @@ bottom:0px;
 
 
 /*inline_delete is for deleteing notes in frame, change naming TODO:*/
-.inline_delete, .inline_delete_comment, .inline_delete_member{
+.inline_delete, .inline_delete_member{
    background-image:url("../img/inline-delete-middle.png");
    background-repeat:no-repeat;
    position:relative;
@@ -718,14 +718,11 @@ bottom:0px;
 }
 
 
-.inline_delete, .inline_delete_comment{
+.inline_delete{
    background-position:-1px 0;
 }
 
 .inline_delete:hover{
-   background-position:-12px 0;
-}
-.inline_delete_comment:hover{
    background-position:-12px 0;
 }
 
