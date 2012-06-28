@@ -2122,8 +2122,12 @@ def add_notes_to_cache(request,username, bookname, cache_id):
     cached_note_ids_list.sort();
     log.debug( 'updated_cached_note_ids:'+str(cached_note_ids_list))   
     cache.note_ids = ','.join(cached_note_ids_list)
-    cache.save()
-    return  HttpResponse(simplejson.dumps({'cache_id':cache.cache_id, 'note_ids':cache.note_ids,'created':created}),
+    cache.save()    
+    if bookname == 'notebook':
+        cache_id = cache.id
+    else:
+        cache_id = cache.cache_id        
+    return  HttpResponse(simplejson.dumps({'cache_id':cache_id, 'note_ids':cache.note_ids,'created':created}),
                                                                      "application/json")
 
 
