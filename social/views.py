@@ -356,10 +356,12 @@ def note(request, username, bookname, note_id):
     note = N.objects.filter(owner__username=username).get(id=note_id)
     
     #get the backlink
-    referer = request.META.get('HTTP_REFERER', '/')       
-    r = urlparse(referer)
-    if r.hostname not in notebook_host_names:
-        snb, created = Social_Note_Backlink.objects.get_or_create(note=note, url=referer)
+    referer = request.META.get('HTTP_REFERER')  
+    
+    if referer: 
+        r = urlparse(referer)
+        if r.hostname not in notebook_host_names:
+            snb, created = Social_Note_Backlink.objects.get_or_create(note=note, url=referer)
     
     if 'framebook' == bookname:
         return frame(request, username, bookname, note_id)
