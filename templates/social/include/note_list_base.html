@@ -28,9 +28,7 @@
 
 
 {% block header_title %}
-{% if  user.username == profile_member.username%}
-    {% blocktrans %}Public notes of {{profile_username}}{% endblocktrans %}
-{% endif %}       
+    {% blocktrans %}Public notes of {{profile_username}}{% endblocktrans %}    
 {% endblock %}
 
 
