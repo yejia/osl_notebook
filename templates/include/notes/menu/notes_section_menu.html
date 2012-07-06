@@ -2,7 +2,7 @@
  
  <div id='notes_section_menu'>
 			    {% if user.username == profile_username %} 
-			        <div class="menu_bar"><span>{% trans "Select" %}: <a href="javascript:selectAll();">{% trans "All" %}</a>, <a href="javascript:selectNone();">{% trans "None" %}</a></span>
+			        <div class="menu_bar"><span>{% trans "Select All" %}: <input type="checkbox"  id="select_notes" name="select_notes" value="all" /><!--<a href="javascript:selectAll();">{% trans "All" %}</a>, <a href="javascript:selectNone();">{% trans "None" %}</a>--></span>
 					
 						<div id="ac_tags_box">                       
 						    <ul id="ac_tags"></ul>

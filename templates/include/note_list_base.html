@@ -1148,6 +1148,12 @@ function showAddNoteTags(){
              });
              
          
+              $(":input[name='select_notes']").change(function(){                      
+                   $(this).is(':checked') ? selectAll() :  selectNone();
+                                  
+                  
+                     
+             });
              
              
              //handle comments and etc
@@ -1832,12 +1838,13 @@ jQuery('.note_display').accordion({
 
 
 {% block header %}
-<div id="header" class="noPrint old">
+<div id="header" class="noPrint">
     <div id="branding">
         <h1 id="site-name">{% block header_title %}{% blocktrans %}Personal notes of {{profile_username}}{% endblocktrans %}{% endblock %}</h1>
     </div>
 
-    <div class="book_tabs">
+    
+<div class="book_tabs old">
         <span class="book_tabs_item {% if bookname == 'snippetbook' %}current{% endif %}" onclick="window.location.replace('{{ book_uri_prefix }}/snippetbook/notes/')">{% trans "Snippets" %}</span>
         <span class="book_tabs_item {% if bookname == 'bookmarkbook' %}current{% endif %}" onclick="window.location.replace('{{ book_uri_prefix }}/bookmarkbook/notes/')">{% trans "Bookmarks" %}</span>
         <span class="book_tabs_item {% if bookname == 'scrapbook' %}current{% endif %}" onclick="window.location.replace('{{ book_uri_prefix }}/scrapbook/notes/')">{% trans "Scraps" %}</span>

@@ -4,14 +4,23 @@
 <div id="sites_header" class="noPrint">
 <span>
 <span class="item">
-<a href="/{{ user.username|default:'anonymous' }}/snippetbook/notes/">{% trans 'Notebook' %}</a>
+<a href="/{{ user.username|default:'anonymous' }}/snippetbook/notes/">{% trans 'Notes' %}</a>
 </span>
+<span class="item">
+<a href="/{{ user.username|default:'anonymous' }}/framebook/notes/">{% trans 'Frames' %}</a>
+</span>
+<span class="item">
+<a href="javascript:alert('Not implemented yet!');" class="NotImplementedYet">{% trans 'Tags' %}</a>
+</span>
+
+<!--
 <span class="item">
 <a href="/{{ user.username|default:'anonymous' }}/groups/">{% trans 'Learning Groups' %}</a>
 </span>
 <span class="item">
 <a href="/{{ user.username|default:'anonymous' }}/friends/">{% trans 'Friends' %}</a>
 </span>
+-->
 <span class="item">
 <a href="/suggest/">{% trans 'Suggest' %}</a>
 </span>

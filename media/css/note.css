@@ -113,7 +113,10 @@ border-bottom:none;
 background-color: #E0FF85;/*#CCFF33;#F5FC9E;*/
 z-index:300;
 }
-
+input#select_notes{
+font-size:300%;
+padding:20px;
+}
 
 .advanced{
 display:none;
