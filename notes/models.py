@@ -85,6 +85,37 @@ def getNC(username):
 
 
 
+#===============================================================================
+# 
+# class  Framable(models.Model):
+#    children = models.ManyToManyField(Framable, through="Frame_Children")  
+#    
+#    
+#    def get_children_order(self):  
+#        id = self.id      
+#        fcs = Frame_Children.objects.using(self.owner_name).filter(frame__id=self.id).order_by('id')
+#        fcs_list = [fc for fc in fcs]
+#        for fc in fcs:
+#            fc.owner_name = self.owner_name
+#        if None in [fc._order for fc in fcs]:
+#            return [fc.child.id for fc in fcs]
+#        else:
+#            
+#            fcs_list.sort(key=lambda r: r._order)            
+#            return [fc.child.id for fc in fcs_list]
+#            
+# 
+# 
+#    def set_children_order(self, order):        
+#        seq = 0
+#        for child_id in order:
+#            fc = Frame_Children.objects.using(self.owner_name).get(frame__id=self.id, child__id=child_id)
+#            fc.owner_name = self.owner_name
+#            fc._order = seq            
+#            fc.save()
+#            seq = seq + 1
+#        self.save() #save the order to the social note
+#===============================================================================
 
 
 
@@ -93,6 +124,14 @@ def getNC(username):
 class Tag(models.Model):
     name = models.CharField(max_length=150)
     private = models.BooleanField(default=False)
+#===============================================================================
+#    desc =  models.TextField(blank=True, max_length=200)
+#    deleted = models.BooleanField(default=False)
+#===============================================================================
+    
+    
+    
+    
     #tag_id = models.IntegerField()
     #user = models.ForeignKey(User)
 #    if not standalone:
@@ -110,6 +149,73 @@ class Tag(models.Model):
     
     def get_working_sets_list(self):
         return self.get_working_sets.values_list('name', flat=True)
+
+
+
+             
+#===============================================================================
+# 
+# 
+# class Frame_Children(models.Model):
+#    frame = models.ForeignKey(Framable) #TODO:
+#    child = models.ForeignKey(Framable)
+#    
+#    class Meta:
+#        order_with_respect_to = 'frame'
+#        
+#===============================================================================
+
+#TODO: remove WorkingSet later
+
+#class Frame is for notes. And Tag_Frame is for putting tags in a frame
+#===============================================================================
+# class Tag_Frame(Tag):
+#    tags = models.ManyToManyField(Tag, through="Frame_Tags")     
+#    #TODO: at the most only one can have this to be true per user
+#    current = models.BooleanField(default=False) 
+#    
+#    class Meta:
+#        verbose_name = "tag frame"    
+#===============================================================================
+    
+    
+#===============================================================================
+#    
+#    #replace the original get_frame_notes_order coming with the django model for order_with_respect_to 
+#    def get_tags_order(self):  
+#        id = self.id      
+#        fts = Frame_Tags.objects.using(self.owner_name).filter(frame__id=self.id).order_by('id')
+#        fts_list = [ft for ft in fts]
+#        for ft in fts:
+#            ft.owner_name = self.owner_name
+#        if None in [ft._order for ft in fts]:
+#            return [ft.tag.id for ft in fns]
+#        else:
+#            
+#            fts_list.sort(key=lambda r: r._order)            
+#            return [ft.tag.id for ft in fts_list]
+#            
+# 
+# 
+#    def set_tags_order(self, order):        
+#        seq = 0
+#        for note_id in order:
+#            ft = Frame_Tags.objects.using(self.owner_name).get(frame__id=self.id, tag__id=tag_id)
+#            ft.owner_name = self.owner_name
+#            ft._order = seq            
+#            ft.save()
+#            seq = seq + 1
+#        self.save() #save the order to the social note
+#             
+#       
+# class Frame_Tags(models.Model):
+#    frame = models.ForeignKey(Tag_Frame) #TODO:
+#    tag = models.ForeignKey(Tag)
+#    
+#    class Meta:
+#        order_with_respect_to = 'frame'
+#    
+#===============================================================================
 
 
 

@@ -28,12 +28,15 @@
 
 
 {% block header_title %}
+{% if  user.username == profile_member.username%}
     {% blocktrans %}Public notes of {{profile_username}}{% endblocktrans %}
+{% endif %}       
 {% endblock %}
 
 
-
-
+{% block profile_head %}
+{% include "include/profile_head.html" %}
+{% endblock %}
 
 
 

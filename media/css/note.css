@@ -34,6 +34,9 @@ font-size: 8px;
 .small_font{
 font-size: 9px;
 }
+.big_font{
+font-size: 13px;
+}
 #content-main{
 border-right:1px dotted #696969;
 border-left:1px dotted #696969;
@@ -70,13 +73,19 @@ padding:25px;
 .setting-in-r-menu{
 float:right;
 }
-/*
+
 form#search{
-position:absolute;
-right:260px;
-top:16px;
-}
+/*position:absolute;
+right:100px;
+top:1px;
 */
+/*
+display:inline;
+*/
+}
+img#seach_icon{
+cursor:pointer;
+}
 
 .book_tabs{
 position:absolute;
@@ -652,6 +661,11 @@ div.accordion_title div.no_color{
 height:88px;
 }
 */
+
+
+.old{
+display:none;
+}
 
 .hover{
 display:none;

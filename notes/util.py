@@ -25,10 +25,7 @@ def getFolder(username, bookname):
 def getCache(username, bookname):
     return create_model("Cache_"+str(bookname)+"_"+str(username), book_cache_dict.get(bookname), username)    
 
-social_book_model_dict = {'notebook':Social_Note, 'snippetbook':Social_Snippet,'bookmarkbook':Social_Bookmark, 'scrapbook': Social_Scrap, 'framebook':Social_Frame}
 
-def getSN(bookname):
-    return social_book_model_dict.get(bookname)
 
 
 

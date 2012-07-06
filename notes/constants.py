@@ -12,3 +12,4 @@ book_template_dict = {'notebook':'notebook/', 'snippetbook':'snippetbook/','book
 model_book_dict = {'Note':'notebook', 'Snippet':'snippetbook','Bookmark':'bookmarkbook', 'Scrap':'scrapbook', 'Frame':'framebook'}
 search_fields_dict = {'notebook':('title','desc'), 'snippetbook':('title','desc'), 'bookmarkbook':('title','desc', 'url'), \
                       'scrapbook':('title','desc', 'url'),'framebook':('title','desc')}
+

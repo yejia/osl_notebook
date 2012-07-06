@@ -21,9 +21,7 @@ from urlparse import urlparse
 from notebook.notes.models import Note, Tag, create_model, WorkingSet, getW
 from notebook.bookmarks.models import Bookmark
 from notebook.scraps.models import Scrap
-from notebook.social.models import Member, Group, Social_Note, Social_Tag, Social_Note_Vote, Social_Note_Comment, \
-                                Social_Snippet, Social_Bookmark, Social_Scrap, Friend_Rel, Social_Frame, Social_Note_Course, Social_Note_Backlink
-
+from notebook.social.models import *
 from notebook.notes.views import User, getT, getlogger, getFolder, get_public_notes, __get_folder_context
 from notebook.notes.views import getSearchResults,  __getQStr, __get_view_theme, Pl, ALL_VAR
 from notebook.notes.util import *
@@ -338,13 +336,14 @@ def notes(request, username, bookname):
 #        log.debug('Not the owner, getting public folders only...')      
     folders = F.objects.filter(private=False).order_by('name') 
     
+    profile_member = Member.objects.get(username=username)
     
     return render_to_response('social/include/notes/notes.html', {'note_list':paged_notes,'sort':sort, 'bookname':bookname, \
-                               'folders':folders, 'profile_username':username, 'appname':'social', 'cl':cl},\
+                               'folders':folders, 'profile_username':username, 'profile_member':profile_member, 'appname':'social', 'cl':cl},\
                                                   context_instance=RequestContext(request,  {'book_uri_prefix':'/social/'+username}))
 
 
-notebook_host_names = ['www.91biji.com', '91biji.com', 'opensourcelearning.org', 'www.opensourcelearning.org']
+notebook_host_names = ['www.91biji.com', '91biji.com', 'opensourcelearning.org', 'www.opensourcelearning.org', '3exps.org', '3exps.com', 'www.3exps.org', 'www.3exps.com']
 
 
 def note(request, username, bookname, note_id):
@@ -658,24 +657,8 @@ def group(request, groupname, bookname):
     
     log.debug('tags of the group:'+str(group.tags.all()))
     
-    tag_names = [tag.name for tag in group.tags.all()]
-    
-#    if bookname == 'scraps':  
-#        note_list = Social_Scrap.objects.filter(tags__name__in=tag_names, owner__in=group.members.all())   
-#              
-#    elif bookname == 'bookmarks':
-#        note_list = Social_Bookmark.objects.filter(tags__name__in=tag_names, owner__in=group.members.all())    
-#    else:
-#        #default snippets
-#        note_list = Social_Snippet.objects.filter(tags__name__in=tag_names, owner__in=group.members.all())
-        
-    q1 = Q(tags__name__in=tag_names, owner__in=group.members.all(), private=False)   
-    q2 = Q(tags__name="sharinggroup:"+groupname, private=True) 
-    note_list = getSN(bookname).objects.filter(q1 | q2)    
-        
-    #log.debug('All snippets of the group '+groupname+' :'+str(notes))
-        
-    #notes.sort(key=lambda r: r.init_date)  
+   
+    note_list = group.get_notes(bookname)
     
     
     qstr = __getQStr(request)
@@ -689,8 +672,10 @@ def group(request, groupname, bookname):
     #group.tags.all()
     #tags = Social_Tag.objects.filter(group=group).order_by('name')#.annotate(Count('social_'+book_entry_dict.get(bookname))).order_by('name')
     tags = get_group_tags(request, groupname, bookname)
+    profile_member = Group.objects.get(name=groupname)
     return render_to_response('social/notes/group_notes.html', {'group':group, 'gs':gs, 'note_list':paged_notes,'sort':sort, 'bookname':bookname, \
                                                  'tags':tags, 'qstr':qstr,\
+                                                  'profile_member':profile_member,\
                                                   'appname':'groups', 'cl':cl},\
                                                   context_instance=RequestContext(request, {'book_uri_prefix':'/groups/'+groupname}))
 

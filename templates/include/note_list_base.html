@@ -1734,12 +1734,11 @@ jQuery('.note_display').accordion({
     
 {% endcomment%}
 
-
-
-
-{% block search_box %}
+{% block profile_head %}
+{% with user.member as profile_member %}
+{% include "include/profile_head.html" %}
+{%endwith%}
 {% endblock %}
-
 
 {% block special_side_menu %}
 {% endblock %}
@@ -1833,7 +1832,7 @@ jQuery('.note_display').accordion({
 
 
 {% block header %}
-<div id="header" class="noPrint">
+<div id="header" class="noPrint old">
     <div id="branding">
         <h1 id="site-name">{% block header_title %}{% blocktrans %}Personal notes of {{profile_username}}{% endblocktrans %}{% endblock %}</h1>
     </div>

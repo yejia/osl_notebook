@@ -20,7 +20,7 @@
                                                     </li>                      
 						                        {% endblock %}     	
 						                        
-						                        <li class="accessible advanced"><a href="#" class="accessible">{% trans "Pack" %} <img src="/site_media/img/arrow.gif"/>&nbsp;&nbsp;</a> 
+						                        <li class="accessible"><a href="#" class="accessible">{% trans "Pack" %} <img src="/site_media/img/arrow.gif"/>&nbsp;&nbsp;</a> 
 						                            <ul>  
 						                                <li><a href="javascript:linkNotes();">{% trans "Put selected notes into a frame" %}</a></li> 
 						                            </ul>
@@ -71,6 +71,11 @@
 						<span class="right_menu_bar">
 						<span>
 						{% include "include/notes/menu/sort_menu.html" %} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                        
+                        
+                        {% block search_box %}
+                        {% endblock %}
+                        
                         {% block toggle_tag_menu%}    
                             {% include "include/notes/menu/toggle_tag_menu.html" %} 
                         {% endblock %} 

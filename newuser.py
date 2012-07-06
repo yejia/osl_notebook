@@ -37,7 +37,7 @@ def create_member(username, email, passwd):
 #create the database file for the user
 #TODO: do I need to specify a super user after this (since it installed a new auth system). Otherwise cannot manage with myadmin?
 def create_db(username):
-    print 'get the setting.py, write to it the config for the new db'
+    #print 'get the setting.py, write to it the config for the new db'
     f = open(HOME_PATH+'notebook/settings.py', 'r+')
     lines = f.readlines()
     for i in range(len(lines)):
@@ -66,7 +66,7 @@ def create_db(username):
 
     
     command_to_run = 'cp '+DB_ROOT+'notesdb_init  '+DB_ROOT+'notesdb_'+username
-    print 'command_to_run ', command_to_run
+    #print 'command_to_run ', command_to_run
     os.system(command_to_run)
 
     #print 'execute syncdb with shell'

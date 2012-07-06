@@ -1254,6 +1254,8 @@ def update_note_tags_inline(request, username, bookname):
                                                                      "application/json")
 
 
+#TODO: after adding notes to a frame, should we automatically save the current ordering or pop a window asking the user to save the ordering?
+#If not doing either and the current frame already has an ordering, the newly added notes will make the ordering not functioning. See get_notes_order in Frame model.
 @login_required  
 def add_notes_to_frame(request, username, bookname): 
     note_id = request.POST.get('id')

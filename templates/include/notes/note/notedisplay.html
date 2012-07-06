@@ -63,7 +63,9 @@
 </div>
 
 <br/>
- {% include "include/get_desc.html" %}     
+{% block note_desc%}
+    {% include "include/get_desc.html" %}    
+{% endblock %}
  
 {% block note_url%}
 {% endblock %}

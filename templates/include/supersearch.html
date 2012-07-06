@@ -1,0 +1,86 @@
+{% load i18n %}
+
+<form id="search" action="" method="get" name="searchForm">     
+		<label for="searchbar" class="old"><img src="/media/img/admin/icon_searchbox.png" alt="Search" /></label> 
+		<input type="text" size="33" name="q" value="" id="searchbar"  placeholder="{% trans "Search " %}{%if current_tag%}{% trans "in tag " %}{{current_tag}}{% trans " of " %}{%endif%}
+{% if bookname == 'snippetbook' %}
+{% trans "Snippets" %}        
+{% endif %}
+{% if bookname == 'bookmarkbook' %}
+{% trans "Bookmarks" %}        
+{% endif %}
+{% if bookname == 'scrapbook' %}
+{% trans "Scraps" %}        
+{% endif %}
+{% if bookname == 'framebook' %}
+{% trans "Frames" %}        
+{% endif %}
+{% if bookname == 'notebook' %}
+{% trans "All" %}        
+{% endif %}" /> 
+		<img src="/media/img/admin/icon_searchbox.png" id="seach_icon" alt="Search" onclick="searchForm.submit();"/>
+        <div>
+        {{current_tag}}
+        <select id="note_type_drop_down"  name="note_type_select">
+        {% if bookname == 'snippetbook' %}
+            <option value="Snippets" selected="selected">{% trans "Snippets" %}</option>
+        {% else %}
+            <option value="Snippets">{% trans "Snippets" %}</option>
+        {% endif %}
+        {% if bookname == 'bookmarkbook' %}
+            <option value="Bookmarks" selected="selected">{% trans "Bookmarks" %}</option>
+        {% else %}
+            <option value="Bookmarks">{% trans "Bookmarks" %}</option>
+        {% endif %}
+        {% if bookname == 'scrapbook' %}
+            <option value="Scraps" selected="selected">{% trans "Scraps" %}</option>
+        {% else %}
+            <option value="Scraps">{% trans "Scraps" %}</option>
+        {% endif %}
+        {% if bookname == 'framebook' %}
+            <option value="Frames" selected="selected">{% trans "Frames" %}</option>
+        {% else %}
+            <option value="Frames">{% trans "Frames" %}</option>
+        {% endif %}
+        {% if bookname == 'notebook' %}
+            <option value="All" selected="selected">{% trans "All" %}</option>
+        {% else %}
+            <option value="All">{% trans "All" %}</option>
+        {% endif %}
+        </select> 
+       </div>        
+</form>
+<!--
+<a href="javascript:alert('Not implemented yet!');" class="NotImplementedYet">{% trans "Or Search on comments"  %}</a>
+-->
+<script type="text/javascript"> 
+$(document).ready(function(){	   
+
+      $(":input#note_type_drop_down").change(function(){                      
+                 current_select = $(this).val();
+                // alert('value is:'+$('option[value='+current_select+']').html());
+                 hint = '{% trans "Search " %}{%if current_tag%}{% trans "in tag " %}{{current_tag}}{% trans " of " %}{%endif%}'+$('option[value='+current_select+']').html();
+                  $(":input#searchbar").attr('placeholder', hint);
+                  if (current_select == 'Snippets')
+                        bookname = "snippetbook";
+                  if (current_select == 'Bookmarks')
+                        bookname = "bookmarkbook";      
+                  if (current_select == 'Scraps')
+                        bookname = "scrapbook";  
+                  if (current_select == 'Frames')
+                        bookname = "framebook";  
+                  if (current_select == 'All')
+                        bookname = "notebook";        
+                  $('form#search').attr('action', '{{book_uri_prefix}}/'+bookname+'/notes/{%if current_tag%}tags/{{current_tag}}/{%endif%}');
+                  alert('action is now:'+ $('form#search').attr('action'));
+        });
+
+
+    //$('form').prettyField();
+    $('.guide a.close').click(function(e) {
+        e.preventDefault();
+        $.post_withck('/j/accounts/hidetip',{kind: $(this).next().val()}, function(r){});
+        $(this).parent().fadeOut('normal');
+    });
+});
+</script> 

@@ -7,6 +7,12 @@
 </div>
 {% endblock %}
 
+
+{% block note_desc%}
+ <pre>{% include "include/get_desc.html" %} </pre>    
+ {% endblock %}
+
+
 {% block note_form_url%}
 <p> {{ note_form.url.label_tag }}: {{note_form.url}} </p> 
 {% endblock %}

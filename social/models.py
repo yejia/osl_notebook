@@ -22,6 +22,8 @@ fs = FileSystemStorage(location=DB_ROOT)
 
 
 
+
+
 class Member(User):
     ROLE_CHOICES = (        
         ('l', 'learner'),
@@ -73,7 +75,23 @@ class Member(User):
    
     def get_groups(self):
         return Group.objects.filter(members=self).order_by('name')
-   
+    
+    
+    def get_public_snippets_count(self):
+        return Social_Snippet.objects.filter(owner=self).count()
+        
+    def get_public_bookmarks_count(self):
+        return Social_Bookmark.objects.filter(owner=self).count()
+    
+    def get_public_scraps_count(self):
+        return Social_Scrap.objects.filter(owner=self).count()
+    
+    def get_public_frames_count(self):
+        return Social_Frame.objects.filter(owner=self).count()
+        
+    def get_public_notes_count(self):
+        return Social_Note.objects.filter(owner=self).count()
+        
 
 class Social_Tag(models.Model):    
     name = models.CharField(max_length=150)
@@ -368,6 +386,14 @@ class Social_Note_Comment(models.Model):
 
 
 
+
+social_book_model_dict = {'notebook':Social_Note, 'snippetbook':Social_Snippet,'bookmarkbook':Social_Bookmark, 'scrapbook': Social_Scrap, 'framebook':Social_Frame}
+
+def getSN(bookname):
+    return social_book_model_dict.get(bookname)
+
+
+
 class Social_Note_Course(models.Model):
     note =  models.ForeignKey(Social_Note)
     submitter = models.ForeignKey(Member)
@@ -420,6 +446,7 @@ class Group(models.Model):
     members = models.ManyToManyField(Member, related_name='members')
     creator = models.ForeignKey(Member)#creater and admins have to be in members
     admins = models.ManyToManyField(Member, related_name='admins') #TODO: only one admin?
+    #icon = models.ImageField(upload_to=get_storage_loc,blank=True, storage=fs) 
     
     
     class Meta:
@@ -450,7 +477,33 @@ class Group(models.Model):
 
     def display_tags(self):      
         return ','.join(self.get_tag_names())
-           
+   
+    
+    
+    def get_notes(self, bookname):
+        tag_names = [tag.name for tag in self.tags.all()]       
+        q1 = Q(tags__name__in=tag_names, owner__in=self.members.all(), private=False)   
+        q2 = Q(tags__name="sharinggroup:"+self.name, private=True) 
+        note_list =  social_book_model_dict.get(bookname).objects.filter(q1 | q2) 
+        return  note_list 
+        
+    
+    
+    def get_public_snippets_count(self):
+        return self.get_notes('snippetbook').count()   
+    
+    def get_public_bookmarks_count(self):
+        return self.get_notes('bookmarkbook').count()  
+    
+    def get_public_scraps_count(self):
+        return self.get_notes('scrapbook').count()  
+    
+    def get_public_frames_count(self):
+        return self.get_notes('framebook').count()  
+    
+    def get_public_notes_count(self):
+        return self.get_notes('notebook').count()  
+        
             
 #Activity Stream such as adding friend, posting...
 #class Activity(models.Model): 

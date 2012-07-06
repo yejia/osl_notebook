@@ -1,0 +1,69 @@
+{% load i18n %}
+
+
+<table><tr><td>
+<div id="profile_head">
+<div><img src={% if  profile_member.icon %}"/file/{{profile_member.icon}}"
+{% else %}
+{% if  profile_member.gender == 'f' %}"/site_media/img/default_female.png"{% endif %} 
+{% if  profile_member.gender == 'm' %}"/site_media/img/default_male.jpg"{% endif %} 
+{% if  not profile_member.gender %}"/site_media/img/default_user_icon.jpg"{% endif %}{% endif %}/>
+</div>
+</td>
+<td>
+<div>{{profile_member.username}}
+</div>
+<div>{{profile_member.last_name}}  {{profile_member.first_name}}
+</div>
+<div>{{profile_member.nickname}}
+</div>
+<!--for group name-->
+{% if  appname == 'groups' %}
+<div>{% trans 'Group' %}:{{profile_member.name}}
+</div>
+{% endif %}
+{% if  user.username == 'leon' %}
+<div>{{profile_member.last_login}}
+</div>
+{% endif %}
+
+
+{% if  not appname %}
+<div><br/>
+<a href="/social/{{profile_username}}/snippetbook/notes/" title="{% trans 'View your public notebook' %}">{% trans 'View social' %}</a>
+</div>
+{% endif %}
+{% if  appname == 'social'  and user.member == profile_member %}
+<div><br/>
+<a href="/{{profile_username}}/snippetbook/notes/" title="{% trans 'View your personal notebook' %}">{% trans 'View personal' %}</a>
+</div>
+{% endif %}
+<br/>
+</td>
+</tr>
+<tr><td colspan=2>
+<table><tr/>
+<td>{{profile_member.get_public_snippets_count}} <br/><a href="{{book_uri_prefix}}/snippetbook/notes/">{% trans "Snippets" %}</a><img src="/site_media/img/Snippet.png" title="Snippet"/></td>
+<td>{{profile_member.get_public_bookmarks_count}}<br/><a href="{{book_uri_prefix}}/bookmarkbook/notes/">{% trans "Bookmarks" %}</a><img src="/site_media/img/Bookmark.png" title="Bookmark"/></td>
+<td>{{profile_member.get_public_scraps_count}} <br/><a href="{{book_uri_prefix}}/scrapbook/notes/">{% trans "Scraps" %}</a><img src="/site_media/img/Scrap.png" title="Scrap"/></td>
+<td>{{profile_memberr.get_public_frames_count}}<br/><a href="{{book_uri_prefix}}/framebook/notes/">{% trans "Frames" %}</a><img src="/site_media/img/Frame.png" title="Frame"/></td>
+<td>{{profile_member.get_public_notes_count}}<br/><a href="{{book_uri_prefix}}/notebook/notes/">{% trans "All" %}</a></td>
+</tr></table>
+<br/>
+<div>
+{% include "include/supersearch.html" %}
+</div>
+<br/>
+<div>
+<span class="clickable" onclick="window.location.replace('/messages/write/?recipients={{profile_member.username}}')"><img src="/site_media/img/email.png"/> {% trans "Private Message" %}</span>
+</div>
+<br/>
+{% if  user.username == profile_member.username%}
+<p><a href="/social/{{profile_username}}/commentsfor/">{% blocktrans %} Comments for {{profile_username}}{% endblocktrans %}</a></p>
+<p><a href="/social/{{profile_username}}/commentsby/">{% blocktrans %} Comments by {{profile_username}}{% endblocktrans %}</a></p>
+{% endif %}
+</div>
+
+</td>
+</tr>
+</table>
