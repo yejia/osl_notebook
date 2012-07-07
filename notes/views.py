@@ -1818,7 +1818,7 @@ def share_todelete(request, username, bookname):
     return HttpResponse('success', mimetype="text/plain")   
 
 
-
+from notebook.social.models import getSN
 
 #TODO: private notes cannot be shared. Might implement the permission control at a finer level
 @login_required
