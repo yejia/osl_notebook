@@ -134,6 +134,15 @@
     function sortNumber(a,b){
             return a - b;
     }
+    
+    //from http://stackoverflow.com/questions/93695/best-cross-browser-method-to-capture-ctrls-with-jquery
+                    //~ $(window).keypress(function(event) {
+    //~ if (!(event.which == 115 && event.ctrlKey) && !(event.which == 19)) return true;
+    //~ alert("Ctrl-S pressed");
+    //~ event.preventDefault();
+    //~ return false;
+//~ });
+    
 	
      //TODO:make it work when the textarea is still focused (without having to leave the textarea input box first)
       $(document).bind('keydown', 'alt+s', addNote);
@@ -143,7 +152,8 @@
             desc = $('#id_desc').val();         
             //alert('desc:'+desc);             
             priv = $('#id_private').attr('checked');
-          //   alert('priv:'+priv);           
+          //   alert('priv:'+priv);        
+            vote =  $('#id_vote').val();            
            
             var selected_tags = [];	
             $('ul#add_note_tags').find('li.tagit-choice').each(function(){               
@@ -152,7 +162,7 @@
             });	
              
            //$.post('/{{profile_username}}/{{bookname}}/notes/addNote/',{'desc':desc, 'private':priv,'tags':selected_tags}, noteAdded, 'json');         
-          $.post('/{{profile_username}}/{{bookname}}/notes/addNote/?desc='+encodeURIComponent(desc)+'&private='+priv+'&tags='+selected_tags,{}, noteAdded, 'json');         
+          $.post('/{{profile_username}}/{{bookname}}/notes/addNote/?desc='+encodeURIComponent(desc)+'&private='+priv+'&vote='+vote+'&tags='+selected_tags,{}, noteAdded, 'json');         
                
                         
     } 
@@ -1543,7 +1553,32 @@ function showAddNoteTags(){
             $(":input[name='pick_lang']").change(function(){       
                 window.location.replace('?pick_lang='+$(this).val())
              });
-        
+             
+             
+             
+              $('#add_note_vote_up'). click(function(){  
+                        var  vote_bar = $(this).parents("#add_note_vote_bar")
+                        var vote_span = vote_bar.find("#add_note_vote")
+                        vote = parseInt(vote_span.text());
+                        newvote = vote+1
+                        vote_span.text(newvote);
+                        vote_bar.find(':input').val(newvote);
+                        
+                        //~ var c=document.getElementById("myCanvas");
+                       //~ var ctx=c.getContext("2d");
+                       //~ ctx.fillStyle="#FF0000";
+                       //~ ctx.fillRect(0,0,15,7);
+                });
+ 
+              $('#add_note_vote_down'). click(function(){  
+                       var  vote_bar = $(this).parents("#add_note_vote_bar")
+                        var vote_span = vote_bar.find("#add_note_vote")
+                        vote = parseInt(vote_span.text());
+                        newvote = vote-1
+                        vote_span.text(newvote);
+                        vote_bar.find(':input').val(newvote);
+                });
+         
         
         {% block extra_ready_script %}
         {% endblock %}

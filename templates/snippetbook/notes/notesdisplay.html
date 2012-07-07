@@ -1,7 +1,7 @@
 {% extends "include/notes/notesdisplay.html" %}
 {% load i18n %}
 
-{% block extra_script %}
+{% block extra_ready_script %}
  <script type="text/javascript">
 
 </script>
@@ -24,6 +24,13 @@
 	<input type="hidden" name="tags" value="{{current_tag}}"/>
 {% endif %}    
     <textarea id="id_desc" rows="3" cols="90" name="desc"></textarea>
+    
+    <span id="add_note_vote_bar">
+<span class="thumbup"  id="add_note_vote_up"  title="{% trans 'Rank Up Importance' %}"><img src="/site_media/img/thumbUp.gif"/></span>
+<span class="thumbdown" id="add_note_vote_down"  title="{% trans "Rank Down Importance"  %}"><img src="/site_media/img/thumbDown.gif"/></span>
+<input type="hidden" name="vote" id="id_vote" value="0"/><span id="add_note_vote">0</span></span>
+
+    
     <div>{% trans "Private" %} <input type="checkbox" name="private" id="id_private"/>
     
 <span>
@@ -37,10 +44,11 @@
   -->
 </div>
 </span>
+
 </div> 
     <span id="charCount"></span>
     <span id="charCount_alert"></span>
-    <br/><button id="add_note_submit"  onclick="javascript:addNote();"/>{% trans 'Add' %}</button>
+    <br/><button class="big" id="add_note_submit"  onclick="javascript:addNote();"/>{% trans 'Add' %} (Alt-S)</button>
     {% trans "Short snippet is recommended (less than 300 characters)" %}
     <a href="javascript:alert('{% trans "A short snippet is enough to represent a significant experience. Practice on that. :-)" %}');"><img src="/media/img/admin/icon-unknown.gif"/></a>
 

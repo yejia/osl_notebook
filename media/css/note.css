@@ -35,7 +35,7 @@ font-size: 8px;
 font-size: 9px;
 }
 .big_font{
-font-size: 13px;
+font-size: 15px;
 }
 #content-main{
 border-right:1px dotted #696969;
@@ -274,6 +274,10 @@ button{
 font-size:11px;
 }
 
+button.big{
+font-size:13px;
+}
+
 select{
 font-size:10px;
 margin-bottom:-3px;
@@ -422,6 +426,11 @@ top:-20px;
 width:250px;
 margin-bottom:-35px;
 
+}
+
+span#add_note_vote_bar{
+position:relative;
+top:50px;
 }
 
 #update_tags_inline_box{

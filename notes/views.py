@@ -1388,7 +1388,7 @@ def add_note(request, username, bookname):
         #post.setlist('tags', tags)
     
     n = N(desc=request.GET.get('desc'))  
-    n.vote = 0
+    n.vote = request.GET.get('vote', 0)
     private = request.GET.get('private', False)
     if private == 'true':
         n.private = True
