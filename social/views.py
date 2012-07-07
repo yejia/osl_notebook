@@ -690,9 +690,9 @@ def notes_tag(request, username, bookname, tag_name):
     sort, order_type,  paged_notes, cl  = __get_notes_context(request, note_list) 
     #TODO: provide tags for social public notebook
     tags = []#Social_Tag.objects.filter(notes_set=note_list).order_by('name')
-    
+    profile_member = Member.objects.get(username=username)
     return render_to_response('social/include/notes/notes.html', {'note_list':paged_notes,'sort':sort, 'current_tag':tag_name, 'bookname':bookname,\
-                               'profile_username':username, 'tags':tags, 'appname':'social', 'cl':cl},\
+                               'profile_username':username, 'profile_member':profile_member, 'tags':tags, 'appname':'social', 'cl':cl},\
                                                   context_instance=RequestContext(request,  {'book_uri_prefix':'/social/'+username})) 
 
 
@@ -728,8 +728,9 @@ def group_tag(request, groupname, bookname, tag_name):
     note_list  = getSearchResults(note_list, qstr)
     sort, order_type,  paged_notes, cl  = __get_notes_context(request, note_list) 
     tags = get_group_tags(request, groupname, bookname)
+    profile_member = Group.objects.get(name=groupname)
     return render_to_response('social/notes/group_notes.html', {'group':group, 'note_list':paged_notes,'sort':sort, 'current_tag':tag_name, 'bookname':bookname,\
-                                                 'tags':tags, 'appname':'groups', 'cl':cl},\
+                                          'profile_member':profile_member, 'tags':tags, 'appname':'groups', 'cl':cl},\
                                                   context_instance=RequestContext(request))
     
 
