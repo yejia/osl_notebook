@@ -3,7 +3,18 @@
 
 
 
+{% block note_brief_table_td1%}
+				                <td class="note_table_td1">            
+				                         {% include "include/notes/inlines/notes_brief_title_inline.html" %}   
+				                </td>           
+{% endblock %}
 
+{% block note_full_table_td1%}                
+					        <td class="note_full_table_td1">             
+					                {% include "include/notes/inlines/notes_full_title_inline.html" %}   
+					        </td>
+{% endblock %}  
+						    
 
 {% block framebook_only_div%}	
                          

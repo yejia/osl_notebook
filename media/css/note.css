@@ -143,14 +143,14 @@ top:0px;
 cursor:pointer;
 }
 
-.thumb
+li  .thumb
 {
 position:absolute;
 right:20px;
 bottom:0px;
 }
 
-.social_thumb
+li  .social_thumb
 {
 position:absolute;
 right:40px;

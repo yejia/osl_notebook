@@ -8,7 +8,7 @@
     <div class="brief_display">
          <table class="note_table"><tr>
              <td class="note_table_td1 structure">
-            <div id="note_title" title="{% trans 'note title' %}"><a href="/{{note.owner.username}}/{{appname}}/notes/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a></div> 		    
+            <div id="note_title" title="{% trans 'note title' %}"><a href="{{book_uri_prefix}}/{{note.get_note_bookname}}/notes/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a></div> 		    
 		    </td><td class="note_table_td2">
 		    <div  id="note_desc" title="{% trans "note desc" %}">{{note.desc}}</div>		   
 		    </td>
@@ -31,7 +31,7 @@
 
 {% block full_display_td12 %}          
             <td class="note_table_td1">
-                <div id="note_title" title="{% trans 'note title' %}"><a href="/social/{{note.owner.username}}/{{note.get_note_bookname}}/notes/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a></div> 		    
+                <div id="note_title" title="{% trans 'note title' %}"><a href="{{book_uri_prefix}}/{{note.get_note_bookname}}/notes/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a></div> 		    
             </td>
             <td class="note_table_td2">
                 <div  id="note_desc" title="{% trans "note desc" %}">{{note.desc}}</div>		   

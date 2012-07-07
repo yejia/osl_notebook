@@ -6,6 +6,20 @@
 {% blocktrans %}Public notes of {{profile_username}}{% endblocktrans %} 
 {% endblock %}
 
+
+{% block extra_ready_script %}
+                $('.voteuseful').click(function(){                 
+                        $(this).parents(".social_thumb").find("#note_vote").load('voteUseful/',{ 'id':$(this).parents("div").attr('note_id')});
+                });
+		
+                $('.voteunuseful').click(function(){
+                        $(this).parents(".social_thumb").find("#note_vote").load('voteUnuseful/',{ 'id':$(this).parents("div").attr('note_id')});
+                });
+{% endblock %}              
+
+         
+
+
 {% block site_branding %}
 
 {% endblock %}

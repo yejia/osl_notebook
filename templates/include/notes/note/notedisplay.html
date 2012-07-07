@@ -111,6 +111,15 @@
 
 
 
+{% block note_vote%}
+<div class="thumb" note_id="{{note.id}}">
+        {% if user.username == profile_username %}  
+			<span class="thumbup"  title="{% trans "Rank Up Importance"  %}"><img src="/site_media/img/thumbUp.gif"/></span>
+			<span class="thumbdown"  title="{% trans "Rank Down Importance"  %}"><img src="/site_media/img/thumbDown.gif"/></span>
+        {% endif %}
+        <span id="note_rank" title="{% trans "Importance"  %}">{{note.vote}}</span>
+</div>
+{% endblock %}
 
 
 <br/>

@@ -145,7 +145,7 @@
     
 	
      //TODO:make it work when the textarea is still focused (without having to leave the textarea input box first)
-      $(document).bind('keydown', 'alt+s', addNote);
+      $("*").bind('keydown', 'alt+s', addNote);
       //$('div.addnote #id_desc').bind('keydown', 'alt+s', addNote);
      
        function addNote(){              
@@ -809,9 +809,9 @@ $("#ac_tags").tagit("removeAll");
     }
     
     
-    $(document).bind('keydown', 'alt+m', structure);
+    $(window).bind('keydown', 'alt+m', structure);
     
-     $(document).bind('keydown', 'alt+l', stream);
+     $(window).bind('keydown', 'alt+l', stream);
      
      
     
@@ -1578,7 +1578,18 @@ function showAddNoteTags(){
                         vote_span.text(newvote);
                         vote_bar.find(':input').val(newvote);
                 });
-         
+                
+                
+                            //move below to a separate file
+                $('.thumbup'). click(function(){                
+                        $(this).parents(".thumb").find("#note_rank").load('voteUpNote/',{ 'id':$(this).parents("div").attr('note_id')});
+                });
+		
+                $('.thumbdown'). click(function(){
+                        $(this).parents(".thumb").find("#note_rank").load('voteDownNote/',{ 'id':$(this).parents("div").attr('note_id')});
+                });
+		
+
         
         {% block extra_ready_script %}
         {% endblock %}

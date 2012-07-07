@@ -47,6 +47,13 @@
 {% endblock %}
 
 
+{% block note_vote%}
+<div class="social_thumb"  note_id="{{ note.id }}">
+<span class="voteuseful"><img src="/site_media/img/vote_up.gif"   title="{% trans "Group Member Vote Useful"  %}"/></span>           
+<span class="voteunuseful"><img src="/site_media/img/vote_down.gif"  title="{% trans "Group Member Vote Unuseful"  %}"/></span>
+<span id="note_vote" title="{% trans "Usefulness voted by group members"  %}">{{note.get_useful_votes}}/{{note.get_total_votes}}</span>
+</div>
+{% endblock %}
 
 
 {% block note_comments%}

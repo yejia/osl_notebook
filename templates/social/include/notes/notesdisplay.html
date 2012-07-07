@@ -5,13 +5,7 @@
 {% block notes_extra_scripts %}
 <script>
 	jQuery(function($){
-                $('.voteuseful'). click(function(){                   
-                        $(this).parents(".social_thumb").find("#note_vote").load('voteUseful/',{ 'id':$(this).parents("li").attr('note_id')});
-                });
-		
-                $('.voteunuseful'). click(function(){
-                        $(this).parents(".social_thumb").find("#note_vote").load('voteUnuseful/',{ 'id':$(this).parents("li").attr('note_id')});
-                });
+      
       });    
 
 </script>
@@ -48,11 +42,10 @@
         {% if appname == 'social' and note.private %}  <!--for social public notebook, not private social notes will be shown. But in the group app, it is ok.-->
         {% else %}     
          <li class="note_display" note_id="{{ note.id }}">
-           
+            <div class="{{bookname}}" note_id="{{ note.id }}">
 	          <div class="kuoda"></div><div class="yasuo"></div>
             
-		    <span class="social_thumb">                 
-			         
+		    <span class="social_thumb"> 			         
             <span class="voteuseful hover"><img src="/site_media/img/vote_up.gif"   title="{% trans "Group Member Vote Useful"  %}"/></span>           
 			<span class="voteunuseful hover"><img src="/site_media/img/vote_down.gif"  title="{% trans "Group Member Vote Unuseful"  %}"/></span>
              <span id="note_vote" title="{% trans "Usefulness voted by group members"  %}">{{note.get_useful_votes}}/{{note.get_total_votes}}</span>
@@ -118,7 +111,7 @@
         </div>
            
            
-           
+           </div>
 	     </li>
     {% endif %} 
     {% endfor %}

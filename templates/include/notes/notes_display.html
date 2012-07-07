@@ -16,15 +16,7 @@
                         $(this).load('updateNoteInline/',{ 'id':$(this).parents('li').attr('note_id'), 'note_field':$(this).parents('div').attr('id'), 'content':  newValue})
                 });
 			
-                //move below to a separate file
-                $('.thumbup'). click(function(){                
-                        $(this).parents(".thumb").find("#note_rank").load('voteUpNote/',{ 'id':$(this).parents("li").attr('note_id')});
-                });
-		
-                $('.thumbdown'). click(function(){
-                        $(this).parents(".thumb").find("#note_rank").load('voteDownNote/',{ 'id':$(this).parents("li").attr('note_id')});
-                });
-		
+    
                 $('.delete_img'). click(function(){
                         $(this).load('deleteNote/',{ 'id':$(this).parents("li").attr('note_id')});
                         $(this).parents("li").remove();
@@ -51,7 +43,7 @@
         {% if user.username != profile_username and note.is_private %}  
         {% else %}     
          <li class="note_display" note_id="{{ note.id }}"  social_note_id="{{ note.get_social_note.id }}">
-         
+          <div class="{{bookname}}" note_id="{{ note.id }}">
          {% if user.username == profile_username %}     
 	            <input type="checkbox" name="note_selected"  value="{{ note.id }}" class="note_selection" />
         {% endif %}      
@@ -78,7 +70,7 @@
             
             
             <!-- block note_content_section -->
-            <div class="{{bookname}}">
+           
                 <div class="brief_display"   {% if bookname == 'framebook' %}id="frame" {% endif %} >
 			         <table class="note_table">
 			            <tr>
