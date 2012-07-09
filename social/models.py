@@ -40,11 +40,11 @@ class Member(User):
         ('m', ugettext_lazy('male')),        
     )
       
-    nickname = models.CharField(max_length=50, blank=True,  verbose_name=ugettext_lazy('nickname'))   
+    nickname = models.CharField(max_length=50, blank=True,  verbose_name=ugettext_lazy('Nickname'))   
     role = models.CharField(max_length=1, choices=ROLE_CHOICES, blank=True) 
     #TODO: change to avatar
-    icon = models.ImageField(upload_to=get_storage_loc,blank=True, storage=fs, verbose_name=ugettext_lazy('icon'))    #TODO:
-    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, blank=True, verbose_name=ugettext_lazy('gender')) 
+    icon = models.ImageField(upload_to=get_storage_loc,blank=True, storage=fs, verbose_name=ugettext_lazy('Icon'))    #TODO:
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, blank=True, verbose_name=ugettext_lazy('Gender')) 
     #maynot be a good way to do like this. TODO:
     # Use UserManager to get the create_user method, etc.
     objects = UserManager()
@@ -443,15 +443,15 @@ class Social_Note_Vote(models.Model):
 
 
 class Group(models.Model):
-    name = models.CharField(blank=False,max_length=50)
-    desc = models.TextField(blank=True,max_length=500)
+    name = models.CharField(blank=False,max_length=50, verbose_name=ugettext_lazy('Name'))
+    desc = models.TextField(blank=True,max_length=500, verbose_name=ugettext_lazy('Description'))
     tags = models.ManyToManyField(Social_Tag)
-    init_date = models.DateTimeField('date created', auto_now_add=True)
-    private = models.BooleanField(blank=True)     
-    members = models.ManyToManyField(Member, related_name='members')
-    creator = models.ForeignKey(Member)#creater and admins have to be in members
-    admins = models.ManyToManyField(Member, related_name='admins') #TODO: only one admin?
-    icon = models.ImageField(upload_to=get_storage_loc,blank=True, storage=fs, verbose_name=ugettext_lazy('icon')) 
+    init_date = models.DateTimeField(verbose_name=ugettext_lazy('date created'), auto_now_add=True)
+    private = models.BooleanField(blank=True,verbose_name=ugettext_lazy('Private'))     
+    members = models.ManyToManyField(Member, related_name='members', verbose_name=ugettext_lazy('Members'))
+    creator = models.ForeignKey(Member, verbose_name=ugettext_lazy('Creator'))#creater and admins have to be in members
+    admins = models.ManyToManyField(Member, related_name='admins', verbose_name=ugettext_lazy('Admins')) #TODO: only one admin?
+    icon = models.ImageField(upload_to=get_storage_loc,blank=True, storage=fs, verbose_name=ugettext_lazy('Icon')) 
     
     
     class Meta:

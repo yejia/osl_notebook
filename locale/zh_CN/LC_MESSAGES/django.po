@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-09 11:02+0800\n"
+"POT-Creation-Date: 2012-07-09 12:30+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -68,7 +68,8 @@ msgstr "标题"
 msgid "The size of the title is limited to 2000 characaters."
 msgstr "标题的长度应小于2000字。"
 
-#: notes/models.py:273 notes/models.py:1094 social/models.py:572
+#: notes/models.py:273 notes/models.py:1094 social/models.py:447
+#: social/models.py:572
 msgid "Description"
 msgstr "正文"
 
@@ -89,7 +90,8 @@ msgstr "标签"
 msgid "Default tag is 'random thought'."
 msgstr "缺省的标签是'random thought'。"
 
-#: notes/models.py:275 templates/include/notes/notesdisplay.html:39
+#: notes/models.py:275 social/models.py:450
+#: templates/include/notes/notesdisplay.html:39
 #: templates/notebook/notes/notesdisplay.html:25
 #: templates/scrapbook/notes/notesdisplay.html:29
 #: templates/snippetbook/notes/notesdisplay.html:34
@@ -97,7 +99,7 @@ msgstr "缺省的标签是'random thought'。"
 msgid "Private"
 msgstr "隐私"
 
-#: notes/models.py:277
+#: notes/models.py:277 social/models.py:449
 msgid "date created"
 msgstr "生成时间"
 
@@ -200,16 +202,32 @@ msgid "male"
 msgstr "男"
 
 #: social/models.py:43
-msgid "nickname"
+msgid "Nickname"
 msgstr "绰号"
 
 #: social/models.py:46 social/models.py:454
-msgid "icon"
+msgid "Icon"
 msgstr "头像"
 
 #: social/models.py:47
-msgid "gender"
+msgid "Gender"
 msgstr "性别"
+
+#: social/models.py:446 templates/social/group/groups.html:31
+msgid "Name"
+msgstr "名字"
+
+#: social/models.py:451 templates/social/notes/group_notes.html:35
+msgid "Members"
+msgstr "成员"
+
+#: social/models.py:452
+msgid "Creator"
+msgstr "创建者"
+
+#: social/models.py:453
+msgid "Admins"
+msgstr "管理员"
 
 #: social/views.py:875
 msgid ""
@@ -1509,9 +1527,8 @@ msgid "Group"
 msgstr "小组"
 
 #: templates/include/profile_head.html:34
-#, fuzzy
 msgid "View your public notebook"
-msgstr "在公开笔记本里看你的这个笔记"
+msgstr "看你的公开笔记本"
 
 #: templates/include/profile_head.html:34
 #: templates/include/notes/inlines/add_comments_and_etc_inline.html:18
@@ -2316,9 +2333,8 @@ msgid "Admin"
 msgstr "管理"
 
 #: templates/social/admin/group.html:27
-#, fuzzy
 msgid "View all groups"
-msgstr "浏览所有小组的笔记"
+msgstr "浏览所有小组"
 
 #: templates/social/admin/group.html:30
 msgid "Group Name"
@@ -2333,9 +2349,8 @@ msgid "group"
 msgstr "小组"
 
 #: templates/social/admin/group.html:39
-#, fuzzy
 msgid "Group basic info"
-msgstr "小组的标签"
+msgstr "小组基本信息"
 
 #: templates/social/admin/group.html:46
 msgid "Group Members:"
@@ -2375,10 +2390,6 @@ msgstr "%(user)s的小组"
 #: templates/social/group/groups.html:25
 msgid "Add a group"
 msgstr "创建一个小组"
-
-#: templates/social/group/groups.html:31
-msgid "Name"
-msgstr "名字"
 
 #: templates/social/group/groups.html:50
 msgid "Group Description"
@@ -2462,10 +2473,6 @@ msgstr "根据用户推荐"
 #, python-format
 msgid " %(user)s's Friends  Notes"
 msgstr "%(user)s的朋友的笔记"
-
-#: templates/social/notes/group_notes.html:35
-msgid "Members"
-msgstr "成员"
 
 #: templates/social/notes/groups_notes.html:7
 #: templates/social/notes/groups_notes.html:11
@@ -2557,8 +2564,8 @@ msgstr "加一个新的标签"
 msgid "All the tags"
 msgstr "所有的标签"
 
-#~ msgid "Icon"
-#~ msgstr "图标"
+#~ msgid "icon"
+#~ msgstr "头像"
 
 #~ msgid "Public Comments"
 #~ msgstr "公开评论"
