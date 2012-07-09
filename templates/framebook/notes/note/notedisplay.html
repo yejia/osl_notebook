@@ -49,6 +49,9 @@
 {% block note_attachment%}
 <div class="noPrint">
 <b>{% trans 'attachment' %} :</b> <a href="/file/{{note.attachment.name}}" target="top">{{note.attachment}}</a>
+ {% if note.is_img %} <br/>
+ <img src="/file/{{note.frame.attachment.name}}" class="attachment"/>
+ {% endif %}
 </div>
 {% endblock %}
 

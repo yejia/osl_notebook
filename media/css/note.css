@@ -997,7 +997,7 @@ a.NotImplementedYet{
 
 img.attachment{
 display:none;
-height:375px;
+height:auto;
 width:500px;
 }
 

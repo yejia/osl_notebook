@@ -381,6 +381,13 @@ class Note(models.Model):
     def get_note_bookname(self):           
         return model_book_dict.get(self.get_note_type())
       
+    
+    
+    def has_attachment(self):
+        if hasattr(self, 'attachment') and self.attachment:
+            return True
+        return False
+    
        
 #TODO: rewrite parts in views that get public notes. It should just use a filter or something with the help of this method
 #or simply add to tempalte (this way is used and it seems to work well, but then in the note list display, the counting of notes
@@ -548,7 +555,7 @@ class Note(models.Model):
             if self.frame.attachment.name:
                 splits = self.frame.attachment.name.split('.')
                 file_type = splits[len(splits)-1]
-        if file_type in ['jpg','JPG','jpeg','JPEG','png','PNG']:
+        if file_type in ['jpg','JPG','jpeg','JPEG','png','PNG', 'gif']:
             return True
         else: 
             return False    
@@ -887,6 +894,19 @@ class Frame(Note):
             fn.save()
             seq = seq + 1
         self.save() #save the order to the social note
+
+
+    def has_attachment(self):
+        if hasattr(self, 'attachment') and self.attachment:
+            return True
+        notes = self.get_notes_in_order()        
+        for note in notes:            
+            if note.get_note_type() == 'Snippet' and note.snippet.has_attachment():                 
+                return True
+            if note.get_note_type() == 'Frame' and note.frame.has_attachment():                 
+                return True
+        return False
+
 
 
 class Frame_Notes(models.Model):

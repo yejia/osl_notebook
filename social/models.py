@@ -290,7 +290,9 @@ class Social_Note(models.Model):
         return backlinks
 
    
-       #is attachment img?
+    #TODO: if not using inheritance for reducing the duplicated code, use a shared service provider to do
+    # all the similar works. Refacotr.
+    #is attachment img?
     def is_img(self):
         file_type = None
         if self.get_note_type() == 'Snippet':
@@ -302,11 +304,20 @@ class Social_Note(models.Model):
                 splits = self.social_frame.attachment.name.split('.')
                 file_type = splits[len(splits)-1]
         
-        if file_type in ['jpg','JPG','jpeg','JPEG','png','PNG']:
+        if file_type in ['jpg','JPG','jpeg','JPEG','png','PNG', 'gif']:
             return True
         else: 
             return False      
    
+   
+   
+    def has_attachment(self):
+        if hasattr(self, 'attachment') and self.attachment:
+            return True
+        return False
+    
+    
+       
 
 class Social_Snippet(Social_Note):
     attachment = models.FileField(upload_to=get_storage_loc,blank=True, storage=fs, verbose_name=ugettext_lazy('Attachment'),)
@@ -367,6 +378,19 @@ class Social_Frame(Social_Note):
         for n in self.notes.all(): 
             v = v + n.vote
         return v
+
+
+    def has_attachment(self):
+        if hasattr(self, 'attachment') and self.attachment:
+            return True
+        notes = self.get_notes_in_order()        
+        for note in notes:            
+            if note.get_note_type() == 'Snippet' and note.social_snippet.has_attachment():                 
+                return True
+            if note.get_note_type() == 'Frame' and note.social_frame.has_attachment():                 
+                return True
+        return False
+
 
 
 class Social_Frame_Notes(models.Model):

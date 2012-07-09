@@ -39,7 +39,7 @@
  {% if note.get_note_type == 'Frame' %} 
  <div class="noPrint">
 <b>{% trans 'attachment' %} :</b> <a href="/file/{{note.social_frame.attachment.name}}" target="top">{{note.social_frame.attachment}}</a>
- {% if note.is_img %} <br/>
+ {% if note.is_img %} <br/> 
  <img src="/file/{{note.social_frame.attachment.name}}" class="attachment"/>
  {% endif %}
 </div>

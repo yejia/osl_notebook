@@ -1,7 +1,10 @@
 {% load i18n %}
 
+
+{% if note.has_attachment %}
 <span id="display_attachment">    
         <span id="show_attachment"><a href="#">{% trans 'Show attachment' %}</a></span>
         <span id="hide_attachment"><a href="#">{% trans 'Hide attachment' %}</a></span>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span>
+{% endif %}
