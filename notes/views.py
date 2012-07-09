@@ -1887,9 +1887,9 @@ def share(request, bookname):
             if bookname == 'snippetbook':
                 content = _('Sharing snippet:')+desc[0:50]
             if bookname == 'bookmarkbook':
-                content = _('Sharing bookmark:')+title[0:30]+'   '+note.bookmark.url
+                content = _('Sharing bookmark:')+title[0:30]+'   '+note.social_bookmark.url
             if bookname == 'scrapbook':
-                content = _('Sharing scrap:')+desc[0:50] + '   '+ note.scrap.url   
+                content = _('Sharing scrap:')+desc[0:50] + '   '+ note.social_scrap.url   
             if bookname == 'framebook':
                 content = _('Sharing knowledge package:')+title[0:30] + '   ' + desc[0:50]         
         if request.user.username == note.owner.username:

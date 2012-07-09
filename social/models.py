@@ -45,6 +45,7 @@ class Member(User):
     #TODO: change to avatar
     icon = models.ImageField(upload_to=get_storage_loc,blank=True, storage=fs, verbose_name=ugettext_lazy('Icon'))    #TODO:
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, blank=True, verbose_name=ugettext_lazy('Gender')) 
+    default_lang = models.CharField(max_length=10, blank=True,  verbose_name=ugettext_lazy('Default language'))   
     #maynot be a good way to do like this. TODO:
     # Use UserManager to get the create_user method, etc.
     objects = UserManager()
@@ -484,9 +485,10 @@ class Group(models.Model):
         return ','.join(self.get_tag_names())
    
 
-    def get_notes_today(self):
-        note_list = self.get_notes('notebook')
-        note_list = note_list.filter(init_date=datetime.date.today())
+    def get_notes_today(self, bookname):
+        note_list = self.get_notes(bookname)
+        now = datetime.date.today()
+        note_list = note_list.filter(init_date__day= now.day, init_date__month=now.month, init_date__year= now.year)        
         return note_list
                          
     

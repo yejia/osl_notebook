@@ -67,6 +67,7 @@ def fix_linkage_vote(username):
     L = getL(username)
     ls = L.objects.all()
     for l in ls:
+        print 'linkage is:', l
         l.vote = l.get_vote()
         l.save()
     L2 = getL2(username)

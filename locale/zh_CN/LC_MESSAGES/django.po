@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-09 12:30+0800\n"
+"POT-Creation-Date: 2012-07-09 20:29+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,54 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+#: email_digest.py:70 email_digest.py:81 notes/views.py:1877
+#: notes/views.py:1888
+msgid "Sharing snippet:"
+msgstr "分享便条："
+
+#: email_digest.py:72 email_digest.py:83 notes/views.py:1879
+#: notes/views.py:1890
+msgid "Sharing bookmark:"
+msgstr "分享网址："
+
+#: email_digest.py:74 email_digest.py:85 notes/views.py:1881
+#: notes/views.py:1892
+msgid "Sharing scrap:"
+msgstr "分享网摘："
+
+#: email_digest.py:76 email_digest.py:87 notes/views.py:1883
+#: notes/views.py:1894
+msgid "Sharing knowledge package:"
+msgstr "分享知识包："
+
+#: email_digest.py:89 notes/views.py:1896
+msgid "Original Note:"
+msgstr "原笔记："
+
+#: email_digest.py:93 notes/views.py:1907
+msgid "from"
+msgstr "来自"
+
+#: email_digest.py:128
+msgid "Daily digest from the group:"
+msgstr "小组今天新添加笔记，来自小组："
+
+#: email_digest.py:128
+msgid ""
+"\n"
+" Or you can go to the group page to view the new notes! "
+msgstr ""
+"\n"
+"或者你可以去小组页面去浏览新添加的笔记！"
+
+#: email_digest.py:132
+msgid "Group "
+msgstr "小组"
+
+#: email_digest.py:132
+msgid ":today's new notes!"
+msgstr "今天新添加的笔记！"
 
 #: manage.py:32
 msgid "Invitation Received"
@@ -57,23 +105,23 @@ msgstr ""
 "这个网址已经成功添加到您的网址本里。您可以关闭这个窗口，或者其会在1秒后自动关"
 "闭。"
 
-#: notes/models.py:270 notes/models.py:1093 social/models.py:571
+#: notes/models.py:270 notes/models.py:1093 social/models.py:573
 #: templates/include/notes/notesdisplay.html:35
 #: templates/notebook/notes/notesdisplay.html:27
 #: templates/scrapbook/notes/notesdisplay.html:28
 msgid "Title"
 msgstr "标题"
 
-#: notes/models.py:270 notes/models.py:1093 social/models.py:571
+#: notes/models.py:270 notes/models.py:1093 social/models.py:573
 msgid "The size of the title is limited to 2000 characaters."
 msgstr "标题的长度应小于2000字。"
 
-#: notes/models.py:273 notes/models.py:1094 social/models.py:447
-#: social/models.py:572
+#: notes/models.py:273 notes/models.py:1094 social/models.py:448
+#: social/models.py:574
 msgid "Description"
 msgstr "正文"
 
-#: notes/models.py:273 notes/models.py:1094 social/models.py:572
+#: notes/models.py:273 notes/models.py:1094 social/models.py:574
 msgid "The size of the desc is limited to 2000 characaters."
 msgstr "正文的长度应小于2000字。"
 
@@ -88,9 +136,9 @@ msgstr "标签"
 
 #: notes/models.py:274
 msgid "Default tag is 'random thought'."
-msgstr "缺省的标签是'random thought'。"
+msgstr "默认的标签是'random thought'。"
 
-#: notes/models.py:275 social/models.py:450
+#: notes/models.py:275 social/models.py:451
 #: templates/include/notes/notesdisplay.html:39
 #: templates/notebook/notes/notesdisplay.html:25
 #: templates/scrapbook/notes/notesdisplay.html:29
@@ -99,7 +147,7 @@ msgstr "缺省的标签是'random thought'。"
 msgid "Private"
 msgstr "隐私"
 
-#: notes/models.py:277 social/models.py:449
+#: notes/models.py:277 social/models.py:450
 msgid "date created"
 msgstr "生成时间"
 
@@ -111,17 +159,17 @@ msgstr "最后修改时间"
 msgid "self ranking"
 msgstr "原作者的评级"
 
-#: notes/models.py:719 snippets/models.py:14 social/models.py:311
-#: social/models.py:335 templates/include/notes/notesdisplay.html:37
+#: notes/models.py:719 snippets/models.py:14 social/models.py:312
+#: social/models.py:336 templates/include/notes/notesdisplay.html:37
 #: templates/notebook/notes/notesdisplay.html:29
 msgid "Attachment"
 msgstr "附件"
 
-#: notes/models.py:1091 social/models.py:569
+#: notes/models.py:1091 social/models.py:571
 msgid "Language"
 msgstr "语言"
 
-#: notes/models.py:1092 social/models.py:570
+#: notes/models.py:1092 social/models.py:572
 msgid "Original language"
 msgstr "原来的语言"
 
@@ -153,33 +201,9 @@ msgstr "条笔记"
 msgid "Note is successfully updated!"
 msgstr "笔记更新成功！"
 
-#: notes/views.py:1877 notes/views.py:1888
-msgid "Sharing snippet:"
-msgstr "分享便条："
-
-#: notes/views.py:1879 notes/views.py:1890
-msgid "Sharing bookmark:"
-msgstr "分享网址："
-
-#: notes/views.py:1881 notes/views.py:1892
-msgid "Sharing scrap:"
-msgstr "分享网摘："
-
-#: notes/views.py:1883 notes/views.py:1894
-msgid "Sharing knowledge package:"
-msgstr "分享知识包："
-
-#: notes/views.py:1896
-msgid "Original Note:"
-msgstr "原笔记："
-
 #: notes/views.py:1898
 msgid "Forwarded Note:"
 msgstr "转发的笔记："
-
-#: notes/views.py:1907
-msgid "from"
-msgstr "来自"
 
 #: notes/templatetags/admin_list.py:257
 msgid "All dates"
@@ -205,7 +229,7 @@ msgstr "男"
 msgid "Nickname"
 msgstr "绰号"
 
-#: social/models.py:46 social/models.py:454
+#: social/models.py:46 social/models.py:455
 msgid "Icon"
 msgstr "头像"
 
@@ -213,19 +237,23 @@ msgstr "头像"
 msgid "Gender"
 msgstr "性别"
 
-#: social/models.py:446 templates/social/group/groups.html:31
+#: social/models.py:48
+msgid "Default language"
+msgstr "默认语言"
+
+#: social/models.py:447 templates/social/group/groups.html:31
 msgid "Name"
 msgstr "名字"
 
-#: social/models.py:451 templates/social/notes/group_notes.html:35
+#: social/models.py:452 templates/social/notes/group_notes.html:35
 msgid "Members"
 msgstr "成员"
 
-#: social/models.py:452
+#: social/models.py:453
 msgid "Creator"
 msgstr "创建者"
 
-#: social/models.py:453
+#: social/models.py:454
 msgid "Admins"
 msgstr "管理员"
 
@@ -591,11 +619,11 @@ msgstr "高级选项"
 
 #: templates/bookmarkbook/import.html:21
 msgid "Default vote for all bookmarks imported from this file"
-msgstr "文件里所有网址（即书签）的缺省重要性"
+msgstr "文件里所有网址（即书签）的默认的重要性"
 
 #: templates/bookmarkbook/import.html:21
 msgid "Enter a integer number here. Default is 0."
-msgstr "这里输入一个整数。缺省为0。"
+msgstr "这里输入一个整数。默认为0。"
 
 #: templates/bookmarkbook/import.html:22
 msgid "Ignore folders in the bookmark file"
@@ -639,7 +667,7 @@ msgid ""
 "vote won't be updated."
 msgstr ""
 "目前只能导入html文件。你可以多次上传同一个文件。 网址（即书签）不会被重复生"
-"成。新标签会被加入。新工作区也会被加入。但是缺省的重要性值不会被更新。"
+"成。新标签会被加入。新工作区也会被加入。但是默认的重要性值不会被更新。"
 
 #: templates/bookmarkbook/import_success.html:3
 msgid "return to"
@@ -826,7 +854,7 @@ msgid ""
 "feedbacks on this notebook application."
 msgstr ""
 "当增加一个新的用户时，系统自动为其生成两个标签：untagged, notebook "
-"feedbacks。 \"untagged\"是一切没有无标签项的缺省标签。\"notebook feedbacks"
+"feedbacks。 \"untagged\"是一切没有无标签项的默认标签。\"notebook feedbacks"
 "\"是供用户对本笔记本应用程序提出反馈。"
 
 #: templates/doc/for_new_users.html:29
@@ -1084,7 +1112,7 @@ msgstr "排序"
 #: templates/social/framebook/notes/note/notedisplay.html:17
 #: templates/social/framebook/notes/note/notedisplay.html:19
 msgid "By default"
-msgstr "根据缺省"
+msgstr "根据默认"
 
 #: templates/framebook/notes/note/notedisplay.html:32
 #: templates/framebook/notes/note/notedisplay.html:34
@@ -2563,6 +2591,9 @@ msgstr "加一个新的标签"
 #: templates/tags/index.html:199
 msgid "All the tags"
 msgstr "所有的标签"
+
+#~ msgid "bookmarkbook"
+#~ msgstr "网址本"
 
 #~ msgid "icon"
 #~ msgstr "头像"
