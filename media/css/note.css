@@ -836,6 +836,10 @@ img.logo_icon{
 height: 40px;
 width: 40px;
 }
+img.avatar{
+height: auto;
+width: 100px;
+}
 
 ul.binding_sites li{
 margin-top:20px;

@@ -1,10 +1,10 @@
 {% load i18n %}
 
 {% block personal_comments %}
-             <span class="note_tabs_item" id="personal_comments" title="{% trans "Comments by yourself on your personal note" %}">{% trans "Comments" %}({{note.get_comments.count}})</span>             
+             <span class="note_tabs_item" id="personal_comments" title="{% trans "Comments by yourself on your personal note" %}">{% trans "Annotations" %}({{note.get_comments.count}})</span>             
              &nbsp;&nbsp;
 {% endblock %}       
-             <span class="note_tabs_item"  id="public_comments" title="{% trans "Comments by you and others on your public note" %}">{% trans "Public Comments" %}({{social_note.get_comments.count}})</span>             
+             <span class="note_tabs_item"  id="public_comments" title="{% trans "Comments by you and others on your public note" %}">{% trans "Comments" %}({{social_note.get_comments.count}})</span>             
              &nbsp;&nbsp;           
              <span class="note_tabs_item"  id="inner_links"  title="{% trans "Notebook internal references of this note" %}">{% trans "Inner Links" %}</span>
              &nbsp;&nbsp;                 

@@ -27,9 +27,18 @@
 <div style="display:none;">{% trans "Group Name" %}: <span class="editableText">{{group.name}}</span> <button onclick="removeGroup/">{% trans "remove this group" %}</button>
 </div>
 <br/><br/>
-<div> {{group.private|yesno:"private, public, public"}}{% trans "group" %}
+<div> {{group.private|yesno:"private, public, public"}}{% trans "group" %} {{group.name}}
 </div>
 <br/><br/>
+
+<div> 
+<form action="updateGroup/" method="post" enctype="multipart/form-data" id="updateGroupForm">
+{% trans "Group basic info" %} :
+               {{ editGroupForm.as_p }}
+            <input type="submit" value="{% trans 'Update' %}"/>   
+</form>             
+</div>
+    <br/><br/>
 <div>
 {% trans "Group Members:" %}
 <ul>

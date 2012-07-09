@@ -3,7 +3,7 @@
 
 <table><tr><td>
 <div id="profile_head">
-<div><img src={% if  profile_member.icon %}"/file/{{profile_member.icon}}"
+<div><img class="avatar" src={% if  profile_member.icon %}"/file/{{profile_member.icon}}"
 {% else %}
 {% if  profile_member.gender == 'f' %}"/site_media/img/default_female.png"{% endif %} 
 {% if  profile_member.gender == 'm' %}"/site_media/img/default_male.jpg"{% endif %} 

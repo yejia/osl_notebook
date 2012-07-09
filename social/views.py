@@ -66,7 +66,7 @@ class AddGroupForm(ModelForm):
     required_css_class = 'required'
     class Meta:
         model = Group  
-        exclude = ()     
+        exclude = ('tags', 'members', 'creator', 'admins')     
         #fields = ('type_of_linkage','desc','tags','title','private', 
         #            'attachment','notes')
         
@@ -540,7 +540,9 @@ def group_admin(request, groupname):
         return HttpResponse("You are not an admin of this group, and thus cannot admin this group.", mimetype="text/plain") #TODO: translate
     
     tags = Social_Tag.objects.all().order_by('name')
-    return render_to_response('social/admin/group.html', {'group':g,'tags':tags,\
+    
+    editGroupForm = AddGroupForm(instance=g)
+    return render_to_response('social/admin/group.html', {'group':g,'tags':tags, 'editGroupForm':editGroupForm \
                                                       }, context_instance=RequestContext(request))
 
 
@@ -570,6 +572,18 @@ def group_update_tags(request, groupname):
         if not tag_name in tag_names:
             group_remove_tag(request, groupname)
                      
+
+@login_required
+def update_group(request, groupname):
+    group = G.objects.get(name=groupname)   
+    editGroupForm = AddGroupForm(request.POST, request.FILES, instance=group)
+    #TODO:record last modified by who?
+    #username = request.user.username
+    log.debug('form errors:'+str(editGroupForm.errors))
+    editGroupForm.save() 
+    return HttpResponseRedirect('/groups/'+groupname+'/admin/')
+
+
 
     
 @login_required

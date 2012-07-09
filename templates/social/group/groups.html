@@ -39,8 +39,15 @@
    {{ addGroupForm.tags.errors }}
     <ul id="ac_tags"></ul> 
     </div>
+    
+     <p>   
+               {{ addGroupForm.icon.label_tag }}:
+                {{ addGroupForm.icon.errors }}
+               {{addGroupForm.icon}}
+    </p>
+    
     <p>
-        {% trans "Desc" %}:  {{addGroupForm.desc}}
+        {% trans "Group Description" %}:  {{addGroupForm.desc}}
     </p>
     <p>
         {% trans "Private" %}:  {{addGroupForm.private}}

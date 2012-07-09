@@ -9,12 +9,17 @@ from django.utils.translation import ugettext as _
 
 from notebook.notes.constants import *
 
+import datetime
+
 
 #TODO: refactor out. It is duplicated with the code from notes.models
 #from time import gmtime, strftime  
 def get_storage_loc(instance, filename):    
     #timepath= strftime('/%Y/%m/%d/')    
-    return 'icons/'+instance.username+'/'+filename   
+    try:
+        return 'icons/'+instance.username+'/'+filename   
+    except:
+        return 'icons/'+instance.name+'/'+filename  #for saving group icon
 
 from django.core.files.storage import FileSystemStorage    
 from notebook.env_settings import DB_ROOT
@@ -31,15 +36,15 @@ class Member(User):
         
     )  
     GENDER_CHOICES = (        
-        ('f', 'female'),
-        ('m', 'male'),        
+        ('f', ugettext_lazy('female')),
+        ('m', ugettext_lazy('male')),        
     )
       
-    nickname = models.CharField(max_length=50, blank=True)   
+    nickname = models.CharField(max_length=50, blank=True,  verbose_name=ugettext_lazy('nickname'))   
     role = models.CharField(max_length=1, choices=ROLE_CHOICES, blank=True) 
     #TODO: change to avatar
-    icon = models.ImageField(upload_to=get_storage_loc,blank=True, storage=fs)    #TODO:
-    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, blank=True) 
+    icon = models.ImageField(upload_to=get_storage_loc,blank=True, storage=fs, verbose_name=ugettext_lazy('icon'))    #TODO:
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, blank=True, verbose_name=ugettext_lazy('gender')) 
     #maynot be a good way to do like this. TODO:
     # Use UserManager to get the create_user method, etc.
     objects = UserManager()
@@ -446,7 +451,7 @@ class Group(models.Model):
     members = models.ManyToManyField(Member, related_name='members')
     creator = models.ForeignKey(Member)#creater and admins have to be in members
     admins = models.ManyToManyField(Member, related_name='admins') #TODO: only one admin?
-    #icon = models.ImageField(upload_to=get_storage_loc,blank=True, storage=fs) 
+    icon = models.ImageField(upload_to=get_storage_loc,blank=True, storage=fs, verbose_name=ugettext_lazy('icon')) 
     
     
     class Meta:
@@ -478,6 +483,12 @@ class Group(models.Model):
     def display_tags(self):      
         return ','.join(self.get_tag_names())
    
+
+    def get_notes_today(self):
+        note_list = self.get_notes('notebook')
+        note_list = note_list.filter(init_date=datetime.date.today())
+        return note_list
+                         
     
     
     def get_notes(self, bookname):
@@ -503,6 +514,8 @@ class Group(models.Model):
     
     def get_public_notes_count(self):
         return self.get_notes('notebook').count()  
+    
+
         
             
 #Activity Stream such as adding friend, posting...
