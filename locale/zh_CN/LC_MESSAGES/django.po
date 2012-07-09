@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-09 20:29+0800\n"
+"POT-Creation-Date: 2012-07-09 20:49+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -58,11 +58,15 @@ msgstr ""
 "\n"
 "或者你可以去小组页面去浏览新添加的笔记！"
 
-#: email_digest.py:132
+#: email_digest.py:129
+msgid "You can set up how you want to receive group digest in your setting:"
+msgstr "你可以在你的用户设置页面修改你要如何接收小组的笔记更新："
+
+#: email_digest.py:133
 msgid "Group "
 msgstr "小组"
 
-#: email_digest.py:132
+#: email_digest.py:133
 msgid ":today's new notes!"
 msgstr "今天新添加的笔记！"
 

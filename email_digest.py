@@ -124,8 +124,9 @@ def send_group_daily_digest(username, groupname):
                 content +=  build_content(note, bookname, pick_lang, 200)
  
     if content:
-        group_url = site_name +  '/group/' +groupname+'/'
-        digest = _('Daily digest from the group:')+groupname+'\n\n\n' + content + _('\n Or you can go to the group page to view the new notes! ')+group_url
+        group_url = site_name +  '/groups/' +groupname+'/'
+        digest = _('Daily digest from the group:')+groupname+'\n\n\n' + content + _('\n Or you can go to the group page to view the new notes! ')+ \
+                  group_url + '\n\n'+_('You can set up how you want to receive group digest in your setting:')+ site_name + '/settings/'
         print 'digest is:', digest
         
         mailserver = get_mail_server()
@@ -139,6 +140,7 @@ def send_daily_digest(username):
     print 'Sending digetst for user:', username
     member = Member.objects.get(username=username)
     groups = member.get_groups()
+    print username, "'s groups:", groups
     for group in groups:
         send_group_daily_digest(username, group.name)
     
