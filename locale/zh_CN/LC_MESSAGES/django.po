@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-09 20:49+0800\n"
+"POT-Creation-Date: 2012-07-10 05:43+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -801,17 +801,41 @@ msgstr "隐私部分。你没有权限浏览。"
 msgid "About"
 msgstr "关于"
 
-#: templates/doc/about.html:16
+#: templates/doc/about.html:17
 msgid "Notebook is to help your learn by simply making and editing notes. "
 msgstr "通过简单的记录和编辑笔记，笔记本帮助你学习。"
 
-#: templates/doc/about.html:16
+#: templates/doc/about.html:17
+msgid "With ease, you can accomplish the whole learning process."
+msgstr "轻轻松松，你就可以完成学习的整个过程。"
+
+#: templates/doc/about.html:17
 msgid "9 notes a day, is 1 day not wasted!"
 msgstr "每天9条笔记，1天就没有白过！"
 
-#: templates/doc/about.html:19
+#: templates/doc/about.html:21
 msgid "Official blog"
 msgstr "官方博客"
+
+#: templates/doc/about.html:24
+msgid ""
+"Notebook is also well suited for a team to cooperate on a project. Your team "
+"can use it to coordinate team efforts in learning and exploring a new "
+"project. Notebook is an effective tool for knowledge sharing within a "
+"company. Using notebook for knowledge sharing, knowledge can be flowing more "
+"continuously within your company. It is a much better way to organize your "
+"company's knowledge and wisdom than traditional document-centered knowledge "
+"systems. If you are intereted in setting up a site for your team or your "
+"company, please contact:"
+msgstr ""
+"笔记本网站也很适合一个团队内部的项目合作。您的团队可以用笔记本来在项目中学习"
+"和探索。笔记本也很适合一个公司内部的知识分享。使用笔记本做知识分享，知识可以"
+"在您的公司里更加连续性的到处流动着，比传统的以文本为中心的知识管理系统能更好"
+"的管理贵公司的知识和智慧。如果您希望为您的公司或者团队建立一个站点，请联系："
+
+#: templates/doc/about.html:25
+msgid "sys @ 3exps.org"
+msgstr "sys @ 91biji.com"
 
 #: templates/doc/contact.html:7 templates/doc/contact.html.py:13
 msgid "Contact"
