@@ -130,7 +130,7 @@ def send_group_daily_digest(username, groupname):
         print 'digest is:', digest
         
         mailserver = get_mail_server()
-        sendEmail(mailserver , SERVER_EMAIL, [u'beyond.leon.liu@gmail.com'], (_('Group ')+groupname+_(":today's new notes!")).encode('utf-8'), digest.encode('utf-8'))
+        sendEmail(mailserver , SERVER_EMAIL, [member.email], (_('Group ')+groupname+_(":today's new notes!")).encode('utf-8'), digest.encode('utf-8'))
         mailserver.close()
         print 'Email digest was sent to '+member.email+' for group '+ groupname 
    
@@ -139,8 +139,9 @@ def send_group_daily_digest(username, groupname):
 def send_daily_digest(username):
     print 'Sending digetst for user:', username
     member = Member.objects.get(username=username)
+    #print 'Getting groups for member:', member.username
     groups = member.get_groups()
-    print username, "'s groups:", groups
+    #print username, "'s groups:", groups
     for group in groups:
         send_group_daily_digest(username, group.name)
     
