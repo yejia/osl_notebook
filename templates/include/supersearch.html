@@ -72,7 +72,7 @@ $(document).ready(function(){
                   if (current_select == 'All')
                         bookname = "notebook";        
                   $('form#search').attr('action', '{{book_uri_prefix}}/'+bookname+'/notes/{%if current_tag%}tags/{{current_tag}}/{%endif%}');
-                  alert('action is now:'+ $('form#search').attr('action'));
+                  
         });
 
 
