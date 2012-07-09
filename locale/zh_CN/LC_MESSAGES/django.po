@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-09 06:00+0800\n"
+"POT-Creation-Date: 2012-07-09 11:02+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -57,22 +57,22 @@ msgstr ""
 "这个网址已经成功添加到您的网址本里。您可以关闭这个窗口，或者其会在1秒后自动关"
 "闭。"
 
-#: notes/models.py:270 notes/models.py:1093 social/models.py:558
+#: notes/models.py:270 notes/models.py:1093 social/models.py:571
 #: templates/include/notes/notesdisplay.html:35
 #: templates/notebook/notes/notesdisplay.html:27
 #: templates/scrapbook/notes/notesdisplay.html:28
 msgid "Title"
 msgstr "标题"
 
-#: notes/models.py:270 notes/models.py:1093 social/models.py:558
+#: notes/models.py:270 notes/models.py:1093 social/models.py:571
 msgid "The size of the title is limited to 2000 characaters."
 msgstr "标题的长度应小于2000字。"
 
-#: notes/models.py:273 notes/models.py:1094 social/models.py:559
+#: notes/models.py:273 notes/models.py:1094 social/models.py:572
 msgid "Description"
 msgstr "正文"
 
-#: notes/models.py:273 notes/models.py:1094 social/models.py:559
+#: notes/models.py:273 notes/models.py:1094 social/models.py:572
 msgid "The size of the desc is limited to 2000 characaters."
 msgstr "正文的长度应小于2000字。"
 
@@ -109,17 +109,17 @@ msgstr "最后修改时间"
 msgid "self ranking"
 msgstr "原作者的评级"
 
-#: notes/models.py:719 snippets/models.py:14 social/models.py:306
-#: social/models.py:330 templates/include/notes/notesdisplay.html:37
+#: notes/models.py:719 snippets/models.py:14 social/models.py:311
+#: social/models.py:335 templates/include/notes/notesdisplay.html:37
 #: templates/notebook/notes/notesdisplay.html:29
 msgid "Attachment"
 msgstr "附件"
 
-#: notes/models.py:1091 social/models.py:556
+#: notes/models.py:1091 social/models.py:569
 msgid "Language"
 msgstr "语言"
 
-#: notes/models.py:1092 social/models.py:557
+#: notes/models.py:1092 social/models.py:570
 msgid "Original language"
 msgstr "原来的语言"
 
@@ -191,27 +191,27 @@ msgstr ""
 "这个网摘已经成功添加到您的网址本里。您可以关闭这个窗口，或者其会在1秒后自动关"
 "闭。"
 
-#: social/models.py:34
+#: social/models.py:39
 msgid "female"
 msgstr "女"
 
-#: social/models.py:35
+#: social/models.py:40
 msgid "male"
 msgstr "男"
 
-#: social/models.py:38
+#: social/models.py:43
 msgid "nickname"
 msgstr "绰号"
 
-#: social/models.py:41 social/models.py:449
+#: social/models.py:46 social/models.py:454
 msgid "icon"
 msgstr "头像"
 
-#: social/models.py:42
+#: social/models.py:47
 msgid "gender"
 msgstr "性别"
 
-#: social/views.py:861
+#: social/views.py:875
 msgid ""
 "Your suggestion is successfully sent to the sys admin! Thank you for your "
 "valuable suggestion!"
@@ -1608,7 +1608,7 @@ msgstr "标题"
 #: templates/include/notes/menu/notes_section_menu.html:9
 #: templates/include/notes/menu/notes_section_menu.html:17
 #: templates/snippetbook/notes/notesdisplay.html:41
-#: templates/social/admin/group.html:71 templates/social/group/groups.html:38
+#: templates/social/admin/group.html:83 templates/social/group/groups.html:38
 #: templates/tagframe/index.html:321 templates/tagframe/index.html.py:328
 #: templates/workingset/index.html:321 templates/workingset/index.html:328
 msgid "Add Tags"
@@ -2147,7 +2147,7 @@ msgstr "你的帐号的设置"
 msgid "Update user info"
 msgstr "更新用户信息"
 
-#: templates/settings/index.html:26
+#: templates/settings/index.html:26 templates/social/admin/group.html:41
 msgid "Update"
 msgstr "更新"
 
@@ -2316,38 +2316,48 @@ msgid "Admin"
 msgstr "管理"
 
 #: templates/social/admin/group.html:27
+#, fuzzy
+msgid "View all groups"
+msgstr "浏览所有小组的笔记"
+
+#: templates/social/admin/group.html:30
 msgid "Group Name"
 msgstr "小组名字"
 
-#: templates/social/admin/group.html:27
+#: templates/social/admin/group.html:30
 msgid "remove this group"
 msgstr "去除这个小组"
 
-#: templates/social/admin/group.html:30
+#: templates/social/admin/group.html:33
 msgid "group"
 msgstr "小组"
 
-#: templates/social/admin/group.html:34
+#: templates/social/admin/group.html:39
+#, fuzzy
+msgid "Group basic info"
+msgstr "小组的标签"
+
+#: templates/social/admin/group.html:46
 msgid "Group Members:"
 msgstr "小组成员"
 
-#: templates/social/admin/group.html:39 templates/social/group/groups.html:70
+#: templates/social/admin/group.html:51 templates/social/group/groups.html:70
 msgid "admin"
 msgstr "管理"
 
-#: templates/social/admin/group.html:40
+#: templates/social/admin/group.html:52
 msgid "creator"
 msgstr "创建者"
 
-#: templates/social/admin/group.html:41
+#: templates/social/admin/group.html:53
 msgid "remove this member"
 msgstr "去除这个组员"
 
-#: templates/social/admin/group.html:55
+#: templates/social/admin/group.html:67
 msgid "Group Tags"
 msgstr "小组的标签"
 
-#: templates/social/admin/group.html:61
+#: templates/social/admin/group.html:73
 msgid "remove this tag"
 msgstr "去除标签"
 

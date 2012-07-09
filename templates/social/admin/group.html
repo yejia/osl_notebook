@@ -23,11 +23,14 @@
 
 
 {% block content%}
+
+<div><a href="/{{user.username}}/groups/">{% trans "View all groups" %}</a>
+</div>
 <!--TODO: so far, don't implement renaming and removing the group-->
 <div style="display:none;">{% trans "Group Name" %}: <span class="editableText">{{group.name}}</span> <button onclick="removeGroup/">{% trans "remove this group" %}</button>
 </div>
 <br/><br/>
-<div> {{group.private|yesno:"private, public, public"}}{% trans "group" %} {{group.name}}
+<div> {{group.private|yesno:"private, public, public"}}{% trans "group" %} <a href="/groups/{{group.name}}/">{{group.name}}</a>
 </div>
 <br/><br/>
 
