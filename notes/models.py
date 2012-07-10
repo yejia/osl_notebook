@@ -903,8 +903,10 @@ class Frame(Note):
         for note in notes:            
             if note.get_note_type() == 'Snippet' and note.snippet.has_attachment():                 
                 return True
-            if note.get_note_type() == 'Frame' and note.frame.has_attachment():                 
-                return True
+            if note.get_note_type() == 'Frame':
+                note.frame.owner_name = self.owner_name   
+                if note.frame.has_attachment():              
+                    return True
         return False
 
 
