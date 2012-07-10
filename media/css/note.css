@@ -31,6 +31,14 @@ margin-top:-10px;
 font-size: 8px;
 }
 
+select#bookname_drop_down{
+color:black;
+font-size: 18px;
+}
+div#bookname_show{
+padding:15px;
+}
+
 .small_font{
 font-size: 9px;
 }

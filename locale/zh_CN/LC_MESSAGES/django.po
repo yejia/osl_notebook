@@ -1771,7 +1771,7 @@ msgstr "你对你个人笔记的评论"
 
 #: templates/include/notes/inlines/add_comments_and_etc_inline.html:4
 msgid "Annotations"
-msgstr "注释"
+msgstr "备注"
 
 #: templates/include/notes/inlines/add_comments_and_etc_inline.html:7
 msgid "Comments by you and others on your public note"

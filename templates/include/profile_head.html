@@ -43,6 +43,35 @@
 </td>
 </tr>
 <tr><td colspan=2>
+<div id="bookname_show">
+<select id="bookname_drop_down"  name="bookname_select">
+        {% if bookname == 'snippetbook' %}
+            <option value="Snippets" selected="selected">{% trans "Snippets" %}</option>
+        {% else %}
+            <option value="Snippets">{% trans "Snippets" %}</option>
+        {% endif %}
+        {% if bookname == 'bookmarkbook' %}
+            <option value="Bookmarks" selected="selected">{% trans "Bookmarks" %}</option>
+        {% else %}
+            <option value="Bookmarks">{% trans "Bookmarks" %}</option>
+        {% endif %}
+        {% if bookname == 'scrapbook' %}
+            <option value="Scraps" selected="selected">{% trans "Scraps" %}</option>
+        {% else %}
+            <option value="Scraps">{% trans "Scraps" %}</option>
+        {% endif %}
+        {% if bookname == 'framebook' %}
+            <option value="Frames" selected="selected">{% trans "Frames" %}</option>
+        {% else %}
+            <option value="Frames">{% trans "Frames" %}</option>
+        {% endif %}
+        {% if bookname == 'notebook' %}
+            <option value="All" selected="selected">{% trans "All" %}</option>
+        {% else %}
+            <option value="All">{% trans "All" %}</option>
+        {% endif %}
+        </select> 
+</div>
 <table><tr/>
 <td>{{profile_member.get_public_snippets_count}} <br/><a href="{{book_uri_prefix}}/snippetbook/notes/">{% trans "Snippets" %}</a><img src="/site_media/img/Snippet.png" title="Snippet"/></td>
 <td>{{profile_member.get_public_bookmarks_count}}<br/><a href="{{book_uri_prefix}}/bookmarkbook/notes/">{% trans "Bookmarks" %}</a><img src="/site_media/img/Bookmark.png" title="Bookmark"/></td>

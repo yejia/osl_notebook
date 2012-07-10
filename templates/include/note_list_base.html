@@ -221,7 +221,7 @@
                                             '<div class="grey structure" id="note_last_modi_date" title="{% trans "last modified time" %}">'+note.last_modi_date+'</div>'+
                                             '<div  class="structure advanced" id="note_frames" title="{% trans "note in frames" %}">{% trans "Frames" %}: {{note.display_frames|default:_("Not in any frame")}}</div>'+                              
                                          //comments
-                                            '<span class="add_comment_button"><a href="javascript:void(0);">{% trans "Comment" %}(0)</a></span>'+
+                                            '<span class="add_comment_button"><a href="javascript:void(0);">{% trans "Annotations" %}(0)</a></span>'+
                                                 ' &nbsp;&nbsp;'+
                                             '<div  id="add_comment_box" style="display:none;"> '+            
                                                         '<div>{{user.username}}: <textarea id="add_comment" rows="3" cols="90" name="desc"></textarea>'+
@@ -909,12 +909,36 @@ function showAddNoteTags(){
                 
            $('li.note_display').mouseleave(function(){	    
                         $(this).find('.hover').hide();
+
                         
                 });     
     
     
             $('#ac_tags_box').hide();
            
+           $('.jd_menu').hide();
+           
+            $('.note_selection').click(function(){	
+                 $('.jd_menu').hide();
+                  $('.note_selection').each(function(){
+                    if ($(this).attr('checked')==true){			
+                       $('.jd_menu').show();
+                    }			
+		     });
+           
+            });
+              
+            $('#select_notes').click(function(){	               
+                    if ($(this).attr('checked')==true){			
+                       $('.jd_menu').show();
+                    }else{
+                       $('.jd_menu').hide();
+                    }     
+           
+            }); 
+            
+            
+              
     
             $('.stream').show();    
             $('.structure').hide();
@@ -1589,6 +1613,25 @@ function showAddNoteTags(){
                         $(this).parents(".thumb").find("#note_rank").load('voteDownNote/',{ 'id':$(this).parents("div").attr('note_id')});
                 });
 		
+        
+        
+         $(":input#bookname_drop_down").change(function(){        
+                 current_select = $(this).val();
+                if (current_select == 'Snippets')
+                        bookname = "snippetbook";
+                  if (current_select == 'Bookmarks')
+                        bookname = "bookmarkbook";      
+                  if (current_select == 'Scraps')
+                        bookname = "scrapbook";  
+                  if (current_select == 'Frames')
+                        bookname = "framebook";  
+                  if (current_select == 'All')
+                        bookname = "notebook";    
+                  window.location.replace('{{book_uri_prefix}}/'+bookname+'/notes/')  ;    
+                        
+         
+                });
+        
 
         
         {% block extra_ready_script %}
