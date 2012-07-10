@@ -67,14 +67,20 @@
 {% endblock %}
 
 {% block extra_script %}
+<script type="text/javascript">
+        function show_more_section(){
+                    $('div#more_section').show();	
+                    $('.show_more_section').hide(); 
+                    $('.hide_more_section').show();                    
+                    return false;       
+        }
+</script>
 {% endblock %}
 
 
 	
 <script type="text/javascript">
-	$(document).ready(function(){	   
-
-
+	$(document).ready(function(){	 
             
 		    $("#ac_tags").tagit({
 			    availableTags: [{% for tag in tags %}"{{tag}}",{% endfor %}],
@@ -137,6 +143,8 @@
                     $('.hide_more_section').show();                    
                     return false;
         });
+        
+
 		
 	});
 	

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-10 05:43+0800\n"
+"POT-Creation-Date: 2012-07-10 13:17+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,39 +18,43 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: email_digest.py:70 email_digest.py:81 notes/views.py:1877
+#: email_digest.py:81 email_digest.py:92 notes/views.py:1877
 #: notes/views.py:1888
 msgid "Sharing snippet:"
 msgstr "分享便条："
 
-#: email_digest.py:72 email_digest.py:83 notes/views.py:1879
+#: email_digest.py:83 email_digest.py:94 notes/views.py:1879
 #: notes/views.py:1890
 msgid "Sharing bookmark:"
 msgstr "分享网址："
 
-#: email_digest.py:74 email_digest.py:85 notes/views.py:1881
+#: email_digest.py:85 email_digest.py:96 notes/views.py:1881
 #: notes/views.py:1892
 msgid "Sharing scrap:"
 msgstr "分享网摘："
 
-#: email_digest.py:76 email_digest.py:87 notes/views.py:1883
+#: email_digest.py:87 email_digest.py:98 notes/views.py:1883
 #: notes/views.py:1894
 msgid "Sharing knowledge package:"
 msgstr "分享知识包："
 
-#: email_digest.py:89 notes/views.py:1896
+#: email_digest.py:100 notes/views.py:1896
 msgid "Original Note:"
 msgstr "原笔记："
 
-#: email_digest.py:93 notes/views.py:1907
+#: email_digest.py:104 notes/views.py:1907
 msgid "from"
 msgstr "来自"
 
-#: email_digest.py:128
+#: email_digest.py:138
 msgid "Daily digest from the group:"
 msgstr "小组今天新添加笔记，来自小组："
 
-#: email_digest.py:128
+#: email_digest.py:140
+msgid "Weekly digest from the group:"
+msgstr "小组本周新添加笔记，来自小组："
+
+#: email_digest.py:141
 msgid ""
 "\n"
 " Or you can go to the group page to view the new notes! "
@@ -58,17 +62,21 @@ msgstr ""
 "\n"
 "或者你可以去小组页面去浏览新添加的笔记！"
 
-#: email_digest.py:129
+#: email_digest.py:142
 msgid "You can set up how you want to receive group digest in your setting:"
 msgstr "你可以在你的用户设置页面修改你要如何接收小组的笔记更新："
 
-#: email_digest.py:133
+#: email_digest.py:148 email_digest.py:150
 msgid "Group "
 msgstr "小组"
 
-#: email_digest.py:133
+#: email_digest.py:148
 msgid ":today's new notes!"
 msgstr "今天新添加的笔记！"
+
+#: email_digest.py:150
+msgid ":this week's new notes!"
+msgstr "本周新添加的笔记！"
 
 #: manage.py:32
 msgid "Invitation Received"
@@ -109,23 +117,23 @@ msgstr ""
 "这个网址已经成功添加到您的网址本里。您可以关闭这个窗口，或者其会在1秒后自动关"
 "闭。"
 
-#: notes/models.py:270 notes/models.py:1093 social/models.py:573
+#: notes/models.py:270 notes/models.py:1117 social/models.py:616
 #: templates/include/notes/notesdisplay.html:35
 #: templates/notebook/notes/notesdisplay.html:27
 #: templates/scrapbook/notes/notesdisplay.html:28
 msgid "Title"
 msgstr "标题"
 
-#: notes/models.py:270 notes/models.py:1093 social/models.py:573
+#: notes/models.py:270 notes/models.py:1117 social/models.py:616
 msgid "The size of the title is limited to 2000 characaters."
 msgstr "标题的长度应小于2000字。"
 
-#: notes/models.py:273 notes/models.py:1094 social/models.py:448
-#: social/models.py:574
+#: notes/models.py:273 notes/models.py:1118 social/models.py:483
+#: social/models.py:617
 msgid "Description"
 msgstr "正文"
 
-#: notes/models.py:273 notes/models.py:1094 social/models.py:574
+#: notes/models.py:273 notes/models.py:1118 social/models.py:617
 msgid "The size of the desc is limited to 2000 characaters."
 msgstr "正文的长度应小于2000字。"
 
@@ -142,7 +150,7 @@ msgstr "标签"
 msgid "Default tag is 'random thought'."
 msgstr "默认的标签是'random thought'。"
 
-#: notes/models.py:275 social/models.py:451
+#: notes/models.py:275 social/models.py:486
 #: templates/include/notes/notesdisplay.html:39
 #: templates/notebook/notes/notesdisplay.html:25
 #: templates/scrapbook/notes/notesdisplay.html:29
@@ -151,7 +159,7 @@ msgstr "默认的标签是'random thought'。"
 msgid "Private"
 msgstr "隐私"
 
-#: notes/models.py:277 social/models.py:450
+#: notes/models.py:277 social/models.py:485
 msgid "date created"
 msgstr "生成时间"
 
@@ -163,17 +171,17 @@ msgstr "最后修改时间"
 msgid "self ranking"
 msgstr "原作者的评级"
 
-#: notes/models.py:719 snippets/models.py:14 social/models.py:312
-#: social/models.py:336 templates/include/notes/notesdisplay.html:37
+#: notes/models.py:728 snippets/models.py:14 social/models.py:334
+#: social/models.py:358 templates/include/notes/notesdisplay.html:37
 #: templates/notebook/notes/notesdisplay.html:29
 msgid "Attachment"
 msgstr "附件"
 
-#: notes/models.py:1091 social/models.py:571
+#: notes/models.py:1115 social/models.py:614
 msgid "Language"
 msgstr "语言"
 
-#: notes/models.py:1092 social/models.py:572
+#: notes/models.py:1116 social/models.py:615
 msgid "Original language"
 msgstr "原来的语言"
 
@@ -229,35 +237,63 @@ msgstr "女"
 msgid "male"
 msgstr "男"
 
-#: social/models.py:43
+#: social/models.py:43 templates/include/notes_pick_lang.html:13
+#: templates/include/notes_pick_lang.html:15
+#: templates/include/pick_lang.html:13 templates/include/pick_lang.html:15
+msgid "Chinese"
+msgstr "中文"
+
+#: social/models.py:44 templates/include/notes_pick_lang.html:18
+#: templates/include/notes_pick_lang.html:20
+#: templates/include/pick_lang.html:18 templates/include/pick_lang.html:20
+msgid "English"
+msgstr "英语"
+
+#: social/models.py:47
+msgid "No Digest"
+msgstr "不接收更新"
+
+#: social/models.py:48
+msgid "Daily Digest"
+msgstr "每日更新"
+
+#: social/models.py:49
+msgid "Weekly Digest"
+msgstr "每周更新"
+
+#: social/models.py:51
 msgid "Nickname"
 msgstr "绰号"
 
-#: social/models.py:46 social/models.py:455
+#: social/models.py:54 social/models.py:490
 msgid "Icon"
 msgstr "头像"
 
-#: social/models.py:47
+#: social/models.py:55
 msgid "Gender"
 msgstr "性别"
 
-#: social/models.py:48
+#: social/models.py:58
 msgid "Default language"
 msgstr "默认语言"
 
-#: social/models.py:447 templates/social/group/groups.html:31
+#: social/models.py:59
+msgid "Digest"
+msgstr "接收更新"
+
+#: social/models.py:482 templates/social/group/groups.html:31
 msgid "Name"
 msgstr "名字"
 
-#: social/models.py:452 templates/social/notes/group_notes.html:35
+#: social/models.py:487 templates/social/notes/group_notes.html:35
 msgid "Members"
 msgstr "成员"
 
-#: social/models.py:453
+#: social/models.py:488
 msgid "Creator"
 msgstr "创建者"
 
-#: social/models.py:454
+#: social/models.py:489
 msgid "Admins"
 msgstr "管理员"
 
@@ -1558,18 +1594,6 @@ msgstr "%(profile_username)s的个人笔记"
 msgid "Pick a language"
 msgstr "选择语言"
 
-#: templates/include/notes_pick_lang.html:13
-#: templates/include/notes_pick_lang.html:15
-#: templates/include/pick_lang.html:13 templates/include/pick_lang.html:15
-msgid "Chinese"
-msgstr "中文"
-
-#: templates/include/notes_pick_lang.html:18
-#: templates/include/notes_pick_lang.html:20
-#: templates/include/pick_lang.html:18 templates/include/pick_lang.html:20
-msgid "English"
-msgstr "英语"
-
 #: templates/include/notice_alert.html:6
 msgid "hide notices"
 msgstr "隐藏通知"
@@ -1942,11 +1966,11 @@ msgstr "属于"
 msgid "You can use the working set to pick a set of tags to work with."
 msgstr "你可以用工作区来选择一组你用来工作的标签。"
 
-#: templates/include/notes/note/display_attachment.html:4
+#: templates/include/notes/note/display_attachment.html:6
 msgid "Show attachment"
 msgstr "显示附件"
 
-#: templates/include/notes/note/display_attachment.html:5
+#: templates/include/notes/note/display_attachment.html:7
 msgid "Hide attachment"
 msgstr "隐藏附件"
 

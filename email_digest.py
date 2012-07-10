@@ -14,7 +14,12 @@ from django.core import management; import notebook; import notebook.settings as
 
 import settings
 
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext as _ , activate, get_language
+#import gettext
+
+#t = gettext.translation('digest', HOME_PATH+'notebook/locale')
+#_ = t.ugettext
+
 from django.contrib.auth.models import User
 
 
@@ -31,6 +36,12 @@ books.remove('notebook')
 
 
 site_name = 'http://www.91biji.com'
+
+
+#settings.LANGUAGE_CODE = 'en-us'
+
+#lang1 = gettext.translation('myapplication', languages=['en-us'])
+#lang2 = gettext.translation('myapplication', languages=['zh-cn'])
 
 
 def get_mail_server():
@@ -56,12 +67,12 @@ def sendEmail(mailserver, fromAddr, toAddrList, subject, content):
 
 def build_content(note, bookname, pick_lang, title_size):
         content = ''
-        print('The current bookname is:'+bookname)
-        if pick_lang == 'E':
+        #print('The current bookname is:'+bookname)
+        if pick_lang == 'en-us':
             desc = note.get_desc_en()
         else:
             desc = note.get_desc_cn()  
-        if pick_lang == 'E':
+        if pick_lang == 'en-us':
             title = note.get_title_en()
         else:
             title = note.get_title_cn()  
@@ -93,7 +104,7 @@ def build_content(note, bookname, pick_lang, title_size):
         content = content+'    \n'+source_str+'    '+url+'    '+_('from')+' '+\
                    note.owner.username + '\n\n'
 
-        print 'built content for one note of today:', content
+        #print 'built content for one note of today:', content
         return content  
 
 
@@ -101,23 +112,21 @@ def build_content(note, bookname, pick_lang, title_size):
 
 
 
-def send_group_daily_digest(username, groupname):
-    print 'Sending digest for', username, 'in', groupname
+
+
+def send_group_digest(username, groupname, freq, pick_lang):
+    print 'Sending '+freq+' digest for', username, 'in', groupname
     group = G.objects.get(name=groupname) 
     
     content = ''
     member = Member.objects.get(username=username)
-    #pick_lang = (member.default_lang)?(member.default_lang=='E'? 'E':'C') : 'E' 
-    if member.default_lang:
-        if member.default_lang == 'E':
-            pick_lang = 'E'
-        else:
-            pick_lang = 'C'
-    else:
-        pick_lang = 'C'
+        
     
-    for bookname in books:        
-        notes = group.get_notes_today(bookname)
+    for bookname in books:  
+        if freq == 'daily':      
+            notes = group.get_notes_today(bookname)
+        else:
+            notes = group.get_notes_this_week(bookname)  
         if notes:
             #content += _(bookname) + '\n\n'
             for note in notes:
@@ -125,35 +134,69 @@ def send_group_daily_digest(username, groupname):
  
     if content:
         group_url = site_name +  '/groups/' +groupname+'/'
-        digest = _('Daily digest from the group:')+groupname+'\n\n\n' + content + _('\n Or you can go to the group page to view the new notes! ')+ \
+        if freq == 'daily':
+            digest_heading = _('Daily digest from the group:')+groupname+'\n\n\n'
+        if freq == 'weekly':    
+            digest_heading = _('Weekly digest from the group:')+groupname+'\n\n\n'
+        digest = digest_heading + content + _('\n Or you can go to the group page to view the new notes! ')+ \
                   group_url + '\n\n'+_('You can set up how you want to receive group digest in your setting:')+ site_name + '/settings/'
         print 'digest is:', digest
         
         mailserver = get_mail_server()
-        sendEmail(mailserver , SERVER_EMAIL, [member.email], (_('Group ')+groupname+_(":today's new notes!")).encode('utf-8'), digest.encode('utf-8'))
+        #subject = ''
+        if freq == 'daily':
+            subject = (_('Group ')+groupname+_(":today's new notes!")).encode('utf-8')
+        if freq == 'weekly':
+            subject = (_('Group ')+groupname+_(":this week's new notes!")).encode('utf-8')   
+        sendEmail(mailserver , SERVER_EMAIL, [member.email], subject, digest.encode('utf-8'))
         mailserver.close()
         print 'Email digest was sent to '+member.email+' for group '+ groupname 
    
     
 
-def send_daily_digest(username):
-    print 'Sending digetst for user:', username
+def send_digest(username, freq):
+    print 'Sending ', freq, ' digetst for user:', username
     member = Member.objects.get(username=username)
     #print 'Getting groups for member:', member.username
+    #pick_lang = (member.default_lang)?(member.default_lang=='E'? 'E':'C') : 'E' 
+    pick_lang = settings.LANGUAGE_CODE
+    if member.default_lang:        
+         pick_lang = member.default_lang    
+         activate(pick_lang)   
+    #print 'current preferred language is:', get_language()
+     
+    #print 'Now current preferred language is:', get_language() 
     groups = member.get_groups()
     #print username, "'s groups:", groups
     for group in groups:
-        send_group_daily_digest(username, group.name)
+        send_group_digest(username, group.name, freq, pick_lang)
     
 
 
 
 
+
 if __name__ == "__main__":
-    users = User.objects.all()
-    for user in users:
-        try:
-            send_daily_digest(user.username)   
-        except:
-             pass            
+    command = sys.argv[1]
+    members = Member.objects.all()
+    if command == 'daily':
+        for member in members:        
+            if member.digest and member.digest == 'w': 
+                pass
+            elif member.digest == 'n':
+                pass
+            else:#if user.digest and user.digest == 'd' or not user.digest
+                try:
+                    send_digest(member.username, 'daily')   
+                except:
+                    pass 
+    if command == 'weekly':
+        for member in members:  
+            if member.digest and member.digest == 'w':  
+                try:
+                    send_digest(member.username, 'weekly')   
+                except:
+                     pass  
+            else:
+                pass                
   

@@ -677,6 +677,8 @@ class Note(models.Model):
                 sn.set_translation(trans.original_lang, trans.lang, trans.title, trans.desc)
             
             
+            #TODO: for group members that want every note posted to the group, email them the newly posted note. Might want to disable this 
+            #due to privcy reason (for example, the user can make a note private to take it back after posting) 
             
             sn.save()        
 

@@ -38,14 +38,25 @@ class Member(User):
     GENDER_CHOICES = (        
         ('f', ugettext_lazy('female')),
         ('m', ugettext_lazy('male')),        
+    )    
+    LANG_CHOICES = (        
+        ('zh-cn', ugettext_lazy('Chinese')),
+        ('en-us', ugettext_lazy('English')),        
     )
-      
+    DIGEST_CHOICES = (      
+        ('n', ugettext_lazy('No Digest')),                
+        ('d', ugettext_lazy('Daily Digest')),
+        ('w', ugettext_lazy('Weekly Digest')),        
+    )  
     nickname = models.CharField(max_length=50, blank=True,  verbose_name=ugettext_lazy('Nickname'))   
     role = models.CharField(max_length=1, choices=ROLE_CHOICES, blank=True) 
     #TODO: change to avatar
     icon = models.ImageField(upload_to=get_storage_loc,blank=True, storage=fs, verbose_name=ugettext_lazy('Icon'))    #TODO:
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, blank=True, verbose_name=ugettext_lazy('Gender')) 
-    default_lang = models.CharField(max_length=10, blank=True,  verbose_name=ugettext_lazy('Default language'))   
+    #TODO: change max_length to 5
+    #so far, this is only used for scripts instead of in the web app. TODO:
+    default_lang = models.CharField(max_length=10, choices=LANG_CHOICES, blank=True,  verbose_name=ugettext_lazy('Default language'))   
+    digest = models.CharField(max_length=1, choices=DIGEST_CHOICES, blank=True, default='d',  verbose_name=ugettext_lazy('Digest')) 
     #maynot be a good way to do like this. TODO:
     # Use UserManager to get the create_user method, etc.
     objects = UserManager()
@@ -515,6 +526,14 @@ class Group(models.Model):
         note_list = note_list.filter(init_date__day= now.day, init_date__month=now.month, init_date__year= now.year)        
         return note_list
                          
+    
+    def get_notes_this_week(self, bookname):
+        note_list = self.get_notes(bookname)
+        now = datetime.date.today()
+        one_week_ago = now - datetime.timedelta(days=7)
+        note_list = note_list.filter(init_date__gte=one_week_ago.strftime('%Y-%m-%d'),  init_date__lte=now.strftime('%Y-%m-%d 23:59:59'))        
+        return note_list
+      
     
     
     def get_notes(self, bookname):

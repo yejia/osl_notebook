@@ -2205,6 +2205,8 @@ def settings_update_profile(request):
     m.email = request.POST.get('email')
     m.nickname = request.POST.get('nickname')
     m.gender = request.POST.get('gender')
+    m.default_lang = request.POST.get('default_lang')
+    m.digest = request.POST.get('digest')
     m.save()
     #
     #f = ProfileForm(request.POST, request.FILES, instance=m)          
@@ -2499,6 +2501,8 @@ def set_language(request):
     language = request.GET.get('language')
     log.debug( 'language from request is:'+language)
     request.session['django_language'] = language
+    request.user.member.default_lang = language
+    request.user.member.save()
     log.debug( 'The preferred langauge is set to:'+request.session.get('django_language', 'no language'))     
     #return HttpResponseRedirect(__get_pre_url(request))  
     return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))
