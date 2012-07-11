@@ -16,7 +16,7 @@
 <div id="content-main">
 <form action="{{ app_path }}" method="post" id="login-form">{% csrf_token %}
   <div class="form-row">
-    <label for="id_username">{% trans 'Username:' %}</label> <input type="text" name="username" id="id_username" />
+    <label for="id_username">{% trans 'Username:' %}</label> <input type="text" name="username" id="id_username"  autofocus="autofocus" />
   </div>
   <div class="form-row">
     <label for="id_password">{% trans 'Password:' %}</label> <input type="password" name="password" id="id_password" />
@@ -28,7 +28,7 @@
 </form>
 
 <script type="text/javascript">
-document.getElementById('id_username').focus()
+document.getElementById('id_username').focus();
 </script>
 </div>
 {% endblock %}

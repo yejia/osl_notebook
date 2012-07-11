@@ -744,7 +744,7 @@ def caches(request, cache_id, username, bookname):
 
 #view included notes in a frame 
 @login_required
-def included_notes_in_frame(request, frame_id, username, bookname):    
+def included_notes_in_frame(request, frame_id, username, bookname):      
     F = getFrame(username)
     f = F.objects.get(id=frame_id)
     f.owner_name = username
@@ -757,9 +757,9 @@ def included_notes_in_frame(request, frame_id, username, bookname):
     qstr = __getQStr(request)
     note_list = getSearchResults(note_list, qstr, search_fields_dict.get(bookname))
     T = getT(username)
-    default_tag_id = T.objects.get(name='untagged').id    
+    default_tag_id = T.objects.get(name='untagged').id   
     context = __get_context(request, note_list, default_tag_id, username, bookname)    
-    return render_to_response(book_template_dict.get(bookname)+'notes/note_list.html', context, context_instance=RequestContext(request,{'bookname': bookname, 'aspect_name':'notes',\
+    return render_to_response(book_template_dict.get(bookname)+'notes/notes.html', context, context_instance=RequestContext(request,{'bookname': bookname, 'aspect_name':'notes',\
                                                                                                         'book_uri_prefix':'/'+username}))
 
 
@@ -1067,7 +1067,7 @@ def folders(request, username, bookname, folder_name):
 
 #TODO:add protection
 #below is copied from note_raw except using a different template page
-def note(request, username, bookname, note_id):
+def note(request, username, bookname, note_id):    
     log.debug('Getting the note:'+note_id)
     if 'framebook' == bookname:
         return frame(request, username, note_id)
@@ -1595,7 +1595,7 @@ def linkagenotes(request, username, bookname):
 
 
 @login_required
-def frame(request, username, frame_id):    
+def frame(request, username, frame_id):     
     F = getFrame(username)    
     frame = F.objects.get(id=frame_id)
    
@@ -1943,7 +1943,7 @@ def share(request, bookname):
 #TODO: possibly use these below as actions that is used to group update the private field of notes  
 @login_required
 def set_notes_private(request, username, bookname):     
-    note_ids = request.POST.getlist('note_ids')    
+    note_ids = request.POST.getlist('note_ids[]')      
     N = getNote(username, bookname)
     notes = N.objects.filter(id__in=note_ids)
     #below doesn't call note.save9)? It seems that it doesn't withdrawn notes made private from public. why? TODO:
@@ -1956,7 +1956,7 @@ def set_notes_private(request, username, bookname):
 
 @login_required
 def set_notes_public(request, username, bookname): 
-    note_ids = request.POST.getlist('note_ids')   
+    note_ids = request.POST.getlist('note_ids[]')   
     N = getNote(username, bookname)
     notes = N.objects.filter(id__in=note_ids)    
     #notes.update(private = False)
