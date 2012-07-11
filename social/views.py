@@ -358,6 +358,8 @@ def note(request, username, bookname, note_id):
     
     if note.private:        
         sharing_groups = [tag.name.split(':')[1] for tag in note.tags.all() if tag.name.startswith('sharinggroup:')]
+        print 'sharing_groups:', sharing_groups
+        #if request.user.is_anonymous() or not request.user.member.is_in_groups(sharing_groups):
         if not request.user.member.is_in_groups(sharing_groups):
             return render_to_response('404.html')
     
@@ -447,6 +449,7 @@ def frame(request, username, bookname, frame_id):
     frame = Social_Frame.objects.get(owner__username=username, id=frame_id)    
     if frame.private:        
         sharing_groups = [tag.name.split(':')[1] for tag in frame.tags.all() if tag.name.startswith('sharinggroup:')]
+        #if request.user.is_anonymous() or not request.user.member.is_in_groups(sharing_groups):
         if not request.user.member.is_in_groups(sharing_groups):
             return render_to_response('404.html')
             

@@ -96,7 +96,7 @@ class Member(User):
     
     
     def is_in_group(self, groupname):
-        groups = self.get_groups()
+        groups = [group.name for group in self.get_groups()]
         if groupname in groups:
             return True
         else:
