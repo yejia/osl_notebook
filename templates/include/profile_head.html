@@ -72,6 +72,9 @@
         {% endif %}
         </select> 
 </div>
+<div>
+{% include "include/supersearch.html" %}
+</div><br/>
 <table><tr/>
 <td>{{profile_member.get_public_snippets_count}} <br/><a href="{{book_uri_prefix}}/snippetbook/notes/">{% trans "Snippets" %}</a><img src="/site_media/img/Snippet.png" title="Snippet"/></td>
 <td>{{profile_member.get_public_bookmarks_count}}<br/><a href="{{book_uri_prefix}}/bookmarkbook/notes/">{% trans "Bookmarks" %}</a><img src="/site_media/img/Bookmark.png" title="Bookmark"/></td>
@@ -80,9 +83,7 @@
 <td>{{profile_member.get_public_notes_count}}<br/><a href="{{book_uri_prefix}}/notebook/notes/">{% trans "All" %}</a></td>
 </tr></table>
 <br/>
-<div>
-{% include "include/supersearch.html" %}
-</div>
+
 <br/>
 <div>
 <span class="clickable" onclick="window.location.replace('/messages/write/?recipients={{profile_member.username}}')"><img src="/site_media/img/email.png"/> {% trans "Private Message" %}</span>

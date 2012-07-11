@@ -1,7 +1,6 @@
 {% load i18n %}
 
-<form id="search" action="" method="get" name="searchForm">     
-		<label for="searchbar" class="old"><img src="/media/img/admin/icon_searchbox.png" alt="Search" /></label> 
+<form id="search" action="" method="get" name="searchForm">     		
 		<input type="text" size="33" name="q" value="" id="searchbar"  placeholder="{% trans "Search " %}{%if current_tag%}{% trans "in tag " %}{{current_tag}}{% trans " of " %}{%endif%}
 {% if bookname == 'snippetbook' %}
 {% trans "Snippets" %}        
@@ -18,7 +17,7 @@
 {% if bookname == 'notebook' %}
 {% trans "All" %}        
 {% endif %}" /> 
-		<img src="/media/img/admin/icon_searchbox.png" id="seach_icon" alt="Search" onclick="searchForm.submit();"/>
+		
         <div>
         {{current_tag}}
         <select id="note_type_drop_down"  name="note_type_select">
@@ -48,6 +47,7 @@
             <option value="All">{% trans "All" %}</option>
         {% endif %}
         </select> 
+        <span id="search_submit"><img src="/media/img/admin/icon_searchbox.png" id="seach_icon" alt="Search" onclick="searchForm.submit();"/></span>
        </div>        
 </form>
 <!--

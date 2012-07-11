@@ -94,6 +94,10 @@ display:inline;
 img#seach_icon{
 cursor:pointer;
 }
+span#search_submit{
+padding:10px;
+
+}
 
 .book_tabs{
 position:absolute;
