@@ -42,7 +42,7 @@
         {% if appname == 'social' and note.private %}  <!--for social public notebook, not private social notes will be shown. But in the group app, it is ok.-->
         {% else %}     
          <li class="note_display" note_id="{{ note.id }}">
-            <div class="{{bookname}}" note_id="{{ note.id }}">
+            <div class="{{bookname}}" note_id="{{ note.id }}" social_note_id="{{ note.id }}">
 	          <div class="kuoda"></div><div class="yasuo"></div>
             
 		    <span class="social_thumb"> 			         
@@ -105,8 +105,9 @@
             <!--
              <div  id="note_linkages" title="note linkages">Linkages: {{note.display_linkages|default:'Not in any linkages'}}</div>
              -->
-             
-             {% include "social/include/notes/inlines/add_comments_and_etc_inline.html" %}   
+             {% with note as social_note  %}
+                    {% include "social/include/notes/inlines/add_comments_and_etc_inline.html" %}   
+            {% endwith %}
 	        </div>
         </div>
            
