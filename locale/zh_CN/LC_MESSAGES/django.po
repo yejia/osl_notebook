@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-11 13:01+0800\n"
+"POT-Creation-Date: 2012-07-11 13:15+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1612,8 +1612,6 @@ msgstr "隐藏通知"
 #: templates/include/profile_head.html:23 templates/social/admin/group.html:7
 #: templates/social/admin/group.html:13 templates/social/group/group.html:8
 #: templates/social/group/group.html:14
-#: templates/social/notes/group_notes.html:7
-#: templates/social/notes/group_notes.html:12
 msgid "Group"
 msgstr "小组"
 
@@ -2576,6 +2574,11 @@ msgstr "根据用户推荐"
 #, python-format
 msgid " %(user)s's Friends  Notes"
 msgstr "%(user)s的朋友的笔记"
+
+#: templates/social/notes/group_notes.html:7
+#: templates/social/notes/group_notes.html:12
+msgid "Learning Group"
+msgstr "学习小组"
 
 #: templates/social/notes/groups_notes.html:7
 #: templates/social/notes/groups_notes.html:11
