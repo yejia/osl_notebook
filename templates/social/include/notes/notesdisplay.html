@@ -23,7 +23,17 @@
         {% include "social/include/notes/notes_section_header.html" %}   
 {% endblock %}	
 
-{% block forms_section %}
+{% block forms_section %} 
+ {% if appname == 'groups'  %} 
+    {% if group not in gs %} 
+         <p>
+            <input type="button" value="{% trans "Join the Group" %}" onclick="show_confirm()"/>  
+         </p>
+    {% endif %}          
+    <p>{% trans "You can make notes in your personal notebook. And the notes you make and tagged with tags of this group will be pushed to this group." %}
+            {% trans "For more details about sharing with a group, see" %}<a href="/forNewUsers/">{% trans "New User Guide" %}</a>
+    </p>
+ {% endif %}
 {% endblock %}	
 
 {% block seach_form_inputs %}   

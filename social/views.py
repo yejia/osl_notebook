@@ -544,7 +544,7 @@ def join_group(request, groupname):
     group.members.add(user.member)
     group.save()
     push_group_tags_back(request, group.name)
-    return HttpResponseRedirect('/groups/'+groupname+'/snippetbook/')
+    return HttpResponseRedirect('/groups/'+groupname+'/snippetbook/notes/')
     
 
 
