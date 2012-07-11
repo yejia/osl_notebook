@@ -354,6 +354,14 @@ def note(request, username, bookname, note_id):
     N = getSN(bookname)
     note = N.objects.filter(owner__username=username).get(id=note_id)
     
+    
+    
+    if note.private:        
+        sharing_groups = [tag.name.split(':')[1] for tag in note.tags.all() if tag.name.startswith('sharinggroup:')]
+        if not request.user.member.is_in_groups(sharing_groups):
+            return render_to_response('404.html')
+    
+    
     #get the backlink
     referer = request.META.get('HTTP_REFERER')  
     
@@ -437,6 +445,11 @@ def note(request, username, bookname, note_id):
 
 def frame(request, username, bookname, frame_id):     
     frame = Social_Frame.objects.get(owner__username=username, id=frame_id)    
+    if frame.private:        
+        sharing_groups = [tag.name.split(':')[1] for tag in frame.tags.all() if tag.name.startswith('sharinggroup:')]
+        if not request.user.member.is_in_groups(sharing_groups):
+            return render_to_response('404.html')
+            
 #===============================================================================
 #    if request.user.username == username:
 #        frame_notes_display = frame.display_notes()

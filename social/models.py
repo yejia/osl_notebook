@@ -88,11 +88,27 @@ class Member(User):
         friends = self.get_friends()        
         return [friend.username for friend in friends]
        
+     
        
    
     def get_groups(self):
         return Group.objects.filter(members=self).order_by('name')
     
+    
+    def is_in_group(self, groupname):
+        groups = self.get_groups()
+        if groupname in groups:
+            return True
+        else:
+            return False
+        
+    def is_in_groups(self, group_list):
+        for group in group_list:
+            if self.is_in_group(group):
+                return True
+            else:
+                return False
+        
     
     def get_public_snippets_count(self):
         return Social_Snippet.objects.filter(owner=self).count()

@@ -587,6 +587,7 @@ class Note(models.Model):
         
         
         #TODO: consider moving this into various subclasses
+        #TODO: shouldn't this check if the note is private or delete?
         if hasattr(self, 'snippet'):
             sn, created = Social_Snippet.objects.get_or_create(owner=owner.member, owner_note_id=self.id) 
         if hasattr(self, 'bookmark'):
