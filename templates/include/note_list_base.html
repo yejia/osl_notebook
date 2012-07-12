@@ -259,6 +259,19 @@
                   $("li[note_id='"+note.note_id+"']  .structure").hide();
             
             
+            $("li[note_id='"+note.note_id+"'] .note_selection").click(function(){	
+                 $('.jd_menu').hide();
+                  $('.note_selection').each(function(){
+                    if ($(this).attr('checked')==true){			
+                       $('.jd_menu').show();
+                    }			
+		     });
+           
+            });
+            
+
+            
+            
               $("li[note_id='"+note.note_id+"']  div.brief_display").show();
               $("li[note_id='"+note.note_id+"']  div.full_display").hide();	
             
@@ -1184,9 +1197,6 @@ function showAddNoteTags(){
          
               $(":input[name='select_notes']").change(function(){                      
                    $(this).is(':checked') ? selectAll() :  selectNone();
-                                  
-                  
-                     
              });
              
              

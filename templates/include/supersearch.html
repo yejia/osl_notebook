@@ -1,6 +1,6 @@
 {% load i18n %}
 
-<form id="search" action="" method="get" name="searchForm">     		
+<form id="search" action="{{book_uri_prefix}}/{{bookname}}/notes/{%if current_tag%}tags/{{current_tag}}/{%endif%}" method="get" name="searchForm">     		
 		<input type="text" size="33" name="q" value="" id="searchbar"  placeholder="{% trans "Search " %}{%if current_tag%}{% trans "in tag " %}{{current_tag}}{% trans " of " %}{%endif%}
 {% if bookname == 'snippetbook' %}
 {% trans "Snippets" %}        
