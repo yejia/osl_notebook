@@ -19,10 +19,6 @@
 
 {% block notes %}
 
- {% block notes_section_header %} 
-        {% include "social/include/notes/notes_section_header.html" %}   
-{% endblock %}	
-
 {% block forms_section %} 
  {% if appname == 'groups'  %} 
     {% if group not in gs %} 
@@ -35,6 +31,12 @@
     </p>
  {% endif %}
 {% endblock %}	
+
+ {% block notes_section_header %} 
+        {% include "social/include/notes/notes_section_header.html" %}   
+{% endblock %}	
+
+
 
 {% block seach_form_inputs %}   
 {% endblock %}	
