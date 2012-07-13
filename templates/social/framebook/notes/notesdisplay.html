@@ -12,10 +12,10 @@
  <table class="note_table">
                 <tr>
                     <td class="note_table_title">
-                        <div id="note_title" title="{% trans 'note title' %}"><a href="/social/{{note.owner.username}}/framebook/notes/note/{{ note.id }}/"><b>{{ note.title|default:_('(No Title)') }}</b></a></div> 	
+                        {% include "social/include/notes/inlines/notes_brief_title_inline.html" %}     
                     </td>
                     <td class="note_table_desc">			    
-                        <div  id="note_desc">{{note.desc}}</div>
+                        {% include "include/notes/inlines/notes_brief_desc_inline.html" %}   
                     </td>
                     <td class="note_table_tags">
                         {% include "social/include/notes/inlines/notes_brief_tags_inline.html" %}     		    
@@ -32,8 +32,8 @@
              {% if user.username == note.owner.username %} 
                {% for n in note.get_notes_in_order %}            
                 <div linked_note_id="{{n.id}}">
-                     <li><img src="/site_media/img/{{n.get_note_type}}.png" title="{{n.get_note_type}}"/><a href="/social/{{note.owner.username}}/{{n.get_note_bookname}}/notes/note/{{n.id}}"><strong>{{ n.title|default:_('(No Title)') }} </strong></a>
-                                &nbsp;&nbsp;&nbsp;{{n.desc|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp;{{n.vote}} &nbsp;&nbsp;&nbsp;&nbsp; 
+                     <li><img src="/site_media/img/{{n.get_note_type}}.png" title="{{n.get_note_type}}"/><a href="/social/{{note.owner.username}}/{{n.get_note_bookname}}/notes/note/{{n.id}}"><strong>{% include "include/get_title.html" %}</strong></a>
+                                &nbsp;&nbsp;&nbsp;{% include "include/get_desc_truncate.html" %}&nbsp;&nbsp;&nbsp;&nbsp;{{n.vote}} &nbsp;&nbsp;&nbsp;&nbsp; 
                                
                      </li>           
                 </div>
@@ -41,8 +41,8 @@
               {% else %}              
                {% for n in note.get_public_notes_in_order  %}            
                 <div linked_note_id="{{n.id}}">
-                     <li><img src="/site_media/img/{{n.get_note_type}}.png" title="{{n.get_note_type}}"/><a href="/social/{{note.owner.username}}/{{n.get_note_bookname}}/notes/note/{{n.id}}"><strong>{{ n.title|default:_('(No Title)') }} </strong></a>
-                                &nbsp;&nbsp;&nbsp;{{n.desc|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp;{{n.vote}} &nbsp;&nbsp;&nbsp;&nbsp; 
+                     <li><img src="/site_media/img/{{n.get_note_type}}.png" title="{{n.get_note_type}}"/><a href="/social/{{note.owner.username}}/{{n.get_note_bookname}}/notes/note/{{n.id}}"><strong>{% include "include/get_title.html" %}</strong></a>
+                                &nbsp;&nbsp;&nbsp;{% include "include/get_desc_truncate.html" %}&nbsp;&nbsp;&nbsp;&nbsp;{{n.vote}} &nbsp;&nbsp;&nbsp;&nbsp; 
                               
                      </li>           
                 </div>
@@ -66,8 +66,8 @@
              {% if user.username == note.owner.username %} 
                {% for n in note.get_notes_in_order %}            
                 <div linked_note_id="{{n.id}}">
-                     <li><img src="/site_media/img/{{n.get_note_type}}.png" title="{{n.get_note_type}}"/><a href="/social/{{note.owner.username}}/{{ n.get_note_bookname}}/notes/note/{{n.id}}"><strong>{{ n.title|default:_('(No Title)') }} </strong></a>
-                                &nbsp;&nbsp;&nbsp;{{n.desc|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp;{{n.vote}} &nbsp;&nbsp;&nbsp;&nbsp; 
+                     <li><img src="/site_media/img/{{n.get_note_type}}.png" title="{{n.get_note_type}}"/><a href="/social/{{note.owner.username}}/{{ n.get_note_bookname}}/notes/note/{{n.id}}"><strong>{% include "include/get_title.html" %}</strong></a>
+                                &nbsp;&nbsp;&nbsp;{% include "include/get_desc_truncate.html" %}&nbsp;&nbsp;&nbsp;&nbsp;{{n.vote}} &nbsp;&nbsp;&nbsp;&nbsp; 
                                
                      </li>           
                 </div>
@@ -75,8 +75,8 @@
               {% else %}              
                {% for n in note.get_public_notes_in_order  %}            
                 <div linked_note_id="{{n.id}}">
-                     <li><img src="/site_media/img/{{n.get_note_type}}.png" title="{{n.get_note_type}}"/><a href="/social/{{note.owner.username}}/{{ n.get_note_bookname}}/notes/note/{{n.id}}"><strong>{{ n.title|default:_('(No Title)') }} </strong></a>
-                                &nbsp;&nbsp;&nbsp;{{n.desc|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp;{{n.vote}} &nbsp;&nbsp;&nbsp;&nbsp; 
+                     <li><img src="/site_media/img/{{n.get_note_type}}.png" title="{{n.get_note_type}}"/><a href="/social/{{note.owner.username}}/{{ n.get_note_bookname}}/notes/note/{{n.id}}"><strong>{% include "include/get_title.html" %}</strong></a>
+                                &nbsp;&nbsp;&nbsp;{% include "include/get_desc_truncate.html" %}&nbsp;&nbsp;&nbsp;&nbsp;{{n.vote}} &nbsp;&nbsp;&nbsp;&nbsp; 
                               
                      </li>           
                 </div>

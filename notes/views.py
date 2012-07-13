@@ -377,6 +377,8 @@ def index(request, username, bookname):
     extra_context = {'qstr':qstr,'folder_values':folder_values, 'is_in_folders':is_in_folders, 'current_folder':current_folder, 'aspect_name':'notes', 'queries':queries}    
     context.update(extra_context)  
     #TODO: see if I don't have to write book_uri_prifix everywhere
+    
+
     return render_to_response(book_template_dict.get(bookname)+'notes/notes.html', context, \
                               context_instance=RequestContext(request,{'bookname': bookname,'book_uri_prefix':'/'+username}))
 
@@ -792,6 +794,15 @@ def __get_context(request, note_list,default_tag_id, username, bookname, aspect_
         pass
     elif in_linkage in true_words:
         note_list = note_list.filter(linkagenote__isnull=False)
+    
+#========below didn't work=======================================================================
+#    for note in note_list:    
+#        if note.get_note_type() == 'Frame':
+#            print 'adding owner_name', username, 'for note:',note 
+#            note.frame.owner_name = username#note.owner_name
+#            print 'note.frame.owner_name',note.frame.owner_name
+#===============================================================================
+    
       
     view_mode, sort, delete, private, date_range, order_type, with_attachment, paged_notes,  cl = __get_notes_context(request, note_list)    
    

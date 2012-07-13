@@ -15,7 +15,7 @@
                                     <td><img src="/site_media/img/{{note.get_note_type}}.png" title="{{note.get_note_type}}"/></td>
                                     <td class="note_table_td1">
                                        <div id="note_title" title="{% trans 'note title' %}">
-                                        <a href="/social/{{note.owner.username}}/{{note.get_note_bookname}}/notes/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a>
+                                        {% include "social/include/notes/inlines/notes_brief_title_inline.html" %}
                                        {% if note.get_note_type == 'Bookmark' %} 
                                             <a href="{{note.social_bookmark.url}}" target="top"><img src="/site_media/img/openurl.png" class=""/></a>
                                        {% endif %}
@@ -25,7 +25,7 @@
                                        </div> 		    
 		                            </td>
                                     <td class="note_table_td2">
-		                                 <div  id="note_desc" title="{% trans "note desc" %}">{{note.desc}}</div>		   
+		                                  {% include "include/notes/inlines/notes_brief_desc_inline.html" %} 	   
 		                              </td>
 		                              <td class="note_table_tags">
 		                                   {% include "social/include/notes/inlines/notes_brief_tags_inline.html" %}     
@@ -49,10 +49,10 @@
  
  {% block note_full_table_td_note_type%}
             <td><img src="/site_media/img/{{note.get_note_type}}.png" title="{{note.get_note_type}}"/></td>
-        {% endblock %}   
+{% endblock %}   
  
  <td class="note_table_td1">
-    <div id="note_title" title="{% trans "note title" %}"><a href="/social/{{note.owner.username}}/{{note.get_note_bookname}}/notes/note/{{ note.id }}/">{{ note.title|default:_('(No Title)')}}</a>
+                {% include "social/include/notes/inlines/notes_brief_title_inline.html" %}
                 {% if note.get_note_type == 'Bookmark' %} 
                     <a href="{{note.social_bookmark.url}}" target="top"><img src="/site_media/img/openurl.png" class=""/></a>
                 {% endif %}
@@ -60,11 +60,45 @@
                     <a href="{{note.social_scrap.url}}" target="top"><img src="/site_media/img/openurl.png" class=""/></a>
                 {% endif %}
 </td><td class="note_table_td2">   
-    <div  id="note_desc" title="{% trans "note desc" %}">{{note.desc}}</div>		   
+ {% include "include/notes/inlines/notes_brief_desc_inline.html" %} 	   
 		    </td>             
     </div> 	        
  {% endblock %}
-        
+ 
+ 
+ 
+
+{% block full_display_div_extra %}
+{% if note.get_note_type == 'Frame'  %} 
+  <div  id="note_notes">
+             {% trans 'Notes included in this frame' %}:                
+            <ul>
+            <!--TODO: refactor-->
+            {% if user.username == note.owner.username %} 
+               {% for n in note.social_frame.get_notes_in_order %}            
+                <div linked_note_id="{{n.id}}">
+                     <li><img src="/site_media/img/{{n.get_note_type}}.png" title="{{n.get_note_type}}"/><a href="/social/{{note.owner.username}}/{{ n.get_note_bookname}}/notes/note/{{n.id}}"><strong>{% include "include/get_title.html" %}</strong></a>
+                                &nbsp;&nbsp;&nbsp;{{n.desc|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp;{{n.vote}} &nbsp;&nbsp;&nbsp;&nbsp; 
+                               
+                     </li>           
+                </div>
+		        {% endfor %}
+              {% else %}              
+               {% for n in note.social_frame.get_public_notes_in_order  %}            
+                <div linked_note_id="{{n.id}}">
+                     <li><img src="/site_media/img/{{n.get_note_type}}.png" title="{{n.get_note_type}}"/><a href="/social/{{note.owner.username}}/{{ n.get_note_bookname}}/notes/note/{{n.id}}"><strong>{% include "include/get_title.html" %}</strong></a>
+                                &nbsp;&nbsp;&nbsp;{{n.desc|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp;{{n.vote}} &nbsp;&nbsp;&nbsp;&nbsp; 
+                              
+                     </li>           
+                </div>
+		         {% endfor %}
+              {% endif %}
+		    
+            </ul>
+		    </div>
+{% endif %}   
+{% endblock %} 
+     
            
            
 

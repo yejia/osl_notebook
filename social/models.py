@@ -389,7 +389,7 @@ class Social_Frame(Social_Note):
         ns = [n for n in self.notes.all().order_by('in_frames') if n.private==False]
         if sort and sort == 'vote':
             ns.sort(key=lambda r: r.vote, reverse=True)  
-        return 
+        return ns
         
 #===============================================================================
 #    def display_notes(self):

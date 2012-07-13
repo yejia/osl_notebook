@@ -25,8 +25,8 @@
              {% if user.username == profile_username %}   
                {% for n in note.get_notes_in_order %}       
                 <div linked_note_id="{{n.id}}">
-                     <li><img src="/site_media/img/{{n.get_note_type}}.png" title="{{n.get_note_type}}"/><a href="/{{profile_username}}/{{n.get_note_bookname}}/notes/note/{{n.id}}"><strong>{{n.title|default:_('(No Title)')}}-</strong></a>
-                                &nbsp;&nbsp;&nbsp;{{n.desc|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp;{{n.vote}} &nbsp;&nbsp;&nbsp;&nbsp; 
+                     <li><img src="/site_media/img/{{n.get_note_type}}.png" title="{{n.get_note_type}}"/><a href="/{{profile_username}}/{{n.get_note_bookname}}/notes/note/{{n.id}}"><strong>{% include "include/get_title.html" %}</strong></a>
+                                &nbsp;&nbsp;&nbsp;{% include "include/get_desc_truncate.html" %}&nbsp;&nbsp;&nbsp;&nbsp;{{n.vote}} &nbsp;&nbsp;&nbsp;&nbsp; 
                                 <span title="remove this note from the frame" class="inline_delete" id="frame_delete_note">&nbsp;&nbsp;&nbsp;<!--TODO:get rid of &nbsp; use the style instead--></span>
                      </li>           
                 </div>
@@ -34,8 +34,8 @@
               {% else %}              
                {% for n in note.display_public_notes  %}            
                 <div linked_note_id="{{n.id}}">
-                     <li><img src="/site_media/img/{{n.get_note_type}}.png" title="{{n.get_note_type}}"/><a href="/{{profile_username}}/{{n.get_note_bookname}}/notes/note/{{n.id}}"><strong>{{n.title|default:_('(No Title)')}}-</strong></a>
-                                &nbsp;&nbsp;&nbsp;{{n.desc|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp;{{n.vote}} &nbsp;&nbsp;&nbsp;&nbsp; 
+                     <li><img src="/site_media/img/{{n.get_note_type}}.png" title="{{n.get_note_type}}"/><a href="/{{profile_username}}/{{n.get_note_bookname}}/notes/note/{{n.id}}"><strong>{% include "include/get_title.html" %}</strong></a>
+                                &nbsp;&nbsp;&nbsp;{% include "include/get_desc_truncate.html" %}&nbsp;&nbsp;&nbsp;&nbsp;{{n.vote}} &nbsp;&nbsp;&nbsp;&nbsp; 
                                 <!--TODO:get rid of &nbsp; use the style instead--></span>
                      </li>           
                 </div>
@@ -55,8 +55,8 @@
              {% if user.username == profile_username %} 
                {% for n in note.get_notes_in_order %}            
                 <div linked_note_id="{{n.id}}">
-                     <li><img src="/site_media/img/{{n.get_note_type}}.png" title="{{n.get_note_type}}"/><a href="/{{profile_username}}/{{n.get_note_bookname}}/notes/note/{{n.id}}"><strong>{{n.title|default:_('(No Title)')}}-</strong></a>
-                                &nbsp;&nbsp;&nbsp;{{n.desc|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp;{{n.vote}} &nbsp;&nbsp;&nbsp;&nbsp; 
+                     <li><img src="/site_media/img/{{n.get_note_type}}.png" title="{{n.get_note_type}}"/><a href="/{{profile_username}}/{{n.get_note_bookname}}/notes/note/{{n.id}}"><strong>{% include "include/get_title.html" %}</strong></a>
+                                &nbsp;&nbsp;&nbsp;{% include "include/get_desc_truncate.html" %}&nbsp;&nbsp;&nbsp;&nbsp;{{n.vote}} &nbsp;&nbsp;&nbsp;&nbsp; 
                                 <span title="remove this note from the frame" class="inline_delete" id="frame_delete_note">&nbsp;&nbsp;&nbsp;<!--TODO:get rid of &nbsp; use the style instead--></span>
                      </li>           
                 </div>
@@ -64,8 +64,8 @@
               {% else %}              
                {% for n in note.get_public_notes_in_order  %}            
                 <div linked_note_id="{{n.id}}">
-                     <li><img src="/site_media/img/{{n.get_note_type}}.png" title="{{n.get_note_type}}"/><a href="/{{profile_username}}/{{n.get_note_bookname}}/notes/note/{{n.id}}"><strong>{{n.title|default:_('(No Title)')}}-</strong></a>
-                                &nbsp;&nbsp;&nbsp;{{n.desc|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp;{{n.vote}} &nbsp;&nbsp;&nbsp;&nbsp; 
+                     <li><img src="/site_media/img/{{n.get_note_type}}.png" title="{{n.get_note_type}}"/><a href="/{{profile_username}}/{{n.get_note_bookname}}/notes/note/{{n.id}}"><strong>{% include "include/get_title.html" %}</strong></a>
+                                &nbsp;&nbsp;&nbsp;{% include "include/get_desc_truncate.html" %}&nbsp;&nbsp;&nbsp;&nbsp;{{n.vote}} &nbsp;&nbsp;&nbsp;&nbsp; 
                                <!--TODO:get rid of &nbsp; use the style instead--></span>
                      </li>           
                 </div>

@@ -72,6 +72,54 @@
             --> 
            {% endcomment %}    
            
+    
+          {% comment %}          
+           		    
+{% block full_display_div_extra %}
+{% if note.get_note_type == 'Frame'  %} 
+     <div  id="note_notes">
+             {% trans 'Notes included in this frame' %}:
+            <ul>
+            <!--TODO: refactor-->
+             {% if user.username == profile_username %} 
+               {% for n in note.frame.get_notes_in_order %}            
+                <div linked_note_id="{{n.id}}">
+                     <li><img src="/site_media/img/{{n.get_note_type}}.png" title="{{n.get_note_type}}"/><a href="/{{profile_username}}/{{n.get_note_bookname}}/notes/note/{{n.id}}"><strong>{% include "include/get_title.html" %}</strong></a>
+                                &nbsp;&nbsp;&nbsp;{% include "include/get_desc_truncate.html" %}&nbsp;&nbsp;&nbsp;&nbsp;{{n.vote}} &nbsp;&nbsp;&nbsp;&nbsp; 
+                                <span title="remove this note from the frame" class="inline_delete" id="frame_delete_note">&nbsp;&nbsp;&nbsp;<!--TODO:get rid of &nbsp; use the style instead--></span>
+                     </li>           
+                </div>
+		        {% endfor %}
+              {% else %}              
+               {% for n in note.get_public_notes_in_order  %}            
+                <div linked_note_id="{{n.id}}">
+                     <li><img src="/site_media/img/{{n.get_note_type}}.png" title="{{n.get_note_type}}"/><a href="/{{profile_username}}/{{n.get_note_bookname}}/notes/note/{{n.id}}"><strong>{% include "include/get_title.html" %}</strong></a>
+                                &nbsp;&nbsp;&nbsp;{% include "include/get_desc_truncate.html" %}&nbsp;&nbsp;&nbsp;&nbsp;{{n.vote}} &nbsp;&nbsp;&nbsp;&nbsp; 
+                               <!--TODO:get rid of &nbsp; use the style instead--></span>
+                     </li>           
+                </div>
+		         {% endfor %}
+              {% endif %}
+		    
+            </ul>
+    </div>
+
+    <div>
+                <div  id="note_add_notes">
+                    {% if user.username == profile_username %}
+                        <span class="editable">
+                        <span  class="included_notes_edit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <input type="text" name="included_notes_added" id="update_included_notes_inline_box"  style="display: none;"   placeholder="{% trans "Enter comma separated note ids" %}"/>
+                       {% trans 'add more notes to the frame' %} 
+                        <a href="javascript:alert('{% trans "Enter comma separated note ids. And those notes will be included in this frame." %}');">
+                            <img src="/media/img/admin/icon-unknown.gif"/>
+                        </a>
+                        </span>
+                    {% endif %}
+        </div>
+{% endif %}   
+{% endblock %} 	
+                  {% endcomment %}    
           
            
        
