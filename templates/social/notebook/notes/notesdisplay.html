@@ -77,7 +77,7 @@
             {% if user.username == note.owner.username %} 
                {% for n in note.social_frame.get_notes_in_order %}            
                 <div linked_note_id="{{n.id}}">
-                     <li><img src="/site_media/img/{{n.get_note_type}}.png" title="{{n.get_note_type}}"/><a href="/social/{{note.owner.username}}/{{ n.get_note_bookname}}/notes/note/{{n.id}}"><strong>{% include "include/get_title.html" %}</strong></a>
+                     <li><img src="/site_media/img/{{n.get_note_type}}.png" title="{{n.get_note_type}}"/><a href="/social/{{note.owner.username}}/{{ n.get_note_bookname}}/notes/note/{{n.id}}"><strong>{% with n as note%}{% include "include/get_title.html" %}{%endwith%}</strong></a>
                                 &nbsp;&nbsp;&nbsp;{{n.desc|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp;{{n.vote}} &nbsp;&nbsp;&nbsp;&nbsp; 
                                
                      </li>           
@@ -86,7 +86,7 @@
               {% else %}              
                {% for n in note.social_frame.get_public_notes_in_order  %}            
                 <div linked_note_id="{{n.id}}">
-                     <li><img src="/site_media/img/{{n.get_note_type}}.png" title="{{n.get_note_type}}"/><a href="/social/{{note.owner.username}}/{{ n.get_note_bookname}}/notes/note/{{n.id}}"><strong>{% include "include/get_title.html" %}</strong></a>
+                     <li><img src="/site_media/img/{{n.get_note_type}}.png" title="{{n.get_note_type}}"/><a href="/social/{{note.owner.username}}/{{ n.get_note_bookname}}/notes/note/{{n.id}}"><strong>{% with n as note%}{% include "include/get_title.html" %}{%endwith%}</strong></a>
                                 &nbsp;&nbsp;&nbsp;{{n.desc|truncatewords:"20" }}&nbsp;&nbsp;&nbsp;&nbsp;{{n.vote}} &nbsp;&nbsp;&nbsp;&nbsp; 
                               
                      </li>           
