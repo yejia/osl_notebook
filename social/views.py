@@ -337,8 +337,8 @@ def notes(request, username, bookname):
     folders = F.objects.filter(private=False).order_by('name') 
     
     profile_member = Member.objects.get(username=username)
-    
-    return render_to_response('social/include/notes/notes.html', {'note_list':paged_notes,'sort':sort, 'bookname':bookname, \
+    pick_lang =  request.GET.get('pick_lang') 
+    return render_to_response('social/include/notes/notes.html', {'note_list':paged_notes,'sort':sort, 'bookname':bookname, 'pick_lang':pick_lang, \
                                'folders':folders, 'profile_username':username, 'profile_member':profile_member, 'appname':'social', 'cl':cl},\
                                                   context_instance=RequestContext(request,  {'book_uri_prefix':'/social/'+username}))
 
