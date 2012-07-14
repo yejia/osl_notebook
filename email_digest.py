@@ -10,9 +10,9 @@ from env_settings import HOME_PATH
 
 sys.path.append(HOME_PATH)
 
-from django.core import management; import notebook; import notebook.settings as settings;management.setup_environ(settings)
+#from django.core import management; import notebook; import notebook.settings as settings;management.setup_environ(settings)
 
-import settings
+#import settings
 
 from django.utils.translation import ugettext as _ , activate, get_language
 #import gettext
@@ -159,7 +159,7 @@ def send_digest(username, freq):
     member = Member.objects.get(username=username)
     #print 'Getting groups for member:', member.username
     #pick_lang = (member.default_lang)?(member.default_lang=='E'? 'E':'C') : 'E' 
-    pick_lang = settings.LANGUAGE_CODE
+    pick_lang = 'zh-cn'
     if member.default_lang:        
          pick_lang = member.default_lang    
          activate(pick_lang)   
