@@ -366,15 +366,28 @@ class Note(models.Model):
             return 0 #not related at all. May raise an error here TODO:
         direct_parent = tag_list[-2]
         if direct_parent in self.get_tags():
-            relevance += 1
+            relevance += 10
         
         ptf = Tag_Frame.objects.using(self.owner_name).get(name=direct_parent)
         ptf.owner_name = self.owner_name
         #print 'ptf.get_siblings(tag_name)', ptf.get_siblings(tag_name)
         for sib in ptf.get_siblings(tag_name):
             if sib in self.get_tags():
-                relevance += 1
+                relevance += 5
         
+        #TODO: checking for cousins.
+        #check for uncles
+        grandparent_list = tag_list[:-2]
+        grandparent_list.reverse()
+        for i, grandparent in enumerate(grandparent_list):
+            child_tag_name = tag_list[-i-2]
+            gtf = Tag_Frame.objects.using(self.owner_name).get(name=grandparent)
+            #print 'child_tag_name:', child_tag_name, 'gtf', gtf
+            gtf.owner_name = self.owner_name
+            for sib in gtf.get_siblings(child_tag_name):
+                if sib in self.get_tags():
+                    relevance += len(tag_list) - i #check if always > 0
+            
         return relevance    
     
     

@@ -124,12 +124,16 @@ class Tag_Frame(Tag):
         return ts    
     
     
+    #TODO:get children and grandchildren under direct siblings as well
     def get_siblings(self, tag_name):
         #print 'self.get_tags_in_order()', self.get_tags_in_order()
         tag_names = [tag.name for tag in self.get_tags_in_order()]        
         tag_names.remove(tag_name)
         return tag_names
      
+     
+   
+        
      
     def add_tags(self, tag_names_str):
         tag_name_list = [tag_name.lstrip().rstrip() for tag_name in tag_names_str.split(',')]        
@@ -143,6 +147,7 @@ class Tag_Frame(Tag):
                 ft._order=current_num_of_tags
                 current_num_of_tags += 1   
                  
+       
              
        
 class Frame_Tags(models.Model):
