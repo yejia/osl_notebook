@@ -2,10 +2,10 @@ from django import template
 
 register = template.Library()
 
-from snippets.models import Snippet
-from bookmarks.models import Bookmark
-from scraps.models import Scrap
-from notes.models import Frame, Note
+from notebook.snippets.models import Snippet
+from notebook.bookmarks.models import Bookmark
+from notebook.scraps.models import Scrap
+from notebook.notes.models import Frame, Note
 
 from notebook.notes.constants import *
 
