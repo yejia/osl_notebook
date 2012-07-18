@@ -941,7 +941,7 @@ def __get_notes_context(request, note_list):
     elif date_range == 'this_year':  
         note_list = note_list.filter(init_date__year= now.year) 
     
-    print 'step 4, length of note_list', len(note_list)
+    #print 'step 4, length of note_list', len(note_list)
     
     #print 'after date_range:', len(note_list)
         

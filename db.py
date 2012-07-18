@@ -13,6 +13,8 @@ from django.contrib.auth.models import User
 from django.db.utils import ConnectionDoesNotExist
 from django.core.exceptions import ObjectDoesNotExist
 
+from django.db import connections,  transaction
+
 
 
 from notebook.notes.util import getNote, getFrame
@@ -112,8 +114,24 @@ def sync_all_dbs():
 def rename_tag_table():
     users = User.objects.all()
     for user in users:
+       print 'For user', user.username
        try:
-         
+           cursor = connections[user.username].cursor()
+           cursor.execute('ALTER TABLE notes_tag RENAME TO tags_tag')          
+           transaction.commit_unless_managed()
+       except Exception as inst:
+           print type(inst)
+           print inst.args
+           print inst
+       try:
+           cursor.execute('ALTER TABLE tags_tag ADD COLUMN desc text;')
+           transaction.commit_unless_managed()
+
+       except Exception as inst:
+           print type(inst)
+           print inst.args
+           print inst
+           
 
 
 
@@ -128,5 +146,7 @@ if __name__ == "__main__":
     if name == 'cleanup_tags':
         cleanup_tags()  
     if name == 'sync_all_dbs':
-        sync_all_dbs()            
+        sync_all_dbs() 
+    if name == 'rename_tag_table':
+        rename_tag_table()           
     sys.exit(0)      
