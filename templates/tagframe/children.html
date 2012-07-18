@@ -10,8 +10,9 @@
                 {{tag.name}}      
                 </a> 
                 </span>
-                <span title="remove this" class="inline_delete" id="tag_frame_remove">&nbsp;&nbsp;&nbsp;</span>
-                    
+                 {% if  username == profile_username %}
+                <span title="{% trans 'remove this' %}" class="inline_delete" id="tag_frame_remove">&nbsp;&nbsp;&nbsp;</span>
+                  {% endif %}   
                 
                 
                 {% if tag.get_tag_type == 'Nonleaf' %}  
