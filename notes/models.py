@@ -364,9 +364,12 @@ class Note(models.Model):
         if not tag_name in self.get_tags():
             #print 'tag not in the note tags, return 0'
             return 0 #not related at all. May raise an error here TODO:
+        
+        
+        #merge code of direct parent with grand parents?TODO:
         direct_parent = tag_list[-2]
         if direct_parent in self.get_tags():
-            relevance += 10
+            relevance += 10 * tag_list.index(direct_parent)
         
         ptf = Tag_Frame.objects.using(self.owner_name).get(name=direct_parent)
         ptf.owner_name = self.owner_name
@@ -380,6 +383,8 @@ class Note(models.Model):
         grandparent_list = tag_list[:-2]
         grandparent_list.reverse()
         for i, grandparent in enumerate(grandparent_list):
+            if grandparent in self.get_tags():
+                relevance += 10 * tag_list.index(grandparent)
             child_tag_name = tag_list[-i-2]
             gtf = Tag_Frame.objects.using(self.owner_name).get(name=grandparent)
             #print 'child_tag_name:', child_tag_name, 'gtf', gtf
