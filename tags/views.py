@@ -123,7 +123,7 @@ def remove_frame(request, username):
     return HttpResponse('successful', mimetype="text/plain") 
 
 
-from notes.views import tags
+from notebook.notes.views import tags
 
 def notes_by_tag(request, username, tag_path, bookname):   
     tag_list = tag_path.split('-')
