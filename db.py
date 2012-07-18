@@ -109,6 +109,14 @@ def sync_all_dbs():
         
 
 
+def rename_tag_table():
+    users = User.objects.all()
+    for user in users:
+       try:
+         
+
+
+
 if __name__ == "__main__":
     name = sys.argv[1]
     if name == 'build_linkage_tags':

@@ -362,7 +362,7 @@ class Note(models.Model):
         relevance = 0
         #check if this note really has tag_name as its tag.
         if not tag_name in self.get_tags():
-            print 'tag not in the note tags, return 0'
+            #print 'tag not in the note tags, return 0'
             return 0 #not related at all. May raise an error here TODO:
         direct_parent = tag_list[-2]
         if direct_parent in self.get_tags():
@@ -370,11 +370,11 @@ class Note(models.Model):
         
         ptf = Tag_Frame.objects.using(self.owner_name).get(name=direct_parent)
         ptf.owner_name = self.owner_name
-        print 'ptf.get_siblings(tag_name)', ptf.get_siblings(tag_name)
+        #print 'ptf.get_siblings(tag_name)', ptf.get_siblings(tag_name)
         for sib in ptf.get_siblings(tag_name):
             if sib in self.get_tags():
                 relevance += 1
-        print 'relevance computed', relevance    
+        
         return relevance    
     
     

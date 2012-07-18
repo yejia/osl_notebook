@@ -354,20 +354,20 @@ def index(request, username, bookname):
     connection.queries = []
     
     note_list = N.objects.all()  
-    print 'length of note_list', len(note_list)
+    
     
     if request.user.username != username:
         log.info('Not the owner of the notes requested, getting public notes only...')
         note_list = get_public_notes(note_list)
 
-    print 'step 2, length of note_list', len(note_list)
+    
     
     qstr = __getQStr(request)
     
     note_list  = getSearchResults(note_list, qstr, search_fields_dict.get(bookname))
     #TODO: use regex, also T and Tag
     
-    print 'step 3, length of note_list', len(note_list) 
+    
     
     T = getT(username)
     default_tag_id = T.objects.get(name='untagged').id    
@@ -888,8 +888,8 @@ def __get_notes_context(request, note_list):
     day =    theme['day']
     week =    theme['week']
     
-    print 'month:',month, ' year:',year
-    print 'day:',day, ' week:',week
+    #print 'month:',month, ' year:',year
+    #print 'day:',day, ' week:',week
     
     if delete in true_words:
         note_list = note_list.filter(deleted=True)
@@ -978,7 +978,7 @@ def __get_notes_context(request, note_list):
             item[0].relevance = item[1] 
         sorted_note_list = [r[0] for r in sorted_notes]
    
-    print 'step 8, length of note_list', len(sorted_note_list)
+    #print 'step 8, length of note_list', len(sorted_note_list)
     
    
     list_per_page = 30

@@ -126,8 +126,7 @@ class Tag_Frame(Tag):
     
     def get_siblings(self, tag_name):
         #print 'self.get_tags_in_order()', self.get_tags_in_order()
-        tag_names = [tag.name for tag in self.get_tags_in_order()]
-        print 'tag_names', tag_names
+        tag_names = [tag.name for tag in self.get_tags_in_order()]        
         tag_names.remove(tag_name)
         return tag_names
      

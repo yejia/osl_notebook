@@ -91,7 +91,7 @@ def add_tag_frame(request, username):
             f.save()  
     #tf.save()
     parent_name =  post.get('parent_name')
-    print 'parent:', parent_name
+    #print 'parent:', parent_name
     if parent_name:
         parent_node = TF.objects.get(name=parent_name)
         FTS = getFrameTags(username)

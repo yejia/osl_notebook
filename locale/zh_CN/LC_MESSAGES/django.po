@@ -1772,7 +1772,7 @@ msgstr "隐藏缓存区"
 
 #: templates/include/notes/notes_display.html:69
 msgid "relevance"
-msgstr ""
+msgstr "相关性"
 
 #: templates/include/notes/notes_display.html:179
 msgid "top"
@@ -1944,7 +1944,7 @@ msgstr "增加评论"
 #: templates/include/notes/menu/sort_menu.html:10
 #: templates/include/notes/menu/sort_menu.html:12
 msgid "By Relevance"
-msgstr ""
+msgstr "根据相关性"
 
 #: templates/include/notes/menu/sort_menu.html:18
 #: templates/include/notes/menu/sort_menu.html:20
