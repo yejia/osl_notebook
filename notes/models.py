@@ -13,6 +13,7 @@ from django.utils.translation import ugettext as _
 
 from notebook.social.models import Social_Note, Social_Tag, Social_Snippet, Social_Bookmark, Social_Scrap, Social_Frame, Social_Frame_Notes
 from notebook.notes.constants import *
+from notebook.tags.models import Tag, Tag_Frame
 
 
 standalone = False
@@ -38,6 +39,7 @@ log = getlogger('notes.models')
 #TODO:move to util.py
 def getT(username):
     return create_model("T_"+str(username), Tag, username)
+
 
 def getL(username):
     return create_model("L_"+str(username), LinkageNote, username)
@@ -120,38 +122,6 @@ def getNC(username):
 
 
 
-#TODO: add delete field? add desc field?
-class Tag(models.Model):
-    name = models.CharField(max_length=150)
-    private = models.BooleanField(default=False)
-#===============================================================================
-#    desc =  models.TextField(blank=True, max_length=200)
-#    deleted = models.BooleanField(default=False)
-#===============================================================================
-    
-    
-    
-    
-    #tag_id = models.IntegerField()
-    #user = models.ForeignKey(User)
-#    if not standalone:
-#        objects = MultiUserManager(owner_name)
-
-    class Meta:
-        unique_together = (("name"),)           
-        ordering = ['name']
-
-    def __unicode__(self):
-        return self.name
-
-    def get_working_sets(self):
-        return self.workingset_set.filter(deleted=False)
-    
-    def get_working_sets_list(self):
-        return self.get_working_sets.values_list('name', flat=True)
-
-
-
              
 #===============================================================================
 # 
@@ -165,57 +135,6 @@ class Tag(models.Model):
 #        
 #===============================================================================
 
-#TODO: remove WorkingSet later
-
-#class Frame is for notes. And Tag_Frame is for putting tags in a frame
-#===============================================================================
-# class Tag_Frame(Tag):
-#    tags = models.ManyToManyField(Tag, through="Frame_Tags")     
-#    #TODO: at the most only one can have this to be true per user
-#    current = models.BooleanField(default=False) 
-#    
-#    class Meta:
-#        verbose_name = "tag frame"    
-#===============================================================================
-    
-    
-#===============================================================================
-#    
-#    #replace the original get_frame_notes_order coming with the django model for order_with_respect_to 
-#    def get_tags_order(self):  
-#        id = self.id      
-#        fts = Frame_Tags.objects.using(self.owner_name).filter(frame__id=self.id).order_by('id')
-#        fts_list = [ft for ft in fts]
-#        for ft in fts:
-#            ft.owner_name = self.owner_name
-#        if None in [ft._order for ft in fts]:
-#            return [ft.tag.id for ft in fns]
-#        else:
-#            
-#            fts_list.sort(key=lambda r: r._order)            
-#            return [ft.tag.id for ft in fts_list]
-#            
-# 
-# 
-#    def set_tags_order(self, order):        
-#        seq = 0
-#        for note_id in order:
-#            ft = Frame_Tags.objects.using(self.owner_name).get(frame__id=self.id, tag__id=tag_id)
-#            ft.owner_name = self.owner_name
-#            ft._order = seq            
-#            ft.save()
-#            seq = seq + 1
-#        self.save() #save the order to the social note
-#             
-#       
-# class Frame_Tags(models.Model):
-#    frame = models.ForeignKey(Tag_Frame) #TODO:
-#    tag = models.ForeignKey(Tag)
-#    
-#    class Meta:
-#        order_with_respect_to = 'frame'
-#    
-#===============================================================================
 
 
 
@@ -436,6 +355,27 @@ class Note(models.Model):
             return self.desc
     
     
+    
+    def get_relevance(self, tag_path):
+        tag_list = tag_path.split('-')
+        tag_name = tag_list[-1]
+        relevance = 0
+        #check if this note really has tag_name as its tag.
+        if not tag_name in self.get_tags():
+            print 'tag not in the note tags, return 0'
+            return 0 #not related at all. May raise an error here TODO:
+        direct_parent = tag_list[-2]
+        if direct_parent in self.get_tags():
+            relevance += 1
+        
+        ptf = Tag_Frame.objects.using(self.owner_name).get(name=direct_parent)
+        ptf.owner_name = self.owner_name
+        print 'ptf.get_siblings(tag_name)', ptf.get_siblings(tag_name)
+        for sib in ptf.get_siblings(tag_name):
+            if sib in self.get_tags():
+                relevance += 1
+        print 'relevance computed', relevance    
+        return relevance    
     
     
 #Not used.    

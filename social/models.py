@@ -137,7 +137,8 @@ class Social_Tag(models.Model):
     def __unicode__(self):
         return self.name
 
-
+    
+    #TODO:below not working. Remove
     def get_social_snippet(self):
         return self.social_social_snippet_related.all().count()
 

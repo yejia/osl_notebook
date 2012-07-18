@@ -64,6 +64,12 @@
             {% endif %}
             <span id="note_rank" title="{% trans "Importance"  %}">{{note.vote}}</span>
 		    </span>
+            
+            {% if request.appname == 'tagframe' %}
+                  <span id="note_relevance" title="{% trans "relevance"  %}" class="relevance">{{note.relevance}}</span>
+		    </span>
+            {% endif %}
+            
              {% if user.username == profile_username %}  
 		    <span class="delete_img hover" title="{% trans "soft delete" %}"><img src="/site_media/img/delete.png"/></span><!--TODO:move delete to css as background img-->
 		    {% endif %}

@@ -69,6 +69,9 @@ def create_db(username):
     #print 'command_to_run ', command_to_run
     os.system(command_to_run)
 
+    #as the last resort, put this at the end or registration code to restart the server 
+    #os.system(command_to_restart_server)  
+
     #print 'execute syncdb with shell'
     #os.system('python manage.py syncdb --database='+username)
     

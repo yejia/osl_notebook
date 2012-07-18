@@ -1,0 +1,64 @@
+{% load i18n %}
+{% load tree_view %}  
+ 
+
+        {% for tag in children %} 
+            <li class="tag_in_frame {% if tag.get_tag_type == 'Nonleaf' %}expandable{% endif %}" tag_name="{{tag.name}}"  parent_name="{{frame}}">
+                {% if tag.get_tag_type == 'Nonleaf' %}<div class="hitarea expandable-hitarea"></div>{% endif %}
+                <span class='noPrint'>                
+                <a href="javascript:void();" title="{{tag.desc|default:''}}">
+                {{tag.name}}      
+                </a> 
+                </span>
+                <span title="remove this" class="inline_delete" id="tag_frame_remove">&nbsp;&nbsp;&nbsp;</span>
+                    
+                
+                
+                {% if tag.get_tag_type == 'Nonleaf' %}  
+                    <ul style="display: none;">                                       
+                            {% tag_tree_view_tag tag.tag_frame %}                     
+                    </ul> 
+                {% endif %}
+                
+                
+                {% if tag.get_tag_type == 'Leaf' %}  <span>{% trans 'View' %}</span>
+                    <ul style="display: none;">                                       
+                          <li><span class="notes_by_tag clickable" bookname="snippetbook" title="{% trans 'Snippets' %}"><img src="/site_media/img/Snippet.png" />{% comment %} TODO: think of applying other viewing mode filtering   {% endcomment %}
+                         
+                          {% if  username == profile_username and private in all_words %} {{tag.snippets_count}}   {% else %} {{tag.public_snippets_count}}  {% endif %}</span>
+                          </li>       
+                          <li ><span class="notes_by_tag clickable" bookname="bookmarkbook"><img src="/site_media/img/Bookmark.png" />   
+                        {% if  username == profile_username and private in all_words %}    {{tag.bookmarks_count}}   {% else %} {{tag.public_bookmarks_count}}  {% endif %}</span> 
+                          </li>
+                          <li><span class="notes_by_tag clickable" bookname="scrapbook"><img src="/site_media/img/Scrap.png" />
+                           {% if  username == profile_username and private in all_words %}  {{tag.scraps_count}}   {% else %} {{tag.public_scraps_count}}  {% endif %}</span> 
+                          </li>
+                          <li><span class="notes_by_tag clickable" bookname="framebook"><img src="/site_media/img/Frame.png" />
+                           {% if  username == profile_username and private in all_words %}  {{tag.frames_count}}   {% else %} {{tag.public_frames_count}}  {% endif %}</span> 
+                          </li>         
+                          <li><span class="notes_by_tag clickable" bookname="notebook">{% trans 'All' %}
+                            {% if  username == profile_username and private in all_words %}   {{tag.notes_count}}   {% else %} {{tag.public_notes_count}}  {% endif %}</span>
+                          </li>                          
+                    </ul> 
+                {% endif %}
+                
+                
+            </li>
+        {% endfor %}
+        
+        
+          <li class="last expandable" parent_name="{{frame}}">
+              <span class="tag_frame_add" title="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
+              <ul  style="display: none;">
+                    <li>
+                      <span class="toggle_add_frame">
+                        <span class="clickable"><img src="/site_media/img/Frame.png" /></span>                    
+                    <!--<span class="show_form_section"><img title="{% trans "Show tags" %}" src="/site_media/img/right-arrow.jpg" class="clickable"/></span>                     
+                                <span class="hide_form_section"><img title="{% trans "Hide tags" %}" src="/site_media/img/down-arrow.jpg" class="clickable" /></span> -->
+                       </span>                        
+                    </li>
+                    <li class="last"><span class="toggle_add_tags_to_frame clickable"><img src="/site_media/img/tags-small.png"/></span>
+                    </li>                    
+              </ul> 
+            </li>
+        

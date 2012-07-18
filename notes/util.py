@@ -46,4 +46,15 @@ from notebook.notes.models import Note_Translation
 def getNoteTranslation(username):
     return create_model("Note_Trans_"+str(username), Note_Translation, username) 
 
+from notebook.tags.models import Tag_Frame
+def getTagFrame(username):
+    return create_model("Tag_Frame"+str(username), Tag_Frame, username) 
+
+from notebook.tags.models import Frame_Tags
+def getFrameTags(username):
+    return create_model("Frame_Tags"+str(username), Frame_Tags, username) 
+
+
+
+
 

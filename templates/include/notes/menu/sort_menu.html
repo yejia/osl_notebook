@@ -4,6 +4,16 @@
 <!--TODO: think of using jquery to do this-->
 {% trans "Sorting" %}
 <select id="sort_drop_down"  name="sort">
+
+{% if request.appname == 'tagframe' %}
+{% if sort == 'relevance' %}
+<option value="relevance" selected="selected">{% trans "By Relevance" %}</option>
+{% else %}
+<option value="relevance">{% trans "By Relevance" %}</option>
+{% endif %}
+{% endif %}
+
+
 {% if sort == 'init_date' %}
 <option value="init_date" selected="selected">{% trans "By Creation Date" %}</option>
 {% else %}

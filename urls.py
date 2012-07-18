@@ -104,7 +104,30 @@ urlpatterns = patterns('',
     (r'^social/(?P<username>[^/]+)/(?P<bookname>[^/]+)/folders/(?P<foldername>[^/]+)/$', 'notebook.social.views.folders'),
 
 
-    #TODO: seems to be matching too many things 
+ 
+
+
+    (r'^(?P<username>[^/]+)/tagframe/$', 'notebook.tags.views.index'),
+    (r'^(?P<username>[^/]+)/tagframe/addTagFrame/$', 'notebook.tags.views.add_tag_frame'),
+    (r'^(?P<username>[^/]+)/tagframe/addTags2Frame/$', 'notebook.tags.views.add_tags_2_frame'),
+    (r'^(?P<username>[^/]+)/tagframe/removeFrame/$', 'notebook.tags.views.remove_frame'),
+    (r'^(?P<username>[^/]+)/tagframe/(?P<tag_path>[^/]+)/(?P<bookname>[^/]+)/notes/$', 'notebook.tags.views.notes_by_tag'),
+
+
+    #below dupldate a lot with patterns in 'notebook.notes.urls', refactor TODO:
+    (r'^(?P<username>[^/]+)/tagframe/(.*)/(?P<bookname>[^/]+)/notes/updateNoteInline/$','notebook.notes.views.update_note_inline'),
+    (r'^(?P<username>[^/]+)/tagframe/(.*)/(?P<bookname>[^/]+)/notes/updateNoteTagsInline/$','notebook.notes.views.update_note_tags_inline'),
+    (r'^(?P<username>[^/]+)/tagframe/(.*)/(?P<bookname>[^/]+)/notes/addComment/$','notebook.notes.views.add_comment'),
+    (r'^(?P<username>[^/]+)/tagframe/(.*)/(?P<bookname>[^/]+)/notes/deleteComment/$','notebook.notes.views.delete_comment'),
+    (r'^(?P<username>[^/]+)/tagframe/(.*)/(?P<bookname>[^/]+)/notes/makePrivate/$','notebook.notes.views.make_private'),
+    (r'^(?P<username>[^/]+)/tagframe/(.*)/(?P<bookname>[^/]+)/notes/makePublic/$','notebook.notes.views.make_public'),
+    
+    (r'^(?P<username>[^/]+)/tagframe/(.*)/(?P<bookname>[^/]+)/notes/voteUpNote/$','notebook.notes.views.vote_up_note'), 
+    (r'^(?P<username>[^/]+)/tagframe/(.*)/(?P<bookname>[^/]+)/notes/voteDownNote/$','notebook.notes.views.vote_down_note'),
+    (r'^(?P<username>[^/]+)/tagframe/(.*)/(?P<bookname>[^/]+)/notes/deleteNote/$','notebook.notes.views.delete_note'),
+    (r'^(?P<username>[^/]+)/tagframe/(.*)/(?P<bookname>[^/]+)/notes/addNote/$','notebook.notes.views.add_note'),    
+
+   #TODO: seems to be matching too many things 
     (r'^(?P<username>[^/]+)/(?P<bookname>[^/]+)/',include('notebook.notes.urls')),
 
 

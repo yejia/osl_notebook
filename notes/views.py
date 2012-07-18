@@ -354,20 +354,27 @@ def index(request, username, bookname):
     connection.queries = []
     
     note_list = N.objects.all()  
+    print 'length of note_list', len(note_list)
     
     if request.user.username != username:
         log.info('Not the owner of the notes requested, getting public notes only...')
         note_list = get_public_notes(note_list)
 
+    print 'step 2, length of note_list', len(note_list)
+    
     qstr = __getQStr(request)
     
     note_list  = getSearchResults(note_list, qstr, search_fields_dict.get(bookname))
     #TODO: use regex, also T and Tag
     
+    print 'step 3, length of note_list', len(note_list) 
     
     T = getT(username)
     default_tag_id = T.objects.get(name='untagged').id    
     context = __get_context(request, note_list, default_tag_id, username, bookname)
+    
+    
+    
     
     folders = context.get('folders') #TODO: if folders is empty
     folder_values, is_in_folders, current_folder = __get_folder_context(folders, qstr)
@@ -790,7 +797,7 @@ def included_notes_in_linkage(request, linkage_id, username, bookname):
 def __get_context(request, note_list,default_tag_id, username, bookname, aspect_name='notes'):  
     theme = __get_view_theme(request)
     in_linkage = theme['in_linkage'] #TODO:get rid of
-    if in_linkage in ['All', 'all']:
+    if in_linkage in all_words:
         pass
     elif in_linkage in true_words:
         note_list = note_list.filter(linkagenote__isnull=False)
@@ -832,13 +839,14 @@ def __get_context(request, note_list,default_tag_id, username, bookname, aspect_
     
     pick_lang =  request.GET.get('pick_lang') 
     return  {'note_list': paged_notes, 'tags':tags, 'view_mode':view_mode,
-                   'delete':delete, 'private':private, 'day':now.day, 'month':now.month, 'year':now.year,
+                   'delete':delete, 'private':private, 
+                   'day':now.day, 'month':now.month, 'year':now.year, #day, month, year current are not planed to be used in filtering in the UI, although you can use it by youself
                    'addnote_mode':addnote_mode,'sort':sort, #'addNoteForm': addNoteForm,
 		   'addLinkNoteForm':AddLinkageNoteForm(),'folders':folders, 'caches':caches, 
 		   'next_cache_id':next_cache_id, 'show_notes_mode':show_notes_mode, 'show_caches_mode':show_caches_mode,'cl':cl, 
            'profile_username':username, 'date_range':date_range, 'order_type':order_type, 'in_linkage':in_linkage, 
            'with_attachment':with_attachment, 'users':User.objects.all(), 'wss':wss, 'current_ws':request.session.get("current_ws", None),
-           'pick_lang':pick_lang
+           'pick_lang':pick_lang, 'true_words':true_words, 'all_words':all_words, 'false_words':false_words
            }      
     
 
@@ -880,8 +888,8 @@ def __get_notes_context(request, note_list):
     day =    theme['day']
     week =    theme['week']
     
-    #print 'month:',month, ' year:',year
-    #print 'day:',day, ' week:',week
+    print 'month:',month, ' year:',year
+    print 'day:',day, ' week:',week
     
     if delete in true_words:
         note_list = note_list.filter(deleted=True)
@@ -893,27 +901,27 @@ def __get_notes_context(request, note_list):
             note_list = note_list.filter(private=True)
     elif private in false_words:          
             note_list = note_list.filter(private=False) 
-    elif private in ['All', 'all']:
+    elif private in all_words:
         pass
     else:
         pass           
         
     now = date.today()
-    if month in ['All', 'all']:
+    if month in all_words:
         pass
     else:
         note_list = note_list.filter(init_date__month=month, init_date__year= now.year) 
     #print   'after month, note_list:',len(note_list)  
-    if year in ['All', 'all']:
+    if year in all_words:
         pass
     else:
         note_list = note_list.filter(init_date__year= year) 
     #print   'after year, note_list:',len(note_list)
-    if day in ['All', 'all']:
+    if day in all_words:
         pass
     else:
         note_list = note_list.filter(init_date__day= day, init_date__month=now.month, init_date__year= now.year)      
-    if week in ['All', 'all']:
+    if week in all_words:
         pass
     elif week=='this': #TODO:
         one_week_ago = now - datetime.timedelta(days=7)
@@ -921,7 +929,7 @@ def __get_notes_context(request, note_list):
                                             )    
     #print 'date_range:', date_range
     #print 'before date_range:', len(note_list)
-    if date_range in ['All', 'all']:
+    if date_range in all_words:
         pass
     elif date_range == 'today':
         note_list = note_list.filter(init_date__day= now.day, init_date__month=now.month, init_date__year= now.year) 
@@ -933,9 +941,11 @@ def __get_notes_context(request, note_list):
     elif date_range == 'this_year':  
         note_list = note_list.filter(init_date__year= now.year) 
     
+    print 'step 4, length of note_list', len(note_list)
+    
     #print 'after date_range:', len(note_list)
         
-    if with_attachment in ['All', 'all']:
+    if with_attachment in all_words:
         pass
     elif with_attachment in true_words:
         try:
@@ -943,7 +953,7 @@ def __get_notes_context(request, note_list):
         except FieldError:
             pass  #bookmarks and scraps do not have attachment. TODO: other ways to tell if the field is there  
     
-    order_type = request.GET.get('order_type','desc')  
+    order_type = request.GET.get('order_type','-init_date')  
     
     
     
@@ -952,14 +962,24 @@ def __get_notes_context(request, note_list):
     if order_field == 'usefulness': #and isinstance(note_list, QuerySet):
         order_field = 'init_date'
     
+    #order_field that was set when triggering notes list view for tagframe app need to be reset
+    if order_field == 'relevance' and not (hasattr(request,'appname') and request.appname == 'tagframe'):
+        order_field = '-init_date'  
+    
 #    sorted_note_list = note_list    
-#    if order_field != 'usefulness':  
-    sorted_note_list = note_list.order_by('%s%s' % ((order_type == 'desc' and '-' or ''), order_field),'-init_date','desc') 
-#    else:       
-#        #Social_Note has usefulness
-#        sorted_notes = [(note, note.get_usefulness()) for note in note_list]   
-#        sorted_notes.sort(key=lambda r: r[1],reverse = (order_type == 'desc' and True or False))  
-#        sorted_note_list = [r[0] for r in sorted_notes]
+    if order_field != 'relevance':  
+        sorted_note_list = note_list.order_by('%s%s' % ((order_type == 'desc' and '-' or ''), order_field),'-init_date','desc') 
+    else:   
+        #sort by relevance
+        log.debug('sorty by relevance under tag path:'+request.tag_path)
+        sorted_notes = [(note, note.get_relevance(request.tag_path)) for note in note_list]   
+        sorted_notes.sort(key=lambda r: r[1],reverse = True) 
+        for item  in sorted_notes:
+            item[0].relevance = item[1] 
+        sorted_note_list = [r[0] for r in sorted_notes]
+   
+    print 'step 8, length of note_list', len(sorted_note_list)
+    
    
     list_per_page = 30
     paginator = Paginator(sorted_note_list, list_per_page) 

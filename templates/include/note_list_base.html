@@ -147,6 +147,13 @@
      //TODO:make it work when the textarea is still focused (without having to leave the textarea input box first)
       $("*").bind('keydown', 'alt+s', addNote);
       //$('div.addnote #id_desc').bind('keydown', 'alt+s', addNote);
+      
+       $("*").bind('keydown', 'alt+p', showDisplayMode);
+       
+       function showDisplayMode(){
+            $("#display_mode").toggle();     
+       
+       }
      
        function addNote(){              
             desc = $('#id_desc').val();         
@@ -550,7 +557,9 @@
          
             $('ul#ac_tags').find('li.tagit-choice').each(function(){               
                    	   // alert('find a tag:'+$(this).find(':input').val());
+                       if ($(this).attr('checked')==true){	
                             selected_tags.push($(this).find(':input').val());	
+                        }
                     			
 		     });	
           // alert('selected_tags is:'+selected_tags );        
@@ -1727,21 +1736,19 @@ jQuery('.note_display').accordion({
 <div id="content-related" class="noPrint"> 
 
 
+<div id="display_mode"  style="display:none">
 
-
-{% comment%}
-<!--
 {% if user.username == profile_username %}
 
 
         <h4>{% trans "Delete" %}</h4>     
-        {% if delete == 'True' %}
+        {% if delete  in true_words  %}
              <span style="font-size:15px">{% trans "Yes" %}</span><br/>
         {% else %}
             <a href="?delete=True">{% trans "Yes" %}</a><br/>        
         {% endif %}    
 
-        {% if delete == 'False' %}
+        {% if delete in false_words %}
              <span style="font-size:15px">{% trans "No" %}</span><br/>
         {% else %}
              <a href="?delete=False">{% trans "No" %}</a><br/>        
@@ -1750,19 +1757,19 @@ jQuery('.note_display').accordion({
            
 
         <h4>{% trans "Private" %}</h4>  
-        {% if private == 'All' %}
+        {% if private in all_words %}
              <span style="font-size:15px">{% trans "All" %}</span><br/>
         {% else %}
             <a href="?private=All">{% trans "All" %}</a><br/>         
         {% endif %}
         
-        {% if private == 'True' %}
+        {% if private  in true_words  %}
              <span style="font-size:15px">{% trans "Yes" %}</span><br/>
         {% else %}
             <a href="?private=True">{% trans "Yes" %}</a><br/>         
         {% endif %}
         
-        {% if private == 'False' %}
+        {% if private in false_words%}
              <span style="font-size:15px">{% trans "No" %}</span><br/>
         {% else %}
             <a href="?private=False">{% trans "No" %}</a><br/>              
@@ -1776,7 +1783,7 @@ jQuery('.note_display').accordion({
 
     
  
-{% if date_range == 'All' %}
+{% if date_range  in all_words %}
  <span style="font-size:15px">{% trans "Any day" %}</span><br/>
  {% else %}
 <a href="?date_range=All">{% trans "Any day" %}</a><br/>   
@@ -1809,20 +1816,23 @@ jQuery('.note_display').accordion({
 {% endif %}
 
 
-
 	<a href="javascript:alert('Not implemented yet!');">{% trans "Pick a Range" %}</a><br/>  
- 
-
+    
+    {% comment %}
+{% trans "Day" %}: {{day}}<br/> 
+{% trans "month" %}: {{month}}<br/> 
+{% trans "year" %}: {{year}}<br/> 
+{% endcomment %}
 
 {% if bookname == 'snippetbook' %}    
             <h4>{% trans "With attachment" %}</h4>  
-       {% if with_attachment == 'All' %}
+       {% if with_attachment in all_words %}
              <span style="font-size:15px">{% trans "All" %}</span><br/>
         {% else %}
             <a href="?with_attachment=All">{% trans "All" %}</a><br/>   
         {% endif %}   
 
-        {% if with_attachment == 'True' %}
+        {% if with_attachment in true_words %}
              <span style="font-size:15px">{% trans "Yes" %}</span><br/>
         {% else %}
             <a href="?with_attachment=True">{% trans "Yes" %}</a><br/>
@@ -1830,14 +1840,16 @@ jQuery('.note_display').accordion({
 {% endif %}                 
       
        
-       
+        {% comment %}   
 {% block linkage_filter %}
 {% endblock %}
+{% endcomment %}
 
-       
--->    
-    
-{% endcomment%}
+</div>
+
+
+
+
 
 {% block profile_head %}
 {% with user.member as profile_member %}

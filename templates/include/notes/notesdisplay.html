@@ -72,6 +72,11 @@
 	{% endif %}
 </div>
 
+<div>
+{% if request.appname == 'tagframe' %}
+    {% trans "Viewing notes under tag path" %}: {{request.tag_path}}
+{% endif %}
+</div>
 
 {% block notes %}
 

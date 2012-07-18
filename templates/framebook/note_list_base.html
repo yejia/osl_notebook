@@ -6,21 +6,13 @@
 {% endblock %}
 
 {% block extra_css %}
-
 <link rel="stylesheet" href="/site_media/css/jquery.treeview.css" />
-
 {% endblock %}
 
 
 {% block extra_script%}
-
-	
-
-	<script src="/site_media/js/ui/jquery.ui.sortable.js"></script>
-    
-    <script src="/site_media/js/jquery.treeview.js" type="text/javascript"></script>
-
-    
+	<script src="/site_media/js/ui/jquery.ui.sortable.js"></script>    
+    <script src="/site_media/js/jquery.treeview.js" type="text/javascript"></script>    
     <script>
 	$(function() {   
 
@@ -61,13 +53,7 @@
        // TODO: how to show error when error happened?      
         //   $('ul.messages').append('<li class="error">{% trans "An error happened when adding a note." %} </li>');     
         $('ul.messages').append('<li class="success">{% trans "The order of the notes included in this frame is reset successfully!" %} </li>');
-        }
-        
-     
-     
-     
-     
-     
+        }  
     
 	</script>
     

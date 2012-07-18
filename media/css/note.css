@@ -162,6 +162,12 @@ right:20px;
 bottom:0px;
 }
 
+li  .relevance{
+position:absolute;
+right:10px;
+bottom:0px;
+}
+
 li  .social_thumb
 {
 position:absolute;
@@ -437,7 +443,13 @@ left:80px;
 top:-20px;
 width:250px;
 margin-bottom:-35px;
-
+}
+#add_frame_tags_box{
+position:relative;
+left:30px;
+top:-30px;
+width:250px;
+margin-bottom:0px;
 }
 
 span#add_note_vote_bar{
@@ -1023,6 +1035,29 @@ padding-left:10px;
 float:right;
 }
 span#back_icon{
+display:none;
+}
+span.tag_frame_add{
+background-image:url("../img/admin/tooltag-add.gif");
+background-repeat:no-repeat;
+padding-bottom:10px;
+}
+span.tag_frame_add:hover{
+background-image:url("../img/admin/tooltag-add_over.gif");
+background-repeat:no-repeat;
+padding-bottom:10px;
+cursor:pointer;
+}
+
+form#addTagFrameForm{
+position:relative;
+left:45px;
+
+}
+textarea#id_desc{
+height:40px;
+}
+.hide_form_section{
 display:none;
 }
 
