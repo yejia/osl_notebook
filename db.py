@@ -117,14 +117,14 @@ def rename_tag_table():
        print 'For user', user.username
        try:
            cursor = connections[user.username].cursor()
-           cursor.execute('ALTER TABLE notes_tag RENAME TO tags_tag')          
+           cursor.execute('ALTER TABLE notes_tag RENAME TO tags_tag;')          
            transaction.commit_unless_managed()
        except Exception as inst:
            print type(inst)
            print inst.args
            print inst
        try:
-           cursor.execute('ALTER TABLE tags_tag ADD COLUMN desc text;')
+           cursor.execute('ALTER TABLE tags_tag ADD COLUMN "desc" text;')
            transaction.commit_unless_managed()
 
        except Exception as inst:
