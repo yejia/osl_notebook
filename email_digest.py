@@ -115,7 +115,7 @@ def build_content(note, bookname, pick_lang, title_size):
 
 
 def send_group_digest(username, groupname, freq, pick_lang):
-    print 'Sending '+freq+' digest for', username, 'in', groupname
+    #print 'Sending '+freq+' digest for', username, 'in', groupname
     group = G.objects.get(name=groupname) 
     
     content = ''
@@ -140,7 +140,7 @@ def send_group_digest(username, groupname, freq, pick_lang):
             digest_heading = _('Weekly digest from the group:')+groupname+'\n\n\n'
         digest = digest_heading + content + _('\n Or you can go to the group page to view the new notes! ')+ \
                   group_url + '\n\n'+_('You can set up how you want to receive group digest in your setting:')+ site_name + '/settings/'
-        print 'digest is:', digest
+        #print 'digest is:', digest
         
         mailserver = get_mail_server()
         #subject = ''
