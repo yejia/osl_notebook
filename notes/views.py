@@ -953,7 +953,7 @@ def __get_notes_context(request, note_list):
         except FieldError:
             pass  #bookmarks and scraps do not have attachment. TODO: other ways to tell if the field is there  
     
-    order_type = request.GET.get('order_type','-init_date')  
+    order_type = request.GET.get('order_type','desc')  
     
     
     
@@ -964,7 +964,7 @@ def __get_notes_context(request, note_list):
     
     #order_field that was set when triggering notes list view for tagframe app need to be reset
     if order_field == 'relevance' and not (hasattr(request,'appname') and request.appname == 'tagframe'):
-        order_field = '-init_date'  
+        order_field = 'init_date'  
     
 #    sorted_note_list = note_list    
     if order_field != 'relevance':  

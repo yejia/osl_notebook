@@ -945,7 +945,8 @@ def __get_notes_context(request, note_list):
     
     order_type = request.GET.get('order_type','desc')  
     
-    
+    if order_field == 'relevance':
+        order_field = 'init_date'
 
     sorted_note_list = note_list    
     if order_field != 'usefulness':  
