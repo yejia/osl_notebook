@@ -399,7 +399,7 @@ class Note(models.Model):
                 if sib in self.get_tags():
                     relevance += len(tag_list) - i #check if always > 0
             
-        log.info('relevant_tags'+relevant_tags)
+        log.info('relevant_tags'+str(relevant_tags))
         for t in self.get_tags():
             if not t in relevant_tags:
                 relevance -= 1
