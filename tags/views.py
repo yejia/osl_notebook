@@ -55,7 +55,7 @@ def index(request, username):
         if tf.name != 'Root' and not tf.in_frames.all():
             top_tag_trees.append(tf)   
     
-    print 'tag_trees', top_tag_trees
+    #print 'tag_trees', top_tag_trees
     
     
     #TODO: think of applying other view theme in addition to private
@@ -68,6 +68,8 @@ def index(request, username):
 
 
 def add_tag_frame(request, username):
+    #print 'add_tag_frame'
+    
     post = request.POST.copy()  
     #tag_names = post.getlist('item[tags][]')
     #tag_ids = [ST.objects.get(name=tag_name).id for tag_name in tag_names]         
@@ -85,11 +87,17 @@ def add_tag_frame(request, username):
 #===============================================================================
     name = post.get('name')
     if Tag.objects.using(username).filter(name=name).exists():
+        #print 'tag existing'
+        #if the tag is already existing, and tag_frame doesn't exist yet, create only the tag_frame
         if not TF.objects.filter(name=name).exists():
+            #print 'tf not existing'
             t = Tag.objects.using(username).get(name=name)
             cursor = connections[username].cursor()
+            #print 'executing insert sql: ', 'insert into tags_tag_frame (tag_ptr_id, current) values('+str(t.id)+',FALSE)'
             cursor.execute('insert into tags_tag_frame (tag_ptr_id, current) values('+str(t.id)+',FALSE)')
-            transaction.commit_unless_managed()
+            #print 'executed successfully'
+            #it seems that unlike raw sql delete, even without using=username, the transaction is still commited
+            transaction.commit_unless_managed(using=username)  
             #tf = TF.objects.raw('insert into tagframe_frame_tags (tag_ptr_id, current) values('+str(t.id)+',FALSE)')
         tf = TF.objects.get(name=name)
     else:
@@ -136,7 +144,16 @@ def delete_frame(request, username):
     frame_name = request.POST.get('frame_name')
     TF = getTagFrame(username)
     tf = TF.objects.get(name=frame_name)
-    tf.delete()
+    if tf.note_set.all():
+        #if there are notes that have this tag, just make this tag a pure tag
+        #ftf = Fake_Tag_Frame.objects.using(username).get(name=frame_name)
+        #ftf.delete()
+        cursor = connections[username].cursor()
+        #print 'executing query:  ', "DELETE FROM tags_tag_frame WHERE tag_ptr_id in (select id from tags_tag  where name='"+frame_name+"')"
+        cursor.execute("DELETE FROM tags_tag_frame WHERE tag_ptr_id in (select id from tags_tag  where name='"+frame_name+"')")
+        transaction.commit_unless_managed(using=username)        
+    else:
+        tf.delete()  
     return HttpResponse('successful', mimetype="text/plain") 
 
 

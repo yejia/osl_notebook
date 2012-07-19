@@ -161,6 +161,23 @@ class Tag_Frame(Tag):
 #    return list(set(parents))    
 #===============================================================================
              
+             
+#solution copied from http://stackoverflow.com/questions/10287169/django-model-inheritance-delete-subclass-keep-superclass
+#but it doesn't seem to work in my case due to the extra m2m field (there is no reference back from Frame_Tag although it is managed through Frame_Tags)
+#Might add Fake_Frame_Tags too, but what the heck. It is too much work to do it this way. Raw sql is better.
+#===============================================================================
+# class Fake_Tag_Frame(models.Model):
+#    tag_ptr = models.PositiveIntegerField(db_column="tag_ptr_id", primary_key=True)
+#    tags = models.ManyToManyField(Tag, related_name='fake_in_frames', through="Frame_Tags")  
+#    current = models.BooleanField(default=False) 
+#    
+#    class Meta:
+#        app_label = Tag_Frame._meta.app_label
+#        db_table = Tag_Frame._meta.db_table
+#        managed = True
+#        
+#===============================================================================
+
        
 class Frame_Tags(models.Model):
     frame = models.ForeignKey(Tag_Frame, related_name='tag_and_frame') #TODO:

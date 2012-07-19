@@ -123,6 +123,10 @@ Alter table notes_note change delete deleted bool NOT NULL;
 INSERT INTO "notes_workingset_tags" ("workingset_id", "tag_id") VALUES (2, 858);
 INSERT INTO "notes_note_tags" ("note_id", "tag_id")  VALUES(10,7);
 
+
+
+DELETE FROM tags_tag_frame WHERE tag_ptr_id in (select id from tags_tag where name='arts');
+
 ===========================
 t:zen | t:gfs | t:love and marriage & v:>2 
 
