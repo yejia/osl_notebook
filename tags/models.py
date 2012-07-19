@@ -147,7 +147,19 @@ class Tag_Frame(Tag):
                 ft._order=current_num_of_tags
                 current_num_of_tags += 1   
                  
-       
+      
+#===============================================================================
+# def get_parents_old(tf):
+#        parents = [fts.frame for fts in Frame_Tags.objects.using(tf.owner_name).filter(tag__name=tf.name)]
+#        return list(set(parents))
+# 
+# def get_parents(tf):
+#    fts = Frame_Tags.objects.using(tf.owner_name).filter(tag__name=tf.name)
+#    print 'fts', fts
+#    parents = [ft.frame for ft in fts] 
+#        
+#    return list(set(parents))    
+#===============================================================================
              
        
 class Frame_Tags(models.Model):
@@ -156,4 +168,8 @@ class Frame_Tags(models.Model):
     
     class Meta:
         order_with_respect_to = 'frame'
+        unique_together = (("frame","tag"),) 
+        
+    def __unicode__(self):
+        return self.frame.name + '-' + self.tag.name         
     

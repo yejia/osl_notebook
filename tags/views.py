@@ -49,11 +49,20 @@ def index(request, username):
     addTagFrameForm = AddTagFrameForm()
     tags = Tag.objects.using(username).all().order_by('name')
     
+    top_tag_trees = []
+    for tf in Tag_Frame.objects.using(username).all():
+        tf.owner_name = username
+        if tf.name != 'Root' and not tf.in_frames.all():
+            top_tag_trees.append(tf)   
+    
+    print 'tag_trees', top_tag_trees
+    
+    
     #TODO: think of applying other view theme in addition to private
     theme = __get_view_theme(request)
     private =    theme['private'] 
     #print 'private', private
-    return render_to_response('tagframe/index.html',{'tag_tree':tag_tree, 'addTagFrameForm':addTagFrameForm, \
+    return render_to_response('tagframe/index.html',{'tag_tree':tag_tree, 'top_tag_trees':top_tag_trees,'addTagFrameForm':addTagFrameForm, \
                             'tags':tags, 'sort':'', 'username':request.user.username,'profile_username':username,  'private':private}, \
                     context_instance=RequestContext(request,  {}))
 
@@ -120,6 +129,14 @@ def remove_frame(request, username):
     FTS = getFrameTags(username)
     fts = FTS.objects.get(frame__name=parent_name, tag__name=tag_name)
     fts.delete()
+    return HttpResponse('successful', mimetype="text/plain") 
+
+
+def delete_frame(request, username):
+    frame_name = request.POST.get('frame_name')
+    TF = getTagFrame(username)
+    tf = TF.objects.get(name=frame_name)
+    tf.delete()
     return HttpResponse('successful', mimetype="text/plain") 
 
 
