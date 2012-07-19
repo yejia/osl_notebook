@@ -555,14 +555,10 @@
     //alert('adding tags new...');
           var selected_tags = [];	
          
-            $('ul#ac_tags').find('li.tagit-choice').each(function(){               
-                   	   // alert('find a tag:'+$(this).find(':input').val());
-                       if ($(this).attr('checked')==true){	
-                            selected_tags.push($(this).find(':input').val());	
-                        }
-                    			
+            $('ul#ac_tags').find('li.tagit-choice').each(function(){     
+                            selected_tags.push($(this).find(':input').val());
 		     });	
-          // alert('selected_tags is:'+selected_tags );        
+          //alert('selected_tags is:'+selected_tags );        
            
             selected_notes = getSelectedNoteIds();		 
            
