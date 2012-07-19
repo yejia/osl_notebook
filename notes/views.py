@@ -669,13 +669,18 @@ def tags(request, username, bookname, tag_name, aspect_name):
     N = getNote(username, bookname)
 
     T = getT(username)
+    t = None
     if tag_name: #TODO: if not tag_name
-        t = T.objects.get(name=tag_name)       
-        if aspect_name=='notes':
-            #n_list = t.note_set
-            n_list = N.objects.filter(tags__name=tag_name)
-        else:
-            n_list = t.linkagenote_set
+        #for notes that have no tag at all, use ' ' to represent it
+        if tag_name == ' ':
+            n_list =  N.objects.filter(tags__isnull=True) #[n for n in N.objects.all() if not n.tags.all()]
+        else:    
+            t = T.objects.get(name=tag_name)       
+            if aspect_name=='notes':
+                #n_list = t.note_set
+                n_list = N.objects.filter(tags__name=tag_name)
+            else:
+                n_list = t.linkagenote_set
         
         if request.user.username != username:
             log.info('Not the owner of the notes requested, getting public notes only...')            
@@ -686,8 +691,10 @@ def tags(request, username, bookname, tag_name, aspect_name):
         qstr = __getQStr(request)
     
         note_list  = getSearchResults(note_list, qstr, search_fields_dict.get(bookname))
-        
-        default_tag_id = t.id   
+        if t:
+            default_tag_id = t.id   
+        else:
+            default_tag_id = 0  
         context = __get_context(request, note_list, default_tag_id, username, bookname, aspect_name)   
         queries = connection.queries	
         extra_context = {'current_tag':tag_name, 'aspect_name':aspect_name, 'queries':queries}
