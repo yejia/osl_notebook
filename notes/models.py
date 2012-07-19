@@ -365,7 +365,7 @@ class Note(models.Model):
             #print 'tag not in the note tags, return 0'
             return 0 #not related at all. May raise an error here TODO:
         
-        relevant_tags = []
+        relevant_tags = [tag_name]
         
         #merge code of direct parent with grand parents?TODO:
         direct_parent = tag_list[-2]
