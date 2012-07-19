@@ -673,7 +673,8 @@ def tags(request, username, bookname, tag_name, aspect_name):
     if tag_name: #TODO: if not tag_name
         #for notes that have no tag at all, use ' ' to represent it
         if tag_name == ' ':
-            n_list =  N.objects.filter(tags__isnull=True) #[n for n in N.objects.all() if not n.tags.all()]
+            #n_list =  N.objects.filter(tags__isnull=True) #[n for n in N.objects.all() if not n.tags.all()]
+            n_list =  N.objects.filter(tags__name='')
         else:    
             t = T.objects.get(name=tag_name)       
             if aspect_name=='notes':
