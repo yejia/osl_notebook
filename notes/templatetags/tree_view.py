@@ -41,7 +41,7 @@ def tag_tree_view_tag(context, frame):
     children = frame.get_tags_in_order(sort) 
     for child in children:
         child.owner_name = frame.owner_name
-        if child.get_tag_type() == 'Leaf':            
+        if child.get_tag_type() == 'Leaf' or child.note_set.count():            
             child.snippets_count = Snippet.objects.using(child.owner_name).filter(deleted=False, tags=child).count() 
             child.public_snippets_count = Snippet.objects.using(child.owner_name).filter(deleted=False, private=False, tags=child).count()
             child.bookmarks_count = Bookmark.objects.using(child.owner_name).filter(deleted=False, tags=child).count() 

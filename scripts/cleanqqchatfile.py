@@ -4,7 +4,7 @@ from BeautifulSoup import BeautifulSoup
 
 f1 = open('/home/leon/doc/class/wuqi-2012-07-08-clean.html')
 
-soup = BeautifulSoup(f)
+soup = BeautifulSoup(f1)
 
 clickable = soup.findAll('span', attrs={'class':'clickable'})
 

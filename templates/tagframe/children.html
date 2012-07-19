@@ -22,10 +22,10 @@
                 {% endif %}
                 
                 
-                {% if tag.get_tag_type == 'Leaf' %}  <span>{% trans 'View' %}</span>
+                {% if tag.get_tag_type == 'Leaf'  or tag.note_set.count%}  <span>{% trans 'View' %}</span>
                     <ul style="display: none;">                                       
                           <li><span class="notes_by_tag clickable" bookname="snippetbook" title="{% trans 'Snippets' %}"><img src="/site_media/img/Snippet.png" />{% comment %} TODO: think of applying other viewing mode filtering   {% endcomment %}
-                         
+                         {% comment %}snippets_count was added to tag in the tree_view cusotom tag lib{% endcomment %}
                           {% if  username == profile_username and private in all_words %} {{tag.snippets_count}}   {% else %} {{tag.public_snippets_count}}  {% endif %}</span>
                           </li>       
                           <li ><span class="notes_by_tag clickable" bookname="bookmarkbook"><img src="/site_media/img/Bookmark.png" />   
