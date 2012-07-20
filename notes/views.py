@@ -2262,7 +2262,7 @@ def settings_tags(request):
     T = getT(username)  
     tags = T.objects.all().order_by('name')
     W = getW(username)
-    wss = W.objects.all().order_by('name')
+    wss = W.objects.all().order_by('name')    
     return render_to_response('tags/index.html', {'wss':wss, 'tags':tags, 'addTagForm':AddTagForm()}, context_instance=RequestContext(request))
 
 
@@ -2292,6 +2292,16 @@ def settings_tag(request, tag_name):
     T = getT(username)    
     tag = T.objects.get(name__exact=tag_name) 
     tag_form = UpdateTagForm(instance=tag)
+    
+    #below is moved from tags.models here since that module cannot import notes.models.Note
+    related = []
+    for t in Tag.objects.using(username).exclude(name=tag.name):   
+        note_list = Note.objects.using(username).filter(tags__name = tag.name)
+        note_list = note_list.filter(tags__name=t.name) 
+        if note_list.count():
+            related.append((t.name, note_list.count()))
+    related.sort(key=lambda r: r[1], reverse=True)         
+    tag.get_tags_counts = related      
     return render_to_response('tags/tag.html',  {'tag':tag, 'tag_form':tag_form}, context_instance=RequestContext(request)) 
 
 @login_required

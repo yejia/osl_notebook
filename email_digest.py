@@ -3,6 +3,7 @@
 import sys, os
 from email.MIMEText import MIMEText
 import smtplib
+import time
 
 
 
@@ -151,6 +152,7 @@ def send_group_digest(username, groupname, freq, pick_lang):
         sendEmail(mailserver , SERVER_EMAIL, [member.email], subject, digest.encode('utf-8'))
         mailserver.close()
         print 'Email digest was sent to '+member.email+' for group '+ groupname 
+        time.sleep(10)
    
     
 
@@ -170,6 +172,7 @@ def send_digest(username, freq):
     #print username, "'s groups:", groups
     for group in groups:
         send_group_digest(username, group.name, freq, pick_lang)
+        
     
 
 

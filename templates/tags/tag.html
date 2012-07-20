@@ -1,3 +1,8 @@
+{% extends "include/base2.html" %}
+{% load i18n %}
+
+
+{% block content%}
 <div>
 <b>Tag id:</b> {{tag.id}}
 </div>
@@ -11,6 +16,13 @@
 <b>delete:</b> {{tag.delete}}
 </div>
 
+    <div>{% trans "Other related tags" %}:
+     {% for t in tag.get_tags_counts %}
+    <a href="/{{user.username}}/notebook/notes/?q=t%3A{{t.0}}+%26+t%3A{{tag.name}}">{{t.0}}</a> ({{t.1}}) 
+    {%comment%}The encoded part is:    t:{{t.0}} & t:{{tag.name}}  , might use urlenode{%endcomment%}
+    {% endfor %}
+    </div>
+    
 <br/><br/>
 
 <div>
@@ -22,3 +34,5 @@
 </form> 
 </div>
 </div>
+
+{% endblock %}

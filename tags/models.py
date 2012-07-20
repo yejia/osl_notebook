@@ -48,7 +48,13 @@ class Tag(models.Model):
             return 'Leaf' 
    
    
-    
+#===============================================================================
+#    def get_tags_counts(self):
+#        related = []
+#        for t in Tag.objects.using(self.owner_name).exclude(name=self.name):            
+#            related.append((t.name, Note.objects.using(self.owner_name).filter(tags__name__in = [self.name,t.name]).count()))
+#        return related    
+#===============================================================================
    
 #===============================================================================
 #    def get_snippets_count(self):  
