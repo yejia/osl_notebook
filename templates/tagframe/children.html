@@ -48,7 +48,7 @@
         {% endfor %}
         
         {% if frame.note_set.count%} 
-        <li class="tag_in_frame"  parent_name="{{frame}}">
+        <li class="related_tags_in_frame"  parent_name="{{frame}}">
               <span title="{% trans 'tags that have been used together with this tag' %}"><a href="javascript:void(0);" class="toggle_related_tags">{% trans 'related tags' %}:</a></span>
                <span class="loading" style="display:none;"><img src="/site_media/img/ui-anim_basic_16x16.gif"/>{% trans "Loading..." %}</span>
               <span class="related_tags" id="{{frame}}"></span>              

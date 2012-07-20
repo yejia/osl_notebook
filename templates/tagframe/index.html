@@ -166,10 +166,15 @@
     
 
      $('.toggle_related_tags').click(function(){     
-                   var parent =  $(this).parents('li[parent_name]');     
+                   var parent =  $(this).parents('li.related_tags_in_frame');     
                     var tag_name = parent.attr('parent_name');
-                    $.post('/{{profile_username}}/tagframe/getRelatedTags/',{'tag_name':tag_name}, got_related_tags, 'json');     
-                    parent.find('span.loading').show(0);
+                    related_tags_span = parent.find('.related_tags')
+                    if  (related_tags_span .text() == ''){                      
+                        $.post('/{{profile_username}}/tagframe/getRelatedTags/',{'tag_name':tag_name}, got_related_tags, 'json');     
+                        parent.find('span.loading').show(0);
+                    }else{
+                        related_tags_span.toggle();
+                    }
      
           });
           
