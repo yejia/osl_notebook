@@ -22,7 +22,7 @@
                 {% endif %}
                 
                 
-                {% if tag.get_tag_type == 'Leaf'  or tag.note_set.count%}  <span>{% trans 'View' %}</span>
+                {% if tag.note_set.count%}  <span>{% trans 'View' %}</span>
                     <ul style="display: none;">                                       
                           <li><span class="notes_by_tag clickable" bookname="snippetbook" title="{% trans 'Snippets' %}"><img src="/site_media/img/Snippet.png" />{% comment %} TODO: think of applying other viewing mode filtering   {% endcomment %}
                          {% comment %}snippets_count was added to tag in the tree_view cusotom tag lib{% endcomment %}
@@ -47,19 +47,17 @@
             </li>
         {% endfor %}
         
+        {% if frame.note_set.count%} 
+        <li class="tag_in_frame"  parent_name="{{frame}}">
+              <span title="{% trans 'tags that have been used together with this tag' %}"><a href="javascript:void(0);" class="toggle_related_tags">{% trans 'related tags' %}:</a></span>
+               <span class="loading" style="display:none;"><img src="/site_media/img/ui-anim_basic_16x16.gif"/>{% trans "Loading..." %}</span>
+              <span class="related_tags" id="{{frame}}"></span>              
+              
+        </li>
+         {% endif %}
+        
           {% if  username == profile_username %}
-          <li class="last expandable" parent_name="{{frame}}">
+          <li class="last" parent_name="{{frame}}">
               <span class="tag_frame_add" title="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
-              <ul  style="display: none;">
-                    <li>
-                      <span class="toggle_add_frame">
-                        <span class="clickable"><img src="/site_media/img/Frame.png" /></span>                    
-                    <!--<span class="show_form_section"><img title="{% trans "Show tags" %}" src="/site_media/img/right-arrow.jpg" class="clickable"/></span>                     
-                                <span class="hide_form_section"><img title="{% trans "Hide tags" %}" src="/site_media/img/down-arrow.jpg" class="clickable" /></span> -->
-                       </span>                        
-                    </li>
-                    <li class="last"><span class="toggle_add_tags_to_frame clickable"><img src="/site_media/img/tags-small.png"/></span>
-                    </li>                    
-              </ul> 
             </li>
          {% endif %}

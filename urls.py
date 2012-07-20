@@ -114,6 +114,7 @@ urlpatterns = patterns('',
     (r'^(?P<username>[^/]+)/tagframe/deleteFrame/$', 'notebook.tags.views.delete_frame'),
     
     (r'^(?P<username>[^/]+)/tagframe/(?P<tag_path>[^/]+)/(?P<bookname>[^/]+)/notes/$', 'notebook.tags.views.notes_by_tag'),
+    (r'^(?P<username>[^/]+)/tagframe/getRelatedTags/$','notebook.tags.views.get_related_tags'),  
 
 
     #below dupldate a lot with patterns in 'notebook.notes.urls', refactor TODO:
@@ -127,7 +128,10 @@ urlpatterns = patterns('',
     (r'^(?P<username>[^/]+)/tagframe/(.*)/(?P<bookname>[^/]+)/notes/voteUpNote/$','notebook.notes.views.vote_up_note'), 
     (r'^(?P<username>[^/]+)/tagframe/(.*)/(?P<bookname>[^/]+)/notes/voteDownNote/$','notebook.notes.views.vote_down_note'),
     (r'^(?P<username>[^/]+)/tagframe/(.*)/(?P<bookname>[^/]+)/notes/deleteNote/$','notebook.notes.views.delete_note'),
-    (r'^(?P<username>[^/]+)/tagframe/(.*)/(?P<bookname>[^/]+)/notes/addNote/$','notebook.notes.views.add_note'),    
+    (r'^(?P<username>[^/]+)/tagframe/(.*)/(?P<bookname>[^/]+)/notes/addNote/$','notebook.notes.views.add_note'),  
+
+
+  
 
    #TODO: seems to be matching too many things 
     (r'^(?P<username>[^/]+)/(?P<bookname>[^/]+)/',include('notebook.notes.urls')),

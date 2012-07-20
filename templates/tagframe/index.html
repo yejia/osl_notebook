@@ -28,6 +28,8 @@
            $('.hide_form_section').hide(0);
            
            $('#top_tag_trees').hide(0);
+           
+           $('span.loading').hide(0);
         
            $('#view_top_trees').click(function(){	
                 $('#top_tag_trees').toggle(0);
@@ -75,7 +77,7 @@
         });   
            
            
-        $('.toggle_add_tags_to_frame').click(function(){	     
+        $('.tag_frame_add').click(function(){	    
            $('#add_child_frame').hide();        
             parent_name =  $(this).parents('li[parent_name]').attr('parent_name');
            if  (parent_name ==  $('div#add_frame_tags_box  span#parent_name').text()){
@@ -158,16 +160,39 @@
       tag_path = 'Root' + '-' + tag_path;
       //alert('tag_path: '+tag_path);
       
-      window.open('/{{profile_username}}/tagframe/'+tag_path+'/'+bookname+'/notes/?sort=relevance')  ;   
-      
-      
-      
-      
-      
+      window.open('/{{profile_username}}/tagframe/'+tag_path+'/'+bookname+'/notes/?sort=relevance')  ;       
       
     });
-      
-      
+    
+
+     $('.toggle_related_tags').click(function(){     
+                   var parent =  $(this).parents('li[parent_name]');     
+                    var tag_name = parent.attr('parent_name');
+                    $.post('/{{profile_username}}/tagframe/getRelatedTags/',{'tag_name':tag_name}, got_related_tags, 'json');     
+                    parent.find('span.loading').show(0);
+     
+          });
+          
+          function got_related_tags(result){
+                             var tag_name = result.tag_name
+                               $('li[parent_name='+tag_name+'] span.loading').hide(0);
+                               
+                               //alert('tag_name '+tag_name);
+                               related_tags = result.related_tags
+                               for(var i = 0; i < related_tags.length; i++){
+                                     var t_name = related_tags[i][0];
+                                     var t_count = related_tags[i][1];
+                                    // alert('t_name:'+t_name);
+                                     //alert('t_count:'+t_count);
+                                     //$('span.related_tags[id='+tag_name+']')
+                                    // alert('<a href="/{{profile_username}}/notebook/notes/?q=t%3A'+t_name+'+%26+t%3A'+tag_name+'" target="top">'+t_name+'</a> ('+t_count+') ');
+                                     $('li[parent_name='+tag_name+'] span.related_tags').append('<a href="/{{profile_username}}/notebook/notes/?q=t%3A'+t_name+'+%26+t%3A'+tag_name+'" target="top">'+t_name+'</a> ('+t_count+') ');
+                              // $('li[parent_name='+tag_name+'] span.related_tags').append('showme')
+                               
+                               
+                               }
+          
+          }
         
           
 	});

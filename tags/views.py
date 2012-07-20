@@ -67,61 +67,60 @@ def index(request, username):
                     context_instance=RequestContext(request,  {}))
 
 
-def add_tag_frame(request, username):
-    #print 'add_tag_frame'
-    
-    post = request.POST.copy()  
-    #tag_names = post.getlist('item[tags][]')
-    #tag_ids = [ST.objects.get(name=tag_name).id for tag_name in tag_names]         
-    #post.setlist('tags', tag_ids) 
-    
-    
-    #tf, created = Tag_Frame.objects.using(username).get_or_create(name=post.get('name'))
-    TF = getTagFrame(username)
-    tf = TF()
+
 #===============================================================================
-#    if not created:
-#        pass #TODO:
-#    tf.desc = post.get('desc')
-#    tf.private = post.get('private', False)
+# def add_tag_frame(request, username):
+#    post = request.POST.copy()  
+#    TF = getTagFrame(username)
+#    tf = TF()
+#    name = post.get('name')
+#    if Tag.objects.using(username).filter(name=name).exists():
+#        if not TF.objects.filter(name=name).exists():
+#            t = Tag.objects.using(username).get(name=name)
+#            cursor = connections[username].cursor()
+#            cursor.execute('insert into tags_tag_frame (tag_ptr_id, current) values('+str(t.id)+',FALSE)')
+#            transaction.commit_unless_managed(using=username)  
+#        tf = TF.objects.get(name=name)
+#    else:
+#        f = AddTagFrameForm(post, instance=tf)
+#        if not f.is_valid(): 
+#            log.debug("add tag frame form errors:"+str(f.errors))            
+#        else:
+#            f.save()  
+#    parent_name =  post.get('parent_name')
+#    if parent_name:
+#        parent_node = TF.objects.get(name=parent_name)
+#        FTS = getFrameTags(username)
+#        fts = FTS(frame=parent_node,tag=tf)
+#        fts.save()
+#    return HttpResponseRedirect(__get_pre_url(request))  
 #===============================================================================
-    name = post.get('name')
-    if Tag.objects.using(username).filter(name=name).exists():
-        #print 'tag existing'
-        #if the tag is already existing, and tag_frame doesn't exist yet, create only the tag_frame
-        if not TF.objects.filter(name=name).exists():
-            #print 'tf not existing'
-            t = Tag.objects.using(username).get(name=name)
-            cursor = connections[username].cursor()
-            #print 'executing insert sql: ', 'insert into tags_tag_frame (tag_ptr_id, current) values('+str(t.id)+',FALSE)'
-            cursor.execute('insert into tags_tag_frame (tag_ptr_id, current) values('+str(t.id)+',FALSE)')
-            #print 'executed successfully'
-            #it seems that unlike raw sql delete, even without using=username, the transaction is still commited
-            transaction.commit_unless_managed(using=username)  
-            #tf = TF.objects.raw('insert into tagframe_frame_tags (tag_ptr_id, current) values('+str(t.id)+',FALSE)')
-        tf = TF.objects.get(name=name)
-    else:
-        f = AddTagFrameForm(post, instance=tf)
-        if not f.is_valid(): 
-            log.debug("add tag frame form errors:"+str(f.errors))            
-        else:
-            f.save()  
-    #tf.save()
-    parent_name =  post.get('parent_name')
-    #print 'parent:', parent_name
-    if parent_name:
-        parent_node = TF.objects.get(name=parent_name)
-        FTS = getFrameTags(username)
-        fts = FTS(frame=parent_node,tag=tf)
-        fts.save()
-    return HttpResponseRedirect(__get_pre_url(request))  
 
 
 
 def add_tags_2_frame(request, username):
     parent_name = request.GET.get('parent_name')    
-    tags_to_add = request.GET.get('tags_to_add')    
+    tags_to_add = request.GET.get('tags_to_add')   
+    
     TF = getTagFrame(username)
+    for tag in tags_to_add.split(','):
+        
+        #handling tag frame and tag creation here
+        if Tag.objects.using(username).filter(name=tag).exists():
+            #print 'tag existing'
+            #if the tag already exists, and tag_frame doesn't exist yet, create only the tag_frame
+            if not TF.objects.filter(name=tag).exists():
+                #print 'tf not existing'
+                t = Tag.objects.using(username).get(name=tag)
+                cursor = connections[username].cursor()
+                #print 'executing insert sql: ', 'insert into tags_tag_frame (tag_ptr_id, current) values('+str(t.id)+',FALSE)'
+                cursor.execute('insert into tags_tag_frame (tag_ptr_id, current) values('+str(t.id)+',FALSE)')
+                #print 'executed successfully'
+                #it seems that unlike raw sql delete, even without using=username, the transaction is still commited
+                transaction.commit_unless_managed(using=username)  
+        else:
+            tf = TF(name=tag)
+            tf.save()       
     parent_node = TF.objects.get(name=parent_name)
     parent_node.add_tags(tags_to_add)
     return HttpResponse('successful', mimetype="text/plain")  
@@ -150,9 +149,13 @@ def delete_frame(request, username):
         #ftf.delete()
         cursor = connections[username].cursor()
         #print 'executing query:  ', "DELETE FROM tags_tag_frame WHERE tag_ptr_id in (select id from tags_tag  where name='"+frame_name+"')"
+        #the parent child relation is still kept in the frame_tags table.
         cursor.execute("DELETE FROM tags_tag_frame WHERE tag_ptr_id in (select id from tags_tag  where name='"+frame_name+"')")
         transaction.commit_unless_managed(using=username)        
     else:
+        #print 'deleting the tag and tag frame together'
+        #this doesn't seem to delete the tag as well although the frame did get deleted, Why? TODO:
+        #Is the parent child relation is still kept in the frame_tags table? TODO:
         tf.delete()  
     return HttpResponse('successful', mimetype="text/plain") 
 
@@ -167,4 +170,18 @@ def notes_by_tag(request, username, tag_path, bookname):
     request.appname = 'tagframe'
     request.tag_path = tag_path
     return tags(request, username, bookname, tag_name, 'notes')
+
+
+def get_related_tags(request, username):
+    tag_name = request.POST.get('tag_name')
+     #below is moved from tags.models here since that module cannot import notes.models.Note
+    related = []
+    for t in Tag.objects.using(username).exclude(name=tag_name):   
+        note_list = Note.objects.using(username).filter(tags__name = tag_name)
+        note_list = note_list.filter(tags__name=t.name) 
+        if note_list.count():
+            related.append((t.name, note_list.count()))
+    related.sort(key=lambda r: r[1], reverse=True)   
+    result = {'tag_name':tag_name, 'related_tags':related}      
+    return HttpResponse(simplejson.dumps(result), "application/json")
     
