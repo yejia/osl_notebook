@@ -27,7 +27,7 @@ from django.db import connections,  transaction
 from notebook.tags.models import *
 from notebook.notes.constants import *
 from notebook.notes.util import *
-from notebook.notes.views import __get_pre_url, getlogger, __get_view_theme
+from notebook.notes.views import __get_pre_url, getlogger, __get_view_theme, __get_related_tags
 
 log = getlogger('tags.views')  
 
@@ -174,14 +174,7 @@ def notes_by_tag(request, username, tag_path, bookname):
 
 def get_related_tags(request, username):
     tag_name = request.POST.get('tag_name')
-     #below is moved from tags.models here since that module cannot import notes.models.Note
-    related = []
-    for t in Tag.objects.using(username).exclude(name=tag_name):   
-        note_list = Note.objects.using(username).filter(tags__name = tag_name)
-        note_list = note_list.filter(tags__name=t.name) 
-        if note_list.count():
-            related.append((t.name, note_list.count()))
-    related.sort(key=lambda r: r[1], reverse=True)   
+    related = __get_related_tags(username, tag_name)  
     result = {'tag_name':tag_name, 'related_tags':related}      
     return HttpResponse(simplejson.dumps(result), "application/json")
     

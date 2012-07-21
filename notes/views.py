@@ -2291,8 +2291,26 @@ def settings_tag(request, tag_name):
     username = request.user.username
     T = getT(username)    
     tag = T.objects.get(name__exact=tag_name) 
-    tag_form = UpdateTagForm(instance=tag)       
+    tag_form = UpdateTagForm(instance=tag)    
+    related = __get_related_tags(username, tag_name)    
+    tag.related_tags = related    
+    
+    
+         
     return render_to_response('tags/tag.html',  {'tag':tag, 'tag_form':tag_form}, context_instance=RequestContext(request)) 
+
+
+def __get_related_tags(username, tag_name):
+    #below is moved from tags.models here since that module cannot import notes.models.Note
+    related = []
+    for t in Tag.objects.using(username).exclude(name=tag_name):   
+        note_list = Note.objects.using(username).filter(tags__name = tag_name)
+        note_list = note_list.filter(tags__name=t.name) 
+        if note_list.count():
+            related.append((t.name, note_list.count()))
+    related.sort(key=lambda r: r[1], reverse=True)   
+    return related
+
 
 @login_required
 def settings_tag_add(request):    
