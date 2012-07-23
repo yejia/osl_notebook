@@ -43,8 +43,7 @@ class AddTagFrameForm(ModelForm):
         
 
 
-def index(request, username):
-    
+def index(request, username):    
     tag_tree, created = Tag_Frame.objects.using(username).get_or_create(name='Root')
     addTagFrameForm = AddTagFrameForm()
     tags = Tag.objects.using(username).all().order_by('name')
