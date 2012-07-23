@@ -108,7 +108,7 @@ urlpatterns = patterns('',
 
 
     (r'^(?P<username>[^/]+)/tagframe/$', 'notebook.tags.views.index'),
-    (r'^(?P<username>[^/]+)/tagframe/addTagFrame/$', 'notebook.tags.views.add_tag_frame'),
+   # (r'^(?P<username>[^/]+)/tagframe/addTagFrame/$', 'notebook.tags.views.add_tag_frame'),
     (r'^(?P<username>[^/]+)/tagframe/addTags2Frame/$', 'notebook.tags.views.add_tags_2_frame'),
     (r'^(?P<username>[^/]+)/tagframe/removeFrame/$', 'notebook.tags.views.remove_frame'),
     (r'^(?P<username>[^/]+)/tagframe/deleteFrame/$', 'notebook.tags.views.delete_frame'),
