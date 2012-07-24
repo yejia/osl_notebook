@@ -890,21 +890,37 @@ class Frame(Note):
 
 
     def get_related_frames(self):        
-        related = []       
+        related = []    
+        offsprings = self.get_offsprings()   
         for child in self.notes.all():        
             child.owner_name = self.owner_name
             uncles = child.get_frame_ids_titles()        
                   
             for uncle in uncles:        
                 uncle.append('(note '+str(child.id)+')  '+child.title+':  '+child.desc)  
-                if uncle[0] != str(self.id) and uncle not in related:
+                if uncle[0] != str(self.id) and uncle[0] not in self.get_offsprings() and uncle not in related:
                     related.append(uncle)        
             #for now, don't go up further TODO:
             if child.get_note_type() == 'Frame':            
                 child.frame.owner_name = self.owner_name           
                 related.extend(child.frame.get_related_frames())        
+        
+        
         return related    
     
+
+
+    def get_offsprings(self):
+        offsprings = [n.id for n in self.notes.all()]
+        for child in self.notes.all():
+            child.owner_name = self.owner_name
+            if child.get_note_type() == 'Frame': 
+                child.frame.owner_name = self.owner_name 
+                offsprings.extend(child.frame.get_offsprings())
+        print 'offsprings', offsprings
+        return   offsprings       
+            
+
 
 
 class Frame_Notes(models.Model):
