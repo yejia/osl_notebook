@@ -136,7 +136,7 @@
 		            <div  id="note_init_date" title="{% trans "initial creation time" %}" class="grey">{% if user.username == profile_username %}<span  class="editableText">{% endif %}{{note.init_date|date:"Y-m-d H:i"}}{% if user.username == profile_username %}<span>{% endif %}</div>
 		            <div class="grey structure" id="note_last_modi_date" title="{% trans "last modified time" %}">{{note.last_modi_date|date:"Y-m-d H:i"}} </div>
 		            {% if note.attachment %}
-				    		    <div  id="note_attachment" title="{% trans "attachment" %}"><a href="/file/{{note.attachment.name}}" target="top">{{note.attachment.name}}</a> </div>
+				    		    <div  id="note_attachment" title="{% trans "attachment" %}"><a href="/file/{{note.attachment.name}}" target="_blank">{{note.attachment.name}}</a> </div>
 				    {% endif %}
 		
 		            <div  class="structure advanced" id="note_frames" title="{% trans "note in frames" %}">{% trans "Frames" %}:

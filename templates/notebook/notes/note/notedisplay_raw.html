@@ -41,7 +41,7 @@
 <b>vote: </b>{{note.vote}}
 </div>
 <div>
-<b>attachment:</b> <a href="/site_media/{{note.attachment.name}}" target="top">{{note.attachment}}</a>
+<b>attachment:</b> <a href="/site_media/{{note.attachment.name}}" target="_blank">{{note.attachment}}</a>
 </div>
 <div>
 <b>linkages: </b>
@@ -66,7 +66,7 @@ No linkage.
 <p>{{ note_form.private.label_tag }}: {{note_form.private}}</p> 
 <p>{{ note_form.delete.label_tag }}: {{note_form.delete}}</p> 
 <p>{{ note_form.vote.label_tag }}: {{note_form.vote}}</p> 
-<p>{{ note_form.attachment.label_tag }}: Currently: <a href="/site_media/{{note.attachment.name}}" target="top">{{note.attachment}}</a>{{note_form.attachment}}</p> 
+<p>{{ note_form.attachment.label_tag }}: Currently: <a href="/site_media/{{note.attachment.name}}" target="_blank">{{note.attachment}}</a>{{note_form.attachment}}</p> 
 <p>{{ note_form.tags.label_tag }}: {{note_form.tags}}</p> 
 <input type="submit" value="Submit" />
 </form> 

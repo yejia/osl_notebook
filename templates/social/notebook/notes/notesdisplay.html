@@ -17,10 +17,10 @@
                                        <div id="note_title" title="{% trans 'note title' %}">
                                         {% include "social/include/notes/inlines/notes_brief_title_inline.html" %}
                                        {% if note.get_note_type == 'Bookmark' %} 
-                                            <a href="{{note.social_bookmark.url}}" target="top"><img src="/site_media/img/openurl.png" class=""/></a>
+                                            <a href="{{note.social_bookmark.url}}" target="_blank"><img src="/site_media/img/openurl.png" class=""/></a>
                                        {% endif %}
                                        {% if note.get_note_type == 'Scrap' %}
-                                             <a href="{{note.social_scrap.url}}" target="top"><img src="/site_media/img/openurl.png" class=""/></a>
+                                             <a href="{{note.social_scrap.url}}" target="_blank"><img src="/site_media/img/openurl.png" class=""/></a>
                                        {% endif %}
                                        </div> 		    
 		                            </td>
@@ -54,10 +54,10 @@
  <td class="note_table_td1">
                 {% include "social/include/notes/inlines/notes_brief_title_inline.html" %}
                 {% if note.get_note_type == 'Bookmark' %} 
-                    <a href="{{note.social_bookmark.url}}" target="top"><img src="/site_media/img/openurl.png" class=""/></a>
+                    <a href="{{note.social_bookmark.url}}" target="_blank"><img src="/site_media/img/openurl.png" class=""/></a>
                 {% endif %}
                 {% if note.get_note_type == 'Scrap' %}
-                    <a href="{{note.social_scrap.url}}" target="top"><img src="/site_media/img/openurl.png" class=""/></a>
+                    <a href="{{note.social_scrap.url}}" target="_blank"><img src="/site_media/img/openurl.png" class=""/></a>
                 {% endif %}
 </td><td class="note_table_td2">   
  {% include "include/notes/inlines/notes_brief_desc_inline.html" %} 	   

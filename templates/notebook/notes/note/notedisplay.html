@@ -16,12 +16,12 @@
 {% block note_url%}
  {% if note.get_note_type == 'Bookmark' %} 
 <div>
-<b>URL :</b> <a href="{{note.bookmark.url}}" target="top">{{note.bookmark.url}}</a>
+<b>URL :</b> <a href="{{note.bookmark.url}}" target="_blank">{{note.bookmark.url}}</a>
 </div>
 {% endif %}
  {% if note.get_note_type == 'Scrap' %} 
 <div>
-<b>URL :</b> <a href="{{note.scrap.url}}" target="top">{{note.scrap.url}}</a>
+<b>URL :</b> <a href="{{note.scrap.url}}" target="_blank">{{note.scrap.url}}</a>
 </div>
 {% endif %}
 {% endblock %}
@@ -38,12 +38,12 @@
 {% block note_attachment%}
  {% if note.get_note_type == 'Snippet' %} 
 <div>
-<b>{% trans 'attachment' %} :</b> <a href="/file/{{note.snippet.attachment.name}}" target="top">{{note.snippet.attachment}}</a>
+<b>{% trans 'attachment' %} :</b> <a href="/file/{{note.snippet.attachment.name}}" target="_blank">{{note.snippet.attachment}}</a>
 </div>
 {% endif %}
  {% if note.get_note_type == 'Frame' %} 
  <div>
-<b>{% trans 'attachment' %} :</b> <a href="/file/{{note.frame.attachment.name}}" target="top">{{note.frame.attachment}}</a>
+<b>{% trans 'attachment' %} :</b> <a href="/file/{{note.frame.attachment.name}}" target="_blank">{{note.frame.attachment}}</a>
 </div>
  {% endif %}
 {% endblock %}

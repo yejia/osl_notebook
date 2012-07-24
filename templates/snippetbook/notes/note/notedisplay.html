@@ -3,7 +3,7 @@
 
 {% block note_attachment%}
 <div>
-<b>{% trans 'attachment' %} :</b> <a href="/file/{{note.attachment.name}}" target="top">{{note.attachment}}</a>
+<b>{% trans 'attachment' %} :</b> <a href="/file/{{note.attachment.name}}" target="_blank">{{note.attachment}}</a>
 {% if note.attachment %}
      {% include "include/notes/note/display_attachment.html" %}         
 {% endif %}

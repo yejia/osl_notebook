@@ -15,16 +15,16 @@
                 {% if note.get_note_type == 'Bookmark' or note.get_note_type == 'Scrap' %} 
                     {% if note.get_note_type == 'Bookmark' %} 
                         {% if  'social' in book_uri_prefix %} 
-                            <a href="{{note.social_bookmark.url}}" target="top">
+                            <a href="{{note.social_bookmark.url}}" target="_blank">
                         {% else %}
-                            <a href="{{note.bookmark.url}}" target="top">
+                            <a href="{{note.bookmark.url}}" target="_blank">
                         {% endif %}                             
                         
                     {% else %}                        
                         {% if  'social' in book_uri_prefix %} 
-                             <a href="{{note.social_scrap.url}}" target="top"> 
+                             <a href="{{note.social_scrap.url}}" target="_blank"> 
                         {% else %}    
-                            <a href="{{note.scrap.url}}" target="top">                            
+                            <a href="{{note.scrap.url}}" target="_blank">                            
                         {% endif %}                           
                     {% endif %}                     
                         <img src="/site_media/img/openurl.png" class=""/>

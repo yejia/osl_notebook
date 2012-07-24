@@ -112,7 +112,7 @@
 		    <div  id="note_last_modi_date" title="{% trans "last modified time" %}" class="grey structure">{{note.last_modi_date|date:"Y-m-d H:i"}} </div>
 		    
             {% if note.attachment %}
-		    <div  id="note_attachment" title="{% trans "attachment" %}"><a href="/file/{{note.attachment.name}}" target="top">{{note.attachment.name}}</a> </div>
+		    <div  id="note_attachment" title="{% trans "attachment" %}"><a href="/file/{{note.attachment.name}}" target="_blank">{{note.attachment.name}}</a> </div>
 		    {% endif %}
             <!--
              <div  id="note_linkages" title="note linkages">Linkages: {{note.display_linkages|default:'Not in any linkages'}}</div>

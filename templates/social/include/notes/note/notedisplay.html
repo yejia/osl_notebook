@@ -10,12 +10,12 @@
 {% block note_url%}
  {% if note.get_note_type == 'Bookmark' %} 
 <div>
-<b>URL :</b> <a href="{{note.social_bookmark.url}}" target="top">{{note.social_bookmark.url}}</a>
+<b>URL :</b> <a href="{{note.social_bookmark.url}}" target="_blank">{{note.social_bookmark.url}}</a>
 </div>
 {% endif %}
  {% if note.get_note_type == 'Scrap' %} 
 <div>
-<b>URL :</b> <a href="{{note.social_scrap.url}}" target="top">{{note.social_scrap.url}}</a>
+<b>URL :</b> <a href="{{note.social_scrap.url}}" target="_blank">{{note.social_scrap.url}}</a>
 </div>
 {% endif %}
 {% endblock %}
@@ -27,7 +27,7 @@
 {% block note_attachment%}
  {% if note.get_note_type == 'Snippet'  %} 
 <div>
-<b>{% trans 'attachment' %} :</b> <a href="/file/{{note.social_snippet.attachment.name}}" target="top">{{note.social_snippet.attachment}}</a>
+<b>{% trans 'attachment' %} :</b> <a href="/file/{{note.social_snippet.attachment.name}}" target="_blank">{{note.social_snippet.attachment}}</a>
  {% if note.attachment %}
      {% include "include/notes/note/display_attachment.html" %}         
 {% endif %}
@@ -38,7 +38,7 @@
 {% endif %}
  {% if note.get_note_type == 'Frame' %} 
  <div class="noPrint">
-<b>{% trans 'attachment' %} :</b> <a href="/file/{{note.social_frame.attachment.name}}" target="top">{{note.social_frame.attachment}}</a>
+<b>{% trans 'attachment' %} :</b> <a href="/file/{{note.social_frame.attachment.name}}" target="_blank">{{note.social_frame.attachment}}</a>
  {% if note.is_img %} <br/> 
  <img src="/file/{{note.social_frame.attachment.name}}" class="attachment"/>
  {% endif %}
