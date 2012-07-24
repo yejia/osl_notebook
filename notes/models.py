@@ -341,6 +341,12 @@ class Note(models.Model):
     
     def get_frame_ids_titles(self):
         return [(str(l.id), l.title) for l in self.in_frames.all()] 
+    
+    def is_in_frame(self):
+        if self.get_frame_ids_titles():
+            return True
+        else:
+            return False
 
     def get_desc_short(self):
         if len(self.desc)>97:

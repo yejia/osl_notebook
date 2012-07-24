@@ -348,8 +348,7 @@ def get_public_tags(tags):
 #TODO: add date range search, votes search
 @login_required
 def index(request, username, bookname):   
-    #if 'framebook' == bookname:
-    #    return frames(request, username, 'notebook')      
+    
     N = getNote(username, bookname)
     connection.queries = []
     

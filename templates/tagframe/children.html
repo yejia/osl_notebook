@@ -5,10 +5,18 @@
         {% for tag in children %} 
             <li class="tag_in_frame {% if tag.get_tag_type == 'Nonleaf' %}expandable{% endif %}  {% if  username != profile_username %}{% if forloop.last %}last{% endif %}{% endif %}" tag_name="{{tag.name}}"  parent_name="{{frame}}">
                 {% if tag.get_tag_type == 'Nonleaf' %}<div class="hitarea expandable-hitarea"></div>{% endif %}
-                <span class='noPrint'>                
+                <span class='tag_name_display'>                
                 <a href="javascript:void();" title="{{tag.desc|default:''}}">
                 {{tag.name}}      
                 </a> 
+                
+                 
+                
+                
+                
+                
+                
+                
                 </span>
                  {% if  username == profile_username %}
                 <span title="{% trans 'remove this' %}" class="inline_delete" id="tag_frame_remove">&nbsp;&nbsp;&nbsp;</span>
@@ -22,8 +30,11 @@
                 {% endif %}
                 
                 
-                {% if tag.note_set.count%}  <span>{% trans 'View' %}</span>
-                    <ul style="display: none;">                                       
+                 
+                
+                {% if tag.note_set.count%} 
+                    <span>{% trans 'View' %}</span>
+                    <ul style="display: none;"  class="show_notes">                                       
                           <li><span class="notes_by_tag clickable" bookname="snippetbook" title="{% trans 'Snippets' %}"><img src="/site_media/img/Snippet.png" />{% comment %} TODO: think of applying other viewing mode filtering   {% endcomment %}
                          {% comment %}snippets_count was added to tag in the tree_view cusotom tag lib{% endcomment %}
                           {% if  username == profile_username and private in all_words %} {{tag.snippets_count}}   {% else %} {{tag.public_snippets_count}}  {% endif %}</span>
@@ -41,7 +52,9 @@
                             {% if  username == profile_username and private in all_words %}   {{tag.notes_count}}   {% else %} {{tag.public_notes_count}}  {% endif %}</span>
                           </li>                          
                     </ul> 
-                {% endif %}
+                   {% endif %}  
+                   
+               
                 
                 
             </li>

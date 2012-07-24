@@ -1060,6 +1060,13 @@ height:40px;
 .hide_form_section{
 display:none;
 }
+.show_notes{
+/*float:right;
+position:relative;
+left:80px;
+margin-top:-800px
+z-index:10;*/
+}
 
 #panel{width:1080px;margin-left:auto;margin-right:auto;}
 
