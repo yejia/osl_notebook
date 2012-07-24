@@ -59,7 +59,7 @@
 
 
              <div  class="add_box" id="add_inner_links_box" style="display:none;">  
-             <div id="inner_links">
+             <div id="inner_links"> 
                 {% for rf in note.get_related_frames %}                    
                      <div outer_link_id="{{rf.0}}"><a href="/{{rf.0}}">{{rf.1}}</a></div>  
                 {% empty %}          

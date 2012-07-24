@@ -340,6 +340,7 @@ class Note(models.Model):
         return ','.join([str(l.id) for l in self.in_frames.all()])    
     
     def get_frame_ids_titles(self):
+        print 'self.in_frames.all():', self.in_frames.all()
         return [(str(l.id), l.title) for l in self.in_frames.all()] 
     
     def is_in_frame(self):
@@ -889,15 +890,19 @@ class Frame(Note):
 
 
 
-    def get_related_frames(self):
+    def get_related_frames(self):        
         related = []       
-        for child in self.notes.all():
-            uncles = child.get_frame_ids_titles()
-            related.extend(uncles)
+        for child in self.notes.all():        
+            child.owner_name = self.owner_name
+            uncles = child.get_frame_ids_titles()        
+            for uncle in uncles:        
+                if uncle[0] != str(self.id):
+                    related.append(uncle)        
             #for now, don't go up further TODO:
-            if child.get_note_type() == 'Frame':                 
-                related.extend(child.get_related_frames())
-            
+            if child.get_note_type() == 'Frame':            
+                child.frame.owner_name = self.owner_name           
+                related.extend(child.frame.get_related_frames())        
+        return related    
     
 
 
