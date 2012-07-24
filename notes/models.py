@@ -889,6 +889,18 @@ class Frame(Note):
 
 
 
+    def get_related_frames(self):
+        related = []       
+        for child in self.notes.all():
+            uncles = child.get_frame_ids_titles()
+            related.extend(uncles)
+            #for now, don't go up further TODO:
+            if child.get_note_type() == 'Frame':                 
+                related.extend(child.get_related_frames())
+            
+    
+
+
 class Frame_Notes(models.Model):
     frame = models.ForeignKey(Frame, related_name='note_and_frame') #TODO:
     note = models.ForeignKey(Note)

@@ -1233,6 +1233,14 @@ function showAddNoteTags(){
                     $('#add_course_box').show();          
             });	
             
+             $('span.note_tabs_item#inner_links'). click(function(){            
+                        parent = $(this).parents('div[note_id]');     
+                        parent.find('span.note_tabs_item').removeClass('present');
+                        $(this).addClass("present");        
+                        parent.find('.add_box').hide();                   
+                        $('#add_inner_links_box').show();          
+            });	            
+            
              $('span.note_tabs_item#outer_links'). click(function(){            
                    parent = $(this).parents('div[note_id]');     
                         parent.find('span.note_tabs_item').removeClass('present');

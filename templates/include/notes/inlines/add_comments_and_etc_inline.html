@@ -6,7 +6,7 @@
 {% endblock %}       
              <span class="note_tabs_item"  id="public_comments" title="{% trans "Comments by you and others on your public note" %}">{% trans "Comments" %}({{social_note.get_comments.count}})</span>             
              &nbsp;&nbsp;           
-             <span class="note_tabs_item"  id="inner_links"  title="{% trans "Notebook internal references of this note" %}">{% trans "Inner Links" %}</span>
+             <span class="note_tabs_item"  id="inner_links"  title="{% trans "Notebook internal references of this note" %}">{% trans "Related Frames" %}</span>
              &nbsp;&nbsp;                 
 {% block courses %}                
 {% endblock %}              
@@ -56,6 +56,18 @@
 {% block add_courses %}          
 {% endblock %}    
 
+
+
+             <div  class="add_box" id="add_inner_links_box" style="display:none;">  
+             <div id="inner_links">
+                {% for rf in note.get_related_frames %}                    
+                     <div outer_link_id="{{rf.0}}"><a href="/{{rf.0}}">{{rf.1}}</a></div>  
+                {% empty %}          
+                        {% trans "No related frames" %}
+                {% endfor %}
+             </div> 
+              </div>             
+      
 
 
              <div  class="add_box" id="add_outer_links_box" style="display:none;">  
