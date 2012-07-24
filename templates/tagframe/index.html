@@ -124,12 +124,12 @@
     
       $('span#tag_frame_remove').click(function(){    
             var r=confirm("{% trans 'Are you sure you want to remove this?' %}");
-                if (r==false){            
+            if (r==false){            
             }else{            
-                var tag_name = $(this).parents('li[tag_name]').attr('tag_name');
-                var parent_name = $(this).parents('li[parent_name]').attr('parent_name');
-                $(this).load('removeFrame/',{ 'parent_name':parent_name, 'tag_name':tag_name});
-                $(this).parents("li[tag_name]").remove();      
+                    var tag_name = $(this).parents('li[tag_name]').attr('tag_name');
+                    var parent_name = $(this).parents('li[parent_name]').attr('parent_name');
+                    $(this).load('removeFrame/',{ 'parent_name':parent_name, 'tag_name':tag_name});
+                    $(this).parents("li[tag_name="+tag_name+"]").remove();      
            }      
       });
       
@@ -191,7 +191,7 @@
                                      //alert('t_count:'+t_count);
                                      //$('span.related_tags[id='+tag_name+']')
                                     // alert('<a href="/{{profile_username}}/notebook/notes/?q=t%3A'+t_name+'+%26+t%3A'+tag_name+'" target="_blank">'+t_name+'</a> ('+t_count+') ');
-                                     $('li[parent_name='+tag_name+'] span.related_tags').append('<a href="/{{profile_username}}/notebook/notes/?q=t%3A'+t_name+'+%26+t%3A'+tag_name+'" target="_blank">'+t_name+'</a> ('+t_count+') ');
+                                     $('li.related_tags_in_frame[parent_name='+tag_name+'] span.related_tags').append('<a href="/{{profile_username}}/notebook/notes/?q=t%3A'+t_name+'+%26+t%3A'+tag_name+'" target="_blank">'+t_name+'</a> ('+t_count+') ');
                               // $('li[parent_name='+tag_name+'] span.related_tags').append('showme')
                                
                                
