@@ -815,16 +815,21 @@ class Frame(Note):
 
     #TODO: need save?
     def add_notes(self, noteids_str):
-        note_id_list = [note_id.lstrip().rstrip() for note_id in noteids_str.split(',')]        
-        current_num_of_notes = len(self.get_notes_order())
-        self.db = self.owner_name
-        for note_id in note_id_list:          
-            n = Note.objects.using(self.owner_name).get(id=note_id)              
-            fn,created = Frame_Notes.objects.using(self.owner_name).get_or_create(frame=self, note=n)
-            if created:
-                fn._order=current_num_of_notes
-                current_num_of_notes += 1         
-            #self.notes.add(n)
+        if noteids_str:
+            note_id_list = [note_id.lstrip().rstrip() for note_id in noteids_str.split(',')]        
+            current_num_of_notes = len(self.get_notes_order())
+            self.db = self.owner_name
+            for note_id in note_id_list:   
+                if note_id != str(self.id):   
+                    print 'It is not the frame itself.'   
+                    n = Note.objects.using(self.owner_name).get(id=note_id)   
+                    if n not in self.notes.all():   
+                        print 'not in the existing included notes.'        
+                        fn,created = Frame_Notes.objects.using(self.owner_name).get_or_create(frame=self, note=n)
+                        if created:
+                            fn._order=current_num_of_notes
+                            current_num_of_notes += 1         
+                    #self.notes.add(n)
     
     #TODO:note_id or id?        
     def remove_note(self, note_id):

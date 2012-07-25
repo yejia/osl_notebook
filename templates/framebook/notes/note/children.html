@@ -1,8 +1,9 @@
  {% load tree_view %}  
- 
+ {% load i18n %}
+
 
         {% for note in children %} 
-            <li class="note_in_frame {% if note.get_note_type == 'Frame' %}expandable{% endif %} {% if forloop.last %}last{% endif %}" note_id="{{note.id}}">
+            <li class="note_in_frame {% if note.get_note_type == 'Frame' %}expandable{% endif %} {% if forloop.last %}last{% endif %}"  note_id="{{note.id}}"  linked_note_id="{{note.id}}">  {% comment %}note_id for set_the_order and linked_note_id for #frame_delete_note{% endcomment %}
                 {% if note.get_note_type == 'Frame' %}<div class="hitarea expandable-hitarea"></div>{% endif %}
                 <span class='noPrint'>
                 <img src="/site_media/img/{{note.get_note_type}}.png" title="{{note.get_note_type}}" />
@@ -36,8 +37,10 @@
                 {% for tag  in note.get_tags %}                    
                         <a href="{{book_uri_prefix}}/{{note.get_note_bookname}}/notes/tags/{{tag}}/">{{tag}}</a>,                 
                 {% endfor %}
-                <img src="/site_media/img/thumbUp.gif"/>{{note.vote}}
+                <span title="{% trans 'vote by the owner' %}">{{note.vote}}</span>
                 </span>
+                
+                <span title="remove this note from the frame" class="inline_delete noPrint" id="frame_delete_note">&nbsp;&nbsp;&nbsp;</span>
                 
                 {% if  note.get_note_type == 'Snippet' %}  
                     <div>

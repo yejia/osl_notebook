@@ -48,7 +48,7 @@
 
 		    
 {% block full_display_div_extra %}
-     <div  id="note_notes">
+     <div  id="note_notes"  note_id="{{note.id}}">
              {% trans 'Notes included in this frame' %}:
             <ul>
             <!--TODO: refactor-->
@@ -75,17 +75,7 @@
             </ul>
     </div>
 
-    <div>
-                <div  id="note_add_notes">
-                    {% if user.username == profile_username %}
-                        <span class="editable">
-                        <span  class="included_notes_edit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                        <input type="text" name="included_notes_added" id="update_included_notes_inline_box"  style="display: none;"   placeholder="{% trans "Enter comma separated note ids" %}"/>
-                       {% trans 'add more notes to the frame' %} 
-                        <a href="javascript:alert('{% trans "Enter comma separated note ids. And those notes will be included in this frame." %}');">
-                            <img src="/media/img/admin/icon-unknown.gif"/>
-                        </a>
-                        </span>
-                    {% endif %}
-        </div>
+    <div note_id="{{note.id}}">
+                {% include "framebook/notes/inlines/add_included_notes.html" %}   
+     </div>   
 {% endblock %} 	

@@ -1490,48 +1490,53 @@ function showAddNoteTags(){
         
         
         
-             $("span.included_notes_edit"). click(function(){
-                //alert('included_notes_edit clicked'); 
-                      var  editable =    $(this).parents('span.editable') ; 
-                      editable.prepend('<span class="included_notes_save">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="included_notes_cancel">&nbsp;&nbsp;&nbsp;&nbsp;</span>');                        
-                      editable.find("#update_included_notes_inline_box").show();
-                      $(this).hide();
+             $("span.included_notes_edit"). click(function(){             
+                        var  editable =    $(this).parents('span.editable') ; 
+                        editable.prepend('<span class="included_notes_save">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="included_notes_cancel">&nbsp;&nbsp;&nbsp;&nbsp;</span>');                        
+                        editable.find("#update_included_notes_inline_box").show();
+                        $(this).hide();
                            
-                       // alert('after hiding this');     
+                           
                          $("span.included_notes_cancel"). click(function(){     
                                 var  editable =    $(this).parents('span.editable') ;                      
                                 editable.find("#update_included_notes_inline_box").hide();                    
                                 editable.find('span.included_notes_save').remove();
-                                editable.find('span.included_notes_edit').show();
-                                
-                                $(this).remove();
-                                
-                                 }); 
-                       //  alert('after cancel');     
+                                editable.find('span.included_notes_edit').show();                                
+                                $(this).remove();                                
+                         }); 
+                       
                          
-                         $("span.included_notes_save"). click(function(){                  
+                         $("span.included_notes_save"). click(function(){           
                                  var included_notes_added = $(this).parents('span.editable').find(':input').val();	
-                                 //alert('included_notes_added is:'+included_notes_added);
-                                 var  editable =    $(this).parents('span.editable') ;                               
+                                 var  editable =    $(this).parents('span.editable') ;          
+                                  note_id = $(this).parents('div[note_id]').attr('note_id');
+                                  notes_to_add_list = included_notes_added.split(" ,");                             
+                                  for (var i=0;i<notes_to_add_list.length;i++){
+                                        if (notes_to_add_list[i] == note_id){
+                                            alert('{% trans "You cannot add a note to itself!"%}');
+                                            return false;
+                                        }    
+                                  //prevent adding existing included notes as well. #TODO:  
+                                    }
 
-                                 // alert('in save, before post');    
-
-                             $.post('addNotesToFrame/',{ 'id':$(this).parents('li').attr('note_id'), 'included_notes_added':  included_notes_added}, included_notes_updated_inline ,'json');           
-              
+                                    $.post('addNotesToFrame/',{ 'id':note_id, 'included_notes_added':  included_notes_added}, included_notes_updated_inline ,'json');               
            
                             });            
 
-                           // alert('after save');     
-
+                           
                             function included_notes_updated_inline(result){           
-                                        var  editable =     $('li[note_id="'+result.note_id+'"] div.full_display  div#note_add_notes span.editable') ;         
+                                        //var  editable =     $('li[note_id="'+result.note_id+'"] div.full_display  div#note_add_notes span.editable') ;         
+                                        var  editable =     $('div[note_id="'+result.note_id+'"]  div#note_add_notes span.editable') ;     
 
+                                       //below applies to both frames display and a single frame display page
                                         editable.find('span.included_notes_cancel').remove();
                                         //TODO:define variable with jquery
                                         editable.find("#update_included_notes_inline_box").hide();                    
                                         editable.find('span.included_notes_save').remove();
-                                        editable.find('span.included_notes_edit').show();
+                                        editable.find('span.included_notes_edit').show();                               
+                                      
                                         
+                                        //for frames display
                                         var full_display = editable.parents('div.full_display');
                                         var ul_full = full_display.find('div div#note_notes ul');                                  
                                          
@@ -1539,13 +1544,32 @@ function showAddNoteTags(){
                                          //alert('ul_brief is:'+ul_brief.html());     
                                          
                                         for (var i=0;i<result.notes_added.length;i++){ 
-                                        // alert('i is'+i);
+                                        
+                                         
+                                       
                                             if (result.notes_added[i][1] == ''){
                                                 title = '{% trans "(No Title)" %}';
                                             }else{
                                                 title  = result.notes_added[i][1];
                                             }
-                                          // alert('title:'+title);
+                                         
+                                          
+                                           //for frame display
+                                          var frame_tree = $('ul.frame_tree');                                    
+                                          frame_tree.find('li:last').removeClass('last');                                        
+                                          frame_tree.append('<li class="note_in_frame last"  note_id="'+result.notes_added[i][0]+'"  linked_note_id="'+result.notes_added[i][0]+'"><img src="/site_media/img/'+result.notes_added[i][5]+'.png" title="'+result.notes_added[i][5]+'"/><a href="/{{profile_username}}/'+result.notes_added[i][4]+'/notes/note/'+result.notes_added[i][0]+'"><strong>'+title+'</strong></a>'+
+                                                                                '&nbsp;&nbsp;&nbsp;'+result.notes_added[i][2]+'&nbsp;&nbsp;&nbsp;&nbsp;'+result.notes_added[i][3]+' &nbsp;&nbsp;&nbsp;&nbsp;'+
+                                                                                '<span title="remove this note from the frame" class="inline_delete" id="frame_delete_note">&nbsp;&nbsp;&nbsp;</span></li>');
+                                        
+                                        
+                                          frame_tree.find('li[note_id="'+result.notes_added[i][0]+'"] span#frame_delete_note').click(function(){	
+                                             //alert('linked_note_id:'+linked_note_id);
+                                                    $.post('deleteNoteFromFrame/',{ 'linkage_id':$(this).parents('div[note_id]').attr('note_id'), 'note_id':$(this).parents('li[linked_note_id]').attr('linked_note_id')});                                        
+                                                    $(this).parents("li[linked_note_id]").remove();                                                   
+                                            });                                      
+                                        
+                                          
+                                             //for frames display
                                             var toappend = '<div linked_note_id="'+result.notes_added[i][0]+'">'+
                                                                            '<li><img src="/site_media/img/'+result.notes_added[i][5]+'.png" title="'+result.notes_added[i][5]+'"/><a href="/{{profile_username}}/'+result.notes_added[i][4]+'/notes/note/'+result.notes_added[i][0]+'"><strong>'+title+'</strong></a>'+
                                                                                 '&nbsp;&nbsp;&nbsp;'+result.notes_added[i][2]+'&nbsp;&nbsp;&nbsp;&nbsp;'+result.notes_added[i][3]+' &nbsp;&nbsp;&nbsp;&nbsp;'+

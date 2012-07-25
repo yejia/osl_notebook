@@ -40,9 +40,17 @@
     <div id="sidetreecontrol"> <a href="?#">{% trans 'List' %}</a> | <a href="?#">{% trans 'Expanded' %}</a></div>    
      {% include "include/notes/note/display_attachment.html" %}      
 </div>     
+<div note_id="{{note.id}}">
     <ul id="sortable" class="frame_tree" >
         {% tree_view_tag note %}
     </ul> 
+</div>    
+    <br/>
+    <div note_id="{{note.id}}">
+    {% include "framebook/notes/inlines/add_included_notes.html" %}   
+    </div>
+    <br/>
+    
  {% endblock %}
  
 
