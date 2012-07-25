@@ -337,10 +337,10 @@ class Note(models.Model):
         return ','.join([str(l.id) for l in self.linkagenote_set.all()])     
     
     def display_frames(self):
-        return ','.join([str(l.id) for l in self.in_frames.all()])    
+        return ','.join([str(l.id) for l in self.in_frames.filter(deleted=False)])    
     
     def get_frame_ids_titles(self):        
-        return [[l.id, l.title] for l in self.in_frames.all()] 
+        return [[l.id, l.title] for l in self.in_frames.filter(deleted=False)] 
     
     def is_in_frame(self):
         if self.get_frame_ids_titles():
@@ -897,7 +897,7 @@ class Frame(Note):
     def get_related_frames(self):        
         related = []    
         offsprings = self.get_offsprings()   
-        for child in self.notes.all():        
+        for child in self.notes.filter(deleted=False):        
             child.owner_name = self.owner_name
             uncles = child.get_frame_ids_titles()        
                   
@@ -910,13 +910,12 @@ class Frame(Note):
             if child.get_note_type() == 'Frame':            
                 child.frame.owner_name = self.owner_name           
                 related.extend(child.frame.get_related_frames())        
-        
-        #print 'get_offsprings', self.get_offsprings()
-        for n in related:
-            #print 'n[0]', n[0]
-            if n[0] in self.get_offsprings():
-                #print 'in offsprints'
-                related.remove(n)        
+        #get a copy of related. Otherwise, removing item while iterating through the list will mess things up
+        for nr in related[:]:            
+            if nr[0] in self.get_offsprings():
+                related.remove(nr)   
+            if nr[0] == self.id:
+                related.remove(nr)         
         related = list(set(related))        
         related.sort(key=lambda r: r[1],reverse = False) 
         return related    
