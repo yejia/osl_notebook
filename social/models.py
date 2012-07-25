@@ -429,6 +429,18 @@ class Social_Frame_Notes(models.Model):
         order_with_respect_to = 'social_frame'
 
 
+
+class Social_Note_Taken(models.Model):
+    note = models.ForeignKey(Social_Note)
+    taker = models.ForeignKey(Member)
+    init_date = models.DateTimeField('date created', auto_now_add=True)
+    
+    def __unicode__(self):
+        #TODO:use ugettext for translation
+        return self.taker.username+" taking "+self.note.owner.username+"'s note: "+self.note.desc
+    
+
+
 class Social_Note_Comment(models.Model):
     note =  models.ForeignKey(Social_Note)
     commenter = models.ForeignKey(Member)

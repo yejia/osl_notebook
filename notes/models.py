@@ -904,13 +904,18 @@ class Frame(Note):
             for uncle in uncles:        
                 uncle.append('(note '+str(child.id)+')  '+child.title+':  '+child.desc)  
                 if uncle[0] != self.id and uncle[0] not in self.get_offsprings() and uncle not in related:
-                    related.append(uncle)        
+                    #make it into a tuple so it can be hashed for soring later. (list cannot be hashed)
+                    related.append((uncle[0],uncle[1],uncle[2]))        
             #for now, don't go up further TODO:
             if child.get_note_type() == 'Frame':            
                 child.frame.owner_name = self.owner_name           
                 related.extend(child.frame.get_related_frames())        
         
-        
+        for n in related:
+            if n[0] in self.get_offsprings():
+                related.remove(n)        
+        related = list(set(related))        
+        related.sort(key=lambda r: r[1],reverse = False) 
         return related    
     
 
@@ -922,7 +927,7 @@ class Frame(Note):
             if child.get_note_type() == 'Frame': 
                 child.frame.owner_name = self.owner_name 
                 offsprings.extend(child.frame.get_offsprings())
-        print 'offsprings', offsprings
+        
         return   offsprings       
             
 
