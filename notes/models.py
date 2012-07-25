@@ -911,8 +911,11 @@ class Frame(Note):
                 child.frame.owner_name = self.owner_name           
                 related.extend(child.frame.get_related_frames())        
         
+        #print 'get_offsprings', self.get_offsprings()
         for n in related:
+            #print 'n[0]', n[0]
             if n[0] in self.get_offsprings():
+                #print 'in offsprints'
                 related.remove(n)        
         related = list(set(related))        
         related.sort(key=lambda r: r[1],reverse = False) 
