@@ -320,10 +320,10 @@ def notes(request, username, bookname):
     #profile_user = 
     note_list = getSN(bookname).objects.filter(owner__username=username)  
     note_list_taken = getSN(bookname).objects.filter(social_note_taken__taker__username=username) 
-    print 'note_list_taken', note_list_taken
-    print 'note_list size:',len(note_list)
-    note_list = note_list | note_list_taken
-    print 'note_list size after merge:',len(note_list)
+    #print 'note_list_taken', note_list_taken
+    #print 'note_list size:',len(note_list)    
+    note_list = note_list | note_list_taken #search across table,, so cannot be merged? TODO:
+    #print 'note_list size after merge:',len(note_list)
     #print 'notelist obtained:', note_list    
     qstr = __getQStr(request)    
     note_list  = getSearchResults(note_list, qstr)

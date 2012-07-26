@@ -457,9 +457,9 @@ def getSearchResults(root_note_list, qstr, search_fields = ('title','desc')):
             elif oper=='|':
                 log.debug( '| operation' )
                 theother_note_list = root_note_list.filter(q2)
-                print 'note_list size:',len(note_list)
+                #print 'note_list size:',len(note_list)
                 note_list = note_list | theother_note_list	
-                print 'note_list size after merge:',len(note_list)
+                #print 'note_list size after merge:',len(note_list)
 
                  
     elif qstr: #TODO: for text search, not support exclude (~) so far
