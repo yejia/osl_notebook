@@ -168,6 +168,17 @@ def notes_by_tag(request, username, tag_path, bookname):
     #print tag_name
     request.appname = 'tagframe'
     request.tag_path = tag_path
+    
+    #N = getNote(username, bookname)
+    #n_list = N.objects.filter(tags__name=tag_name)    
+    #if len(n_list) > 100:
+#===============================================================================
+#        q = request.GET.copy()
+#        q.update({'q':'t:'+tag_list[-2]})
+#        request.GET = q
+#===============================================================================        
+        #request.limited_list = tag_list[-2:]
+       
     return tags(request, username, bookname, tag_name, 'notes')
 
 

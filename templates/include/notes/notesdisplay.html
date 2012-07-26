@@ -75,6 +75,12 @@
 <div>
 {% if request.appname == 'tagframe' %}
     {% trans "Viewing notes under tag path" %}: {{request.tag_path}}
+    {% if request.limited %}<br/><br/>
+    
+    <div>{% trans "There are more than 100 notes having this tag. Only the first 100 are shown." %}
+              {% comment %}   {% trans "There are more than 150 notes having tags of " %}{{request.limited_list.1}}. {% trans "So notes of both " %}{{request.limited_list|join:"," }}{% trans " are shown." %} {% endcomment %}  
+     </div>           
+     {% endif %}
 {% endif %}
 </div>
 

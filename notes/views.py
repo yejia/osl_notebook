@@ -405,8 +405,8 @@ def getSearchResults(root_note_list, qstr, search_fields = ('title','desc')):
     if qstr and (qstr.startswith('t:') or qstr.startswith('v:') or  qstr.startswith('~')): 	         
         oper_list = re.findall(r'&|\|', qstr)
         term_list = re.split(r'&|\|',qstr)
-        print(['oper_list:',oper_list])
-        print(['term_list:',term_list])       
+        log.info(['oper_list:',oper_list])
+        log.info(['term_list:',term_list])       
         #for term in term_list for oper in oper_list:
         first_term =  term_list[0].split(":")
         t1 = first_term[1].strip()
@@ -698,6 +698,9 @@ def tags(request, username, bookname, tag_name, aspect_name):
             default_tag_id = t.id   
         else:
             default_tag_id = 0  
+        
+        
+                
         context = __get_context(request, note_list, default_tag_id, username, bookname, aspect_name)   
         queries = connection.queries	
         extra_context = {'current_tag':tag_name, 'aspect_name':aspect_name, 'queries':queries}
@@ -982,6 +985,13 @@ def __get_notes_context(request, note_list):
     else:   
         #sort by relevance
         log.debug('sorty by relevance under tag path:'+request.tag_path)
+        #it is too much computation to compute the relevance for each note. So cut the size if there are more than 100 notes. 
+        #This is not right! It still need to sort by relevance first to get the first 100 more relevant notes.
+        #TODO: create another table to store the relevance values for notes that are in the tag tree and do the computation separately every day.
+        if len(note_list) > 100:
+            note_list = note_list[:100]
+            request.limited = True
+        
         sorted_notes = [(note, note.get_relevance(request.tag_path)) for note in note_list]   
         sorted_notes.sort(key=lambda r: r[1],reverse = True) 
         for item  in sorted_notes:
