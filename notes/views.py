@@ -405,8 +405,8 @@ def getSearchResults(root_note_list, qstr, search_fields = ('title','desc')):
     if qstr and (qstr.startswith('t:') or qstr.startswith('v:') or  qstr.startswith('~')): 	         
         oper_list = re.findall(r'&|\|', qstr)
         term_list = re.split(r'&|\|',qstr)
-        log.debug(['oper_list:',oper_list])
-        log.debug(['term_list:',term_list])       
+        print(['oper_list:',oper_list])
+        print(['term_list:',term_list])       
         #for term in term_list for oper in oper_list:
         first_term =  term_list[0].split(":")
         t1 = first_term[1].strip()
@@ -457,8 +457,10 @@ def getSearchResults(root_note_list, qstr, search_fields = ('title','desc')):
             elif oper=='|':
                 log.debug( '| operation' )
                 theother_note_list = root_note_list.filter(q2)
+                print 'note_list size:',len(note_list)
                 note_list = note_list | theother_note_list	
-                
+                print 'note_list size after merge:',len(note_list)
+
                  
     elif qstr: #TODO: for text search, not support exclude (~) so far
         #TODO: simple text search so far, no | and others  

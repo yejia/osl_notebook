@@ -3,6 +3,7 @@
  
 
         {% for tag in children %} 
+          {% if not tag.private or  username == profile_username  %} 
             <li class="tag_in_frame {% if tag.get_tag_type == 'Nonleaf' %}expandable{% endif %}  {% if  username != profile_username %}{% if forloop.last %}last{% endif %}{% endif %}" tag_name="{{tag.name}}"  parent_name="{{frame}}">
                 {% if tag.get_tag_type == 'Nonleaf' %}<div class="hitarea expandable-hitarea"></div>{% endif %}
                 <span class='tag_name_display'>                
@@ -58,6 +59,7 @@
                 
                 
             </li>
+          {% endif %}     
         {% endfor %}
         
         {% if frame.note_set.count%} 

@@ -318,7 +318,12 @@ def notes(request, username, bookname):
 #        return frames(request, username, 'notebook')   
 #===============================================================================
     #profile_user = 
-    note_list = getSN(bookname).objects.filter(owner__username=username)   
+    note_list = getSN(bookname).objects.filter(owner__username=username)  
+    note_list_taken = getSN(bookname).objects.filter(social_note_taken__taker__username=username) 
+    print 'note_list_taken', note_list_taken
+    print 'note_list size:',len(note_list)
+    note_list = note_list | note_list_taken
+    print 'note_list size after merge:',len(note_list)
     #print 'notelist obtained:', note_list    
     qstr = __getQStr(request)    
     note_list  = getSearchResults(note_list, qstr)
@@ -341,6 +346,7 @@ def notes(request, username, bookname):
     return render_to_response('social/include/notes/notes.html', {'note_list':paged_notes,'sort':sort, 'bookname':bookname, 'pick_lang':pick_lang, \
                                'folders':folders, 'profile_username':username, 'profile_member':profile_member, 'appname':'social', 'cl':cl},\
                                                   context_instance=RequestContext(request,  {'book_uri_prefix':'/social/'+username}))
+
 
 
 notebook_host_names = ['www.91biji.com', '91biji.com', 'opensourcelearning.org', 'www.opensourcelearning.org', '3exps.org', '3exps.com', 'www.3exps.org', 'www.3exps.com']
@@ -787,7 +793,8 @@ def vote_unuseful(request):
 @login_required
 def take(request):
     note_id = request.POST.get('id') 
-    snt, created = Social_Note_Taken.objects.get_or_create(note__id=note_id, taker=request.user.member)
+    sn = SN.objects.get(id=note_id)
+    snt, created = Social_Note_Taken.objects.get_or_create(note=sn, taker=request.user.member)
     return  HttpResponse(created, mimetype="text/plain")   
 
 import notebook.settings as settings
