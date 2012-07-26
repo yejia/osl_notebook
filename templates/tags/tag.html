@@ -16,12 +16,12 @@
 <b>delete:</b> {{tag.delete}}
 </div>
 
-    <div>{% trans "Other related tags" %}:
+    <span id="related_tags">{% trans "Other related tags" %}:
      {% for t in tag.related_tags %}
-    <a href="/{{user.username}}/notebook/notes/?q=t%3A{{t.0}}+%26+t%3A{{tag.name}}" target="_blank">{{t.0}}</a> ({{t.1}})  
+    <a href="/{{user.username}}/notebook/notes/?q=t%3A{{t.0}}+%26+t%3A{{tag.name}}" target="_blank" rel="{{t.1}}">{{t.0}}</a> ({{t.1}})  
     {%comment%}The encoded part is:    t:{{t.0}} & t:{{tag.name}}  , might use urlenode{%endcomment%}   
     {% endfor %}
-    </div>
+    </span>
 
 <br/><br/>
 

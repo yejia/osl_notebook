@@ -2313,7 +2313,8 @@ def __get_related_tags(username, tag_name):
         note_list = note_list.filter(tags__name=t.name) 
         if note_list.count():
             related.append((t.name, note_list.count()))
-    related.sort(key=lambda r: r[1], reverse=True)   
+    #related.sort(key=lambda r: r[1], reverse=True)
+    related.sort(key=lambda r: r[0], reverse=False)   
     return related
 
 

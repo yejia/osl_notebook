@@ -14,9 +14,10 @@
 
 {% block extra_script %}
 
+
 <script src="/site_media/js/ui/jquery.ui.sortable.js"></script>    
-    <script src="/site_media/js/jquery.treeview.js" type="text/javascript"></script>    
-    <script>
+<script src="/site_media/js/jquery.treeview.js" type="text/javascript"></script>    
+<script>
 	$(function() {   
     
     
@@ -191,13 +192,29 @@
                                      //alert('t_count:'+t_count);
                                      //$('span.related_tags[id='+tag_name+']')
                                     // alert('<a href="/{{profile_username}}/notebook/notes/?q=t%3A'+t_name+'+%26+t%3A'+tag_name+'" target="_blank">'+t_name+'</a> ('+t_count+') ');
-                                     $('li.related_tags_in_frame[parent_name='+tag_name+'] span.related_tags').append('<a href="/{{profile_username}}/notebook/notes/?q=t%3A'+t_name+'+%26+t%3A'+tag_name+'" target="_blank">'+t_name+'</a> ('+t_count+') ');
+                                     $('li.related_tags_in_frame[parent_name='+tag_name+'] span.related_tags').append('<a href="/{{profile_username}}/notebook/notes/?q=t%3A'+t_name+'+%26+t%3A'+tag_name+'" target="_blank"  rel="'+t_count+'">'+t_name+'</a> ('+t_count+') ');
                               // $('li[parent_name='+tag_name+'] span.related_tags').append('showme')
                                
+                               
+                                    $.fn.tagcloud.defaults = {
+                                                size: {start: 8, end: 18, unit: 'pt'},
+                                                color: {start: '#c77', end: '#f52'}
+                                    };
+
+                                    $(function () {
+                                                $('.related_tags a').tagcloud();
+                                    });
                                
                                }
           
           }
+          
+          
+
+
+
+
+
           
           
           //~ $('.tag_name_display').hover(function(){  

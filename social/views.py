@@ -782,7 +782,13 @@ def vote_unuseful(request):
     snv.useful=False
     snv.save()  
     result = str(note.get_useful_votes())+'/'+str(note.get_total_votes())    
-    return HttpResponse(result, mimetype="text/plain")          
+    return HttpResponse(result, mimetype="text/plain")      
+
+@login_required
+def take(request):
+    note_id = request.POST.get('id') 
+    snt, created = Social_Note_Taken.objects.get_or_create(note__id=note_id, taker=request.user.member)
+    return  HttpResponse(created, mimetype="text/plain")   
 
 import notebook.settings as settings
 if "notification" in settings.INSTALLED_APPS:

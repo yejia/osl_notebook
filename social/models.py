@@ -440,6 +440,10 @@ class Social_Note_Taken(models.Model):
         return self.taker.username+" taking "+self.note.owner.username+"'s note: "+self.note.desc
     
 
+    class Meta:
+        unique_together = (("note","taker"),)   
+        
+        
 
 class Social_Note_Comment(models.Model):
     note =  models.ForeignKey(Social_Note)
@@ -451,7 +455,8 @@ class Social_Note_Comment(models.Model):
         #TODO:use ugettext for translation
         return self.commenter.username+" on "+self.note.owner.username+"'s note: "+self.desc 
 
-    class Meta:
+    class Meta:  
+        unique_together = (("note","commenter", "desc"),)         
         ordering = ['-init_date','note','desc']
 
 

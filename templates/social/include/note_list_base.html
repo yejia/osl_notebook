@@ -15,6 +15,14 @@
                 $('.voteunuseful').click(function(){
                         $(this).parents(".social_thumb").find("#note_vote").load('voteUnuseful/',{ 'id':$(this).parents("div").attr('note_id')});
                 });
+                
+                $('.take').click(function(){                 
+                        $.post('take/',{ 'id':$(this).parents("div").attr('note_id')}, processreturn,'text');
+                });
+                
+                function processreturn(){
+                     ;
+                }
 {% endblock %}              
 
          

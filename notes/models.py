@@ -695,6 +695,7 @@ class Note_Comment(models.Model):
         return self.desc  
         
     class Meta:
+        unique_together = (("note", "desc"),)   
         ordering = ['-init_date','note','desc']
                 
 
