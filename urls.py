@@ -107,7 +107,7 @@ urlpatterns = patterns('',
 
  
 
-
+   #TODO:put tagframe at front, since it doesn't distinguis btw personal and public book. For example /tagframe/username/...
     (r'^(?P<username>[^/]+)/tagframe/$', 'notebook.tags.views.index'),
    # (r'^(?P<username>[^/]+)/tagframe/addTagFrame/$', 'notebook.tags.views.add_tag_frame'),
     (r'^(?P<username>[^/]+)/tagframe/addTags2Frame/$', 'notebook.tags.views.add_tags_2_frame'),
@@ -130,7 +130,8 @@ urlpatterns = patterns('',
     (r'^(?P<username>[^/]+)/tagframe/(.*)/(?P<bookname>[^/]+)/notes/voteDownNote/$','notebook.notes.views.vote_down_note'),
     (r'^(?P<username>[^/]+)/tagframe/(.*)/(?P<bookname>[^/]+)/notes/deleteNote/$','notebook.notes.views.delete_note'),
     (r'^(?P<username>[^/]+)/tagframe/(.*)/(?P<bookname>[^/]+)/notes/addNote/$','notebook.notes.views.add_note'),  
-
+    (r'^(?P<username>[^/]+)/tagframe/(.*)/(?P<bookname>[^/]+)/notes/addTags2Notes2/$','notebook.notes.views.add_tags_to_notes2'),
+    (r'^(?P<username>[^/]+)/tagframe/(.*)/(?P<bookname>[^/]+)/notes/removeTagsFromNotes2/$','notebook.notes.views.remove_tags_from_notes2'),
 
   
 
