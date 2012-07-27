@@ -192,7 +192,11 @@ def show_out_of_sync(username):
     for sn in sns:
         n = Note.objects.using(username).get(id=sn.owner_note_id)
         if n.deleted == True:
-            print sn.id,
+            print 'social:',sn.id, 'personal:',n.id
+
+            #print 'removing this note from social...'
+            #sn.delete()
+            
    
 
 
