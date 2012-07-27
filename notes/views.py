@@ -147,6 +147,16 @@ def logout_view(request):
     return HttpResponseRedirect('/login/') 
 
 
+def __get_home(request):
+    username = request.user.username
+    if request.user.member.home == 'f':
+        return '/'+username+'/framebook/notes/' 
+    elif request.user.member.home == 't':
+        return '/'+username+'/tagframe/' 
+    else:         
+        return '/'+username+'/snippetbook/notes/' 
+
+
 def login_user(request): 
     username = request.POST['username']
     password = request.POST['password']
@@ -161,8 +171,9 @@ def login_user(request):
             if next:
                 if next.find('anonymous') != -1:
                     next = next.replace('anonymous', username)
-                return HttpResponseRedirect(next)           
-            return HttpResponseRedirect('/'+username+'/snippetbook/notes/') 
+                return HttpResponseRedirect(next)  
+                   
+            return HttpResponseRedirect(__get_home(request)) 
         else:
             pass
             # Return a 'disabled account' error message
@@ -228,10 +239,10 @@ def register_user(request):
        
 
 @login_required
-def root(request):
+def root(request):    
     user = request.user
     username = user.username
-    return HttpResponseRedirect('/'+username+'/snippetbook/notes/') 
+    return HttpResponseRedirect(__get_home(request)) 
 
 
 from notification.models import Notice
@@ -2264,6 +2275,7 @@ def settings_update_profile(request):
     m.gender = request.POST.get('gender')
     m.default_lang = request.POST.get('default_lang')
     m.digest = request.POST.get('digest')
+    m.home = request.POST.get('home')
     m.save()
     #
     #f = ProfileForm(request.POST, request.FILES, instance=m)          

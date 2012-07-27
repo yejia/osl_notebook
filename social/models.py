@@ -48,6 +48,13 @@ class Member(User):
         ('d', ugettext_lazy('Daily Digest')),
         ('w', ugettext_lazy('Weekly Digest')),        
     )  
+    HOME_CHOICES = (      
+        ('s', ugettext_lazy('Snippets')),                
+        ('f', ugettext_lazy('Frames')),
+        ('t', ugettext_lazy('Tag Tree')),        
+    )   
+   
+    
     nickname = models.CharField(max_length=50, blank=True,  verbose_name=ugettext_lazy('Nickname'))   
     role = models.CharField(max_length=1, choices=ROLE_CHOICES, blank=True) 
     #TODO: change to avatar
@@ -57,6 +64,7 @@ class Member(User):
     #so far, this is only used for scripts instead of in the web app. TODO:
     default_lang = models.CharField(max_length=10, choices=LANG_CHOICES, blank=True,  verbose_name=ugettext_lazy('Default language'))   
     digest = models.CharField(max_length=1, choices=DIGEST_CHOICES, blank=True, default='d',  verbose_name=ugettext_lazy('Digest')) 
+    home = models.CharField(max_length=1, choices=HOME_CHOICES, blank=True, default='s',  verbose_name=ugettext_lazy('Home'))
     #maynot be a good way to do like this. TODO:
     # Use UserManager to get the create_user method, etc.
     objects = UserManager()
@@ -124,7 +132,24 @@ class Member(User):
         
     def get_public_notes_count(self):
         return Social_Note.objects.filter(owner=self).count()
-        
+  
+  
+  
+#class Member_Settings(models.Model): 
+#===============================================================================
+#    HOME_CHOICES = (      
+#        ('s', ugettext_lazy('Snippets')),                
+#        ('f', ugettext_lazy('Frames')),
+#        ('t', ugettext_lazy('Tag Tree')),        
+#    )   
+#    member = models.ForeignKey(Member)
+#    home = models.CharField(max_length=1, choices=HOME_CHOICES, blank=True, default='s',  verbose_name=ugettext_lazy('Home')) 
+#===============================================================================
+    
+     
+#    def __unicode__(self): 
+#        return self.member.username + ugettext_lazy('  settings')   
+       
 
 class Social_Tag(models.Model):    
     name = models.CharField(max_length=150)
