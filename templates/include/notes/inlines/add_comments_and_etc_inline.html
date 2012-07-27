@@ -59,7 +59,7 @@
 
 
              <div  class="add_box" id="add_inner_links_box" style="display:none;">  
-             <div id="inner_links"> 
+             <div> 
                 {% for rf in note.get_related_frames %}                    
                      <div outer_link_id="{{rf.0}}"><a href="{{book_uri_prefix}}/framebook/notes/note/{{rf.0}}/" title="{% trans "connected by: " %}{{rf.2}}" target="_blank">{{rf.1}}</a></div>  
                 {% empty %}          
@@ -71,7 +71,7 @@
 
 
              <div  class="add_box" id="add_outer_links_box" style="display:none;">  
-             <div id="outer_links">
+             <div>
                 {% for outer_link in social_note.get_outer_links %}                    
                      <div outer_link_id="{{outer_link.id}}"><a href="{{outer_link.url}}" target="_blank">{{outer_link.url}}</a>     {% if user.username == profile_username %}       <span title="{% trans "remove this outer link" %}" class="inline_delete" id="note_delete_outer_link">&nbsp;&nbsp;&nbsp;</span> {% endif %}</div>                     
                 {% endfor %}
