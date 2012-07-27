@@ -52,9 +52,9 @@
     {% for note in note_list.object_list %} 
         <!--got rid of "user.username != profile_username and " so that even the user himself cannot see private social notes (only viewable in the groups that the private notes are shared. TODO: change?)-->
         {% if appname == 'social' and note.private %}  <!--for social public notebook, not private social notes will be shown. But in the group app, it is ok.-->
-        {% else %}     {% comment %}  
-            {% if True or bookname == 'framebook' and note.is_in_frame %}
-             {% else %}     {% endcomment %}   
+        {% else %}     
+            {% if bookname == 'framebook' and note.is_in_frame %}
+             {% else %}      
          <li class="note_display" note_id="{{ note.id }}">
             <div class="{{bookname}}" note_id="{{ note.id }}" social_note_id="{{ note.id }}">
 	          <div class="kuoda"></div><div class="yasuo"></div>
@@ -135,7 +135,7 @@
            
            </div>
 	     </li>
-    {% comment %}      {% endif %}  {% comment %}  endif for check if frame is top frame. No displaying for non-top frames    {% endcomment %}   
+        {% endif %}  {% comment %}  endif for check if frame is top frame. No displaying for non-top frames    {% endcomment %}   
     {% endif %} 
     {% endfor %}
 </ul>

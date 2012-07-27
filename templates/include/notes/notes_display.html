@@ -41,9 +41,9 @@
 <ul class="notes_display">
     {% for note in note_list.object_list %}
         {% if user.username != profile_username and note.is_private %}  
-        {% else %}   {% comment %}  
-             {% if True or bookname == 'framebook' and note.is_in_frame %}
-             {% else %}    {% endcomment %}           
+        {% else %}   
+             {% if bookname == 'framebook' and note.is_in_frame %}
+             {% else %}             
          <li class="note_display" note_id="{{ note.id }}"  social_note_id="{{ note.get_social_note.id }}">
           <div class="{{bookname}}" note_id="{{ note.id }}">
          {% if user.username == profile_username %}     
@@ -167,7 +167,7 @@
             
            
 	     </li>
-   {% comment %}  {% endif %}   endif for check if frame is top frame. No displaying for non-top frames    {% endcomment %}   
+     {% endif %} {% comment %}  endif for check if frame is top frame. No displaying for non-top frames    {% endcomment %}   
     {% endif %} 
     {% endfor %}
 </ul>

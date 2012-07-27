@@ -187,7 +187,7 @@ def fix_table(sql):
         
 #show notes that are out of sync btw personal and social
 #For now, just check notes that shouldn't be in social
-def show_out_of_sync(username):
+def clean_out_of_sync(username):
     sns = Social_Note.objects.filter(owner__username=username)
     for sn in sns:
         n = Note.objects.using(username).get(id=sn.owner_note_id)
