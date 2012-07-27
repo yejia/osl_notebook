@@ -317,6 +317,18 @@ class Social_Note(models.Model):
         backlinks = Social_Note_Backlink.objects.filter(note=self) 
         return backlinks
 
+    
+    def get_frame_ids_titles(self):        
+        return [[l.id, l.title] for l in self.in_frames.filter(deleted=False)] 
+    
+    
+    
+    def is_in_frame(self):
+        if self.get_frame_ids_titles():
+            return True
+        else:
+            return False
+
    
     #TODO: if not using inheritance for reducing the duplicated code, use a shared service provider to do
     # all the similar works. Refacotr.

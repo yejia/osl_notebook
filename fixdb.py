@@ -22,9 +22,9 @@ from notebook.snippets.models import Snippet
 from notebook.notes.views import getT, getNote
 #from notebook.bookmarks.views import getN as getB
 #from notebook.scraps.views import getN as getS
-from notebook.social.models import Social_Snippet, Social_Tag, Social_Bookmark, Social_Scrap
+from notebook.social.models import Social_Snippet, Social_Tag, Social_Bookmark, Social_Scrap, Social_Note
 
-from notebook.notes.models import Tag
+from notebook.notes.models import Tag, Note
 
 from django.contrib.auth.models import User
 
@@ -185,6 +185,15 @@ def fix_table(sql):
                 print e
                   
         
+#show notes that are out of sync btw personal and social
+#For now, just check notes that shouldn't be in social
+def show_out_of_sync(username):
+    sns = Social_Note.objects.filter(owner__username=username)
+    for sn in sns:
+        n = Note.objects.using(username).get(id=sn.owner_note_id)
+        if n.deleted == True:
+            print sn.id,
+   
 
 
 
@@ -224,5 +233,7 @@ if __name__ == "__main__":
             print "add _order column to all db's notes_frame_notes table..."
             #TODO: get sql from command input
             fix_table('ALTER TABLE notes_frame_notes ADD COLUMN _order integer;')
+        if command=='show_out_of_sync':
+             show_out_of_sync(username)
           
          
