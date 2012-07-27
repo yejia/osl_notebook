@@ -544,6 +544,7 @@ class Note(models.Model):
     #tag, then his notes in *** won't show in the group 
     #TODO:refactor out to several sync methods
    #TODO:when a note become public again, should the frame that it is in get a save too so that the social frame can be updated?
+   #TODO: debug: when making a frame private, it is not removed from the social space.
     def save(self, *args, **kwargs):             
         #do_something()
         super(Note, self).save(*args, **kwargs) # Call the "real" save() method.        

@@ -22,7 +22,7 @@ from notebook.snippets.models import Snippet
 from notebook.notes.views import getT, getNote
 #from notebook.bookmarks.views import getN as getB
 #from notebook.scraps.views import getN as getS
-from notebook.social.models import Social_Snippet, Social_Tag, Social_Bookmark, Social_Scrap, Social_Note
+from notebook.social.models import Social_Frame, Social_Snippet, Social_Tag, Social_Bookmark, Social_Scrap, Social_Note
 
 from notebook.notes.models import Tag, Note
 
@@ -193,12 +193,13 @@ def show_out_of_sync(username):
         n = Note.objects.using(username).get(id=sn.owner_note_id)
         if n.deleted == True:
             print 'social:',sn.id, 'personal:',n.id
-
-            #print 'removing this note from social...'
-            #sn.delete()
+            print 'removing this note from social...'
+            sn.delete()
             
    
-
+def  check_frames(username):
+    sfs = Social_Frame.objects.filter(owner__username=username)
+       
 
 
 #notes from personal notebook deleted(or privated) before implemenation of "withdrawn from social notebook if 
