@@ -111,12 +111,13 @@ def sync_all_dbs():
         
 
 
-def rename_tag_table():
-    users = User.objects.all()
+def rename_tag_table(users):
+    if not users:
+        users = [u.username for u in User.objects.all()]
     for user in users:
-       print 'For user', user.username
+       print 'For user', user
        try:
-           cursor = connections[user.username].cursor()
+           cursor = connections[user].cursor()
            cursor.execute('ALTER TABLE notes_tag RENAME TO tags_tag;')          
            transaction.commit_unless_managed()
        except Exception as inst:
@@ -148,5 +149,7 @@ if __name__ == "__main__":
     if name == 'sync_all_dbs':
         sync_all_dbs() 
     if name == 'rename_tag_table':
-        rename_tag_table()           
+        users = sys.argv[2:]
+        print 'users',users 
+        rename_tag_table(users)           
     sys.exit(0)      
