@@ -458,6 +458,42 @@ class Social_Frame(Social_Note):
 
 
 
+    def get_related_frames(self):        
+        related = []    
+        offsprings = self.get_offsprings()   
+        for child in self.notes.filter(deleted=False):        
+            
+            uncles = child.get_frame_ids_titles()        
+                  
+            for uncle in uncles:        
+                uncle.append('(note '+str(child.id)+')  '+child.title+':  '+child.desc)  
+                if uncle[0] != self.id and uncle[0] not in self.get_offsprings() and uncle not in related:
+                    #make it into a tuple so it can be hashed for soring later. (list cannot be hashed)
+                    related.append((uncle[0],uncle[1],uncle[2]))        
+            #for now, don't go up further TODO:
+            if child.get_note_type() == 'Frame':            
+                        
+                related.extend(child.social_frame.get_related_frames())        
+        #get a copy of related. Otherwise, removing item while iterating through the list will mess things up
+        for nr in related[:]:            
+            if nr[0] in self.get_offsprings():
+                related.remove(nr)   
+            if nr[0] == self.id:
+                related.remove(nr)         
+        related = list(set(related))        
+        related.sort(key=lambda r: r[1],reverse = False) 
+        return related   
+ 
+ 
+ 
+    def get_offsprings(self):
+        offsprings = [n.id for n in self.notes.all()]
+        for child in self.notes.all():            
+            if child.get_note_type() == 'Frame':                  
+                offsprings.extend(child.social_frame.get_offsprings())        
+        return   offsprings        
+
+
 class Social_Frame_Notes(models.Model):
     social_frame = models.ForeignKey(Social_Frame, related_name='note_and_frame') #TODO:
     social_note = models.ForeignKey(Social_Note)
