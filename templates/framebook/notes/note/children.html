@@ -50,10 +50,32 @@
                              {% else %}
                                 <img src="/file/{{note.snippet.attachment.name}}" class="attachment"/>
                              {% endif %}
+                        {% else %}   
+                             {% if  'social' in book_uri_prefix %} 
+                                    <span class="attachment">{%trans 'attachment' %}: <a href="/file/{{note.social_snippet.attachment.name}}">{{note.social_snippet.attachment.name}}</a></span>
+                             {% else %}
+                                    <span class="attachment">{%trans 'attachment' %}: <a href="/file/{{note.snippet.attachment.name}}" class="attachment">{{note.snippet.attachment.name}}</a></span>
+                             {% endif %}
                         {% endif %}
                     </div> 
                 {% endif %}
-                
+                 {% if  note.get_note_type == 'Frame'  %}  
+                    <div>
+                        {% if note.is_img %}
+                             {% if  'social' in book_uri_prefix %} 
+                                <img src="/file/{{note.social_frame.attachment.name}}" class="attachment"/>
+                             {% else %}
+                                <img src="/file/{{note.frame.attachment.name}}" class="attachment"/>
+                             {% endif %}
+                        {% else %}   
+                             {% if  'social' in book_uri_prefix %} 
+                                    <span class="attachment">{%trans 'attachment' %}: <a href="/file/{{note.social_frame.attachment.name}}">{{note.social_frame.attachment.name}}</a></span>
+                             {% else %}
+                                    <span class="attachment">{%trans 'attachment' %}: <a href="/file/{{note.frame.attachment.name}}" class="attachment">{{note.frame.attachment.name}}</a></span>
+                             {% endif %}
+                        {% endif %}
+                    </div> 
+                {% endif %}
                 {% if note.get_note_type == 'Frame' %}  
                     <ul style="display: none;">
                        {% if  'social' in book_uri_prefix %}                       
