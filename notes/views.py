@@ -535,8 +535,8 @@ def get_ws_tags(request, username, bookname):
 #On the web interface, you can pick the other person's working set.
 @login_required
 def __get_ws_tags_for_menu(request, username, bookname):
-    """get tags for the current working set. If no current working set or if it is either bookmarks or scrapbook or snippetbook, 
-    then set it as the bookname. 
+    """get tags for the current working set. If no current working set or if it is in either bookmarks or scrapbook or snippetbook, 
+    then set it as the bookname. If it is in frames, make the current working set all tags
     """
     #Don't use the custom model, it seems that it cannot be correctly serialize (fields are empty objects) . Might because it is proxy.TODO:
     #T = getT(username)    
@@ -545,7 +545,7 @@ def __get_ws_tags_for_menu(request, username, bookname):
     if not request.session.get("current_ws") or request.session.get("current_ws") in books:
         request.session["current_ws"] = bookname                 
     current_ws = request.session.get("current_ws")      
-    if current_ws == 'all tags' or current_ws == 'notebook':
+    if current_ws == 'all tags' or current_ws in ['notebook','framebook']:
         #this annotate get all the note's count instead of just the bookname's 
         tags_qs = Tag.objects.using(username).all().order_by('name')#.annotate(Count('note'+book_entry_dict.get(bookname))).order_by('name') 
     else:        

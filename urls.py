@@ -116,6 +116,7 @@ urlpatterns = patterns('',
     
     (r'^(?P<username>[^/]+)/tagframe/(?P<tag_path>[^/]+)/(?P<bookname>[^/]+)/notes/$', 'notebook.tags.views.notes_by_tag'),
     (r'^(?P<username>[^/]+)/tagframe/getRelatedTags/$','notebook.tags.views.get_related_tags'),  
+    (r'^(?P<username>[^/]+)/tagframe/export/$','notebook.tags.views.export'),  
 
 
     #below dupldate a lot with patterns in 'notebook.notes.urls', refactor TODO:

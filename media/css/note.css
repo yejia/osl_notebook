@@ -1067,6 +1067,18 @@ left:80px;
 margin-top:-800px
 z-index:10;*/
 }
+#tag_frame_block{
+background-color:#F5FC9E;/*#F5FFD6;*/
+width:250px;
+border:1px dashed #bbb;
+padding:5px;
+}
+#add_frame_tags_box{
+background-color:#F5FC9E;/*#F5FFD6;*/
+width:250px;
+border:1px dashed #bbb;
+padding:5px;
+}
 
 #panel{width:1080px;margin-left:auto;margin-right:auto;}
 

@@ -61,7 +61,7 @@
         
         
            
-            $('.toggle_add_frame').click(function(){	  
+            $('.toggle_add_frame').click(function(){	                      
                      $('#add_frame_tags_box').hide();
                     parent_name =  $(this).parents('li[parent_name]').attr('parent_name')
                     if  (parent_name ==  $('div#add_child_frame  span#parent_name').text()){        
@@ -78,7 +78,8 @@
         });   
            
            
-        $('.tag_frame_add').click(function(){	    
+        $('.tag_frame_add').click(function(){	 
+           $('div#tag_frame_block').hide(300);
            $('#add_child_frame').hide();        
             parent_name =  $(this).parents('li[parent_name]').attr('parent_name');
            if  (parent_name ==  $('div#add_frame_tags_box  span#parent_name').text()){
@@ -211,11 +212,39 @@
           
           
 
+    $('div#tag_frame_block').hide();
 
+     $('.tag_name_display').click(function(){    
+           $('#add_frame_tags_box').hide(300);  
+           var tag_name = $(this).find('a').text();
+           var  tag_frame_title  = $('div#tag_frame_block').find('span#tag_frame_title');
+           if  (tag_name == tag_frame_title.text()){
+                 $('div#tag_frame_block').toggle(300);
+           }else{
+                tag_frame_title.text(tag_name);
+                $('div#tag_frame_block').show(300);
+            }
+             
+     
+     
+        });
+        
+        
+         $('#import_tag_tree').click(function(){    
+                 var  tag_frame_title  = $('div#tag_frame_block').find('span#tag_frame_title').text();
+                 $.post('/{{profile_username}}/tagframe/export/?tag_frame_name='+tag_frame_title,{}, imported, 'text');       
 
-
-
-          
+           });
+           
+           
+        function imported(result){
+                if (result='Error'){
+                    $('ul.messages').append('<li class="error">{% trans "An error happened when importing the tag tree." %} </li>');     
+                }else{
+                    $('ul.messages').append('<li class="success">{% trans "The tag tree is successfully imported to your notebook! Please go to your notebook to take a look" %} <a href="/{{user.username}}/tagframe/">{% trans "Your tag tree" %} </a></li>');
+                }
+        }  
+        
           
           //~ $('.tag_name_display').hover(function(){  
                      //~ $(this).parents('li[tag_name]').find('span.show_notes').show(300);          
@@ -252,7 +281,7 @@
     }
     
       function reordered(result){
-       // TODO: how to show error when error happened?      
+       // TODO: how to show error when error happened?      The server should return an error message.
         //   $('ul.messages').append('<li class="error">{% trans "An error happened when adding a note." %} </li>');     
         $('ul.messages').append('<li class="success">{% trans "The order of the notes included in this frame is reset successfully!" %} </li>');
         }  
@@ -280,15 +309,21 @@
 
 
 {% block site_branding %}
+<br/>
 {{user.username}} {% trans "'s Root Tag Tree" %}  <span title="{% trans 'Tag tree is used to represent the knowledge in your brain.  Note relevance is computed when rendering notes for a tag in a tree. So that the position of a tag in the tree says more about what notes you want to see there. ' %}"><img src="/media/img/admin/icon-unknown.gif"/></span>
 <br/><br/>
-<div><a href="#" id="view_top_trees">{% trans "View other Top Level Tag Trees" %} </a></div>
+
 {% endblock %}
 
 
 {% block content%}
 
-
+<div id="tag_frame_block">
+<div>{% trans "Tag Tree" %}: <span id="tag_frame_title"></span></div>
+<div id="import_tag_tree"><a href="javascript:void();">{% trans "Import this tag tree" %}</a></div>
+<div>{% trans "View this tag tree as a working set" %} </div>
+<div>{% trans "View this tag tree like in Trello" %} </div>
+</div>
 
 <div id="top_tag_trees">
 <ull>
@@ -358,4 +393,7 @@
 
 </div>
 {%endif%}
+
+<br/><br/>
+<div><a href="#" id="view_top_trees">{% trans "View other Top Level Tag Trees" %} </a></div>
 {% endblock %}

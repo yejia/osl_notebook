@@ -102,8 +102,13 @@ def add_tags_2_frame(request, username):
     tags_to_add = request.GET.get('tags_to_add')   
     
     TF = getTagFrame(username)
-    for tag in tags_to_add.split(','):
-        
+    parent_frame = TF.objects.get(name=parent_name)
+    __add_tags_2_frame(parent_frame, tags_to_add)
+    return HttpResponse('successful', mimetype="text/plain")  
+    
+
+def __add_tags_2_frame(parent_frame, tags_to_add):    
+    for tag in tags_to_add.split(','):        
         #handling tag frame and tag creation here
         if Tag.objects.using(username).filter(name=tag).exists():
             #print 'tag existing'
@@ -119,11 +124,8 @@ def add_tags_2_frame(request, username):
                 transaction.commit_unless_managed(using=username)  
         else:
             tf = TF(name=tag)
-            tf.save()       
-    parent_node = TF.objects.get(name=parent_name)
-    parent_node.add_tags(tags_to_add)
-    return HttpResponse('successful', mimetype="text/plain")  
-    
+            tf.save()     
+    parent_frame.add_tags(tags_to_add)
 
 
 def remove_frame(request, username):   
@@ -187,4 +189,20 @@ def get_related_tags(request, username):
     related = __get_related_tags(username, tag_name)  
     result = {'tag_name':tag_name, 'related_tags':related}      
     return HttpResponse(simplejson.dumps(result), "application/json")
-    
+
+
+def export(request, username):
+    tag_frame_name = request.GET.get('tag_frame_name')
+    if request.user.username == username:
+        return HttpResponse(simplejson.dumps({'type':'Error','msg':_('You cannot import tag tree into your own notebook!')}), "application/json")
+    else:
+        TF = getTagFrame(username)
+        tf = TF.objects.get(name=frame_name)
+        TFU = getTagFrame(request.user.username)
+        if TFU.objects.filter(name=frame_name).exists():
+            #TODO: allow changing the name of the tag
+            return HttpResponse(simplejson.dumps({'type':'Error','msg':_('You already have a tag tree of this name in your own notebook!')}), "application/json")
+        else:
+            #TODO:possible conflicts with the users' own tag trees (for example, if the user alreayd have a tag frame with the same name but with different children)
+            for tag in tf.tags.all():
+                add_tags_2_frame(request, username) 

@@ -1298,7 +1298,7 @@ function showAddNoteTags(){
                 
                   function public_commentAdded(result){
                         note_id = result.note_id;
-                        $('div#public_comments').prepend('<div comment_id="'+result.comment_id+'">'+result.comment_desc+
+                        $('div[note_id='+result.note_id+']  div#public_comments').prepend('<div comment_id="'+result.comment_id+'">'+result.comment_desc+
                                                                       '<span title="{% trans "remove this comment" %}" class="inline_delete" id="note_delete_public_comment">&nbsp;&nbsp;&nbsp;</span></div>');   
                                                                       
                          $('div#public_comments').find("div[comment_id='"+result.comment_id+"']").find('span.inline_delete').click(function(){	                
