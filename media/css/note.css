@@ -295,15 +295,15 @@ font-size:11px;
 button.big{
 color:#FFFFFF;
 /*below copied from bootstrap*/
-background-color:;
- border-bottom-left-radius:6px;
-  border-bottom-right-radius:6px;
-  border-top-left-radius:6px;
-  border-top-right-radius:6px;
-  font-size:20px;
+
+  border-bottom-left-radius:3px;
+  border-bottom-right-radius:3px;
+  border-top-left-radius:3px;
+  border-top-right-radius:3px;
+  font-size:15px;
   font-weight:normal;
   margin-right:10px;
-  padding:4px 8px;
+  padding:2px 4px;
 
 background-color:#0074CC;
   background-image:-webkit-linear-gradient(top, #0088CC, #0055CC);
