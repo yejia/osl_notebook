@@ -648,7 +648,8 @@ $("#ac_tags").tagit("removeAll");
 			
     function	linkNotes(){
 		     selected_notes = getSelectedNoteIds();
-		     $('form#linkNotesForm').before("{% trans 'The following notes are going to be put into a frame:' %}"+selected_notes);
+               $('form#linkNotesForm').parents('div.linkNotes').find('div#create_frame_hint').empty();
+		     $('form#linkNotesForm').parents('div.linkNotes').find('div#create_frame_hint').append("{% trans 'The following notes are going to be put into a frame:' %}"+selected_notes);
 		     $('form#linkNotesForm').prepend('<input type="hidden"  name="notes"  value="'+selected_notes+'"/>');
 		     $('.linkNotes').show();		
     }
@@ -893,9 +894,9 @@ function showAddNoteTags(){
                 $('span#charCount').html(charLength + '{% trans "characters used" %}');
                 // Alerts when 300 characters is reached
                 if($(this).val().length > 300)
-                        $('span#charCount_alert').html('<strong>{% trans "You have used up 300 characters. It recommended to keep a snippet short." %}</strong>');
+                        $('#charCount_alert').html('<strong>{% trans "You have used up 300 characters. It recommended to keep a snippet short." %}</strong>');
                  else
-                       $('span#charCount_alert').html('')                
+                       $('#charCount_alert').html('')                
         });
     
     
@@ -938,6 +939,7 @@ function showAddNoteTags(){
            
             $('.note_selection').click(function(){	
                  $('.jd_menu').hide();
+                 $('div.linkNotes').hide();
                   $('.note_selection').each(function(){
                     if ($(this).attr('checked')==true){			
                        $('.jd_menu').show();
@@ -951,6 +953,7 @@ function showAddNoteTags(){
                        $('.jd_menu').show();
                     }else{
                        $('.jd_menu').hide();
+                       $('div.linkNotes').hide();
                     }     
            
             }); 

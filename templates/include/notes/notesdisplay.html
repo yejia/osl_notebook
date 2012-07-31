@@ -24,6 +24,7 @@
 		<br/><br/>
 		<div class="linkNotes">
 			{% trans "Create a frame" %}:
+            <div id="create_frame_hint"></div>
 			<form action="linkNotes/" method="post" enctype="multipart/form-data" id="linkNotesForm"> <!--TODO:get ok? it still send an extra request to the server-->
 			<input type="hidden" name="user" id="id_user"  value="{{user.id}}"/>
 				<table> 

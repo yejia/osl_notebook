@@ -12,10 +12,13 @@
 
 <div id="add_note_section">
 <div class="section_header">
-<!--记录你的感受/想法--><span class="big_font">{{user.username}}, <a href="http://blog.opensourcelearning.org/?p=109" target="_blank">{% trans "What have your learned today?" %}</a>:&nbsp;&nbsp;&nbsp;&nbsp;
+<!--记录你的感受/想法--><span class="big_font">{{user.username}}, <a href="http://blog.opensourcelearning.org/?p=109" target="_blank">{% trans "What have your learned today?" %}<img src="/media/img/admin/icon-unknown.gif"/></a>:&nbsp;&nbsp;&nbsp;&nbsp;
 <span class="show_add_note_section"><img title="{% trans 'Show adding snippet' %}" src="/site_media/img/right-arrow.jpg" class="clickable"/></span>
 <span class="hide_add_note_section"  ><img title="{% trans 'Hide adding snippet' %}" src="/site_media/img/down-arrow.jpg" class="click_img"/></span> 
-
+<span id="charCountSpan">
+<span id="charCount"></span>
+</span>
+<div id="charCount_alert"></div>
 </div>
 
 <div class="addnote">
@@ -25,14 +28,16 @@
 {% endif %}    
     <textarea id="id_desc" rows="3" cols="90" name="desc"></textarea>
     
+    
+
+    
+    <div>{% trans "Private" %} <input type="checkbox" name="private" id="id_private"/>
+    &nbsp;&nbsp;&nbsp;&nbsp;
     <span id="add_note_vote_bar">
 <span class="thumbup"  id="add_note_vote_up"  title="{% trans 'Rank Up Importance' %}"><img src="/site_media/img/thumbUp.gif"/></span>
 <span class="thumbdown" id="add_note_vote_down"  title="{% trans "Rank Down Importance"  %}"><img src="/site_media/img/thumbDown.gif"/></span>
 <input type="hidden" name="vote" id="id_vote" value="0"/><span id="add_note_vote">0</span></span>
-
-    
-    <div>{% trans "Private" %} <input type="checkbox" name="private" id="id_private"/>
-    
+&nbsp;&nbsp;&nbsp;&nbsp;
 <span>
     <span class="tags_img clickable" onclick="javascript:showAddNoteTags();" title="{% trans 'Add tags' %}"><img src="/site_media/img/tags-small.png" class="img_in_notes_section_header"/></span>
     <div id="add_note_tags_box">                       
@@ -46,11 +51,12 @@
 </span>
 
 </div> 
-    <span id="charCount"></span>
-    <span id="charCount_alert"></span>
-    <br/><button class="big" id="add_note_submit"  onclick="javascript:addNote();"/>{% trans 'Add' %} (Alt-S)</button>
+ <span id="add_note_submit_button">
+<button class="big" id="add_note_submit"  onclick="javascript:addNote();"/>{% trans 'Add' %} (Alt-S)</button>
     {% trans "Short snippet is recommended (less than 300 characters)" %}
     <a href="javascript:alert('{% trans "A short snippet is enough to represent a significant experience. Practice on that. :-)" %}');"><img src="/media/img/admin/icon-unknown.gif"/></a>
+    </span>   
+    
 
 </div>
 <br/>

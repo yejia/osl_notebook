@@ -293,7 +293,27 @@ font-size:11px;
 }
 
 button.big{
-font-size:13px;
+color:#FFFFFF;
+/*below copied from bootstrap*/
+background-color:;
+ border-bottom-left-radius:6px;
+  border-bottom-right-radius:6px;
+  border-top-left-radius:6px;
+  border-top-right-radius:6px;
+  font-size:20px;
+  font-weight:normal;
+  margin-right:10px;
+  padding:4px 8px;
+
+background-color:#0074CC;
+  background-image:-webkit-linear-gradient(top, #0088CC, #0055CC);
+  background-repeat:repeat no-repeat;
+  border-color:rgba(0, 0, 0, 0.0976563) rgba(0, 0, 0, 0.0976563) rgba(0, 0, 0, 0.246094);
+
+}
+span#add_note_submit_button{
+padding-top:20px;
+
 }
 
 select{
@@ -439,7 +459,7 @@ background-color:#F5FC9E;
 
 #add_note_tags_box{
 position:relative;
-left:80px;
+left:160px;
 top:-20px;
 width:250px;
 margin-bottom:-35px;
@@ -452,9 +472,9 @@ width:250px;
 margin-bottom:0px;
 }
 
-span#add_note_vote_bar{
+span#add_note_vote_bar{/*
 position:relative;
-top:50px;
+top:50px;*/
 }
 
 #update_tags_inline_box{
@@ -1078,6 +1098,10 @@ background-color:#F5FC9E;/*#F5FFD6;*/
 width:250px;
 border:1px dashed #bbb;
 padding:5px;
+}
+#charCountSpan{
+position:relative;
+left:200px;
 }
 
 #panel{width:1080px;margin-left:auto;margin-right:auto;}
