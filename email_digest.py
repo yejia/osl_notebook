@@ -67,46 +67,54 @@ def sendEmail(mailserver, fromAddr, toAddrList, subject, content):
 
 
 def build_content(note, bookname, pick_lang, title_size):
-        content = ''
-        #print('The current bookname is:'+bookname)
-        if pick_lang == 'en-us':
-            desc = note.get_desc_en()
-        else:
-            desc = note.get_desc_cn()  
-        if pick_lang == 'en-us':
-            title = note.get_title_en()
-        else:
-            title = note.get_title_cn()  
-        desc_size = title_size + 20     
-        if bookname == 'snippetbook':
-            content = _('Sharing snippet:')+desc[0:desc_size]
-        if bookname == 'bookmarkbook':
-            content = _('Sharing bookmark:')+title[0:title_size]+'   '+note.url
-        if bookname == 'scrapbook':
-            content = _('Sharing scrap:')+desc[0:desc_size] + '   '+ note.url   
-        if bookname == 'framebook':
-            content = _('Sharing knowledge package:')+title[0:title_size] + '   ' + desc[0:desc_size] 
-        if bookname == 'notebook':
-            bookname = note.get_note_bookname()
-            print('This note of notebook is actually a note of '+bookname)
-            if bookname == 'snippetbook':
-                content = _('Sharing snippet:')+desc[0:desc_size]
-            if bookname == 'bookmarkbook':
-                content = _('Sharing bookmark:')+title[0:title_size]+'   '+note.social_bookmark.url
-            if bookname == 'scrapbook':
-                content = _('Sharing scrap:')+desc[0:desc_size] + '   '+ note.social_scrap.url   
-            if bookname == 'framebook':
-                content = _('Sharing knowledge package:')+title[0:title_size] + '   ' + desc[0:desc_size]         
-       
-        source_str = _('Original Note:')
-         
+    """build the content for a single note"""
+    content = ''
+    #print('The current bookname is:'+bookname)
+    if pick_lang == 'en-us':
+        desc = note.get_desc_en()
+    else:
+        desc = note.get_desc_cn()  
+    if pick_lang == 'en-us':
+        title = note.get_title_en()
+    else:
+        title = note.get_title_cn()  
+    desc_size = title_size + 200     
+    if bookname == 'snippetbook':
+        content = _('Sharing snippet:')+desc[0:desc_size]
+    if bookname == 'bookmarkbook':
+        content = _('Sharing bookmark:')+title[0:title_size]+'   '+note.url
+    if bookname == 'scrapbook':
+        content = _('Sharing scrap:')+desc[0:desc_size] + '   '+ note.url   
+    if bookname == 'framebook':
+        content = _('Sharing knowledge package:')+title[0:title_size] + '   ' + desc[0:desc_size] 
+#===============================================================================
+#    if bookname == 'notebook':
+#        bookname = note.get_note_bookname()
+#        print('This note of notebook is actually a note of '+bookname)
+#        if bookname == 'snippetbook':
+#            content = _('Sharing snippet:')+desc[0:desc_size]
+#        if bookname == 'bookmarkbook':
+#            content = _('Sharing bookmark:')+title[0:title_size]+'   '+note.social_bookmark.url
+#        if bookname == 'scrapbook':
+#            content = _('Sharing scrap:')+desc[0:desc_size] + '   '+ note.social_scrap.url   
+#        if bookname == 'framebook':
+#            content = _('Sharing knowledge package:')+title[0:title_size] + '   ' + desc[0:desc_size]         
+#===============================================================================
+   
+    source_str = _('Original Note:')
+     
 
-        url =  site_name+  '/social/'+ note.owner.username + '/' + bookname + '/notes/note/' + str(note.id)
-        content = content+'    \n'+source_str+'    '+url+'    '+_('from')+' '+\
-                   note.owner.username + '\n\n'
+    url =  site_name+  '/social/'+ note.owner.username + '/' + bookname + '/notes/note/' + str(note.id)
+    content = content+'    \n'+source_str+'    '+url+'    '+_('from')+' '+\
+               note.owner.username 
+    tag_str = ','.join([t.name for t in note.tags.filter(private=False)])                
+    t_str = _('tags: ') + tag_str 
+    vote_str = _("note importance ranked by the owner: ")+str(note.vote)
 
-        #print 'built content for one note of today:', content
-        return content  
+    content = content + '\n' + t_str + '\n' + vote_str + '\n\n'
+
+    #print 'built content for one note of today:', content
+    return content  
 
 
 
@@ -124,15 +132,18 @@ def send_group_digest(username, groupname, freq, pick_lang):
         
     
     for bookname in books:  
+        
         if freq == 'daily':      
             notes = group.get_notes_today(bookname)
+            
         else:
             notes = group.get_notes_this_week(bookname)  
         if notes:
+            
             #content += _(bookname) + '\n\n'
             for note in notes:
                 content +=  build_content(note, bookname, pick_lang, 200)
- 
+    
     if content:
         group_url = site_name +  '/groups/' +groupname+'/'
         if freq == 'daily':

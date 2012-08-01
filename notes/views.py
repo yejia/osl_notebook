@@ -9,7 +9,7 @@ from django.db import connection
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.utils import simplejson
 from django.utils.http import urlencode
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext as _ , activate
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm

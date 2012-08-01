@@ -12,7 +12,7 @@ from django.template import RequestContext
 from django.core.exceptions import ObjectDoesNotExist, FieldError
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext as _ , activate
 from django.core.mail import send_mail
 
 import datetime
@@ -625,13 +625,17 @@ def group_add_users(request, groupname):
     #tags = [ST.objects.get(name=tag_name).name for tag_name in tag_names]
     if not user_names:    
         #TODO: give an error page, also validation on the form       
-        messages.error(request, "No tags are entered!")  
+        messages.error(request, _("No tags are entered!"))  
     group = G.objects.get(name=groupname)     
     for uname in user_names:
         member = Member.objects.get(username=uname)
+        #TODO: add group tags into the member's space
         group.members.add(member)  
-        content = _('You are invited to group ')+groupname
-        send_mail(_('You are invited to group ')+groupname, content.encode('utf8'), u'sys@opensourcelearning.org', [member.email])
+        if member.default_lang:
+            activate(member.default_lang)
+        content = _('You are invited and added to group ')+groupname+'\n\n'+\
+                _('You can visit this group at ')+'http://www.91biji.com/groups/' + groupname +'\n\n'+ _('If you want to remove yourself from this group, you can do that in your groups page.')
+        send_mail(_('You are invited to group ')+groupname, content.encode('utf-8'), u'sys@opensourcelearning.org', [member.email])
        
     return HttpResponseRedirect('/groups/'+groupname+'/admin/')     
 

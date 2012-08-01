@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-01 18:48+0800\n"
+"POT-Creation-Date: 2012-08-02 06:58+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,43 +18,47 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: email_digest.py:82 email_digest.py:93 notes/views.py:1945
-#: notes/views.py:1956
+#: email_digest.py:83 notes/views.py:1945 notes/views.py:1956
 msgid "Sharing snippet:"
 msgstr "分享便条："
 
-#: email_digest.py:84 email_digest.py:95 notes/views.py:1947
-#: notes/views.py:1958
+#: email_digest.py:85 notes/views.py:1947 notes/views.py:1958
 msgid "Sharing bookmark:"
 msgstr "分享网址："
 
-#: email_digest.py:86 email_digest.py:97 notes/views.py:1949
-#: notes/views.py:1960
+#: email_digest.py:87 notes/views.py:1949 notes/views.py:1960
 msgid "Sharing scrap:"
 msgstr "分享网摘："
 
-#: email_digest.py:88 email_digest.py:99 notes/views.py:1951
-#: notes/views.py:1962
+#: email_digest.py:89 notes/views.py:1951 notes/views.py:1962
 msgid "Sharing knowledge package:"
 msgstr "分享知识包："
 
-#: email_digest.py:101 notes/views.py:1964
+#: email_digest.py:104 notes/views.py:1964
 msgid "Original Note:"
 msgstr "原笔记："
 
-#: email_digest.py:105 notes/views.py:1975
+#: email_digest.py:108 notes/views.py:1975
 msgid "from"
 msgstr "来自"
 
-#: email_digest.py:139
+#: email_digest.py:112
+msgid "tags: "
+msgstr "标签："
+
+#: email_digest.py:113
+msgid "note importance ranked by the owner: "
+msgstr "作者自评重要性： "
+
+#: email_digest.py:151
 msgid "Daily digest from the group:"
 msgstr "小组今天新添加笔记，来自小组："
 
-#: email_digest.py:141
+#: email_digest.py:153
 msgid "Weekly digest from the group:"
 msgstr "小组本周新添加笔记，来自小组："
 
-#: email_digest.py:142
+#: email_digest.py:154
 msgid ""
 "\n"
 " Or you can go to the group page to view the new notes! "
@@ -62,19 +66,19 @@ msgstr ""
 "\n"
 "或者你可以去小组页面去浏览新添加的笔记！"
 
-#: email_digest.py:143
+#: email_digest.py:155
 msgid "You can set up how you want to receive group digest in your setting:"
 msgstr "你可以在你的用户设置页面修改你要如何接收小组的笔记更新："
 
-#: email_digest.py:149 email_digest.py:151
+#: email_digest.py:161 email_digest.py:163
 msgid "Group "
 msgstr "小组"
 
-#: email_digest.py:149
+#: email_digest.py:161
 msgid ":today's new notes!"
 msgstr "今天新添加的笔记！"
 
-#: email_digest.py:151
+#: email_digest.py:163
 msgid ":this week's new notes!"
 msgstr "本周新添加的笔记！"
 
@@ -343,11 +347,29 @@ msgstr "你不是这个小组的管理员，所以不能管理这个小组。"
 msgid "You have successfully removed the member from the group."
 msgstr "你已经成功的将该成员从这个小组移除。"
 
-#: social/views.py:633 social/views.py:634
+#: social/views.py:628
+msgid "No tags are entered!"
+msgstr "没有输入标签！"
+
+#: social/views.py:636
+msgid "You are invited and added to group "
+msgstr "你被邀请参加并已被加入学习小组"
+
+#: social/views.py:637
+msgid "You can visit this group at "
+msgstr "你可以在这个网址访问该学习小组"
+
+#: social/views.py:637
+msgid ""
+"If you want to remove yourself from this group, you can do that in your "
+"groups page."
+msgstr "如果你想退出该学习小组，你可以在你的学习小组页面完成此操作。"
+
+#: social/views.py:638
 msgid "You are invited to group "
 msgstr "你被邀请参加学习小组"
 
-#: social/views.py:932
+#: social/views.py:936
 msgid ""
 "Your suggestion is successfully sent to the sys admin! Thank you for your "
 "valuable suggestion!"
@@ -2840,6 +2862,9 @@ msgstr "所有工作区"
 msgid "Make Current"
 msgstr "设成当前"
 
+#~ msgid "Owner's self ranking for this note's importance is:"
+#~ msgstr "作者自评重要性："
+
 #~ msgid "Short snippet is recommended (less than 300 characters)"
 #~ msgstr "建议短便条(少于150字)"
 
@@ -2930,9 +2955,6 @@ msgstr "设成当前"
 #~ msgid "desc"
 #~ msgstr "笔记正文"
 
-#~ msgid "tags"
-#~ msgstr "标签"
-
 # python-format
 #~ msgid "Notes of %(profile_username)s"
 #~ msgstr "%(profile_username)s的笔记"
@@ -2955,9 +2977,6 @@ msgstr "设成当前"
 
 #~ msgid "This is a %(group.private|yesno:\"private, public, public\")s group"
 #~ msgstr "这是一个%(group.private|yesno:\"private, public, public\")s小组"
-
-#~ msgid "No tags are entered!"
-#~ msgstr "没有输入标签！"
 
 #~ msgid "Add tags selected"
 #~ msgstr "加选取的标签"
