@@ -891,7 +891,7 @@ function showAddNoteTags(){
       $('div.addnote textarea#id_desc').keyup(function() {
                 var charLength = $(this).val().length;
                 // Displays count
-                $('span#charCount').html(charLength + '{% trans "characters used" %}');
+                $('span#charCount').html(charLength);
                 // Alerts when 300 characters is reached
                 if($(this).val().length > 300)
                         $('#charCount_alert').html('<strong>{% trans "You have used up 300 characters. It recommended to keep a snippet short." %}</strong>');

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-01 15:57+0800\n"
+"POT-Creation-Date: 2012-08-01 18:11+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -151,7 +151,7 @@ msgstr "默认的标签是'random thought'。"
 #: templates/include/note_list_base.html:1784
 #: templates/include/notes/notesdisplay.html:40
 #: templates/scrapbook/notes/notesdisplay.html:29
-#: templates/snippetbook/notes/notesdisplay.html:34
+#: templates/snippetbook/notes/notesdisplay.html:46
 #: templates/social/group/groups.html:56
 msgid "Private"
 msgstr "隐私"
@@ -456,7 +456,7 @@ msgid "Notebook administration"
 msgstr "笔记本管理"
 
 #: templates/admin/change_form.html:21 templates/admin/index.html:29
-#: templates/snippetbook/notes/notesdisplay.html:55
+#: templates/snippetbook/notes/notesdisplay.html:64
 #: templates/tagframe/index.html:380
 msgid "Add"
 msgstr "添加"
@@ -1433,14 +1433,14 @@ msgstr "去除这个评论"
 #: templates/include/note_list_base.html:206
 #: templates/include/notes/notes_display.html:64
 #: templates/include/notes/note/notedisplay.html:117
-#: templates/snippetbook/notes/notesdisplay.html:37
+#: templates/snippetbook/notes/notesdisplay.html:49
 msgid "Rank Up Importance"
 msgstr "增加重要性"
 
 #: templates/include/note_list_base.html:207
 #: templates/include/notes/notes_display.html:65
 #: templates/include/notes/note/notedisplay.html:118
-#: templates/snippetbook/notes/notesdisplay.html:38
+#: templates/snippetbook/notes/notesdisplay.html:50
 msgid "Rank Down Importance"
 msgstr "降低重要性"
 
@@ -1522,7 +1522,6 @@ msgstr "增加评论"
 #: templates/include/notes/inlines/add_comments_and_etc_inline.html:30
 #: templates/include/notes/inlines/add_comments_and_etc_inline.html:46
 #: templates/include/notes/menu/notes_section_menu.html:11
-#: templates/snippetbook/notes/notesdisplay.html:48
 #: templates/social/include/notes/inlines/add_comments_and_etc_inline.html:30
 #: templates/workingset/index.html:323
 msgid "Cancel"
@@ -1577,10 +1576,6 @@ msgstr ""
 "如果你加入这个小组，你做的笔记，只要加了这个小组使用的同样的标签，就会自动的"
 "被添加到这个小组里。但是隐私的笔记不会。隐私的笔记永远在你的私人笔记本里，除"
 "非你有意的要分享给某个小组。"
-
-#: templates/include/note_list_base.html:894
-msgid "characters used"
-msgstr "字已经输入了"
 
 #: templates/include/note_list_base.html:897
 msgid ""
@@ -1783,7 +1778,6 @@ msgstr "标题"
 #: templates/include/notes/addNote.html:88
 #: templates/include/notes/menu/notes_section_menu.html:9
 #: templates/include/notes/menu/notes_section_menu.html:17
-#: templates/snippetbook/notes/notesdisplay.html:46
 #: templates/social/admin/group.html:98 templates/social/group/groups.html:41
 #: templates/workingset/index.html:321 templates/workingset/index.html:328
 msgid "Add Tags"
@@ -2372,31 +2366,35 @@ msgstr "%(profile_username)s的便条本"
 msgid "Search snippets"
 msgstr "搜索便条"
 
-#: templates/snippetbook/notes/notesdisplay.html:15
+#: templates/snippetbook/notes/notesdisplay.html:16
 msgid "What have your learned today?"
 msgstr "你今天学到了什么？"
 
-#: templates/snippetbook/notes/notesdisplay.html:16
+#: templates/snippetbook/notes/notesdisplay.html:19
 msgid "Show adding snippet"
 msgstr "显示加便条"
 
-#: templates/snippetbook/notes/notesdisplay.html:17
+#: templates/snippetbook/notes/notesdisplay.html:20
 msgid "Hide adding snippet"
 msgstr "隐藏加便条"
 
-#: templates/snippetbook/notes/notesdisplay.html:42
-msgid "Add tags"
-msgstr "加标签"
+#: templates/snippetbook/notes/notesdisplay.html:24
+msgid "Use short snippet (< 300 letters)"
+msgstr "建议短便条(少于150字)"
 
-#: templates/snippetbook/notes/notesdisplay.html:56
-msgid "Short snippet is recommended (less than 300 characters)"
-msgstr "建议短便条（少于150字）"
-
-#: templates/snippetbook/notes/notesdisplay.html:57
+#: templates/snippetbook/notes/notesdisplay.html:25
 msgid ""
 "A short snippet is enough to represent a significant experience. Practice on "
 "that. :-)"
 msgstr "一个短的便条足够表达一个重要的感受。练习一下。:-)"
+
+#: templates/snippetbook/notes/notesdisplay.html:27
+msgid "characters used"
+msgstr "字已经输入了"
+
+#: templates/snippetbook/notes/notesdisplay.html:55
+msgid "Add tags"
+msgstr "加标签"
 
 #: templates/social/commentsby.html:15
 msgid "Comments on"
@@ -2729,9 +2727,9 @@ msgid ""
 "Tag tree is used to represent the knowledge in your brain.  Note relevance "
 "is computed when rendering notes for a tag in a tree. So that the position "
 "of a tag in the tree says more about what notes you want to see there. "
-msgstr "标签树是用来展示你大脑里的知识结构。当显示标签树上某一个标签下的笔记时，"
-"系统会根据这棵标签树来计算各笔记的相关度，并按相关度排序。"
-
+msgstr ""
+"标签树是用来展示你大脑里的知识结构。当显示标签树上某一个标签下的笔记时，系统"
+"会根据这棵标签树来计算各笔记的相关度，并按相关度排序。"
 
 #: templates/tagframe/index.html:323
 msgid "Import this tag tree"
@@ -2841,6 +2839,9 @@ msgstr "所有工作区"
 #: templates/workingset/index.html:370
 msgid "Make Current"
 msgstr "设成当前"
+
+#~ msgid "Short snippet is recommended (less than 300 characters)"
+#~ msgstr "建议短便条(少于150字)"
 
 #~ msgid " Groups created by %(user)s "
 #~ msgstr "%(user)s创建的小组"

@@ -2,65 +2,79 @@
 {% load i18n %}
 
 {% block extra_ready_script %}
- <script type="text/javascript">
+    <script type="text/javascript">
 
-</script>
+    </script>
 {% endblock %}
 
 {% block add_note_section %}
 
+    <table class="align_table">
+        <tr>
+            <td>
+                <div id="add_note_section">
+                    <div class="section_header">
+                        <span class="big_font">{{user.username}}, <a href="http://blog.opensourcelearning.org/?p=109" target="_blank">{% trans "What have your learned today?" %}
+                                <img src="/media/img/admin/icon-unknown.gif"/></a>:&nbsp;&nbsp;&nbsp;&nbsp;
+                        </span>     
+                        <span class="show_add_note_section"><img title="{% trans 'Show adding snippet' %}" src="/site_media/img/right-arrow.jpg" class="clickable"/></span>
+                        <span class="hide_add_note_section"  ><img title="{% trans 'Hide adding snippet' %}" src="/site_media/img/down-arrow.jpg" class="click_img"/></span> 
+                     </div>   
+            </td>
+            <td class="right_td">
+                    <span id="charCountSpan">
+                            <span>{% trans "Use short snippet (< 300 letters)" %}
+                                    <a href="javascript:alert('{% trans "A short snippet is enough to represent a significant experience. Practice on that. :-)" %}');"><img src="/media/img/admin/icon-unknown.gif"/></a>
+                            </span>&nbsp;
+                            <span id="charCount">0</span> {% trans "characters used" %}
+                            </span>
+                            <span id="charCount_alert"></span>
+   
+            </td>
+        </tr>
+    </table>
 
-<div id="add_note_section">
-<div class="section_header">
-<!--记录你的感受/想法--><span class="big_font">{{user.username}}, <a href="http://blog.opensourcelearning.org/?p=109" target="_blank">{% trans "What have your learned today?" %}<img src="/media/img/admin/icon-unknown.gif"/></a>:&nbsp;&nbsp;&nbsp;&nbsp;
-<span class="show_add_note_section"><img title="{% trans 'Show adding snippet' %}" src="/site_media/img/right-arrow.jpg" class="clickable"/></span>
-<span class="hide_add_note_section"  ><img title="{% trans 'Hide adding snippet' %}" src="/site_media/img/down-arrow.jpg" class="click_img"/></span> 
-<span id="charCountSpan">
-<span id="charCount"></span>
-</span>
-<div id="charCount_alert"></div>
-</div>
-
-<div class="addnote">
-<!--TODO:get ok? it still send an extra request to the server-->
-{% if current_tag %}
-	<input type="hidden" name="tags" value="{{current_tag}}"/>
-{% endif %}    
-    <textarea id="id_desc" rows="3" cols="90" name="desc"></textarea>
+    <div class="addnote">
+        <!--TODO:get ok? it still send an extra request to the server-->
+        {% if current_tag %}
+            <input type="hidden" name="tags" value="{{current_tag}}"/>
+        {% endif %}    
+        <table class="align_table">
+                <tr><td colspan="2">
+                    <textarea id="id_desc" rows="3" cols="85" name="desc"></textarea>   
+                </td></tr>
+                <tr><td>    
+                    <div>
+                            {% trans "Private" %} <input type="checkbox" name="private" id="id_private"/>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <span id="add_note_vote_bar">
+                                <span class="thumbup"  id="add_note_vote_up"  title="{% trans 'Rank Up Importance' %}"><img src="/site_media/img/thumbUp.gif"/></span>
+                                <span class="thumbdown" id="add_note_vote_down"  title="{% trans "Rank Down Importance"  %}"><img src="/site_media/img/thumbDown.gif"/></span>
+                                <input type="hidden" name="vote" id="id_vote" value="0"/><span id="add_note_vote">0</span>
+                            </span>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <span>
+                                <span class="tags_img clickable" onclick="javascript:showAddNoteTags();" title="{% trans 'Add tags' %}"><img src="/site_media/img/tags-small.png" class="img_in_notes_section_header"/>
+                                </span>
+                                <div id="add_note_tags_box">                       
+                                    <ul id="add_note_tags"></ul>
+                                </div>
+                            </span>
+                    </td>
+                    <td class="right_td">
+                        <span id="add_note_submit_button">
+                            <button class="big" id="add_note_submit"  onclick="javascript:addNote();"/>{% trans 'Add' %} (Alt-S)</button>        
+        
+                        </span>
+                    </td>         
+                </tr>
+        </table>
+        
+    </div> 
+   
     
-    
+      
 
-    
-    <div>{% trans "Private" %} <input type="checkbox" name="private" id="id_private"/>
-    &nbsp;&nbsp;&nbsp;&nbsp;
-    <span id="add_note_vote_bar">
-<span class="thumbup"  id="add_note_vote_up"  title="{% trans 'Rank Up Importance' %}"><img src="/site_media/img/thumbUp.gif"/></span>
-<span class="thumbdown" id="add_note_vote_down"  title="{% trans "Rank Down Importance"  %}"><img src="/site_media/img/thumbDown.gif"/></span>
-<input type="hidden" name="vote" id="id_vote" value="0"/><span id="add_note_vote">0</span></span>
-&nbsp;&nbsp;&nbsp;&nbsp;
-<span>
-    <span class="tags_img clickable" onclick="javascript:showAddNoteTags();" title="{% trans 'Add tags' %}"><img src="/site_media/img/tags-small.png" class="img_in_notes_section_header"/></span>
-    <div id="add_note_tags_box">                       
-<ul id="add_note_tags"></ul>
-<!--
- <button  id="add_tags_to_note"  onclick="javascript:addNoteTags();">{% trans 'Add Tags' %}</button>
- 
-  <button  id="cancel_change_note_tags" onclick="javascript:cancelChangeTags();">{% trans 'Cancel' %}</button>
-  -->
-</div>
-</span>
-
-</div> 
- <span id="add_note_submit_button">
-<button class="big" id="add_note_submit"  onclick="javascript:addNote();"/>{% trans 'Add' %} (Alt-S)</button>
-    {% trans "Short snippet is recommended (less than 300 characters)" %}
-    <a href="javascript:alert('{% trans "A short snippet is enough to represent a significant experience. Practice on that. :-)" %}');"><img src="/media/img/admin/icon-unknown.gif"/></a>
-    </span>   
-    
-
-</div>
-<br/>
-</div>
 
 {% endblock %}
 

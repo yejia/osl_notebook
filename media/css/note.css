@@ -312,8 +312,10 @@ background-color:#0074CC;
 
 }
 span#add_note_submit_button{
-padding-top:20px;
-
+/*padding-top:20px;*/
+position:relative;
+left:0px;
+top:0px;
 }
 
 select{
@@ -463,6 +465,7 @@ left:160px;
 top:-20px;
 width:250px;
 margin-bottom:-35px;
+z-index:3;
 }
 #add_frame_tags_box{
 position:relative;
@@ -935,11 +938,10 @@ margin-left:10px;
 
 div#add_note_section{
 margin-top:15px;
-margin-left:10px;
 }
 
-div.section_header{
-margin-top:20px;
+div.section_header{/*
+margin-top:20px;*/
 }
 
 #more_section{
@@ -1078,7 +1080,11 @@ left:45px;
 
 }
 textarea#id_desc{
-height:40px;
+height:50px;
+width:690px;
+
+margin:0px;
+padding:0px;
 }
 .hide_form_section{
 display:none;
@@ -1103,12 +1109,32 @@ border:1px dashed #bbb;
 padding:5px;
 }
 #charCountSpan{
+/*
 position:relative;
-left:200px;
+left:200px;*/
 }
 div.padded{
 padding:5px;
 }
+table.align_table{
+padding:0px;
+margin:0px;
+margin-left:10px;
+width:700px;
+border:none;
+}
+table.align_table tr td{
+padding:0px;
+margin:0px;
+padding-bottom:3px;
+border:none;
+}
+td.right_td{
+text-align:right;
+vertical-align:bottom;
+overflow:visible;
+}
+
 #panel{width:1080px;margin-left:auto;margin-right:auto;}
 
 /* grid */
