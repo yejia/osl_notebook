@@ -22,11 +22,13 @@
 
 <br/><br/>
 {% if user.username == profile_username %}
-<div>
-{% trans "Add a group" %}:
-<!--<span class="show_add_group_section"><img title="" src="/site_media/img/right-arrow.jpg"/></span><span class="hide_add_note_section"><img title="" src="/site_media/img/down-arrow.jpg"/></span> -->
-</div>
-<div class="addgroup">
+
+<p> 
+<a href="javascript:void(0);" onclick="javascript:show_more_section();">{% trans "Add a group" %}:</a>
+<span class="show_more_section"><img title="" src="/site_media/img/right-arrow.jpg"/></span><span class="hide_more_section"><img title="" src="/site_media/img/down-arrow.jpg"/></span> 
+</p>
+<div id="more_section"  class="addgroup" style="display:none;">
+
 <form action="addGroup" method="post" id="addGroupForm"> 
     <p>   
                {% trans "Name" %} <span class="required">*</span>: 
