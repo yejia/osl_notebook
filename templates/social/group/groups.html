@@ -21,6 +21,7 @@
 
 
 <br/><br/>
+{% if user.username == profile_username %}
 <div>
 {% trans "Add a group" %}:
 <!--<span class="show_add_group_section"><img title="" src="/site_media/img/right-arrow.jpg"/></span><span class="hide_add_note_section"><img title="" src="/site_media/img/down-arrow.jpg"/></span> -->
@@ -60,10 +61,10 @@
    <input type="submit" value="{% trans 'Submit' %}"/>
 </form> 
 </div>
-
+ {% endif %}  
 <br/><br/><br/>
 <div>
-{% blocktrans %} Groups created by {{user}} {% endblocktrans %}:
+{% blocktrans %} Groups created by {{profile_username}} {% endblocktrans %}:
 {% for g in gs_created_by_self %}		
 
 <li>
@@ -81,10 +82,13 @@
 
 <br/>
 <div>
-{% blocktrans %} Groups followed by {{user}} {% endblocktrans %}:
+{% blocktrans %} Groups followed by {{profile_username}} {% endblocktrans %}:
 {% for g in gs_following %}		
-<li>
+<li member_id="{{user.id}}" group_name={{g.name}}>
 <a href="/groups/{{g}}/">{{g}}</a>
+{% if user.username == profile_username %}
+<span title="{% trans "remove myself from this group" %}" class="inline_delete" id="group_delete_member">&nbsp;&nbsp;&nbsp;</span>
+{% endif %}
 </li>
 {% endfor %}
 </div>

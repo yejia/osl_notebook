@@ -510,6 +510,9 @@ padding:0px;
 ul#ac_tags{
 width:300px;
 }
+ul#ac_users{
+width:300px;
+}
 
 
 #sort_drop_down{
@@ -1103,7 +1106,9 @@ padding:5px;
 position:relative;
 left:200px;
 }
-
+div.padded{
+padding:5px;
+}
 #panel{width:1080px;margin-left:auto;margin-right:auto;}
 
 /* grid */

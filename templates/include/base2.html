@@ -89,6 +89,12 @@
 			    availableTags: [{% for tag in tags %}"{{tag}}",{% endfor %}],
                    allowSpaces: true
                   });  
+                  
+                
+              $("#ac_users").tagit({
+			    availableTags: [{% for u in users %}"{{u}}",{% endfor %}],
+                   allowSpaces: true
+                });     
             
             //TODO: make the tag-it lib able to take several auto complete input boxes
             //$("#ab_tags").tagit({
@@ -96,10 +102,17 @@
             //});  
             
             
-              $('span#group_delete_member').click(function(){                  
-                    $(this).load('deleteMember/',{'member_id':$(this).parents('li[member_id]').attr('member_id')});
+              $('span#group_delete_member').click(function(){               
+                   var group_name = $(this).parents('li[group_name]').attr('group_name');
                     $(this).parents("li[member_id]").remove();
+                    $.post('/groups/'+group_name+'/admin/deleteMember/',{'member_id':$(this).parents('li[member_id]').attr('member_id') }, memberDeleted, 'json');
+                   
                 });
+                
+                function memberDeleted(result){
+                        $('ul.messages').append('<li class="'+result.type+'">'+result.msg+'</li>');                
+                
+                }
                 
                  $('span#group_delete_tag').click(function(){     
               
@@ -193,13 +206,13 @@
 {% block help_message_if_none %}
 {% endblock %}
 
-{% if messages %}
+
 <ul class="messages">
     {% for message in messages %}
     <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
     {% endfor %}
 </ul>
-{% endif %}
+
 
 <!--
 <div>

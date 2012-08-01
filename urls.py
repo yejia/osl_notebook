@@ -58,6 +58,8 @@ urlpatterns = patterns('',
     (r'^groups/(?P<groupname>[^/]+)/admin/addTags2Group/$', 'notebook.social.views.group_add_tags'),
     (r'^groups/(?P<groupname>[^/]+)/admin/removeTagFromGroup/$', 'notebook.social.views.group_remove_tag'),
     (r'^groups/(?P<groupname>[^/]+)/admin/updateGroup/$', 'notebook.social.views.update_group'),
+    (r'^groups/(?P<groupname>[^/]+)/admin/addUsers2Group/$', 'notebook.social.views.group_add_users'),
+
 
 
     #(r'^groups/(?P<groupname>[^/]+)/snippets/$', 'notebook.social.views.group_snippets'),

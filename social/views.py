@@ -59,9 +59,14 @@ ST = Social_Tag
 
 
 
-
-
 class AddGroupForm(ModelForm):
+    error_css_class = 'error'
+    required_css_class = 'required'
+    class Meta:
+        model = Group  
+        
+
+class EditGroupForm(ModelForm):
     error_css_class = 'error'
     required_css_class = 'required'
     class Meta:
@@ -203,7 +208,8 @@ def groups(request, username):
     
     #posting for adding a group
     if request.method == 'POST':
-        post = request.POST.copy()    
+        post = request.POST.copy()  
+        print 'post', post  
         #TODO: move logic below to group.add_tags
         tag_names = post.getlist('item[tags][]')
         #print 'tag_names', tag_names
@@ -562,25 +568,30 @@ def group_admin(request, groupname):
         return HttpResponse("You are not an admin of this group, and thus cannot admin this group.", mimetype="text/plain") #TODO: translate
     
     tags = Social_Tag.objects.all().order_by('name')
+    users = User.objects.exclude(username__in=[m.username for m in g.members.all()])
     
-    editGroupForm = AddGroupForm(instance=g)
-    return render_to_response('social/admin/group.html', {'group':g,'tags':tags, 'editGroupForm':editGroupForm \
+    editGroupForm = EditGroupForm(instance=g)
+    return render_to_response('social/admin/group.html', {'group':g,'tags':tags, 'users':users, 'editGroupForm':editGroupForm \
                                                       }, context_instance=RequestContext(request))
 
 
 #delete a member won't remove the group:groupname workingset from member's personal space 
 @login_required    
 def group_delete_member(request, groupname):
-    g = G.objects.get(name=groupname) 
-    #TODO: move below to a decorator
-    if request.user.member not in g.admins.all():
-        return HttpResponse("You are not an admin of this group, and thus cannot admin this group.", mimetype="text/plain")
+    #groupname = request.POST.get('group_name')
+    g = G.objects.get(name=groupname)     
     member_id = request.POST.get('member_id')
     member = User.objects.get(id=member_id)
+    #TODO: move below to a decorator
+    #user can remove himself. But to remove group members other than himself. he has to be in the group admin 
+    if request.user.member not in g.admins.all():# and member.username != request.user.member.username:
+        #return HttpResponse("You are not an admin of this group, and thus cannot admin this group.", mimetype="text/plain")
+        return HttpResponse(simplejson.dumps({'type':'error','msg':_('You are not an admin of this group, and thus cannot admin this group.')}), "application/json")
     g.members.remove(member)
     g.admins.remove(member)
-    return HttpResponse('successful', mimetype="text/plain")  
-    
+    #return HttpResponse('successful', mimetype="text/plain")  
+    #TODO: use this type of response for all returns that do not refresh the page, to notify the front page that what the result of processing is
+    return HttpResponse(simplejson.dumps({'type':'success','msg':_('You have successfully removed the member from the group.')}), "application/json")
 
 
 @login_required
@@ -598,7 +609,7 @@ def group_update_tags(request, groupname):
 @login_required
 def update_group(request, groupname):
     group = G.objects.get(name=groupname)   
-    editGroupForm = AddGroupForm(request.POST, request.FILES, instance=group)
+    editGroupForm = EditGroupForm(request.POST, request.FILES, instance=group)
     #TODO:record last modified by who?
     #username = request.user.username
     log.debug('form errors:'+str(editGroupForm.errors))
@@ -606,6 +617,23 @@ def update_group(request, groupname):
     return HttpResponseRedirect('/groups/'+groupname+'/admin/')
 
 
+#TODO: check if admin
+@login_required
+def group_add_users(request, groupname):
+    user_names = request.POST.getlist('item[tags][]')
+    #TODO:what is below for?
+    #tags = [ST.objects.get(name=tag_name).name for tag_name in tag_names]
+    if not user_names:    
+        #TODO: give an error page, also validation on the form       
+        messages.error(request, "No tags are entered!")  
+    group = G.objects.get(name=groupname)     
+    for uname in user_names:
+        member = Member.objects.get(username=uname)
+        group.members.add(member)  
+        content = _('You are invited to group ')+groupname
+        send_mail(_('You are invited to group ')+groupname, content.encode('utf8'), u'sys@opensourcelearning.org', [member.email])
+       
+    return HttpResponseRedirect('/groups/'+groupname+'/admin/')     
 
     
 @login_required

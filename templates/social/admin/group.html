@@ -30,11 +30,16 @@
 <div style="display:none;">{% trans "Group Name" %}: <span class="editableText">{{group.name}}</span> <button onclick="removeGroup/">{% trans "remove this group" %}</button>
 </div>
 <br/><br/>
-<div> {{group.private|yesno:"private, public, public"}}{% trans "group" %} <a href="/groups/{{group.name}}/">{{group.name}}</a>
+<div> {{group.private|yesno:"private, public, public"}} {% trans "group" %} <a href="/groups/{{group.name}}/">{{group.name}}</a>
+</div>
+<div class="padded">{{group.desc}}
 </div>
 <br/><br/>
-
-<div> 
+<p> 
+<a href="javascript:void(0);" onclick="javascript:show_more_section();">{% trans "Update group info" %}:</a>
+<span class="show_more_section"><img title="" src="/site_media/img/right-arrow.jpg"/></span><span class="hide_more_section"><img title="" src="/site_media/img/down-arrow.jpg"/></span> 
+</p>
+<div id="more_section" style="display:none;">
 <form action="updateGroup/" method="post" enctype="multipart/form-data" id="updateGroupForm">
 {% trans "Group basic info" %} :
                {{ editGroupForm.as_p }}
@@ -46,7 +51,7 @@
 {% trans "Group Members:" %}
 <ul>
 {% for m in group.members.all %}		
-<li member_id="{{m.id}}">
+<li member_id="{{m.id}}" group_name="{{group.name}}">
 <a href="/social/{{m}}/">{{m.username}}</a> 
 &nbsp;&nbsp;&nbsp;&nbsp;{% if m in group.admins.all %}{% trans "admin" %}{% endif %} 
 &nbsp;&nbsp;&nbsp;&nbsp;{% if m == group.creator %}{% trans "creator" %}{% endif %} 
@@ -54,6 +59,16 @@
 {% endif %} 
 </li>
 {% endfor %}
+<li>
+
+<form action="addUsers2Group/" method="post" id="addUsers2GroupForm"> 
+<div>   
+    <ul id="ac_users"></ul>     
+</div> 
+<input type="submit" value="{% trans 'Add Users' %}"/>
+</form> 
+
+</li>
 </ul>
 
 
