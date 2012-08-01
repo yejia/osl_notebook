@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block add_note_section %}
-
+<br/>
     <table class="align_table">
         <tr>
             <td>
@@ -23,11 +23,12 @@
             </td>
             <td class="right_td">
                     <span id="charCountSpan">
-                            <span>{% trans "Use short snippet (< 300 letters)" %}
+                            
+                            <span id="charCount">0</span> {% trans "letters used" %}
+                            </span>
+                            <span>{% trans "(< 300 letters)" %}
                                     <a href="javascript:alert('{% trans "A short snippet is enough to represent a significant experience. Practice on that. :-)" %}');"><img src="/media/img/admin/icon-unknown.gif"/></a>
                             </span>&nbsp;
-                            <span id="charCount">0</span> {% trans "characters used" %}
-                            </span>
                             <span id="charCount_alert"></span>
    
             </td>

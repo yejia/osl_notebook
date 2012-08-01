@@ -1080,8 +1080,8 @@ left:45px;
 
 }
 textarea#id_desc{
-height:50px;
-width:690px;
+height:60px;
+width:590px;
 
 margin:0px;
 padding:0px;
@@ -1120,7 +1120,7 @@ table.align_table{
 padding:0px;
 margin:0px;
 margin-left:10px;
-width:700px;
+width:600px;
 border:none;
 }
 table.align_table tr td{
