@@ -1899,6 +1899,13 @@ def share(request, bookname):
     if not bound_sites:
         return HttpResponse(simplejson.dumps({'count_of_notes':len(note_ids), 'count_of_sites':len(bound_sites)}),
                                                                      "application/json")
+     
+     #douban
+    if 'douban' in bound_sites:
+        d_service = DoubanService(api_key=douban_consumer_key, secret=douban_consumer_secret)
+        d_access_key, d_access_secret = getAccessKey(request.user.username, 'douban')        
+        d_service.client.token = douban.oauth.OAuthToken(str(d_access_key), str(d_access_secret))
+    
             
     #weibo
     if 'sina' in bound_sites:
@@ -1907,11 +1914,7 @@ def share(request, bookname):
         auth_client.set_access_token(access_key, access_secret)
         api = API(auth_client)
     
-    #douban
-    if 'douban' in bound_sites:
-        d_service = DoubanService(api_key=douban_consumer_key, secret=douban_consumer_secret)
-        d_access_key, d_access_secret = getAccessKey(request.user.username, 'douban')        
-        d_service.client.token = douban.oauth.OAuthToken(str(d_access_key), str(d_access_secret))
+   
     if 'tencent' in bound_sites: 
              #TODO: 
              pass  
@@ -1975,14 +1978,17 @@ def share(request, bookname):
         content = content+'    '+source_str+'    '+url+'    '+_('from')+' '+\
                    note.owner.username
         
+        
+        if 'douban' in bound_sites:
+            saying = u"""<?xml version='1.0' encoding='UTF-8'?><entry xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:db="http://www.douban.com/xmlns/"><content>"""+content+u"""</content></entry>"""    
+            status = d_service.AddBroadcasting('/miniblog/saying', saying.encode('utf8')) 
+        
 #        #send to weibo        
         if 'sina' in bound_sites:
             status = api.update_status(status=content)
             #can only send one weibo at one time? Have to wait a while to send another one?TODO:
             time.sleep(0.5) #     
-        if 'douban' in bound_sites:
-            saying = u"""<?xml version='1.0' encoding='UTF-8'?><entry xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:db="http://www.douban.com/xmlns/"><content>"""+content+u"""</content></entry>"""    
-            status = d_service.AddBroadcasting('/miniblog/saying', saying.encode('utf8')) 
+        
             #print 'status:', status.ToString()
         if 'tencent' in bound_sites: 
              #TODO: 
@@ -2596,6 +2602,7 @@ def set_language(request):
     #return HttpResponseRedirect(__get_pre_url(request))  
     return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))
 
+
 def for_new_users(request):
     return render_to_response('doc/for_new_users.html', context_instance=RequestContext(request))
 
@@ -2606,6 +2613,11 @@ def about(request):
         return render_to_response('doc/about.html', context_instance=RequestContext(request))
     elif topic == 'contact':
         return render_to_response('doc/contact.html', context_instance=RequestContext(request))
+    
+
+def change_your_broswer(request):
+    return render_to_response('doc/change_your_browser.html', context_instance=RequestContext(request))
+     
 
 
 allbindingsites = ['sina', 'douban', 'tencent', 'facebook', 'twitter']

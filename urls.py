@@ -199,6 +199,9 @@ urlpatterns = patterns('',
     (r'^forNewUsers/$','notebook.notes.views.for_new_users'),
     (r'^about$','notebook.notes.views.about'),
 
+    (r'^changeYourBroswer/$','notebook.notes.views.change_your_broswer'),
+
+
     (r'^test','notebook.notes.views.test'),
 
 
