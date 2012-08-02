@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-02 06:58+0800\n"
+"POT-Creation-Date: 2012-08-02 07:59+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,23 +42,23 @@ msgstr "原笔记："
 msgid "from"
 msgstr "来自"
 
-#: email_digest.py:112
+#: email_digest.py:111
 msgid "tags: "
 msgstr "标签："
 
-#: email_digest.py:113
+#: email_digest.py:112
 msgid "note importance ranked by the owner: "
 msgstr "作者自评重要性： "
 
-#: email_digest.py:151
+#: email_digest.py:150
 msgid "Daily digest from the group:"
 msgstr "小组今天新添加笔记，来自小组："
 
-#: email_digest.py:153
+#: email_digest.py:152
 msgid "Weekly digest from the group:"
 msgstr "小组本周新添加笔记，来自小组："
 
-#: email_digest.py:154
+#: email_digest.py:153
 msgid ""
 "\n"
 " Or you can go to the group page to view the new notes! "
@@ -66,19 +66,19 @@ msgstr ""
 "\n"
 "或者你可以去小组页面去浏览新添加的笔记！"
 
-#: email_digest.py:155
+#: email_digest.py:154
 msgid "You can set up how you want to receive group digest in your setting:"
 msgstr "你可以在你的用户设置页面修改你要如何接收小组的笔记更新："
 
-#: email_digest.py:161 email_digest.py:163
+#: email_digest.py:160 email_digest.py:162
 msgid "Group "
 msgstr "小组"
 
-#: email_digest.py:161
+#: email_digest.py:160
 msgid ":today's new notes!"
 msgstr "今天新添加的笔记！"
 
-#: email_digest.py:163
+#: email_digest.py:162
 msgid ":this week's new notes!"
 msgstr "本周新添加的笔记！"
 
@@ -348,28 +348,39 @@ msgid "You have successfully removed the member from the group."
 msgstr "你已经成功的将该成员从这个小组移除。"
 
 #: social/views.py:628
-msgid "No tags are entered!"
-msgstr "没有输入标签！"
+msgid "No users are entered!"
+msgstr "没有输入任何用户名！"
 
 #: social/views.py:636
-msgid "You are invited and added to group "
-msgstr "你被邀请参加并已被加入学习小组"
+msgid "You are invited to join the group "
+msgstr "你被邀请参加学习小组"
 
 #: social/views.py:637
 msgid "You can visit this group at "
-msgstr "你可以在这个网址访问该学习小组"
-
-#: social/views.py:637
-msgid ""
-"If you want to remove yourself from this group, you can do that in your "
-"groups page."
-msgstr "如果你想退出该学习小组，你可以在你的学习小组页面完成此操作。"
+msgstr "这是该学习小组的网址 "
 
 #: social/views.py:638
+msgid ""
+"If you want to join this group, you can click on the \"join the group\" "
+"button."
+msgstr "如果你想加入该学习小组，你可以点击\"加入小组\"按钮。"
+
+#: social/views.py:639
+msgid ""
+"After joining, if you want to remove yourself from this group, you can do "
+"that in your groups page."
+msgstr ""
+"加入学习小组后，如果你想退出该学习小组，你可以在你的学习小组页面完成此操作。"
+
+#: social/views.py:640
 msgid "You are invited to group "
 msgstr "你被邀请参加学习小组"
 
-#: social/views.py:936
+#: social/views.py:641
+msgid "You have successfully sent the group invitation!"
+msgstr "你已经成功的发出了小组邀请！"
+
+#: social/views.py:939
 msgid ""
 "Your suggestion is successfully sent to the sys admin! Thank you for your "
 "valuable suggestion!"
@@ -2861,6 +2872,9 @@ msgstr "所有工作区"
 #: templates/workingset/index.html:370
 msgid "Make Current"
 msgstr "设成当前"
+
+#~ msgid "You are invited and added to group "
+#~ msgstr "你被邀请参加并已被加入学习小组"
 
 #~ msgid "Owner's self ranking for this note's importance is:"
 #~ msgstr "作者自评重要性："

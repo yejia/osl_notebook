@@ -584,7 +584,7 @@ def group_delete_member(request, groupname):
     member = User.objects.get(id=member_id)
     #TODO: move below to a decorator
     #user can remove himself. But to remove group members other than himself. he has to be in the group admin 
-    if request.user.member not in g.admins.all():# and member.username != request.user.member.username:
+    if request.user.member not in g.admins.all() and member.username != request.user.member.username:
         #return HttpResponse("You are not an admin of this group, and thus cannot admin this group.", mimetype="text/plain")
         return HttpResponse(simplejson.dumps({'type':'error','msg':_('You are not an admin of this group, and thus cannot admin this group.')}), "application/json")
     g.members.remove(member)
@@ -625,17 +625,23 @@ def group_add_users(request, groupname):
     #tags = [ST.objects.get(name=tag_name).name for tag_name in tag_names]
     if not user_names:    
         #TODO: give an error page, also validation on the form       
-        messages.error(request, _("No tags are entered!"))  
+        messages.error(request, _("No users are entered!"))  
     group = G.objects.get(name=groupname)     
     for uname in user_names:
         member = Member.objects.get(username=uname)
-        #TODO: add group tags into the member's space
-        group.members.add(member)  
+        #for now, only invite, don't add the member directly
+        #group.members.add(member)  
         if member.default_lang:
             activate(member.default_lang)
-        content = _('You are invited and added to group ')+groupname+'\n\n'+\
-                _('You can visit this group at ')+'http://www.91biji.com/groups/' + groupname +'\n\n'+ _('If you want to remove yourself from this group, you can do that in your groups page.')
+        content = _('You are invited to join the group ')+groupname+'\n\n'+\
+                _('You can visit this group at ')+'http://www.91biji.com/groups/' + groupname +'\n\n'+\
+                _('If you want to join this group, you can click on the "join the group" button.')+'\n\n'+\
+                 _('After joining, if you want to remove yourself from this group, you can do that in your groups page.')
         send_mail(_('You are invited to group ')+groupname, content.encode('utf-8'), u'sys@opensourcelearning.org', [member.email])
+    
+    if request.user.member.default_lang:
+          activate(request.user.member.default_lang)  
+    messages.success(request, _("You have successfully sent the group invitation!"))  
        
     return HttpResponseRedirect('/groups/'+groupname+'/admin/')     
 
