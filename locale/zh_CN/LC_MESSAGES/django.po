@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-02 11:00+0800\n"
+"POT-Creation-Date: 2012-08-02 13:41+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2271,11 +2271,11 @@ msgid "Trash"
 msgstr "垃圾"
 
 #: templates/registration/login.html:18
-msgid "A simple notebook that helps you learn in real life"
-msgstr "一个简单的帮助你在生活中学习的笔记本"
+msgid "A simple notebook that helps you learn in real life!"
+msgstr "一个简单的帮助你在生活中学习的笔记本！"
 
 #: templates/registration/login.html:18
-msgid "9 notes a day is a day not wasted"
+msgid "9 notes a day is a day not wasted!"
 msgstr "每天9条笔记，1天就没有白过！"
 
 #: templates/registration/login.html:21
