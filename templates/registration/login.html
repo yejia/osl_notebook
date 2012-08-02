@@ -1,10 +1,21 @@
 {% extends "registration/base.html" %}
 {% load i18n %}
 
+{% block extrahead %}
+   <script src="/site_media/js/jquery.min.js" type="text/javascript"></script>	
+<script type="text/javascript">
+$(document).ready(function(){	
+    if ($.browser.msie) {
+        $('.browser_alert').css("color", "red");
+    }
+});      
+
+</script>
+{% endblock %}
 
 {% block content %}
 
-<h1>{% trans "A simple notebook that helps you learn"  %}!</h1>
+<h1>{% trans "A simple notebook that helps you learn in real life"  %}!  {% trans "9 notes a day is a day not wasted"%}!</h1>
 
 {% if form.errors %}
 <p>{% trans "Your username and password didn't match. Please try again."  %}</p>
@@ -26,7 +37,7 @@
 <input type="hidden" name="next" value="{{ next }}" />
 </form>
 
-<p style="font-size: 9px;">{% trans "Recommended browsers for visiting this site: Chrome, Firefox, Opera."  %}{% trans "Best viewed with Chrome and Firefox, and with your browser zooming in one level."  %}</p>
+<p style="font-size: 9px;" class="browser_alert">{% trans "Recommended browsers for visiting this site: Chrome, Firefox, Opera."  %}{% trans "Best viewed with Chrome and Firefox, and with your browser zooming in one level."  %}</p>
 
 <p style="font-size: 9px;">{% trans "The site is currently invitation only. If you want to join the site, please contact sys admin"  %}:  sys  @  opensourcelearning.org</p>
 {% endblock %}
