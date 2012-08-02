@@ -101,9 +101,7 @@
     
 <script type="text/javascript">
 
-if ($.browser.msie) {
-   $('ul.messages').append('<li class="error">{% trans "You are using an IE browser or IE based browser! You are too out! Please switch to other browsers. All other browser can view this site. The best is:" %} <a href="http://www.google.com/chrome/ ">{%trans "google chrome"%}</a></li>');
-  }
+
 
 	//disalbe print.css
     document.getElementsByTagName('link')[0].disabled = true;
@@ -890,6 +888,11 @@ function showAddNoteTags(){
 	
 <script type="text/javascript">
 	$(document).ready(function(){	
+    
+    if ($.browser.webkit) {
+//alert('{% trans "You are using an IE browser or IE based browser! You are too out! Please switch to other browsers. All other browser can view this site. The best is:" %} <a href="http://www.google.com/chrome/ ">{%trans "google chrome"%}</a>');
+   $('ul.messages').append('<li class="error">{% trans "You are using an IE browser or IE based browser! You are too out! Please switch to other browsers. All other browser can view this site. The best is:" %} <a href="http://www.google.com/chrome/ ">{%trans "google chrome"%}</a></li>');
+  }
     
     
         //borrowed from http://coda-clips.com/textarea-character-count-jquery with modification
