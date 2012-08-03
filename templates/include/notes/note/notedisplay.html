@@ -80,7 +80,7 @@
 <a href="{{book_uri_prefix}}/{{bookname}}/notes/tags/{{tag}}/">{{tag}}</a>,
 {% endfor %}
 </span>
-{% if user.username == profile_username %}
+{% if user.username == profile_username and appname != 'social' %}
 <span class="tags_edit">&nbsp;&nbsp;&nbsp;&nbsp;</span>
 <div id="update_tags_inline_box" style="display: none;position:relative;left:80px;"  title="{% trans "note tags" %}">
                         <ul id="update_tags_inline">
