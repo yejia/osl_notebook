@@ -71,16 +71,13 @@ class Tag(models.Model):
 
 
 
-#class Frame is for notes. And Tag_Frame is for putting tags in a frame
+
 class Tag_Frame(Tag):
+    """class Frame is for notes. And Tag_Frame is frame used to put tags in a frame. Itself is a tag too."""
     tags = models.ManyToManyField(Tag, related_name='in_frames', through="Frame_Tags")     
     #TODO: at the most only one can have this to be true per user
     current = models.BooleanField(default=False)     
-    #name = models.CharField(max_length=50)
-    #desc =  models.TextField(blank=True, max_length=200)    
-    #private = models.BooleanField(default=False)
-    #deleted = models.BooleanField(default=False)
-    #parent = models.ForeignKey(Tag_Frame)   
+
 
     class Meta:
         verbose_name = "tag frame"          

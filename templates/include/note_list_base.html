@@ -1467,7 +1467,7 @@ function showAddNoteTags(){
                                             selected_tags.push($(this).find(':input').val());	                            
                                 });	                        
                                 selected_tags_str =  selected_tags.join();                            
-                                $.post('updateNoteTagsInline/',{ 'id':$(this).parents('li').attr('note_id'), 'tags':  selected_tags_str}, tags_updated_inline ,'json');                  
+                                $.post('updateNoteTagsInline/',{ 'id':$(this).parents('div[note_id]').attr('note_id'), 'tags':  selected_tags_str}, tags_updated_inline ,'json');                  
                                 //$(this).load('updateNoteInline/',{ 'id':$(this).parents('li').attr('note_id'),'note_field':'note_tags', 'content':  selected_tags_str});
                     
                     
@@ -1475,20 +1475,26 @@ function showAddNoteTags(){
                      
                      
                      function tags_updated_inline(result){           
-                            var  editable =     $('li[note_id="'+result.note_id+'"] span.editable') ;              
+                            var  editable =     $('div[note_id="'+result.note_id+'"] span.editable') ;              
                             editable.find('span.tags_cancel').remove();
                             //TODO:define variable with jquery
                              editable.find("#update_tags_inline_box").hide();                    
                             editable.find('span.tags_save').remove();
                             editable.find('span.tags_edit').show();
-                            $('li[note_id='+result.note_id+'] span.tags_text').text(result.display_tags);
-                            $('li[note_id='+result.note_id+'] span.tags_text').show();
+                            $('div[note_id='+result.note_id+'] span.tags_text').text(result.display_tags);
+                            $('div[note_id='+result.note_id+'] span.tags_text').show();
                             
                             toappend = ''
                             for (var i=0;i<result.note_tags.length;i++){ 
                                  toappend = toappend+ '<span><a href="/{{profile_username}}/{{bookname}}/notes/tags/'+result.note_tags[i]+'/">'+result.note_tags[i]+'</a>,</span>';
                             }                            
-                            $('li[note_id='+result.note_id+']  div.brief_display  div#note_tags').empty().append(toappend);
+                           // $('div[note_id='+result.note_id+']  div.brief_display  div#note_tags').empty().append(toappend);
+                           //get rid of finding brief_display to accomodate the tag editing in note display page
+                            $('div[note_id='+result.note_id+']   #note_tags').empty().append(toappend);
+                            
+                             
+                            //alert($('div[note_id='+result.note_id+']   #note_tags'));
+                         //   alert('toappend:'+toappend);
                     }                  
  
                          

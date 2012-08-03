@@ -1153,11 +1153,16 @@ def note(request, username, bookname, note_id):
         note_trans = Note_Translation.objects.using(username).get(note=note)            
         note_trans_form = UpdateNoteTransForm(instance=note_trans)
     
+    
+
+    
+    tags = __get_ws_tags(request, username, bookname)
+    
     pick_lang =  request.GET.get('pick_lang')      
     return render_to_response(book_template_dict.get(bookname)+'notes/note/note.html', {'note':note, 'notes_included':notes_included, \
                                                                                    'note_form':note_form, 'profile_username':username, \
                                                                                    'note_trans_form':note_trans_form,\
-                                                                                   'pick_lang':pick_lang, 
+                                                                                   'pick_lang':pick_lang, 'tags':tags 
                                                                                    },
                                                                                     context_instance=RequestContext(request, {'bookname': bookname,\
                                                                                                                               'aspect_name':'notes',\

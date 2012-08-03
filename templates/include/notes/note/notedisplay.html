@@ -72,13 +72,28 @@
 
 <br/>
 
-{% block note_tags%}
-<div class="noPrint">
-<b><img src="/site_media/img/tags-small.png" class="img_in_notes_section_header"/>:</b> 
+{% block note_tags%} {% comment %} below added a lot of div or span with class or id in order to use the same js for notes display {% endcomment %}
+<div class="noPrint" note_id="{{note.id}}">
+<b><img  src="/site_media/img/tags-small.png" />:</b>
+<span class="editable"><span class="tags_text" id="note_tags">
 {% for tag in note.get_tags %}
 <a href="{{book_uri_prefix}}/{{bookname}}/notes/tags/{{tag}}/">{{tag}}</a>,
 {% endfor %}
+</span>
+{% if user.username == profile_username %}
+<span class="tags_edit">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<div id="update_tags_inline_box" style="display: none;position:relative;left:80px;"  title="{% trans "note tags" %}">
+                        <ul id="update_tags_inline">
+                                {% for tag in note.get_tags %}
+                                   <li>{{tag}}</li>
+                                {% endfor %}
+                        </ul>
 </div>
+{% endif %}
+</span>
+
+</div>
+ 
 {% endblock %}
 
 <div class="noPrint">

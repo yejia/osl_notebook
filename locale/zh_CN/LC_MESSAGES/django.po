@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-03 10:17+0800\n"
+"POT-Creation-Date: 2012-08-03 18:19+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2262,15 +2262,25 @@ msgstr "收件箱"
 msgid "Sent Messages"
 msgstr "发出的信件"
 
-#: templates/postman/base.html:8
+#: templates/postman/base.html:9
 msgid "Write"
 msgstr "写信"
 
-#: templates/postman/base.html:9
+#: templates/postman/base.html:11
+msgid ""
+"Go to your friend profile page, and click on 'Private Message' to message to "
+"your friend."
+msgstr "去你朋友的页面，点击‘私信’来写信给你的朋友"
+
+#: templates/postman/base.html:11
+msgid "Write to friends"
+msgstr "写信给朋友"
+
+#: templates/postman/base.html:12
 msgid "Archives"
 msgstr "存档"
 
-#: templates/postman/base.html:10
+#: templates/postman/base.html:13
 msgid "Trash"
 msgstr "垃圾"
 
@@ -2521,6 +2531,11 @@ msgstr "加朋友"
 msgid " view %(profile_username)s's notebook "
 msgstr "%(profile_username)s的笔记本"
 
+#: templates/social/profile.html:63
+#, python-format
+msgid " view %(profile_username)s's tag tree "
+msgstr "%(profile_username)s的标签树"
+
 #: templates/social/profile.html:66
 #, python-format
 msgid "Friends of %(profile_username)s "
@@ -2590,8 +2605,8 @@ msgid "remove this member"
 msgstr "去除这个组员"
 
 #: templates/social/admin/group.html:68
-msgid "Add Users"
-msgstr "添加成员"
+msgid "Invite Users"
+msgstr "邀请成员"
 
 #: templates/social/admin/group.html:82
 msgid "Group Tags"
@@ -2768,7 +2783,9 @@ msgid ""
 "If you still want to import this tag tree, it will be merged with your "
 "existing tag tree. You can easily modify the merged tree in your tag tree "
 "page. Still import?: "
-msgstr "如果你仍然想导入这个标签树，它会和你已有的标签树合并。你可以在你的标签树页面对其轻松的进行修改。仍然想导入？： "
+msgstr ""
+"如果你仍然想导入这个标签树，它会和你已有的标签树合并。你可以在你的标签树页面"
+"对其轻松的进行修改。仍然想导入？： "
 
 #: templates/tagframe/index.html:243
 msgid "Import"
@@ -2909,6 +2926,9 @@ msgstr "所有工作区"
 #: templates/workingset/index.html:370
 msgid "Make Current"
 msgstr "设成当前"
+
+#~ msgid "Add Users"
+#~ msgstr "添加成员"
 
 #~ msgid "You are invited and added to group "
 #~ msgstr "你被邀请参加并已被加入学习小组"
