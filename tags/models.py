@@ -131,7 +131,23 @@ class Tag_Frame(Tag):
         #    ns.sort(key=lambda r: r.vote, reverse=True)  
         return ts    
     
+
+
+    def get_public_tags_in_order(self, sort=None):
+        order = self.get_tags_order()
+        ts = []
+        for tag_id in order:
+            t = Tag.objects.using(self.owner_name).get(id=tag_id)
+            if not t.private:
+                #add below so it can keep pointing to the right db
+                t.owner_name = self.owner_name
+                ts.append(t)
+        #if sort and sort == 'vote':
+        #    ns.sort(key=lambda r: r.vote, reverse=True)  
+        return ts
     
+
+
     #TODO:get children and grandchildren under direct siblings as well
     def get_siblings(self, tag_name):
         #print 'self.get_tags_in_order()', self.get_tags_in_order()
@@ -144,16 +160,17 @@ class Tag_Frame(Tag):
         
      
     def add_tags(self, tag_names_str):
-        tag_name_list = [tag_name.lstrip().rstrip() for tag_name in tag_names_str.split(',')]        
-        current_num_of_tags = len(self.get_tags_order())
-        self.db = self.owner_name
-        for tag_name in tag_name_list:  
-            #TODO: handling adding new tags         
-            t = Tag.objects.using(self.owner_name).get(name=tag_name)              
-            ft,created = Frame_Tags.objects.using(self.owner_name).get_or_create(frame=self, tag=t)
-            if created:
-                ft._order=current_num_of_tags
-                current_num_of_tags += 1   
+        if tag_names_str:
+            tag_name_list = [tag_name.lstrip().rstrip() for tag_name in tag_names_str.split(',')]        
+            current_num_of_tags = len(self.get_tags_order())
+            self.db = self.owner_name
+            for tag_name in tag_name_list:  
+                #TODO: handling adding new tags         
+                t = Tag.objects.using(self.owner_name).get(name=tag_name)              
+                ft,created = Frame_Tags.objects.using(self.owner_name).get_or_create(frame=self, tag=t)
+                if created:
+                    ft._order=current_num_of_tags
+                    current_num_of_tags += 1   
                  
       
 #===============================================================================

@@ -881,6 +881,12 @@ li.error{
 background-color: red;
 width: 20%;
 }
+li.warning{
+background-color: #FF8533;
+width: 20%;
+}
+
+
 
 img.logo_icon{
 height: 40px;

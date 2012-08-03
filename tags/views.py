@@ -96,44 +96,47 @@ def index(request, username):
 #===============================================================================
 
 
-
+#TODO: check if request.user.usrename = username 
+#@user_passes_test(lambda u: u.username==username)
 def add_tags_2_frame(request, username):
     parent_name = request.GET.get('parent_name')    
     tags_to_add = request.GET.get('tags_to_add')   
     
     TF = getTagFrame(username)
     parent_frame = TF.objects.get(name=parent_name)
-    __add_tags_2_frame(parent_frame, tags_to_add)
+    __add_tags_2_frame(parent_frame, tags_to_add, username)
     return HttpResponse('successful', mimetype="text/plain")  
     
 
-def __add_tags_2_frame(parent_frame, tags_to_add):    
+#TODO: username should be obtained from parent_frame.owner_name
+def __add_tags_2_frame(parent_frame, tags_to_add, username):    
     for tag in tags_to_add.split(','):        
-        #handling tag frame and tag creation here
-        if Tag.objects.using(username).filter(name=tag).exists():
-            #print 'tag existing'
+        __create_tag_frame(tag, username)        
+    parent_frame.add_tags(tags_to_add)
+    
+    
+def __create_tag_frame(tag_name, username):
+    #handling tag frame and tag creation here
+    TF = getTagFrame(username)
+    if Tag.objects.using(username).filter(name=tag_name).exists():           
             #if the tag already exists, and tag_frame doesn't exist yet, create only the tag_frame
-            if not TF.objects.filter(name=tag).exists():
-                #print 'tf not existing'
-                t = Tag.objects.using(username).get(name=tag)
-                cursor = connections[username].cursor()
-                #print 'executing insert sql: ', 'insert into tags_tag_frame (tag_ptr_id, current) values('+str(t.id)+',FALSE)'
-                cursor.execute('insert into tags_tag_frame (tag_ptr_id, current) values('+str(t.id)+',FALSE)')
-                #print 'executed successfully'
+            if not TF.objects.filter(name=tag_name).exists():
+                t = Tag.objects.using(username).get(name=tag_name)
+                cursor = connections[username].cursor()       
+                print 'The following query will be executed:', 'insert into tags_tag_frame (tag_ptr_id, current) values('+str(t.id)+',FALSE)'
+                #sqlite has no TRUE/FALSE as its boolean value, it use 0, 1. postgresql accepts both.          
+                cursor.execute("insert into tags_tag_frame (tag_ptr_id, current) values("+str(t.id)+", '0')")                
                 #it seems that unlike raw sql delete, even without using=username, the transaction is still commited
                 transaction.commit_unless_managed(using=username)  
-        else:
-            tf = TF(name=tag)
-            tf.save()     
-    parent_frame.add_tags(tags_to_add)
+    else:
+        tf = TF(name=tag_name)
+        tf.save()     
+    return TF.objects.get(name=tag_name)
 
 
 def remove_frame(request, username):   
-    parent_name = request.POST.get('parent_name')
-    #print 'parent_name', parent_name
+    parent_name = request.POST.get('parent_name')    
     tag_name = request.POST.get('tag_name')
-    #print 'tag_name', tag_name    
-    #print 'username', username
     FTS = getFrameTags(username)
     fts = FTS.objects.get(frame__name=parent_name, tag__name=tag_name)
     fts.delete()
@@ -164,10 +167,8 @@ def delete_frame(request, username):
 from notebook.notes.views import tags
 
 def notes_by_tag(request, username, tag_path, bookname):   
-    tag_list = tag_path.split('-')
-    #print tag_list
-    tag_name = tag_list[-1]
-    #print tag_name
+    tag_list = tag_path.split('-')    
+    tag_name = tag_list[-1]   
     request.appname = 'tagframe'
     request.tag_path = tag_path
     
@@ -192,17 +193,38 @@ def get_related_tags(request, username):
 
 
 def export(request, username):
-    tag_frame_name = request.GET.get('tag_frame_name')
-    if request.user.username == username:
-        return HttpResponse(simplejson.dumps({'type':'Error','msg':_('You cannot import tag tree into your own notebook!')}), "application/json")
+    #username is the profile username from who you want to import the tag tree
+    tag_frame_name = request.GET.get('tag_frame_name')  
+    force = request.GET.get('force') 
+    if request.user.username == username:                  
+        return HttpResponse(simplejson.dumps({'type':'error','msg':_('You cannot import tag tree into your own notebook!')}), "application/json")
     else:
         TF = getTagFrame(username)
-        tf = TF.objects.get(name=frame_name)
+        tf = TF.objects.get(name=tag_frame_name)
         TFU = getTagFrame(request.user.username)
-        if TFU.objects.filter(name=frame_name).exists():
+        #Only warn for the top tag in the tree. For the children and grandchildren, if the user want to import, just merge if user already has in his notebook
+        if TFU.objects.filter(name=tag_frame_name).exists() and  force not in true_words:
             #TODO: allow changing the name of the tag
-            return HttpResponse(simplejson.dumps({'type':'Error','msg':_('You already have a tag tree of this name in your own notebook!')}), "application/json")
+            return HttpResponse(simplejson.dumps({'type':'warning','msg':_('You already have a tag tree of this name in your own notebook!')}), "application/json")
         else:
             #TODO:possible conflicts with the users' own tag trees (for example, if the user alreayd have a tag frame with the same name but with different children)
-            for tag in tf.tags.all():
-                add_tags_2_frame(request, username) 
+            #prompt to tell the user s/he already has a tag tree with such a name, and does s/he want to rename the new or the old one? Or replace the old one? Or merge with the old one?
+            #For now, the implementation of tag frame will merge the two automatically by default.  
+            export_tree(tf, request.user.username)
+            
+                
+        if force in true_words:   
+            messages.success(request, _("You have successfully imported the tag tree into your own notebook!")) 
+            return HttpResponseRedirect(__get_pre_url(request)) 
+        return  HttpResponse(simplejson.dumps({'type':'success','msg':_('You have successfully imported the tag tree into your own notebook!')}), "application/json")
+
+
+def export_tree(tf, import_user_username):
+    tag_frame_name = tf.name
+    tfu = __create_tag_frame(tag_frame_name, import_user_username)            
+    tags_to_add = ','.join([t.name for t in tf.get_public_tags_in_order()])           
+    __add_tags_2_frame(tfu, tags_to_add, import_user_username) 
+    for tfchild in tf.get_tags_in_order(): 
+        tfchild.tag_frame.owner_name = import_user_username
+        export_tree(tfchild.tag_frame, import_user_username)
+                      

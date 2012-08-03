@@ -232,15 +232,20 @@
         
          $('#import_tag_tree').click(function(){    
                  var  tag_frame_title  = $('div#tag_frame_block').find('span#tag_frame_title').text();
-                 $.post('/{{profile_username}}/tagframe/export/?tag_frame_name='+tag_frame_title,{}, imported, 'text');       
+                 $.post('/{{profile_username}}/tagframe/export/?tag_frame_name='+tag_frame_title,{}, imported, 'json');       
 
            });
            
            
         function imported(result){
-                if (result='Error'){
-                    $('ul.messages').append('<li class="error">{% trans "An error happened when importing the tag tree." %} </li>');     
-                }else{
+                var  tag_frame_title  = $('div#tag_frame_block').find('span#tag_frame_title').text();
+                if ("warning"==result.type){
+                    $('ul.messages').append('<li class="warning">'+result.msg+' {% trans "If you still want to import this tag tree, it will be merged with your existing tag tree. You can easily modify the merged tree in your tag tree page. Still import?: " %}<a href="/{{profile_username}}/tagframe/export/?tag_frame_name='+tag_frame_title+'&force=y">{% trans "Import" %} </a></li>');     
+                }
+                if ("error"==result.type){
+                        $('ul.messages').append('<li class="error">{% trans "An error happened when importing the tag tree." %}'+result.msg+'</li>');
+                }
+                if ("success"==result.type){
                     $('ul.messages').append('<li class="success">{% trans "The tag tree is successfully imported to your notebook! Please go to your notebook to take a look" %} <a href="/{{user.username}}/tagframe/">{% trans "Your tag tree" %} </a></li>');
                 }
         }  
@@ -303,14 +308,14 @@
 
 
 {% block title %}
-{{user.username}} {% trans "'s Root Tag Tree" %} 
+{{profile_username}} {% trans "'s Root Tag Tree" %} 
 {% endblock %}
 
 
 
 {% block site_branding %}
 <br/>
-{{user.username}} {% trans "'s Root Tag Tree" %}  <span title="{% trans 'Tag tree is used to represent the knowledge in your brain.  Note relevance is computed when rendering notes for a tag in a tree. So that the position of a tag in the tree says more about what notes you want to see there. ' %}"><img src="/media/img/admin/icon-unknown.gif"/></span>
+{{profile_username}} {% trans "'s Root Tag Tree" %}  <span title="{% trans 'Tag tree is used to represent the knowledge in your brain.  Note relevance is computed when rendering notes for a tag in a tree. So that the position of a tag in the tree says more about what notes you want to see there. ' %}"><img src="/media/img/admin/icon-unknown.gif"/></span>
 <br/><br/>
 
 {% endblock %}
@@ -325,22 +330,7 @@
 <div>{% trans "View this tag tree like in Trello" %} </div>
 </div>
 
-<div id="top_tag_trees">
-<ull>
-{% for top_tree in top_tag_trees %} 
-<li frame_name="{{top_tree.name}}">
-{{top_tree.name}}: {{top_tree.desc|default:''}}
-{% if  username == profile_username %}
-                <span title="{% trans 'delete this' %}" class="inline_delete top_frame_delete" >&nbsp;&nbsp;&nbsp;</span>
-{% endif %}   
-<ul  class="frame_tree" >
-        {% tag_tree_view_tag top_tree %}
-    </ul> 
-</li>
- {% endfor %}
- </ul>
-</div>
-<br/><br/><br/>
+<br/>
 
 {% if not tag_tree %}    
 <div class="addtagframe">
@@ -396,4 +386,22 @@
 
 <br/><br/>
 <div><a href="#" id="view_top_trees">{% trans "View other Top Level Tag Trees" %} </a></div>
+
+<br/>
+
+<div id="top_tag_trees">
+<ull>
+{% for top_tree in top_tag_trees %} 
+<li frame_name="{{top_tree.name}}">
+{{top_tree.name}}: {{top_tree.desc|default:''}}
+{% if  username == profile_username %}
+                <span title="{% trans 'delete this' %}" class="inline_delete top_frame_delete" >&nbsp;&nbsp;&nbsp;</span>
+{% endif %}   
+<ul  class="frame_tree" >
+        {% tag_tree_view_tag top_tree %}
+    </ul> 
+</li>
+ {% endfor %}
+ </ul>
+</div>
 {% endblock %}
