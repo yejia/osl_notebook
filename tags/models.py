@@ -142,8 +142,11 @@ class Tag_Frame(Tag):
                 #add below so it can keep pointing to the right db
                 t.owner_name = self.owner_name
                 ts.append(t)
+            else:
+                print 'tag is private'    
         #if sort and sort == 'vote':
         #    ns.sort(key=lambda r: r.vote, reverse=True)  
+        #print 'ts', ts
         return ts
     
 

@@ -219,12 +219,19 @@ def export(request, username):
         return  HttpResponse(simplejson.dumps({'type':'success','msg':_('You have successfully imported the tag tree into your own notebook!')}), "application/json")
 
 
-def export_tree(tf, import_user_username):
+def export_tree(tf, import_user_username):    
     tag_frame_name = tf.name
-    tfu = __create_tag_frame(tag_frame_name, import_user_username)            
-    tags_to_add = ','.join([t.name for t in tf.get_public_tags_in_order()])           
+    owner_name = tf.owner_name
+    #print 'tag_frame_name', tag_frame_name
+    tfu = __create_tag_frame(tag_frame_name, import_user_username)  
+    #print 'tfu', tfu
+           
+    tags_to_add = ','.join([t.name for t in tf.get_public_tags_in_order()])   
+    #print 'tags_to_add', tags_to_add        
     __add_tags_2_frame(tfu, tags_to_add, import_user_username) 
-    for tfchild in tf.get_tags_in_order(): 
-        tfchild.tag_frame.owner_name = import_user_username
+    for tfchild in tf.get_public_tags_in_order(): 
+        #print 'tfchild:', tfchild
+        #print  'tfchild.tag_frame:', tfchild.tag_frame
+        tfchild.tag_frame.owner_name = owner_name
         export_tree(tfchild.tag_frame, import_user_username)
                       
