@@ -103,7 +103,10 @@
 			{% block notes_section %}
 			{% endblock %}
 		</div>
-     </div>   
+     </div> 
+{% else %} 
+    <div>{% trans "You don't have any notes yet! Start making notes every day!" %}</div>
+    <hr/>
 {% endif %}
 
 {% endblock %}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-04 20:16+0800\n"
+"POT-Creation-Date: 2012-08-04 20:50+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1917,6 +1917,10 @@ msgid ""
 "There are more than 100 notes having this tag. Only the first 100 are shown."
 msgstr "有超过100个笔记含有此标签。只显示了头100个。"
 
+#: templates/include/notes/notesdisplay.html:111
+msgid "You don't have any notes yet! Start making notes every day!"
+msgstr "你还没有任何笔记！现在就开始每天做些笔记！"
+
 #: templates/include/notes/inlines/add_comments_and_etc_inline.html:4
 msgid "Comments by yourself on your personal note"
 msgstr "你对你个人笔记的评论"
@@ -2938,6 +2942,9 @@ msgstr "所有工作区"
 #: templates/workingset/index.html:370
 msgid "Make Current"
 msgstr "设成当前"
+
+#~ msgid "In your "
+#~ msgstr "在你的"
 
 #~ msgid "Add Users"
 #~ msgstr "添加成员"
