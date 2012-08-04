@@ -3,6 +3,32 @@
 
 
 
+{% block add_note_section %}
+<br/><br/>
+ <span class="note_frame_add" title="{% trans "Create a new frame" %}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+ 
+
+			<form action="linkNotes/" method="post" enctype="multipart/form-data" id="createFrameForm"> <!--TODO:get ok? it still send an extra request to the server-->
+			<input type="hidden" name="user" id="id_user"  value="{{user.id}}"/>
+				<table class="create_frame"> 
+					<tr><!--<th><label for="id_type_of_linkage">{% trans "Type of linkage" %}:</label></th><td>{{addLinkNoteForm.type_of_linkage}}</td>-->
+					        <th>{{addLinkNoteForm.desc.errors }}<label for="id_desc">{% trans "Desc" %}:</label></th><td>{{addLinkNoteForm.desc}}</td>
+					<!--	<th><label for="id_tags">{% trans "Tags" %}:</label></th><td>{{addLinkNoteForm.tags}}</td>--><!--TODO:automatically select the current_tag if it is available-->			
+					</tr> 
+					<tr><th>{{addLinkNoteForm.title.errors }}<label for="id_title">{% trans "Title" %}:</label></th><td><input id="id_title" type="text" name="title" maxlength="30" size="30"/></td> 		
+			{% if bookname == "snippetbook" %}                
+			                        <th>{{addLinkNoteForm.attachment.errors }}<label for="id_attachment">{% trans "Attachment" %}:</label></th><td>{{addLinkNoteForm.attachment}}</td>
+			{% endif %}                        
+						<th><label for="id_private">{% trans "Private" %}:</label></th><td>{{addLinkNoteForm.private}}</td>			 
+					</tr> 
+					<tr>
+						<td><button class="big clickable" id="create_frame_submit"  onclick="javascript:submit();"/>{% trans 'Add' %}</button>   </td>
+					</tr> 
+				</table>
+			        
+			</form>    
+
+{% endblock %}
 
 {% block notes_section_menu %}
             {% include "framebook/notes/menu/notes_section_menu.html" %}  	

@@ -27,7 +27,7 @@
             <div id="create_frame_hint"></div>
 			<form action="linkNotes/" method="post" enctype="multipart/form-data" id="linkNotesForm"> <!--TODO:get ok? it still send an extra request to the server-->
 			<input type="hidden" name="user" id="id_user"  value="{{user.id}}"/>
-				<table> 
+				<table class="create_frame"> 
 					<tr><!--<th><label for="id_type_of_linkage">{% trans "Type of linkage" %}:</label></th><td>{{addLinkNoteForm.type_of_linkage}}</td>-->
 					        <th>{{addLinkNoteForm.desc.errors }}<label for="id_desc">{% trans "Desc" %}:</label></th><td>{{addLinkNoteForm.desc}}</td>
 					<!--	<th><label for="id_tags">{% trans "Tags" %}:</label></th><td>{{addLinkNoteForm.tags}}</td>--><!--TODO:automatically select the current_tag if it is available-->			

@@ -1511,25 +1511,32 @@ def  frame_notes(request, username, bookname):
         pass #TODO
     
     
-    note_ids = request.POST.get('notes')    
-    notes = note_ids.split(",")   
-    notes = list(set(notes)) 
-    
+    note_ids = request.POST.get('notes') 
+    if  note_ids:  
+        notes = note_ids.split(",")   
+        notes = list(set(notes)) 
+    else:
+        notes = None
+        
     #ptr_notes = __get_parent_note_ids(notes, username, bookname)
     #print 'ptr_notes is:', ptr_notes #TODO:should be the same as notes
     N = getNote(username, bookname)
    
     tag_list = []
-    for note_id in notes:
-        n = N.objects.get(id=note_id)        
-        tag_list.extend(n.get_tags_ids())    
+    if notes:
+        for note_id in notes:
+            n = N.objects.get(id=note_id)        
+            tag_list.extend(n.get_tags_ids())    
     
-    tags = list(set(tag_list))  
+        tags = list(set(tag_list))  
     
     post = request.POST.copy()   
-    post.setlist('notes', notes)
-    post.setlist('tags', tags)
-    post['vote'] = 0 #TODO: should have the default in the model    
+    if notes:
+        post.setlist('notes', notes)
+        post.setlist('tags', tags)
+    
+    
+    #post['vote'] = 0 #TODO: should have the default in the model    
 
     F = getFrame(username)
     frameNote = F()
@@ -1542,8 +1549,9 @@ def  frame_notes(request, username, bookname):
         frameNote.attachment = file 
     frameNote.save()
     #TODO: below is not correct since note_ids correspond to those snippet/bookmark/scrap ids instead of notes ids
-    frameNote.add_notes(','.join(notes)) 
-    frameNote.tags = tags    
+    if notes:
+        frameNote.add_notes(','.join(notes)) 
+        frameNote.tags = tags    
     
 #    AddLForm = create_model_form("AddLForm_"+str(username), L, options={'exclude':('tags')})
 #    
