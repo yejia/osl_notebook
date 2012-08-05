@@ -96,7 +96,7 @@
 </div>
 
 <br/><br/>
-{% if user.username == profile_username %}<a href="/{{profile_username}}/groups/snippetbook/notes/">{% trans "view all group notes" %}</a>{% endif %}
+{% if user.username == profile_username and user.member.get_groups %}<a href="/{{profile_username}}/groups/snippetbook/notes/">{% trans "view all group notes" %}</a>{% endif %}
 
 </div>
 
