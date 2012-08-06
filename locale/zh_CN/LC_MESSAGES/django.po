@@ -2334,7 +2334,7 @@ msgstr "本网站目前只接受邀请。如果你想加入，请和系统管理
 
 #: templates/registration/login.html:42
 msgid "give the username you want to use and a brief introduction of yourself."
-msgstr ""
+msgstr "告知你要用的用户名和你的一个简单的自我介绍。"
 
 #: templates/registration/register.html:7
 msgid "User Registration"
