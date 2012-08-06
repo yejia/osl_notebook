@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-04 20:50+0800\n"
+"POT-Creation-Date: 2012-08-07 06:02+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2331,6 +2331,10 @@ msgid ""
 "The site is currently invitation only. If you want to join the site, please "
 "contact sys admin"
 msgstr "本网站目前只接受邀请。如果你想加入，请和系统管理员联系"
+
+#: templates/registration/login.html:42
+msgid "give the username you want to use and a brief introduction of yourself."
+msgstr ""
 
 #: templates/registration/register.html:7
 msgid "User Registration"
