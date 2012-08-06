@@ -36,28 +36,8 @@ def create_member(username, email, passwd):
 
 #create the database file for the user
 #TODO: do I need to specify a super user after this (since it installed a new auth system). Otherwise cannot manage with myadmin?
-def create_db(username):
-    #print 'get the setting.py, write to it the config for the new db'
-    #f = open(HOME_PATH+'notebook/settings.py', 'r+')
-    #lines = f.readlines()
-    #for i in range(len(lines)):
-    #    if lines[i].find('DATABASES = {')!=-1:
-    #        lines.insert(i+1,"""\n'"""+username+"""': {
-    #                    'NAME': DB_ROOT+'/notesdb_"""+username+"""',
-    #                    'ENGINE': 'django.db.backends.sqlite3' ,
-    #                    'USER': '',
-    #                    'PASSWORD': ''
-    #                    },\n""")
-                        
- 
-    #f.seek(0)
-    #for line in lines:
-    #    f.write(line)
-    #f.flush()
-    #f.close()
-    
-
-    
+#This function doesn't work on local machine since the local dev server will reload the settings.py if it is changed making 
+def create_db(username):   
     command_to_run = 'cp '+DB_ROOT+'notesdb_init  '+DB_ROOT+'notesdb_'+username
     #print 'command_to_run ', command_to_run
     os.system(command_to_run)
@@ -81,8 +61,42 @@ def create_db(username):
     #newDatabase['HOST'] = ''
     #newDatabase['PORT'] = ''  
     settings.DATABASES[username] = newDatabase
+    save_db_settings_to_file(newDatabase)
 
-  
+    #print 'get the setting.py, write to it the config for the new db'
+#===============================================================================
+#    f = open(HOME_PATH+'notebook/settings.py', 'r+')
+#    lines = f.readlines()
+#    for i in range(len(lines)):
+#        if lines[i].find('DATABASES = {')!=-1:
+#            lines.insert(i+1,"""\n'"""+username+"""': {
+#                        'NAME': DB_ROOT+'/notesdb_"""+username+"""',
+#                        'ENGINE': 'django.db.backends.sqlite3' ,
+#                        'USER': '',
+#                        'PASSWORD': ''
+#                        },\n""")
+#                        
+# 
+#    f.seek(0)
+#    for line in lines:
+#        f.write(line)
+#    f.flush()
+#    f.close()
+#===============================================================================
+    
+
+def save_db_settings_to_file(db_settings):
+    path_to_store_settings  
+    newDbString = """
+DATABASES['%(id)s'] = {
+        'ENGINE': '%(ENGINE)s', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': '%(NAME)s',                      # Or path to database file if using sqlite3.
+        'USER': '',                      # Not used with sqlite3.
+        'PASSWORD': '',                  # Not used with sqlite3.    
+         } """ % db_settings
+    file_to_store_settings = os.path.join(path_to_store_settings, db_settings['id'] + ".py") 
+    f = open(file_to_store_settings, 'w')
+    f.write(newDbString)    
 
     
     
