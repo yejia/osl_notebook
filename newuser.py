@@ -38,30 +38,23 @@ def create_member(username, email, passwd):
 #TODO: do I need to specify a super user after this (since it installed a new auth system). Otherwise cannot manage with myadmin?
 def create_db(username):
     #print 'get the setting.py, write to it the config for the new db'
-    f = open(HOME_PATH+'notebook/settings.py', 'r+')
-    lines = f.readlines()
-    for i in range(len(lines)):
-        if lines[i].find('DATABASES = {')!=-1:
-            lines.insert(i+1,"""\n'"""+username+"""': {
-                        'NAME': DB_ROOT+'/notesdb_"""+username+"""',
-                        'ENGINE': 'django.db.backends.sqlite3' ,
-                        'USER': '',
-                        'PASSWORD': ''
-                        },\n""")
+    #f = open(HOME_PATH+'notebook/settings.py', 'r+')
+    #lines = f.readlines()
+    #for i in range(len(lines)):
+    #    if lines[i].find('DATABASES = {')!=-1:
+    #        lines.insert(i+1,"""\n'"""+username+"""': {
+    #                    'NAME': DB_ROOT+'/notesdb_"""+username+"""',
+    #                    'ENGINE': 'django.db.backends.sqlite3' ,
+    #                    'USER': '',
+    #                    'PASSWORD': ''
+    #                    },\n""")
                         
-    #~ for line in f:
-        #~ if line.find('DATABASES = {')!=-1:
-            #~ f.write("""'\n"""+username+"""': {\n
-                        #~ 'NAME': '"""+HOME_PATH+"""notebook/db/"""+username+"""',\n
-                        #~ 'ENGINE': 'django.db.backends.sqlite3' ,\n
-                        #~ 'USER': '',\n
-                        #~ 'PASSWORD': ''\n
-                        #~ },""")
-    f.seek(0)
-    for line in lines:
-        f.write(line)
-    f.flush()
-    f.close()
+ 
+    #f.seek(0)
+    #for line in lines:
+    #    f.write(line)
+    #f.flush()
+    #f.close()
     
 
     
@@ -75,9 +68,20 @@ def create_db(username):
     #print 'execute syncdb with shell'
     #os.system('python manage.py syncdb --database='+username)
     
-    reload(notebook.settings)
+    #reload(notebook.settings)
 
-    #reload(notebook.notes.views)   
+    #reload(notebook.notes.views) 
+
+    newDatabase = {}
+    newDatabase["id"] = username
+    newDatabase['ENGINE'] = 'django.db.backends.sqlite3'
+    newDatabase['NAME'] = DB_ROOT+'/notesdb_'+username
+    newDatabase['USER'] = ''
+    newDatabase['PASSWORD'] = ''
+    #newDatabase['HOST'] = ''
+    #newDatabase['PORT'] = ''  
+    settings.DATABASES[username] = newDatabase
+
   
 
     
