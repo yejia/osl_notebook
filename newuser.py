@@ -75,7 +75,7 @@ def create_db(username):
     #print 'execute syncdb with shell'
     #os.system('python manage.py syncdb --database='+username)
     
-    #reload(notebook.settings)
+    reload(notebook.settings)
 
     #reload(notebook.notes.views)   
   
