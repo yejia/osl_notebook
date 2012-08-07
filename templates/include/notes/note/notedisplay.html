@@ -56,8 +56,28 @@
  {% include "include/get_title.html" %}   
 </h2>
 </div>
+
+
 {% block note_type%}
+<div class="noPrint">
+<a href="{{book_uri_prefix}}/{{bookname}}/notes/">{% trans 'View all ' %}
+ {% if note.get_note_type == 'Bookmark' %} 
+    {% trans 'bookmarks' %}
+{% endif %}
+ {% if note.get_note_type == 'Scrap' %} 
+    {% trans 'scraps' %}
+{% endif %}
+ {% if note.get_note_type == 'Snippet' %} 
+    {% trans 'snippets' %}
+{% endif %}
+ {% if note.get_note_type == 'Note' %} 
+    {% trans 'notes' %}
+{% endif %}
+</a>
+</div>
 {% endblock %}
+
+
 <div class="grey noPrint">
 {% trans 'Created' %} :<a href="{{book_uri_prefix}}/{{bookname}}/notes/?year={{note.init_date|date:"Y"}}">{{note.init_date|date:"Y"}}</a>-<a href="{{book_uri_prefix}}/{{bookname}}/notes/?year={{note.init_date|date:"Y"}}&month={{note.init_date|date:"m"}}">{{note.init_date|date:"m"}}</a>-<a href="{{book_uri_prefix}}/{{bookname}}/notes/?year={{note.init_date|date:"Y"}}&month={{note.init_date|date:"m"}}&day={{note.init_date|date:"d"}}">{{note.init_date|date:"d"}}</a>  {{note.init_date|date:"H"}}:{{note.init_date|date:"i"}}      
 </div>

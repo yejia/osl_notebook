@@ -485,6 +485,9 @@ class Social_Frame(Social_Note):
         return related   
  
  
+    def get_size_of_related_frames(self):  
+        return len(self.get_related_frames()) 
+ 
  
     def get_offsprings(self):
         offsprings = [n.id for n in self.notes.all()]

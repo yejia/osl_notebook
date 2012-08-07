@@ -3,7 +3,31 @@
 
 
 
+{% block note_type%}
+<div class="noPrint">
+ {% if note.get_note_type == 'Snippet' %} 
+  <a href="{{book_uri_prefix}}/snippetbook/notes/">{% trans 'View all ' %}
+    {% trans 'snippets' %}
+  </a>  
+{% endif %}
+ {% if note.get_note_type == 'Bookmark' %} 
+ <a href="{{book_uri_prefix}}/bookmarkbook/notes/">{% trans 'View all ' %}
+    {% trans 'bookmarks' %}
+</a>
+{% endif %}
+ {% if note.get_note_type == 'Scrap' %} 
+  <a href="{{book_uri_prefix}}/scrapbook/notes/">{% trans 'View all ' %}
+    {% trans 'scraps' %}
+  </a>  
+{% endif %}
+ {% if note.get_note_type == 'Note' %} 
+  <a href="{{book_uri_prefix}}/notebook/notes/">{% trans 'View all ' %}
+    {% trans 'notes' %}
+  </a>  
+{% endif %}
 
+</div>
+{% endblock %}
 
 
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-07 06:17+0800\n"
+"POT-Creation-Date: 2012-08-07 16:02+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,27 +38,27 @@ msgstr "分享知识包："
 msgid "Original Note:"
 msgstr "原笔记："
 
-#: email_digest.py:108 notes/views.py:1991
+#: email_digest.py:109 notes/views.py:1991
 msgid "from"
 msgstr "来自"
 
-#: email_digest.py:111
+#: email_digest.py:112
 msgid "tags: "
 msgstr "标签："
 
-#: email_digest.py:112
+#: email_digest.py:113
 msgid "note importance ranked by the owner: "
 msgstr "作者自评重要性： "
 
-#: email_digest.py:150
+#: email_digest.py:151
 msgid "Daily digest from the group:"
 msgstr "小组今天新添加笔记，来自小组："
 
-#: email_digest.py:152
+#: email_digest.py:153
 msgid "Weekly digest from the group:"
 msgstr "小组本周新添加笔记，来自小组："
 
-#: email_digest.py:153
+#: email_digest.py:154
 msgid ""
 "\n"
 " Or you can go to the group page to view the new notes! "
@@ -66,19 +66,19 @@ msgstr ""
 "\n"
 "或者你可以去小组页面去浏览新添加的笔记！"
 
-#: email_digest.py:154
+#: email_digest.py:155
 msgid "You can set up how you want to receive group digest in your setting:"
 msgstr "你可以在你的用户设置页面修改你要如何接收小组的笔记更新："
 
-#: email_digest.py:160 email_digest.py:162
+#: email_digest.py:161 email_digest.py:163
 msgid "Group "
 msgstr "小组"
 
-#: email_digest.py:160
+#: email_digest.py:161
 msgid ":today's new notes!"
 msgstr "今天新添加的笔记！"
 
-#: email_digest.py:162
+#: email_digest.py:163
 msgid ":this week's new notes!"
 msgstr "本周新添加的笔记！"
 
@@ -121,23 +121,23 @@ msgstr ""
 "这个网址已经成功添加到您的网址本里。您可以关闭这个窗口，或者其会在1秒后自动关"
 "闭。"
 
-#: notes/models.py:189 notes/models.py:1141 social/models.py:723
+#: notes/models.py:189 notes/models.py:1144 social/models.py:726
 #: templates/framebook/notes/notesdisplay.html:18
 #: templates/include/notes/notesdisplay.html:36
 #: templates/scrapbook/notes/notesdisplay.html:28
 msgid "Title"
 msgstr "标题"
 
-#: notes/models.py:189 notes/models.py:1141 social/models.py:723
+#: notes/models.py:189 notes/models.py:1144 social/models.py:726
 msgid "The size of the title is limited to 2000 characaters."
 msgstr "标题的长度应小于2000字。"
 
-#: notes/models.py:192 notes/models.py:1142 social/models.py:590
-#: social/models.py:724
+#: notes/models.py:192 notes/models.py:1145 social/models.py:593
+#: social/models.py:727
 msgid "Description"
 msgstr "正文"
 
-#: notes/models.py:192 notes/models.py:1142 social/models.py:724
+#: notes/models.py:192 notes/models.py:1145 social/models.py:727
 msgid "The size of the desc is limited to 2000 characaters."
 msgstr "正文的长度应小于2000字。"
 
@@ -153,7 +153,7 @@ msgstr "标签"
 msgid "Default tag is 'random thought'."
 msgstr "默认的标签是'random thought'。"
 
-#: notes/models.py:194 social/models.py:593
+#: notes/models.py:194 social/models.py:596
 #: templates/framebook/notes/notesdisplay.html:22
 #: templates/include/note_list_base.html:1802
 #: templates/include/notes/notesdisplay.html:40
@@ -163,7 +163,7 @@ msgstr "默认的标签是'random thought'。"
 msgid "Private"
 msgstr "隐私"
 
-#: notes/models.py:196 social/models.py:592
+#: notes/models.py:196 social/models.py:595
 msgid "date created"
 msgstr "生成时间"
 
@@ -181,11 +181,11 @@ msgstr "原作者的评级"
 msgid "Attachment"
 msgstr "附件"
 
-#: notes/models.py:1139 social/models.py:721
+#: notes/models.py:1142 social/models.py:724
 msgid "Language"
 msgstr "语言"
 
-#: notes/models.py:1140 social/models.py:722
+#: notes/models.py:1143 social/models.py:725
 msgid "Original language"
 msgstr "原来的语言"
 
@@ -209,7 +209,8 @@ msgstr "密码不一致！"
 msgid "note"
 msgstr "条笔记"
 
-#: notes/views.py:1057
+#: notes/views.py:1057 templates/include/notes/note/notedisplay.html:74
+#: templates/social/include/notes/note/notedisplay.html:25
 msgid "notes"
 msgstr "条笔记"
 
@@ -300,7 +301,7 @@ msgstr "标签树"
 msgid "Nickname"
 msgstr "绰号"
 
-#: social/models.py:61 social/models.py:597
+#: social/models.py:61 social/models.py:600
 msgid "Icon"
 msgstr "头像"
 
@@ -327,64 +328,64 @@ msgstr "接收更新"
 msgid "Home"
 msgstr "主页"
 
-#: social/models.py:589 templates/social/group/groups.html:34
+#: social/models.py:592 templates/social/group/groups.html:34
 msgid "Name"
 msgstr "名字"
 
-#: social/models.py:594 templates/social/notes/group_notes.html:35
+#: social/models.py:597 templates/social/notes/group_notes.html:35
 msgid "Members"
 msgstr "成员"
 
-#: social/models.py:595
+#: social/models.py:598
 msgid "Creator"
 msgstr "创建者"
 
-#: social/models.py:596
+#: social/models.py:599
 msgid "Admins"
 msgstr "管理员"
 
-#: social/views.py:589
+#: social/views.py:594
 msgid "You are not an admin of this group, and thus cannot admin this group."
 msgstr "你不是这个小组的管理员，所以不能管理这个小组。"
 
-#: social/views.py:594
+#: social/views.py:599
 msgid "You have successfully removed the member from the group."
 msgstr "你已经成功的将该成员从这个小组移除。"
 
-#: social/views.py:628
+#: social/views.py:633
 msgid "No users are entered!"
 msgstr "没有输入任何用户名！"
 
-#: social/views.py:636
+#: social/views.py:643
 msgid "You are invited to join the group "
 msgstr "你被邀请参加学习小组"
 
-#: social/views.py:637
+#: social/views.py:644
 msgid "You can visit this group at "
 msgstr "这是该学习小组的网址 "
 
-#: social/views.py:638
+#: social/views.py:645
 msgid ""
 "If you want to join this group, you can click on the \"join the group\" "
 "button."
 msgstr "如果你想加入该学习小组，你可以点击\"加入小组\"按钮。"
 
-#: social/views.py:639
+#: social/views.py:646
 msgid ""
 "After joining, if you want to remove yourself from this group, you can do "
 "that in your groups page."
 msgstr ""
 "加入学习小组后，如果你想退出该学习小组，你可以在你的学习小组页面完成此操作。"
 
-#: social/views.py:640
+#: social/views.py:647
 msgid "You are invited to group "
 msgstr "你被邀请参加学习小组"
 
-#: social/views.py:644
+#: social/views.py:651
 msgid "You have successfully sent the group invitation!"
 msgstr "你已经成功的发出了小组邀请！"
 
-#: social/views.py:942
+#: social/views.py:949
 msgid ""
 "Your suggestion is successfully sent to the sys admin! Thank you for your "
 "valuable suggestion!"
@@ -1274,8 +1275,8 @@ msgstr "原作者自评重要性"
 #: templates/notebook/notes/note/notedisplay.html:48
 #: templates/snippetbook/notes/note/notedisplay.html:6
 #: templates/social/include/notes/notesdisplay.html:124
-#: templates/social/include/notes/note/notedisplay.html:30
-#: templates/social/include/notes/note/notedisplay.html:41
+#: templates/social/include/notes/note/notedisplay.html:54
+#: templates/social/include/notes/note/notedisplay.html:65
 msgid "attachment"
 msgstr "附件"
 
@@ -1474,7 +1475,7 @@ msgstr "学习小组"
 #: templates/include/note_list_base.html:196
 #: templates/include/notes/addNote.html:102
 #: templates/include/notes/notes_display.html:56
-#: templates/include/notes/note/notedisplay.html:104
+#: templates/include/notes/note/notedisplay.html:124
 #: templates/social/group/groups.html:74
 msgid "private"
 msgstr "隐私"
@@ -1502,21 +1503,21 @@ msgstr "去除这个评论"
 
 #: templates/include/note_list_base.html:216
 #: templates/include/notes/notes_display.html:64
-#: templates/include/notes/note/notedisplay.html:133
+#: templates/include/notes/note/notedisplay.html:153
 #: templates/snippetbook/notes/notesdisplay.html:52
 msgid "Rank Up Importance"
 msgstr "增加重要性"
 
 #: templates/include/note_list_base.html:217
 #: templates/include/notes/notes_display.html:65
-#: templates/include/notes/note/notedisplay.html:134
+#: templates/include/notes/note/notedisplay.html:154
 #: templates/snippetbook/notes/notesdisplay.html:53
 msgid "Rank Down Importance"
 msgstr "降低重要性"
 
 #: templates/include/note_list_base.html:218
 #: templates/include/notes/notes_display.html:67
-#: templates/include/notes/note/notedisplay.html:136
+#: templates/include/notes/note/notedisplay.html:156
 msgid "Importance"
 msgstr "重要性"
 
@@ -1546,7 +1547,7 @@ msgstr "笔记正文"
 #: templates/include/note_list_base.html:233
 #: templates/include/notes/inlines/notes_brief_tags_inline.html:3
 #: templates/include/notes/inlines/notes_full_tags_inline.html:4
-#: templates/include/notes/note/notedisplay.html:86
+#: templates/include/notes/note/notedisplay.html:106
 #: templates/social/group/notes/inlines/notes_brief_tags_inline.html:3
 #: templates/social/include/notes/notesdisplay.html:110
 #: templates/social/include/notes/inlines/notes_brief_tags_inline.html:3
@@ -1573,7 +1574,7 @@ msgstr "在包里的"
 
 #: templates/include/note_list_base.html:239
 #: templates/include/notes/notes_display.html:148
-#: templates/include/notes/note/notedisplay.html:120
+#: templates/include/notes/note/notedisplay.html:140
 msgid "Not in any frame"
 msgstr "不在任何包里"
 
@@ -1953,6 +1954,10 @@ msgstr "外部链接"
 msgid "View this note in public notebook"
 msgstr "在公开笔记本里看你的这个笔记"
 
+#: templates/include/notes/inlines/add_comments_and_etc_inline.html:51
+msgid " ago"
+msgstr "以前"
+
 #: templates/include/notes/inlines/add_comments_and_etc_inline.html:66
 msgid "connected by: "
 msgstr "联系："
@@ -2133,31 +2138,54 @@ msgstr "显示附件"
 msgid "Hide attachment"
 msgstr "隐藏附件"
 
-#: templates/include/notes/note/notedisplay.html:62
+#: templates/include/notes/note/notedisplay.html:63
+#: templates/social/include/notes/note/notedisplay.html:9
+#: templates/social/include/notes/note/notedisplay.html:14
+#: templates/social/include/notes/note/notedisplay.html:19
+#: templates/social/include/notes/note/notedisplay.html:24
+msgid "View all "
+msgstr "浏览全部"
+
+#: templates/include/notes/note/notedisplay.html:65
+#: templates/social/include/notes/note/notedisplay.html:15
+msgid "bookmarks"
+msgstr "网址"
+
+#: templates/include/notes/note/notedisplay.html:68
+#: templates/social/include/notes/note/notedisplay.html:20
+msgid "scraps"
+msgstr "网摘"
+
+#: templates/include/notes/note/notedisplay.html:71
+#: templates/social/include/notes/note/notedisplay.html:10
+msgid "snippets"
+msgstr "便条"
+
+#: templates/include/notes/note/notedisplay.html:82
 msgid "Created"
 msgstr "生成时间"
 
-#: templates/include/notes/note/notedisplay.html:101
+#: templates/include/notes/note/notedisplay.html:121
 msgid "importance"
 msgstr "重要性"
 
-#: templates/include/notes/note/notedisplay.html:116
+#: templates/include/notes/note/notedisplay.html:136
 msgid "In frames"
 msgstr "在包里"
 
-#: templates/include/notes/note/notedisplay.html:162
+#: templates/include/notes/note/notedisplay.html:182
 msgid "Edit this note"
 msgstr "编辑这个笔记"
 
-#: templates/include/notes/note/notedisplay.html:163
+#: templates/include/notes/note/notedisplay.html:183
 msgid "Hide edit form"
 msgstr "隐藏编辑表格"
 
-#: templates/include/notes/note/notedisplay.html:201
+#: templates/include/notes/note/notedisplay.html:221
 msgid "Add or edit the translation"
 msgstr "添加或更新翻译"
 
-#: templates/include/notes/note/notedisplay.html:202
+#: templates/include/notes/note/notedisplay.html:222
 msgid "Hide the translation form"
 msgstr "隐藏翻译表格"
 
@@ -2325,7 +2353,8 @@ msgstr "访问本站，建议使用以下浏览器：Chrome， Firefox，  Safar
 msgid ""
 "Best viewed with Chrome, Firefox, and Safari, and with your browser zooming "
 "in one level."
-msgstr "最佳浏览效果是使用Chrome，Firefox，和Safari，并且将浏览器屏幕放大一级。"
+msgstr ""
+"最佳浏览效果是使用Chrome，Firefox，和Safari，并且将浏览器屏幕放大一级。"
 
 #: templates/registration/login.html:42
 msgid ""
@@ -2536,7 +2565,7 @@ msgstr "%(user)s的朋友"
 
 #: templates/social/friends.html:21
 msgid "view all"
-msgstr "浏览所有的"
+msgstr "浏览全部"
 
 #: templates/social/profile.html:6 templates/social/profile.html.py:13
 #, python-format
@@ -2692,17 +2721,17 @@ msgid "Take this note"
 msgstr "收录这个笔记"
 
 #: templates/social/include/notes/notesdisplay.html:69
-#: templates/social/include/notes/note/notedisplay.html:52
+#: templates/social/include/notes/note/notedisplay.html:76
 msgid "Group Member Vote Useful"
 msgstr "小组成员认为有用"
 
 #: templates/social/include/notes/notesdisplay.html:70
-#: templates/social/include/notes/note/notedisplay.html:53
+#: templates/social/include/notes/note/notedisplay.html:77
 msgid "Group Member Vote Unuseful"
 msgstr "小组成员认为没用"
 
 #: templates/social/include/notes/notesdisplay.html:72
-#: templates/social/include/notes/note/notedisplay.html:54
+#: templates/social/include/notes/note/notedisplay.html:78
 msgid "Usefulness voted by group members"
 msgstr "根据小组成员投票结果的有用度"
 
@@ -2948,6 +2977,10 @@ msgstr "所有工作区"
 msgid "Make Current"
 msgstr "设成当前"
 
+#, fuzzy
+#~ msgid "View all snippets"
+#~ msgstr "浏览所有的知识包"
+
 #~ msgid "In your "
 #~ msgstr "在你的"
 
@@ -3120,9 +3153,6 @@ msgstr "设成当前"
 
 #~ msgid "About folder"
 #~ msgstr "关于文件夹的更多信息"
-
-#~ msgid "snippets"
-#~ msgstr "便条"
 
 #~ msgid ""
 #~ "You don't have a linkage yet. You can try creating a linkage by linking "
