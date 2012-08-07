@@ -859,8 +859,15 @@ def add_comment(request):
     nc.save()
     #send notice to the user
     #print 'sending notice'
-    if notification and note.owner != request.user.member:
-      notification.send([note.owner], "comment_receive", {"from_user": request.user})
+    if notification: 
+        if note.owner != request.user.member:
+            notification.send([note.owner], "comment_receive", {"from_user": request.user})
+            
+        #sent notification to other commenters who have commented on this note 
+        other_commenters_ids = note.social_note_comment_set.exclude(commenter=request.user.member).exclude(commenter=note.owner).values_list('commenter', flat=True)
+        other_commenters_ids = list(set(other_commenters_ids))  
+        other_commenters = Member.objects.filter(id__in=other_commenters_ids)    
+        notification.send(other_commenters, "comment_receive", {"from_user": request.user})      
       
       #print 'notices sent'
     return  HttpResponse(simplejson.dumps({'note_id':note_id, 'comment_id':nc.id, 'comment_desc':nc.desc, 'commenter':nc.commenter.username}),
