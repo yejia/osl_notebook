@@ -650,7 +650,7 @@ class Group(models.Model):
         tag_names = [tag.name for tag in self.tags.all()]       
         q1 = Q(tags__name__in=tag_names, owner__in=self.members.all(), private=False)   
         q2 = Q(tags__name="sharinggroup:"+self.name, private=True) 
-        note_list =  social_book_model_dict.get(bookname).objects.filter(q1 | q2) 
+        note_list =  social_book_model_dict.get(bookname).objects.filter(q1 | q2).distinct() 
         return  note_list 
         
     

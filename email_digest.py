@@ -107,10 +107,11 @@ def build_content(note, bookname, pick_lang, title_size):
     f = lambda x: x=="zh-cn" and "C" or"E"
     url =  site_name+  '/social/'+ note.owner.username + '/' + bookname + '/notes/note/' + str(note.id) + '/?pick_lang='+ f(pick_lang)
     html_url = '<a href="'+url+'">'+url+'</a>'       
+    html_content = content + '<br/>'+source_str+'    '+html_url+'    '+_('from')+' '+\
+               note.owner.username 
     content = content+'    \n'+source_str+'    '+url+'    '+_('from')+' '+\
                note.owner.username 
-    html_content = html_content + '    <br/>'+source_str+'    '+html_url+'    '+_('from')+' '+\
-               note.owner.username 
+    
     tag_str = ','.join([t.name for t in note.tags.filter(private=False)])                
     t_str = _('tags: ') + tag_str 
     vote_str = _("note importance ranked by the owner: ")+str(note.vote)
@@ -126,7 +127,7 @@ def build_content(note, bookname, pick_lang, title_size):
 
 
 
-#TODO: write method to turn text content into html content 
+#TODO: write method to turn text content into html content. Replace '\n' with '<br/>', and parse http:// link (stop when encountering whitespace)
 def send_group_digest(username, groupname, freq, pick_lang):
     #print 'Sending '+freq+' digest for', username, 'in', groupname
     group = G.objects.get(name=groupname) 
@@ -140,7 +141,7 @@ def send_group_digest(username, groupname, freq, pick_lang):
         
         if freq == 'daily':      
             notes = group.get_notes_today(bookname)
-            
+            #print group, notes
         else:
             notes = group.get_notes_this_week(bookname)  
         if notes:
@@ -163,7 +164,7 @@ def send_group_digest(username, groupname, freq, pick_lang):
         html_settings_url = '<a href="'+settings_url+'">'+settings_url+'</a>' 
         digest = digest_heading + content + '\n'+ _('Or you can go to the group page to view the new notes! ')+ \
                   group_url + '\n\n'+_('You can set up how you want to receive group digest in your setting:')+ settings_url
-        html_digest = digest_heading + '<br/><br/>'+ html_content +'<br/>'+ _('Or you can go to the group page to view the new notes! ')+ \
+        html_digest = digest_heading + '<br/><br/><br/>'+ html_content +'<br/>'+ _('Or you can go to the group page to view the new notes! ')+ \
                   html_group_url + '<br/><br/>'+_('You can set up how you want to receive group digest in your setting:')+ html_settings_url
         #print 'digest is:', digest
         
@@ -178,6 +179,7 @@ def send_group_digest(username, groupname, freq, pick_lang):
 
         msg = EmailMultiAlternatives(subject, digest.encode('utf-8') , SERVER_EMAIL, [member.email])
         msg.attach_alternative(html_digest.encode('utf-8') , "text/html")
+        #msg.content_subtype = "html"
         msg.send()
         print 'Email digest was sent to '+member.email+' for group '+ groupname 
         time.sleep(10)
