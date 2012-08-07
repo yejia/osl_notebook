@@ -22,7 +22,7 @@ from django.utils.translation import ugettext as _ , activate, get_language
 #_ = t.ugettext
 
 from django.contrib.auth.models import User
-
+from django.utils.http import urlquote
 
 
 
@@ -145,7 +145,7 @@ def send_group_digest(username, groupname, freq, pick_lang):
                 content +=  build_content(note, bookname, pick_lang, 200)
     
     if content:
-        group_url = site_name +  '/groups/' +groupname+'/'
+        group_url = site_name +  '/groups/' +urlquote(groupname)+'/'
         if freq == 'daily':
             digest_heading = _('Daily digest from the group:')+groupname+'\n\n\n'
         if freq == 'weekly':    

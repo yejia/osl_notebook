@@ -17,7 +17,7 @@ from django.core.mail import send_mail
 
 import datetime
 from urlparse import urlparse
-from urllib import quote
+from django.utils.http import urlquote
 
 from notebook.notes.models import Note, Tag, create_model, WorkingSet, getW
 from notebook.bookmarks.models import Bookmark
@@ -638,7 +638,7 @@ def group_add_users(request, groupname):
         #group.members.add(member)  
         if member.default_lang:
             activate(member.default_lang)
-        url = quote('www.91biji.com/groups/' + groupname + '/')
+        url = urlquote('www.91biji.com/groups/' + groupname + '/')
             
         content = _('You are invited to join the group ')+groupname+'\n\n'+\
                 _('You can visit this group at ')+ 'http://' + url  +'\n\n'+\
