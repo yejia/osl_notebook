@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-07 21:10+0800\n"
+"POT-Creation-Date: 2012-08-08 06:21+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,63 +18,67 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: email_digest.py:84 notes/views.py:1961 notes/views.py:1972
+#: email_digest.py:84 email_digest.py:85 notes/views.py:1961
+#: notes/views.py:1972
 msgid "Sharing snippet:"
 msgstr "分享便条："
 
-#: email_digest.py:86 notes/views.py:1963 notes/views.py:1974
+#: email_digest.py:87 email_digest.py:88 notes/views.py:1963
+#: notes/views.py:1974
 msgid "Sharing bookmark:"
 msgstr "分享网址："
 
-#: email_digest.py:88 notes/views.py:1965 notes/views.py:1976
+#: email_digest.py:90 email_digest.py:91 notes/views.py:1965
+#: notes/views.py:1976
 msgid "Sharing scrap:"
 msgstr "分享网摘："
 
-#: email_digest.py:90 notes/views.py:1967 notes/views.py:1978
+#: email_digest.py:93 email_digest.py:94 notes/views.py:1967
+#: notes/views.py:1978
 msgid "Sharing knowledge package:"
 msgstr "分享知识包："
 
-#: email_digest.py:105 notes/views.py:1980
+#: email_digest.py:109 notes/views.py:1980
 msgid "Original Note:"
 msgstr "原笔记："
 
-#: email_digest.py:110 email_digest.py:112 notes/views.py:1991
+#: email_digest.py:114 email_digest.py:116 notes/views.py:1991
 msgid "from"
 msgstr "来自"
 
-#: email_digest.py:115
+#: email_digest.py:120
 msgid "tags: "
 msgstr "标签："
 
-#: email_digest.py:116
+#: email_digest.py:121
 msgid "note importance ranked by the owner: "
 msgstr "作者自评重要性： "
 
-#: email_digest.py:159
+#: email_digest.py:166
 msgid "Daily digest from the group:"
 msgstr "小组今天新添加笔记，来自小组："
 
-#: email_digest.py:161
+#: email_digest.py:168
 msgid "Weekly digest from the group:"
 msgstr "小组本周新添加笔记，来自小组："
 
-#: email_digest.py:164 email_digest.py:166
+#: email_digest.py:171 email_digest.py:173
 msgid "Or you can go to the group page to view the new notes! "
 msgstr "或者你可以去小组页面去浏览新添加的笔记！"
 
-#: email_digest.py:165 email_digest.py:167
+#: email_digest.py:172 email_digest.py:174
 msgid "You can set up how you want to receive group digest in your setting:"
 msgstr "你可以在你的用户设置页面修改你要如何接收小组的笔记更新："
 
-#: email_digest.py:173 email_digest.py:175
-msgid "Group "
-msgstr "小组"
+#: email_digest.py:180 email_digest.py:182
+msgid "Learning Group "
+msgstr "学习小组"
 
-#: email_digest.py:173
+#: email_digest.py:180
 msgid ":today's new notes!"
 msgstr "今天新添加的笔记！"
 
-#: email_digest.py:175
+#: email_digest.py:182
 msgid ":this week's new notes!"
 msgstr "本周新添加的笔记！"
 
@@ -2977,6 +2981,9 @@ msgstr "全部工作区"
 #: templates/workingset/index.html:370
 msgid "Make Current"
 msgstr "设成当前"
+
+#~ msgid "Group "
+#~ msgstr "小组"
 
 #, fuzzy
 #~ msgid "View all snippets"
