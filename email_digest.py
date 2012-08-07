@@ -82,12 +82,16 @@ def build_content(note, bookname, pick_lang, title_size):
     desc_size = title_size + 200     
     if bookname == 'snippetbook':
         content = _('Sharing snippet:')+desc[0:desc_size]
+        html_content = _('Sharing snippet:')+desc[0:desc_size]
     if bookname == 'bookmarkbook':
-        content = _('Sharing bookmark:')+title[0:title_size]+'   '+note.url
+        content = _('Sharing bookmark:')+title[0:title_size]+'   '+note.url 
+        html_content = _('Sharing bookmark:')+title[0:title_size]+'   '+ '<a href="'+note.url+'">'+note.url+'</a>'
     if bookname == 'scrapbook':
-        content = _('Sharing scrap:')+desc[0:desc_size] + '   '+ note.url   
+        content = _('Sharing scrap:')+desc[0:desc_size] + '   '+ note.url 
+        html_content = _('Sharing scrap:')+desc[0:desc_size] + '   '+ '<a href="'+note.url+'">'+note.url+'</a>' 
     if bookname == 'framebook':
         content = _('Sharing knowledge package:')+title[0:title_size] + '   ' + desc[0:desc_size] 
+        html_content = _('Sharing knowledge package:')+title[0:title_size] + '   ' + desc[0:desc_size] 
 #===============================================================================
 #    if bookname == 'notebook':
 #        bookname = note.get_note_bookname()
@@ -107,7 +111,7 @@ def build_content(note, bookname, pick_lang, title_size):
     f = lambda x: x=="zh-cn" and "C" or"E"
     url =  site_name+  '/social/'+ note.owner.username + '/' + bookname + '/notes/note/' + str(note.id) + '/?pick_lang='+ f(pick_lang)
     html_url = '<a href="'+url+'">'+url+'</a>'       
-    html_content = content + '<br/>'+source_str+'    '+html_url+'    '+_('from')+' '+\
+    html_content = html_content + '<br/>'+source_str+'    '+html_url+'    '+_('from')+' '+\
                note.owner.username 
     content = content+'    \n'+source_str+'    '+url+'    '+_('from')+' '+\
                note.owner.username 
@@ -127,7 +131,9 @@ def build_content(note, bookname, pick_lang, title_size):
 
 
 
-#TODO: write method to turn text content into html content. Replace '\n' with '<br/>', and parse http:// link (stop when encountering whitespace)
+#TODO: write method to turn text content into html content. Replace '\n' with '<br/>', 
+#and parse http:// link (stop when encountering whitespace). One thing to watch out is
+#that url in bookmark or scrap may not have http:// prefix if it is entered by the user manually
 def send_group_digest(username, groupname, freq, pick_lang):
     #print 'Sending '+freq+' digest for', username, 'in', groupname
     group = G.objects.get(name=groupname) 
@@ -171,9 +177,9 @@ def send_group_digest(username, groupname, freq, pick_lang):
         #mailserver = get_mail_server()
         
         if freq == 'daily':
-            subject = (_('Group ')+groupname+_(":today's new notes!")).encode('utf-8')
+            subject = (_('Learning Group ')+groupname+_(":today's new notes!")).encode('utf-8')
         if freq == 'weekly':
-            subject = (_('Group ')+groupname+_(":this week's new notes!")).encode('utf-8')   
+            subject = (_('Learning Group ')+groupname+_(":this week's new notes!")).encode('utf-8')   
         #sendEmail(mailserver , SERVER_EMAIL, [member.email], subject, digest.encode('utf-8'))
         #mailserver.close()
 
