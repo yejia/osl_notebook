@@ -2637,7 +2637,7 @@ msgstr "小组"
 
 #: templates/social/admin/group.html:39
 msgid "Update group info"
-msgstr "更新用户信息"
+msgstr "更新小组信息"
 
 #: templates/social/admin/group.html:44
 msgid "Group basic info"

@@ -133,7 +133,8 @@ def build_content(note, bookname, pick_lang, title_size):
 
 #TODO: write method to turn text content into html content. Replace '\n' with '<br/>', 
 #and parse http:// link (stop when encountering whitespace). One thing to watch out is
-#that url in bookmark or scrap may not have http:// prefix if it is entered by the user manually
+#that url in bookmark or scrap may not have http:// prefix if it is entered by the user manually.
+#(What you can do is to have the system automcatically add http:// prefix if it is not there when creating a bookmark
 def send_group_digest(username, groupname, freq, pick_lang):
     #print 'Sending '+freq+' digest for', username, 'in', groupname
     group = G.objects.get(name=groupname) 
