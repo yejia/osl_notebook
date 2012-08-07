@@ -5,13 +5,13 @@ from email.MIMEText import MIMEText
 import smtplib
 import time
 
-
+from django.core.mail import EmailMultiAlternatives
 
 from env_settings import HOME_PATH
 
 sys.path.append(HOME_PATH)
 
-#from django.core import management; import notebook; import notebook.settings as settings;management.setup_environ(settings)
+from django.core import management; import notebook; import notebook.settings as settings;management.setup_environ(settings)
 
 #import settings
 
@@ -69,6 +69,7 @@ def sendEmail(mailserver, fromAddr, toAddrList, subject, content):
 def build_content(note, bookname, pick_lang, title_size):
     """build the content for a single note"""
     content = ''
+    html_content = ''
     #print('The current bookname is:'+bookname)
     if pick_lang == 'en-us':
         desc = note.get_desc_en()
@@ -105,17 +106,19 @@ def build_content(note, bookname, pick_lang, title_size):
      
     f = lambda x: x=="zh-cn" and "C" or"E"
     url =  site_name+  '/social/'+ note.owner.username + '/' + bookname + '/notes/note/' + str(note.id) + '/?pick_lang='+ f(pick_lang)
-           
+    html_url = '<a href="'+url+'">'+url+'</a>'       
     content = content+'    \n'+source_str+'    '+url+'    '+_('from')+' '+\
+               note.owner.username 
+    html_content = html_content + '    <br/>'+source_str+'    '+html_url+'    '+_('from')+' '+\
                note.owner.username 
     tag_str = ','.join([t.name for t in note.tags.filter(private=False)])                
     t_str = _('tags: ') + tag_str 
     vote_str = _("note importance ranked by the owner: ")+str(note.vote)
 
     content = content + '\n' + t_str + '\n' + vote_str + '\n\n'
-
+    html_content = html_content + '<br/>' + t_str + '<br/>' + vote_str + '<br/><br/>'
     #print 'built content for one note of today:', content
-    return content  
+    return content, html_content  
 
 
 
@@ -123,12 +126,13 @@ def build_content(note, bookname, pick_lang, title_size):
 
 
 
-
+#TODO: write method to turn text content into html content 
 def send_group_digest(username, groupname, freq, pick_lang):
     #print 'Sending '+freq+' digest for', username, 'in', groupname
     group = G.objects.get(name=groupname) 
     
     content = ''
+    html_content = ''
     member = Member.objects.get(username=username)
         
     
@@ -143,26 +147,38 @@ def send_group_digest(username, groupname, freq, pick_lang):
             
             #content += _(bookname) + '\n\n'
             for note in notes:
-                content +=  build_content(note, bookname, pick_lang, 200)
+                #content +=  build_content(note, bookname, pick_lang, 200)
+                note_content,html_note_content = build_content(note, bookname, pick_lang, 200)
+                content += note_content 
+                html_content += html_note_content
     
     if content:
         group_url = site_name +  '/groups/' +urlquote(groupname)+'/'
+        html_group_url = '<a href="'+group_url+'">'+group_url+'</a>' 
         if freq == 'daily':
             digest_heading = _('Daily digest from the group:')+groupname+'\n\n\n'
         if freq == 'weekly':    
             digest_heading = _('Weekly digest from the group:')+groupname+'\n\n\n'
-        digest = digest_heading + content + _('\n Or you can go to the group page to view the new notes! ')+ \
-                  group_url + '\n\n'+_('You can set up how you want to receive group digest in your setting:')+ site_name + '/settings/'
+        settings_url = site_name + '/settings/'
+        html_settings_url = '<a href="'+settings_url+'">'+settings_url+'</a>' 
+        digest = digest_heading + content + '\n'+ _('Or you can go to the group page to view the new notes! ')+ \
+                  group_url + '\n\n'+_('You can set up how you want to receive group digest in your setting:')+ settings_url
+        html_digest = digest_heading + '<br/><br/>'+ html_content +'<br/>'+ _('Or you can go to the group page to view the new notes! ')+ \
+                  html_group_url + '<br/><br/>'+_('You can set up how you want to receive group digest in your setting:')+ html_settings_url
         #print 'digest is:', digest
         
-        mailserver = get_mail_server()
-        #subject = ''
+        #mailserver = get_mail_server()
+        
         if freq == 'daily':
             subject = (_('Group ')+groupname+_(":today's new notes!")).encode('utf-8')
         if freq == 'weekly':
             subject = (_('Group ')+groupname+_(":this week's new notes!")).encode('utf-8')   
-        sendEmail(mailserver , SERVER_EMAIL, [member.email], subject, digest.encode('utf-8'))
-        mailserver.close()
+        #sendEmail(mailserver , SERVER_EMAIL, [member.email], subject, digest.encode('utf-8'))
+        #mailserver.close()
+
+        msg = EmailMultiAlternatives(subject, digest.encode('utf-8') , SERVER_EMAIL, [member.email])
+        msg.attach_alternative(html_digest.encode('utf-8') , "text/html")
+        msg.send()
         print 'Email digest was sent to '+member.email+' for group '+ groupname 
         time.sleep(10)
    
