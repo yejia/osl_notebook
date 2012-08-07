@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-07 16:02+0800\n"
+"POT-Creation-Date: 2012-08-07 17:41+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -385,7 +385,7 @@ msgstr "你被邀请参加学习小组"
 msgid "You have successfully sent the group invitation!"
 msgstr "你已经成功的发出了小组邀请！"
 
-#: social/views.py:949
+#: social/views.py:954
 msgid ""
 "Your suggestion is successfully sent to the sys admin! Thank you for your "
 "valuable suggestion!"
@@ -2524,8 +2524,12 @@ msgid "'s note"
 msgstr "的笔记"
 
 #: templates/social/commentsfor.html:16
-msgid "on note"
-msgstr "对笔记"
+msgid "on your note"
+msgstr "对你的笔记"
+
+#: templates/social/commentsfor.html:16
+msgid "on note commented by you"
+msgstr "对你评论过的笔记"
 
 #: templates/social/folders.html:11
 #, python-format

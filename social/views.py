@@ -859,8 +859,9 @@ def add_comment(request):
     nc.save()
     #send notice to the user
     #print 'sending notice'
-    if notification:
+    if notification and note.owner != request.user.member:
       notification.send([note.owner], "comment_receive", {"from_user": request.user})
+      
       #print 'notices sent'
     return  HttpResponse(simplejson.dumps({'note_id':note_id, 'comment_id':nc.id, 'comment_desc':nc.desc, 'commenter':nc.commenter.username}),
                                                                      "application/json")
@@ -883,7 +884,12 @@ from notification.models import Notice
 @login_required
 def comments_4_user(request, username):  
     profile_member = Member.objects.get(username=username) 
-    comments = Social_Note_Comment.objects.filter(note__owner=profile_member).order_by('-init_date')        
+    comments1 = Social_Note_Comment.objects.filter(note__owner=profile_member).order_by('-init_date')    
+    comments2 = Social_Note_Comment.objects.filter(note__social_note_comment__commenter=profile_member).order_by('-init_date')  
+    
+    #print 'comments2:', comments2    
+    comments = comments1 | comments2
+    comments = comments.distinct()
     #clear notifications related to comment receive
     Notice.objects.filter(notice_type__label='comment_receive', recipient=request.user).update(unseen=False)    
     return render_to_response('social/commentsfor.html', {'comments':comments,'profile_username':username},\

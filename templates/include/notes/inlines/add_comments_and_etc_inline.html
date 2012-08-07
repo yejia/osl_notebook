@@ -32,7 +32,7 @@
              <br/> 
              <div id="personal_comments">
                 {% for comment in note.get_comments %}                   
-                     <div comment_id="{{comment.id}}">{{comment}}  <span title="{% trans "remove this comment" %}" class="inline_delete" id="note_delete_personal_comment">&nbsp;&nbsp;&nbsp;</span></div>                       
+                     <div comment_id="{{comment.id}}">{{comment}}  &nbsp;&nbsp;&nbsp;<span class="grey">({{comment.init_date}})</span><span title="{% trans "remove this comment" %}" class="inline_delete" id="note_delete_personal_comment">&nbsp;&nbsp;&nbsp;</span></div>                       
                 {% endfor %}
              </div>
             </div>
@@ -48,7 +48,7 @@
              <br/> 
              <div id="public_comments">
                 {% for comment in social_note.get_comments %}                    
-                     <div comment_id="{{comment.id}}"><a href="/social/{{comment.commenter}}">{{comment.commenter}}</a>: {{comment.desc}}   &nbsp;&nbsp;&nbsp;{{comment.init_date|timesince}} {% trans " ago" %}&nbsp;&nbsp;      {% if user.username == profile_username %}     <span title="{% trans "remove this comment" %}" class="inline_delete" id="note_delete_public_comment">&nbsp;&nbsp;&nbsp;</span> {% endif %}</div>                     
+                     <div comment_id="{{comment.id}}"><a href="/social/{{comment.commenter}}">{{comment.commenter}}</a>: {{comment.desc}}   &nbsp;&nbsp;&nbsp;<span class="grey">({{comment.init_date|timesince}}{% trans " ago" %})</span>    {% if user.username == profile_username %}     <span title="{% trans "remove this comment" %}" class="inline_delete" id="note_delete_public_comment">&nbsp;&nbsp;&nbsp;</span> {% endif %}</div>                     
                 {% endfor %}
              </div> 
               </div>             
