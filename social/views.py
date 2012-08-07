@@ -17,6 +17,7 @@ from django.core.mail import send_mail
 
 import datetime
 from urlparse import urlparse
+from urllib import quote
 
 from notebook.notes.models import Note, Tag, create_model, WorkingSet, getW
 from notebook.bookmarks.models import Bookmark
@@ -364,7 +365,11 @@ def note(request, username, bookname, note_id):
     
         
     N = getSN(bookname)
+    #TODO: if cannot find the note, tell the user such note doesn't exist and send an email to admin
+    #try:
     note = N.objects.filter(owner__username=username).get(id=note_id)
+    #except ObjectDoesNotExist:
+    #    return  render_to_response('404.html')  
     
     
     
@@ -633,8 +638,10 @@ def group_add_users(request, groupname):
         #group.members.add(member)  
         if member.default_lang:
             activate(member.default_lang)
+        url = quote('www.91biji.com/groups/' + groupname + '/')
+            
         content = _('You are invited to join the group ')+groupname+'\n\n'+\
-                _('You can visit this group at ')+'http://www.91biji.com/groups/' + groupname +'\n\n'+\
+                _('You can visit this group at ')+ 'http://' + url  +'\n\n'+\
                 _('If you want to join this group, you can click on the "join the group" button.')+'\n\n'+\
                  _('After joining, if you want to remove yourself from this group, you can do that in your groups page.')
         send_mail(_('You are invited to group ')+groupname, content.encode('utf-8'), u'sys@opensourcelearning.org', [member.email])
