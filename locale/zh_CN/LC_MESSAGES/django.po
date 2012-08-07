@@ -747,7 +747,7 @@ msgstr "高级选项"
 
 #: templates/bookmarkbook/import.html:21
 msgid "Default vote for all bookmarks imported from this file"
-msgstr "文件里所有网址（即书签）的默认的重要性"
+msgstr "文件里全部网址（即书签）的默认的重要性"
 
 #: templates/bookmarkbook/import.html:21
 msgid "Enter a integer number here. Default is 0."
@@ -777,11 +777,11 @@ msgstr "Delicious 导出的书签文件有标签作为attribute在A tag里。"
 
 #: templates/bookmarkbook/import.html:29
 msgid "Apply a common tag to all bookmarks imported"
-msgstr "为所有导入的网址加同一个标签"
+msgstr "为全部导入的网址加同一个标签"
 
 #: templates/bookmarkbook/import.html:32
 msgid "Apply a working set to all tags imported"
-msgstr "为所有导入的标签加一个工作区"
+msgstr "为全部导入的标签加一个工作区"
 
 #: templates/bookmarkbook/import.html:33
 msgid "A working set is a set of tags that you work with in your app."
@@ -873,7 +873,7 @@ msgstr "在链条里的"
 #: templates/tagframe/children.html:52 templates/tags/index.html:207
 #: templates/workingset/index.html:318
 msgid "All"
-msgstr "所有"
+msgstr "全部"
 
 #: templates/bookmarkbook/notes/notes.html:12
 #: templates/bookmarkbook/notes/notes.html:14
@@ -1279,7 +1279,7 @@ msgstr "附件"
 #: templates/framebook/notes/note/notedisplay.html:9
 #: templates/social/framebook/notes/note/notedisplay.html:7
 msgid "View all frames"
-msgstr "浏览所有的知识包"
+msgstr "浏览全部的知识包"
 
 #: templates/framebook/notes/note/notedisplay.html:23
 #: templates/social/framebook/notes/note/notedisplay.html:13
@@ -2105,7 +2105,7 @@ msgstr "标签"
 #: templates/social/include/notes/menu/tags_menu.html:9
 #: templates/social/include/notes/menu/tags_menu.html:11
 msgid "all tags"
-msgstr "所有标签"
+msgstr "全部标签"
 
 #: templates/include/notes/menu/tags_menu.html:80
 msgid "Loading tags..."
@@ -2220,7 +2220,7 @@ msgstr "链条"
 #: templates/scrapbook/notes/linkages.html:12
 #: templates/snippetbook/notes/linkages.html:12
 msgid "All Linkages"
-msgstr "所有链条"
+msgstr "全部链条"
 
 #: templates/include/notes/todelete/linkages.html:13
 #: templates/scrapbook/notes/linkages.html:13
@@ -2244,11 +2244,11 @@ msgstr "%(profile_username)s的个人笔记本"
 #: templates/notebook/note_list_base.html:5
 #, python-format
 msgid "All notes of %(profile_username)s"
-msgstr "%(profile_username)s的所有笔记"
+msgstr "%(profile_username)s的全部笔记"
 
 #: templates/notebook/search.html:4
 msgid "Search all notes"
-msgstr "搜索所有笔记"
+msgstr "搜索全部笔记"
 
 #: templates/notebook/notes/note/notedisplay.html:9
 msgid "Note Type"
@@ -2617,7 +2617,7 @@ msgstr "管理"
 
 #: templates/social/admin/group.html:27
 msgid "View all groups"
-msgstr "浏览所有小组"
+msgstr "浏览全部小组"
 
 #: templates/social/admin/group.html:30
 msgid "Group Name"
@@ -2692,7 +2692,7 @@ msgstr "退出这个小组"
 
 #: templates/social/group/groups.html:99
 msgid "view all group notes"
-msgstr "浏览所有小组的笔记"
+msgstr "浏览全部小组的笔记"
 
 # python-format
 #: templates/social/include/note_list_base.html:6
@@ -2972,7 +2972,7 @@ msgstr "在这里设置"
 
 #: templates/workingset/index.html:316
 msgid "All the working sets"
-msgstr "所有工作区"
+msgstr "全部工作区"
 
 #: templates/workingset/index.html:370
 msgid "Make Current"
