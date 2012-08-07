@@ -884,8 +884,8 @@ from notification.models import Notice
 @login_required
 def comments_4_user(request, username):  
     profile_member = Member.objects.get(username=username) 
-    comments1 = Social_Note_Comment.objects.filter(note__owner=profile_member).order_by('-init_date')    
-    comments2 = Social_Note_Comment.objects.filter(note__social_note_comment__commenter=profile_member).order_by('-init_date')  
+    comments1 = Social_Note_Comment.objects.filter(note__owner=profile_member).exclude(commenter=profile_member).order_by('-init_date')    
+    comments2 = Social_Note_Comment.objects.filter(note__social_note_comment__commenter=profile_member).exclude(commenter=profile_member).order_by('-init_date')  
     
     #print 'comments2:', comments2    
     comments = comments1 | comments2
