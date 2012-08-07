@@ -103,8 +103,9 @@ def build_content(note, bookname, pick_lang, title_size):
    
     source_str = _('Original Note:')
      
-
-    url =  site_name+  '/social/'+ note.owner.username + '/' + bookname + '/notes/note/' + str(note.id) + '/?pick_lang='+pick_lang
+    f = lambda x: x=="zh-cn" and "C" or"E"
+    url =  site_name+  '/social/'+ note.owner.username + '/' + bookname + '/notes/note/' + str(note.id) + '/?pick_lang='+ f(pick_lang)
+           
     content = content+'    \n'+source_str+'    '+url+'    '+_('from')+' '+\
                note.owner.username 
     tag_str = ','.join([t.name for t in note.tags.filter(private=False)])                
