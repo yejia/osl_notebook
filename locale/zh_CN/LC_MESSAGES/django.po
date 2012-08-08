@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-08 06:21+0800\n"
+"POT-Creation-Date: 2012-08-08 10:02+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -54,31 +54,31 @@ msgstr "标签："
 msgid "note importance ranked by the owner: "
 msgstr "作者自评重要性： "
 
-#: email_digest.py:166
+#: email_digest.py:167
 msgid "Daily digest from the group:"
 msgstr "小组今天新添加笔记，来自小组："
 
-#: email_digest.py:168
+#: email_digest.py:169
 msgid "Weekly digest from the group:"
 msgstr "小组本周新添加笔记，来自小组："
 
-#: email_digest.py:171 email_digest.py:173
+#: email_digest.py:172 email_digest.py:174
 msgid "Or you can go to the group page to view the new notes! "
 msgstr "或者你可以去小组页面去浏览新添加的笔记！"
 
-#: email_digest.py:172 email_digest.py:174
+#: email_digest.py:173 email_digest.py:175
 msgid "You can set up how you want to receive group digest in your setting:"
 msgstr "你可以在你的用户设置页面修改你要如何接收小组的笔记更新："
 
-#: email_digest.py:180 email_digest.py:182
+#: email_digest.py:181 email_digest.py:183
 msgid "Learning Group "
 msgstr "学习小组"
 
-#: email_digest.py:180
+#: email_digest.py:181
 msgid ":today's new notes!"
 msgstr "今天新添加的笔记！"
 
-#: email_digest.py:182
+#: email_digest.py:183
 msgid ":this week's new notes!"
 msgstr "本周新添加的笔记！"
 
@@ -106,14 +106,14 @@ msgstr "收到新的评论"
 msgid "you have received a comment"
 msgstr "你收到了新的评论"
 
-#: bookmarks/views.py:41
+#: bookmarks/views.py:44
 msgid ""
 "This bookmark aready exists! You can close this window, or it will be closed "
 "for you in 2 seconds."
 msgstr ""
 "这个网址已经在您的网址本里。您可以关闭这个窗口，或者其会在2秒后自动关闭。"
 
-#: bookmarks/views.py:61
+#: bookmarks/views.py:65
 msgid ""
 "Bookmark is successfully added! You can close this window, or it will be "
 "closed for you in 1 second."
@@ -836,7 +836,7 @@ msgstr "搜索网址"
 #: templates/bookmarkbook/notes/addNote.html:8
 #: templates/framebook/notes/notesdisplay.html:15
 #: templates/include/notes/notesdisplay.html:33
-#: templates/scrapbook/notes/addNote.html:7
+#: templates/scrapbook/notes/addNote.html:9
 #: templates/scrapbook/notes/notesdisplay.html:22
 #: templates/workingset/index.html:286
 msgid "Desc"
@@ -1027,7 +1027,7 @@ msgid ""
 "browser bookmark bar."
 msgstr "为了方便加书签，您可以将下面这个链接拖到你的浏览器的书签栏里去。"
 
-#: templates/doc/for_new_users.html:22 templates/include/notes/addNote.html:72
+#: templates/doc/for_new_users.html:22 templates/include/notes/addNote.html:78
 msgid "Add a bookmark"
 msgstr "添加一个网址"
 
@@ -1038,8 +1038,9 @@ msgid ""
 msgstr "为了方便加摘录，您可以将下面这个链接拖到你的浏览器的书签栏里去。"
 
 #: templates/doc/for_new_users.html:27
+#: templates/scrapbook/notes/addNote.html:5
 msgid "Add a scrap"
-msgstr "加一个摘录"
+msgstr "加一个网摘"
 
 #: templates/doc/for_new_users.html:31
 msgid ""
@@ -1474,7 +1475,7 @@ msgstr "学习小组"
 #: templates/include/groups_menu.html:8
 #: templates/include/note_list_base.html:194
 #: templates/include/note_list_base.html:196
-#: templates/include/notes/addNote.html:102
+#: templates/include/notes/addNote.html:117
 #: templates/include/notes/notes_display.html:56
 #: templates/include/notes/note/notedisplay.html:124
 #: templates/social/group/groups.html:74
@@ -1591,7 +1592,7 @@ msgid "Save Comment"
 msgstr "增加评论"
 
 #: templates/include/note_list_base.html:246
-#: templates/include/notes/addNote.html:74
+#: templates/include/notes/addNote.html:89
 #: templates/include/notes/inlines/add_comments_and_etc_inline.html:30
 #: templates/include/notes/inlines/add_comments_and_etc_inline.html:46
 #: templates/include/notes/menu/notes_section_menu.html:11
@@ -1839,16 +1840,24 @@ msgstr "含标签"
 msgid " of "
 msgstr "的"
 
-#: templates/include/notes/addNote.html:74
+#: templates/include/notes/addNote.html:82
+msgid "This bookmark aready exists!"
+msgstr "这个网址已经在您的网址本里！"
+
+#: templates/include/notes/addNote.html:82
+msgid "You can view it here:"
+msgstr "你可以在此浏览："
+
+#: templates/include/notes/addNote.html:89
 #: templates/social/group/groups.html:63
 msgid "Submit"
 msgstr "递交"
 
-#: templates/include/notes/addNote.html:80
+#: templates/include/notes/addNote.html:95
 msgid "title"
 msgstr "标题"
 
-#: templates/include/notes/addNote.html:88
+#: templates/include/notes/addNote.html:103
 #: templates/include/notes/menu/notes_section_menu.html:9
 #: templates/include/notes/menu/notes_section_menu.html:17
 #: templates/social/admin/group.html:98 templates/social/group/groups.html:41
@@ -1856,12 +1865,12 @@ msgstr "标题"
 msgid "Add Tags"
 msgstr "加标签"
 
-#: templates/include/notes/addNote.html:93
+#: templates/include/notes/addNote.html:108
 #: templates/include/notes/notes_section_header.html:10
 msgid "More"
 msgstr "更多"
 
-#: templates/include/notes/addNote.html:99
+#: templates/include/notes/addNote.html:114
 msgid "Vote"
 msgstr "自打分重要性"
 

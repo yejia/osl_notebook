@@ -47,6 +47,13 @@ $(document).ready(function(){
 		}); 
         
         
+        {% if existing%}
+          $('.addnote').hide();
+        
+        
+        {% endif %}
+        
+        s
        //~ $(document).bind('keydown', 'alt+s', addNote);
 
       //~ $(document).bind('keydown', 'alt+m', function(){
@@ -68,8 +75,16 @@ $(document).ready(function(){
 
 </head>
 <body>
+<h1>{% block title %}{% trans "Add a bookmark" %}{% endblock %}:</h1><br/>
+
+
+{% if existing%}
+{% trans "This bookmark aready exists!" %} {% trans "You can view it here:" %}<br/>
+<a href="/{{user.username}}/bookmarkbook/notes/note/{{id}}/">{{title}}</a>        
+{% endif %}
+
 <div class="addnote" style="margin-left:15px;margin-top:15px;">
-<h1>{% trans "Add a bookmark" %}:</h1><br/>
+
 <form action="" method="post" enctype="multipart/form-data" id="addNoteForm"> <!--TODO:get ok? it still send an extra request to the server-->
 	<input type="submit" value="{% trans "Submit" %}"/>&nbsp;&nbsp;<input type="submit" name="btnC" value="{% trans "Cancel" %}" onclick="window.close();"><br/><br/>
     <p>
