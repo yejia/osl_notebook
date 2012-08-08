@@ -54,8 +54,9 @@ def index(request, username):
         
         #copied from social.views.groups()
         tag_names = post.getlist('item[tags][]')
-        tag_ids = [Tag_Frame.objects.using(username).get(name=tag_name).id for tag_name in tag_names]         
-        post['root_tag_frame'] = tag_ids[0]  
+        tag_ids = [Tag_Frame.objects.using(username).get(name=tag_name).id for tag_name in tag_names]  
+               
+         
         A = getArea(username)
         a = A()
         a.owner_name = username
@@ -69,8 +70,11 @@ def index(request, username):
         a.name = post.get('name')
         a.desc = post.get('desc')
         a.private = post.get('private', False)
-        a.root_note_frame = Frame.objects.using(username).get(id=int(post.get('root_note_frame')))
-        a.root_tag_frame = Tag_Frame.objects.using(username).get(id=int(tag_ids[0]))  
+        #TODO: warn of empty root_note_frame and root_tag_frame. They cannot be null
+        if post.get('root_note_frame'):
+            a.root_note_frame = Frame.objects.using(username).get(id=post.get('root_note_frame'))
+        if tag_ids:  
+            a.root_tag_frame = Tag_Frame.objects.using(username).get(id=tag_ids[0])  
         a.save()   
         
         

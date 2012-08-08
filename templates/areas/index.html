@@ -44,7 +44,16 @@
     </p>
 
    
+      <p>
+        {% trans "Root frame" %}<span class="required">*</span>:   
+    <input type="text" name="root_note_frame" placeholder="{% trans "Enter a frame's id" %}" /> 
+    </p>
     
+     <div>   
+   {% trans "Root tag tree" %}  ({% trans "Enter only 1 tag tree in the input box" %} )<span class="required">*</span>:
+   {{ addAreaForm.root_tag_frame.errors }}
+    <ul id="ac_tags"></ul> 
+    </div>
       
     <p>
         {% trans "Description" %}:  {{addAreaForm.desc}}
@@ -55,16 +64,7 @@
     
     
     
-     <p>
-        {% trans "Root frame" %}:   
-    <input type="text" name="root_note_frame" placeholder="{% trans "Enter a frame's id" %}" /> 
-    </p>
-    
-     <div>   
-   {% trans "Root tag tree" %}  ({% trans "Enter only 1 tag tree in the input box" %} )
-   {{ addAreaForm.root_tag_frame.errors }}
-    <ul id="ac_tags"></ul> 
-    </div>
+   
     
 <input type="submit" value="{% trans 'Update' %}"/>
 </form> 
