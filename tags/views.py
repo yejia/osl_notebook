@@ -61,11 +61,22 @@ def index(request, username):
     theme = __get_view_theme(request)
     private =    theme['private'] 
     #print 'private', private
-    return render_to_response('tagframe/index.html',{'tag_tree':tag_tree, 'top_tag_trees':top_tag_trees,'addTagFrameForm':addTagFrameForm, \
+    return render_to_response('tagframes/index.html',{'tag_tree':tag_tree, 'top_tag_trees':top_tag_trees,'addTagFrameForm':addTagFrameForm, \
                             'tags':tags, 'sort':'', 'username':request.user.username,'profile_username':username,  'private':private}, \
                     context_instance=RequestContext(request,  {}))
 
 
+
+def tagframe(request, username, tagframe_name):
+     tf = Tag_Frame.objects.using(username).get(name=tagframe_name)
+     tags = Tag.objects.using(username).all().order_by('name')
+     #TODO: need this?
+     theme = __get_view_theme(request)
+     private =    theme['private'] 
+     #print 'private', private
+     return render_to_response('tagframes/tagframe.html',{'tag_tree':tf,\
+                            'tags':tags, 'sort':'', 'username':request.user.username,'profile_username':username,  'private':private}, \
+                    context_instance=RequestContext(request,  {}))
 
 #===============================================================================
 # def add_tag_frame(request, username):

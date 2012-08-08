@@ -33,7 +33,7 @@ def social_tree_view_tag(context, frame):
 
 from notebook.tags.views import AddTagFrameForm    
 
-@register.inclusion_tag('tagframe/children.html',  takes_context=True)
+@register.inclusion_tag('tagframes/children.html',  takes_context=True)
 def tag_tree_view_tag(context, frame):    
     frame.owner_name = context['profile_username']   
     #print 'frame.owner_name:', frame.owner_name

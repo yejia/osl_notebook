@@ -107,14 +107,14 @@
             	       
 		 parent_name =   $(this).parents('div#add_frame_tags_box').find('#parent_name').text(); 
               
-            $.ajax({url: 'addTags2Frame/'+
+            $.ajax({url: '/{{profile_username}}/tagframes/addTags2Frame/'+
                                     '?parent_name='+parent_name+
                                     '&tags_to_add='+selected_tags,
                             success:  processReturn,
                             async:   false
             })         
             
-         window.location.reload(false);     
+       //  window.location.reload(false);     
 		 
 	});
     
@@ -159,10 +159,10 @@
       
       }
       
-      tag_path = 'Root' + '-' + tag_path;
+      tag_path = '{{tag_tree.name}}' + '-' + tag_path;
       //alert('tag_path: '+tag_path);
       
-      window.open('/{{profile_username}}/tagframe/'+tag_path+'/'+bookname+'/notes/?sort=relevance')  ;       
+      window.open('/{{profile_username}}/tagframes/'+tag_path+'/'+bookname+'/notes/?sort=relevance')  ;       
       
     });
     
@@ -172,7 +172,7 @@
                     var tag_name = parent.attr('parent_name');
                     related_tags_span = parent.find('.related_tags')
                     if  (related_tags_span .text() == ''){                      
-                        $.post('/{{profile_username}}/tagframe/getRelatedTags/',{'tag_name':tag_name}, got_related_tags, 'json');     
+                        $.post('/{{profile_username}}/tagframes/getRelatedTags/',{'tag_name':tag_name}, got_related_tags, 'json');     
                         parent.find('span.loading').show(0);
                     }else{
                         related_tags_span.toggle();
@@ -232,7 +232,7 @@
         
          $('#import_tag_tree').click(function(){    
                  var  tag_frame_title  = $('div#tag_frame_block').find('span#tag_frame_title').text();
-                 $.post('/{{profile_username}}/tagframe/export/?tag_frame_name='+tag_frame_title,{}, imported, 'json');       
+                 $.post('/{{profile_username}}/tagframes/export/?tag_frame_name='+tag_frame_title,{}, imported, 'json');       
 
            });
            
@@ -240,13 +240,13 @@
         function imported(result){
                 var  tag_frame_title  = $('div#tag_frame_block').find('span#tag_frame_title').text();
                 if ("warning"==result.type){
-                    $('ul.messages').append('<li class="warning">'+result.msg+' {% trans "If you still want to import this tag tree, it will be merged with your existing tag tree. You can easily modify the merged tree in your tag tree page. Still import?: " %}<a href="/{{profile_username}}/tagframe/export/?tag_frame_name='+tag_frame_title+'&force=y">{% trans "Import" %} </a></li>');     
+                    $('ul.messages').append('<li class="warning">'+result.msg+' {% trans "If you still want to import this tag tree, it will be merged with your existing tag tree. You can easily modify the merged tree in your tag tree page. Still import?: " %}<a href="/{{profile_username}}/tagframes/export/?tag_frame_name='+tag_frame_title+'&force=y">{% trans "Import" %} </a></li>');     
                 }
                 if ("error"==result.type){
                         $('ul.messages').append('<li class="error">{% trans "An error happened when importing the tag tree." %}'+result.msg+'</li>');
                 }
                 if ("success"==result.type){
-                    $('ul.messages').append('<li class="success">{% trans "The tag tree is successfully imported to your notebook! Please go to your notebook to take a look" %} <a href="/{{user.username}}/tagframe/">{% trans "Your tag tree" %} </a></li>');
+                    $('ul.messages').append('<li class="success">{% trans "The tag tree is successfully imported to your notebook! Please go to your notebook to take a look" %} <a href="/{{user.username}}/tagframes/">{% trans "Your tag tree" %} </a></li>');
                 }
         }  
         
@@ -385,6 +385,9 @@
 {%endif%}
 
 <br/><br/>
+
+
+{% block other_top_trees %}
 <div><a href="#" id="view_top_trees">{% trans "View other Top Level Tag Trees" %} </a></div>
 
 <br/>
@@ -404,4 +407,7 @@
  {% endfor %}
  </ul>
 </div>
+{% endblock %}
+
+
 {% endblock %}

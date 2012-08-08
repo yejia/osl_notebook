@@ -1,0 +1,27 @@
+{% extends "tagframes/index.html" %}
+{% load i18n %}
+{% load tree_view %} 
+
+
+
+
+
+{% block title %}
+{{profile_username}} {% trans "'s Tag Tree" %} {{tag_tree.name}}
+{% endblock %}
+
+
+
+{% block site_branding %}
+<br/>
+{{profile_username}} {% trans "'s Tag Tree" %} <b>{{tag_tree.name}}</b>
+<br/><br/>
+
+{% endblock %}
+
+{% block other_top_trees %}
+
+{% endblock %}
+
+
+

@@ -1,0 +1,90 @@
+{% extends "include/base2.html" %}
+{% load i18n %}
+
+
+
+
+{% block extra_css %}
+
+{% endblock %}
+
+
+{% block extra_script %}
+
+{% endblock %}
+
+{% block title %}
+{{profile_username}} {% trans "'s Learning Areas" %} 
+{% endblock %}
+
+
+{% block site_branding %}
+<br/>
+{{profile_username}} {% trans "'s Learning Areas" %}  <span title="{% trans 'Learning areas are the major learning areas that you are learning' %}"><img src="/media/img/admin/icon-unknown.gif"/></span>
+<br/><br/>
+
+{% endblock %}
+
+
+{% block content%}
+
+
+<p> 
+<a href="javascript:void(0);" onclick="javascript:show_more_section();">{% trans "Add a learning area" %}:</a>
+<span class="show_more_section"><img title="" src="/site_media/img/right-arrow.jpg"/></span><span class="hide_more_section"><img title="" src="/site_media/img/down-arrow.jpg"/></span> 
+</p>
+<div id="more_section" style="display:none;">
+<form action="" method="post" enctype="multipart/form-data" id="addAreaForm">
+
+
+<p>   
+               {% trans "Name" %} <span class="required">*</span>: 
+                {{ addAreaForm.name.errors }}
+               {{addAreaForm.name}}
+    </p>
+
+   
+    
+      
+    <p>
+        {% trans "Description" %}:  {{addAreaForm.desc}}
+    </p>
+    <p>
+        {% trans "Private" %}:  {{addAreaForm.private}}
+    </p>
+    
+    
+    
+     <p>
+        {% trans "Root frame" %}:   
+    <input type="text" name="root_note_frame" placeholder="{% trans "Enter a frame's id" %}" /> 
+    </p>
+    
+     <div>   
+   {% trans "Root tag tree" %}  ({% trans "Enter only 1 tag tree in the input box" %} )
+   {{ addAreaForm.root_tag_frame.errors }}
+    <ul id="ac_tags"></ul> 
+    </div>
+    
+<input type="submit" value="{% trans 'Update' %}"/>
+</form> 
+</div>
+
+
+<span> {% trans "All areas" %}:</span>
+<ul>
+{% for area in areas %}		
+<li>
+<a href="/{{username}}/areas/area/{{area.name}}/">{{area.name}}</a>
+</li>
+{% endfor %}
+</ul>
+
+
+
+
+
+
+
+
+{% endblock %}

@@ -210,7 +210,7 @@ def groups(request, username):
     #posting for adding a group
     if request.method == 'POST':
         post = request.POST.copy()  
-        print 'post', post  
+        #print 'post', post  
         #TODO: move logic below to group.add_tags
         tag_names = post.getlist('item[tags][]')
         #print 'tag_names', tag_names

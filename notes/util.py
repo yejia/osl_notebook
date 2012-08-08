@@ -56,5 +56,6 @@ def getFrameTags(username):
 
 
 
-
-
+from notebook.areas.models import Area
+def getArea(username):
+    return create_model("Area"+str(username), Area, username)

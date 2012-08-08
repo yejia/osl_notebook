@@ -109,36 +109,37 @@ urlpatterns = patterns('',
 
  
 
-   #TODO:put tagframe at front, since it doesn't distinguis btw personal and public book. For example /tagframe/username/...
-    (r'^(?P<username>[^/]+)/tagframe/$', 'notebook.tags.views.index'),
-   # (r'^(?P<username>[^/]+)/tagframe/addTagFrame/$', 'notebook.tags.views.add_tag_frame'),
-    (r'^(?P<username>[^/]+)/tagframe/addTags2Frame/$', 'notebook.tags.views.add_tags_2_frame'),
-    (r'^(?P<username>[^/]+)/tagframe/removeFrame/$', 'notebook.tags.views.remove_frame'),
-    (r'^(?P<username>[^/]+)/tagframe/deleteFrame/$', 'notebook.tags.views.delete_frame'),
+   #TODO:put tagframes at front, since it doesn't distinguis btw personal and public book. For example /tagframes/username/...
+    (r'^(?P<username>[^/]+)/tagframes/$', 'notebook.tags.views.index'),
+   # (r'^(?P<username>[^/]+)/tagframes/addTagFrame/$', 'notebook.tags.views.add_tag_frame'),
+    (r'^(?P<username>[^/]+)/tagframes/addTags2Frame/$', 'notebook.tags.views.add_tags_2_frame'),
+    (r'^(?P<username>[^/]+)/tagframes/removeFrame/$', 'notebook.tags.views.remove_frame'),
+    (r'^(?P<username>[^/]+)/tagframes/deleteFrame/$', 'notebook.tags.views.delete_frame'),
     
-    (r'^(?P<username>[^/]+)/tagframe/(?P<tag_path>[^/]+)/(?P<bookname>[^/]+)/notes/$', 'notebook.tags.views.notes_by_tag'),
-    (r'^(?P<username>[^/]+)/tagframe/getRelatedTags/$','notebook.tags.views.get_related_tags'),  
-    (r'^(?P<username>[^/]+)/tagframe/export/$','notebook.tags.views.export'),  
+    (r'^(?P<username>[^/]+)/tagframes/(?P<tag_path>[^/]+)/(?P<bookname>[^/]+)/notes/$', 'notebook.tags.views.notes_by_tag'),
+    (r'^(?P<username>[^/]+)/tagframes/getRelatedTags/$','notebook.tags.views.get_related_tags'),  
+    (r'^(?P<username>[^/]+)/tagframes/export/$','notebook.tags.views.export'),  
 
 
     #below dupldate a lot with patterns in 'notebook.notes.urls', refactor TODO:
-    (r'^(?P<username>[^/]+)/tagframe/(.*)/(?P<bookname>[^/]+)/notes/updateNoteInline/$','notebook.notes.views.update_note_inline'),
-    (r'^(?P<username>[^/]+)/tagframe/(.*)/(?P<bookname>[^/]+)/notes/updateNoteTagsInline/$','notebook.notes.views.update_note_tags_inline'),
-    (r'^(?P<username>[^/]+)/tagframe/(.*)/(?P<bookname>[^/]+)/notes/addComment/$','notebook.notes.views.add_comment'),
-    (r'^(?P<username>[^/]+)/tagframe/(.*)/(?P<bookname>[^/]+)/notes/deleteComment/$','notebook.notes.views.delete_comment'),
-    (r'^(?P<username>[^/]+)/tagframe/(.*)/(?P<bookname>[^/]+)/notes/makePrivate/$','notebook.notes.views.make_private'),
-    (r'^(?P<username>[^/]+)/tagframe/(.*)/(?P<bookname>[^/]+)/notes/makePublic/$','notebook.notes.views.make_public'),
+    (r'^(?P<username>[^/]+)/tagframes/(.*)/(?P<bookname>[^/]+)/notes/updateNoteInline/$','notebook.notes.views.update_note_inline'),
+    (r'^(?P<username>[^/]+)/tagframes/(.*)/(?P<bookname>[^/]+)/notes/updateNoteTagsInline/$','notebook.notes.views.update_note_tags_inline'),
+    (r'^(?P<username>[^/]+)/tagframes/(.*)/(?P<bookname>[^/]+)/notes/addComment/$','notebook.notes.views.add_comment'),
+    (r'^(?P<username>[^/]+)/tagframes/(.*)/(?P<bookname>[^/]+)/notes/deleteComment/$','notebook.notes.views.delete_comment'),
+    (r'^(?P<username>[^/]+)/tagframes/(.*)/(?P<bookname>[^/]+)/notes/makePrivate/$','notebook.notes.views.make_private'),
+    (r'^(?P<username>[^/]+)/tagframes/(.*)/(?P<bookname>[^/]+)/notes/makePublic/$','notebook.notes.views.make_public'),
     
-    (r'^(?P<username>[^/]+)/tagframe/(.*)/(?P<bookname>[^/]+)/notes/voteUpNote/$','notebook.notes.views.vote_up_note'), 
-    (r'^(?P<username>[^/]+)/tagframe/(.*)/(?P<bookname>[^/]+)/notes/voteDownNote/$','notebook.notes.views.vote_down_note'),
-    (r'^(?P<username>[^/]+)/tagframe/(.*)/(?P<bookname>[^/]+)/notes/deleteNote/$','notebook.notes.views.delete_note'),
-    (r'^(?P<username>[^/]+)/tagframe/(.*)/(?P<bookname>[^/]+)/notes/addNote/$','notebook.notes.views.add_note'),  
-    (r'^(?P<username>[^/]+)/tagframe/(.*)/(?P<bookname>[^/]+)/notes/addTags2Notes2/$','notebook.notes.views.add_tags_to_notes2'),
-    (r'^(?P<username>[^/]+)/tagframe/(.*)/(?P<bookname>[^/]+)/notes/removeTagsFromNotes2/$','notebook.notes.views.remove_tags_from_notes2'),
+    (r'^(?P<username>[^/]+)/tagframes/(.*)/(?P<bookname>[^/]+)/notes/voteUpNote/$','notebook.notes.views.vote_up_note'), 
+    (r'^(?P<username>[^/]+)/tagframes/(.*)/(?P<bookname>[^/]+)/notes/voteDownNote/$','notebook.notes.views.vote_down_note'),
+    (r'^(?P<username>[^/]+)/tagframes/(.*)/(?P<bookname>[^/]+)/notes/deleteNote/$','notebook.notes.views.delete_note'),
+    (r'^(?P<username>[^/]+)/tagframes/(.*)/(?P<bookname>[^/]+)/notes/addNote/$','notebook.notes.views.add_note'),  
+    (r'^(?P<username>[^/]+)/tagframes/(.*)/(?P<bookname>[^/]+)/notes/addTags2Notes2/$','notebook.notes.views.add_tags_to_notes2'),
+    (r'^(?P<username>[^/]+)/tagframes/(.*)/(?P<bookname>[^/]+)/notes/removeTagsFromNotes2/$','notebook.notes.views.remove_tags_from_notes2'),
 
-  
+    (r'^(?P<username>[^/]+)/tagframes/tagframe/(?P<tagframe_name>[^/]+)/$','notebook.tags.views.tagframe'),
 
     (r'^(?P<username>[^/]+)/areas/$', 'notebook.areas.views.index'),
+    (r'^(?P<username>[^/]+)/areas/area/(?P<areaname>[^/]+)/$', 'notebook.areas.views.area'),
 
 
    #TODO: seems to be matching too many things 

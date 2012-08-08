@@ -1,0 +1,55 @@
+{% extends "include/base2.html" %}
+{% load i18n %}
+
+
+
+
+
+{% block extra_css %}
+
+{% endblock %}
+
+
+{% block extra_script %}
+
+{% endblock %}
+
+{% block title %}
+{{profile_username}} {% trans "'s Learning Area" %} : {{area.name}}
+
+
+{% endblock %}
+
+
+{% block site_branding %}
+<br/>
+{{profile_username}} {% trans "'s Learning Area" %} : <b>{{area.name}} </b>
+
+{% if area.private %} <span class="lock_noclick" title="{% trans 'private'  %}" style="display:{% if area.private %}inline{% else %}none{% endif %};">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;              
+                                   </span> 
+        {% else %} <span class="unlock_noclick" title="{% trans 'public'  %}" style="display:{% if area.private %}none{% else %}inline{% endif %};">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;          
+                </span>
+        
+        {% endif %}  
+
+<br/>
+
+{% endblock %}
+
+
+{% block content%}
+<div>{{area.desc}}</div>
+
+
+<div>
+ {% trans "Root tag tree" %}: <a href="/{{profile_username}}/tagframes/tagframe/{{area.root_tag_frame.name}}/">{{area.root_tag_frame.name}}</a>
+ </div>
+<div>
+{% trans "Root frame" %}: <a href="/{{profile_username}}/framebook/notes/note/{{area.root_note_frame.id}}/">{{area.root_note_frame.title}}
+ </div>
+ {% trans " " %}
+ 
+ {% trans " " %}
+
+
+{% endblock %}
