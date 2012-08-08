@@ -5,9 +5,11 @@ from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.utils.translation import ugettext as _
 from django.contrib import messages
+from django.forms import ModelForm
 
 from notebook.notes.views import __get_ws_tags, getlogger, getNote, getT, getW, create_model_form
 import notebook
+from notebook.bookmarks.models import Bookmark
 
 
 #TODO: below to be deleted later after merging linkage. This def is only used in fixdb.py
@@ -19,6 +21,14 @@ def getL(username):
 
 log = getlogger('bookmarks.views')         
 
+
+
+class AddBookmarkForm(ModelForm):
+    error_css_class = 'error'
+    required_css_class = 'required'
+    class Meta:
+        model = Bookmark  
+        #exclude = ('tags',)  
                
 
 #this method is used for processing the request users send via the browser button  TODO: use code in add_note method 
@@ -33,7 +43,7 @@ def add_bookmark(request):
     if request.method == 'POST': 
         tags = T.objects.all()
         #TODO: whether can get an existing AddNForm_username from the memory?
-        AddNForm = create_model_form("AddNForm_"+str(username), N, fields={'tags':forms.ModelMultipleChoiceField(queryset=tags)})     
+        #AddNForm = create_model_form("AddNForm_"+str(username), N, fields={'tags':forms.ModelMultipleChoiceField(queryset=tags)})     
         n = N()  
         post = request.POST.copy()
         url = post.get('url')
@@ -53,7 +63,8 @@ def add_bookmark(request):
             tags = [T.objects.get(name='untagged').id]
         post.setlist('tags', tags)
         
-        f = AddNForm(post, instance=n)
+        #f = AddNForm(post, instance=n)
+        f = AddBookmarkForm(post, instance=n)
         log.debug("f.errors:"+str(f.errors))
         f.save()
         #TODO:below seems redundant, since f.save() may have saved the instance as well
@@ -61,19 +72,24 @@ def add_bookmark(request):
         return render_to_response("include/notes/addNote_result.html",{'message':_('Bookmark is successfully added! You can close this window, or it will be closed for you in 1 second.')})
        
     else:
+        url = request.GET.get('url')
+        if N.objects.filter(url=url).exists():
+            pass#return render_to_response('bookmarkbook/notes/addNote.html', {'addNoteForm': addNoteForm, 'url':url, 'tags':tags}) 
         tags = __get_ws_tags(request, username, 'bookmarkbook')  
         from django.forms import TextInput
         #by adding the tags field specifically here, we avoided it using tags of another user (a strange error which repeat even after changing class names and variable names)
-        AddNForm = create_model_form("AddNForm_"+str(username), N, fields={'tags':forms.ModelMultipleChoiceField(queryset=tags)}, options={'exclude':['deleted'],
-                                                             'fields':['url','title','tags','desc','vote','private'],
-                                                             'widgets':{'title': TextInput(attrs={'size': 60}),
-                                                                       }})
-        url = request.GET.get('url')
+        #AddNForm = create_model_form("AddNForm_"+str(username), N, fields={},#{'tags':forms.ModelMultipleChoiceField(queryset=tags)},
+        #                                                     options={'exclude':['deleted'],
+        #                                                     'fields':['url','title','tags','desc','vote','private'],
+        #                                                     'widgets':{'title': TextInput(attrs={'size': 60}),
+        #                                                               }})
+        
         title = request.GET.get('title')
         
         #default_tag_id = T.objects.get(name='untagged').id  
         default_tag_id = T.objects.get(name='untagged').id 
-        addNoteForm = AddNForm(initial={'url': url, 'title':title, 'tags': [default_tag_id]})
+        #addNoteForm = AddNForm(initial={'url': url, 'title':title, 'tags': [default_tag_id]})
+        addNoteForm = AddBookmarkForm(initial={'url': url, 'title':title, 'tags': [default_tag_id]})
         return render_to_response('bookmarkbook/notes/addNote.html', {'addNoteForm': addNoteForm, 'url':url, 'tags':tags}) #TODO:how to display url using the form's initial
     
 
