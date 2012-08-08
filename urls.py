@@ -138,6 +138,9 @@ urlpatterns = patterns('',
 
   
 
+    (r'^(?P<username>[^/]+)/areas/$', 'notebook.areas.views.index'),
+
+
    #TODO: seems to be matching too many things 
     (r'^(?P<username>[^/]+)/(?P<bookname>[^/]+)/',include('notebook.notes.urls')),
 

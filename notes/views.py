@@ -391,7 +391,8 @@ def index(request, username, bookname):
     
     queries = connection.queries
     
-    extra_context = {'qstr':qstr,'folder_values':folder_values, 'is_in_folders':is_in_folders, 'current_folder':current_folder, 'aspect_name':'notes', 'queries':queries}    
+    extra_context = {'qstr':qstr,'folder_values':folder_values, 'is_in_folders':is_in_folders,\
+                      'current_folder':current_folder, 'aspect_name':'notes', 'queries':queries, 'appname':'notes'}    
     context.update(extra_context)  
     #TODO: see if I don't have to write book_uri_prifix everywhere
     
@@ -1162,7 +1163,8 @@ def note(request, username, bookname, note_id):
     return render_to_response(book_template_dict.get(bookname)+'notes/note/note.html', {'note':note, 'notes_included':notes_included, \
                                                                                    'note_form':note_form, 'profile_username':username, \
                                                                                    'note_trans_form':note_trans_form,\
-                                                                                   'pick_lang':pick_lang, 'tags':tags 
+                                                                                   'pick_lang':pick_lang, 'tags':tags,
+                                                                                   'appname':'note' 
                                                                                    },
                                                                                     context_instance=RequestContext(request, {'bookname': bookname,\
                                                                                                                               'aspect_name':'notes',\

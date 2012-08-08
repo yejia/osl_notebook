@@ -138,9 +138,10 @@ display:none;
 display:none;
 }
 
-/*TODO: debug info control should be moved to py code. Otherwise, it can be viewed.*/
-.debug{
+
+.debug{/*
 display:none;
+*/
 }
 
 .grey{
