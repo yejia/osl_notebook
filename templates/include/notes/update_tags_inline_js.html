@@ -1,0 +1,96 @@
+
+<script type="text/javascript">
+//Scripts in this file are used both for the add tag box in the add note form, also in the update tags inline box in the notes display section of notes display page
+	$(document).ready(function(){	 
+    
+    tagsAvailable = [{% for tag in tags %}"{{tag}}",{% endfor %}];
+
+     // tagsAvailable = [{% for tag in tags %}"{{tag}}",{% endfor %}];
+        $("#add_note_tags").tagit({
+			    availableTags: tagsAvailable,
+                   allowSpaces: true
+            });    
+            
+        $('#add_note_tags').hide(); 
+            
+        $('#add_note_tags_box').hide(); 
+                
+      
+        
+      
+         
+        $('span.tags_edit'). click(function(){
+                //alert('tags edit clicked');
+                      var  editable =    $(this).parents('span.editable') ; 
+                       editable.find('span.tags_text').hide();
+                       //TODO: think of if better to move below into the html code and use show/hide instead of spitting out from js on the fly and remove later. Also the functions defined here can be moved out.
+                        editable.prepend('<span class="tags_save">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="tags_cancel">&nbsp;&nbsp;&nbsp;&nbsp;</span>');                        
+                        editable.find("#update_tags_inline_box").show();
+                        
+                        editable.find("#update_tags_inline").tagit({
+			              availableTags: tagsAvailable,
+                              allowSpaces: true,
+                              
+                         }); 
+                         
+                         $(this).hide();
+                         
+                         
+                          $('span.tags_cancel'). click(function(){     
+                                var  editable =    $(this).parents('span.editable') ;                      
+                                editable.find("#update_tags_inline_box").hide();                    
+                                editable.find('span.tags_save').remove();
+                                editable.find('span.tags_edit').show();
+                                editable.find('span.tags_text').show();
+                                $(this).remove();
+                                
+                                 }); 
+                         
+                        $('span.tags_save'). click(function(){                  
+                                 var selected_tags = [];	
+                                 var  editable =    $(this).parents('span.editable') ;  
+                                 editable.find('li.tagit-choice').each(function(){                      	                    
+                                            // selected_tags = selected_tags+$(this).find(':input').val()+',';	   
+                                            selected_tags.push($(this).find(':input').val());	                            
+                                });	                        
+                                selected_tags_str =  selected_tags.join();                            
+                                $.post('updateNoteTagsInline/',{ 'id':$(this).parents('div[note_id]').attr('note_id'), 'tags':  selected_tags_str}, tags_updated_inline ,'json');                  
+                                //$(this).load('updateNoteInline/',{ 'id':$(this).parents('li').attr('note_id'),'note_field':'note_tags', 'content':  selected_tags_str});
+                    
+                    
+                        });
+                     
+                     
+                     function tags_updated_inline(result){           
+                            var  editable =     $('div[note_id="'+result.note_id+'"] span.editable') ;              
+                            editable.find('span.tags_cancel').remove();
+                            //TODO:define variable with jquery
+                             editable.find("#update_tags_inline_box").hide();                    
+                            editable.find('span.tags_save').remove();
+                            editable.find('span.tags_edit').show();
+                            $('div[note_id='+result.note_id+'] span.tags_text').text(result.display_tags);
+                            $('div[note_id='+result.note_id+'] span.tags_text').show();
+                            
+                            toappend = ''
+                            for (var i=0;i<result.note_tags.length;i++){ 
+                                 toappend = toappend+ '<span><a href="/{{profile_username}}/{{bookname}}/notes/tags/'+result.note_tags[i]+'/">'+result.note_tags[i]+'</a>,</span>';
+                            }                            
+                           // $('div[note_id='+result.note_id+']  div.brief_display  div#note_tags').empty().append(toappend);
+                           //get rid of finding brief_display to accomodate the tag editing in note display page
+                            $('div[note_id='+result.note_id+']   #note_tags').empty().append(toappend);
+                            
+                             
+                            //alert($('div[note_id='+result.note_id+']   #note_tags'));
+                         //   alert('toappend:'+toappend);
+                    }                  
+ 
+                         
+                  
+        });
+        
+        
+        
+});
+	
+</script>        
+        

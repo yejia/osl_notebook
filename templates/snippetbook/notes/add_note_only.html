@@ -1,0 +1,28 @@
+{% extends "include/base2.html" %}
+{% load i18n %}
+
+{% block extra_script %}
+ <script src="/site_media/js/jquery.hotkeys.js" type="text/javascript" charset="utf-8"></script>	
+ 
+{% include "include/notes/add_note_js.html" %}
+{% include "include/notes/update_tags_inline_js.html" %}    
+
+{% endblock %}
+
+{% block title %}
+{% trans "Add snippet" %} 
+{% endblock %}
+
+
+
+{% block site_branding %}
+{% trans "Add a snippet" %} 
+{% endblock %}
+
+{% block content%}
+ {% include "snippetbook/notes/add_note.html" %}
+ 
+ {% comment %}Not used currently. If it is wanted to dispaly note added in add note only page, then this can be included.
+ {% include "snippetbook/notes/show_added_notes.html" %}
+ {% endcomment %}
+ {% endblock %}

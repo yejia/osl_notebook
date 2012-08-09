@@ -1,0 +1,111 @@
+{% load i18n %}
+
+
+
+
+
+
+<script type="text/javascript"> 
+$(document).ready(function(){	
+        tagsAvailable = [{% for tag in tags %}"{{tag}}",{% endfor %}];
+
+
+        $('#add_note_vote_up'). click(function(){  
+                        var  vote_bar = $(this).parents("#add_note_vote_bar")
+                        var vote_span = vote_bar.find("#add_note_vote")
+                        vote = parseInt(vote_span.text());
+                        newvote = vote+1
+                        vote_span.text(newvote);
+                        vote_bar.find(':input').val(newvote);
+                        
+                        //~ var c=document.getElementById("myCanvas");
+                       //~ var ctx=c.getContext("2d");
+                       //~ ctx.fillStyle="#FF0000";
+                       //~ ctx.fillRect(0,0,15,7);
+        });
+ 
+        $('#add_note_vote_down'). click(function(){  
+                       var  vote_bar = $(this).parents("#add_note_vote_bar")
+                        var vote_span = vote_bar.find("#add_note_vote")
+                        vote = parseInt(vote_span.text());
+                        newvote = vote-1
+                        vote_span.text(newvote);
+                        vote_bar.find(':input').val(newvote);
+        });
+
+
+    //borrowed from http://coda-clips.com/textarea-character-count-jquery with modification
+      $('div.addnote textarea#id_desc').keyup(function() {
+                var charLength = $(this).val().length;
+                // Displays count
+                $('span#charCount').html(charLength);
+                // Alerts when 300 characters is reached
+                if($(this).val().length > 300)
+                        $('#charCount_alert').html('<strong>{% trans "You have used up 300 characters. It recommended to keep a snippet short." %}</strong>');
+                 else
+                       $('#charCount_alert').html('')                
+        });
+
+
+
+});
+
+
+  
+           
+function showAddNoteTags(){    
+            //alert('show add tgs');
+            $("#add_note_tags").tagit("removeAll");
+           $('#add_note_tags_box').toggle();  
+            $('#add_note_tags').show();  
+          //   $('#add_tags_to_note').show(3); 
+            $('#add_note_tags_box').find('.tagit-new input').focus();     
+           // $('#add_note_tags_box').find('.tagit-new input').css("background-color","#05FC9E");
+           
+           // $('#ac_tags').css("border","groove");
+                        
+    }
+
+</script>
+
+ {% if appname == 'notes'%}
+  {% include "snippetbook/notes/show_note_added_js.html" %} 
+{% endif%}
+
+<script type="text/javascript">
+  
+
+function addNote(){              
+            desc = $('#id_desc').val();         
+            //alert('desc:'+desc);             
+            priv = $('#id_private').attr('checked');
+          //   alert('priv:'+priv);        
+            vote =  $('#id_vote').val();            
+           
+            var selected_tags = [];	
+            $('ul#add_note_tags').find('li.tagit-choice').each(function(){               
+                   	   // alert('find a tag:'+$(this).find(':input').val());
+                            selected_tags.push($(this).find(':input').val());	                  			
+            });	
+             
+           //$.post('/{{profile_username}}/{{bookname}}/notes/addNote/',{'desc':desc, 'private':priv,'tags':selected_tags}, noteAdded, 'json');         
+          $.post('/{{profile_username}}/{{bookname}}/notes/addNote/?desc='+encodeURIComponent(desc)+'&private='+priv+'&vote='+vote+'&tags='+selected_tags,{}, noteAdded , 'json');         
+               
+                        
+    } 
+    
+   
+    
+    function noteAdded(note){
+     // TODO: how to show error when error happened?      
+        //   $('ul.messages').append('<li class="error">{% trans "An error happened when adding a note." %} </li>');     
+    $('ul.messages').append('<li class="success">{% trans "Note is successfully added!" %} </li>');
+    //clear the form's desc textarea field
+        $('#id_desc').val('');
+        {% if appname == 'notes'%}showNoteAdded(note){% endif%} 
+        
+    }
+    
+
+    
+</script>

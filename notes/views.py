@@ -147,12 +147,18 @@ def logout_view(request):
     return HttpResponseRedirect('/login/') 
 
 
+from minidetector import detect_mobile
+@detect_mobile
 def __get_home(request):
+    if request.mobile:
+        return '/'+username+'/addNoteOnly/'
     username = request.user.username
     if request.user.member.home == 'f':
         return '/'+username+'/framebook/notes/' 
     elif request.user.member.home == 't':
-        return '/'+username+'/tagframe/' 
+        return '/'+username+'/tagframes/' 
+    elif request.user.member.home == 'a':
+        return '/'+username+'/addNoteOnly/' 
     else:         
         return '/'+username+'/snippetbook/notes/' 
 
@@ -352,7 +358,14 @@ def get_public_tags(tags):
 
 
     
-    
+@login_required
+def add_note_only(request, username): 
+    if request.user.username != username:
+        return HttpResponse(_('You have no permission here!'), mimetype="text/plain") 
+    else:    
+        tags = __get_ws_tags(request, username, 'snippetbook')
+        return render_to_response('snippetbook/notes/add_note_only.html', {'profile_username':username, 'tags':tags},\
+                                  context_instance=RequestContext(request,{'bookname':'snippetbook', 'appname':'addNoteOnly'}))    
 
 
 

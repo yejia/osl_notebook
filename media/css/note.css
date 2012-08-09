@@ -1166,6 +1166,11 @@ text-align:right;
 vertical-align:bottom;
 overflow:visible;
 }
+.site_branding{
+font-size:18px;
+font-weight:700;
+padding-top:10px;
+}
 
 #panel{width:1080px;margin-left:auto;margin-right:auto;}
 

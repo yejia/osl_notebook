@@ -51,7 +51,8 @@ class Member(User):
     HOME_CHOICES = (      
         ('s', ugettext_lazy('Snippets')),                
         ('f', ugettext_lazy('Frames')),
-        ('t', ugettext_lazy('Tag Tree')),        
+        ('t', ugettext_lazy('Tag Tree')),
+        ('a', ugettext_lazy('Add Note Only')),        
     )   
    
     

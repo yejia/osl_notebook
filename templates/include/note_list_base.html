@@ -88,7 +88,7 @@
 
 
     
-    
+   
     
 {% block extra_css %}
 {% endblock %}
@@ -105,7 +105,9 @@
   window.location.replace('/changeYourBroswer/')
   }
 </script>
-    
+
+{% include "include/notes/add_note_js.html" %}
+{% include "include/notes/update_tags_inline_js.html" %}    
 <script type="text/javascript">
 
 
@@ -165,326 +167,7 @@
        
        }
      
-       function addNote(){              
-            desc = $('#id_desc').val();         
-            //alert('desc:'+desc);             
-            priv = $('#id_private').attr('checked');
-          //   alert('priv:'+priv);        
-            vote =  $('#id_vote').val();            
-           
-            var selected_tags = [];	
-            $('ul#add_note_tags').find('li.tagit-choice').each(function(){               
-                   	   // alert('find a tag:'+$(this).find(':input').val());
-                            selected_tags.push($(this).find(':input').val());	                  			
-            });	
-             
-           //$.post('/{{profile_username}}/{{bookname}}/notes/addNote/',{'desc':desc, 'private':priv,'tags':selected_tags}, noteAdded, 'json');         
-          $.post('/{{profile_username}}/{{bookname}}/notes/addNote/?desc='+encodeURIComponent(desc)+'&private='+priv+'&vote='+vote+'&tags='+selected_tags,{}, noteAdded, 'json');         
-               
-                        
-    } 
-    
-     function noteAdded(note){
-       // TODO: how to show error when error happened?      
-        //   $('ul.messages').append('<li class="error">{% trans "An error happened when adding a note." %} </li>');     
-        $('ul.messages').append('<li class="success">{% trans "Note is successfully added!" %} </li>');
-       
-        pri_part = ""
-        if (note.private==true){
-            pri_part =  '<span class="lock" title="{% trans "private"  %}" style="display:inline;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>' +'<span class="unlock" title="{% trans "public"  %}" style="display:none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>'
-        }else{
-           pri_part =  '<span class="unlock" title="{% trans "public"  %}" style="display:inline;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>'+'<span class="lock" title="{% trans "private"  %}" style="display:none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>'
-        }
-        tags = '';
-        tags_in_full = '';
-        for (var i=0;i<note.tags.length;i++){
-            tags = tags +  '<span><a href="/{{profile_username}}/{{bookname}}/notes/tags/'+note.tags[i]+'/">'+note.tags[i]+'</a>,</span>';
-            tags_in_full = tags_in_full + '<li>'+note.tags[i]+'</li>';
-        }
-        
-        
-        
-        comments = ''
-         for (var i=0;i<note.comments.length;i++){               
-                     comments=comments+'<div comment_id="'+note.comments[i].id+'">'+note.comments[i].desc+'<span title="{% trans "remove this comment" %}" class="inline_delete_comment" id="note_delete_comment">&nbsp;&nbsp;&nbsp;</span></div>';                      
-      }
-        
-    //    alert('tags:'+tags);
-        toprepend = '<li class="note_display" note_id="'+note.note_id+'"><input type="checkbox" name="note_selected"  value="'+
-                      note.note_id+'" class="note_selection" /><div class="kuoda"></div><div class="yasuo"></div> <span class="lockunlock">'+pri_part+'</span>'+
-                               
-                      '<span class="thumb"><span class="thumbup hover"  title="{% trans "Rank Up Importance"  %}"><img src="/site_media/img/thumbUp.gif"/></span>'+
-			                                                 '<span class="thumbdown hover"  title="{% trans "Rank Down Importance"  %}"><img src="/site_media/img/thumbDown.gif"/></span>'+
-                      '<span id="note_rank" title="{% trans "Importance"  %}">'+note.vote+'</span></span><span class="delete_img hover" title="{% trans "soft delete" %}"><img src="/site_media/img/delete.png"/></span>'+
-                      '<div class="snippetbook"><div class="brief_display"><table class="note_table"><tr><td class="note_table_td1 structure"><div id="note_title" title="{% trans "note title" %}">'+
-                      '<a href="/{{profile_username}}/{{bookname}}/notes/note/'+note.note_id +'/">{% trans "(No Title)" %}</a></div> </td><td class="note_table_td2"><div  id="note_desc" title="{% trans "note desc" %}">'+note.desc+'</div>'+	
-                      '</td> <td class="note_table_tags">  <div id="note_tags" title="{% trans "note tags" %}">'+tags+'</div></td> <td class="note_table_td4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr></table></div>'+
-                      '<div class="full_display">'+
-                                '<table class="note_table"><tr><td class="note_table_td1 structure">'+
-                                       '<div id="note_title" title="{% trans "note title" %}"><span class="editableText"><a href="/{{profile_username}}/{{bookname}}/notes/note/'+note.note_id+'/">{% trans "(No Title)" %}</a></span></div></td><td class="note_table_td2"> '+	
-                                       '<div  id="note_desc" title="{% trans "note desc" %}"><span class="editableText">'+note.desc+'</span></div></td><td class="note_table_tags">'+
-                                       '<span class="editable"><span class="tags_edit">&nbsp;&nbsp;&nbsp;&nbsp;</span>'+
-                                       '<div id="update_tags_inline_box" style="display: none;"  title="{% trans "note tags" %}">'+
-                                                '<ul id="update_tags_inline">'+tags_in_full+'</ul>'+
-                                        '</div>'+
-                                         '<span class="tags_text">'+note.display_tags+'</span></span>' +                                       
-                                                     
-                                       
-                                      // '<div id="note_tags" title="{% trans "note tags" %}"><span class="editableText">'+note.display_tags+'</span></div> '
-                                      '</td></tr></table>'+
-                                       //time and comments
-                                       ' <div>'+
-                                            '<div  class="grey" id="note_init_date" title="{% trans "initial creation time" %}"><span  class="editableText">'+note.init_date+'<span></div>'+
-                                            '<div class="grey structure" id="note_last_modi_date" title="{% trans "last modified time" %}">'+note.last_modi_date+'</div>'+
-                                            '<div  class="structure advanced" id="note_frames" title="{% trans "note in frames" %}">{% trans "Frames" %}: {{note.display_frames|default:_("Not in any frame")}}</div>'+                              
-                                         //comments
-                                            '<span class="add_comment_button"><a href="javascript:void(0);">{% trans "Annotations" %}(0)</a></span>'+
-                                                ' &nbsp;&nbsp;'+
-                                            '<div  id="add_comment_box" style="display:none;"> '+            
-                                                        '<div>{{user.username}}: <textarea id="add_comment" rows="3" cols="90" name="desc"></textarea>'+
-                                                                '<span class="comment_submit"  title="{% trans "Save Comment" %}"><img src="/site_media/img/save.png"/></span>&nbsp;'+
-                                                                '<span class="cancel_comment_submit" title="{% trans "Cancel" %}"><img src="/site_media/img/cancel.png" /></span>'+
-                                                        '</div>'+             
-                                                        '<div id="comments"><br/>'+ 
-                                                                    comments+
-                                                        '</div>'+             
-                                            '</div>'+                                           
-                                        '</div>'+
-                       '</div></div></div>'+                
-                                       
-                      '</li>';
-     //      alert('toprepend:'+toprepend);         
-        $('div.notes_display').find('ul.notes_display').prepend(toprepend);
-        
-        //clear the form's desc textarea field
-        $('#id_desc').val('');
-        
-
-        
-        //TODO: duplicated, merge 
-          $('li.note_display').mouseenter(function(){	    
-                        $(this).find('.hover').show();
-                        
-                });
-                
-           $('li.note_display').mouseleave(function(){	    
-                        $(this).find('.hover').hide();
-                        
-                });     
-                
-                  $("li[note_id='"+note.note_id+"']  .stream").show();    
-                  $("li[note_id='"+note.note_id+"']  .structure").hide();
-            
-            
-            $("li[note_id='"+note.note_id+"'] .note_selection").click(function(){	
-                 $('.jd_menu').hide();
-                  $('.note_selection').each(function(){
-                    if ($(this).attr('checked')==true){			
-                       $('.jd_menu').show();
-                    }			
-		     });
-           
-            });
-            
-
-            
-            
-              $("li[note_id='"+note.note_id+"']  div.brief_display").show();
-              $("li[note_id='"+note.note_id+"']  div.full_display").hide();	
-            
-             $("li[note_id='"+note.note_id+"']  .yasuo").hide();
-		
-          $('.kuoda').click(function(){		
-                    $(this).parents("li").find('div.brief_display').hide(100);
-                    $(this).parents("li").find('div.full_display').show(100);
-                
-                    $(this).parents("li").find("div.kuoda").hide(100);
-                    $(this).parents("li").find("div.yasuo").show(100);		
-            });
-		
-            $('.yasuo').click(function(){        
-                    $(this).parents("li").find('div.brief_display').show(100);
-                    $(this).parents("li").find('div.full_display').hide(100);		       
-                    $(this).parents("li").find("div.kuoda").show(100);
-                    $(this).parents("li").find("div.yasuo").hide(100);		
-            });		        
-        
-        
-                $("li[note_id='"+note.note_id+"']").find('span.editableText').editableText({
-                        newlinesEnabled: false
-                });
-			
-            //    $.editableText.defaults.newlinesEnabled = true;
-
-                //$("li[note_id='"+note.note_id+"']").find('div.editableText, p.editableText').editableText();
-	
-                $("li[note_id='"+note.note_id+"'] .editableText").change(function(){
-                        var newValue = $(this).text();
-                        $(this).load('updateNoteInline/',{ 'id':$(this).parents('li').attr('note_id'), 'note_field':$(this).parents('div').attr('id'), 'content':  newValue})
-                });
-			
-                //move below to a separate file
-               $("li[note_id='"+note.note_id+"']  .thumbup"). click(function(){                      
-                        $(this).parents(".thumb").find("#note_rank").load('voteUpNote/',{ 'id':$(this).parents("li").attr('note_id')});
-                });
-		
-                   $("li[note_id='"+note.note_id+"']  .thumbdown"). click(function(){
-                        $(this).parents(".thumb").find("#note_rank").load('voteDownNote/',{ 'id':$(this).parents("li").attr('note_id')});
-                });
-		
-                  $("li[note_id='"+note.note_id+"'] .delete_img"). click(function(){
-                        $(this).load('deleteNote/',{ 'id':$(this).parents("li").attr('note_id')});
-                        $(this).parents("li").remove();
-                });
-
-
-  
-                
-        
-        
-           $("li[note_id='"+note.note_id+"'] .comment_submit").click(function(){  
-                        var newValue = $(this).parents("#add_comment_box").find("#add_comment").val();
-                        $.post('addComment/',{ 'id':$(this).parents('li').attr('note_id'), 'content':  newValue}, commentAdded ,'json');              
-      
-                });
-                
-                 $("li[note_id='"+note.note_id+"'] .cancel_comment_submit").click(function(){                   
-                        comment_box  = $(this).parents("#add_comment_box")
-                        comment_box.find("#add_comment").val('');
-                        comment_box.hide();
-      
-                });
-                
-               
-                //TODO:totoally the same as the one in the main. Just call it?
-                function commentAdded(result){
-                        note_id = result.note_id;
-                     //$("li[note_id='"+note_id+"']").find('div#comments').append("<div>"+result.content+"</div>");   
-                     
-                      $("li[note_id='"+note_id+"']").find('div#comments').prepend('<div comment_id="'+result.comment_id+'">{% block new_note_comment_display  %}'+result.comment_desc+
-                                                                      '{% endblock %}<span title="{% trans "remove this comment" %}" class="inline_delete_comment" id="note_delete_comment">&nbsp;&nbsp;&nbsp;</span></div>');   
-                   
-                    $("li[note_id='"+note_id+"']").find('div#comments').find("div[comment_id='"+result.comment_id+"']").find('span.inline_delete_comment').click(function(){	                
-                        $(this).load('deleteComment/',{'comment_id':$(this).parents('div').attr('comment_id')});
-                        $(this).parents("div[comment_id]").remove();
-                   });
-                     
-                     
-                    comment_box = $("li[note_id='"+note_id+"']").find('div#add_comment_box');
-                    comment_box.find("#add_comment").val('')
-                    //comment_box.hide();
-                
-                }
-                
-                
-                  $("li[note_id='"+note.note_id+"'] .add_comment_button").click(function(){                   
-                        $(this).parents('li').find('#add_comment_box').show();               
-      
-                });
-                
-                
-                  $("li[note_id='"+note.note_id+"'] span.inline_delete_comment").click(function(){	                
-                    $(this).load('deleteComment/',{'comment_id':$(this).parents('div').attr('comment_id')});
-                    $(this).parents("div[comment_id]").remove();
-                });
-                
-                
-    
-                            
-                  $("li[note_id='"+note.note_id+"']  span.unlock").click(function(){	                   
-                    $.post('makePrivate/',{'id':$(this).parents('li').attr('note_id')}, privacyChanged, 'json');                   
-                });
-                
-                  $("li[note_id='"+note.note_id+"']  span.lock").click(function(){	                   
-                    $.post('makePublic/',{'id':$(this).parents('li').attr('note_id')}, privacyChanged, 'json');                   
-                });
-                
-                
-                  function privacyChanged(result){                 
-                    note_id = result.note_id
-                    if (result.private == 'y'){
-                    //alert('is true');                          
-                          $("li[note_id='"+note_id+"']").find('span.lock').show();
-                          $("li[note_id='"+note_id+"']").find('span.unlock').hide();
-                    }else{
-                   //alert('is fale');
-                          $("li[note_id='"+note_id+"']").find('span.unlock').show();
-                          $("li[note_id='"+note_id+"']").find('span.lock').hide();
-                    }
-                }
-                
-               
-
-                     
-
-                
-            $("li[note_id='"+note.note_id+"']  span.tags_edit"). click(function(){
-                //alert('tags edit clicked');
-                      var  editable =    $(this).parents('span.editable') ; 
-                       editable.find('span.tags_text').hide();
-                       //TODO: think of if better to move below into the html code and use show/hide instead of spitting out from js on the fly and remove later. Also the functions defined here can be moved out.
-                        editable.prepend('<span class="tags_save">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="tags_cancel">&nbsp;&nbsp;&nbsp;&nbsp;</span>');                        
-                        editable.find("#update_tags_inline_box").show();
-                        
-                        editable.find("#update_tags_inline").tagit({
-			              availableTags: tagsAvailable,
-                              allowSpaces: true,
-                              
-                         }); 
-                         
-                         $(this).hide();
-                         
-                         
-                          $("li[note_id='"+note.note_id+"']  span.tags_cancel"). click(function(){     
-                                var  editable =    $(this).parents('span.editable') ;                      
-                                editable.find("#update_tags_inline_box").hide();                    
-                                editable.find('span.tags_save').remove();
-                                editable.find('span.tags_edit').show();
-                                editable.find('span.tags_text').show();
-                                $(this).remove();
-                                
-                                 }); 
-                         
-                         $("li[note_id='"+note.note_id+"']  span.tags_save"). click(function(){                  
-                                 var selected_tags = [];	
-                                 var  editable =    $(this).parents('span.editable') ;  
-                                 editable.find('li.tagit-choice').each(function(){                      	                    
-                                            // selected_tags = selected_tags+$(this).find(':input').val()+',';	   
-                                            selected_tags.push($(this).find(':input').val());	                            
-                                });	                        
-                                selected_tags_str =  selected_tags.join();                            
-                                $.post('updateNoteTagsInline/',{ 'id':$(this).parents('li').attr('note_id'), 'tags':  selected_tags_str}, tags_updated_inline ,'json');                  
-                                //$(this).load('updateNoteInline/',{ 'id':$(this).parents('li').attr('note_id'),'note_field':'note_tags', 'content':  selected_tags_str});
-                                
-                                
-                    
-                    
-                        });
-                     
-                     
-                     function tags_updated_inline(result){          
-                            var  editable =     $('li[note_id="'+result.note_id+'"] span.editable') ;              
-                            editable.find('span.tags_cancel').remove();
-                            //TODO:define variable with jquery
-                            editable.find("#update_tags_inline_box").hide();                    
-                            editable.find('span.tags_save').remove();
-                            editable.find('span.tags_edit').show();
-                            $('li[note_id='+result.note_id+'] span.tags_text').text(result.display_tags);
-                            $('li[note_id='+result.note_id+'] span.tags_text').show();
-                            toappend = ''
-                            for (var i=0;i<result.note_tags.length;i++){ 
-                                 toappend = toappend+ '<span><a href="/{{profile_username}}/{{bookname}}/notes/tags/'+result.note_tags[i]+'/">'+result.note_tags[i]+'</a>,</span>';
-                            }                            
-                            $('li[note_id='+result.note_id+']  div.brief_display  div#note_tags').empty().append(toappend);
-                            
-                    }                   
-                         
-                  
-        });
-                
-
-        
-    }
+     
     
     
     function showAddTags(){    
@@ -855,24 +538,12 @@ $("#ac_tags").tagit("removeAll");
         }
     }
     
-    
-function showAddNoteTags(){    
-            //alert('show add tgs');
-            $("#add_note_tags").tagit("removeAll");
-           $('#add_note_tags_box').toggle();  
-            $('#add_note_tags').show();  
-          //   $('#add_tags_to_note').show(3); 
-            $('#add_note_tags_box').find('.tagit-new input').focus();     
-           // $('#add_note_tags_box').find('.tagit-new input').css("background-color","#05FC9E");
-           
-           // $('#ac_tags').css("border","groove");
-                        
-    }
-    
-      function  addNoteTags(){
+  
+    //Seems not used. TODO:delete
+      //~ function  addNoteTags(){
    
-           $('#add_note_tags_box').hide();  
-    }
+           //~ $('#add_note_tags_box').hide();  
+    //~ }
 
 
 //TODO:re-implement this in python code, since I pass the whole url in th request anyway
@@ -899,17 +570,7 @@ function showAddNoteTags(){
 
     
     
-        //borrowed from http://coda-clips.com/textarea-character-count-jquery with modification
-      $('div.addnote textarea#id_desc').keyup(function() {
-                var charLength = $(this).val().length;
-                // Displays count
-                $('span#charCount').html(charLength);
-                // Alerts when 300 characters is reached
-                if($(this).val().length > 300)
-                        $('#charCount_alert').html('<strong>{% trans "You have used up 300 characters. It recommended to keep a snippet short." %}</strong>');
-                 else
-                       $('#charCount_alert').html('')                
-        });
+       
     
     
         
@@ -1418,89 +1079,7 @@ function showAddNoteTags(){
                 
 
                                     
-         // tagsAvailable = [{% for tag in tags %}"{{tag}}",{% endfor %}];
-        $("#add_note_tags").tagit({
-			    availableTags: tagsAvailable,
-                   allowSpaces: true
-            });    
-            
-        $('#add_note_tags').hide(); 
-            
-        $('#add_note_tags_box').hide(); 
-                
-      
-        
-      
-         
-        $('span.tags_edit'). click(function(){
-                //alert('tags edit clicked');
-                      var  editable =    $(this).parents('span.editable') ; 
-                       editable.find('span.tags_text').hide();
-                       //TODO: think of if better to move below into the html code and use show/hide instead of spitting out from js on the fly and remove later. Also the functions defined here can be moved out.
-                        editable.prepend('<span class="tags_save">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="tags_cancel">&nbsp;&nbsp;&nbsp;&nbsp;</span>');                        
-                        editable.find("#update_tags_inline_box").show();
-                        
-                        editable.find("#update_tags_inline").tagit({
-			              availableTags: tagsAvailable,
-                              allowSpaces: true,
-                              
-                         }); 
-                         
-                         $(this).hide();
-                         
-                         
-                          $('span.tags_cancel'). click(function(){     
-                                var  editable =    $(this).parents('span.editable') ;                      
-                                editable.find("#update_tags_inline_box").hide();                    
-                                editable.find('span.tags_save').remove();
-                                editable.find('span.tags_edit').show();
-                                editable.find('span.tags_text').show();
-                                $(this).remove();
-                                
-                                 }); 
-                         
-                        $('span.tags_save'). click(function(){                  
-                                 var selected_tags = [];	
-                                 var  editable =    $(this).parents('span.editable') ;  
-                                 editable.find('li.tagit-choice').each(function(){                      	                    
-                                            // selected_tags = selected_tags+$(this).find(':input').val()+',';	   
-                                            selected_tags.push($(this).find(':input').val());	                            
-                                });	                        
-                                selected_tags_str =  selected_tags.join();                            
-                                $.post('updateNoteTagsInline/',{ 'id':$(this).parents('div[note_id]').attr('note_id'), 'tags':  selected_tags_str}, tags_updated_inline ,'json');                  
-                                //$(this).load('updateNoteInline/',{ 'id':$(this).parents('li').attr('note_id'),'note_field':'note_tags', 'content':  selected_tags_str});
-                    
-                    
-                        });
-                     
-                     
-                     function tags_updated_inline(result){           
-                            var  editable =     $('div[note_id="'+result.note_id+'"] span.editable') ;              
-                            editable.find('span.tags_cancel').remove();
-                            //TODO:define variable with jquery
-                             editable.find("#update_tags_inline_box").hide();                    
-                            editable.find('span.tags_save').remove();
-                            editable.find('span.tags_edit').show();
-                            $('div[note_id='+result.note_id+'] span.tags_text').text(result.display_tags);
-                            $('div[note_id='+result.note_id+'] span.tags_text').show();
-                            
-                            toappend = ''
-                            for (var i=0;i<result.note_tags.length;i++){ 
-                                 toappend = toappend+ '<span><a href="/{{profile_username}}/{{bookname}}/notes/tags/'+result.note_tags[i]+'/">'+result.note_tags[i]+'</a>,</span>';
-                            }                            
-                           // $('div[note_id='+result.note_id+']  div.brief_display  div#note_tags').empty().append(toappend);
-                           //get rid of finding brief_display to accomodate the tag editing in note display page
-                            $('div[note_id='+result.note_id+']   #note_tags').empty().append(toappend);
-                            
-                             
-                            //alert($('div[note_id='+result.note_id+']   #note_tags'));
-                         //   alert('toappend:'+toappend);
-                    }                  
- 
-                         
-                  
-        });
-        
+    
         
         
         
@@ -1641,29 +1220,7 @@ function showAddNoteTags(){
              });
              
              
-             
-              $('#add_note_vote_up'). click(function(){  
-                        var  vote_bar = $(this).parents("#add_note_vote_bar")
-                        var vote_span = vote_bar.find("#add_note_vote")
-                        vote = parseInt(vote_span.text());
-                        newvote = vote+1
-                        vote_span.text(newvote);
-                        vote_bar.find(':input').val(newvote);
-                        
-                        //~ var c=document.getElementById("myCanvas");
-                       //~ var ctx=c.getContext("2d");
-                       //~ ctx.fillStyle="#FF0000";
-                       //~ ctx.fillRect(0,0,15,7);
-                });
- 
-              $('#add_note_vote_down'). click(function(){  
-                       var  vote_bar = $(this).parents("#add_note_vote_bar")
-                        var vote_span = vote_bar.find("#add_note_vote")
-                        vote = parseInt(vote_span.text());
-                        newvote = vote-1
-                        vote_span.text(newvote);
-                        vote_bar.find(':input').val(newvote);
-                });
+           
                 
                 
                             //move below to a separate file
