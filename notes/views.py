@@ -149,10 +149,10 @@ def logout_view(request):
 
 from minidetector import detect_mobile
 @detect_mobile
-def __get_home(request):
+def __get_home(request):    
+    username = request.user.username
     if request.mobile:
         return '/'+username+'/addNoteOnly/'
-    username = request.user.username
     if request.user.member.home == 'f':
         return '/'+username+'/framebook/notes/' 
     elif request.user.member.home == 't':
