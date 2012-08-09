@@ -366,6 +366,7 @@ def add_note_only(request, username):
         return HttpResponse(_('You have no permission here!'), mimetype="text/plain") 
     else:    
         tags = __get_ws_tags(request, username, 'snippetbook')
+        request.mobile = True
         return render_to_response('snippetbook/notes/add_note_only.html', {'profile_username':username, 'tags':tags},\
                                   context_instance=RequestContext(request,{'bookname':'snippetbook', 'appname':'addNoteOnly'}))    
 
