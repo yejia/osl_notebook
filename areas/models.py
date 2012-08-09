@@ -5,7 +5,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q
 
 from notebook.tags.models import Tag_Frame
-from notebook.notes.models import Frame
+from notebook.notes.models import Frame, create_model
 from notebook.social.models import Group
 from notebook.notes.util import book_model_dict, getNote
 
