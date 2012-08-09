@@ -1118,6 +1118,11 @@ width:590px;
 margin:0px;
 padding:0px;
 }
+
+div.mobile textarea#id_desc{
+width:290px;
+}
+
 .hide_form_section{
 display:none;
 }
@@ -1171,7 +1176,9 @@ font-size:18px;
 font-weight:700;
 padding-top:10px;
 }
-
+div.mobile table{
+width:300px;
+}
 #panel{width:1080px;margin-left:auto;margin-right:auto;}
 
 /* grid */

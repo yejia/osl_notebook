@@ -357,7 +357,9 @@ def get_public_tags(tags):
 
 
 
-    
+from minidetector import detect_mobile
+
+@detect_mobile    
 @login_required
 def add_note_only(request, username): 
     if request.user.username != username:
