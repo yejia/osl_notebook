@@ -928,14 +928,15 @@ class Frame(Note):
 
 
     def get_offsprings(self):
-        offsprings = [n.id for n in self.notes.all()]
+        offsprings = [n.id for n in self.notes.all()] #it is managed, can it use .notes reference directly? TODO:
         for child in self.notes.all():
             child.owner_name = self.owner_name
             if child.get_note_type() == 'Frame': 
                 child.frame.owner_name = self.owner_name 
                 offsprings.extend(child.frame.get_offsprings())
         
-        return   offsprings       
+        #return   offsprings
+        return list(set(offsprings))       
             
 
 

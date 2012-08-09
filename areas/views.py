@@ -27,8 +27,10 @@ from django.db import connections,  transaction
 
 
 from notebook.areas.models import *
-from notebook.notes.views import __get_pre_url, getlogger, __get_view_theme 
+from notebook.notes.views import __get_pre_url, getlogger, __get_view_theme, __getQStr, getSearchResults, __get_context 
 from notebook.notes.util import *
+from notebook.notes.constants import *
+
 
 log = getlogger('areas.views')  
 
@@ -95,10 +97,54 @@ def index(request, username):
 def area(request, username, areaname):     
     area = Area.objects.using(username).get(name=areaname)
     area.owner_name = username
-    tags = Tag_Frame.objects.using(username).all().order_by('name')
+    area.root_tag_frame.owner_name = username
+    area.root_note_frame.owner_name = username
+    #tags = Tag_Frame.objects.using(username).all().order_by('name')
+    area_tags =  Tag.objects.using(username).filter(name__in=area.root_tag_frame.get_offsprings())
+    area_tags_with_count = []
+    for t in area_tags:
+        note_list = Note.objects.using(username).filter(tags__name = t.name)
+        area_tags_with_count.append([t, note_list.count()])
+        
     #TODO:need this?
     theme = __get_view_theme(request)
     private =    theme['private'] 
-    return render_to_response('areas/area.html',{'area':area,  'tags':tags, \
+    return render_to_response('areas/area.html',{'area':area,  'area_tags_with_count':area_tags_with_count, \
                             'username':request.user.username,'profile_username':username,  'private':private}, \
                     context_instance=RequestContext(request,  {}))
+    
+    
+def area_notes(request, username, areaname, bookname):  
+    area = Area.objects.using(username).get(name=areaname)
+    area.owner_name = username
+    note_list = area.get_notes(bookname)
+    qstr = __getQStr(request)    
+    note_list  = getSearchResults(note_list, qstr)
+    
+    
+    
+    default_tag_id = Tag.objects.using(username).get(name='untagged').id    
+    context = __get_context(request, note_list, default_tag_id, username, bookname)
+    context['area'] = area
+     
+    
+    #context['tags'] = tags
+    #profile_member = 
+    return render_to_response(book_template_dict.get(bookname)+'notes/notes.html', context, \
+                              context_instance=RequestContext(request,{'bookname': bookname,'book_uri_prefix':'/'+username, 'appname':'areas'}))
+    
+    
+    
+def get_area_tags(request, username, areaname, bookname):  
+    print 'get_area_tags'
+    area = Area.objects.using(username).get(name=areaname)
+    area.owner_name = username
+    area.root_tag_frame.owner_name = username
+    tags = area.root_tag_frame.get_offsprings()
+    tags_return = []
+    for tag in tags:
+        count = Note.objects.using(username).filter(tags__name=tag).count()
+        t = {'name':tag, 'note_count':count}
+        tags_return.append(t)
+    return HttpResponse(simplejson.dumps(tags_return), "application/json")
+        

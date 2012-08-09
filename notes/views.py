@@ -368,7 +368,7 @@ def add_note_only(request, username):
         tags = __get_ws_tags(request, username, 'snippetbook')
         
         return render_to_response('snippetbook/notes/add_note_only.html', {'profile_username':username, 'tags':tags},\
-                                  context_instance=RequestContext(request,{'bookname':'snippetbook', 'appname':'addNoteOnly'}))    
+                                  context_instance=RequestContext(request,{'bookname':'snippetbook', 'pagename':'addNoteOnly'}))    
 
 
 
@@ -408,7 +408,7 @@ def index(request, username, bookname):
     queries = connection.queries
     
     extra_context = {'qstr':qstr,'folder_values':folder_values, 'is_in_folders':is_in_folders,\
-                      'current_folder':current_folder, 'aspect_name':'notes', 'queries':queries, 'appname':'notes'}    
+                      'current_folder':current_folder, 'aspect_name':'notes', 'queries':queries, 'appname':'notes', 'pagename':'notes'}    
     context.update(extra_context)  
     #TODO: see if I don't have to write book_uri_prifix everywhere
     
@@ -737,7 +737,7 @@ def tags(request, username, bookname, tag_name, aspect_name):
         if aspect_name=='notes':
             return render_to_response(book_template_dict.get(bookname)+'notes/notes.html', context, \
                                       context_instance=RequestContext(request,{'bookname': bookname, 'advanced': get_advanced_setting(request),\
-                                                                               'book_uri_prefix':'/'+username, 'appname':'notes'}))
+                                                                               'book_uri_prefix':'/'+username, 'appname':'notes', 'pagename':'notes'}))
         else:
             return render_to_response(book_template_dict.get(bookname)+'notes/linkages.html', context,\
                                        context_instance=RequestContext(request,{'bookname': bookname, 'advanced': get_advanced_setting(request),\
@@ -1180,7 +1180,7 @@ def note(request, username, bookname, note_id):
                                                                                    'note_form':note_form, 'profile_username':username, \
                                                                                    'note_trans_form':note_trans_form,\
                                                                                    'pick_lang':pick_lang, 'tags':tags,
-                                                                                   'appname':'note' 
+                                                                                   'pagename':'note', 'appname':'notes' #TODO: in the future, get the app name from the app the view is included 
                                                                                    },
                                                                                     context_instance=RequestContext(request, {'bookname': bookname,\
                                                                                                                               'aspect_name':'notes',\
@@ -1746,7 +1746,8 @@ def frame(request, username, frame_id):
     return render_to_response('framebook/notes/note/note.html', {'note':frame, 'notes_in_frame':notes_in_frame, 'sort':sort, \
                                                              'profile_username':username, 'note_form':note_form,\
                                                              'note_trans_form':note_trans_form,'pick_lang':pick_lang}, \
-                                                             context_instance=RequestContext(request,{'bookname': 'framebook','book_uri_prefix':'/'+username}))
+                                                             context_instance=RequestContext(request,{'bookname': 'framebook',\
+                                                                     'appname':'notes' , 'pagename':'note','book_uri_prefix':'/'+username}))
 
 
 

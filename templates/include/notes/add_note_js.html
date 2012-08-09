@@ -68,7 +68,7 @@ function showAddNoteTags(){
 
 </script>
 
- {% if appname == 'notes'%}
+ {% if pagename == 'notes'%}
   {% include "snippetbook/notes/show_note_added_js.html" %} 
 {% endif%}
 
@@ -102,7 +102,7 @@ function addNote(){
     $('ul.messages').append('<li class="success">{% trans "Note is successfully added!" %} </li>');
     //clear the form's desc textarea field
         $('#id_desc').val('');
-        {% if appname == 'notes'%}showNoteAdded(note){% endif%} 
+        {% if pagename == 'notes'%}showNoteAdded(note){% endif%} 
         
     }
     

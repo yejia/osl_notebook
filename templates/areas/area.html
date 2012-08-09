@@ -45,10 +45,19 @@
  {% trans "Root tag tree" %}: <a href="/{{profile_username}}/tagframes/tagframe/{{area.root_tag_frame.name}}/">{{area.root_tag_frame.name}}</a>
  </div>
 <div>
-{% trans "Root frame" %}: <a href="/{{profile_username}}/framebook/notes/note/{{area.root_note_frame.id}}/">{{area.root_note_frame.title}}
+{% trans "Root frame" %}: <a href="/{{profile_username}}/framebook/notes/note/{{area.root_note_frame.id}}/">{{area.root_note_frame.title}}</a>
  </div>
- {% trans " " %}
  
+ <div>
+  {% trans "All the tags in this area" %}:  
+  {% for t in area_tags_with_count %}
+  <a href="/{{profile_username}}/notebook/notes/tags/{{t.0}}/">{{t.0}} ({{t.1}})</a>,
+  {% endfor %}
+  </div>
+
+<div>
+ <a href="/{{profile_username}}/areas/area/{{area}}/notebook/notes/">{% trans "View all notes in this learning area" %}</a>
+  </div>
  {% trans " " %}
 
 

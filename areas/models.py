@@ -2,10 +2,18 @@
 
 from django.db import models
 from django.core.exceptions import ObjectDoesNotExist
+from django.db.models import Q
 
 from notebook.tags.models import Tag_Frame
 from notebook.notes.models import Frame
 from notebook.social.models import Group
+from notebook.notes.util import book_model_dict, getNote
+
+
+
+
+def getArea(username):
+    return create_model("Area"+str(username), Area, username)
 
 
 class Area(models.Model):
@@ -36,6 +44,18 @@ class Area(models.Model):
     def get_pulled_note_frames(self):
         pass           
 
+
+    def get_notes(self, bookname):        
+        self.root_tag_frame.owner_name = self.owner_name
+        tag_names = self.root_tag_frame.get_offsprings()
+        q = Q(tags__name__in=tag_names) 
+        N = getNote(self.owner_name, bookname)
+        note_list =  N.objects.using(self.owner_name).filter(q).distinct() 
+        return note_list
+   
+   
+    def get_public_notes(self, bookname):
+        pass 
 
 #store tag_frame that 
 class Area_Tag_Frame(models.Model):

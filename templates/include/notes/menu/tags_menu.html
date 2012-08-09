@@ -13,8 +13,14 @@ $(document).ready(function(){
                     $.get('/{{profile_username}}/{{bookname}}/getWsTags/',{'ws':$(this).val()}, loadTags, 'json');  
              });
 
-            $.get('/{{profile_username}}/{{bookname}}/getWsTags/',{}, loadTags, 'json');  
-                 
+            {% if appname == 'areas' %}
+                    $.get('/{{profile_username}}/areas/area/{{area}}/{{bookname}}/getAreaTags/',{}, loadTags, 'json');  
+            {% else %}
+                    $.get('/{{profile_username}}/{{bookname}}/getWsTags/',{}, loadTags, 'json');  
+            
+            {% endif %}
+
+
             function loadTags(tags){                 
                           
                    //tag_choices = ''
@@ -23,7 +29,7 @@ $(document).ready(function(){
                         //below are the old code used with qs
                        //$('.tag_menu').append(' <li><span><a href="/{{profile_username}}/{{bookname}}/{{aspect_name}}/tags/'+tags[i].fields.name+'/">'+tags[i].fields.name+'</a></span></li>')
                        if (tags[i].name != '{{current_tag}}'){
-                            $('.tag_list').append(' <li><span><a href="/{{profile_username}}/{{bookname}}/{{aspect_name}}/tags/'+tags[i].name+'/">'+tags[i].name+'</a> ('+tags[i].note_count+')</span></li>')
+                            $('.tag_list').append(' <li><span><a href="/{{profile_username}}/{{bookname}}/notes/tags/'+tags[i].name+'/">'+tags[i].name+'</a> ('+tags[i].note_count+')</span></li>')
                        }else{
                            $('.tag_list').append(' <li><span  style="font-size:18px">'+tags[i].name+'</a> ('+tags[i].note_count+')</span></li>')
                        }
@@ -69,7 +75,7 @@ $(document).ready(function(){
   <ul class="tag_menu">
   <li>
   {% if not current_tag %}    
-<span style="font-size:18px">{% trans "all tags" %}</span>  
+<span style="font-size:18px">{% if appname != 'areas' %}{% trans "all tags" %} {% else %}{% trans "tags of this area" %} {% endif %}</span>  
   {% else %}
   <span><a href="/{{profile_username}}/{{bookname}}/{{aspect_name}}/">{% trans "all tags" %}</a> </span> 
  {% endif %}

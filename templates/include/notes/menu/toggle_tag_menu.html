@@ -9,6 +9,7 @@
 <div class="module tag_menu_box"> 
     <h2>{% trans "Tags" %}
         {% block ws_picker %}
+         {% if appname != 'areas' %} {% comment %}use block inheritance might be better here{% endcomment %}
         <span class="advanced">&nbsp;{% trans "in" %}  
         <select id="ws_drop_down"  name="workingset">
             {% if 'all tags' == current_ws %}
@@ -29,6 +30,7 @@
          </a>         
         </span>
         <span class="setting-in-r-menu"><a href="/settings/tags/">{% trans "Settings" %}</a></span>
+         {% endif %}
         {% endblock %}
     </h2>   
 

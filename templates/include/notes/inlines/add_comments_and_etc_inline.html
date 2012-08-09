@@ -9,7 +9,7 @@
  {% comment %}
 It is too much computing for below. So don't do this on notes list page, otherwise it takes about 10 seconds to load a page
 {% endcomment %}            
- {% if  note.get_note_type == 'Frame'  and appname == 'note' %}         
+ {% if  note.get_note_type == 'Frame'  and pagename == 'note' %}         
              <span class="note_tabs_item"  id="inner_links"  title="{% trans "Notebook internal references of this note" %}">{% trans "Related Frames" %}({{note.get_size_of_related_frames}})</span>
              &nbsp;&nbsp;    
  {% endif %}                 
@@ -62,7 +62,7 @@ It is too much computing for below. So don't do this on notes list page, otherwi
 {% endblock %}    
 
 
-{% if  note.get_note_type == 'Frame'  and appname == 'note' %}  
+{% if  note.get_note_type == 'Frame'  and pagename == 'note' %}  
              <div  class="add_box" id="add_inner_links_box" style="display:none;">  
              <div>
                 {% for rf in note.get_related_frames %}                    
