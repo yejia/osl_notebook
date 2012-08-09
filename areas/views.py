@@ -111,7 +111,7 @@ def area(request, username, areaname):
     private =    theme['private'] 
     return render_to_response('areas/area.html',{'area':area,  'area_tags_with_count':area_tags_with_count, \
                             'username':request.user.username,'profile_username':username,  'private':private}, \
-                    context_instance=RequestContext(request,  {}))
+                    context_instance=RequestContext(request,  {'book_uri_prefix':'/'+username+'/areas/area/'+area.name}))
     
     
 def area_notes(request, username, areaname, bookname):  

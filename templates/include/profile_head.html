@@ -75,11 +75,11 @@
 <div>
 {% include "include/supersearch.html" %}
 </div><br/>
-<table><tr/>
-<td>{{profile_member.get_public_snippets_count}} <br/><a href="{{book_uri_prefix}}/snippetbook/notes/">{% trans "Snippets" %}</a><img src="/site_media/img/Snippet.png" title="Snippet"/></td>
-<td>{{profile_member.get_public_bookmarks_count}}<br/><a href="{{book_uri_prefix}}/bookmarkbook/notes/">{% trans "Bookmarks" %}</a><img src="/site_media/img/Bookmark.png" title="Bookmark"/></td>
-<td>{{profile_member.get_public_scraps_count}} <br/><a href="{{book_uri_prefix}}/scrapbook/notes/">{% trans "Scraps" %}</a><img src="/site_media/img/Scrap.png" title="Scrap"/></td>
-<td>{{profile_member.get_public_frames_count}}<br/><a href="{{book_uri_prefix}}/framebook/notes/">{% trans "Frames" %}</a><img src="/site_media/img/Frame.png" title="Frame"/></td>
+<table><tr/>{% comment %}get counts for others (such as group, personal notebook, area){% endcomment %}
+<td>{{profile_member.get_public_snippets_count}} <br/><a href="{{book_uri_prefix}}/snippetbook/notes/">{% trans "Snippets" %}<img src="/site_media/img/Snippet.png" title="Snippet"/></a></td>
+<td>{{profile_member.get_public_bookmarks_count}}<br/><a href="{{book_uri_prefix}}/bookmarkbook/notes/">{% trans "Bookmarks" %}<img src="/site_media/img/Bookmark.png" title="Bookmark"/></a></td>
+<td>{{profile_member.get_public_scraps_count}} <br/><a href="{{book_uri_prefix}}/scrapbook/notes/">{% trans "Scraps" %}<img src="/site_media/img/Scrap.png" title="Scrap"/></a></td>
+<td>{{profile_member.get_public_frames_count}}<br/><a href="{{book_uri_prefix}}/framebook/notes/">{% trans "Frames" %}<img src="/site_media/img/Frame.png" title="Frame"/></a></td>
 <td>{{profile_member.get_public_notes_count}}<br/><a href="{{book_uri_prefix}}/notebook/notes/">{% trans "All" %}</a></td>
 </tr></table>
 <br/>

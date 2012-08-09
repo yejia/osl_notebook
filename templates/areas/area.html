@@ -56,8 +56,15 @@
   </div>
 
 <div>
- <a href="/{{profile_username}}/areas/area/{{area}}/notebook/notes/">{% trans "View all notes in this learning area" %}</a>
+ {% trans "View all notes in this learning area" %}:
   </div>
+  <table><tr/>
+<td>{% if user.username == profile_username %}{{area.get_snippets.count}} {% else %}{{area.get_public_snippets.count}}{% endif %}<br/><a href="{{book_uri_prefix}}/snippetbook/notes/" target="_blank">{% trans "Snippets" %}<br/><img src="/site_media/img/Snippet.png" title="Snippet"/></a></td>
+<td>{{area.get_public_bookmarks.count}}<br/><a href="{{book_uri_prefix}}/bookmarkbook/notes/" target="_blank">{% trans "Bookmarks" %}<br/><img src="/site_media/img/Bookmark.png" title="Bookmark"/></a></td>
+<td>{{area.get_public_scraps.count}} <br/><a href="{{book_uri_prefix}}/scrapbook/notes/" target="_blank">{% trans "Scraps" %}<br/><img src="/site_media/img/Scrap.png" title="Scrap"/></a></td>
+<td>{{area.get_public_frames.count}}<br/><a href="{{book_uri_prefix}}/framebook/notes/" target="_blank">{% trans "Frames" %}<br/><img src="/site_media/img/Frame.png" title="Frame"/></a></td>
+<td>{{area.get_public_notes.count}}<br/><a href="{{book_uri_prefix}}/notebook/notes/" target="_blank">{% trans "All" %}</a></td>
+</tr></table>
  {% trans " " %}
 
 

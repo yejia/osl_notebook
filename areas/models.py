@@ -45,18 +45,44 @@ class Area(models.Model):
         pass           
 
 
-    def get_notes(self, bookname):        
+    def get_notes(self, bookname='notebook'):
         self.root_tag_frame.owner_name = self.owner_name
         tag_names = self.root_tag_frame.get_offsprings()
         q = Q(tags__name__in=tag_names) 
         N = getNote(self.owner_name, bookname)
-        note_list =  N.objects.using(self.owner_name).filter(q).distinct() 
+        note_list = N.objects.using(self.owner_name).filter(deleted=False)
+        note_list =  note_list.filter(q)        
+        return note_list.distinct() 
+   
+   
+    def get_public_notes(self, bookname='notebook'):
+        note_list = self.get_notes(bookname)
+        note_list.filter(private=False)
         return note_list
-   
-   
-    def get_public_notes(self, bookname):
-        pass 
+ 
 
+    
+
+    def get_snippets(self):
+        return self.get_notes('snippetbook')
+
+    def get_public_snippets(self):
+        return self.get_public_notes('snippetbook')    
+
+
+    def get_public_bookmarks(self):
+        return self.get_public_notes('bookmarkbook')
+    
+    
+    def get_public_scraps(self):
+        return self.get_public_notes('scrapbook')
+    
+    
+    def get_public_frames(self):
+        return self.get_public_notes('framebook')
+        
+    
+        
 #store tag_frame that 
 class Area_Tag_Frame(models.Model):
     area = models.ForeignKey(Area)
