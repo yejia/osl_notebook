@@ -2379,6 +2379,13 @@ def __get_related_tags(username, tag_name):
     related.sort(key=lambda r: r[0], reverse=False)   
     return related
 
+#bookname should be framebook
+@login_required
+def get_related_frames(request, bookname, username, note_id):
+    frame = Frame.objects.using(username).get(id=note_id)
+    frame.owner_name = username
+    return HttpResponse(simplejson.dumps(frame.get_related_frames()), "application/json")
+
 
 @login_required
 def settings_tag_add(request):    

@@ -78,6 +78,8 @@ urlpatterns = patterns('',
     (r'^notes/note/(?P<note_id>[^/]+)/updateNote/$','notebook.notes.views.update_note'),
     (r'^notes/note/(?P<note_id>[^/]+)/updateNoteTrans/$','notebook.notes.views.update_note_trans'),
     (r'^linkagenotes/note/(?P<note_id>[^/]+)/updateLinkageNote/$','notebook.notes.views.update_linkagenote'),
+    #below actually applied to framebook
+    (r'^notes/note/(?P<note_id>[^/]+)/getRelatedFrames/$','notebook.notes.views.get_related_frames'),
 
     (r'^setNotesPrivate/$','notebook.notes.views.set_notes_private'),
     (r'^setNotesPublic/$','notebook.notes.views.set_notes_public'),

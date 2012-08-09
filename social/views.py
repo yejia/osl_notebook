@@ -955,6 +955,14 @@ def delete_course(request):
 
 
 
+#bookname should be framebook
+@login_required
+def get_related_frames(request, bookname, username, note_id):
+    frame = Social_Frame.objects.get(id=note_id)    
+    return HttpResponse(simplejson.dumps(frame.get_related_frames()), "application/json")
+
+
+
 def suggest(request):
     if request.method == 'POST': 
         content = request.POST.get('content')

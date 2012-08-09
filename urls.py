@@ -108,7 +108,7 @@ urlpatterns = patterns('',
     (r'^social/(?P<username>[^/]+)/(?P<bookname>[^/]+)/notes/tags/(?P<tag_name>[^/]+)/$', 'notebook.social.views.notes_tag'),
     (r'^social/(?P<username>[^/]+)/(?P<bookname>[^/]+)/folders/(?P<foldername>[^/]+)/$', 'notebook.social.views.folders'),
 
-
+    (r'^social/(?P<username>[^/]+)/(?P<bookname>[^/]+)/notes/note/(?P<note_id>[^/]+)/getRelatedFrames/$','notebook.social.views.get_related_frames'),
  
 
    #TODO:put tagframes at front, since it doesn't distinguis btw personal and public book. For example /tagframes/username/...
