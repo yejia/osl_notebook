@@ -147,25 +147,7 @@
             return a - b;
     }
     
-    //from http://stackoverflow.com/questions/93695/best-cross-browser-method-to-capture-ctrls-with-jquery
-                    //~ $(window).keypress(function(event) {
-    //~ if (!(event.which == 115 && event.ctrlKey) && !(event.which == 19)) return true;
-    //~ alert("Ctrl-S pressed");
-    //~ event.preventDefault();
-    //~ return false;
-//~ });
-    
-	
-     //TODO:make it work when the textarea is still focused (without having to leave the textarea input box first)
-      $("*").bind('keydown', 'alt+s', addNote);
-      //$('div.addnote #id_desc').bind('keydown', 'alt+s', addNote);
-      
-       $("*").bind('keydown', 'alt+p', showDisplayMode);
-       
-       function showDisplayMode(){
-            $("#display_mode").toggle();     
-       
-       }
+
      
      
     
@@ -521,10 +503,7 @@ $("#ac_tags").tagit("removeAll");
     }
     
     
-    $(window).bind('keydown', 'alt+m', structure);
-    
-     $(window).bind('keydown', 'alt+l', stream);
-     
+
      
     
     
@@ -567,9 +546,46 @@ $("#ac_tags").tagit("removeAll");
 <script type="text/javascript">
 	$(document).ready(function(){	
     
+    
+        //from http://stackoverflow.com/questions/93695/best-cross-browser-method-to-capture-ctrls-with-jquery
+                    //~ $(window).keypress(function(event) {
+    //~ if (!(event.which == 115 && event.ctrlKey) && !(event.which == 19)) return true;
+    //~ alert("Ctrl-S pressed");
+    //~ event.preventDefault();
+    //~ return false;
+//~ });
+    
+	
+     //TODO:make it work when the textarea is still focused (without having to leave the textarea input box first)
+      $("*").bind('keydown', 'alt+s', addNote);
+      //$('div.addnote #id_desc').bind('keydown', 'alt+s', addNote);
+      
+       $("*").bind('keydown', 'alt+p', showDisplayMode);
+       
+       
+       
+       function showDisplayMode(){
+            $("#display_mode").toggle();     
+       
+       }
+       
+           $(window).bind('keydown', 'alt+m', structure);
+    
+     $(window).bind('keydown', 'alt+l', stream);
+     
+    
 
+     $("*").bind('keydown', 'alt+h', hideRightSideMenu);
+        
+         function hideRightSideMenu(){       
+              $(".hide_side_menu").trigger('click');       
+       }
     
-    
+     $("*").bind('keydown', 'alt+r', showRightSideMenu);
+        
+         function showRightSideMenu(){  
+              $(".show_side_menu").trigger('click');       
+       }
        
     
     
