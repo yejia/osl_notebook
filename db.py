@@ -137,6 +137,22 @@ def rename_tag_table(users):
 
 
 
+def fix_notes_frame_notes_table(users):
+    if not users:
+         users = [u.username for u in User.objects.all()]
+    for user in users:
+        print 'For user', user
+        try:
+            cursor = connections[user].cursor()
+            cursor.execute('ALTER TABLE notes_frame_notes ADD COLUMN "_order" integer;')          
+            transaction.commit_unless_managed()
+        except Exception as inst:
+            print type(inst)
+            print inst.args
+            print inst   
+
+
+
 if __name__ == "__main__":
     name = sys.argv[1]
     if name == 'build_linkage_tags':
@@ -152,5 +168,9 @@ if __name__ == "__main__":
     if name == 'rename_tag_table':
         users = sys.argv[2:]
         print 'users',users 
-        rename_tag_table(users)           
+        rename_tag_table(users)   
+    if name == 'fix_nfn':
+        users = sys.argv[2:]
+        print 'users',users 
+        fix_notes_frame_notes_table(users)         
     sys.exit(0)      
