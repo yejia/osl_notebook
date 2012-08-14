@@ -115,7 +115,7 @@ function addNote(){
              
            //$.post('/{{profile_username}}/{{bookname}}/notes/addNote/',{'desc':desc, 'private':priv,'tags':selected_tags}, noteAdded, 'json');         
         var online = navigator.onLine;        
-        alert('online:'+online);
+        //alert('online:'+online);
         if (online){         
               $.post('/{{profile_username}}/{{bookname}}/notes/addNote/?desc='+encodeURIComponent(desc)+'&private='+priv+'&vote='+vote+'&tags='+selected_tags,{}, noteAdded , 'json');         
           }else{    
