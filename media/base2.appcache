@@ -1,7 +1,10 @@
 CACHE MANIFEST
 # 2012-08-14 v1.0.0
+/site_media/js/jquery.min.js
+/site_media/js/tag-it.js
 /site_media/css/tag-it/jquery.tagit.css
 /site_media/css/note.css
+/site_media/img/
 
 NETWORK:
 /login/
