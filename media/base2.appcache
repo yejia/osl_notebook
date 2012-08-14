@@ -4,7 +4,7 @@ CACHE MANIFEST
 /site_media/js/tag-it.js
 /site_media/css/tag-it/jquery.tagit.css
 /site_media/css/note.css
-#/site_media/img/
+/site_media/img/*
 
 NETWORK:
 /login/
