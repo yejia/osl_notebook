@@ -379,7 +379,7 @@ def note(request, username, bookname, note_id):
         #print 'sharing_groups:', sharing_groups
         #if request.user.is_anonymous() or not request.user.member.is_in_groups(sharing_groups):
         if not request.user.member.is_in_groups(sharing_groups):
-            return render_to_response('404.html')
+            raise Http404
     
     
     #get the backlink
@@ -469,7 +469,7 @@ def frame(request, username, bookname, frame_id):
         sharing_groups = [tag.name.split(':')[1] for tag in frame.tags.all() if tag.name.startswith('sharinggroup:')]
         #if request.user.is_anonymous() or not request.user.member.is_in_groups(sharing_groups):
         if not request.user.member.is_in_groups(sharing_groups):
-            return render_to_response('404.html')
+            raise Http404
             
 #===============================================================================
 #    if request.user.username == username:
