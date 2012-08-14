@@ -96,7 +96,7 @@ function showAddNoteTags(){
 <script type="text/javascript">
   
 
-//alert('online:'+online);
+
 
 
 
@@ -115,6 +115,7 @@ function addNote(){
              
            //$.post('/{{profile_username}}/{{bookname}}/notes/addNote/',{'desc':desc, 'private':priv,'tags':selected_tags}, noteAdded, 'json');         
         var online = navigator.onLine;        
+        alert('online:'+online);
         if (online){         
               $.post('/{{profile_username}}/{{bookname}}/notes/addNote/?desc='+encodeURIComponent(desc)+'&private='+priv+'&vote='+vote+'&tags='+selected_tags,{}, noteAdded , 'json');         
           }else{    
