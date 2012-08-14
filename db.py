@@ -147,8 +147,9 @@ def fix_notes_frame_notes_table(users):
             cursor.execute('ALTER TABLE notes_frame_notes ADD COLUMN "_order" integer;')          
             transaction.commit_unless_managed()
         except Exception as inst:
-            print type(inst)
-            print inst.args
+            print sys.exc_info()
+            #print type(inst)
+            #print inst.args
             #print inst   
 
 

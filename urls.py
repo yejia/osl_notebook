@@ -206,6 +206,7 @@ urlpatterns = patterns('',
 
     (r'^forNewUsers/$','notebook.notes.views.for_new_users'),
     (r'^about$','notebook.notes.views.about'),
+    (r'^mobile/$','notebook.notes.views.mobile'),
 
     (r'^changeYourBroswer/$','notebook.notes.views.change_your_broswer'),
 

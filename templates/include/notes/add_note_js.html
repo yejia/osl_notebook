@@ -74,6 +74,29 @@ function showAddNoteTags(){
 
 <script type="text/javascript">
   
+var online = navigator.onLine;
+//alert('online:'+online);
+
+if (online){
+//alert('localStorage.notes_to_add'+localStorage.notes_to_add);
+   if (localStorage.notes_to_add){
+          notes_to_sync = JSON.parse(localStorage['notes_to_add'])
+         for (var i=0; i < notes_to_sync.length; i++){
+            note_to_sync = notes_to_sync[i];
+            $.post('/{{profile_username}}/{{bookname}}/notes/addNote/?desc='+encodeURIComponent(note_to_sync[0])+'&private='+note_to_sync[1]+'&vote='+note_to_sync[2]+'&tags='+note_to_sync[3],{}, noteSynced , 'json');   
+        }          
+   }
+}
+
+function noteSynced(result){
+    //TODO: count and report how many succeeded and how many failed?
+     notes_synced = JSON.parse(localStorage['notes_to_add']);
+     count = notes_synced.length;
+     
+      $('ul.messages').append('<li class="success">'+count+' {% trans "notes successfully synced with the server!" %} </li>');
+      localStorage.clear();
+
+}
 
 function addNote(){              
             desc = $('#id_desc').val();         
@@ -89,8 +112,20 @@ function addNote(){
             });	
              
            //$.post('/{{profile_username}}/{{bookname}}/notes/addNote/',{'desc':desc, 'private':priv,'tags':selected_tags}, noteAdded, 'json');         
-          $.post('/{{profile_username}}/{{bookname}}/notes/addNote/?desc='+encodeURIComponent(desc)+'&private='+priv+'&vote='+vote+'&tags='+selected_tags,{}, noteAdded , 'json');         
-               
+         if (online){         
+              $.post('/{{profile_username}}/{{bookname}}/notes/addNote/?desc='+encodeURIComponent(desc)+'&private='+priv+'&vote='+vote+'&tags='+selected_tags,{}, noteAdded , 'json');         
+          }else{    
+              note_to_add = [desc, priv, vote, selected_tags];                        
+              if (localStorage['notes_to_add']){ 
+                    notes_to_add = JSON.parse(localStorage['notes_to_add']);
+                    notes_to_add.push(note_to_add);
+               }else{
+                    notes_to_add = [];
+                     notes_to_add.push(note_to_add);
+             } 
+              localStorage.notes_to_add = JSON.stringify(notes_to_add);
+              noteAdded(notes_to_add);
+         }
                         
     } 
     

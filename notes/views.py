@@ -2652,6 +2652,10 @@ def about(request):
         return render_to_response('doc/about.html', context_instance=RequestContext(request))
     elif topic == 'contact':
         return render_to_response('doc/contact.html', context_instance=RequestContext(request))
+
+
+def mobile(request):
+    return render_to_response('doc/mobile.html', context_instance=RequestContext(request))
     
 
 def change_your_broswer(request):
