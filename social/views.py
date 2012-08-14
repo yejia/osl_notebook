@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from django.http import HttpResponse,HttpResponseRedirect
+from django.http import HttpResponse,HttpResponseRedirect, Http404
 from django.shortcuts import render_to_response
 from django import forms
 from django.forms import ModelForm
@@ -14,6 +14,7 @@ from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
 from django.utils.translation import ugettext as _ , activate
 from django.core.mail import send_mail
+
 
 import datetime
 from urlparse import urlparse
@@ -369,7 +370,7 @@ def note(request, username, bookname, note_id):
     try:
         note = N.objects.filter(owner__username=username).get(id=note_id)
     except (ObjectDoesNotExist, ValueError):
-        return  render_to_response('404.html')  
+        raise Http404  
     
     
     
