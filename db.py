@@ -149,7 +149,7 @@ def fix_notes_frame_notes_table(users):
         except Exception as inst:
             print type(inst)
             print inst.args
-            print inst   
+            #print inst   
 
 
 
@@ -171,6 +171,6 @@ if __name__ == "__main__":
         rename_tag_table(users)   
     if name == 'fix_nfn':
         users = sys.argv[2:]
-        print 'users',users 
+        #print 'users',users 
         fix_notes_frame_notes_table(users)         
     sys.exit(0)      

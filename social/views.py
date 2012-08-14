@@ -366,10 +366,10 @@ def note(request, username, bookname, note_id):
         
     N = getSN(bookname)
     #TODO: if cannot find the note, tell the user such note doesn't exist and send an email to admin
-    #try:
-    note = N.objects.filter(owner__username=username).get(id=note_id)
-    #except ObjectDoesNotExist:
-    #    return  render_to_response('404.html')  
+    try:
+        note = N.objects.filter(owner__username=username).get(id=note_id)
+    except (ObjectDoesNotExist, ValueError):
+        return  render_to_response('404.html')  
     
     
     
