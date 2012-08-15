@@ -11,6 +11,7 @@ $(document).ready(function(){
 
 
         $('#add_note_vote_up'). click(function(){  
+        //alert('add_note_vote_up');
                         var  vote_bar = $(this).parents("#add_note_vote_bar")
                         var vote_span = vote_bar.find("#add_note_vote")
                         vote = parseInt(vote_span.text());
@@ -77,14 +78,17 @@ function noteSynced(result){
 function showAddNoteTags(){    
             //alert('show add tgs');
             $("#add_note_tags").tagit("removeAll");
+             //alert('show add tgs 1');
            $('#add_note_tags_box').toggle();  
+          //  alert('show add tgs 2');
             $('#add_note_tags').show();  
+           //  alert('show add tgs 3');
           //   $('#add_tags_to_note').show(3); 
             $('#add_note_tags_box').find('.tagit-new input').focus();     
            // $('#add_note_tags_box').find('.tagit-new input').css("background-color","#05FC9E");
            
            // $('#ac_tags').css("border","groove");
-                        
+           //    alert('show add tgs done');          
     }
 
 </script>
