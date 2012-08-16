@@ -49,10 +49,10 @@ class AddAreaForm(ModelForm):
 
 
 def index(request, username): 
-    print  'username',username
+    #print  'username',username
     if request.method == 'POST': 
         post = request.POST.copy()
-        print 'post', post  
+        #print 'post', post  
         
         #copied from social.views.groups()
         tag_names = post.getlist('item[tags][]')
@@ -105,13 +105,28 @@ def area(request, username, areaname):
     for t in area_tags:
         note_list = Note.objects.using(username).filter(tags__name = t.name)
         area_tags_with_count.append([t, note_list.count()])
+    
+    groups = Group.objects.exclude(id__in=[g.id for g in area.get_groups()])
         
     #TODO:need this?
     theme = __get_view_theme(request)
     private =    theme['private'] 
     return render_to_response('areas/area.html',{'area':area,  'area_tags_with_count':area_tags_with_count, \
-                            'username':request.user.username,'profile_username':username,  'private':private}, \
+                            'username':request.user.username,'profile_username':username,  'private':private, 'groups':groups}, \
                     context_instance=RequestContext(request,  {'book_uri_prefix':'/'+username+'/areas/area/'+area.name}))
+    
+ 
+
+def add_groups_2_area(request,username, areaname):
+    area = Area.objects.using(username).get(name=areaname)
+    area.owner_name = username
+    group_names = request.POST.getlist('item[tags][]')
+    groups = Group.objects.filter(name__in=group_names)
+    group_ids = [g.id for g in groups]
+    area.add_groups(group_ids)
+    return HttpResponseRedirect(__get_pre_url(request)) 
+    
+    
     
     
 def area_notes(request, username, areaname, bookname):  

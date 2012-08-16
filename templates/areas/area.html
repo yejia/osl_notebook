@@ -1,4 +1,4 @@
-{% extends "include/base2.html" %}
+{% extends "include/base_mini_no_cache.html" %}
 {% load i18n %}
 
 
@@ -11,7 +11,15 @@
 
 
 {% block extra_script %}
-
+<script type="text/javascript">
+$(document).ready(function(){	 
+ $("#ac_groups").tagit({
+			    availableTags: [{% for g in groups %}"{{g}}",{% endfor %}],
+                   allowSpaces: true
+                });     
+	});
+	
+</script>
 {% endblock %}
 
 {% block title %}
@@ -65,7 +73,18 @@
 <td>{{area.get_public_frames.count}}<br/><a href="{{book_uri_prefix}}/framebook/notes/" target="_blank">{% trans "Frames" %}<br/><img src="/site_media/img/Frame.png" title="Frame"/></a></td>
 <td>{{area.get_public_notes.count}}<br/><a href="{{book_uri_prefix}}/notebook/notes/" target="_blank">{% trans "All" %}</a></td>
 </tr></table>
- {% trans " " %}
 
+<div>
+ {% trans "Learning groups in this area" %}:
+  {% for g in area.get_groups %}
+    <a href="/groups/{{g.name}}/">{{g.name}}</a>,
+    {% endfor %}
+<form action="addGroups2Area/" method="post" id="addGroups2AreaForm"> 
+<div>   
+    <ul id="ac_groups"></ul>     
+</div> 
+<input type="submit" value="{% trans 'Add Group' %}"/>
+</form> 
+</div>
 
 {% endblock %}

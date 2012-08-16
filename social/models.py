@@ -602,6 +602,7 @@ class Group(models.Model):
     
     
     class Meta:
+        #should name be unique?TODO:
         unique_together = (("name"),)           
         ordering = ['name','-init_date']
     

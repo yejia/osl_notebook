@@ -82,6 +82,17 @@ class Area(models.Model):
         return self.get_public_notes('framebook')
         
     
+    def get_groups(self):
+        ags = Area_Group.objects.using(self.owner_name).filter(area=self)
+        return Group.objects.filter(id__in=[ag.group_id for ag in ags])
+    
+    
+    def add_groups(self, groups):
+        for group in groups:
+            a, created = Area_Group.objects.using(self.owner_name).get_or_create(area=self, group_id=group)
+            
+        
+    
         
 #store tag_frame that 
 class Area_Tag_Frame(models.Model):
@@ -94,7 +105,8 @@ class Area_Tag_Frame(models.Model):
 #can one class join several areas?
 class Area_Group(models.Model):
     area = models.ForeignKey(Area)
-    group = models.ForeignKey(Group)
+    #reference to the id of the group in the social db. Since they are on different db, foreign key cannot be used.TODO:
+    group_id = models.IntegerField()
    
     
 class Meta:
@@ -102,6 +114,6 @@ class Meta:
 
 
     def __unicode__(self):
-        return self.area.name + '-' + self.group.name   
+        return self.area.name + '-' + self.group_id   
     
     
