@@ -87,11 +87,16 @@ class Area(models.Model):
         return Group.objects.filter(id__in=[ag.group_id for ag in ags])
     
     
-    def add_groups(self, groups):
-        for group in groups:
-            a, created = Area_Group.objects.using(self.owner_name).get_or_create(area=self, group_id=group)
+    def add_groups(self, group_ids):
+        for group_id in group_ids:
+            a, created = Area_Group.objects.using(self.owner_name).get_or_create(area=self, group_id=group_id)
             
-        
+    
+    def remove_group(self, group_id):
+        ag = Area_Group.objects.using(self.owner_name).get(area=self, group_id=group_id)
+        ag.owner_name = self.owner_name
+        ag.delete()
+            
     
         
 #store tag_frame that 

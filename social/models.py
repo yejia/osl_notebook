@@ -8,6 +8,7 @@ from django.utils.translation import ugettext_lazy
 from django.utils.translation import ugettext as _
 
 from notebook.notes.constants import *
+from notebook.tags.models import Tag_Frame
 
 import datetime
 
@@ -603,7 +604,8 @@ class Group(models.Model):
     
     class Meta:
         #should name be unique?TODO:
-        unique_together = (("name"),)           
+        #unique_together = (("name"),)
+        unique_together = (("name", 'creator'),)           
         ordering = ['name','-init_date']
     
     
@@ -672,12 +674,35 @@ class Group(models.Model):
     def get_public_notes_count(self):
         return self.get_notes('notebook').count()  
     
-
+    
+    #get tag frames made by the group members except the root one
+    def get_tag_frames(self):
+        tag_frames = []
+        gtfs = Group_Tag_Frame.objects.filter(group=self) 
+        print 'gtfs', gtfs
+        for gtf in gtfs:  
+            tag_frame = Tag_Frame.objects.using(gtf.tag_frame_owner.username).get(id=gtf.tag_frame_id) 
+            tag_frames.append([tag_frame, gtf.tag_frame_owner] )
+        return tag_frames
+    
         
-            
 #Activity Stream such as adding friend, posting...
 #class Activity(models.Model): 
 #    pass
+
+
+
+
+
+class Group_Tag_Frame(models.Model):
+    group = models.ForeignKey(Group)
+    #tag_frame_id in owner's db
+    tag_frame_id = models.IntegerField()
+    tag_frame_owner = models.ForeignKey(Member)
+
+
+
+
 
 
 #one relation has one entry in this table (although two entries make it easy for query).  TODO: enforce no redundance?

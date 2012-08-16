@@ -26,6 +26,7 @@ from django.db import connections,  transaction
 
 from notebook.tags.models import *
 from notebook.notes.constants import *
+from notebook.social.models import Group_Tag_Frame, Group
 from notebook.notes.util import *
 from notebook.notes.views import __get_pre_url, getlogger, __get_view_theme, __get_related_tags
 
@@ -73,10 +74,22 @@ def tagframe(request, username, tagframe_name):
      #TODO: need this?
      theme = __get_view_theme(request)
      private =    theme['private'] 
-     #print 'private', private
+     #print 'private', private     
      return render_to_response('tagframes/tagframe.html',{'tag_tree':tf,\
                             'tags':tags, 'sort':'', 'username':request.user.username,'profile_username':username,  'private':private}, \
                     context_instance=RequestContext(request,  {}))
+
+
+
+
+def push_tag_frame_2_groups(request, username, tagframe_name):
+    tf = Tag_Frame.objects.using(username).get(name=tagframe_name)
+    group_names = request.POST.getlist('item[tags][]')
+    groups = Group.objects.filter(name__in=group_names)
+    #group_ids = [g.id for g in groups]
+    for group in groups:
+        Group_Tag_Frame.objects.get_or_create(group=group, tag_frame_id=tf.id, tag_frame_owner=request.user.member)
+    return HttpResponseRedirect(__get_pre_url(request)) 
 
 #===============================================================================
 # def add_tag_frame(request, username):

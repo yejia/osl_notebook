@@ -24,10 +24,12 @@ from notebook.notes.models import Note, Tag, create_model, WorkingSet, getW
 from notebook.bookmarks.models import Bookmark
 from notebook.scraps.models import Scrap
 from notebook.social.models import *
+from notebook.areas.models import Area, Area_Group
 from notebook.notes.views import User, getT, getlogger, getFolder, get_public_notes, __get_folder_context
 from notebook.notes.views import getSearchResults,  __getQStr, __get_view_theme, Pl, ALL_VAR
 from notebook.notes.util import *
 from notebook.notes.constants import *
+
 
 
 log = getlogger('social.views')  
@@ -756,14 +758,36 @@ def group(request, groupname, bookname):
     #tags = Social_Tag.objects.filter(group=group).order_by('name')#.annotate(Count('social_'+book_entry_dict.get(bookname))).order_by('name')
     tags = get_group_tags(request, groupname, bookname)
     profile_member = Group.objects.get(name=groupname)
+    
+    
+    
+    #For now, get the learning area from the creator's db TODO:
+    
+    try:
+        ag = Area_Group.objects.using(group.creator.username).get(group_id=group.id)
+        ag.owner_name = group.creator.username
+        area = ag.area
+    except ObjectDoesNotExist:
+        area = None     
+    
+    
     return render_to_response('social/notes/group_notes.html', {'group':group, 'gs':gs, 'note_list':paged_notes,'sort':sort, 'bookname':bookname, \
                                                  'tags':tags, 'qstr':qstr,\
                                                   'profile_member':profile_member,\
-                                                  'appname':'groups', 'cl':cl},\
+                                                  'appname':'groups', 'cl':cl, 'area':area},\
                                                   context_instance=RequestContext(request, {'book_uri_prefix':'/groups/'+groupname}))
 
 
 
+def group_tagframes(request, groupname):
+    group = G.objects.get(name=groupname)
+    print 'group', group
+    tfs = group.get_tag_frames()   
+    return render_to_response('social/group/group_tagframes.html', {'group':group,                                
+                                                  'tag_frames':tfs, 'appname':'groups', 
+                                                  },\
+                                                  context_instance=RequestContext(request, {'book_uri_prefix':'/groups/'+groupname}))
+              
 
 
 def notes_tag(request, username, bookname, tag_name):   
@@ -827,6 +851,7 @@ def vote_useful(request):
     result = str(note.get_useful_votes())+'/'+str(note.get_total_votes())     
     return HttpResponse(result, mimetype="text/plain") 
 
+
 @login_required
 def vote_unuseful(request):  
     note_id = request.POST.get('id')       
@@ -837,12 +862,14 @@ def vote_unuseful(request):
     result = str(note.get_useful_votes())+'/'+str(note.get_total_votes())    
     return HttpResponse(result, mimetype="text/plain")      
 
+
 @login_required
 def take(request):
     note_id = request.POST.get('id') 
     sn = SN.objects.get(id=note_id)
     snt, created = Social_Note_Taken.objects.get_or_create(note=sn, taker=request.user.member)
     return  HttpResponse(created, mimetype="text/plain")   
+
 
 import notebook.settings as settings
 if "notification" in settings.INSTALLED_APPS:

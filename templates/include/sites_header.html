@@ -12,7 +12,9 @@
 <span class="item">
 <a href="/{{ user.username|default:'anonymous' }}/tagframes/">{% trans 'Tag Tree' %}</a>
 </span>
-
+<span class="item">
+<a href="/{{ user.username|default:'anonymous' }}/areas/">{% trans 'Learning Areas' %}</a>
+</span>
 
 <span class="item">
 <a href="/{{ user.username|default:'anonymous' }}/groups/">{% trans 'Learning Groups' %}</a>
@@ -58,7 +60,7 @@
     <a href="/forNewUsers/">{% trans 'For new users' %}</a>
 </span>
 <span class="item">
-    <a href="/social/leon/framebook/notes/note/10740/">{% trans 'Doc' %}</a>
+    <a href="/doc/">{% trans 'Doc' %}</a>
 </span>
 <span class="item">
 {% if not user.is_anonymous %}

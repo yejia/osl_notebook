@@ -13,19 +13,34 @@
 {% block extra_script %}
 <script type="text/javascript">
 $(document).ready(function(){	 
+
+
  $("#ac_groups").tagit({
 			    availableTags: [{% for g in groups %}"{{g}}",{% endfor %}],
                    allowSpaces: true
                 });     
-	});
+
+    
+    
+      $('span#area_delete_group').click(function(){    
+                   var area_name = $(this).parents('div[area_name]').attr('area_name');
+                    $(this).parents("span[group_id]").remove();
+                    $.post('/{{user.username}}/areas/area/'+area_name+'/removeGroupFromArea/',{'group_id':$(this).parents('span[group_id]').attr('group_id') }, groupDeleted, 'json');
+                   
+                });
+                
+                function groupDeleted(result){
+                        $('ul.messages').append('<li class="'+result.type+'">'+result.msg+'</li>');                
+                
+                }
+                
+        	});        
 	
 </script>
 {% endblock %}
 
 {% block title %}
 {{profile_username}} {% trans "'s Learning Area" %} : {{area.name}}
-
-
 {% endblock %}
 
 
@@ -40,32 +55,32 @@ $(document).ready(function(){
         
         {% endif %}  
 
-<br/>
+<br/><br/>
 
 {% endblock %}
 
 
 {% block content%}
+<div area_name="{{area.name}}">
 <div>{{area.desc}}</div>
 
 
-<div>
- {% trans "Root tag tree" %}: <a href="/{{profile_username}}/tagframes/tagframe/{{area.root_tag_frame.name}}/">{{area.root_tag_frame.name}}</a>
+<div class="padded">
+ <b>{% trans "Root tag tree" %}:</b> <a href="/{{profile_username}}/tagframes/tagframe/{{area.root_tag_frame.name}}/">{{area.root_tag_frame.name}}</a>
  </div>
-<div>
-{% trans "Root frame" %}: <a href="/{{profile_username}}/framebook/notes/note/{{area.root_note_frame.id}}/">{{area.root_note_frame.title}}</a>
+<div class="padded">
+ <b>{% trans "Root frame" %}:</b> <a href="/{{profile_username}}/framebook/notes/note/{{area.root_note_frame.id}}/">{{area.root_note_frame.title}}</a>
  </div>
  
- <div>
-  {% trans "All the tags in this area" %}:  
+ <div class="padded">
+  <b> {% trans "All the tags in this area" %}:  </b>
   {% for t in area_tags_with_count %}
   <a href="/{{profile_username}}/notebook/notes/tags/{{t.0}}/">{{t.0}} ({{t.1}})</a>,
   {% endfor %}
   </div>
 
-<div>
- {% trans "View all notes in this learning area" %}:
-  </div>
+<div class="padded">
+  <b>{% trans "View all notes in this learning area" %}:</b>
   <table><tr/>
 <td>{% if user.username == profile_username %}{{area.get_snippets.count}} {% else %}{{area.get_public_snippets.count}}{% endif %}<br/><a href="{{book_uri_prefix}}/snippetbook/notes/" target="_blank">{% trans "Snippets" %}<br/><img src="/site_media/img/Snippet.png" title="Snippet"/></a></td>
 <td>{{area.get_public_bookmarks.count}}<br/><a href="{{book_uri_prefix}}/bookmarkbook/notes/" target="_blank">{% trans "Bookmarks" %}<br/><img src="/site_media/img/Bookmark.png" title="Bookmark"/></a></td>
@@ -73,18 +88,28 @@ $(document).ready(function(){
 <td>{{area.get_public_frames.count}}<br/><a href="{{book_uri_prefix}}/framebook/notes/" target="_blank">{% trans "Frames" %}<br/><img src="/site_media/img/Frame.png" title="Frame"/></a></td>
 <td>{{area.get_public_notes.count}}<br/><a href="{{book_uri_prefix}}/notebook/notes/" target="_blank">{% trans "All" %}</a></td>
 </tr></table>
-
-<div>
- {% trans "Learning groups in this area" %}:
+  </div>
+  
+<div class="padded">
+  <b>{% trans "Learning groups in this area" %}:</b>
   {% for g in area.get_groups %}
-    <a href="/groups/{{g.name}}/">{{g.name}}</a>,
+    <span group_id="{{g.id}}"><a href="/groups/{{g.name}}/">{{g.name}}</a>
+    &nbsp;
+   {% if user.username == profile_username %}  
+         <span title="{% trans "remove this group" %}" class="inline_delete"  id="area_delete_group">&nbsp;&nbsp;&nbsp;</span>
+   {% endif %}     
+    , &nbsp;
+    </span>
     {% endfor %}
+{% if user.username == profile_username %}    
 <form action="addGroups2Area/" method="post" id="addGroups2AreaForm"> 
 <div>   
     <ul id="ac_groups"></ul>     
 </div> 
 <input type="submit" value="{% trans 'Add Group' %}"/>
 </form> 
+{% endif %}
 </div>
 
+</div>
 {% endblock %}

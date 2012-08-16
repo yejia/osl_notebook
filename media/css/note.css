@@ -519,6 +519,8 @@ width:300px;
 }
 ul#ac_groups{
 width:300px;
+padding-bottom:0px;
+margin-bottom:0px;/*how ac_tags has no spacing at bottom without adding these?TODO:*/
 }
 
 

@@ -127,6 +127,16 @@ def add_groups_2_area(request,username, areaname):
     return HttpResponseRedirect(__get_pre_url(request)) 
     
     
+
+def remove_group_from_area(request,username, areaname):
+    print 'delete_group'
+    group_id = request.POST.get('group_id')
+    area = Area.objects.using(username).get(name=areaname)
+    area.owner_name = username
+    area.remove_group(group_id)
+    return HttpResponse(simplejson.dumps({'type':'success','msg':_('You have successfully removed the group from the area.')}), "application/json")
+    
+    
     
     
 def area_notes(request, username, areaname, bookname):  

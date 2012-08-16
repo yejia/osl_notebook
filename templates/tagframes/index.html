@@ -5,9 +5,6 @@
 
 	
 {% block extra_css %}
-
-
-
 <link rel="stylesheet" href="/site_media/css/jquery.treeview.css" />
 {% endblock %}
 
@@ -217,11 +214,13 @@
      $('.tag_name_display').click(function(){    
            $('#add_frame_tags_box').hide(300);  
            var tag_name = $(this).find('a').text();
-           var  tag_frame_title  = $('div#tag_frame_block').find('span#tag_frame_title');
+           var  tag_frame_title  = $('div#tag_frame_block').find('span#tag_frame_title a');
            if  (tag_name == tag_frame_title.text()){
                  $('div#tag_frame_block').toggle(300);
            }else{
                 tag_frame_title.text(tag_name);
+                href =  tag_frame_title.attr('href')
+                 tag_frame_title.attr('href', href+tag_name)
                 $('div#tag_frame_block').show(300);
             }
              
@@ -231,14 +230,14 @@
         
         
          $('#import_tag_tree').click(function(){    
-                 var  tag_frame_title  = $('div#tag_frame_block').find('span#tag_frame_title').text();
+                 var  tag_frame_title  = $('div#tag_frame_block').find('span#tag_frame_title a').text();
                  $.post('/{{profile_username}}/tagframes/export/?tag_frame_name='+tag_frame_title,{}, imported, 'json');       
 
            });
            
            
         function imported(result){
-                var  tag_frame_title  = $('div#tag_frame_block').find('span#tag_frame_title').text();
+                var  tag_frame_title  = $('div#tag_frame_block').find('span#tag_frame_title a').text();
                 if ("warning"==result.type){
                     $('ul.messages').append('<li class="warning">'+result.msg+' {% trans "If you still want to import this tag tree, it will be merged with your existing tag tree. You can easily modify the merged tree in your tag tree page. Still import?: " %}<a href="/{{profile_username}}/tagframes/export/?tag_frame_name='+tag_frame_title+'&force=y">{% trans "Import" %} </a></li>');     
                 }
@@ -260,6 +259,17 @@
              
              //~ );
           
+        
+        
+        //below is for tagframe.html page. Think of moving it out of this page TODO:
+         $("#ac_groups").tagit({
+			    availableTags: [{% for g in request.user.member.get_groups %}"{{g}}",{% endfor %}],
+                   allowSpaces: true
+                });     
+      
+	
+        
+        
         
           
 	});
@@ -324,7 +334,7 @@
 {% block content%}
 
 <div id="tag_frame_block">
-<div>{% trans "Tag Tree" %}: <span id="tag_frame_title"></span></div>
+<div>{% trans "Tag Tree" %}: <span id="tag_frame_title"><a href="/{{profile_username}}/tagframes/tagframe/"></a></span></div>
 <div id="import_tag_tree"><a href="javascript:void();">{% trans "Import this tag tree" %}</a></div>
 <div>{% trans "View this tag tree as a working set" %} </div>
 <div>{% trans "View this tag tree like in Trello" %} </div>
@@ -396,17 +406,25 @@
 <ull>
 {% for top_tree in top_tag_trees %} 
 <li frame_name="{{top_tree.name}}">
-{{top_tree.name}}: {{top_tree.desc|default:''}}
+<a href="/{{profile_username}}/tagframes/tagframe/{{top_tree.name}}/">{{top_tree.name}}</a>: {{top_tree.desc|default:''}}
 {% if  username == profile_username %}
                 <span title="{% trans 'delete this' %}" class="inline_delete top_frame_delete" >&nbsp;&nbsp;&nbsp;</span>
 {% endif %}   
+{% comment %} 
 <ul  class="frame_tree" >
-        {% tag_tree_view_tag top_tree %}
-    </ul> 
+       {% tag_tree_view_tag top_tree %}
+    </ul>
+ {% endcomment %}    
 </li>
  {% endfor %}
  </ul>
 </div>
+{% endblock %}
+
+
+
+{% block extra %}
+
 {% endblock %}
 
 

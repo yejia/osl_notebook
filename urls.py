@@ -51,6 +51,7 @@ urlpatterns = patterns('',
     #(r'^users/(?P<username>[^/]+)/wall/bookmarks/$', 'notebook.social.views.wall_bookmarks'),
     #(r'^users/(?P<username>[^/]+)/wall/scraps/$', 'notebook.social.views.wall_scraps'),
     (r'^groups/(?P<groupname>[^/]+)/$', 'notebook.social.views.group_index'),
+    (r'^groups/(?P<groupname>[^/]+)/tagframes/$', 'notebook.social.views.group_tagframes'),
 
     (r'^groups/(?P<groupname>[^/]+)/joinGroup/$', 'notebook.social.views.join_group'),
     (r'^groups/(?P<groupname>[^/]+)/admin/$', 'notebook.social.views.group_admin'),
@@ -139,12 +140,14 @@ urlpatterns = patterns('',
     (r'^(?P<username>[^/]+)/tagframes/(.*)/(?P<bookname>[^/]+)/notes/removeTagsFromNotes2/$','notebook.notes.views.remove_tags_from_notes2'),
 
     (r'^(?P<username>[^/]+)/tagframes/tagframe/(?P<tagframe_name>[^/]+)/$','notebook.tags.views.tagframe'),
+    (r'^(?P<username>[^/]+)/tagframes/tagframe/(?P<tagframe_name>[^/]+)/pushTagFrame2Groups/$','notebook.tags.views.push_tag_frame_2_groups'),
 
     (r'^(?P<username>[^/]+)/areas/$', 'notebook.areas.views.index'),
     (r'^(?P<username>[^/]+)/areas/area/(?P<areaname>[^/]+)/$', 'notebook.areas.views.area'),
     (r'^(?P<username>[^/]+)/areas/area/(?P<areaname>[^/]+)/(?P<bookname>[^/]+)/notes/$', 'notebook.areas.views.area_notes'),
     (r'^(?P<username>[^/]+)/areas/area/(?P<areaname>[^/]+)/(?P<bookname>[^/]+)/getAreaTags/$', 'notebook.areas.views.get_area_tags'),
     (r'^(?P<username>[^/]+)/areas/area/(?P<areaname>[^/]+)/addGroups2Area/$', 'notebook.areas.views.add_groups_2_area'),
+    (r'^(?P<username>[^/]+)/areas/area/(?P<areaname>[^/]+)/removeGroupFromArea/$', 'notebook.areas.views.remove_group_from_area'),
 
 
 
@@ -208,6 +211,8 @@ urlpatterns = patterns('',
 
     (r'^forNewUsers/$','notebook.notes.views.for_new_users'),
     (r'^about$','notebook.notes.views.about'),
+    (r'^doc/$','notebook.notes.views.doc'),
+    (r'^faq/$','notebook.notes.views.faq'),
     (r'^mobile/$','notebook.notes.views.mobile'),
 
     (r'^changeYourBroswer/$','notebook.notes.views.change_your_broswer'),

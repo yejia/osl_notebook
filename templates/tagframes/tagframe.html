@@ -24,4 +24,18 @@
 {% endblock %}
 
 
+{% block extra %}
+ {% trans "Push the tag tree to groups" %}:<br/>
+ {% if user.username == profile_username %}    
+<form action="pushTagFrame2Groups/" method="post" id="pushTagFrame2GroupsForm"> 
+<div>   
+    <ul id="ac_groups"></ul>     
+</div> 
+<input type="submit" value="{% trans 'Push to Groups' %}"/>
+</form> 
+{% endif %}
+ 
+{% endblock %}
+
+
 

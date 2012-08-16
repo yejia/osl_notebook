@@ -1,0 +1,31 @@
+{% extends "include/base_mini_no_cache.html" %}
+{% load i18n %}
+
+
+{% block title %}
+{{group.name}} {% trans "'s Tag Trees" %} 
+{% endblock %}
+
+
+{% block site_branding %}
+<br/>
+{% trans "Learning Group" %}  {{group.name}} {% trans "'s Tag Trees" %} 
+<br/><br/>
+{% endblock %}
+
+
+
+{% block content%}
+<ul>
+ {% for tf in tag_frames %}
+   <li> <span><a href="/{{tf.1}}/tagframes/tagframe/{{tf.0.name}}/">{{tf.0.name}}</a>  {% trans " by " %} {{tf.1}}
+    </span>
+  </li>  
+</ul>    
+    {% endfor %}
+
+
+
+
+
+{% endblock %}

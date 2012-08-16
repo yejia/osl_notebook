@@ -1,0 +1,27 @@
+{% extends "include/base_mini_no_cache.html" %}
+{% load i18n %}
+
+
+
+{% block title %}
+{% trans 'Documentation' %}
+{% endblock %}
+
+
+
+{% block content%}<br/>
+<h1>{% trans 'Documentation' %}</h1>
+<br/><br/>
+ 
+ <p>
+<a href="/faq">{% trans 'FAQ' %}</a>
+</p>
+
+ <p>
+{% trans 'The developer documentation is currently put in a knowledge frame' %}: <a href="http://www.91biji.com/social/leon/framebook/notes/note/10740/">{% trans 'Notes of Notebook' %}</a>
+</p>
+
+
+
+<br/><br/>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "include/base_mini_no_cache.html" %}
+{% load i18n %}
+
+
+
+{% block title %}
+{% trans 'FAQ' %}
+{% endblock %}
+
+
+
+{% block content%}<br/>
+<h1>{% trans 'FAQ' %}</h1>
+<br/><br/>
+ 
+<ul>
+<li>
+ <p><b>
+{% trans 'How to add tags?' %}
+</b>
+</p>
+ <p>
+{% trans 'In your personal notebook, you can add tags on the notes list display page or on the single note display page.' %}<br/> {% trans 'On notes list display page, you can use the bulk editing menu to add tags to or remove tags from several selected tags.' %} 
+{% trans 'Or you can click on the plus icon ' %} {% trans 'to expand a note and update its tags there.' %}
+<br/>
+{% trans 'You can also change the tags on a single note display page.' %}
+</p>
+</li>
+
+
+
+</ul>
+<br/><br/>
+{% endblock %}

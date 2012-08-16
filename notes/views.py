@@ -2658,6 +2658,14 @@ def mobile(request):
     return render_to_response('doc/mobile.html', context_instance=RequestContext(request))
     
 
+def doc(request):
+    return render_to_response('doc/doc.html', context_instance=RequestContext(request))
+
+
+def faq(request):
+    return render_to_response('doc/faq.html', context_instance=RequestContext(request))
+
+
 def change_your_broswer(request):
     return render_to_response('doc/change_your_browser.html', context_instance=RequestContext(request))
      
