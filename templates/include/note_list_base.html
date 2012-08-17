@@ -1128,8 +1128,11 @@ $("#ac_tags").tagit("removeAll");
                                         }    
                                   //prevent adding existing included notes as well. #TODO:  
                                     }
-
-                                    $.post('addNotesToFrame/',{ 'id':note_id, 'included_notes_added':  included_notes_added}, included_notes_updated_inline ,'json');               
+                                   if (editable.hasClass('create')){
+                                        $.post('createNoteInFrame/',{ 'id':note_id, 'note_created_desc' :  included_notes_added}, included_notes_updated_inline ,'json');      
+                                   }else{
+                                        $.post('addNotesToFrame/',{ 'id':note_id, 'included_notes_added':  included_notes_added}, included_notes_updated_inline ,'json');      
+                                  }                                    
            
                             });            
 

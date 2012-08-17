@@ -1370,6 +1370,39 @@ def add_notes_to_frame(request, username, bookname):
                                                                      "application/json")
 
 
+def create_note_in_frame(request, username, bookname):
+    note_id = request.POST.get('id')
+    note_created_desc = request.POST.get('note_created_desc')
+    #bookname should always be framebook here
+    N = getNote(username, bookname) 
+    frame = N.objects.get(id=note_id) 
+    #for now, only create a snippet directly inside a frame. Think of creating bookmark or scrap later TODO:
+    N_To_Include = getNote(username, 'snippetbook')  
+    note_to_include, created = N_To_Include.objects.get_or_create(desc=note_created_desc)  
+    T = getT(username)
+    if frame.title.startswith('Weekly Plan:'):
+        
+        t1, t1_created = T.objects.get_or_create(name='weekly')
+        t2, t2_created = T.objects.get_or_create(name='plan')
+        note_to_include.tags.add(t1)
+        note_to_include.tags.add(t2)
+        note_to_include.save()
+#=======think of getting rid of untagged tag from db, and just fill it in in the template artificially if tag is empty TODO:========================================================================
+#    else:
+#        t1 =  T.objects.get(name='untagged')   
+#===============================================================================
+    notes_to_add_clean_return = [[note_to_include.id, note_to_include.title, note_to_include.desc[0:200], note_to_include.vote, note_to_include.get_note_bookname(), note_to_include.get_note_type()]]
+    
+    frame.add_notes(str(note_to_include.id)) 
+    frame.owner_name = username
+    frame.vote = frame.get_vote()
+    frame.tags = frame.get_sum_of_note_tag_ids()    
+    frame.save() 
+    
+    return HttpResponse(simplejson.dumps({'note_id':frame.id, 'notes_added':notes_to_add_clean_return}),
+                                                                     "application/json")
+
+
 @login_required
 def delete_note_from_frame(request, username, bookname):    
     frame_id = request.POST.get('linkage_id')

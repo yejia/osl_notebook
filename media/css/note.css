@@ -817,11 +817,14 @@ bottom:0px;
 padding-top:15px;
 }
 
-span.tags_edit, span.included_notes_edit {	
+span.tags_edit, span.included_notes_edit, span.included_notes_create {	
    background: url("../img/icon_changelink.gif");
    background-repeat:no-repeat;
-   cursor:pointer;
-   
+   cursor:pointer;   
+}
+
+input#update_included_notes_inline_box{
+width:200px;
 }
 
 span.tags_save{

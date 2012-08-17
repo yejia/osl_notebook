@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-17 18:42+0800\n"
+"POT-Creation-Date: 2012-08-18 06:05+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,31 +18,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: email_digest.py:84 email_digest.py:85 notes/views.py:1986
-#: notes/views.py:1997
+#: email_digest.py:84 email_digest.py:85 notes/views.py:2019
+#: notes/views.py:2030
 msgid "Sharing snippet:"
 msgstr "分享便条："
 
-#: email_digest.py:87 email_digest.py:88 notes/views.py:1988
-#: notes/views.py:1999
+#: email_digest.py:87 email_digest.py:88 notes/views.py:2021
+#: notes/views.py:2032
 msgid "Sharing bookmark:"
 msgstr "分享网址："
 
-#: email_digest.py:90 email_digest.py:91 notes/views.py:1990
-#: notes/views.py:2001
+#: email_digest.py:90 email_digest.py:91 notes/views.py:2023
+#: notes/views.py:2034
 msgid "Sharing scrap:"
 msgstr "分享网摘："
 
-#: email_digest.py:93 email_digest.py:94 notes/views.py:1992
-#: notes/views.py:2003
+#: email_digest.py:93 email_digest.py:94 notes/views.py:2025
+#: notes/views.py:2036
 msgid "Sharing knowledge package:"
 msgstr "分享知识包："
 
-#: email_digest.py:109 notes/views.py:2005
+#: email_digest.py:109 notes/views.py:2038
 msgid "Original Note:"
 msgstr "原笔记："
 
-#: email_digest.py:114 email_digest.py:116 notes/views.py:2016
+#: email_digest.py:114 email_digest.py:116 notes/views.py:2049
 msgid "from"
 msgstr "来自"
 
@@ -118,7 +118,7 @@ msgstr "到"
 msgid "Make your weekly plan for this week here."
 msgstr "在这里制定你一周的学习计划。"
 
-#: plan.py:64 plan.py:68
+#: plan.py:70 plan.py:74
 msgid ""
 "It is the beginning of the week again. To start this week right, first make "
 "a learning plan for this week. What do you want to learn this week? And how "
@@ -127,13 +127,13 @@ msgstr ""
 "新的一周又开始了。每周开始的时候做个大概的计划会帮助你在这一周内的学习更有成"
 "果。现在就开始制定这周的学习计划吧。这周打算学些什么？怎么学？"
 
-#: plan.py:65 plan.py:69
+#: plan.py:71 plan.py:75
 msgid ""
 "A weekly plan has been created for you in your notebook. You just need to "
 "fill in the specifics by adding snippets to it:"
 msgstr "系统已经将本周学习计划添加到您的笔记本里。你只需要加入一些便条即可。"
 
-#: plan.py:77
+#: plan.py:80
 msgid "Time to make your weekly plan"
 msgstr "制定周学习计划的时间到了"
 
@@ -192,7 +192,7 @@ msgstr "默认的标签是'random thought'。"
 #: notes/models.py:194 social/models.py:598 templates/areas/area.html:193
 #: templates/areas/index.html:56
 #: templates/framebook/notes/notesdisplay.html:22
-#: templates/include/note_list_base.html:1375
+#: templates/include/note_list_base.html:1378
 #: templates/include/notes/notesdisplay.html:40
 #: templates/scrapbook/notes/notesdisplay.html:29
 #: templates/snippetbook/notes/add_note.html:47
@@ -259,7 +259,7 @@ msgstr "条笔记"
 msgid "Note is successfully updated!"
 msgstr "笔记更新成功！"
 
-#: notes/views.py:2007
+#: notes/views.py:2040
 msgid "Forwarded Note:"
 msgstr "转发的笔记："
 
@@ -309,7 +309,7 @@ msgstr "每周更新"
 
 #: social/models.py:53 templates/areas/area.html:125
 #: templates/framebook/notes/todelete/folders.html:19
-#: templates/include/note_list_base.html:1577
+#: templates/include/note_list_base.html:1580
 #: templates/include/profile_head.html:49
 #: templates/include/profile_head.html:51
 #: templates/include/profile_head.html:80 templates/include/supersearch.html:6
@@ -323,7 +323,7 @@ msgid "Snippets"
 msgstr "便条"
 
 #: social/models.py:54 templates/areas/area.html:128
-#: templates/include/note_list_base.html:1581
+#: templates/include/note_list_base.html:1584
 #: templates/include/profile_head.html:64
 #: templates/include/profile_head.html:66
 #: templates/include/profile_head.html:83
@@ -574,7 +574,7 @@ msgstr[1] ""
 
 #: templates/admin/delete_confirmation.html:10
 #: templates/admin/submit_line.html:4
-#: templates/include/note_list_base.html:1360
+#: templates/include/note_list_base.html:1363
 msgid "Delete"
 msgstr "删除"
 
@@ -814,7 +814,7 @@ msgstr "浏览这个学习领域里的所有笔记"
 
 #: templates/areas/area.html:126
 #: templates/framebook/notes/todelete/folders.html:21
-#: templates/include/note_list_base.html:1578
+#: templates/include/note_list_base.html:1581
 #: templates/include/profile_head.html:54
 #: templates/include/profile_head.html:56
 #: templates/include/profile_head.html:81
@@ -832,7 +832,7 @@ msgstr "网址"
 
 #: templates/areas/area.html:127
 #: templates/framebook/notes/todelete/folders.html:23
-#: templates/include/note_list_base.html:1579
+#: templates/include/note_list_base.html:1582
 #: templates/include/profile_head.html:59
 #: templates/include/profile_head.html:61
 #: templates/include/profile_head.html:82
@@ -850,11 +850,11 @@ msgstr "网摘"
 #: templates/areas/area.html:129 templates/bookmarkbook/notes/notes.html:7
 #: templates/bookmarkbook/notes/notes.html:9
 #: templates/framebook/notes/todelete/folders.html:25
-#: templates/include/note_list_base.html:1377
-#: templates/include/note_list_base.html:1379
-#: templates/include/note_list_base.html:1446
-#: templates/include/note_list_base.html:1448
-#: templates/include/note_list_base.html:1582
+#: templates/include/note_list_base.html:1380
+#: templates/include/note_list_base.html:1382
+#: templates/include/note_list_base.html:1449
+#: templates/include/note_list_base.html:1451
+#: templates/include/note_list_base.html:1585
 #: templates/include/profile_head.html:69
 #: templates/include/profile_head.html:71
 #: templates/include/profile_head.html:84
@@ -1052,12 +1052,12 @@ msgstr "在链条里的"
 
 #: templates/bookmarkbook/notes/notes.html:12
 #: templates/bookmarkbook/notes/notes.html:14
-#: templates/include/note_list_base.html:1362
-#: templates/include/note_list_base.html:1364
-#: templates/include/note_list_base.html:1383
-#: templates/include/note_list_base.html:1385
-#: templates/include/note_list_base.html:1452
-#: templates/include/note_list_base.html:1454
+#: templates/include/note_list_base.html:1365
+#: templates/include/note_list_base.html:1367
+#: templates/include/note_list_base.html:1386
+#: templates/include/note_list_base.html:1388
+#: templates/include/note_list_base.html:1455
+#: templates/include/note_list_base.html:1457
 #: templates/notebook/notes/notes.html:14
 #: templates/notebook/notes/notes.html:16
 #: templates/scrapbook/notes/notes.html:13
@@ -1534,6 +1534,24 @@ msgid ""
 "frame."
 msgstr "编辑时输入逗号分隔的note ids，所有的在内的便条都会被加到包里去。"
 
+#: templates/framebook/notes/inlines/add_included_notes.html:16
+msgid "OR"
+msgstr "或者"
+
+#: templates/framebook/notes/inlines/add_included_notes.html:20
+msgid "Write your snippet here directly"
+msgstr "直接在这里写便条"
+
+#: templates/framebook/notes/inlines/add_included_notes.html:21
+msgid "Write a snippet in this frame directly"
+msgstr "直接在这个知识包里写便条"
+
+#: templates/framebook/notes/inlines/add_included_notes.html:22
+msgid ""
+"You can create a snippet here directly. Just write in the box and a new "
+"snippet will be created and be included in this frame."
+msgstr "你可以在这里直接生成一个便条。直接在输入框里写就可以。一个新的便条会产生并加入到这个知识包里面。"
+
 #: templates/framebook/notes/note/children.html:41
 msgid "vote by the owner"
 msgstr "原作者自评重要性"
@@ -1693,7 +1711,7 @@ msgid "My Friends"
 msgstr "我的朋友"
 
 #: templates/include/get_title.html:2
-#: templates/include/note_list_base.html:1161
+#: templates/include/note_list_base.html:1164
 #: templates/include/notes/todelete/linkagenotesdisplay.html:109
 #: templates/include/notes/todelete/linkagenotesdisplay.html:155
 #: templates/notebook/notes/notes_display.html:11
@@ -1792,64 +1810,64 @@ msgstr "去除这个课程"
 msgid "You cannot add a note to itself!"
 msgstr "你不能把一个笔记添加给自己！"
 
-#: templates/include/note_list_base.html:1348
+#: templates/include/note_list_base.html:1351
 msgid "show side menu"
 msgstr "显示侧边菜单"
 
-#: templates/include/note_list_base.html:1349
+#: templates/include/note_list_base.html:1352
 msgid "hide side menu"
 msgstr "隐藏侧边菜单"
 
-#: templates/include/note_list_base.html:1368
-#: templates/include/note_list_base.html:1370
-#: templates/include/note_list_base.html:1389
-#: templates/include/note_list_base.html:1391
+#: templates/include/note_list_base.html:1371
+#: templates/include/note_list_base.html:1373
+#: templates/include/note_list_base.html:1392
+#: templates/include/note_list_base.html:1394
 msgid "No"
 msgstr "否"
 
-#: templates/include/note_list_base.html:1398
+#: templates/include/note_list_base.html:1401
 msgid "Date Range"
 msgstr "时间范围"
 
-#: templates/include/note_list_base.html:1403
-#: templates/include/note_list_base.html:1405
+#: templates/include/note_list_base.html:1406
+#: templates/include/note_list_base.html:1408
 msgid "Any day"
 msgstr "任何天"
 
-#: templates/include/note_list_base.html:1409
-#: templates/include/note_list_base.html:1411
+#: templates/include/note_list_base.html:1412
+#: templates/include/note_list_base.html:1414
 msgid "Today"
 msgstr "今天"
 
-#: templates/include/note_list_base.html:1415
-#: templates/include/note_list_base.html:1417
+#: templates/include/note_list_base.html:1418
+#: templates/include/note_list_base.html:1420
 msgid "Past 7 Days"
 msgstr "过去7天"
 
-#: templates/include/note_list_base.html:1421
-#: templates/include/note_list_base.html:1423
+#: templates/include/note_list_base.html:1424
+#: templates/include/note_list_base.html:1426
 msgid "This Month"
 msgstr "本月"
 
-#: templates/include/note_list_base.html:1426
+#: templates/include/note_list_base.html:1429
 msgid "This Season"
 msgstr "本季度"
 
-#: templates/include/note_list_base.html:1429
-#: templates/include/note_list_base.html:1431
+#: templates/include/note_list_base.html:1432
+#: templates/include/note_list_base.html:1434
 msgid "This Year"
 msgstr "今年"
 
-#: templates/include/note_list_base.html:1435
+#: templates/include/note_list_base.html:1438
 msgid "Pick a Range"
 msgstr "选择一个日期范围"
 
-#: templates/include/note_list_base.html:1444
+#: templates/include/note_list_base.html:1447
 msgid "With attachment"
 msgstr "含附件"
 
 # python-format
-#: templates/include/note_list_base.html:1572
+#: templates/include/note_list_base.html:1575
 #, python-format
 msgid "Personal notes of %(profile_username)s"
 msgstr "%(profile_username)s的个人笔记"

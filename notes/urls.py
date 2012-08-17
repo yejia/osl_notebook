@@ -34,6 +34,7 @@ urlpatterns = patterns('',
     (r'/updateNoteInline/$','notebook.notes.views.update_note_inline'), #TODO:maybe no / after updateNote   
     (r'/updateNoteTagsInline/$','notebook.notes.views.update_note_tags_inline'), 
     (r'/addNotesToFrame/$','notebook.notes.views.add_notes_to_frame'), 
+    (r'/createNoteInFrame/$','notebook.notes.views.create_note_in_frame'), 
 
 
     (r'/addComment/$','notebook.notes.views.add_comment'),
