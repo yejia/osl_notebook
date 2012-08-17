@@ -817,7 +817,7 @@ bottom:0px;
 padding-top:15px;
 }
 
-span.tags_edit, span.included_notes_edit, span.included_notes_create {	
+span.tags_edit, span.included_notes_edit {	
    background: url("../img/icon_changelink.gif");
    background-repeat:no-repeat;
    cursor:pointer;   
