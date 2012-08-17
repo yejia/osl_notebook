@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-17 07:18+0800\n"
+"POT-Creation-Date: 2012-08-17 08:39+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1177,6 +1177,40 @@ msgstr "展开单个笔记来对该笔记修改标签。"
 #: templates/doc/faq.html:26
 msgid "You can also change the tags on a single note display page."
 msgstr "你可以进入单个笔记的页面在该页面修改标签。"
+
+#: templates/doc/faq.html:32
+msgid ""
+"I am exploring knowledge in several areas. How do I use this notebook to "
+"help me explore and organize my knowledge?"
+msgstr "我现在在几个领域进行知识的探索和积累。我如何用这个笔记本帮助我整理我正在形成的知识？"
+
+#: templates/doc/faq.html:38
+msgid ""
+"Use tags to mark the experiences or useful info you obtained daily in those "
+"areas."
+msgstr "用标签来标记你从日常生活中在这几个领域积累的经验或者有用的信息。"
+
+#: templates/doc/faq.html:41
+msgid "Use knowledge frame to put notes into a topic."
+msgstr "形成主题性的知识包。"
+
+#: templates/doc/faq.html:44
+msgid ""
+"Use tag tree to demonstrate the knowledge structure in this area and help "
+"you access your knowledge."
+msgstr "用标签树来展现这个领域的知识结构并帮助你快速的访问其中的知识。"
+
+#: templates/doc/faq.html:47
+msgid ""
+"When you have accumulated enough knowledge in an area, you can build "
+"\"learning area\" with the notes, frames, and tag trees."
+msgstr "当你在某个领域积累了足够的知识，你就可以用这些笔记，知识包和标签树建立一个\"学习领域\"。"
+
+#: templates/doc/faq.html:50
+msgid ""
+"Once your knowledge in an area is mature, it is time for you to open a "
+"course or a slearning salon."
+msgstr "一旦你在某一领域里的知识成熟了，你就可以开课或者办学习沙龙了。"
 
 #: templates/doc/for_new_users.html:6 templates/doc/for_new_users.html.py:9
 #: templates/social/include/notes/notesdisplay.html:30
@@ -2836,6 +2870,7 @@ msgid "remove this tag"
 msgstr "去除标签"
 
 #: templates/social/bookmarkbook/notes/notesdisplay.html:19
+#: templates/social/notebook/notes/notesdisplay.html:33
 #: templates/social/scrapbook/notes/notesdisplay.html:18
 #: templates/social/snippetbook/notes/notesdisplay.html:20
 msgid "snippet's owner"
