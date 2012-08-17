@@ -25,22 +25,19 @@
 
 {% block content%}
 
-
+ {% if user.username == profile_username %}  
 <p> 
 <a href="javascript:void(0);" onclick="javascript:show_more_section();">{% trans "Add a learning area" %}:</a>
 <span class="show_more_section"><img title="" src="/site_media/img/right-arrow.jpg"/></span><span class="hide_more_section"><img title="" src="/site_media/img/down-arrow.jpg"/></span> 
 </p>
 <div id="more_section" style="display:none;">
 <form action="" method="post" enctype="multipart/form-data" id="addAreaForm">
-
-
 <p>   
                {% trans "Name" %} <span class="required">*</span>: 
                 {{ addAreaForm.name.errors }}
                {{addAreaForm.name}}
     </p>
-
-   
+    
       <p>
         {% trans "Root frame" %}<span class="required">*</span>:   
     <input type="text" name="root_note_frame" placeholder="{% trans "Enter a frame's id" %}" /> 
@@ -59,20 +56,17 @@
         {% trans "Private" %}:  {{addAreaForm.private}}
     </p>
     
-    
-    
-   
-    
 <input type="submit" value="{% trans 'Add' %}"/>
 </form> 
 </div>
 
+{% endif %}
 
 <span> {% trans "All areas" %}:</span>
 <ul>
 {% for area in areas %}		
 <li>
-<a href="/{{username}}/areas/area/{{area.name}}/">{{area.name}}</a>
+<a href="/{{profile_username}}/areas/area/{{area.name}}/">{{area.name}}</a>
 </li>
 {% endfor %}
 </ul>

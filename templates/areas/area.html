@@ -153,6 +153,7 @@ $(document).ready(function(){
 
 
 <br/>
+{% if user.username == profile_username %}  
 <p> 
 <a href="javascript:void(0);" onclick="javascript:show_more_section();">{% trans "Edit the learning area" %}:</a>
 <span class="show_more_section"><img title="" src="/site_media/img/right-arrow.jpg"/></span><span class="hide_more_section"><img title="" src="/site_media/img/down-arrow.jpg"/></span> 
@@ -193,6 +194,6 @@ $(document).ready(function(){
 <input type="submit" value="{% trans 'Add' %}"/>
 </form> 
 </div>
-
+{% endif %}
 
 {% endblock %}
