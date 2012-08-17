@@ -1050,7 +1050,10 @@ class LinkageNote(models.Model):
         new_tags_list = [name.lstrip().rstrip() for name in tags_str.split(',')] #assume distinct here. TODO:       
         #TODO:for now, just remove all the old tags and then add all the new ones
         #might want to improve the algorithm later
-        self.tags.clear()
+        for tag in self.tags.all():
+            if not tag.name.startswith('takenfrom:'): 
+                self.tags.remove(tag)
+        #self.tags.clear()
         for tname in new_tags_list:	     	
             t = Tag.objects.using(self.owner_name).get(name=tname) 
             self.tags.add(t) 

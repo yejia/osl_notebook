@@ -781,7 +781,7 @@ def group(request, groupname, bookname):
 
 def group_tagframes(request, groupname):
     group = G.objects.get(name=groupname)
-    print 'group', group
+    #print 'group', group
     tfs = group.get_tag_frames()   
     return render_to_response('social/group/group_tagframes.html', {'group':group,                                
                                                   'tag_frames':tfs, 'appname':'groups', 
@@ -867,7 +867,15 @@ def vote_unuseful(request):
 def take(request):
     note_id = request.POST.get('id') 
     sn = SN.objects.get(id=note_id)
+    #below can be used for track record for now. TODO:    
     snt, created = Social_Note_Taken.objects.get_or_create(note=sn, taker=request.user.member)
+    #note is taken into the taker's db, with a tag: takenfrom:owner_name:owner_note_id
+    t, created = Tag.objects.using(request.user.username).get_or_create(name='takenfrom:'+sn.owner.username+':'+str(sn.id))
+    if sn.get_note_type() == 'Snippet':
+        n, created = Snippet.objects.using(request.user.username).get_or_create(desc=sn.desc, title=sn.title)
+        n.owner_name = request.user.username
+        n.tags.add(t)
+        
     return  HttpResponse(created, mimetype="text/plain")   
 
 

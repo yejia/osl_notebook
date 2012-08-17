@@ -705,6 +705,8 @@ def tags(request, username, bookname, tag_name, aspect_name):
             n_list1 =  N.objects.filter(tags__isnull=True) #[n for n in N.objects.all() if not n.tags.all()]
             n_list2 =  N.objects.filter(tags__name='')
             n_list = n_list1 | n_list2
+        elif tag_name == 'takenfrom:':
+           n_list = N.objects.filter(tags__name__startswith=tag_name)     
         else:    
             t = T.objects.get(name=tag_name)       
             if aspect_name=='notes':
@@ -1330,9 +1332,11 @@ def update_note_inline(request, username, bookname):
 def update_note_tags_inline(request, username, bookname): 
     note_id = request.POST.get('id')
     tags =  request.POST.get('tags')  
+    #strip away special tags that should not be changed by the user
+    tags_clean = [tag for tag in tags if not tag.startswith('takenfrom:')]
     N = getNote(username, bookname)    
     note = N.objects.get(id=note_id)
-    note.update_tags(tags) 
+    note.update_tags(tags_clean) 
     note.save() 
     return HttpResponse(simplejson.dumps({'note_id':note.id, 'display_tags':note.display_tags(),\
                                           'note_tags':note.get_tags()}),
