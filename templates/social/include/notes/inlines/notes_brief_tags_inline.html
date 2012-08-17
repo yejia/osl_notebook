@@ -8,7 +8,12 @@
                                 {% if tag in group.get_tag_names %}<a href="/groups/{{group.name}}/{{bookname}}/tags/{{tag}}/">{{tag}}</a>
                                 {% else %}{{tag}}
                                 {% endif %}, 
-                            {% else %}<a href="/social/{{note.owner.username}}/{{bookname}}/tags/{{tag}}/">{{tag}}</a>, 
+                            {% else %}
+                                {% if  'takenfrom:' in tag  %}
+                                    <span><a href="/social/{{note.owner.username}}/{{bookname}}/tags/{{tag|slice:":10"}}/">{{tag|slice:":10"}}</a>{{tag|slice:"10:"}}</span>
+                                {% else %}    
+                                    <a href="/social/{{note.owner.username}}/{{bookname}}/tags/{{tag}}/">{{tag}}</a>, 
+                                {% endif %}       
                             {% endif %}  
                     </span>
                     {% endif %}

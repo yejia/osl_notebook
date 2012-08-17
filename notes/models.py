@@ -440,7 +440,10 @@ class Note(models.Model):
             bookname = 'snippetbook'   
         num_of_tags_created = 0
         W = getW(self.owner_name)             
-        w = W.objects.get(name=bookname)     
+        w = W.objects.get(name=bookname)  
+        
+        tags_to_add = [tag for tag in tags_to_add if not tag.startswith('takenfrom:')]
+           
         for tag_name in tags_to_add:    
             t, created = Tag.objects.using(self.owner_name).get_or_create(name=tag_name) 
             #in any case, just add the tag to the snippet working set. If it is already
@@ -460,7 +463,8 @@ class Note(models.Model):
             
     
     #tags_to_add is a list of tag names
-    def remove_tags(self, tags_to_remove):              
+    def remove_tags(self, tags_to_remove): 
+        tags_to_remove = [tag for tag in tags_to_remove if not tag.startswith('takenfrom:')]             
         for tag_name in tags_to_remove:    
             t = Tag.objects.using(self.owner_name).get(name=tag_name) 
             self.tags.remove(t)
@@ -469,10 +473,21 @@ class Note(models.Model):
     
     #TODO: merge the ws part with add_tags or maybe move that into save() (seems better since save will be called anyway to update social note)
     def update_tags(self, tags_str):
-        new_tags_list = [name.lstrip().rstrip() for name in tags_str.split(',')]
+        if not tags_str:
+            return 0
+        
+        tags_str = ','.join([tag for tag in tags_str.split(',') if not tag.startswith('takenfrom:')])
+        
+        new_tags_list = [name.lstrip().rstrip() for name in tags_str.split(',')]   
+        
+        
         #TODO:for now, just remove all the old tags and then add all the new ones
         #might want to improve the algorithm later
-        self.tags.clear()
+        #self.tags.clear()
+        for tag in self.tags.all():
+            if not tag.name.startswith('takenfrom:'): 
+                self.tags.remove(tag)
+                
         count_tag_created = 0
         
         W = getW(self.owner_name)
@@ -1049,11 +1064,8 @@ class LinkageNote(models.Model):
     def update_tags(self, tags_str):	
         new_tags_list = [name.lstrip().rstrip() for name in tags_str.split(',')] #assume distinct here. TODO:       
         #TODO:for now, just remove all the old tags and then add all the new ones
-        #might want to improve the algorithm later
-        for tag in self.tags.all():
-            if not tag.name.startswith('takenfrom:'): 
-                self.tags.remove(tag)
-        #self.tags.clear()
+        #might want to improve the algorithm later        
+        self.tags.clear()
         for tname in new_tags_list:	     	
             t = Tag.objects.using(self.owner_name).get(name=tname) 
             self.tags.add(t) 

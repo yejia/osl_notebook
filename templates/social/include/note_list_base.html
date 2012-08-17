@@ -17,10 +17,18 @@
                 });
                 
                 $('.take').click(function(){                 
-                        $.post('take/',{ 'id':$(this).parents("div").attr('note_id')}, processreturn,'text');
+                        $.post('take/',{ 'id':$(this).parents("div").attr('note_id')}, noteTaken,'text');
                 });
                 
-                function processreturn(){
+                function noteTaken(created){
+                    if (created == 'True'){                    
+                      $('ul.messages').append('<li class="success">{% trans "The note is successfully taken to your notebook!" %} </li>');
+                    }else{
+                     $('ul.messages').append('<li class="success">{% trans "You already have such a note in your notebook!" %} </li>');
+                    }
+                }
+                
+                function processreturn(result){
                      ;
                 }
 {% endblock %}              

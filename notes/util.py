@@ -16,6 +16,9 @@ book_folder_dict = {'notebook':Folder, 'snippetbook':notebook.snippets.models.Sn
 book_cache_dict = {'notebook':notebook.notes.models.Cache, 'snippetbook':notebook.snippets.models.Snippet_Cache,'bookmarkbook':notebook.bookmarks.models.Bookmark_Cache, 'scrapbook': notebook.scraps.models.Scrap_Cache, 'framebook': notebook.notes.models.Frame_Cache}
 book_entry_dict = {'notebook':'', 'snippetbook':'__snippet','bookmarkbook':'__bookmark', 'scrapbook': '__scrap'}
 
+#note_type_model_dict = {'Note':Note, 'Snippet':Snippet,'Bookmark':Bookmark, 'Scrap': Scrap, 'Frame':Frame}
+
+
 def getNote(username, bookname):
     return create_model("Note_"+str(bookname)+"_"+str(username), book_model_dict.get(bookname), username) 
 

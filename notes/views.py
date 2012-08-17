@@ -1333,10 +1333,11 @@ def update_note_tags_inline(request, username, bookname):
     note_id = request.POST.get('id')
     tags =  request.POST.get('tags')  
     #strip away special tags that should not be changed by the user
-    tags_clean = [tag for tag in tags if not tag.startswith('takenfrom:')]
+    #it is already enforced at db level. Code below can be removed TODO:
+    tags_clean = [tag for tag in tags.split(',') if not tag.startswith('takenfrom:')]
     N = getNote(username, bookname)    
     note = N.objects.get(id=note_id)
-    note.update_tags(tags_clean) 
+    note.update_tags(','.join(tags_clean)) 
     note.save() 
     return HttpResponse(simplejson.dumps({'note_id':note.id, 'display_tags':note.display_tags(),\
                                           'note_tags':note.get_tags()}),
@@ -1857,12 +1858,13 @@ def add_tags_to_notes(request, username, bookname):
 @login_required    
 def add_tags_to_notes2(request, username, bookname):    
     note_ids= request.GET.getlist('note_ids')[0].split(',')      
-    tags_to_add = request.GET.getlist('tags_to_add')[0].split(',')      
+    tags_to_add = request.GET.getlist('tags_to_add')[0].split(',')  
+    tags_to_add_clean = [tag for tag in tags_to_add if not tag.startswith('takenfrom:')]    
     N = getNote(username, bookname)    
     result = [] 
     for note_id in note_ids:
         note = N.objects.get(id=note_id)
-        note.add_tags(tags_to_add, bookname)
+        note.add_tags(tags_to_add_clean, bookname)
         result.append([note_id, note.get_tags(), note.display_tags()])        
     log.info('tag added') 
     return  HttpResponse(simplejson.dumps(result), "application/json")
@@ -2135,6 +2137,8 @@ def remove_tags_from_notes2(request, username, bookname):
     note_ids= request.GET.getlist('note_ids')[0].split(',')    
     log.debug( 'Removing tags to the following notes:'+str(note_ids))
     tags_to_remove = request.GET.getlist('tags_to_add')[0].split(',')
+    #it is already enforced at the db level that takefrom tag canno tbe changed.
+    tags_to_remove = [tag for tag in tags_to_remove if not tag.startswith('takenfrom:')]    
     log.debug( 'The following tags are going to removed:'+str(tags_to_remove))    
     N = getNote(username, bookname)
     T = getT(username)

@@ -9,7 +9,7 @@ from django.utils import simplejson
 from django.utils.http import urlencode
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
-from django.core.exceptions import ObjectDoesNotExist, FieldError
+from django.core.exceptions import ObjectDoesNotExist, FieldError, MultipleObjectsReturned
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
 from django.utils.translation import ugettext as _ , activate
@@ -791,7 +791,10 @@ def group_tagframes(request, groupname):
 
 
 def notes_tag(request, username, bookname, tag_name):   
-    note_list = getSN(bookname).objects.filter(tags__name=tag_name, owner__username=username)
+    if tag_name == 'takenfrom:':
+        note_list = getSN(bookname).objects.filter(tags__name__startswith=tag_name, owner__username=username)
+    else:
+        note_list = getSN(bookname).objects.filter(tags__name=tag_name, owner__username=username)
     qstr = __getQStr(request)    
     note_list  = getSearchResults(note_list, qstr)
     sort, order_type,  paged_notes, cl  = __get_notes_context(request, note_list) 
@@ -868,14 +871,20 @@ def take(request):
     note_id = request.POST.get('id') 
     sn = SN.objects.get(id=note_id)
     #below can be used for track record for now. TODO:    
-    snt, created = Social_Note_Taken.objects.get_or_create(note=sn, taker=request.user.member)
+    snt, snt_created = Social_Note_Taken.objects.get_or_create(note=sn, taker=request.user.member)
     #note is taken into the taker's db, with a tag: takenfrom:owner_name:owner_note_id
-    t, created = Tag.objects.using(request.user.username).get_or_create(name='takenfrom:'+sn.owner.username+':'+str(sn.id))
-    if sn.get_note_type() == 'Snippet':
-        n, created = Snippet.objects.using(request.user.username).get_or_create(desc=sn.desc, title=sn.title)
+    t, t_created = Tag.objects.using(request.user.username).get_or_create(name='takenfrom:'+sn.owner.username+':'+str(sn.id))
+    try:
+        n, created = getNote(request.user.username, sn.get_note_bookname()).objects.using(request.user.username).get_or_create(desc=sn.desc, title=sn.title)
+        #print 'created is', created
+    except MultipleObjectsReturned:
+        created = False    
+    #print 'created', created
+    if created:
         n.owner_name = request.user.username
         n.tags.add(t)
-        
+        n.save()
+    
     return  HttpResponse(created, mimetype="text/plain")   
 
 
