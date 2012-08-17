@@ -45,18 +45,8 @@ $(document).ready(function(){
 
 
 {% block site_branding %}
-<br/>
 {{profile_username}} {% trans "'s Learning Area" %} : <b>{{area.name}} </b>
-
-{% if area.private %} <span class="lock_noclick" title="{% trans 'private'  %}" style="display:{% if area.private %}inline{% else %}none{% endif %};">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;              
-                                   </span> 
-        {% else %} <span class="unlock_noclick" title="{% trans 'public'  %}" style="display:{% if area.private %}none{% else %}inline{% endif %};">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;          
-                </span>
-        
-        {% endif %}  
-
 <br/><br/>
-
 {% endblock %}
 
 
@@ -64,6 +54,11 @@ $(document).ready(function(){
 <div area_name="{{area.name}}">
 <div>{{area.desc}}</div>
 
+{% if area.private %} <span class="lock_noclick" title="{% trans 'private'  %}" style="display:{% if area.private %}inline{% else %}none{% endif %};">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;              
+                                   </span> 
+{% else %} <span class="unlock_noclick" title="{% trans 'public'  %}" style="display:{% if area.private %}none{% else %}inline{% endif %};">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;          
+                </span>        
+{% endif %}  
 
 <div class="padded">
  <b>{% trans "Root tag tree" %}:</b> <a href="/{{profile_username}}/tagframes/tagframe/{{area.root_tag_frame.name}}/">{{area.root_tag_frame.name}}</a>
