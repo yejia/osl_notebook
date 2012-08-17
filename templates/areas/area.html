@@ -12,7 +12,21 @@
 
 {% block extra_script %}
 <script type="text/javascript">
+        function show_more_section(){ 
+                    $('div#more_section').show();	
+                    $('.show_more_section').hide(); 
+                    $('.hide_more_section').show();                    
+                    return false;       
+        }     
+              
+</script>
+<script type="text/javascript">
 $(document).ready(function(){	 
+      //copied from base2.html
+	    $("#ac_tags").tagit({
+			    availableTags: [{% for tag in tags %}"{{tag}}",{% endfor %}],
+                   allowSpaces: true
+                  });  
 
 
  $("#ac_groups").tagit({
@@ -34,7 +48,33 @@ $(document).ready(function(){
                 
                 }
                 
-        	});        
+                
+               
+
+
+//below coped from base2.html
+     //below are copied from add bookmark button page. TODO: merge and clean up
+              $('.hide_more_section').hide(0);
+   
+   $('.hide_more_section').click(function(){
+                    $('div#more_section').hide();
+             		$(this).hide();   
+                    $('.show_more_section').show();                  
+                    return false;
+        });
+		
+    $('.show_more_section').click(function(){
+                    $('div#more_section').show();	
+                    $(this).hide();   	
+                    $('.hide_more_section').show();                    
+                    return false;
+        });               
+                
+                
+                
+        	});   
+
+        
 	
 </script>
 {% endblock %}
@@ -46,19 +86,22 @@ $(document).ready(function(){
 
 {% block site_branding %}
 {{profile_username}} {% trans "'s Learning Area" %} : <b>{{area.name}} </b>
-<br/><br/>
+
 {% endblock %}
 
 
 {% block content%}
-<div area_name="{{area.name}}">
-<div>{{area.desc}}</div>
-
+<div>{{area.desc}}
 {% if area.private %} <span class="lock_noclick" title="{% trans 'private'  %}" style="display:{% if area.private %}inline{% else %}none{% endif %};">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;              
                                    </span> 
 {% else %} <span class="unlock_noclick" title="{% trans 'public'  %}" style="display:{% if area.private %}none{% else %}inline{% endif %};">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;          
                 </span>        
 {% endif %}  
+</div>
+<br/><br/>
+
+
+<div area_name="{{area.name}}">
 
 <div class="padded">
  <b>{% trans "Root tag tree" %}:</b> <a href="/{{profile_username}}/tagframes/tagframe/{{area.root_tag_frame.name}}/">{{area.root_tag_frame.name}}</a>
@@ -107,4 +150,49 @@ $(document).ready(function(){
 </div>
 
 </div>
+
+
+<br/>
+<p> 
+<a href="javascript:void(0);" onclick="javascript:show_more_section();">{% trans "Edit the learning area" %}:</a>
+<span class="show_more_section"><img title="" src="/site_media/img/right-arrow.jpg"/></span><span class="hide_more_section"><img title="" src="/site_media/img/down-arrow.jpg"/></span> 
+</p>
+<div id="more_section" style="display:none;">
+<form action="" method="post" enctype="multipart/form-data" id="editAreaForm">
+
+ <input type="hidden" name="id" value="{{area.id}}"/>
+<p>   
+               {% trans "Name" %} <span class="required">*</span>: 
+                {{ editAreaForm.name.errors }}
+               {{editAreaForm.name}}
+    </p>
+
+   
+      <p>
+        {% trans "Root frame" %}<span class="required">*</span>:   
+    <input type="text" name="root_note_frame" value="{{editAreaForm.root_note_frame.value}}" placeholder="{% trans "Enter a frame's id" %}" /> 
+    </p>
+    
+     <div>   
+   {% trans "Root tag tree" %}  ({% trans "Enter only 1 tag tree in the input box" %} )<span class="required">*</span>:  
+   {{ editAreaForm.root_tag_frame.errors }}
+    <ul id="ac_tags">
+           
+                        <li>{{area.root_tag_frame.name}}</li>
+            
+    </ul> 
+    </div>
+      
+    <p>
+        {% trans "Description" %}:  {{editAreaForm.desc}}
+    </p>
+    <p>
+        {% trans "Private" %}:  {{editAreaForm.private}}
+    </p>
+    
+<input type="submit" value="{% trans 'Add' %}"/>
+</form> 
+</div>
+
+
 {% endblock %}

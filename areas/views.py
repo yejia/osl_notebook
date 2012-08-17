@@ -94,7 +94,25 @@ def index(request, username):
     
     
 
-def area(request, username, areaname):     
+def area(request, username, areaname):  
+    if request.method == 'POST': 
+        #below copied from index. merge. TODO:
+        post = request.POST.copy()
+        tag_names = post.getlist('item[tags][]')
+        tag_ids = [Tag_Frame.objects.using(username).get(name=tag_name).id for tag_name in tag_names]         
+        A = getArea(username)
+        a = A.objects.get(id=post.get('id'))
+        a.owner_name = username
+        a.name = post.get('name')
+        a.desc = post.get('desc')
+        a.private = post.get('private', False)
+        #TODO: warn of empty root_note_frame and root_tag_frame. They cannot be null
+        if post.get('root_note_frame'):
+            a.root_note_frame = Frame.objects.using(username).get(id=post.get('root_note_frame'))
+        if tag_ids:  
+            a.root_tag_frame = Tag_Frame.objects.using(username).get(id=tag_ids[0])  
+        a.save() 
+           
     area = Area.objects.using(username).get(name=areaname)
     area.owner_name = username
     area.root_tag_frame.owner_name = username
@@ -107,11 +125,14 @@ def area(request, username, areaname):
         area_tags_with_count.append([t, note_list.count()])
     
     groups = Group.objects.exclude(id__in=[g.id for g in area.get_groups()])
+    editAreaForm = AddAreaForm(instance=area)
+    tags = Tag_Frame.objects.using(username).all().order_by('name')
+
         
     #TODO:need this?
     theme = __get_view_theme(request)
     private =    theme['private'] 
-    return render_to_response('areas/area.html',{'area':area,  'area_tags_with_count':area_tags_with_count, \
+    return render_to_response('areas/area.html',{'area':area,  'area_tags_with_count':area_tags_with_count, 'editAreaForm':editAreaForm,'tags':tags, \
                             'username':request.user.username,'profile_username':username,  'private':private, 'groups':groups}, \
                     context_instance=RequestContext(request,  {'book_uri_prefix':'/'+username+'/areas/area/'+area.name}))
     
