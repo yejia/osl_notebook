@@ -109,7 +109,7 @@ $(document).ready(function(){
  <b>{% trans "Root tag tree" %}:</b> <a href="/{{profile_username}}/tagframes/tagframe/{{area.root_tag_frame.name}}/">{{area.root_tag_frame.name}}</a>
  </div>
 <div class="padded">
- <b>{% trans "Root frame" %}:</b> <a href="/{{profile_username}}/framebook/notes/note/{{area.root_note_frame.id}}/">{{area.root_note_frame.title}}</a>
+ <b>{% trans "Root frame" %}:</b> {% if user.username == profile_username %}<a href="/{{profile_username}}/framebook/notes/note/{{area.root_note_frame.id}}/">{% else %}<a href="/social/{{profile_username}}/framebook/notes/note/{{area.root_note_frame.get_social_note.id}}/">{% endif %}{{area.root_note_frame.title}}</a>
  </div>
  
  <div class="padded">
