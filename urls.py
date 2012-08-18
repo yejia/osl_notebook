@@ -45,6 +45,7 @@ urlpatterns = patterns('',
     #(r'^users/(?P<username>[^/]+)/$', 'notebook.social.views.wall'),
     (r'^social/(?P<username>[^/]+)/$', 'notebook.social.views.profile'),
     (r'^social/(?P<username>[^/]+)/addFriend/$', 'notebook.social.views.add_friend'),
+    (r'^social/(?P<username>[^/]+)/removeFriend/$', 'notebook.social.views.remove_friend'),
 
 #below seem not used
     #(r'^users/(?P<username>[^/]+)/wall/snippets/$', 'notebook.social.views.wall_snippets'),

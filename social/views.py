@@ -554,6 +554,14 @@ def add_friend(request, username):
     return HttpResponseRedirect('/social/'+username+'/')  
     
 
+@login_required
+def remove_friend(request, username):
+    m1 = request.user.member
+    m2 = Member.objects.get(username=username)     
+    f = Friend_Rel.objects.get(friend1=m1, friend2=m2)
+    f.delete()
+    return HttpResponseRedirect('/social/'+username+'/')  
+
 
 #what to do with tags in the user space if the group is removed? I think it is to keep it there. 
 #But how about the special sharinggroup tag? Should be removed, right?

@@ -27,6 +27,7 @@
 {% if  profile_member.gender == 'm' %}"/site_media/img/default_male.jpg"{% endif %} 
 {% if  not profile_member.gender %}"/site_media/img/default_user_icon.jpg"{% endif %}{% endif %}/>
 </div>
+<br/>
 <div>{{profile_member.username}}
 </div>
 <div>{{profile_member.last_name}}  {{profile_member.first_name}}
@@ -34,7 +35,7 @@
 <div>{{profile_member.nickname}}
 </div>
 {% if  user.username == 'leon' %}
-<div>{{profile_member.last_login}}
+<div title="{% trans 'Last login time' %}">{{profile_member.last_login}}
 </div>
 {% endif %}
 <br/>
@@ -53,6 +54,11 @@
 {% if profile_username not in user.member.get_friends_names  and profile_username != user.username%}  
 <form action="addFriend/" method="get">
 <input type="submit" value="{% trans "Add Friend" %}"/>
+</form>
+{% endif %} 
+{% if profile_username in user.member.get_friends_names  and profile_username != user.username%}  
+<form action="removeFriend/" method="get">
+<input type="submit" value="{% trans "Remove Friend" %}"/>
 </form>
 {% endif %} 
 </p>
