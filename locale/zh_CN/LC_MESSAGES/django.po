@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-19 06:15+0800\n"
+"POT-Creation-Date: 2012-08-19 06:40+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1888,7 +1888,7 @@ msgstr "隐藏通知"
 msgid "Group"
 msgstr "小组"
 
-#: templates/include/profile_head.html:27
+#: templates/include/profile_head.html:27 templates/social/profile.html:38
 msgid "Last login time"
 msgstr "最后登录时间"
 
@@ -1910,18 +1910,18 @@ msgstr "看你的个人笔记本"
 msgid "View personal"
 msgstr "看个人"
 
-#: templates/include/profile_head.html:90 templates/social/profile.html:42
+#: templates/include/profile_head.html:90 templates/social/profile.html:43
 msgid "Private Message"
 msgstr "私信"
 
 #: templates/include/profile_head.html:94 templates/social/commentsfor.html:5
-#: templates/social/commentsfor.html:11 templates/social/profile.html:46
+#: templates/social/commentsfor.html:11 templates/social/profile.html:47
 #, python-format
 msgid " Comments for %(profile_username)s"
 msgstr "%(profile_username)s收到的评论"
 
 #: templates/include/profile_head.html:95 templates/social/commentsby.html:5
-#: templates/social/commentsby.html:10 templates/social/profile.html:47
+#: templates/social/commentsby.html:10 templates/social/profile.html:48
 #, python-format
 msgid " Comments by %(profile_username)s"
 msgstr "%(profile_username)s发布的评论"
@@ -2851,35 +2851,44 @@ msgstr "浏览全部"
 msgid " %(profile_username)s's Public Profile "
 msgstr "%(profile_username)s的公开主页"
 
-#: templates/social/profile.html:55
+#: templates/social/profile.html:56
 msgid "Add Friend"
 msgstr "加朋友"
 
-#: templates/social/profile.html:60
+#: templates/social/profile.html:61
 msgid "Remove Friend"
 msgstr "移除朋友"
 
-#: templates/social/profile.html:66
+#: templates/social/profile.html:67
 #, python-format
 msgid " view %(profile_username)s's notebook "
 msgstr "%(profile_username)s的笔记本"
 
-#: templates/social/profile.html:68
+#: templates/social/profile.html:69
 #, python-format
 msgid " view %(profile_username)s's tag tree "
 msgstr "%(profile_username)s的标签树"
 
 #: templates/social/profile.html:71
+#python-format
+msgid " view %(profile_username)s's  "
+msgstr "%(profile_username)s的"
+
+#: templates/social/profile.html:71
+msgid "learning areas"
+msgstr "学习领域"
+
+#: templates/social/profile.html:74
 #, python-format
 msgid "Friends of %(profile_username)s "
 msgstr "%(profile_username)s的朋友"
 
-#: templates/social/profile.html:82 templates/social/group/groups.html:69
+#: templates/social/profile.html:85 templates/social/group/groups.html:69
 #, python-format
 msgid " Groups created by %(profile_username)s "
 msgstr "%(profile_username)s创建的小组"
 
-#: templates/social/profile.html:95 templates/social/group/groups.html:87
+#: templates/social/profile.html:98 templates/social/group/groups.html:87
 #, python-format
 msgid " Groups followed by %(profile_username)s "
 msgstr "%(profile_username)s加入的小组"

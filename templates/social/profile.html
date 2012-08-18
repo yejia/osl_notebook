@@ -67,19 +67,13 @@
 <p>{% blocktrans %} view {{profile_username}}'s notebook {% endblocktrans %}: <a href="/social/{{profile_username}}/snippetbook/"><img src="/site_media/img/notebook-small.png"/></a></p>
 
 <p>{% blocktrans %} view {{profile_username}}'s tag tree {% endblocktrans %}: <a href="/{{profile_username}}/tagframes/"><img src="/site_media/img/tagtree-small.png"/></a></p>
+
+<p>{% blocktrans %} view {{profile_username}}'s  {% endblocktrans %}<a href="/{{profile_username}}/areas/">{% trans "learning areas" %}</a></p>
 <br/><br/>
-<div>
-{% blocktrans %}Friends of {{profile_username}} {% endblocktrans %}:
-{% for f in profile_user.member.get_friends %}		
-<li>
-<a href="/social/{{f.username}}/">{{f.username}}</a><!--TODO:nickname-->
-</li>
-{% endfor %}
-</div>
+
     
 
-<br/><br/>
-<div>
+<p>
 {% blocktrans %} Groups created by {{profile_username}} {% endblocktrans %}:
 {% for g in gs_created %}	
 {% if  not g.private %}
@@ -88,11 +82,10 @@
 </li>
 {% endif %}
 {% endfor %}
-</div>
+</p>
 
 
-<br/><br/>
-<div>
+<p>
 {% blocktrans %} Groups followed by {{profile_username}} {% endblocktrans %}:
 {% for g in gs_following %}	
 {% if  not g.private %}
@@ -101,7 +94,17 @@
 </li>
 {% endif %}
 {% endfor %}
-</div>
+</p>
+
+
+<p>
+{% blocktrans %}Friends of {{profile_username}} {% endblocktrans %}:
+{% for f in profile_user.member.get_friends %}		
+<li>
+<a href="/social/{{f.username}}/">{{f.username}}</a><!--TODO:nickname-->
+</li>
+{% endfor %}
+</p>
 
 
 </div>
