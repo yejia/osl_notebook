@@ -168,9 +168,11 @@ def profile(request, username):
     gs_created = get_groups_created_by_self(request, username)
     gs_following = get_groups_following(request, username)  
     profile_member = Member.objects.get(username=username)  
+    areas = Area.objects.using(username).filter(private=False) 
     return render_to_response('social/profile.html', {'gs_created':gs_created, 'gs_following':gs_following, \
                                                       'profile_user':User.objects.get(username=username), \
-                                                      'profile_member':profile_member, 'profile_username':username}, context_instance=RequestContext(request))
+                                                      'profile_member':profile_member, 'profile_username':username,\
+                                                      'areas':areas}, context_instance=RequestContext(request))
 
 
 @login_required

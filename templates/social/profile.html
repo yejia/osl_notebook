@@ -64,11 +64,33 @@
 </p>
 
 <br/><br/>
-<p>{% blocktrans %} view {{profile_username}}'s notebook {% endblocktrans %}: <a href="/social/{{profile_username}}/snippetbook/"><img src="/site_media/img/notebook-small.png"/></a></p>
+
+<table style="padding-left:0px; margin-left:0px;"><tr style="padding-left:0px; margin-left:0px;">
+<td style="padding-left:0px; margin-left:0px;">
+{% blocktrans %} view {{profile_username}}'s notebook {% endblocktrans %}: <a href="/social/{{profile_username}}/snippetbook/"><img src="/site_media/img/notebook-small.png"/></a>
+</td>
+{% comment %}get counts for others (such as group, personal notebook, area){% endcomment %}
+<td>{{profile_member.get_public_snippets_count}} <br/><a href="/{{profile_username}}/snippetbook/notes/">{% trans "Snippets" %}<img src="/site_media/img/Snippet.png" title="Snippet"/></a></td>
+<td>{{profile_member.get_public_bookmarks_count}}<br/><a href="/{{profile_username}}/bookmarkbook/notes/">{% trans "Bookmarks" %}<img src="/site_media/img/Bookmark.png" title="Bookmark"/></a></td>
+<td>{{profile_member.get_public_scraps_count}} <br/><a href="/{{profile_username}}/scrapbook/notes/">{% trans "Scraps" %}<img src="/site_media/img/Scrap.png" title="Scrap"/></a></td>
+<td>{{profile_member.get_public_frames_count}}<br/><a href="/{{profile_username}}/framebook/notes/">{% trans "Frames" %}<img src="/site_media/img/Frame.png" title="Frame"/></a></td>
+<td>{{profile_member.get_public_notes_count}}<br/><a href="/{{profile_username}}/notebook/notes/">{% trans "All" %}</a></td>
+</tr></table>
+
+
 
 <p>{% blocktrans %} view {{profile_username}}'s tag tree {% endblocktrans %}: <a href="/{{profile_username}}/tagframes/"><img src="/site_media/img/tagtree-small.png"/></a></p>
 
-<p>{% blocktrans %} view {{profile_username}}'s  {% endblocktrans %}<a href="/{{profile_username}}/areas/">{% trans "learning areas" %}</a></p>
+<p>{% blocktrans %} view {{profile_username}}'s  {% endblocktrans %}<a href="/{{profile_username}}/areas/">{% trans "learning areas" %}</a>
+{% for area in areas %}	
+{% if  not area.private %}
+<li>
+<a href="/{{profile_username}}/areas/area/{{area.name}}/">{{area.name}}</a>
+</li>
+{% endif %}
+{% endfor %}
+
+</p>
 <br/><br/>
 
     

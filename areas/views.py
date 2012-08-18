@@ -78,9 +78,11 @@ def index(request, username):
         if tag_ids:  
             a.root_tag_frame = Tag_Frame.objects.using(username).get(id=tag_ids[0])  
         a.save()   
-        
-        
-    areas = Area.objects.using(username).all()
+    if request.user.username == username:
+        areas = Area.objects.using(username).all()    
+    else:
+        areas = Area.objects.using(username).filter(private=False)    
+    
     #Just getting tag frames is enought.  Pure tags shouldn't be made as root tag tree
     tags = Tag_Frame.objects.using(username).all().order_by('name')
     addAreaForm = AddAreaForm()
@@ -113,7 +115,9 @@ def area(request, username, areaname):
             a.root_tag_frame = Tag_Frame.objects.using(username).get(id=tag_ids[0])  
         a.save() 
            
+    
     area = Area.objects.using(username).get(name=areaname)
+       
     area.owner_name = username
     area.root_tag_frame.owner_name = username
     area.root_note_frame.owner_name = username
