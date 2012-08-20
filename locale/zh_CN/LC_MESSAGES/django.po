@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-19 06:40+0800\n"
+"POT-Creation-Date: 2012-08-20 13:51+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -137,7 +137,24 @@ msgstr "系统已经将本周学习计划添加到您的笔记本里。你只需
 msgid "Time to make your weekly plan"
 msgstr "制定周学习计划的时间到了"
 
-#: areas/views.py:158
+#: plan.py:123 plan.py:126
+msgid ""
+"It is the weekend again. Now is your time to review your weekly plan. Have "
+"you accomplished your plan this week? What you have done well? What you "
+"haven't done very well? What can you improve on? "
+msgstr ""
+"又到了周末了。现在是回顾你一周的学习计划的时间了。你是否完成了你制定的任务？"
+"哪些方面是做得比较好的？哪些方面是做得还不够好的？还有哪些可以提高的地方？"
+
+#: plan.py:124 plan.py:127
+msgid "Remember to find time on the weekend to review your weekly plan:"
+msgstr "记住周末要找时间回顾你本周的学习计划："
+
+#: plan.py:129
+msgid "Time to review your weekly plan"
+msgstr "回顾一周学习计划的时间到了"
+
+#: areas/views.py:162
 msgid "You have successfully removed the group from the area."
 msgstr "你已经成功的将该小组从这个学习领域移除。"
 
@@ -314,7 +331,7 @@ msgstr "每周更新"
 #: templates/include/profile_head.html:51
 #: templates/include/profile_head.html:80 templates/include/supersearch.html:6
 #: templates/include/supersearch.html:25 templates/include/supersearch.html:27
-#: templates/social/wall_snippets.html:25
+#: templates/social/profile.html:74 templates/social/wall_snippets.html:25
 #: templates/social/notes/friends_notes.html:20
 #: templates/social/notes/group_notes.html:17
 #: templates/social/notes/groups_notes.html:16
@@ -332,6 +349,7 @@ msgstr "便条"
 #: templates/include/supersearch.html:42
 #: templates/include/notes/notes_display.html:144
 #: templates/snippetbook/notes/show_note_added_js.html:56
+#: templates/social/profile.html:77
 msgid "Frames"
 msgstr "知识包"
 
@@ -392,48 +410,48 @@ msgstr "创建者"
 msgid "Admins"
 msgstr "管理员"
 
-#: social/views.py:606
+#: social/views.py:608
 msgid "You are not an admin of this group, and thus cannot admin this group."
 msgstr "你不是这个小组的管理员，所以不能管理这个小组。"
 
-#: social/views.py:611
+#: social/views.py:613
 msgid "You have successfully removed the member from the group."
 msgstr "你已经成功的将该成员从这个小组移除。"
 
-#: social/views.py:645
+#: social/views.py:647
 msgid "No users are entered!"
 msgstr "没有输入任何用户名！"
 
-#: social/views.py:655
+#: social/views.py:657
 msgid "You are invited to join the group "
 msgstr "你被邀请参加学习小组"
 
-#: social/views.py:656
+#: social/views.py:658
 msgid "You can visit this group at "
 msgstr "这是该学习小组的网址 "
 
-#: social/views.py:657
+#: social/views.py:659
 msgid ""
 "If you want to join this group, you can click on the \"join the group\" "
 "button."
 msgstr "如果你想加入该学习小组，你可以点击\"加入小组\"按钮。"
 
-#: social/views.py:658
+#: social/views.py:660
 msgid ""
 "After joining, if you want to remove yourself from this group, you can do "
 "that in your groups page."
 msgstr ""
 "加入学习小组后，如果你想退出该学习小组，你可以在你的学习小组页面完成此操作。"
 
-#: social/views.py:659
+#: social/views.py:661
 msgid "You are invited to group "
 msgstr "你被邀请参加学习小组"
 
-#: social/views.py:663
+#: social/views.py:665
 msgid "You have successfully sent the group invitation!"
 msgstr "你已经成功的发出了小组邀请！"
 
-#: social/views.py:1024
+#: social/views.py:1026
 msgid ""
 "Your suggestion is successfully sent to the sys admin! Thank you for your "
 "valuable suggestion!"
@@ -821,7 +839,7 @@ msgstr "浏览这个学习领域里的所有笔记"
 #: templates/include/sites_header.html:40
 #: templates/include/sites_header.html:42 templates/include/supersearch.html:9
 #: templates/include/supersearch.html:30 templates/include/supersearch.html:32
-#: templates/social/wall_snippets.html:28
+#: templates/social/profile.html:75 templates/social/wall_snippets.html:28
 #: templates/social/wall_snippets.html:30
 #: templates/social/wall_snippets.html:42
 #: templates/social/notes/friends_notes.html:21
@@ -837,7 +855,7 @@ msgstr "网址"
 #: templates/include/profile_head.html:61
 #: templates/include/profile_head.html:82
 #: templates/include/supersearch.html:12 templates/include/supersearch.html:35
-#: templates/include/supersearch.html:37
+#: templates/include/supersearch.html:37 templates/social/profile.html:76
 #: templates/social/wall_snippets.html:33
 #: templates/social/wall_snippets.html:35
 #: templates/social/wall_snippets.html:43
@@ -868,7 +886,7 @@ msgstr "网摘"
 #: templates/scrapbook/notes/notes.html:10
 #: templates/snippetbook/notes/linkagenotesdisplay.html:61
 #: templates/snippetbook/notes/notes.html:9
-#: templates/snippetbook/notes/notes.html:11
+#: templates/snippetbook/notes/notes.html:11 templates/social/profile.html:78
 #: templates/social/notes/friends_notes.html:24
 #: templates/social/notes/group_notes.html:21
 #: templates/social/notes/groups_notes.html:20
@@ -1505,8 +1523,8 @@ msgstr "搜索包"
 #: templates/framebook/notes/notes_display.html:22
 #: templates/framebook/notes/notes_display.html:52
 #: templates/notebook/notes/note/notedisplay.html:57
-#: templates/social/framebook/notes/notesdisplay.html:29
-#: templates/social/framebook/notes/notesdisplay.html:63
+#: templates/social/framebook/notes/notesdisplay.html:31
+#: templates/social/framebook/notes/notesdisplay.html:65
 #: templates/social/notebook/notes/notesdisplay.html:74
 msgid "Notes included in this frame"
 msgstr "包里所含笔记"
@@ -2859,39 +2877,40 @@ msgstr "加朋友"
 msgid "Remove Friend"
 msgstr "移除朋友"
 
-#: templates/social/profile.html:67
+#: templates/social/profile.html:70
 #, python-format
 msgid " view %(profile_username)s's notebook "
 msgstr "%(profile_username)s的笔记本"
 
-#: templates/social/profile.html:69
+#: templates/social/profile.html:83
 #, python-format
 msgid " view %(profile_username)s's tag tree "
 msgstr "%(profile_username)s的标签树"
 
-#: templates/social/profile.html:71
-#python-format
+# python-format
+#: templates/social/profile.html:85
+#, python-format
 msgid " view %(profile_username)s's  "
 msgstr "%(profile_username)s的"
 
-#: templates/social/profile.html:71
+#: templates/social/profile.html:85
 msgid "learning areas"
 msgstr "学习领域"
 
-#: templates/social/profile.html:74
-#, python-format
-msgid "Friends of %(profile_username)s "
-msgstr "%(profile_username)s的朋友"
-
-#: templates/social/profile.html:85 templates/social/group/groups.html:69
+#: templates/social/profile.html:100 templates/social/group/groups.html:69
 #, python-format
 msgid " Groups created by %(profile_username)s "
 msgstr "%(profile_username)s创建的小组"
 
-#: templates/social/profile.html:98 templates/social/group/groups.html:87
+#: templates/social/profile.html:112 templates/social/group/groups.html:87
 #, python-format
 msgid " Groups followed by %(profile_username)s "
 msgstr "%(profile_username)s加入的小组"
+
+#: templates/social/profile.html:124
+#, python-format
+msgid "Friends of %(profile_username)s "
+msgstr "%(profile_username)s的朋友"
 
 #: templates/social/wall_snippets.html:14
 #, python-format
@@ -2955,6 +2974,7 @@ msgid "remove this tag"
 msgstr "去除标签"
 
 #: templates/social/bookmarkbook/notes/notesdisplay.html:19
+#: templates/social/framebook/notes/notesdisplay.html:23
 #: templates/social/notebook/notes/notesdisplay.html:33
 #: templates/social/scrapbook/notes/notesdisplay.html:18
 #: templates/social/snippetbook/notes/notesdisplay.html:20
@@ -3307,6 +3327,9 @@ msgstr "全部工作区"
 #: templates/workingset/index.html:370
 msgid "Make Current"
 msgstr "设成当前"
+
+#~ msgid "Here is your weekly plan for you to review:"
+#~ msgstr "这里是你本周的学习计划，供你回顾："
 
 #~ msgid "Group "
 #~ msgstr "小组"

@@ -36,7 +36,7 @@ site_name = 'http://www.91biji.com'
 
 def create_weekly_plan(user):
     now = date.today()
-    one_week_later = now + datetime.timedelta(days=7)
+    one_week_later = now + datetime.timedelta(days=6)
     f, created =getFrame(user).objects.get_or_create(title='Weekly Plan:'+now.strftime('%Y-%m-%d')+' to ' + one_week_later.strftime('%Y-%m-%d'))
     #if created:
     f.owner_name =  user
@@ -84,9 +84,7 @@ def  email_weekly_plan_notice(user, user_frame_id):
     time.sleep(10)
     
 
-def make_weekly_plan(users):
-    if not users:
-        users = [u.username for u in User.objects.all()]
+def make_weekly_plan(users):    
     for user in users:
         try:
             user_frame_id = create_weekly_plan(user)   
@@ -96,19 +94,64 @@ def make_weekly_plan(users):
             print sys.exc_info()       
 
 
-def make_monthly_plan(users):
-    if not users:
-        users = [u.username for u in User.objects.all()]
+def make_monthly_plan(users):    
     for user in users:
-        create_monthly_plan(user)
-    email_monthly_plan_notice(users) 
+        try:
+            create_monthly_plan(user)
+            email_monthly_plan_notice(users) 
+        except:
+            print sys.exc_info()      
+
+
+
+def remind_weekly_review(users):
+    now = date.today()
+    this_monday = now - datetime.timedelta(days=4)
     
+    print 'monday_this_week',this_monday
+    
+    for user in users:
+        try:
+            f =getFrame(user).objects.get(title__startswith='Weekly Plan:'+this_monday.strftime('%Y-%m-%d')+' to ')
+            member = Member.objects.get(username=user)
+            pick_lang = 'zh-cn'
+            if member.default_lang:        
+                 pick_lang = member.default_lang    
+                 activate(pick_lang) 
+            
+            frame_url = site_name + '/' + member.username + '/framebook/notes/note/' + str(f.id) + '/'   
+            content = _("It is the weekend again. Now is your time to review your weekly plan. Have you accomplished your plan this week? What you have done well? What you haven't done very well? What can you improve on? ")+'\n'+\
+                    _("Remember to find time on the weekend to review your weekly plan:") + '\n' + \
+                    frame_url
+            html_content =  _("It is the weekend again. Now is your time to review your weekly plan. Have you accomplished your plan this week? What you have done well? What you haven't done very well? What can you improve on? ")+'<br/>'+\
+                    _("Remember to find time on the weekend to review your weekly plan:") + '<br/>' + \
+                    '<a href="' + frame_url +'">' + frame_url + '</a>'
+            msg = EmailMultiAlternatives(_('Time to review your weekly plan'), content.encode('utf-8') , SERVER_EMAIL, [member.email])
+            msg.attach_alternative(html_content.encode('utf-8') , "text/html")
+            msg.send()
+            print 'email was sent to user',user,' for weekly plan review.'
+            time.sleep(10)       
+        except:
+            print sys.exc_info()      
+             
+                
+ 
+def remind_monthly_review(users):
+    pass
+   
+   
     
 
 if __name__ == "__main__":
     command = sys.argv[1]
     users = sys.argv[2:]
+    if not users:
+        users = [u.username for u in User.objects.all()]
     if command == 'weekly':
         make_weekly_plan(users)
     if command == 'monthly':
-        make_monthly_plan(users)     
+        make_monthly_plan(users) 
+    if command == 'weekly_review':
+        remind_weekly_review(users)   
+    if command == 'monthly_review':
+        remind_monthly_review(users)    
