@@ -101,11 +101,12 @@ def cleanup_tags():
                                     
                 
 #TODO: this sync didn't sync the default db      
-def sync_all_dbs():
-    users = User.objects.all()
+def sync_dbs(users):
+    if not users:
+        users = [u.username for u in User.objects.all()]
     for user in users:
         print 'sync db for user:', user
-        os.system('python manage.py syncdb --database='+user.username) 
+        os.system('python manage.py syncdb --database='+user) 
         #on server, use django-admin
         #os.system('python2.7 manage.py syncdb --database='+user.username) 
         #os.system('../bin/django-admin.py syncdb --database='+user.username) 
@@ -164,8 +165,9 @@ if __name__ == "__main__":
         build_frame_votes()  
     if name == 'cleanup_tags':
         cleanup_tags()  
-    if name == 'sync_all_dbs':
-        sync_all_dbs() 
+    if name == 'sync_dbs':
+        users = sys.argv[2:]
+        sync_dbs(users) 
     if name == 'rename_tag_table':
         users = sys.argv[2:]
         print 'users',users 
