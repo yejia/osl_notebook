@@ -885,7 +885,15 @@ def take(request):
     #note is taken into the taker's db, with a tag: takenfrom:owner_name:owner_note_id
     t, t_created = Tag.objects.using(request.user.username).get_or_create(name='takenfrom:'+sn.owner.username+':'+str(sn.id))
     try:
-        n, created = getNote(request.user.username, sn.get_note_bookname()).objects.using(request.user.username).get_or_create(desc=sn.desc, title=sn.title)
+        if sn.get_note_bookname()=='bookmarkbook':
+            #print 'note is', sn.get_note_bookname()
+            n, created = getNote(request.user.username, sn.get_note_bookname()).objects.get_or_create(url=sn.social_bookmark.url, desc=sn.desc, title=sn.title)
+        elif sn.get_note_bookname()=='scrapbook':
+            #print 'note is', sn.get_note_bookname()
+            n, created = getNote(request.user.username, sn.get_note_bookname()).objects.get_or_create(url=sn.social_scrap.url, desc=sn.desc, title=sn.title)
+        else:
+            #print 'note is', sn.get_note_bookname()
+            n, created = getNote(request.user.username, sn.get_note_bookname()).objects.get_or_create(desc=sn.desc, title=sn.title)        
         #print 'created is', created
     except MultipleObjectsReturned:
         created = False    
