@@ -20,6 +20,8 @@
                     <td class="note_table_tags">
                         {% include "social/include/notes/inlines/notes_brief_tags_inline.html" %}     		    
                     </td>
+                    <td><span id="note_owner" title="{% trans "snippet's owner"  %}"><a href="/social/{{note.owner.username}}/">{{note.owner.username}}</a></span>
+                    </td>
                 </tr>
         </table>
             
