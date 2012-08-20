@@ -1498,6 +1498,14 @@ def delete_note(request, username, bookname):
     note.save()
     return HttpResponse(note.deleted, mimetype="text/plain")        
     
+@login_required      
+def discard_note(request, username, bookname):
+    note_id = request.POST.get('id')
+    N = getNote(username, bookname)
+    note = N.objects.get(id=note_id)
+    note.delete()
+    return HttpResponse(True, mimetype="text/plain") 
+       
 
 @login_required
 def add_note(request, username, bookname):

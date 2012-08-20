@@ -46,6 +46,7 @@ urlpatterns = patterns('',
     (r'/voteUpNote/$','notebook.notes.views.vote_up_note'), 
     (r'/voteDownNote/$','notebook.notes.views.vote_down_note'),
     (r'/deleteNote/$','notebook.notes.views.delete_note'),
+    (r'/discardNote/$','notebook.notes.views.discard_note'),
     (r'/addNote/$','notebook.notes.views.add_note'),    
     (r'/linkNotes/$','notebook.notes.views.frame_notes'),  
     #(r'^frames/$','notebook.notes.views.frames'),
@@ -76,7 +77,8 @@ urlpatterns = patterns('',
 
     (r'^notes/note/(?P<note_id>[^/]+)/$','notebook.notes.views.note'),
     (r'^notes/note_raw/(?P<note_id>[^/]+)/$','notebook.notes.views.note_raw'),
-    (r'^notes/note/(?P<note_id>[^/]+)/updateNote/$','notebook.notes.views.update_note'),
+    
+(r'^notes/note/(?P<note_id>[^/]+)/updateNote/$','notebook.notes.views.update_note'),
     (r'^notes/note/(?P<note_id>[^/]+)/updateNoteTrans/$','notebook.notes.views.update_note_trans'),
     (r'^linkagenotes/note/(?P<note_id>[^/]+)/updateLinkageNote/$','notebook.notes.views.update_linkagenote'),
     #below actually applied to framebook

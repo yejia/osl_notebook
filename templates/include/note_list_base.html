@@ -1269,6 +1269,35 @@ $("#ac_tags").tagit("removeAll");
                         
          
                 });
+                
+                //delete note on note display page
+                $('#soft_delete'). click(function(){
+                        $(this).load('deleteNote/',{ 'id':$(this).parents("div").attr('note_id')}, note_deleted, 'text');
+                       
+                });
+                
+                function note_deleted(result){
+                     if (result=='True')
+                           window.location.reload(true); 
+                
+                }
+                
+                 $('#hard_delete'). click(function(){  
+                      var r=confirm("{% trans 'Are you sure you want to discard this? This note will be deleted permanently and it cannot be recovered!' %}");
+                      if (r==false){    
+                      }else{
+                     
+                         $(this).load('discardNote/',{ 'id':$(this).parents("div").attr('note_id')}, note_discarded, 'text');
+                         
+                        
+                      }
+                });
+                
+                 function note_discarded(result){
+                     if (result=='True')
+                           window.location.replace('{{book_uri_prefix}}/{{bookname}}/notes/') ;
+                
+                }
         
 
         

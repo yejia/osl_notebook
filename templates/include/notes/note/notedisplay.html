@@ -43,17 +43,25 @@
 
 
 
+
 {% include "include/pick_lang.html" %}         
 
 
 
 
 
-
-<div>
+<div note_id="{{note.id}}">
 <h2> 
 <img src="/site_media/img/{{note.get_note_type}}.png" title="{{note.get_note_type}}" class="noPrint"/>
  {% include "include/get_title.html" %}   
+ &nbsp;&nbsp;&nbsp; 
+ {% if user.username == profile_username %} 
+{% if note.deleted  %} 
+<img src="/site_media/img/hard-delete.png" title="{% trans 'hard delete' %}" id="hard_delete" class="delete_img_on_note_display clickable noPrint"/>
+{% else %}
+<img src="/site_media/img/delete.png" title="{% trans 'soft delete' %}" id="soft_delete"  class="delete_img_on_note_display clickable noPrint"/>
+{% endif %}
+{% endif %}
 </h2>
 </div>
 

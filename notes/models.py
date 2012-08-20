@@ -796,7 +796,7 @@ class Frame(Note):
     
  
     
-    def get_public_notes_in_order(self):
+    def get_public_notes_in_order(self, sort=None):
         order = self.get_notes_order()
         ns = []
         for note_id in order:
