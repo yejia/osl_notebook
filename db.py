@@ -106,10 +106,10 @@ def sync_dbs(users):
         users = [u.username for u in User.objects.all()]
     for user in users:
         print 'sync db for user:', user
-        os.system('python manage.py syncdb --database='+user) 
+        #os.system('python manage.py syncdb --database='+user) 
         #on server, use django-admin
-        #os.system('python2.7 manage.py syncdb --database='+user.username) 
-        #os.system('../bin/django-admin.py syncdb --database='+user.username) 
+        os.system('python2.7 manage.py syncdb --database='+user) 
+        #os.system('../bin/django-admin.py syncdb --database='+user) 
         
 
 
