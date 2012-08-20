@@ -3,15 +3,15 @@
 
 <table><tr><td>
 <div id="profile_head">
-<div><img class="avatar" src={% if  profile_member.icon %}"/file/{{profile_member.icon}}"
+<div><a href="/settings/"><img class="avatar" src={% if  profile_member.icon %}"/file/{{profile_member.icon}}"
 {% else %}
 {% if  profile_member.gender == 'f' %}"/site_media/img/default_female.png"{% endif %} 
 {% if  profile_member.gender == 'm' %}"/site_media/img/default_male.jpg"{% endif %} 
-{% if  not profile_member.gender %}"/site_media/img/default_user_icon.jpg"{% endif %}{% endif %}/>
+{% if  not profile_member.gender %}"/site_media/img/default_user_icon.jpg"{% endif %}{% endif %}/></a>
 </div>
 </td>
 <td>
-<div>{{profile_member.username}}
+<div><a href="/social/{{profile_member.username}}/">{{profile_member.username}}</a>
 </div>
 <!--
 <div>{{profile_member.last_name}}  {{profile_member.first_name}}
