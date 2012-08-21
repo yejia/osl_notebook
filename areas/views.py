@@ -28,6 +28,7 @@ from django.db import connections,  transaction
 
 from notebook.areas.models import *
 from notebook.notes.views import __get_pre_url, getlogger, __get_view_theme, __getQStr, getSearchResults, __get_context 
+from notebook.social.models import Member
 from notebook.notes.util import *
 from notebook.notes.constants import *
 
