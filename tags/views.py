@@ -26,7 +26,7 @@ from django.db import connections,  transaction
 
 from notebook.tags.models import *
 from notebook.notes.constants import *
-from notebook.social.models import Group_Tag_Frame, Group
+from notebook.social.models import Group_Tag_Frame, Group, Member
 from notebook.notes.util import *
 from notebook.notes.views import __get_pre_url, getlogger, __get_view_theme, __get_related_tags
 
@@ -59,8 +59,8 @@ def index(request, username):
     
     
     #TODO: think of applying other view theme in addition to private
-    theme = __get_view_theme(request)
-    private =    theme['private'] 
+    profile_member = Member.objects.get(username=username)
+    private = profile_member.viewing_private 
     #print 'private', private
     return render_to_response('tagframes/index.html',{'tag_tree':tag_tree, 'top_tag_trees':top_tag_trees,'addTagFrameForm':addTagFrameForm, \
                             'tags':tags, 'sort':'', 'username':request.user.username,'profile_username':username,  'private':private,\
