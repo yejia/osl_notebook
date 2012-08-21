@@ -3,19 +3,22 @@
  
 
         {% for tag in children %} 
-          {% if not tag.private or  username == profile_username  %} 
-            <li class="tag_in_frame {% if tag.get_tag_type == 'Nonleaf' %}expandable{% endif %}  {% if  username != profile_username %}{% if forloop.last %}last{% endif %}{% endif %}" tag_name="{{tag.name}}"  parent_name="{{frame}}">
+
+       {% comment %} make sure this one actually works correctly to use this one
+          {% if not tag.private or  username == profile_username and  private in true_words or private in all_words  %} 
+             {% endcomment %} 
+
+             
+          {% if not tag.private %}  
+              
+              
+              
+              
+              
+               <li class="tag_in_frame {% if tag.get_tag_type == 'Nonleaf' %}expandable{% endif %}  {% if  username != profile_username %}{% if forloop.last %}last{% endif %}{% endif %}" tag_name="{{tag.name}}"  parent_name="{{frame}}">
                 {% if tag.get_tag_type == 'Nonleaf' %}<div class="hitarea expandable-hitarea"></div>{% endif %}
                 <span class='tag_name_display'>                
-                <a href="javascript:void();" title="{{tag.desc|default:''}}">{{tag.name}}</a> 
-                
-                 
-                
-                
-                
-                
-                
-                
+                        <a href="javascript:void();" title="{{tag.desc|default:''}}">{{tag.name}}</a>                 
                 </span>
                  {% if  username == profile_username %}
                 <span title="{% trans 'remove this' %}" class="inline_delete" id="tag_frame_remove">&nbsp;&nbsp;&nbsp;</span>
@@ -26,8 +29,7 @@
                     <ul style="display: none;">                                       
                             {% tag_tree_view_tag tag.tag_frame %}                     
                     </ul> 
-                {% endif %}
-                
+                {% endif %}               
                 
                  
                 
@@ -53,10 +55,106 @@
                     </ul> 
                    {% endif %}  
                    
-               
-                
                 
             </li>
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+          {% else %}
+          
+                {% if username == profile_username %}
+                    {% if private in false_words %}   
+                    
+                    {% else %}
+                  
+                  
+                             {% comment %} li below is copied from above. Think of a way of not duplicate the code. (tried using include, but it didn't work. I guess it is because it need to pass the context?) TODO:
+                             {% endcomment %} 
+                      
+                      
+                          <li class="tag_in_frame {% if tag.get_tag_type == 'Nonleaf' %}expandable{% endif %}  {% if  username != profile_username %}{% if forloop.last %}last{% endif %}{% endif %}" tag_name="{{tag.name}}"  parent_name="{{frame}}">
+                {% if tag.get_tag_type == 'Nonleaf' %}<div class="hitarea expandable-hitarea"></div>{% endif %}
+                <span class='tag_name_display'>                
+                        <a href="javascript:void();" title="{{tag.desc|default:''}}">{{tag.name}}</a>                 
+                </span>
+                 {% if  username == profile_username %}
+                <span title="{% trans 'remove this' %}" class="inline_delete" id="tag_frame_remove">&nbsp;&nbsp;&nbsp;</span>
+                  {% endif %}   
+                
+                
+                {% if tag.get_tag_type == 'Nonleaf' %}  
+                    <ul style="display: none;">                                       
+                            {% tag_tree_view_tag tag.tag_frame %}                     
+                    </ul> 
+                {% endif %}               
+                
+                 
+                
+                {% if tag.note_set.count%} 
+                    <span>{% trans 'View' %}</span>
+                    <ul style="display: none;"  class="show_notes">                                       
+                          <li><span class="notes_by_tag clickable" bookname="snippetbook" title="{% trans 'Snippets' %}"><img src="/site_media/img/Snippet.png" />{% comment %} TODO: think of applying other viewing mode filtering   {% endcomment %}
+                         {% comment %}snippets_count was added to tag in the tree_view cusotom tag lib{% endcomment %}
+                          {% if  username == profile_username and private in all_words %} {{tag.snippets_count}}   {% else %} {{tag.public_snippets_count}}  {% endif %}</span>
+                          </li>       
+                          <li ><span class="notes_by_tag clickable" bookname="bookmarkbook"><img src="/site_media/img/Bookmark.png" />   
+                        {% if  username == profile_username and private in all_words %}    {{tag.bookmarks_count}}   {% else %} {{tag.public_bookmarks_count}}  {% endif %}</span> 
+                          </li>
+                          <li><span class="notes_by_tag clickable" bookname="scrapbook"><img src="/site_media/img/Scrap.png" />
+                           {% if  username == profile_username and private in all_words %}  {{tag.scraps_count}}   {% else %} {{tag.public_scraps_count}}  {% endif %}</span> 
+                          </li>
+                          <li><span class="notes_by_tag clickable" bookname="framebook"><img src="/site_media/img/Frame.png" />
+                           {% if  username == profile_username and private in all_words %}  {{tag.frames_count}}   {% else %} {{tag.public_frames_count}}  {% endif %}</span> 
+                          </li>         
+                          <li><span class="notes_by_tag clickable" bookname="notebook">{% trans 'All' %}
+                            {% if  username == profile_username and private in all_words %}   {{tag.notes_count}}   {% else %} {{tag.public_notes_count}}  {% endif %}</span>
+                          </li>                          
+                    </ul> 
+                   {% endif %}  
+                   
+                
+            </li>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    {% endif %}
+                {% endif %}     
           {% endif %}     
         {% endfor %}
         

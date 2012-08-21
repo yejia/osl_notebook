@@ -87,8 +87,9 @@ def index(request, username):
     tags = Tag_Frame.objects.using(username).all().order_by('name')
     addAreaForm = AddAreaForm()
     #TODO: think of applying other view theme in addition to private
-    theme = __get_view_theme(request)
-    private =    theme['private'] 
+    #theme = __get_view_theme(request)
+    profile_member = Member.objects.get(username=username)
+    private = profile_member.viewing_private    
     #print 'private', private
     return render_to_response('areas/index.html',{'areas':areas, 'addAreaForm':addAreaForm, 'tags':tags, \
                             'username':request.user.username,'profile_username':username,  'private':private}, \

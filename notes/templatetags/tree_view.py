@@ -58,5 +58,7 @@ def tag_tree_view_tag(context, frame):
     
     return {'children': children, 'profile_username':context['profile_username'], \
              'sort':sort, 'addTagFrameForm':addTagFrameForm, 'frame':frame, 
-              'username':context['username'], 'profile_username':context['profile_username'], 'all_words':all_words,'private':context['private'] #'pick_lang':context['pick_lang']
+              'username':context['username'], 'profile_username':context['profile_username'], 'all_words':all_words,'private':context['private'],
+              'true_words':context['true_words'], 'all_words':context['all_words'], 'false_words':context['false_words'] 
+              #'pick_lang':context['pick_lang']
              }    

@@ -63,7 +63,8 @@ def index(request, username):
     private =    theme['private'] 
     #print 'private', private
     return render_to_response('tagframes/index.html',{'tag_tree':tag_tree, 'top_tag_trees':top_tag_trees,'addTagFrameForm':addTagFrameForm, \
-                            'tags':tags, 'sort':'', 'username':request.user.username,'profile_username':username,  'private':private}, \
+                            'tags':tags, 'sort':'', 'username':request.user.username,'profile_username':username,  'private':private,\
+                            'true_words':true_words, 'all_words':all_words, 'false_words':false_words}, \
                     context_instance=RequestContext(request,  {}))
 
 
