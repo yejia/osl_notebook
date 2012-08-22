@@ -1033,7 +1033,7 @@ def __get_notes_context(request, note_list):
         if len(note_list) > 100:
             note_list = note_list[:100]
             request.limited = True
-        note_list = note_list.order_by('vote')
+        note_list = note_list.order_by('-vote')
         sorted_notes = [(note, note.get_relevance(request.tag_path)) for note in note_list]   
         sorted_notes.sort(key=lambda r: r[1],reverse = True) 
         for item  in sorted_notes:
