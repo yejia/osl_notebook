@@ -17,5 +17,7 @@
                             {% endif %}  
                     </span>
                     {% endif %}
+                {% empty %}   
+                     <span><a href="/social/{{note.owner.username}}/{{bookname}}/tags/untagged/">{% trans "untagged" %}</a>,</span>
                 {% endfor %}
 </div>        

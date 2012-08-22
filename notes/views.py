@@ -396,9 +396,9 @@ def index(request, username, bookname):
     
     
     T = getT(username)
-    default_tag_id = T.objects.get(name='untagged').id    
-    context = __get_context(request, note_list, default_tag_id, username, bookname)
-    
+    #default_tag_id = T.objects.get(name='untagged').id    
+    #context = __get_context(request, note_list, default_tag_id, username, bookname)
+    context = __get_context(request, note_list, username, bookname)
     
     
     
@@ -707,6 +707,8 @@ def tags(request, username, bookname, tag_name, aspect_name):
             n_list = n_list1 | n_list2
         elif tag_name == 'takenfrom:':
            n_list = N.objects.filter(tags__name__startswith=tag_name)     
+        elif tag_name == 'untagged':
+           n_list = N.objects.filter(tags__name=None)  
         else:    
             t = T.objects.get(name=tag_name)       
             if aspect_name=='notes':
@@ -724,14 +726,17 @@ def tags(request, username, bookname, tag_name, aspect_name):
         qstr = __getQStr(request)
     
         note_list  = getSearchResults(note_list, qstr, search_fields_dict.get(bookname))
-        if t:
-            default_tag_id = t.id   
-        else:
-            default_tag_id = 0  
+#===============================================================================
+#        if t:
+#            default_tag_id = t.id   
+#        else:
+#            default_tag_id = 0  
+#===============================================================================
         
         
                 
-        context = __get_context(request, note_list, default_tag_id, username, bookname, aspect_name)   
+        context = __get_context(request, note_list, #default_tag_id,
+                                 username, bookname, aspect_name)   
         queries = connection.queries	
         extra_context = {'current_tag':tag_name, 'aspect_name':aspect_name, 'queries':queries}
         context.update(extra_context)
@@ -787,8 +792,9 @@ def caches(request, cache_id, username, bookname):
         note_list = __get_notes_by_ids([], username, bookname)
     
     T = getT(username)
-    default_tag_id = T.objects.get(name='untagged').id    
-    context = __get_context(request, note_list, default_tag_id, username, bookname)	
+    #default_tag_id = T.objects.get(name='untagged').id    
+    context = __get_context(request, note_list, #default_tag_id,
+                             username, bookname)	
     return render_to_response(book_template_dict.get(bookname)+'notes/note_list.html', context, context_instance=RequestContext(request,{'bookname': bookname, 'aspect_name':'notes',\
                                                                                                         'book_uri_prefix':'/'+username}))
 
@@ -809,8 +815,9 @@ def included_notes_in_frame(request, frame_id, username, bookname):
     qstr = __getQStr(request)
     note_list = getSearchResults(note_list, qstr, search_fields_dict.get(bookname))
     T = getT(username)
-    default_tag_id = T.objects.get(name='untagged').id   
-    context = __get_context(request, note_list, default_tag_id, username, bookname)    
+    #default_tag_id = T.objects.get(name='untagged').id   
+    context = __get_context(request, note_list, #default_tag_id,
+                             username, bookname)    
     return render_to_response(book_template_dict.get(bookname)+'notes/notes.html', context, context_instance=RequestContext(request,{'bookname': bookname, 'aspect_name':'notes',\
                                                                                                         'book_uri_prefix':'/'+username}))
 
@@ -831,13 +838,15 @@ def included_notes_in_linkage(request, linkage_id, username, bookname):
     qstr = __getQStr(request)
     note_list = getSearchResults(note_list, qstr, search_fields_dict.get(bookname))
     T = getT(username)
-    default_tag_id = T.objects.get(name='untagged').id    
-    context = __get_context(request, note_list, default_tag_id, username, bookname)    
+    #default_tag_id = T.objects.get(name='untagged').id    
+    context = __get_context(request, note_list, #default_tag_id,
+                             username, bookname)    
     return render_to_response(book_template_dict.get(bookname)+'notes/note_list.html', context, context_instance=RequestContext(request,{'bookname': bookname, 'aspect_name':'notes',\
                                                                                                         'book_uri_prefix':'/'+username}))
 
 
-def __get_context(request, note_list,default_tag_id, username, bookname, aspect_name='notes'):  
+def __get_context(request, note_list,#default_tag_id, 
+                  username, bookname, aspect_name='notes'):  
     theme = __get_view_theme(request)
     in_linkage = theme['in_linkage'] #TODO:get rid of
     if in_linkage in all_words:
@@ -1133,8 +1142,9 @@ def folders(request, username, bookname, folder_name):
         #request_path = '/'+username+'/notes/?q='+django.utils.http.urlquote_plus(qstr)        
         note_list  = getSearchResults(note_list, qstr)     
     #TODO: no need of below in folders aspect
-    default_tag_id = T.objects.get(name='untagged').id    
-    context = __get_context(request, note_list, default_tag_id, username, bookname)
+    #default_tag_id = T.objects.get(name='untagged').id    
+    context = __get_context(request, note_list, #default_tag_id,
+                             username, bookname)
     
     folders = context.get('folders') #TODO: if folders is empty
     folder_values, is_in_folders, current_folder = __get_folder_context(folders, qstr)
@@ -1378,7 +1388,12 @@ def create_note_in_frame(request, username, bookname):
     frame = N.objects.get(id=note_id) 
     #for now, only create a snippet directly inside a frame. Think of creating bookmark or scrap later TODO:
     N_To_Include = getNote(username, 'snippetbook')  
-    note_to_include, created = N_To_Include.objects.get_or_create(desc=note_created_desc)  
+    
+    #there might be multiple notes with the same desc. If so, just get the first one for now. TODO:
+    if N_To_Include.objects.filter(desc=note_created_desc).count() > 1: 
+        note_to_include =  N_To_Include.objects.filter(desc=note_created_desc)[0]
+    else:    
+        note_to_include, created = N_To_Include.objects.get_or_create(desc=note_created_desc)  
     T = getT(username)
     if frame.title.startswith('Weekly Plan:'):
         
@@ -1520,10 +1535,14 @@ def add_note(request, username, bookname):
     #tags = request.GET.getlist('tags')[0].split(',')  
     tags = request.GET.get('tags').split(',')  
     
-    if not tags or (len(tags) == 1 and tags[0] == u''):
-        tags = ['untagged']
+#===============================================================================
+#    if not tags or (len(tags) == 1 and tags[0] == u''):
+#        tags = ['untagged']
+#===============================================================================
         #post.setlist('tags', tags)
     
+    if not tags or (len(tags) == 1 and tags[0] == u''):
+        tags = None
     n = N(desc=request.GET.get('desc'))  
     n.vote = request.GET.get('vote', 0)
     private = request.GET.get('private', False)

@@ -66,7 +66,7 @@ def build_frame_votes():
 #            frame.save() 
 #===============================================================================
 
-
+#below is not useful anymore. Since untagged tag is going to be removed from dbs.
 #clean up untagged tag for notes already having other tags, add untagged tag for notes having no tags
 def cleanup_tags():
     users = User.objects.all()     
@@ -147,13 +147,27 @@ def fix_notes_frame_notes_table(users):
             cursor = connections[user].cursor()
             cursor.execute('ALTER TABLE notes_frame_notes ADD COLUMN "_order" integer;')          
             transaction.commit_unless_managed()
-        except Exception as inst:
+        except:
             print sys.exc_info()
             #print type(inst)
             #print inst.args
             #print inst   
 
 
+def remove_untagged(users):    
+    for user in users:
+        print 'For user', user
+        try:
+            T = getT(user)
+            if T.objects.filter(name='untagged').exists():
+                t = T.objects.get(name='untagged')
+                t.delete()
+            if T.objects.filter(name='').exists():
+                t1 = T.objects.get(name='')
+                t1.delete()
+        except:
+            print sys.exc_info()   
+            
 
 if __name__ == "__main__":
     name = sys.argv[1]
@@ -175,5 +189,10 @@ if __name__ == "__main__":
     if name == 'fix_nfn':
         users = sys.argv[2:]
         #print 'users',users 
-        fix_notes_frame_notes_table(users)         
+        fix_notes_frame_notes_table(users) 
+    if name == 'remove_untagged':
+             users = sys.argv[2:]
+             if not users:
+                 users = [u.username for u in User.objects.all()]
+             remove_untagged(users)             
     sys.exit(0)      

@@ -436,30 +436,33 @@ class Note(models.Model):
     #TODO: get rid of bookname, and use hasattr to tell what the instance is. Just like how update_tags does
     def add_tags(self, tags_to_add, bookname):  
         #TODO: not right. Should tell bookname base on the instance. After using hasattr, no need to consider the case of 'notebook'
-        if bookname == 'notebook':
-            bookname = 'snippetbook'   
-        num_of_tags_created = 0
-        W = getW(self.owner_name)             
-        w = W.objects.get(name=bookname)  
-        
-        tags_to_add = [tag for tag in tags_to_add if not tag.startswith('takenfrom:')]
-           
-        for tag_name in tags_to_add:    
-            t, created = Tag.objects.using(self.owner_name).get_or_create(name=tag_name) 
-            #in any case, just add the tag to the snippet working set. If it is already
-            # in it, just no effect.             
-            try:             
-                w.tags.add(t)
-                w.save()                
-            except Exception:
-                log.error("Error in add_tags with w "+w.name+' and tag '+t.name)            
-            self.tags.add(t)  
-            #TODO: there seems to be no need t save this instance, as self.tags.add(t) already saved data to the m2m table  
-            # but to update the social note as well, I think below is still needed        
-            self.save() 
-            if created:
-                num_of_tags_created += 1
-        return num_of_tags_created       
+        if not tags_to_add:
+            return 0
+        else:
+            if bookname == 'notebook':
+                bookname = 'snippetbook'   
+            num_of_tags_created = 0
+            W = getW(self.owner_name)             
+            w = W.objects.get(name=bookname)  
+            
+            tags_to_add = [tag for tag in tags_to_add if not tag.startswith('takenfrom:')]
+               
+            for tag_name in tags_to_add:    
+                t, created = Tag.objects.using(self.owner_name).get_or_create(name=tag_name) 
+                #in any case, just add the tag to the snippet working set. If it is already
+                # in it, just no effect.             
+                try:             
+                    w.tags.add(t)
+                    w.save()                
+                except Exception:
+                    log.error("Error in add_tags with w "+w.name+' and tag '+t.name)            
+                self.tags.add(t)  
+                #TODO: there seems to be no need t save this instance, as self.tags.add(t) already saved data to the m2m table  
+                # but to update the social note as well, I think below is still needed        
+                self.save() 
+                if created:
+                    num_of_tags_created += 1
+            return num_of_tags_created       
             
     
     #tags_to_add is a list of tag names

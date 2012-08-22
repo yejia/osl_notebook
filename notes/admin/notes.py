@@ -74,6 +74,10 @@ class Social_NoteAdmin(MultiDBModelAdmin):
 class Social_Note_CommentAdmin(MultiDBModelAdmin):
      list_display = ('note', 'desc', 'commenter', 'init_date') 
 
+class Social_TagAdmin(MultiDBModelAdmin):
+     list_display = ('id', 'name', 'private')  
+     search_fields = ['name', 'id']
+
 class Social_Note_VoteAdmin(MultiDBModelAdmin):
      list_display = ('note', 'voter', 'useful', 'init_date') 
 
@@ -96,6 +100,7 @@ class MessageAdmin(MultiDBModelAdmin):
 
 
 
+
 site = admin.AdminSite()
 
 site.register(Note,NotesAdmin)
@@ -106,7 +111,7 @@ site.register(Cache, CacheAdmin)
 site.register(WorkingSet)
 site.register(Group)
 site.register(Social_Note, Social_NoteAdmin)
-site.register(Social_Tag)
+site.register(Social_Tag, Social_TagAdmin)
 site.register(Member)
 site.register(User, UserAdmin)
 site.register(Social_Note_Comment, Social_Note_CommentAdmin)

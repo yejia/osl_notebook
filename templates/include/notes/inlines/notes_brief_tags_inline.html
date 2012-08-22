@@ -2,11 +2,13 @@
 
 <div id="note_tags" title="{% trans "note tags" %}">
                 {% for tag in note.get_tags %}
-                {% if  'takenfrom:' in tag  %}
-                    <span><a href="/{{profile_username}}/{{bookname}}/notes/tags/{{tag|slice:":10"}}/">{{tag|slice:":10"}}</a>{{tag|slice:"10:"}}</span> 
-                    {% comment %} use taken in the url instead of still using tags {% endcomment %}
-                {% else %}
-                    <span><a href="/{{profile_username}}/{{bookname}}/notes/tags/{{tag}}/">{{tag}}</a>,</span>
-                {% endif %}    
+                    {% if  'takenfrom:' in tag  %}
+                        <span><a href="/{{profile_username}}/{{bookname}}/notes/tags/{{tag|slice:":10"}}/">{{tag|slice:":10"}}</a>{{tag|slice:"10:"}}</span> 
+                        {% comment %} use taken in the url instead of still using tags {% endcomment %}
+                    {% else %}
+                        <span><a href="/{{profile_username}}/{{bookname}}/notes/tags/{{tag}}/">{{tag}}</a>,</span>
+                    {% endif %}    
+                {% empty %}
+                         <span><a href="/{{profile_username}}/{{bookname}}/notes/tags/untagged/">{% trans "untagged" %}</a>,</span>
                 {% endfor %}
 </div>

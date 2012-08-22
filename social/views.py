@@ -803,6 +803,8 @@ def group_tagframes(request, groupname):
 def notes_tag(request, username, bookname, tag_name):   
     if tag_name == 'takenfrom:':
         note_list = getSN(bookname).objects.filter(tags__name__startswith=tag_name, owner__username=username)
+    elif tag_name == 'untagged':
+        note_list = getSN(bookname).objects.filter(tags__name=None, owner__username=username)
     else:
         note_list = getSN(bookname).objects.filter(tags__name=tag_name, owner__username=username)
     qstr = __getQStr(request)    

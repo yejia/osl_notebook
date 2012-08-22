@@ -117,7 +117,11 @@
                 {% endblock %} 
                 
                 <td class="note_table_tags">
-                    <div id="note_tags" title="{% trans "note tags" %}">{% if appname == 'groups' %}{{note.display_all_tags}}{% else %}{{note.display_tags}}{% endif %}</div>
+                    {% if note.display_tags  %}
+                        <div id="note_tags" title="{% trans "note tags" %}">{% if appname == 'groups' %}{{note.display_all_tags}}{% else %}{{note.display_tags}}{% endif %}</div>
+                    {% else %}   
+                       <div id="note_tags" title="{% trans "note tags" %}">{% trans "untagged" %}</div>
+                    {% endif %}                    
                 </td>
                 </tr>
             </table>
