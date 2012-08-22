@@ -577,6 +577,9 @@ def __get_ws_tags_for_menu(request, username, bookname):
         count = N.objects.filter(tags=tag).count()
         t = {'name':tag.name, 'private':tag.private, 'note_count':count}
         tags.append(t)
+    untagged_count = N.objects.filter(tags=None, deleted=False).count()
+    untagged = {'name':'untagged', 'private':False, 'note_count':untagged_count}
+    tags.insert(0, untagged)    
     #print 'tags', tags
     return tags   
 
