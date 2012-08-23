@@ -64,8 +64,8 @@ def index(request, username):
     #print 'private', private
     return render_to_response('tagframes/index.html',{'tag_tree':tag_tree, 'top_tag_trees':top_tag_trees,'addTagFrameForm':addTagFrameForm, \
                             'tags':tags, 'sort':'', 'username':request.user.username,'profile_username':username,  'private':private,\
-                            'true_words':true_words, 'all_words':all_words, 'false_words':false_words}, \
-                    context_instance=RequestContext(request,  {}))
+                            }, \
+                    context_instance=RequestContext(request,  {'true_words':true_words, 'all_words':all_words, 'false_words':false_words}))
 
 
 
@@ -78,7 +78,7 @@ def tagframe(request, username, tagframe_name):
      #print 'private', private     
      return render_to_response('tagframes/tagframe.html',{'tag_tree':tf,\
                             'tags':tags, 'sort':'', 'username':request.user.username,'profile_username':username,  'private':private}, \
-                    context_instance=RequestContext(request,  {}))
+                    context_instance=RequestContext(request,  {'true_words':true_words, 'all_words':all_words, 'false_words':false_words}))
 
 
 
