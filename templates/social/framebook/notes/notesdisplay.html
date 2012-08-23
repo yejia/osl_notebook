@@ -10,7 +10,8 @@
 {% block brief_display %}
 <div class="brief_display" id="frame">
  <table class="note_table">
-                <tr>
+                <tr> 
+                     {% include "social/include/notes/inlines/notes_note_type_inline.html" %} 
                     <td class="note_table_title">
                         {% include "social/include/notes/inlines/notes_brief_title_inline.html" %}     
                     </td>

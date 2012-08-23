@@ -197,7 +197,8 @@ def friends_notes2(request, username, bookname):
     return render_to_response('social/notes/friends_notes.html', {'note_list':paged_notes,'sort':sort, 'bookname':bookname, \
                                                  'tags':None, 'qstr':qstr, \
                                                  'appname':'friends', 'cl':cl, 'profile_username':username},\
-                                                  context_instance=RequestContext(request, {'book_uri_prefix':'/'+username+'/friends'})) 
+                                                  context_instance=RequestContext(request, {'book_uri_prefix':'/'+username+'/friends',
+                                                                                            'note_type':bookname_note_type_dict.get(bookname)})) 
  
 
 
@@ -291,7 +292,7 @@ def groups_notes(request, username, bookname):
     return render_to_response('social/notes/groups_notes.html', {'note_list':paged_notes,'sort':sort, 'bookname':bookname, \
                                                  'tags':None, 'qstr':qstr,\
                                                  'appname':'friends', 'cl':cl, 'profile_username':username},\
-                                                  context_instance=RequestContext(request, {'book_uri_prefix':'/'+username+'/groups'})) 
+                                                  context_instance=RequestContext(request, {'book_uri_prefix':'/'+username+'/groups', 'note_type':bookname_note_type_dict.get(bookname)})) 
     
 
 
@@ -357,7 +358,7 @@ def notes(request, username, bookname):
     pick_lang =  request.GET.get('pick_lang') 
     return render_to_response('social/include/notes/notes.html', {'note_list':paged_notes,'sort':sort, 'bookname':bookname, 'pick_lang':pick_lang, \
                                'folders':folders, 'profile_username':username, 'profile_member':profile_member, 'appname':'social', 'cl':cl},\
-                                                  context_instance=RequestContext(request,  {'book_uri_prefix':'/social/'+username}))
+                                                  context_instance=RequestContext(request,  {'book_uri_prefix':'/social/'+username, 'note_type':bookname_note_type_dict.get(bookname)}))
 
 
 
@@ -780,12 +781,13 @@ def group(request, groupname, bookname):
     except ObjectDoesNotExist:
         area = None     
     
-    
+    #in the template, to get the right url for each note, it still have to call each note's get_note_bookname method. So it might be better to get rid of passing note_type here TODO:
+    #But the current way might be a little faster since it reduce the num of calls
     return render_to_response('social/notes/group_notes.html', {'group':group, 'gs':gs, 'note_list':paged_notes,'sort':sort, 'bookname':bookname, \
                                                  'tags':tags, 'qstr':qstr,\
                                                   'profile_member':profile_member,\
                                                   'appname':'groups', 'cl':cl, 'area':area},\
-                                                  context_instance=RequestContext(request, {'book_uri_prefix':'/groups/'+groupname}))
+                                                  context_instance=RequestContext(request, {'book_uri_prefix':'/groups/'+groupname, 'note_type':bookname_note_type_dict.get(bookname)}))
 
 
 
@@ -815,7 +817,7 @@ def notes_tag(request, username, bookname, tag_name):
     profile_member = Member.objects.get(username=username)
     return render_to_response('social/include/notes/notes.html', {'note_list':paged_notes,'sort':sort, 'current_tag':tag_name, 'bookname':bookname,\
                                'profile_username':username, 'profile_member':profile_member, 'tags':tags, 'appname':'social', 'cl':cl},\
-                                                  context_instance=RequestContext(request,  {'book_uri_prefix':'/social/'+username})) 
+                                                  context_instance=RequestContext(request,  {'book_uri_prefix':'/social/'+username, 'note_type':bookname_note_type_dict.get(bookname)})) 
 
 
 

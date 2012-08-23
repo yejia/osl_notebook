@@ -746,11 +746,11 @@ def tags(request, username, bookname, tag_name, aspect_name):
     
         if aspect_name=='notes':
             return render_to_response(book_template_dict.get(bookname)+'notes/notes.html', context, \
-                                      context_instance=RequestContext(request,{'bookname': bookname, 'advanced': get_advanced_setting(request),\
+                                      context_instance=RequestContext(request,{'bookname': bookname, 'note_type':bookname_note_type_dict.get(bookname), 'advanced': get_advanced_setting(request),\
                                                                                'book_uri_prefix':'/'+username, 'appname':'notes', 'pagename':'notes'}))
         else:
             return render_to_response(book_template_dict.get(bookname)+'notes/linkages.html', context,\
-                                       context_instance=RequestContext(request,{'bookname': bookname, 'advanced': get_advanced_setting(request),\
+                                       context_instance=RequestContext(request,{'bookname': bookname, 'note_type':bookname_note_type_dict.get(bookname), 'advanced': get_advanced_setting(request),\
                                                                                 'book_uri_prefix':'/'+username}))
 
 
