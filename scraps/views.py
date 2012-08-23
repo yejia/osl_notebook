@@ -36,31 +36,50 @@ def add_scrap(request):
     username = request.user.username
     N = getNote(username, 'scrapbook')
     T = getT(username)
-    W = getW(username)
-    w = W.objects.get(name='scrapbook')  
+    #W = getW(username)
+    #w = W.objects.get(name='scrapbook')  
     if request.method == 'POST': 
-            tags = T.objects.all()
-            AddNForm = create_model_form("AddNForm_add_scrap_post_"+str(username), N, fields={'tags':forms.ModelMultipleChoiceField(queryset=tags)})     
-            n = N() 
-            post = request.POST.copy()
-            tag_names = post.getlist('item[tags][]')
-            tags = []
-            for tag_name in tag_names:
-                t, created = T.objects.get_or_create(name=tag_name)
-                if created or not w.tags.filter(name=t.name).exists():
-                    w.tags.add(t)
-                tags.append(t.id)    
-            
-            if not tag_names:           
-                tags = [T.objects.get(name='untagged').id]
-            post.setlist('tags', tags) 
-            f = AddNForm(post, instance=n)
-            log.debug("f.errors:"+str(f.errors))
-            #TODO:handle errors such as url broken
-            f.save()
-            n.save() #called this specifically to save the url to the social db as well
-            return render_to_response("include/notes/addNote_result.html",\
-                                      {'message':_('Scrap is successfully added! You can close this window, or it will be closed for you in 1 second.')})
+        tags = T.objects.all()
+        #form require tags to be required. So don't use form now, and use the code from add_note in notebook.notes.views for adding a snippet
+        #AddNForm = create_model_form("AddNForm_add_scrap_post_"+str(username), N, fields={'tags':forms.ModelMultipleChoiceField(queryset=tags)})     
+        n = N() 
+        post = request.POST.copy()
+        tag_names = post.getlist('item[tags][]')
+        tags = []
+        for tag_name in tag_names:
+            t, created = T.objects.get_or_create(name=tag_name)
+#==============Don't need below any more since add_tags will do this logic=================================================================
+#            if created or not w.tags.filter(name=t.name).exists():
+#                w.tags.add(t)
+#===============================================================================
+            #tags.append(t.id)
+            tags.append(t.name)    
+        
+
+        #if not tag_names:           
+#                tags = [T.objects.get(name='untagged').id]
+             
+    
+  
+
+        if not tags or (len(tags) == 1 and tags[0] == u''):
+            tags = None
+        #f = AddNForm(post, instance=n)
+        #log.debug("f.errors:"+str(f.errors))
+        #TODO:handle errors such as url broken
+        #n = f.save(commit=False)
+        
+        n.title = post.get('title')
+        n.desc = post.get('desc')
+        n.url = post.get('url')
+        n.private = post.get('private', False)
+        n.vote = post.get('vote')
+        n.save()
+        n.add_tags(tags, 'scrapbook')   
+ 
+        n.save() #called this specifically to save the url to the social db as well
+        return render_to_response("include/notes/addNote_result.html",\
+                                  {'message':_('Scrap is successfully added! You can close this window, or it will be closed for you in 1 second.')})
        
     else:
         
@@ -68,7 +87,8 @@ def add_scrap(request):
         
         from django.forms import TextInput
         #by adding the tags field specifically here, we avoided it using tags of another user (a strange error which repeat even after changing class names and variable names)
-        AddNForm_scrap = create_model_form("AddNForm_add_scrap_get_"+str(username), N, fields={'tags':forms.ModelMultipleChoiceField(queryset=tags)}, options={'exclude':['deleted'],
+        AddNForm_scrap = create_model_form("AddNForm_add_scrap_get_"+str(username), N, fields={#'tags':forms.ModelMultipleChoiceField(queryset=tags)
+                                                                                               }, options={'exclude':['deleted'],
                                                              'fields':['url','title','tags','desc','vote','private'],
                                                              'widgets':{'title': TextInput(attrs={'size': 80}),
                                                                        }})
@@ -77,8 +97,9 @@ def add_scrap(request):
         title = request.GET.get('title')
         desc = request.GET.get('desc')
        
-        default_tag_id = T.objects.get(name='untagged').id  
-        addNoteForm = AddNForm_scrap(initial={'url': url, 'title':title, 'desc':desc, 'tags': [default_tag_id]})
+        #default_tag_id = T.objects.get(name='untagged').id  
+        addNoteForm = AddNForm_scrap(initial={'url': url, 'title':title, 'desc':desc#, 'tags': [default_tag_id]
+                                              })
         #no need of the custimized form in the scrapbook template
         return render_to_response('scrapbook/notes/addNote.html', {'addNoteForm': addNoteForm, 'desc':desc, 'url':url, 'tags':tags})
     

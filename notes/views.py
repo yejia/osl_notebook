@@ -1555,6 +1555,7 @@ def add_note(request, username, bookname):
         n.private = False     
     n.save()
     n.add_tags(tags, bookname)
+    #TODO: add newly created tags to its corresponding bookname working set
     n.save()
     #messages.success(request, "Note is successfully added!") #TODO    
     

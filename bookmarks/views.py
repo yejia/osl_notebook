@@ -31,12 +31,12 @@ def add_bookmark(request):
     username = request.user.username
     N = getNote(username, 'bookmarkbook')
     T = getT(username)
-    W = getW(username)
-    w = W.objects.get(name='bookmarkbook')
+    #W = getW(username)
+    #w = W.objects.get(name='bookmarkbook')
     if request.method == 'POST': 
         tags = T.objects.all()
-        #TODO: whether can get an existing AddNForm_username from the memory?
-        AddNForm = create_model_form("AddNForm_"+str(username), N, fields={'tags':forms.ModelMultipleChoiceField(queryset=tags)})     
+        #the same as in add scrap code, here we don't use form because tags in from is required
+        #AddNForm = create_model_form("AddNForm_"+str(username), N, fields={'tags':forms.ModelMultipleChoiceField(queryset=tags)})     
         n = N()  
         post = request.POST.copy()
         url = post.get('url')
@@ -46,19 +46,35 @@ def add_bookmark(request):
         tags = []
         for tag_name in tag_names:
             t, created = T.objects.get_or_create(name=tag_name)
-            #even if it not created, if it is not in this ws, still add it
-            if created or not w.tags.filter(name=t.name).exists():
-                w.tags.add(t)
-            tags.append(t.id) 
+#===============================================================================
+#            
+#            if created or not w.tags.filter(name=t.name).exists():
+#                w.tags.add(t)
+#===============================================================================
+            #tags.append(t.id)
+            tags.append(t.name) 
         
-        if not tag_names:
-            tags = [T.objects.get(name='untagged').id]
-        post.setlist('tags', tags)
-        
-        f = AddNForm(post, instance=n)        
-        log.debug("f.errors:"+str(f.errors))
-        f.save()
-        #TODO:below seems redundant, since f.save() may have saved the instance as well
+#===============================================================================
+#        if not tag_names:
+#            tags = [T.objects.get(name='untagged').id]
+#===============================================================================
+#===============================================================================
+#        post.setlist('tags', tags)
+#        
+#        f = AddNForm(post, instance=n)        
+#        log.debug("f.errors:"+str(f.errors))
+#        f.save()
+#===============================================================================
+
+        if not tags or (len(tags) == 1 and tags[0] == u''):
+            tags = None
+        n.title = post.get('title')
+        n.desc = post.get('desc')
+        n.url = post.get('url')
+        n.private = post.get('private', False)
+        n.vote = post.get('vote')
+        n.save()
+        n.add_tags(tags, 'bookmarkbook') 
         n.save()        
         return render_to_response("include/notes/addNote_result.html",{'message':_('Bookmark is successfully added! You can close this window, or it will be closed for you in 1 second.')})
        
@@ -80,8 +96,9 @@ def add_bookmark(request):
         
         
         title = request.GET.get('title')          
-        default_tag_id = T.objects.get(name='untagged').id 
-        addNoteForm = AddNForm(initial={'url': url, 'title':title, 'tags': [default_tag_id]})        
+        #default_tag_id = T.objects.get(name='untagged').id 
+        addNoteForm = AddNForm(initial={'url': url, 'title':title#, 'tags': [default_tag_id]
+                                        })        
         return render_to_response('bookmarkbook/notes/addNote.html', {'addNoteForm': addNoteForm, 'url':url, 'tags':tags}) #TODO:how to display url using the form's initial
     
 
