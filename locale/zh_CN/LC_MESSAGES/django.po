@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-23 17:42+0800\n"
+"POT-Creation-Date: 2012-08-23 18:10+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -175,7 +175,7 @@ msgstr ""
 
 #: notes/models.py:189 notes/models.py:1164 social/models.py:753
 #: templates/framebook/notes/notesdisplay.html:18
-#: templates/include/notes/notesdisplay.html:36
+#: templates/include/notes/notesdisplay.html:40
 #: templates/scrapbook/notes/notesdisplay.html:28
 msgid "Title"
 msgstr "标题"
@@ -195,7 +195,7 @@ msgid "The size of the desc is limited to 2000 characaters."
 msgstr "正文的长度应小于2000字。"
 
 #: notes/models.py:193 templates/framebook/notes/notesdisplay.html:16
-#: templates/include/notes/notesdisplay.html:34
+#: templates/include/notes/notesdisplay.html:38
 #: templates/include/notes/menu/toggle_tag_menu.html:10
 #: templates/scrapbook/notes/notesdisplay.html:24
 #: templates/workingset/index.html:285
@@ -210,7 +210,7 @@ msgstr "默认的标签是'random thought'。"
 #: templates/areas/index.html:56
 #: templates/framebook/notes/notesdisplay.html:22
 #: templates/include/note_list_base.html:1407
-#: templates/include/notes/notesdisplay.html:40
+#: templates/include/notes/notesdisplay.html:44
 #: templates/scrapbook/notes/notesdisplay.html:29
 #: templates/snippetbook/notes/add_note.html:47
 #: templates/social/group/groups.html:56
@@ -231,7 +231,7 @@ msgstr "原作者的评级"
 
 #: notes/models.py:725 snippets/models.py:14 social/models.py:390
 #: social/models.py:414 templates/framebook/notes/notesdisplay.html:20
-#: templates/include/notes/notesdisplay.html:38
+#: templates/include/notes/notesdisplay.html:42
 msgid "Attachment"
 msgstr "附件"
 
@@ -1065,7 +1065,7 @@ msgstr "搜索网址"
 
 #: templates/bookmarkbook/notes/addNote.html:8
 #: templates/framebook/notes/notesdisplay.html:15
-#: templates/include/notes/notesdisplay.html:33
+#: templates/include/notes/notesdisplay.html:37
 #: templates/scrapbook/notes/addNote.html:9
 #: templates/scrapbook/notes/notesdisplay.html:22
 #: templates/workingset/index.html:286
@@ -1629,7 +1629,7 @@ msgid "Create a new frame"
 msgstr "生成一个新的知识包"
 
 #: templates/framebook/notes/notesdisplay.html:14
-#: templates/include/notes/notesdisplay.html:32
+#: templates/include/notes/notesdisplay.html:36
 msgid "Type of linkage"
 msgstr "链条类型"
 
@@ -2243,32 +2243,36 @@ msgstr "显示"
 msgid "Less"
 msgstr "更少"
 
-#: templates/include/notes/notesdisplay.html:27
+#: templates/include/notes/notesdisplay.html:25
+msgid "Viewing under tag:"
+msgstr "正在浏览的标签："
+
+#: templates/include/notes/notesdisplay.html:31
 msgid "Create a frame"
 msgstr "生成一个包"
 
-#: templates/include/notes/notesdisplay.html:59
+#: templates/include/notes/notesdisplay.html:63
 msgid "Folder"
 msgstr "文件夹"
 
-#: templates/include/notes/notesdisplay.html:62
+#: templates/include/notes/notesdisplay.html:66
 msgid "Search term is"
 msgstr "搜索词条是"
 
-#: templates/include/notes/notesdisplay.html:69
+#: templates/include/notes/notesdisplay.html:73
 msgid "Save this search as a folder"
 msgstr "将这个搜索存为一个文件夹"
 
-#: templates/include/notes/notesdisplay.html:80
+#: templates/include/notes/notesdisplay.html:84
 msgid "Viewing notes under tag path"
 msgstr "浏览一个标签路径下的笔记"
 
-#: templates/include/notes/notesdisplay.html:83
+#: templates/include/notes/notesdisplay.html:87
 msgid ""
 "There are more than 100 notes having this tag. Only the first 100 are shown."
 msgstr "有超过100个笔记含有此标签。只显示了头100个。"
 
-#: templates/include/notes/notesdisplay.html:111
+#: templates/include/notes/notesdisplay.html:115
 msgid "You don't have any notes yet! Start making notes every day!"
 msgstr "你还没有任何笔记！现在就开始每天做些笔记！"
 

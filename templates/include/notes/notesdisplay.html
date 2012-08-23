@@ -19,6 +19,10 @@
 			{% endblock %}
 		{% endif %}  
 		
+        
+        {% if current_tag %}<br/>
+			{% trans "Viewing under tag:" %} <a href="/{{profile_username}}/settings/tags/tag/{{current_tag}}/">{{current_tag}}</a>
+		{% endif %}  
 		
 		
 		<br/><br/>
