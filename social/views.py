@@ -855,7 +855,7 @@ def group_tag(request, groupname, bookname, tag_name):
     profile_member = Group.objects.get(name=groupname)
     return render_to_response('social/notes/group_notes.html', {'group':group, 'note_list':paged_notes,'sort':sort, 'current_tag':tag_name, 'bookname':bookname,\
                                           'profile_member':profile_member, 'tags':tags, 'appname':'groups', 'cl':cl},\
-                                                  context_instance=RequestContext(request))
+                                                  context_instance=RequestContext(request,  {'note_type':bookname_note_type_dict.get(bookname)}))
     
 
 @login_required
