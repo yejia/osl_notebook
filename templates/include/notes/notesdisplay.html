@@ -20,8 +20,8 @@
 		{% endif %}  
 		
         
-        {% if current_tag %}<br/>
-			{% trans "Viewing under tag:" %} <a href="/{{profile_username}}/settings/tags/tag/{{current_tag}}/">{{current_tag}}</a>
+        {% if current_tag %}<br/><br/>
+			{% trans "Viewing under tag:" %}  {% if current_tag == 'untagged' %}{{current_tag}}{% else %}  <a href="/{{profile_username}}/settings/tags/tag/{{current_tag}}/">{{current_tag}}</a>{% endif %}  
 		{% endif %}  
 		
 		
