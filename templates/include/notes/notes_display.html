@@ -82,7 +82,8 @@
                 <div class="brief_display"   {% if bookname == 'framebook' %}id="frame" {% endif %} >
 			         <table class="note_table">
 			            <tr>
-				             {% block note_brief_table_td_note_type%}                
+				             {% block note_brief_table_td_note_type%}   
+                               <td><a href="/{{profile_username}}/{{bookname}}/notes/note/{{ note.id }}/"><img src="/site_media/img/{{note_type}}.png" title="{% trans 'note id' %} {{note.id}}" class="clickable"/></a></td>                          
 				             {% endblock %}   
 				             {% block note_brief_table_td1%}
 				                <td class="note_table_td1 structure">            

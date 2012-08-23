@@ -414,7 +414,7 @@ def index(request, username, bookname):
     
 
     return render_to_response(book_template_dict.get(bookname)+'notes/notes.html', context, \
-                              context_instance=RequestContext(request,{'bookname': bookname,'book_uri_prefix':'/'+username}))
+                              context_instance=RequestContext(request,{'bookname': bookname, 'note_type':bookname_note_type_dict.get(bookname),'book_uri_prefix':'/'+username}))
 
 
 def  __getQStr(request):

@@ -15,3 +15,4 @@ model_book_dict = {'Note':'notebook', 'Snippet':'snippetbook','Bookmark':'bookma
 search_fields_dict = {'notebook':('title','desc'), 'snippetbook':('title','desc'), 'bookmarkbook':('title','desc', 'url'), \
                       'scrapbook':('title','desc', 'url'),'framebook':('title','desc')}
 
+bookname_note_type_dict = {'notebook':'Note', 'snippetbook':'Snippet','bookmarkbook':'Bookmark', 'scrapbook': 'Scrap','framebook': 'Frame'}

@@ -3,7 +3,7 @@
 
 
             {% block note_brief_table_td_note_type%}
-                <td><img src="/site_media/img/{{note.get_note_type}}.png" title="{{note.get_note_type}}"/></td>
+                <td><a href="/{{profile_username}}/{{note.get_note_bookname}}/notes/note/{{ note.id }}/"><img src="/site_media/img/{{note.get_note_type}}.png" title="{% trans 'note id' %} {{note.id}}"/></a></td>
               {% endblock %}   
                
             {% block note_brief_table_td1%}
