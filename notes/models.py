@@ -721,7 +721,8 @@ class Note_Comment(models.Model):
 #For now, we don't make frame of Snippet/Bookmark/Scrap. There are only frames of Notes. 
 #TODO: clean up code that duplicate with those in Note
 class Frame(Note):       
-    attachment = models.FileField(upload_to=get_storage_loc, blank=True, storage=fs, verbose_name=ugettext_lazy('Attachment'))    
+    #max_length=100 is the defaul value. Don't change it for now. If the user realy need longer file name, then change it. TODO:
+    attachment = models.FileField(upload_to=get_storage_loc, max_length=100,  blank=True, storage=fs, verbose_name=ugettext_lazy('Attachment'))    
     
     #TODO: notes reference to the id of Note instead of note_id. Unlike ForeignKey field, ManyToManyField
     #doesn't allow specifying a to_field argument. Think of whether to reference to note_id.

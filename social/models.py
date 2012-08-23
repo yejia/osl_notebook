@@ -387,7 +387,7 @@ class Social_Note(models.Model):
        
 
 class Social_Snippet(Social_Note):
-    attachment = models.FileField(upload_to=get_storage_loc,blank=True, storage=fs, verbose_name=ugettext_lazy('Attachment'),)
+    attachment = models.FileField(upload_to=get_storage_loc, max_length=100, blank=True, storage=fs, verbose_name=ugettext_lazy('Attachment'),)
     
 
 
@@ -411,7 +411,7 @@ class Social_Scrap(Social_Note):
 
 
 class Social_Frame(Social_Note):
-    attachment = models.FileField(upload_to=get_storage_loc, blank=True, storage=fs, verbose_name=ugettext_lazy('Attachment'),)   
+    attachment = models.FileField(upload_to=get_storage_loc, max_length=100,  blank=True, storage=fs, verbose_name=ugettext_lazy('Attachment'),)   
     notes = models.ManyToManyField(Social_Note, related_name='in_frames', through="Social_Frame_Notes")
     
     def __unicode__(self):

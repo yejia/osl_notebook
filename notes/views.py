@@ -1252,6 +1252,15 @@ def update_note(request, note_id, username, bookname):
         note.url = url
     file = request.FILES.get('attachment')     
     attachment_clear = request.POST.get('attachment-clear')    
+    
+    full_name = get_storage_loc(note, file.name)
+    
+    if len(full_name) > 100:
+        messages.error(request, _("Error uploading the file. The file name is too long! Please use a shorter file name. You can reduce your file name by ")+str((len(full_name)-100))+_(' letters.')) #TODO
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))    
+    
+    #TODO: validate the uploaded file for security
+    
     #TODO:check the official way of using attachment-clear field or ClearableFileInput
     if file or attachment_clear:
         if note.get_note_type() == 'Frame':
