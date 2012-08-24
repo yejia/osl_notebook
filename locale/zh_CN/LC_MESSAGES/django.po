@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-24 17:35+0800\n"
+"POT-Creation-Date: 2012-08-24 18:43+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1408,7 +1408,11 @@ msgstr "为了方便加摘录，您可以将下面这个链接拖到你的浏览
 msgid "Add a scrap"
 msgstr "加一个网摘"
 
-#: templates/doc/for_new_users.html:34
+#: templates/doc/for_new_users.html:33
+msgid "Here is how these two buttons look like in your browser bookmark bar."
+msgstr "这两个按钮在你的浏览器的书签栏里的样子如下图所示："
+
+#: templates/doc/for_new_users.html:37
 msgid ""
 "There are two tags automatically added when a new user is generated: "
 "untagged, notebook feedbacks. \"untagged\" is the default tag used for all "
@@ -1419,48 +1423,48 @@ msgstr ""
 "feedbacks。 \"untagged\"是一切没有无标签项的默认标签。\"notebook feedbacks"
 "\"是供用户对本笔记本应用程序提出反馈。"
 
-#: templates/doc/for_new_users.html:37
+#: templates/doc/for_new_users.html:40
 msgid ""
 " You can save your queries on snippets/bookmarks/scraps into a dynamic "
 "snippetbook/bookmarkbook/scrapbook."
 msgstr "你可以把将你对便条/网址/网摘的搜索存成动态的便条本/网址本/网摘本。"
 
-#: templates/doc/for_new_users.html:40
+#: templates/doc/for_new_users.html:43
 msgid "About search"
 msgstr "关于搜索"
 
-#: templates/doc/for_new_users.html:40
+#: templates/doc/for_new_users.html:43
 msgid ""
 "You can do some complex searches in the search box. Below are the sample "
 "queries"
 msgstr "你可以在搜索框里做一些复杂的搜索。下面是一些例子。"
 
-#: templates/doc/for_new_users.html:43
+#: templates/doc/for_new_users.html:46
 msgid "Note on notation"
 msgstr "标注说明"
 
-#: templates/doc/for_new_users.html:57
+#: templates/doc/for_new_users.html:60
 msgid " About sharing to your public notebook"
 msgstr "关于共享到你的公开笔记本"
 
-#: templates/doc/for_new_users.html:57
+#: templates/doc/for_new_users.html:60
 msgid ""
 " Any note you make that is not marked as private will be pushed to your "
 "social public notebook, together with its tags."
 msgstr ""
 "你做的任何非隐私的笔记会共享到你的公开笔记本去，这条笔记的标签也会被共享。"
 
-#: templates/doc/for_new_users.html:58
+#: templates/doc/for_new_users.html:61
 msgid ""
 "Your private tags, however, won't be pushed over to your social public "
 "notebook."
 msgstr "但是你的私人标签，不会被共享到你的公开笔记本。"
 
-#: templates/doc/for_new_users.html:61
+#: templates/doc/for_new_users.html:64
 msgid " About groups"
 msgstr "关于小组"
 
-#: templates/doc/for_new_users.html:61
+#: templates/doc/for_new_users.html:64
 msgid ""
 " A group has several tags that are added by the group admin. (The creater of "
 "the group is automatically the admin of the group.) After you join a group, "
@@ -1471,18 +1475,18 @@ msgstr ""
 "理员。）你加入这个小组后，你可以在你的个人笔记本做笔记。只要你给笔记加任何这"
 "个小组的标签，这条笔记就会被共享到该小组。"
 
-#: templates/doc/for_new_users.html:62
+#: templates/doc/for_new_users.html:65
 msgid "Notes that are private, however, won't be pushed to the social space."
 msgstr "隐私笔记，不会被共享到公共空间。"
 
-#: templates/doc/for_new_users.html:62
+#: templates/doc/for_new_users.html:65
 msgid ""
 " If you add a sharinggroup:yourgroupname tag to the note, the sharing "
 "machanism will be different."
 msgstr ""
 "如果你加一个sharinggroup:yourgroupname标签到你的笔记，分享的机制会不同。"
 
-#: templates/doc/for_new_users.html:63
+#: templates/doc/for_new_users.html:66
 msgid ""
 " Any note you add a sharinggroup:yourgroupname tag will be pushed to that "
 "group, even if the note has no any other tags of that group or the note is "
@@ -1491,15 +1495,15 @@ msgstr ""
 "任何加了sharinggroup:yourgroupname标签的笔记会被共享到那个小组，即使这条笔记"
 "不含该小组的标签或者笔记是隐私的。"
 
-#: templates/doc/for_new_users.html:68
+#: templates/doc/for_new_users.html:71
 msgid "Below are for advanced users only"
 msgstr "下面的仅供高级用户"
 
-#: templates/doc/for_new_users.html:70
+#: templates/doc/for_new_users.html:73
 msgid "About working set"
 msgstr "关于工作区"
 
-#: templates/doc/for_new_users.html:70
+#: templates/doc/for_new_users.html:73
 msgid ""
 "A working set is a set of tags that you can work with when viewing stuff in "
 "the notebook. If you have a lot of tags, it is a good idea to choose a "
@@ -1508,11 +1512,11 @@ msgstr ""
 "一个工作区是一组标签，你可以用来浏览或记录你的笔记本。如果你使用很多的标签，"
 "可以用工作区来只使用这个工作区的标签来浏览或记录你的笔记本。"
 
-#: templates/doc/for_new_users.html:73
+#: templates/doc/for_new_users.html:76
 msgid "About cache"
 msgstr "关于缓存区"
 
-#: templates/doc/for_new_users.html:73
+#: templates/doc/for_new_users.html:76
 msgid ""
 " Cache is used to help you when working with notes. For example, you can "
 "find some notes by search. Then add those notes to a cache. Do a search "
@@ -1523,11 +1527,11 @@ msgstr ""
 "缓存区。然后再搜索找到一些其他笔记，你也把他们加入该缓存区。然后浏览该缓存区"
 "的所有笔记，对他们进行批量处理。"
 
-#: templates/doc/for_new_users.html:76
+#: templates/doc/for_new_users.html:79
 msgid "About frame"
 msgstr "关于知识包"
 
-#: templates/doc/for_new_users.html:76
+#: templates/doc/for_new_users.html:79
 msgid "Frame is a set of notes/bookmarks/scraps packaged together."
 msgstr "一个知识包是一组便条/网址/网摘。"
 
