@@ -955,7 +955,10 @@ font-size:0px;
 margin:-3px;
 padding:0px;
 }
-
+.spacing{
+margin:3px;
+padding:3px;
+}
 
 .cache_item{
 font-size:10px;

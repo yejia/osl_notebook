@@ -911,7 +911,11 @@ $("#ac_tags").tagit("removeAll");
                         parent.find('#add_public_comment_box').show();      
                 });
                 
-               
+               $('span#comments_on_included').click(function(){                   
+                        parent = toggleBox($(this));                                                
+                        parent.find('#add_comments_included_box').show();      
+                });
+                
                 
             $('span#courses'). click(function(){            
                      parent = toggleBox($(this));                

@@ -499,6 +499,14 @@ class Social_Frame(Social_Note):
         return   offsprings        
 
 
+
+    def get_included_comments(self):
+        ns = self.get_offsprings()
+        comments = Social_Note_Comment.objects.filter(note__id__in=ns) 
+        return comments
+        
+        
+
 class Social_Frame_Notes(models.Model):
     social_frame = models.ForeignKey(Social_Frame, related_name='note_and_frame') #TODO:
     social_note = models.ForeignKey(Social_Note)

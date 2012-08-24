@@ -47,9 +47,12 @@ $(document).ready(function(){
  {% comment %}
 It is too much computing for below. So don't do this on notes list page, otherwise it takes about 10 seconds to load a page
 {% endcomment %}            
- {% if  note.get_note_type == 'Frame'  and pagename == 'note' %}         
+ {% if  note.get_note_type == 'Frame'  and pagename == 'note' %} 
+              {% comment %}For now, don't show this in note list display page. It might slow down performance{% endcomment %}    
+            <span class="note_tabs_item" id="comments_on_included">{% trans "Comments on included notes" %}({{social_note.social_frame.get_included_comments.count}})</span>   &nbsp;&nbsp;   
              <span class="note_tabs_item"  id="inner_links"  title="{% trans "Notebook internal references of this note" %}">{% trans "Related Frames" %}(<span id="size_of_related_frames">{% comment %}{{note.get_size_of_related_frames}}{% endcomment %}</span>)</span>
              &nbsp;&nbsp;    
+            
  {% endif %}                 
 {% block courses %}                
 {% endblock %}              
@@ -109,7 +112,19 @@ It is too much computing for below. So don't do this on notes list page, otherwi
                         {% trans "No related frames" %}
                 {% endfor %} {% endcomment %}
              </div> 
-              </div>             
+              </div>  
+
+
+
+
+            <div  class="add_box" id="add_comments_included_box" style="display:none;"> 
+            <div id="public_comments">
+                {% for comment in social_note.social_frame.get_included_comments %}                    
+                     <div comment_id="{{comment.id}}" class="spacing"><a href="/social/{{comment.commenter}}">{{comment.commenter}}</a>: {{comment.desc}}   &nbsp;&nbsp;&nbsp;<span class="grey">({{comment.init_date|timesince}}{% trans " ago" %})</span>    {% if user.username == comment.commenter.username %}<br/>
+                     {% trans "on " %}  <a href="/social/{{comment.note.owner.username}}/{{comment.note.get_note_bookname}}/notes/note/{{ comment.note.id }}">{% if comment.note.desc %}{{comment.note.desc}}{% else %}{{comment.note.title|default:_('(No Title)')}}{% endif %}</a>{% endif %}</div>                     
+                {% endfor %}
+             </div>
+              </div>  
  {% endif %}        
 
 
