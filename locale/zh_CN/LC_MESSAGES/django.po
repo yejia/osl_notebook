@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-23 18:10+0800\n"
+"POT-Creation-Date: 2012-08-24 17:35+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -173,24 +173,24 @@ msgstr ""
 "这个网址已经成功添加到您的网址本里。您可以关闭这个窗口，或者其会在1秒后自动关"
 "闭。"
 
-#: notes/models.py:189 notes/models.py:1164 social/models.py:753
+#: notes/models.py:189 notes/models.py:1165 social/models.py:753
 #: templates/framebook/notes/notesdisplay.html:18
 #: templates/include/notes/notesdisplay.html:40
 #: templates/scrapbook/notes/notesdisplay.html:28
 msgid "Title"
 msgstr "标题"
 
-#: notes/models.py:189 notes/models.py:1164 social/models.py:753
+#: notes/models.py:189 notes/models.py:1165 social/models.py:753
 msgid "The size of the title is limited to 2000 characaters."
 msgstr "标题的长度应小于2000字。"
 
-#: notes/models.py:192 notes/models.py:1165 social/models.py:595
+#: notes/models.py:192 notes/models.py:1166 social/models.py:595
 #: social/models.py:754 templates/areas/area.html:190
 #: templates/areas/index.html:53
 msgid "Description"
 msgstr "正文"
 
-#: notes/models.py:192 notes/models.py:1165 social/models.py:754
+#: notes/models.py:192 notes/models.py:1166 social/models.py:754
 msgid "The size of the desc is limited to 2000 characaters."
 msgstr "正文的长度应小于2000字。"
 
@@ -229,17 +229,17 @@ msgstr "最后修改时间"
 msgid "self ranking"
 msgstr "原作者的评级"
 
-#: notes/models.py:725 snippets/models.py:14 social/models.py:390
+#: notes/models.py:726 snippets/models.py:14 social/models.py:390
 #: social/models.py:414 templates/framebook/notes/notesdisplay.html:20
 #: templates/include/notes/notesdisplay.html:42
 msgid "Attachment"
 msgstr "附件"
 
-#: notes/models.py:1162 social/models.py:751
+#: notes/models.py:1163 social/models.py:751
 msgid "Language"
 msgstr "语言"
 
-#: notes/models.py:1163 social/models.py:752
+#: notes/models.py:1164 social/models.py:752
 msgid "Original language"
 msgstr "原来的语言"
 
@@ -267,7 +267,7 @@ msgstr ""
 msgid "note"
 msgstr "条笔记"
 
-#: notes/views.py:1088 templates/include/notes/note/notedisplay.html:84
+#: notes/views.py:1088 templates/include/notes/note/notedisplay.html:83
 #: templates/social/include/notes/note/notedisplay.html:28
 msgid "notes"
 msgstr "条笔记"
@@ -799,7 +799,7 @@ msgstr "的学习领域"
 #: templates/areas/area.html:95 templates/include/groups_menu.html:8
 #: templates/include/notes/addNote.html:117
 #: templates/include/notes/notes_display.html:56
-#: templates/include/notes/note/notedisplay.html:134
+#: templates/include/notes/note/notedisplay.html:133
 #: templates/snippetbook/notes/show_note_added_js.html:11
 #: templates/snippetbook/notes/show_note_added_js.html:13
 #: templates/social/group/groups.html:74
@@ -1268,28 +1268,28 @@ msgstr ""
 "在笔记列表显示页面，你可以将你的鼠标放在每条笔记前代表该笔记类型的小图标上，"
 "从跳出的说明框里你可以看到这条笔记的id。"
 
-#: templates/doc/faq.html:39 templates/doc/faq.html.py:54
-#: templates/doc/faq.html:58 templates/doc/faq.html.py:63
-#: templates/doc/faq.html:77
+#: templates/doc/faq.html:39 templates/doc/faq.html.py:55
+#: templates/doc/faq.html:61 templates/doc/faq.html.py:66
+#: templates/doc/faq.html:80
 msgid "See the screenshot."
 msgstr "看截图。"
 
-#: templates/doc/faq.html:45
+#: templates/doc/faq.html:46
 msgid "How to add notes to a frame?"
 msgstr "如何将笔记放入一个知识包里？"
 
-#: templates/doc/faq.html:49
+#: templates/doc/faq.html:50
 msgid "There are two ways to add a note to a frame."
 msgstr "有两种方法来将笔记放入一个知识包。"
 
-#: templates/doc/faq.html:52
+#: templates/doc/faq.html:53
 msgid ""
 "If you want to add existing notes to a frame, you can enter their note ids "
 "in the first input box."
 msgstr ""
 "如果你想将已有的笔记添加到一个知识包里，你可以在第一输入框里输入笔记的id。"
 
-#: templates/doc/faq.html:56
+#: templates/doc/faq.html:59
 msgid ""
 "Tip for users who enabled advanced features: you can use cache to put the "
 "notes that you want to add into a cache first. Then copy the note ids from "
@@ -1298,7 +1298,7 @@ msgstr ""
 "如果你在使用高级功能，这里是一个小技巧：你可以使用缓存区，将想添加的笔记先放"
 "入缓存区中，然后从缓存区将那些id拷贝出来。"
 
-#: templates/doc/faq.html:61
+#: templates/doc/faq.html:64
 msgid ""
 "If you want to create a note (currently you can only create a snippet "
 "directly inside a frame), you can write inside the second input box directly."
@@ -1306,11 +1306,11 @@ msgstr ""
 "如果你想在包里直接生成一个新的笔记（目前只能在一个知识包里只能生成便条），你"
 "可以在第二个输入框里直接写入便条的文字。"
 
-#: templates/doc/faq.html:71
+#: templates/doc/faq.html:74
 msgid "How to upload a file?"
 msgstr "如何上传文件？"
 
-#: templates/doc/faq.html:75
+#: templates/doc/faq.html:78
 msgid ""
 "You cannot add a file to a note when creating the note. However, after "
 "creating the note (snippet, bookmark, scrap, or frame), you can add file as "
@@ -1319,7 +1319,7 @@ msgstr ""
 "你不能在生成一个新的笔记的时候就同时上传一个文件到这个笔记里。但是，当笔记"
 "（便条，网址，网摘，或知识包）生成后，你可以上传文件作为该笔记的附件。"
 
-#: templates/doc/faq.html:75
+#: templates/doc/faq.html:78
 msgid ""
 "You can do so at the single note display page of that note, and click on "
 "\"Edit this note\" at the bottom."
@@ -1327,7 +1327,7 @@ msgstr ""
 "你可以去单个笔记的显示页面做这个操作。在那里点击页面底部的\"编辑这个笔记\"链"
 "接。"
 
-#: templates/doc/faq.html:84
+#: templates/doc/faq.html:87
 msgid ""
 "I am exploring knowledge in several areas. How do I use this notebook to "
 "help me explore and organize my knowledge?"
@@ -1335,23 +1335,23 @@ msgstr ""
 "我现在在几个领域进行知识的探索和积累。我如何用这个笔记本帮助我整理我正在形成"
 "的知识？"
 
-#: templates/doc/faq.html:90
+#: templates/doc/faq.html:93
 msgid ""
 "Use tags to mark the experiences or useful info you obtained daily in those "
 "areas."
 msgstr "用标签来标记你从日常生活中在这几个领域积累的经验或者有用的信息。"
 
-#: templates/doc/faq.html:93
+#: templates/doc/faq.html:96
 msgid "Use knowledge frame to put notes into a topic."
 msgstr "形成主题性的知识包。"
 
-#: templates/doc/faq.html:96
+#: templates/doc/faq.html:99
 msgid ""
 "Use tag tree to demonstrate the knowledge structure in this area and help "
 "you access your knowledge."
 msgstr "用标签树来展现这个领域的知识结构并帮助你快速的访问其中的知识。"
 
-#: templates/doc/faq.html:99
+#: templates/doc/faq.html:102
 msgid ""
 "When you have accumulated enough knowledge in an area, you can build "
 "\"learning area\" with the notes, frames, and tag trees."
@@ -1359,7 +1359,7 @@ msgstr ""
 "当你在某个领域积累了足够的知识，你就可以用这些笔记，知识包和标签树建立一个"
 "\"学习领域\"。"
 
-#: templates/doc/faq.html:102
+#: templates/doc/faq.html:105
 msgid ""
 "Once your knowledge in an area is mature, it is time for you to open a "
 "course or a slearning salon."
@@ -1675,7 +1675,7 @@ msgstr "原作者自评重要性"
 #: templates/framebook/notes/note/children.html:58
 #: templates/framebook/notes/note/children.html:73
 #: templates/framebook/notes/note/children.html:75
-#: templates/framebook/notes/note/notedisplay.html:60
+#: templates/framebook/notes/note/notedisplay.html:61
 #: templates/include/notes/notes_display.html:142
 #: templates/notebook/notes/note/notedisplay.html:43
 #: templates/notebook/notes/note/notedisplay.html:48
@@ -1686,31 +1686,38 @@ msgstr "原作者自评重要性"
 msgid "attachment"
 msgstr "附件"
 
+#: templates/framebook/notes/note/children.html:56
+#: templates/framebook/notes/note/children.html:58
+#: templates/framebook/notes/note/children.html:73
+#: templates/framebook/notes/note/children.html:75
+msgid "No attachment"
+msgstr "没有附件"
+
 #: templates/framebook/notes/note/notedisplay.html:9
 #: templates/social/framebook/notes/note/notedisplay.html:7
 msgid "View all frames"
 msgstr "浏览全部的知识包"
 
-#: templates/framebook/notes/note/notedisplay.html:23
+#: templates/framebook/notes/note/notedisplay.html:24
 #: templates/social/framebook/notes/note/notedisplay.html:13
 msgid "notes included"
 msgstr "包含的笔记"
 
-#: templates/framebook/notes/note/notedisplay.html:24
+#: templates/framebook/notes/note/notedisplay.html:25
 #: templates/include/notes/menu/sort_menu.html:5
 #: templates/social/framebook/notes/note/notedisplay.html:14
 msgid "Sorting"
 msgstr "排序"
 
-#: templates/framebook/notes/note/notedisplay.html:27
-#: templates/framebook/notes/note/notedisplay.html:29
+#: templates/framebook/notes/note/notedisplay.html:28
+#: templates/framebook/notes/note/notedisplay.html:30
 #: templates/social/framebook/notes/note/notedisplay.html:17
 #: templates/social/framebook/notes/note/notedisplay.html:19
 msgid "By default"
 msgstr "根据默认"
 
-#: templates/framebook/notes/note/notedisplay.html:32
-#: templates/framebook/notes/note/notedisplay.html:34
+#: templates/framebook/notes/note/notedisplay.html:33
+#: templates/framebook/notes/note/notedisplay.html:35
 #: templates/include/notes/menu/sort_menu.html:27
 #: templates/include/notes/menu/sort_menu.html:29
 #: templates/social/framebook/notes/note/notedisplay.html:22
@@ -1718,24 +1725,24 @@ msgstr "根据默认"
 msgid "By Importance"
 msgstr "根据重要性"
 
-#: templates/framebook/notes/note/notedisplay.html:38
+#: templates/framebook/notes/note/notedisplay.html:39
 msgid "You can drag the notes to change the ordering and save it"
 msgstr "你可以拖拽下面的笔记来改变它们的排序"
 
-#: templates/framebook/notes/note/notedisplay.html:38
+#: templates/framebook/notes/note/notedisplay.html:39
 msgid "Save the order"
 msgstr "保存当前排序"
 
-#: templates/framebook/notes/note/notedisplay.html:39
+#: templates/framebook/notes/note/notedisplay.html:40
 msgid "View notes included in note list"
 msgstr "在笔记列表里浏览包含的笔记"
 
-#: templates/framebook/notes/note/notedisplay.html:39
+#: templates/framebook/notes/note/notedisplay.html:40
 #: templates/snippetbook/notes/note/linkagenotedisplay.html:44
 msgid "View in note list"
 msgstr "在笔记列表里浏览"
 
-#: templates/framebook/notes/note/notedisplay.html:41
+#: templates/framebook/notes/note/notedisplay.html:42
 #: templates/include/notes/notes_section_header.html:6
 #: templates/social/framebook/notes/note/notedisplay.html:28
 #: templates/social/include/notes/notes_section_header.html:4
@@ -1743,7 +1750,7 @@ msgstr "在笔记列表里浏览"
 msgid "List"
 msgstr "表单"
 
-#: templates/framebook/notes/note/notedisplay.html:41
+#: templates/framebook/notes/note/notedisplay.html:42
 #: templates/include/notes/notes_section_header.html:5
 #: templates/social/framebook/notes/note/notedisplay.html:28
 #: templates/social/include/notes/notes_section_header.html:4
@@ -2195,7 +2202,7 @@ msgid "relevance"
 msgstr "相关性"
 
 #: templates/include/notes/notes_display.html:76
-#: templates/include/notes/note/notedisplay.html:63
+#: templates/include/notes/note/notedisplay.html:62
 #: templates/snippetbook/notes/show_note_added_js.html:35
 msgid "soft delete"
 msgstr "软删除"
@@ -2347,7 +2354,7 @@ msgstr "笔记正文"
 
 #: templates/include/notes/inlines/notes_brief_tags_inline.html:3
 #: templates/include/notes/inlines/notes_full_tags_inline.html:6
-#: templates/include/notes/note/notedisplay.html:116
+#: templates/include/notes/note/notedisplay.html:115
 #: templates/snippetbook/notes/show_note_added_js.html:38
 #: templates/snippetbook/notes/show_note_added_js.html:44
 #: templates/snippetbook/notes/show_note_added_js.html:50
@@ -2548,11 +2555,11 @@ msgstr "显示附件"
 msgid "Hide attachment"
 msgstr "隐藏附件"
 
-#: templates/include/notes/note/notedisplay.html:61
+#: templates/include/notes/note/notedisplay.html:60
 msgid "hard delete"
 msgstr "永久删除"
 
-#: templates/include/notes/note/notedisplay.html:73
+#: templates/include/notes/note/notedisplay.html:72
 #: templates/social/include/notes/note/notedisplay.html:12
 #: templates/social/include/notes/note/notedisplay.html:17
 #: templates/social/include/notes/note/notedisplay.html:22
@@ -2560,26 +2567,26 @@ msgstr "永久删除"
 msgid "View all "
 msgstr "浏览全部"
 
-#: templates/include/notes/note/notedisplay.html:75
+#: templates/include/notes/note/notedisplay.html:74
 #: templates/social/include/notes/note/notedisplay.html:18
 msgid "bookmarks"
 msgstr "网址"
 
-#: templates/include/notes/note/notedisplay.html:78
+#: templates/include/notes/note/notedisplay.html:77
 #: templates/social/include/notes/note/notedisplay.html:23
 msgid "scraps"
 msgstr "网摘"
 
-#: templates/include/notes/note/notedisplay.html:81
+#: templates/include/notes/note/notedisplay.html:80
 #: templates/social/include/notes/note/notedisplay.html:13
 msgid "snippets"
 msgstr "便条"
 
-#: templates/include/notes/note/notedisplay.html:92
+#: templates/include/notes/note/notedisplay.html:91
 msgid "Created"
 msgstr "生成时间"
 
-#: templates/include/notes/note/notedisplay.html:131
+#: templates/include/notes/note/notedisplay.html:130
 msgid "importance"
 msgstr "重要性"
 

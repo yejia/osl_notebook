@@ -8,7 +8,7 @@
      {% include "include/notes/note/display_attachment.html" %}         
 {% endif %}
  {% if note.is_img %} <br/>
- <img src="/file/{{note.snippet.attachment.name}}" class="attachment"/>
+ <img src="/file/{{note.snippet.attachment.name}}" class="attachment attachment_img"/>
  {% endif %}
 </div>
 {% endblock %}

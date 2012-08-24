@@ -46,15 +46,15 @@
                     <div>
                         {% if note.is_img %}
                              {% if  'social' in book_uri_prefix %} 
-                                <img src="/file/{{note.social_snippet.attachment.name}}" class="attachment"/>
+                                <img src="/file/{{note.social_snippet.attachment.name}}" class="attachment attachment_img"/>
                              {% else %}
-                                <img src="/file/{{note.snippet.attachment.name}}" class="attachment"/>
+                                <img src="/file/{{note.snippet.attachment.name}}" class="attachment attachment_img"/>
                              {% endif %}
                         {% else %}   
                              {% if  'social' in book_uri_prefix %} 
-                                    <span class="attachment">{%trans 'attachment' %}: <a href="/file/{{note.social_snippet.attachment.name}}">{{note.social_snippet.attachment.name}}</a></span>
+                                    <span class="attachment">{%trans 'attachment' %}:  {% if note.social_snippet.attachment %}<a href="/file/{{note.social_snippet.attachment.name}}"> {% endif %}{{note.social_snippet.attachment.name|default:_('No attachment')}}{% if note.social_snippet.attachment %}</a> {% endif %}</span>
                              {% else %}
-                                    <span class="attachment">{%trans 'attachment' %}: <a href="/file/{{note.snippet.attachment.name}}" class="attachment">{{note.snippet.attachment.name}}</a></span>
+                                    <span class="attachment">{%trans 'attachment' %}: {% if note.snippet.attachment %}<a href="/file/{{note.snippet.attachment.name}}" class="attachment"> {% endif %}{{note.snippet.attachment.name|default:_('No attachment')}}{% if note.snippet.attachment %}</a> {% endif %}</span>
                              {% endif %}
                         {% endif %}
                     </div> 
@@ -63,15 +63,15 @@
                     <div>
                         {% if note.is_img %}
                              {% if  'social' in book_uri_prefix %} 
-                                <img src="/file/{{note.social_frame.attachment.name}}" class="attachment"/>
+                                <img src="/file/{{note.social_frame.attachment.name}}" class="attachment attachment_img"/>
                              {% else %}
-                                <img src="/file/{{note.frame.attachment.name}}" class="attachment"/>
+                                <img src="/file/{{note.frame.attachment.name}}" class="attachment attachment_img"/>
                              {% endif %}
                         {% else %}   
                              {% if  'social' in book_uri_prefix %} 
-                                    <span class="attachment">{%trans 'attachment' %}: <a href="/file/{{note.social_frame.attachment.name}}">{{note.social_frame.attachment.name}}</a></span>
+                                    <span class="attachment">{%trans 'attachment' %}: {% if note.social_frame.attachment %}<a href="/file/{{note.social_frame.attachment.name}}">{% endif %}{{note.social_frame.attachment.name|default:_('No attachment')}}{% if note.social_frame.attachment %}</a>{% endif %}</span>
                              {% else %}
-                                    <span class="attachment">{%trans 'attachment' %}: <a href="/file/{{note.frame.attachment.name}}" class="attachment">{{note.frame.attachment.name}}</a></span>
+                                    <span class="attachment">{%trans 'attachment' %}: {% if note.frame.attachment %}<a href="/file/{{note.frame.attachment.name}}" class="attachment">{% endif %}{{note.frame.attachment.name|default:_('No attachment')}}{% if note.frame.attachment %}</a>{% endif %}</span>
                              {% endif %}
                         {% endif %}
                     </div> 
