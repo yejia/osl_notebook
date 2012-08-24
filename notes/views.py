@@ -1245,7 +1245,7 @@ def update_note(request, note_id, username, bookname):
         note.tags = note.frame.get_sum_of_note_tag_ids()
     else:    
         note.vote = request.POST.get('vote')
-        note.tags = request.POST.getlist('tags')
+        #note.tags = request.POST.getlist('tags')
     url = request.POST.get('url')
     if url:
         #TODO: if note type is note

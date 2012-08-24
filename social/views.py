@@ -959,15 +959,22 @@ from notification.models import Notice
 @login_required
 def comments_4_user(request, username):  
     profile_member = Member.objects.get(username=username) 
+    current_commenter = request.GET.get('commenter', 'all')
+    
     comments1 = Social_Note_Comment.objects.filter(note__owner=profile_member).exclude(commenter=profile_member).order_by('-init_date')    
     comments2 = Social_Note_Comment.objects.filter(note__social_note_comment__commenter=profile_member).exclude(commenter=profile_member).order_by('-init_date')  
     
     #print 'comments2:', comments2    
     comments = comments1 | comments2
     comments = comments.distinct()
+    commenters = list(set(comments.values_list('commenter__username', flat=True)))
+    print 'commenters', commenters
+    if current_commenter != 'all':
+        comments = comments.filter(commenter__username=current_commenter)
+    
     #clear notifications related to comment receive
     Notice.objects.filter(notice_type__label='comment_receive', recipient=request.user).update(unseen=False)    
-    return render_to_response('social/commentsfor.html', {'comments':comments,'profile_username':username},\
+    return render_to_response('social/commentsfor.html', {'comments':comments,'profile_username':username, 'commenters':commenters, 'current_commenter': current_commenter},\
                                                   context_instance=RequestContext(request)) 
 
 

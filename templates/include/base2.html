@@ -179,7 +179,15 @@
         });
 
 
-		
+      //for comments by user page
+      
+      
+       $(":input#commenter_drop_down").change(function(){     
+                 current_select = $(this).val();
+
+		     window.location.replace('/social/{{profile_username}}/commentsfor/?commenter='+current_select)  ;    
+             
+         });    
 	});
 	
 </script>

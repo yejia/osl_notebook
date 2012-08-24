@@ -206,10 +206,11 @@
             <p>{{ note_form.vote.label_tag }}: {{note_form.vote}}</p>
         {% endblock %}
 
+ {% comment%}
         {% block note_form_tags%}
             <p>{{ note_form.tags.label_tag }}: {{note_form.tags}}</p>
         {% endblock %}
-         
+      {% endcomment%}      
          
           {% comment%}
           init_date might not be editable in django form due to its definition in model. Might want to change this. TODO:
@@ -220,7 +221,7 @@
         {% block note_form_attachment%}
         {% endblock %}
 
-        <input type="submit" value="Submit" />
+        <input type="submit" value="{% trans 'Submit'%}" />
     </form> 
 </div>
 <br/>
@@ -232,7 +233,7 @@
         <p> {{ note_trans_form.lang.label_tag }}: {{note_trans_form.lang}}</p>         
         <p> {{ note_trans_form.title.label_tag }}: {{note_trans_form.title}}</p> 
         <p>{{ note_trans_form.desc.label_tag }}: {{note_trans_form.desc}}</p> 
-        <input type="submit" value="Submit" />
+        <input type="submit" value="{% trans 'Submit'%}" />
     </form> 
 </div>
 
