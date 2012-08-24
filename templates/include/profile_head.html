@@ -3,11 +3,11 @@
 
 <table><tr><td>
 <div id="profile_head">
-<div><a href="/settings/"><img class="avatar" src={% if  profile_member.icon %}"/file/{{profile_member.icon}}"
+<div><a href="/settings/"><img class="avatar" src={% if  appname == 'friends' %}"/site_media/img/friends.png"{% else %}{% if  profile_member.icon %}"/file/{{profile_member.icon}}"
 {% else %}
 {% if  profile_member.gender == 'f' %}"/site_media/img/default_female.png"{% endif %} 
 {% if  profile_member.gender == 'm' %}"/site_media/img/default_male.jpg"{% endif %} 
-{% if  not profile_member.gender %}"/site_media/img/default_user_icon.jpg"{% endif %}{% endif %}/></a>
+{% if  not profile_member.gender %}"/site_media/img/default_user_icon.jpg"{% endif %}{% endif %}{% endif %}/></a>
 </div>
 </td>
 <td>
