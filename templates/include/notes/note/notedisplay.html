@@ -50,8 +50,7 @@
 
 
 
-<div note_id="{{note.id}}">
-<h2> 
+<div note_id="{{note.id}}" class="note_title_in_note_display">
 <img src="/site_media/img/{{note.get_note_type}}.png" title="{{note.get_note_type}}" class="noPrint"/>
  {% include "include/get_title.html" %}   
  &nbsp;&nbsp;&nbsp; 
@@ -64,7 +63,7 @@
 {% endif %}
 {% endif %}
 {% endblock %}
-</h2>
+
 </div>
 
 
@@ -141,6 +140,7 @@
 {% endblock %}
 
 {% block note_in_frames%}
+
 <div class="noPrint">
 <b>{% trans 'In frames' %} : </b>
 {% for frame in note.in_frames.all %}

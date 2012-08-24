@@ -18,6 +18,7 @@
 
 
 {% block notes_in_frame%}
+<br/><br/>
 <div class='noPrint'>
     <b>{% trans 'notes included' %}: </b> 
     {% trans "Sorting" %}
@@ -45,7 +46,7 @@
         {% tree_view_tag note %}
     </ul> 
 </div>    
-    <br/>
+    <br/><br/>
     <div note_id="{{note.id}}">
     {% include "framebook/notes/inlines/add_included_notes.html" %}   
     </div>

@@ -945,9 +945,17 @@ span.note_type{
 background-color:#00FFFF;
 padding-right:5px;
 }
+/*not sure below is used*/
 div#note_in_frame{
-margin-top:5px;
+margin:10px;
+padding:10px;
 }
+.spacing_li{
+font-size:0px;
+margin:-3px;
+padding:0px;
+}
+
 
 .cache_item{
 font-size:10px;
@@ -1066,11 +1074,25 @@ a.NotImplementedYet{
    color: #DCDCDC;
 }
 
+span.note_desc_in_frame{
+font-size:13px;
+padding:5px;
+margin:3px;
+}
+div.note_title_in_note_display{
+font-size:24px;
+padding:5px;
+margin:3px;
+padding-top:15px;
 
+}
 .attachment{
 display:none;
 height:auto;
 width:500px;
+margin:20px;
+padding:8px;
+border:1px dashed green
 }
 
 span#display_attachment{

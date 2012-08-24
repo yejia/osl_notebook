@@ -2742,7 +2742,7 @@ def mobile(request):
 def doc(request):
     return render_to_response('doc/doc.html', context_instance=RequestContext(request))
 
-
+#TODO: get this from the faq frame, then render it with a special template 
 def faq(request):
     return render_to_response('doc/faq.html', context_instance=RequestContext(request))
 
