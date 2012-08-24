@@ -1188,6 +1188,11 @@ text-align:right;
 vertical-align:bottom;
 overflow:visible;
 }
+img.screenshot{
+padding:20px;
+margin:30px;
+border:1px groove red;
+}
 .site_branding{
 font-size:18px;
 font-weight:700;
