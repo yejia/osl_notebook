@@ -13,12 +13,12 @@
 {% trans "View by commenter:" %}
 
 <select id="commenter_drop_down"  name="commenter">
-{% for commenter in commenters %}	
- {% if current_commenter == 'all' %}
+{% if current_commenter == 'all' %}
             <option value="all" selected="selected">{% trans "All" %}</option>
  {% else %}
             <option value="all">{% trans "All" %}</option>
- {% endif %}    
+ {% endif %}  
+{% for commenter in commenters %}	   
  {% if current_commenter == commenter %}
             <option value="{{commenter}}" selected="selected">{{commenter}}</option>
  {% else %}
