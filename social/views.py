@@ -967,8 +967,12 @@ def comments_4_user(request, username):
     #print 'comments2:', comments2    
     comments = comments1 | comments2
     comments = comments.distinct()
+    
+    #try use aggregation to get the count of comments for each commenter TODO:
     commenters = list(set(comments.values_list('commenter__username', flat=True)))
-    print 'commenters', commenters
+    
+    commenters.sort()
+    #print 'commenters', commenters
     if current_commenter != 'all':
         comments = comments.filter(commenter__username=current_commenter)
     
