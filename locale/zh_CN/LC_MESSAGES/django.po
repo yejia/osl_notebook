@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-25 20:33+0800\n"
+"POT-Creation-Date: 2012-08-25 21:19+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -928,9 +928,17 @@ msgstr "编辑该学习领域"
 msgid "Enter a frame's id"
 msgstr "输入一个知识包的id"
 
-#: templates/areas/area.html:180
-msgid "Enter only 1 tag tree in the input box"
-msgstr "在输入框里只输入一个标签树"
+#: templates/areas/area.html:176 templates/areas/index.html:43
+msgid "Click to see what is note id"
+msgstr ""
+
+#: templates/areas/area.html:180 templates/areas/index.html:47
+msgid "Enter only 1 tag tree in the input box."
+msgstr "在输入框里只输入一个标签树。"
+
+#: templates/areas/area.html:180 templates/areas/index.html:47
+msgid "And it has to be an existing tag tree."
+msgstr "并且必须是已经存在的标签树。"
 
 #: templates/areas/index.html:20
 msgid "Learning areas are the major learning areas that you are learning"
@@ -939,14 +947,6 @@ msgstr "学习领域是你正在学习的几个主要领域"
 #: templates/areas/index.html:30
 msgid "Add a learning area"
 msgstr "添加一个学习领域"
-
-#: templates/areas/index.html:47
-msgid "Enter only 1 tag tree in the input box."
-msgstr "在输入框里只输入一个标签树。"
-
-#: templates/areas/index.html:47
-msgid "And it has to be an existing tag tree."
-msgstr "并且必须是已经存在的标签树。"
 
 #: templates/areas/index.html:65
 msgid "All areas"
@@ -3513,6 +3513,9 @@ msgstr "全部工作区"
 #: templates/workingset/index.html:370
 msgid "Make Current"
 msgstr "设成当前"
+
+#~ msgid "Enter only 1 tag tree in the input box"
+#~ msgstr "在输入框里只输入一个标签树"
 
 #~ msgid "on "
 #~ msgstr "对包含的笔记："

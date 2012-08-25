@@ -127,7 +127,7 @@
             }else{            
                     var tag_name = $(this).parents('li[tag_name]').attr('tag_name');
                     var parent_name = $(this).parents('li[parent_name]').attr('parent_name');
-                    $(this).load('removeFrame/',{ 'parent_name':parent_name, 'tag_name':tag_name});
+                    $(this).load('/{{user.username}}/tagframes/removeFrame/',{ 'parent_name':parent_name, 'tag_name':tag_name});
                     $(this).parents("li[tag_name="+tag_name+"]").remove();      
            }      
       });
