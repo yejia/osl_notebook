@@ -183,14 +183,13 @@ def area_notes(request, username, areaname, bookname):
                             username, bookname)
     context['area'] = area
      
-    print 'context', context
-    print 'username', username
+
     #context['tags'] = tags
     #profile_member = 
     return render_to_response(book_template_dict.get(bookname)+'notes/notes.html', context, \
                               context_instance=RequestContext(request,{'bookname': bookname,'book_uri_prefix':'/'+username, 'appname':'areas',
                                                                         'note_type':bookname_note_type_dict.get(bookname),
-                                                               'profile_member':Member.objects.get(username='leon')}))
+                                                               'profile_member':Member.objects.get(username=username)}))
     
     
     
