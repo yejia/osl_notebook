@@ -17,7 +17,7 @@
 
 {% block site_branding %}
 <br/>
-{{profile_username}} {% trans "'s Learning Areas" %}  <span title="{% trans 'Learning areas are the major learning areas that you are learning' %}"><img src="/media/img/admin/icon-unknown.gif"/></span>
+<a href="/social/{{profile_username}}/">{{profile_username}}</a> {% trans "'s Learning Areas" %}  <span title="{% trans 'Learning areas are the major learning areas that you are learning' %}"><img src="/media/img/admin/icon-unknown.gif"/></span>
 <br/><br/>
 
 {% endblock %}

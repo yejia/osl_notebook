@@ -14,7 +14,7 @@
 
 {% block site_branding %}
 <br/>
-{{profile_username}} {% trans "'s Tag Tree" %} <b>{{tag_tree.name}}</b>
+<a href="/social/{{profile_username}}/">{{profile_username}}</a> {% trans "'s Tag Tree" %} <b>{{tag_tree.name}}</b>
 <br/><br/>
 
 {% endblock %}

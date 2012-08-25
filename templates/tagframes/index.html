@@ -325,7 +325,7 @@
 
 {% block site_branding %}
 <br/>
-{{profile_username}} {% trans "'s Root Tag Tree" %}  <span title="{% trans 'Tag tree is used to represent the knowledge in your brain.  Note relevance is computed when rendering notes for a tag in a tree. So that the position of a tag in the tree says more about what notes you want to see there. ' %}"><img src="/media/img/admin/icon-unknown.gif"/></span>
+<a href="/social/{{profile_username}}/">{{profile_username}}</a>{% trans "'s Root Tag Tree" %}  <span title="{% trans 'Tag tree is used to represent the knowledge in your brain.  Note relevance is computed when rendering notes for a tag in a tree. So that the position of a tag in the tree says more about what notes you want to see there. ' %}"><img src="/media/img/admin/icon-unknown.gif"/></span>
 <br/><br/>
 
 {% endblock %}

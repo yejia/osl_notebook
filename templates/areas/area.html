@@ -85,7 +85,7 @@ $(document).ready(function(){
 
 
 {% block site_branding %}
-{{profile_username}} {% trans "'s Learning Area" %} : <b>{{area.name}} </b>
+<a href="/social/{{profile_username}}/">{{profile_username}}</a>{% trans "'s Learning Area" %} : <b>{{area.name}} </b>
 
 {% endblock %}
 
