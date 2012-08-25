@@ -8,7 +8,7 @@
                 <img src="/media/img/admin/icon-unknown.gif"/>
             </a>  
            {% block folder_setting %} 
-                <span class="setting-in-r-menu"><a href="/{{profile_username}}/{{bookname}}/settings/folders/">{% trans "Settings" %}</a></span>
+                {% if user.username == profile_member.username %}<span class="setting-in-r-menu"><a href="/{{user}}/{{bookname}}/settings/folders/">{% trans "Settings" %}</a></span>{% endif %}
            {% endblock %}   
     </h2>       
 	{% for folder in folders %}	

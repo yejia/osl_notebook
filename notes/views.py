@@ -414,7 +414,8 @@ def index(request, username, bookname):
     
 
     return render_to_response(book_template_dict.get(bookname)+'notes/notes.html', context, \
-                              context_instance=RequestContext(request,{'bookname': bookname, 'note_type':bookname_note_type_dict.get(bookname),'book_uri_prefix':'/'+username}))
+                              context_instance=RequestContext(request,{'bookname': bookname, 'note_type':bookname_note_type_dict.get(bookname),
+                                                               'profile_member':Member.objects.get(username=username), 'book_uri_prefix':'/'+username}))
 
 
 def  __getQStr(request):
@@ -747,11 +748,11 @@ def tags(request, username, bookname, tag_name, aspect_name):
         if aspect_name=='notes':
             return render_to_response(book_template_dict.get(bookname)+'notes/notes.html', context, \
                                       context_instance=RequestContext(request,{'bookname': bookname, 'note_type':bookname_note_type_dict.get(bookname), 'advanced': get_advanced_setting(request),\
-                                                                               'book_uri_prefix':'/'+username, 'appname':'notes', 'pagename':'notes'}))
+                                                                               'book_uri_prefix':'/'+username, 'appname':'notes', 'pagename':'notes',  'profile_member':Member.objects.get(username=username)}))
         else:
             return render_to_response(book_template_dict.get(bookname)+'notes/linkages.html', context,\
                                        context_instance=RequestContext(request,{'bookname': bookname, 'note_type':bookname_note_type_dict.get(bookname), 'advanced': get_advanced_setting(request),\
-                                                                                'book_uri_prefix':'/'+username}))
+                                                                                'book_uri_prefix':'/'+username,  'profile_member':Member.objects.get(username=username)}))
 
 
 def get_advanced_setting(request):
@@ -799,7 +800,8 @@ def caches(request, cache_id, username, bookname):
     context = __get_context(request, note_list, #default_tag_id,
                              username, bookname)	
     return render_to_response(book_template_dict.get(bookname)+'notes/note_list.html', context, context_instance=RequestContext(request,{'bookname': bookname, 'aspect_name':'notes',\
-                                                                'note_type':bookname_note_type_dict.get(bookname), 'book_uri_prefix':'/'+username}))
+                                                                'note_type':bookname_note_type_dict.get(bookname), 'book_uri_prefix':'/'+username,
+                                                                 'profile_member':Member.objects.get(username=username)}))
 
 
 
@@ -1027,13 +1029,17 @@ def __get_notes_context(request, note_list):
     else:   
         #sort by relevance
         log.debug('sorty by relevance under tag path:'+request.tag_path)
+        
+        #for ordering by relevance, order by vote first so that vote can be the secondary ordering after relevance :
+        note_list = note_list.order_by('-vote')
+        
         #it is too much computation to compute the relevance for each note. So cut the size if there are more than 100 notes. 
         #This is not right! It still need to sort by relevance first to get the first 100 more relevant notes.
         #TODO: create another table to store the relevance values for notes that are in the tag tree and do the computation separately every day.
         if len(note_list) > 100:
             note_list = note_list[:100]
             request.limited = True
-        note_list = note_list.order_by('-vote')
+        
         sorted_notes = [(note, note.get_relevance(request.tag_path)) for note in note_list]   
         sorted_notes.sort(key=lambda r: r[1],reverse = True) 
         for item  in sorted_notes:
@@ -1156,7 +1162,9 @@ def folders(request, username, bookname, folder_name):
     context.update(extra_context)     
     
     return render_to_response(book_template_dict.get(bookname)+'folders.html', context, context_instance=RequestContext(request,{'bookname': bookname,
-                                                                                        'note_type':bookname_note_type_dict.get(bookname), 'book_uri_prefix':'/'+username}))
+                                                                                        'note_type':bookname_note_type_dict.get(bookname), 
+                                                                                        'book_uri_prefix':'/'+username,
+                                                                                         'profile_member':Member.objects.get(username=username)}))
 
 
 

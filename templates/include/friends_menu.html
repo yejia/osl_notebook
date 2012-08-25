@@ -2,10 +2,10 @@
 
 <div class="module">
 
- <h2>{% trans "My Friends" %}  <span class="setting-in-r-menu"><a href="/{{user}}/friends/">{% trans "Settings" %}</a></span></h2>  
+ <h2>{% trans "My Friends" %}  {% if user.username == profile_member.username %}<span class="setting-in-r-menu"><a href="/{{user}}/friends/">{% trans "Settings" %}</a></span>{% endif %}</h2>  
 
  <ul>  
-{% for f in user.member.get_friends %}
+{% for f in profile_member.get_friends %}
  <li><a href="/social/{{ f.username }}/">{{f.username}}</a></li> 
 {% endfor %} 
 </ul>  
