@@ -142,7 +142,8 @@ def area(request, username, areaname):
     private =    theme['private'] 
     return render_to_response('areas/area.html',{'area':area,  'area_tags_with_count':area_tags_with_count, 'editAreaForm':editAreaForm,'tags':tags, \
                             'username':request.user.username,'profile_username':username,  'private':private, 'groups':groups}, \
-                    context_instance=RequestContext(request,  {'book_uri_prefix':'/'+username+'/areas/area/'+area.name}))
+                    context_instance=RequestContext(request,  {'book_uri_prefix':'/'+username+'/areas/area/'+area.name,
+                                                              }))
     
  
 
@@ -186,7 +187,9 @@ def area_notes(request, username, areaname, bookname):
     #context['tags'] = tags
     #profile_member = 
     return render_to_response(book_template_dict.get(bookname)+'notes/notes.html', context, \
-                              context_instance=RequestContext(request,{'bookname': bookname,'book_uri_prefix':'/'+username, 'appname':'areas'}))
+                              context_instance=RequestContext(request,{'bookname': bookname,'book_uri_prefix':'/'+username, 'appname':'areas',
+                                                                        'note_type':bookname_note_type_dict.get(bookname),
+                                                               'profile_member':Member.objects.get(username=username)}))
     
     
     
