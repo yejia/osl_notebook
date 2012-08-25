@@ -133,9 +133,9 @@ def remind_weekly_review(users):
             time.sleep(10)       
         except Exception as inst:
             print sys.exc_info()  
-            print type(inst)
-            print inst.args
-            print inst    
+            #print type(inst)
+            #print inst.args
+            #print inst    
              
                 
  
