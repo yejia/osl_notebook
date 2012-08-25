@@ -57,6 +57,7 @@ def index(request, username):
         
         #copied from social.views.groups()
         tag_names = post.getlist('item[tags][]')
+        #Don't allow creating new tag frame here for now. TODO:
         tag_ids = [Tag_Frame.objects.using(username).get(name=tag_name).id for tag_name in tag_names]  
                
          
@@ -103,6 +104,7 @@ def area(request, username, areaname):
         #below copied from index. merge. TODO:
         post = request.POST.copy()
         tag_names = post.getlist('item[tags][]')
+        #Don't allow creating new tag frame here for now. TODO:
         tag_ids = [Tag_Frame.objects.using(username).get(name=tag_name).id for tag_name in tag_names]         
         A = getArea(username)
         a = A.objects.get(id=post.get('id'))

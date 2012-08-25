@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-25 11:54+0800\n"
+"POT-Creation-Date: 2012-08-25 20:33+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,31 +18,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: email_digest.py:84 email_digest.py:85 notes/views.py:2084
-#: notes/views.py:2095
+#: email_digest.py:84 email_digest.py:85 notes/views.py:2086
+#: notes/views.py:2097
 msgid "Sharing snippet:"
 msgstr "分享便条："
 
-#: email_digest.py:87 email_digest.py:88 notes/views.py:2086
-#: notes/views.py:2097
+#: email_digest.py:87 email_digest.py:88 notes/views.py:2088
+#: notes/views.py:2099
 msgid "Sharing bookmark:"
 msgstr "分享网址："
 
-#: email_digest.py:90 email_digest.py:91 notes/views.py:2088
-#: notes/views.py:2099
+#: email_digest.py:90 email_digest.py:91 notes/views.py:2090
+#: notes/views.py:2101
 msgid "Sharing scrap:"
 msgstr "分享网摘："
 
-#: email_digest.py:93 email_digest.py:94 notes/views.py:2090
-#: notes/views.py:2101
+#: email_digest.py:93 email_digest.py:94 notes/views.py:2092
+#: notes/views.py:2103
 msgid "Sharing knowledge package:"
 msgstr "分享知识包："
 
-#: email_digest.py:109 notes/views.py:2103
+#: email_digest.py:109 notes/views.py:2105
 msgid "Original Note:"
 msgstr "原笔记："
 
-#: email_digest.py:114 email_digest.py:116 notes/views.py:2114
+#: email_digest.py:114 email_digest.py:116 notes/views.py:2116
 msgid "from"
 msgstr "来自"
 
@@ -154,7 +154,7 @@ msgstr "记住周末要找时间回顾你本周的学习计划："
 msgid "Time to review your weekly plan"
 msgstr "回顾一周学习计划的时间到了"
 
-#: areas/views.py:167
+#: areas/views.py:169
 msgid "You have successfully removed the group from the area."
 msgstr "你已经成功的将该小组从这个学习领域移除。"
 
@@ -272,22 +272,22 @@ msgstr "条笔记"
 msgid "notes"
 msgstr "条笔记"
 
-#: notes/views.py:1284
+#: notes/views.py:1285
 msgid ""
 "Error uploading the file. The file name is too long! Please use a shorter "
 "file name. You can reduce your file name by "
 msgstr ""
 "上传文件时发生错误。文件名太长！请用一个短点的文件名。你可以将文件名缩短"
 
-#: notes/views.py:1284
+#: notes/views.py:1285
 msgid " letters."
 msgstr "字即可。"
 
-#: notes/views.py:1308
+#: notes/views.py:1309
 msgid "Note is successfully updated!"
 msgstr "笔记更新成功！"
 
-#: notes/views.py:2105
+#: notes/views.py:2107
 msgid "Forwarded Note:"
 msgstr "转发的笔记："
 
@@ -421,48 +421,48 @@ msgstr "创建者"
 msgid "Admins"
 msgstr "管理员"
 
-#: social/views.py:611
+#: social/views.py:618
 msgid "You are not an admin of this group, and thus cannot admin this group."
 msgstr "你不是这个小组的管理员，所以不能管理这个小组。"
 
-#: social/views.py:616
+#: social/views.py:623
 msgid "You have successfully removed the member from the group."
 msgstr "你已经成功的将该成员从这个小组移除。"
 
-#: social/views.py:650
+#: social/views.py:657
 msgid "No users are entered!"
 msgstr "没有输入任何用户名！"
 
-#: social/views.py:660
+#: social/views.py:667
 msgid "You are invited to join the group "
 msgstr "你被邀请参加学习小组"
 
-#: social/views.py:661
+#: social/views.py:668
 msgid "You can visit this group at "
 msgstr "这是该学习小组的网址 "
 
-#: social/views.py:662
+#: social/views.py:669
 msgid ""
 "If you want to join this group, you can click on the \"join the group\" "
 "button."
 msgstr "如果你想加入该学习小组，你可以点击\"加入小组\"按钮。"
 
-#: social/views.py:663
+#: social/views.py:670
 msgid ""
 "After joining, if you want to remove yourself from this group, you can do "
 "that in your groups page."
 msgstr ""
 "加入学习小组后，如果你想退出该学习小组，你可以在你的学习小组页面完成此操作。"
 
-#: social/views.py:664
+#: social/views.py:671
 msgid "You are invited to group "
 msgstr "你被邀请参加学习小组"
 
-#: social/views.py:668
+#: social/views.py:675
 msgid "You have successfully sent the group invitation!"
 msgstr "你已经成功的发出了小组邀请！"
 
-#: social/views.py:1051
+#: social/views.py:1063
 msgid ""
 "Your suggestion is successfully sent to the sys admin! Thank you for your "
 "valuable suggestion!"
@@ -928,7 +928,7 @@ msgstr "编辑该学习领域"
 msgid "Enter a frame's id"
 msgstr "输入一个知识包的id"
 
-#: templates/areas/area.html:180 templates/areas/index.html:47
+#: templates/areas/area.html:180
 msgid "Enter only 1 tag tree in the input box"
 msgstr "在输入框里只输入一个标签树"
 
@@ -939,6 +939,14 @@ msgstr "学习领域是你正在学习的几个主要领域"
 #: templates/areas/index.html:30
 msgid "Add a learning area"
 msgstr "添加一个学习领域"
+
+#: templates/areas/index.html:47
+msgid "Enter only 1 tag tree in the input box."
+msgstr "在输入框里只输入一个标签树。"
+
+#: templates/areas/index.html:47
+msgid "And it has to be an existing tag tree."
+msgstr "并且必须是已经存在的标签树。"
 
 #: templates/areas/index.html:65
 msgid "All areas"
@@ -3425,7 +3433,7 @@ msgstr "删除"
 msgid "'s Tag Tree"
 msgstr "的标签树"
 
-#: templates/tagframes/tagframe.html:28
+#: templates/tagframes/tagframe.html:29
 msgid "Push the tag tree to groups"
 msgstr "向小组推送这个标签树"
 
