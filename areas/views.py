@@ -175,8 +175,9 @@ def area_notes(request, username, areaname, bookname):
     
     
     
-    default_tag_id = Tag.objects.using(username).get(name='untagged').id    
-    context = __get_context(request, note_list, default_tag_id, username, bookname)
+    #default_tag_id = Tag.objects.using(username).get(name='untagged').id    
+    context = __get_context(request, note_list, #default_tag_id, 
+                            username, bookname)
     context['area'] = area
      
     

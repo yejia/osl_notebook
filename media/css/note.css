@@ -30,6 +30,10 @@ select#lang_drop_down{
 margin-top:-10px;
 font-size: 8px;
 }
+select#frame_empty_drop_down{
+margin-top:-10px;
+font-size: 8px;
+}
 
 select#bookname_drop_down{
 color:red;

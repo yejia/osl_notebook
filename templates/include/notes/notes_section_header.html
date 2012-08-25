@@ -7,5 +7,8 @@
 		<span class="show_notes_section"><img title="show notes section" src="/site_media/img/right-arrow.jpg" class="clickable"/></span>
 		<span class="hide_notes_section"><img title="hide notes section" src="/site_media/img/down-arrow.jpg" class="clickable"/></span> 
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{% include "include/notes_pick_lang.html" %}    
+         {% if  bookname == 'framebook'  %} 
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{% include "include/frames_pick_empty.html" %} 
+        {% endif %}          
 		<span  style="float:right;"><a href="javascript:stream();" title="Alt-l">{% trans "Less" %}</a>    |    <a href="javascript:structure();" title="Alt-m">{% trans "More" %}</a></span>
 </div>
