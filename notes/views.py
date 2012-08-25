@@ -1851,7 +1851,8 @@ def frame(request, username, frame_id):
                                                              'profile_username':username, 'note_form':note_form,\
                                                              'note_trans_form':note_trans_form,'pick_lang':pick_lang}, \
                                                              context_instance=RequestContext(request,{'bookname': 'framebook',\
-                                                                     'appname':'notes' , 'pagename':'note','book_uri_prefix':'/'+username}))
+                                                                     'appname':'notes' , 'pagename':'note','book_uri_prefix':'/'+username,
+                                                                      'profile_member':Member.objects.get(username=username)}))
 
 
 
