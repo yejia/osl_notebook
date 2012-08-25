@@ -1224,7 +1224,8 @@ def note(request, username, bookname, note_id):
                                                                                    },
                                                                                     context_instance=RequestContext(request, {'bookname': bookname,\
                                                                                                                               'aspect_name':'notes',\
-                                                                                                                              'book_uri_prefix':'/'+username }))
+                                                                                                                              'book_uri_prefix':'/'+username,
+                                                                                                                               'profile_member':Member.objects.get(username=username) }))
     
 
 
