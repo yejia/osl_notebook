@@ -1,0 +1,24 @@
+{% load i18n %}
+
+<span id="frames_pick_empty">
+ 
+    {% trans "Pick empty frames" %}
+    <select id="frame_empty_drop_down"  name="pick_empty">
+            {% if not pick_empty  %}
+                <option value="" selected="selected">---</option>
+            {% else %}   
+                <option value="">---</option>
+            {% endif %}   
+            {% if pick_lang == 'Y'  %}
+                <option value="Y" selected="selected">{% trans "Empty frames" %}</option>
+            {% else %}
+                <option value="Y">{% trans "Empty frames" %}</option>
+            {% endif %}
+            {% if pick_lang == 'N'  %}
+                <option value="N" selected="selected">{% trans "Non empty frames" %}</option>
+            {% else %}
+                <option value="N">{% trans "Non empty frames" %}</option>
+            {% endif %}
+    </select>   
+
+</span>
