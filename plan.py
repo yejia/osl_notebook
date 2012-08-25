@@ -106,9 +106,9 @@ def make_monthly_plan(users):
 
 def remind_weekly_review(users):
     now = date.today()
-    this_monday = now - datetime.timedelta(days=3)
+    this_monday = now - datetime.timedelta(days=5)
     
-    print 'monday_this_week',this_monday
+    print 'monday_this_week','Weekly Plan:'+this_monday.strftime('%Y-%m-%d')+' to '
     
     for user in users:
         try:
