@@ -4,7 +4,15 @@
 
 {% block note_type%}
 <div class="noPrint">
-<a href="{{book_uri_prefix}}/framebook/notes/">{% trans 'View all frames' %}</a>
+{% if  'Weekly Plan:' in note.title %}
+    <a href="{{book_uri_prefix}}/framebook/notes/?q=Weekly Plan:">{% trans 'View all weekly plans' %}</a>
+{% else  %}
+    {% if  'Monthly Plan:' in note.title %}
+        <a href="{{book_uri_prefix}}/framebook/notes/?q=Monthly Plan:">{% trans 'View all monthly plans' %}</a>
+    {% else  %}
+        <a href="{{book_uri_prefix}}/framebook/notes/">{% trans 'View all frames' %}</a>
+   {% endif %}
+{% endif %}
 </div>
 {% endblock %}
 

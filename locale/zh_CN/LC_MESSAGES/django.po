@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-25 08:10+0800\n"
+"POT-Creation-Date: 2012-08-25 08:52+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,31 +18,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: email_digest.py:84 email_digest.py:85 notes/views.py:2059
-#: notes/views.py:2070
+#: email_digest.py:84 email_digest.py:85 notes/views.py:2060
+#: notes/views.py:2071
 msgid "Sharing snippet:"
 msgstr "分享便条："
 
-#: email_digest.py:87 email_digest.py:88 notes/views.py:2061
-#: notes/views.py:2072
+#: email_digest.py:87 email_digest.py:88 notes/views.py:2062
+#: notes/views.py:2073
 msgid "Sharing bookmark:"
 msgstr "分享网址："
 
-#: email_digest.py:90 email_digest.py:91 notes/views.py:2063
-#: notes/views.py:2074
+#: email_digest.py:90 email_digest.py:91 notes/views.py:2064
+#: notes/views.py:2075
 msgid "Sharing scrap:"
 msgstr "分享网摘："
 
-#: email_digest.py:93 email_digest.py:94 notes/views.py:2065
-#: notes/views.py:2076
+#: email_digest.py:93 email_digest.py:94 notes/views.py:2066
+#: notes/views.py:2077
 msgid "Sharing knowledge package:"
 msgstr "分享知识包："
 
-#: email_digest.py:109 notes/views.py:2078
+#: email_digest.py:109 notes/views.py:2079
 msgid "Original Note:"
 msgstr "原笔记："
 
-#: email_digest.py:114 email_digest.py:116 notes/views.py:2089
+#: email_digest.py:114 email_digest.py:116 notes/views.py:2090
 msgid "from"
 msgstr "来自"
 
@@ -272,22 +272,22 @@ msgstr "条笔记"
 msgid "notes"
 msgstr "条笔记"
 
-#: notes/views.py:1259
+#: notes/views.py:1260
 msgid ""
 "Error uploading the file. The file name is too long! Please use a shorter "
 "file name. You can reduce your file name by "
 msgstr ""
 "上传文件时发生错误。文件名太长！请用一个短点的文件名。你可以将文件名缩短"
 
-#: notes/views.py:1259
+#: notes/views.py:1260
 msgid " letters."
 msgstr "字即可。"
 
-#: notes/views.py:1283
+#: notes/views.py:1284
 msgid "Note is successfully updated!"
 msgstr "笔记更新成功！"
 
-#: notes/views.py:2080
+#: notes/views.py:2081
 msgid "Forwarded Note:"
 msgstr "转发的笔记："
 
@@ -421,48 +421,48 @@ msgstr "创建者"
 msgid "Admins"
 msgstr "管理员"
 
-#: social/views.py:609
+#: social/views.py:611
 msgid "You are not an admin of this group, and thus cannot admin this group."
 msgstr "你不是这个小组的管理员，所以不能管理这个小组。"
 
-#: social/views.py:614
+#: social/views.py:616
 msgid "You have successfully removed the member from the group."
 msgstr "你已经成功的将该成员从这个小组移除。"
 
-#: social/views.py:648
+#: social/views.py:650
 msgid "No users are entered!"
 msgstr "没有输入任何用户名！"
 
-#: social/views.py:658
+#: social/views.py:660
 msgid "You are invited to join the group "
 msgstr "你被邀请参加学习小组"
 
-#: social/views.py:659
+#: social/views.py:661
 msgid "You can visit this group at "
 msgstr "这是该学习小组的网址 "
 
-#: social/views.py:660
+#: social/views.py:662
 msgid ""
 "If you want to join this group, you can click on the \"join the group\" "
 "button."
 msgstr "如果你想加入该学习小组，你可以点击\"加入小组\"按钮。"
 
-#: social/views.py:661
+#: social/views.py:663
 msgid ""
 "After joining, if you want to remove yourself from this group, you can do "
 "that in your groups page."
 msgstr ""
 "加入学习小组后，如果你想退出该学习小组，你可以在你的学习小组页面完成此操作。"
 
-#: social/views.py:662
+#: social/views.py:664
 msgid "You are invited to group "
 msgstr "你被邀请参加学习小组"
 
-#: social/views.py:666
+#: social/views.py:668
 msgid "You have successfully sent the group invitation!"
 msgstr "你已经成功的发出了小组邀请！"
 
-#: social/views.py:1049
+#: social/views.py:1051
 msgid ""
 "Your suggestion is successfully sent to the sys admin! Thank you for your "
 "valuable suggestion!"
@@ -799,7 +799,7 @@ msgstr "的学习领域"
 #: templates/areas/area.html:95 templates/include/groups_menu.html:8
 #: templates/include/notes/addNote.html:117
 #: templates/include/notes/notes_display.html:56
-#: templates/include/notes/note/notedisplay.html:133
+#: templates/include/notes/note/notedisplay.html:141
 #: templates/snippetbook/notes/show_note_added_js.html:11
 #: templates/snippetbook/notes/show_note_added_js.html:13
 #: templates/social/group/groups.html:74
@@ -1681,7 +1681,7 @@ msgstr "原作者自评重要性"
 #: templates/framebook/notes/note/children.html:58
 #: templates/framebook/notes/note/children.html:73
 #: templates/framebook/notes/note/children.html:75
-#: templates/framebook/notes/note/notedisplay.html:61
+#: templates/framebook/notes/note/notedisplay.html:69
 #: templates/include/notes/notes_display.html:142
 #: templates/notebook/notes/note/notedisplay.html:43
 #: templates/notebook/notes/note/notedisplay.html:48
@@ -1699,66 +1699,76 @@ msgstr "附件"
 msgid "No attachment"
 msgstr "没有附件"
 
-#: templates/framebook/notes/note/notedisplay.html:9
-#: templates/social/framebook/notes/note/notedisplay.html:7
+#: templates/framebook/notes/note/notedisplay.html:10
+#: templates/social/framebook/notes/note/notedisplay.html:8
+msgid "View all weekly plans"
+msgstr "浏览全部周学习计划"
+
+#: templates/framebook/notes/note/notedisplay.html:13
+#: templates/social/framebook/notes/note/notedisplay.html:11
+msgid "View all monthly plans"
+msgstr "浏览全部月学习计划"
+
+#: templates/framebook/notes/note/notedisplay.html:15
+#: templates/social/framebook/notes/note/notedisplay.html:13
 msgid "View all frames"
 msgstr "浏览全部的知识包"
 
-#: templates/framebook/notes/note/notedisplay.html:24
-#: templates/social/framebook/notes/note/notedisplay.html:13
+#: templates/framebook/notes/note/notedisplay.html:32
+#: templates/social/framebook/notes/note/notedisplay.html:21
 msgid "notes included"
 msgstr "包含的笔记"
 
-#: templates/framebook/notes/note/notedisplay.html:25
+#: templates/framebook/notes/note/notedisplay.html:33
 #: templates/include/notes/menu/sort_menu.html:5
-#: templates/social/framebook/notes/note/notedisplay.html:14
+#: templates/social/framebook/notes/note/notedisplay.html:22
 msgid "Sorting"
 msgstr "排序"
 
-#: templates/framebook/notes/note/notedisplay.html:28
-#: templates/framebook/notes/note/notedisplay.html:30
-#: templates/social/framebook/notes/note/notedisplay.html:17
-#: templates/social/framebook/notes/note/notedisplay.html:19
+#: templates/framebook/notes/note/notedisplay.html:36
+#: templates/framebook/notes/note/notedisplay.html:38
+#: templates/social/framebook/notes/note/notedisplay.html:25
+#: templates/social/framebook/notes/note/notedisplay.html:27
 msgid "By default"
 msgstr "根据默认"
 
-#: templates/framebook/notes/note/notedisplay.html:33
-#: templates/framebook/notes/note/notedisplay.html:35
+#: templates/framebook/notes/note/notedisplay.html:41
+#: templates/framebook/notes/note/notedisplay.html:43
 #: templates/include/notes/menu/sort_menu.html:27
 #: templates/include/notes/menu/sort_menu.html:29
-#: templates/social/framebook/notes/note/notedisplay.html:22
-#: templates/social/framebook/notes/note/notedisplay.html:24
+#: templates/social/framebook/notes/note/notedisplay.html:30
+#: templates/social/framebook/notes/note/notedisplay.html:32
 msgid "By Importance"
 msgstr "根据重要性"
 
-#: templates/framebook/notes/note/notedisplay.html:39
+#: templates/framebook/notes/note/notedisplay.html:47
 msgid "You can drag the notes to change the ordering and save it"
 msgstr "你可以拖拽下面的笔记来改变它们的排序"
 
-#: templates/framebook/notes/note/notedisplay.html:39
+#: templates/framebook/notes/note/notedisplay.html:47
 msgid "Save the order"
 msgstr "保存当前排序"
 
-#: templates/framebook/notes/note/notedisplay.html:40
+#: templates/framebook/notes/note/notedisplay.html:48
 msgid "View notes included in note list"
 msgstr "在笔记列表里浏览包含的笔记"
 
-#: templates/framebook/notes/note/notedisplay.html:40
+#: templates/framebook/notes/note/notedisplay.html:48
 #: templates/snippetbook/notes/note/linkagenotedisplay.html:44
 msgid "View in note list"
 msgstr "在笔记列表里浏览"
 
-#: templates/framebook/notes/note/notedisplay.html:42
+#: templates/framebook/notes/note/notedisplay.html:50
 #: templates/include/notes/notes_section_header.html:6
-#: templates/social/framebook/notes/note/notedisplay.html:28
+#: templates/social/framebook/notes/note/notedisplay.html:36
 #: templates/social/include/notes/notes_section_header.html:4
 #: templates/tagframes/index.html:386
 msgid "List"
 msgstr "表单"
 
-#: templates/framebook/notes/note/notedisplay.html:42
+#: templates/framebook/notes/note/notedisplay.html:50
 #: templates/include/notes/notes_section_header.html:5
-#: templates/social/framebook/notes/note/notedisplay.html:28
+#: templates/social/framebook/notes/note/notedisplay.html:36
 #: templates/social/include/notes/notes_section_header.html:4
 #: templates/tagframes/index.html:386
 msgid "Expanded"
@@ -2124,8 +2134,8 @@ msgid "You can view it here:"
 msgstr "你可以在此浏览："
 
 #: templates/include/notes/addNote.html:89
-#: templates/include/notes/note/notedisplay.html:228
-#: templates/include/notes/note/notedisplay.html:240
+#: templates/include/notes/note/notedisplay.html:230
+#: templates/include/notes/note/notedisplay.html:242
 #: templates/social/group/groups.html:63
 msgid "Submit"
 msgstr "递交"
@@ -2187,21 +2197,21 @@ msgid "Hide cache section"
 msgstr "隐藏缓存区"
 
 #: templates/include/notes/notes_display.html:64
-#: templates/include/notes/note/notedisplay.html:163
+#: templates/include/notes/note/notedisplay.html:134
 #: templates/snippetbook/notes/add_note.html:50
 #: templates/snippetbook/notes/show_note_added_js.html:33
 msgid "Rank Up Importance"
 msgstr "增加重要性"
 
 #: templates/include/notes/notes_display.html:65
-#: templates/include/notes/note/notedisplay.html:164
+#: templates/include/notes/note/notedisplay.html:135
 #: templates/snippetbook/notes/add_note.html:51
 #: templates/snippetbook/notes/show_note_added_js.html:34
 msgid "Rank Down Importance"
 msgstr "降低重要性"
 
 #: templates/include/notes/notes_display.html:67
-#: templates/include/notes/note/notedisplay.html:166
+#: templates/include/notes/note/notedisplay.html:132
 #: templates/snippetbook/notes/show_note_added_js.html:35
 msgid "Importance"
 msgstr "重要性"
@@ -2241,7 +2251,7 @@ msgid "note in frames"
 msgstr "在包里的"
 
 #: templates/include/notes/notes_display.html:149
-#: templates/include/notes/note/notedisplay.html:150
+#: templates/include/notes/note/notedisplay.html:158
 #: templates/snippetbook/notes/show_note_added_js.html:56
 msgid "Not in any frame"
 msgstr "不在任何包里"
@@ -2604,27 +2614,27 @@ msgstr "便条"
 msgid "Created"
 msgstr "生成时间"
 
-#: templates/include/notes/note/notedisplay.html:130
+#: templates/include/notes/note/notedisplay.html:131
 msgid "importance"
 msgstr "重要性"
 
-#: templates/include/notes/note/notedisplay.html:146
+#: templates/include/notes/note/notedisplay.html:154
 msgid "In frames"
 msgstr "在包里"
 
-#: templates/include/notes/note/notedisplay.html:192
+#: templates/include/notes/note/notedisplay.html:194
 msgid "Edit this note"
 msgstr "编辑这个笔记"
 
-#: templates/include/notes/note/notedisplay.html:193
+#: templates/include/notes/note/notedisplay.html:195
 msgid "Hide edit form"
 msgstr "隐藏编辑表格"
 
-#: templates/include/notes/note/notedisplay.html:233
+#: templates/include/notes/note/notedisplay.html:235
 msgid "Add or edit the translation"
 msgstr "添加或更新翻译"
 
-#: templates/include/notes/note/notedisplay.html:234
+#: templates/include/notes/note/notedisplay.html:236
 msgid "Hide the translation form"
 msgstr "隐藏翻译表格"
 

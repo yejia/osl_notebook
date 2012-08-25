@@ -106,7 +106,7 @@ def make_monthly_plan(users):
 
 def remind_weekly_review(users):
     now = date.today()
-    this_monday = now - datetime.timedelta(days=4)
+    this_monday = now - datetime.timedelta(days=3)
     
     print 'monday_this_week',this_monday
     
@@ -131,8 +131,11 @@ def remind_weekly_review(users):
             msg.send()
             print 'email was sent to user',user,' for weekly plan review.'
             time.sleep(10)       
-        except:
-            print sys.exc_info()      
+        except Exception as inst:
+            print sys.exc_info()  
+            print type(inst)
+            print inst.args
+            print inst    
              
                 
  
