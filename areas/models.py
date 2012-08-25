@@ -45,9 +45,20 @@ class Area(models.Model):
         pass           
 
 
+    #TODO: private ones? 
+    def get_all_tags(self):
+        self.root_tag_frame.owner_name = self.owner_name
+        area_tags_names = self.root_tag_frame.get_offsprings()
+        area_tags_names.append(self.root_tag_frame.name)
+        area_tags_names.sort()
+        return area_tags_names
+        
+        
+
+
     def get_notes(self, bookname='notebook'):
         self.root_tag_frame.owner_name = self.owner_name
-        tag_names = self.root_tag_frame.get_offsprings()
+        tag_names = self.get_all_tags()
         q = Q(tags__name__in=tag_names) 
         N = getNote(self.owner_name, bookname)
         note_list = N.objects.using(self.owner_name).filter(deleted=False)

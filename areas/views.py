@@ -124,7 +124,9 @@ def area(request, username, areaname):
     area.root_tag_frame.owner_name = username
     area.root_note_frame.owner_name = username
     #tags = Tag_Frame.objects.using(username).all().order_by('name')
-    area_tags =  Tag.objects.using(username).filter(name__in=area.root_tag_frame.get_offsprings())
+    area_tags_names = area.root_tag_frame.get_offsprings()
+    
+    area_tags =  Tag.objects.using(username).filter(name__in=area.get_all_tags())
     area_tags_with_count = []
     for t in area_tags:
         note_list = Note.objects.using(username).filter(tags__name = t.name)
