@@ -799,7 +799,7 @@ def caches(request, cache_id, username, bookname):
     context = __get_context(request, note_list, #default_tag_id,
                              username, bookname)	
     return render_to_response(book_template_dict.get(bookname)+'notes/note_list.html', context, context_instance=RequestContext(request,{'bookname': bookname, 'aspect_name':'notes',\
-                                                                                                        'book_uri_prefix':'/'+username}))
+                                                                'note_type':bookname_note_type_dict.get(bookname), 'book_uri_prefix':'/'+username}))
 
 
 
@@ -1155,7 +1155,8 @@ def folders(request, username, bookname, folder_name):
     extra_context = {'qstr':qstr,'folder_values':folder_values, 'is_in_folders':is_in_folders, 'current_folder':current_folder, 'aspect_name':'folders'}    
     context.update(extra_context)     
     
-    return render_to_response(book_template_dict.get(bookname)+'folders.html', context, context_instance=RequestContext(request,{'bookname': bookname,'book_uri_prefix':'/'+username}))
+    return render_to_response(book_template_dict.get(bookname)+'folders.html', context, context_instance=RequestContext(request,{'bookname': bookname,
+                                                                                        'note_type':bookname_note_type_dict.get(bookname), 'book_uri_prefix':'/'+username}))
 
 
 

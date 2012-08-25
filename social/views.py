@@ -542,7 +542,9 @@ def folders(request, username, bookname, foldername):
     return render_to_response('social/folders.html',  {'note_list':paged_notes,'sort':sort, 'bookname':bookname, \
                               'folders':folders, 'is_in_folders':True, 'current_folder':current_folder,
                                'profile_username':username, 'appname':'social', 'cl':cl},\
-                                context_instance=RequestContext(request,{'book_uri_prefix':'/social/'+username}))
+                                context_instance=RequestContext(request,{'book_uri_prefix':'/social/'+username, 
+                                                                         'note_type':bookname_note_type_dict.get(bookname),
+                                                                         'profile_member':Member.objects.get(username=username),}))
      
 
 

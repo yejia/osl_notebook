@@ -126,7 +126,15 @@
 {% endblock %}
 
 <div class="noPrint">
-<b>{% trans 'importance' %} : </b>{{note.vote}}
+
+<div class="thumb" note_id="{{note.id}}"><b>{% trans 'importance' %} : </b>
+        <span id="note_rank" title="{% trans "Importance"  %}">{{note.vote}}</span>
+        {% if user.username == profile_username %}  
+			<span class="thumbup"  title="{% trans "Rank Up Importance"  %}"><img src="/site_media/img/thumbUp.gif"/></span>
+			<span class="thumbdown"  title="{% trans "Rank Down Importance"  %}"><img src="/site_media/img/thumbDown.gif"/></span>
+        {% endif %}
+        
+</div>
 </div>
 <div class="noPrint">
 <b>{% trans 'private' %} :</b> {{note.private|yesno:"yeah,no,maybe" }}
@@ -157,13 +165,7 @@
 
 
 {% block note_vote%}
-<div class="thumb" note_id="{{note.id}}">
-        {% if user.username == profile_username %}  
-			<span class="thumbup"  title="{% trans "Rank Up Importance"  %}"><img src="/site_media/img/thumbUp.gif"/></span>
-			<span class="thumbdown"  title="{% trans "Rank Down Importance"  %}"><img src="/site_media/img/thumbDown.gif"/></span>
-        {% endif %}
-        <span id="note_rank" title="{% trans "Importance"  %}">{{note.vote}}</span>
-</div>
+
 {% endblock %}
 
 
