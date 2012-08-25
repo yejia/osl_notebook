@@ -42,7 +42,7 @@
     {% for note in note_list.object_list %}
         {% if user.username != profile_username and note.is_private %}  
         {% else %}   
-             {% if bookname == 'framebook' and note.is_in_frame %}
+             {% if bookname == 'framebook' and note.is_in_frame %} {% comment %}TODO: use block inheritance to move this logic to framebook templates{% endcomment %}
              {% else %}             
          <li class="note_display" note_id="{{ note.id }}"  social_note_id="{{ note.get_social_note.id }}">
           <div class="{{bookname}}" note_id="{{ note.id }}">

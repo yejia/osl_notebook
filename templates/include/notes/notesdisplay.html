@@ -90,12 +90,15 @@
 </div>
 
 {% block notes %}
-
-{% if note_list.object_list %}
-
+{% comment %}If it is framebook, show the section header even if there is no note list, because you want people to pick non empty frames{% endcomment %}
+{% if note_list.object_list  or bookname == 'framebook' %}
     {% block notes_section_header %}
         {% include "include/notes/notes_section_header.html" %}   
-    {% endblock %}	
+    {% endblock %}
+{% endif %}
+{% if note_list.object_list %}
+
+	
 	
 	<div id='notes_section'>
        
@@ -109,6 +112,7 @@
 		</div>
      </div> 
 {% else %} 
+<br/>
     <div>{% trans "You don't have any notes yet! Start making notes every day!" %}</div>
     <hr/>
 {% endif %}

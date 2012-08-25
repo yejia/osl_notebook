@@ -192,13 +192,16 @@ def friends_notes2(request, username, bookname):
     note_list  = getSearchResults(note_list, qstr)
     
     sort, order_type,  paged_notes, cl = __get_notes_context(request, note_list) 
+    
+    
       
     #tags = get_group_tags(request, groupname, bookname)
     return render_to_response('social/notes/friends_notes.html', {'note_list':paged_notes,'sort':sort, 'bookname':bookname, \
                                                  'tags':None, 'qstr':qstr, \
                                                  'appname':'friends', 'cl':cl, 'profile_username':username},\
                                                   context_instance=RequestContext(request, {'book_uri_prefix':'/'+username+'/friends',
-                                                                                            'note_type':bookname_note_type_dict.get(bookname)})) 
+                                                                                            'note_type':bookname_note_type_dict.get(bookname),
+                                                                                            'pick_empty':request.GET.get('pick_empty', 'all')  })) 
  
 
 
@@ -292,7 +295,9 @@ def groups_notes(request, username, bookname):
     return render_to_response('social/notes/groups_notes.html', {'note_list':paged_notes,'sort':sort, 'bookname':bookname, \
                                                  'tags':None, 'qstr':qstr,\
                                                  'appname':'friends', 'cl':cl, 'profile_username':username},\
-                                                  context_instance=RequestContext(request, {'book_uri_prefix':'/'+username+'/groups', 'note_type':bookname_note_type_dict.get(bookname)})) 
+                                                  context_instance=RequestContext(request, 
+                                                        {'book_uri_prefix':'/'+username+'/groups', 'note_type':bookname_note_type_dict.get(bookname),
+                                                         'pick_empty':request.GET.get('pick_empty', 'all')})) 
     
 
 
@@ -358,7 +363,9 @@ def notes(request, username, bookname):
     pick_lang =  request.GET.get('pick_lang') 
     return render_to_response('social/include/notes/notes.html', {'note_list':paged_notes,'sort':sort, 'bookname':bookname, 'pick_lang':pick_lang, \
                                'folders':folders, 'profile_username':username, 'profile_member':profile_member, 'appname':'social', 'cl':cl},\
-                                                  context_instance=RequestContext(request,  {'book_uri_prefix':'/social/'+username, 'note_type':bookname_note_type_dict.get(bookname)}))
+                                                  context_instance=RequestContext(request,  {'book_uri_prefix':'/social/'+username, 
+                                                                'note_type':bookname_note_type_dict.get(bookname),
+                                                                'pick_empty':request.GET.get('pick_empty', 'all')}))
 
 
 
@@ -789,7 +796,9 @@ def group(request, groupname, bookname):
                                                  'tags':tags, 'qstr':qstr,\
                                                   'profile_member':profile_member,\
                                                   'appname':'groups', 'cl':cl, 'area':area},\
-                                                  context_instance=RequestContext(request, {'book_uri_prefix':'/groups/'+groupname, 'note_type':bookname_note_type_dict.get(bookname)}))
+                                                  context_instance=RequestContext(request, {'book_uri_prefix':'/groups/'+groupname,
+                                                                                             'note_type':bookname_note_type_dict.get(bookname),
+                                                                                             'pick_empty':request.GET.get('pick_empty', 'all')}))
 
 
 
@@ -819,7 +828,9 @@ def notes_tag(request, username, bookname, tag_name):
     profile_member = Member.objects.get(username=username)
     return render_to_response('social/include/notes/notes.html', {'note_list':paged_notes,'sort':sort, 'current_tag':tag_name, 'bookname':bookname,\
                                'profile_username':username, 'profile_member':profile_member, 'tags':tags, 'appname':'social', 'cl':cl},\
-                                                  context_instance=RequestContext(request,  {'book_uri_prefix':'/social/'+username, 'note_type':bookname_note_type_dict.get(bookname)})) 
+                                                  context_instance=RequestContext(request,  {'book_uri_prefix':'/social/'+username, 
+                                                                                             'note_type':bookname_note_type_dict.get(bookname),
+                                                                                             'pick_empty':request.GET.get('pick_empty', 'all')})) 
 
 
 
@@ -857,7 +868,8 @@ def group_tag(request, groupname, bookname, tag_name):
     profile_member = Group.objects.get(name=groupname)
     return render_to_response('social/notes/group_notes.html', {'group':group, 'note_list':paged_notes,'sort':sort, 'current_tag':tag_name, 'bookname':bookname,\
                                           'profile_member':profile_member, 'tags':tags, 'appname':'groups', 'cl':cl},\
-                                                  context_instance=RequestContext(request,  {'note_type':bookname_note_type_dict.get(bookname)}))
+                                                  context_instance=RequestContext(request,  {'note_type':bookname_note_type_dict.get(bookname),
+                                                                                             'pick_empty':request.GET.get('pick_empty', 'all')}))
     
 
 @login_required
@@ -1102,6 +1114,19 @@ def __get_notes_context(request, note_list):
 #            note_list = note_list.filter(attachment__startswith='noteattachments/') #TODO: hard coded, change
 #        except FieldError:
 #            pass  
+    
+    
+    pick_empty = 'all'
+    #if bookname == 'framebook':
+    
+    pick_empty = request.GET.get('pick_empty', 'all')    
+    if pick_empty in true_words:
+        #below won't cause any trouble for bookname other than framebook, since it will not be called
+        note_list = note_list.filter(notes=None) 
+        #print 'empty frmame list:', [(n.id, n.private, n.deleted) for n in note_list]
+    elif pick_empty in false_words:
+        note_list = note_list.exclude(notes=None) 
+    
     
     order_type = request.GET.get('order_type','desc')  
     

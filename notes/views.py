@@ -378,7 +378,7 @@ def index(request, username, bookname):
     
     N = getNote(username, bookname)
     connection.queries = []
-    
+       
     note_list = N.objects.all()  
     
     
@@ -408,7 +408,8 @@ def index(request, username, bookname):
     queries = connection.queries
     
     extra_context = {'qstr':qstr,'folder_values':folder_values, 'is_in_folders':is_in_folders,\
-                      'current_folder':current_folder, 'aspect_name':'notes', 'queries':queries, 'appname':'notes', 'pagename':'notes'}    
+                      'current_folder':current_folder, 'aspect_name':'notes', 'queries':queries, 'appname':'notes', 'pagename':'notes',\
+                      }  
     context.update(extra_context)  
     #TODO: see if I don't have to write book_uri_prifix everywhere
     
@@ -867,6 +868,21 @@ def __get_context(request, note_list,#default_tag_id,
 #            print 'note.frame.owner_name',note.frame.owner_name
 #===============================================================================
     
+    pick_empty = 'all'
+    if bookname == 'framebook':
+        pick_empty = request.GET.get('pick_empty', 'all')
+        if pick_empty in true_words:
+            note_list = note_list.filter(notes=None) 
+            #print 'empty frmame list:', [(n.id, n.private, n.deleted) for n in note_list]
+        elif pick_empty in false_words:
+            note_list = note_list.exclude(notes=None)   
+        
+        #cannot use model method to filter. So this logic is done in the template. Might change this later since
+        #it makes the count of frames in each page different from actual frames displayed TODO: 
+        #note_list.filter(is_in_frame=False)    
+       
+    
+    
       
     view_mode, sort, delete, private, date_range, order_type, with_attachment, paged_notes,  cl = __get_notes_context(request, note_list)    
    
@@ -903,8 +919,8 @@ def __get_context(request, note_list,#default_tag_id,
 		   'next_cache_id':next_cache_id, 'show_notes_mode':show_notes_mode, 'show_caches_mode':show_caches_mode,'cl':cl, 
            'profile_username':username, 'date_range':date_range, 'order_type':order_type, 'in_linkage':in_linkage, 
            'with_attachment':with_attachment, 'users':User.objects.all(), 'wss':wss, 'current_ws':request.session.get("current_ws", None),
-           'pick_lang':pick_lang, 'true_words':true_words, 'all_words':all_words, 'false_words':false_words
-           }      
+           'pick_lang':pick_lang, 'true_words':true_words, 'all_words':all_words, 'false_words':false_words, 'pick_empty':pick_empty
+           }      #pick_empty is only for frames
     
 
 

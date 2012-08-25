@@ -9,15 +9,15 @@
             {% else %}   
                 <option value="">---</option>
             {% endif %}   
-            {% if pick_lang == 'Y'  %}
-                <option value="Y" selected="selected">{% trans "Empty frames" %}</option>
+            {% if pick_empty == 'y'  %}
+                <option value="y" selected="selected">{% trans "Empty frames" %}</option>
             {% else %}
-                <option value="Y">{% trans "Empty frames" %}</option>
+                <option value="y">{% trans "Empty frames" %}</option>
             {% endif %}
-            {% if pick_lang == 'N'  %}
-                <option value="N" selected="selected">{% trans "Non empty frames" %}</option>
+            {% if pick_empty == 'n'  %}
+                <option value="n" selected="selected">{% trans "Non empty frames" %}</option>
             {% else %}
-                <option value="N">{% trans "Non empty frames" %}</option>
+                <option value="n">{% trans "Non empty frames" %}</option>
             {% endif %}
     </select>   
 

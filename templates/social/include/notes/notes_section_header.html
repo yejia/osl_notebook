@@ -3,6 +3,9 @@
 <div class="section_header"> 
 <span class="item">{% trans "Show" %}:</span><span class="item"><a href="javascript:expandall();">{% trans "Expanded" %}</span><span class="item"><a href="javascript:collapseall();">{% trans "List" %}</a></span>
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{% include "include/notes_pick_lang.html" %}    
+ {% if  bookname == 'framebook'  %} 
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{% include "include/frames_pick_empty.html" %} 
+        {% endif %}  
 </div> 
 <div  id="group_notes_section"><!--group_notes_section has no hiding and showing, different from notes_section-->
 <div class="social">&nbsp;  

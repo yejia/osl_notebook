@@ -1238,8 +1238,13 @@ $("#ac_tags").tagit("removeAll");
             });  
             
             
+            //pick a language drop down  select with class lang_drop_down 
             $(":input[name='pick_lang']").change(function(){       
                 window.location.replace('?pick_lang='+$(this).val())
+             });
+              //pick empty frames drop down  select with class frame_empty_drop_down 
+             $(":input[name='pick_empty']").change(function(){       
+                window.location.replace('?pick_empty='+$(this).val())
              });
              
              
