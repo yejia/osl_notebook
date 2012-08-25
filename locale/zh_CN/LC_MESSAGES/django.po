@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-25 07:56+0800\n"
+"POT-Creation-Date: 2012-08-25 08:10+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -173,24 +173,24 @@ msgstr ""
 "这个网址已经成功添加到您的网址本里。您可以关闭这个窗口，或者其会在1秒后自动关"
 "闭。"
 
-#: notes/models.py:189 notes/models.py:1165 social/models.py:761
+#: notes/models.py:189 notes/models.py:1165 social/models.py:770
 #: templates/framebook/notes/notesdisplay.html:18
 #: templates/include/notes/notesdisplay.html:40
 #: templates/scrapbook/notes/notesdisplay.html:28
 msgid "Title"
 msgstr "标题"
 
-#: notes/models.py:189 notes/models.py:1165 social/models.py:761
+#: notes/models.py:189 notes/models.py:1165 social/models.py:770
 msgid "The size of the title is limited to 2000 characaters."
 msgstr "标题的长度应小于2000字。"
 
-#: notes/models.py:192 notes/models.py:1166 social/models.py:603
-#: social/models.py:762 templates/areas/area.html:190
+#: notes/models.py:192 notes/models.py:1166 social/models.py:612
+#: social/models.py:771 templates/areas/area.html:190
 #: templates/areas/index.html:53
 msgid "Description"
 msgstr "正文"
 
-#: notes/models.py:192 notes/models.py:1166 social/models.py:762
+#: notes/models.py:192 notes/models.py:1166 social/models.py:771
 msgid "The size of the desc is limited to 2000 characaters."
 msgstr "正文的长度应小于2000字。"
 
@@ -206,7 +206,7 @@ msgstr "标签"
 msgid "Default tag is 'random thought'."
 msgstr "默认的标签是'random thought'。"
 
-#: notes/models.py:194 social/models.py:606 templates/areas/area.html:193
+#: notes/models.py:194 social/models.py:615 templates/areas/area.html:193
 #: templates/areas/index.html:56
 #: templates/framebook/notes/notesdisplay.html:22
 #: templates/include/note_list_base.html:1411
@@ -217,7 +217,7 @@ msgstr "默认的标签是'random thought'。"
 msgid "Private"
 msgstr "隐私"
 
-#: notes/models.py:196 social/models.py:605
+#: notes/models.py:196 social/models.py:614
 msgid "date created"
 msgstr "生成时间"
 
@@ -235,11 +235,11 @@ msgstr "原作者的评级"
 msgid "Attachment"
 msgstr "附件"
 
-#: notes/models.py:1163 social/models.py:759
+#: notes/models.py:1163 social/models.py:768
 msgid "Language"
 msgstr "语言"
 
-#: notes/models.py:1164 social/models.py:760
+#: notes/models.py:1164 social/models.py:769
 msgid "Original language"
 msgstr "原来的语言"
 
@@ -377,7 +377,7 @@ msgstr ""
 msgid "Nickname"
 msgstr "绰号"
 
-#: social/models.py:63 social/models.py:610
+#: social/models.py:63 social/models.py:619
 msgid "Icon"
 msgstr "头像"
 
@@ -404,20 +404,20 @@ msgstr "接收更新"
 msgid "Home"
 msgstr "主页"
 
-#: social/models.py:602 templates/areas/area.html:168
+#: social/models.py:611 templates/areas/area.html:168
 #: templates/areas/index.html:36 templates/social/group/groups.html:34
 msgid "Name"
 msgstr "名字"
 
-#: social/models.py:607 templates/social/notes/group_notes.html:35
+#: social/models.py:616 templates/social/notes/group_notes.html:35
 msgid "Members"
 msgstr "成员"
 
-#: social/models.py:608
+#: social/models.py:617
 msgid "Creator"
 msgstr "创建者"
 
-#: social/models.py:609
+#: social/models.py:618
 msgid "Admins"
 msgstr "管理员"
 
@@ -2357,8 +2357,8 @@ msgid "Loading related frames..."
 msgstr "导入相关的知识包。。。"
 
 #: templates/include/notes/inlines/add_comments_and_etc_inline.html:127
-msgid "on "
-msgstr ""
+msgid "on included note:"
+msgstr "对内含的笔记："
 
 #: templates/include/notes/inlines/add_comments_and_etc_inline.html:137
 msgid "remove this outer link"
@@ -3481,6 +3481,9 @@ msgstr "全部工作区"
 #: templates/workingset/index.html:370
 msgid "Make Current"
 msgstr "设成当前"
+
+#~ msgid "on "
+#~ msgstr "对包含的笔记："
 
 #~ msgid "Here is your weekly plan for you to review:"
 #~ msgstr "这里是你本周的学习计划，供你回顾："

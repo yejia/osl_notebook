@@ -120,8 +120,8 @@ It is too much computing for below. So don't do this on notes list page, otherwi
             <div  class="add_box" id="add_comments_included_box" style="display:none;"> 
             <div id="public_comments">
                 {% for comment in social_note.social_frame.get_included_comments %}                    
-                     <div comment_id="{{comment.id}}" class="spacing"><a href="/social/{{comment.commenter}}">{{comment.commenter}}</a>: {{comment.desc}}   &nbsp;&nbsp;&nbsp;<span class="grey">({{comment.init_date|timesince}}{% trans " ago" %})</span>    {% if user.username == comment.commenter.username %}<br/>
-                     {% trans "on " %}  <a href="/social/{{comment.note.owner.username}}/{{comment.note.get_note_bookname}}/notes/note/{{ comment.note.id }}">{% if comment.note.desc %}{{comment.note.desc}}{% else %}{{comment.note.title|default:_('(No Title)')}}{% endif %}</a>{% endif %}</div>                     
+                     <div comment_id="{{comment.id}}" class="spacing"><a href="/social/{{comment.commenter}}">{{comment.commenter}}</a>: {{comment.desc}}   &nbsp;&nbsp;&nbsp;<span class="grey">({{comment.init_date|timesince}}{% trans " ago" %})</span><br/>
+                     {% trans "on included note:" %}  <a href="/social/{{comment.note.owner.username}}/{{comment.note.get_note_bookname}}/notes/note/{{ comment.note.id }}">{% if comment.note.desc %}{{comment.note.desc}}{% else %}{{comment.note.title|default:_('(No Title)')}}{% endif %}</a></div>                     
                 {% endfor %}
              </div>
               </div>  

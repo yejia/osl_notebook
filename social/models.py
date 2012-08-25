@@ -499,9 +499,18 @@ class Social_Frame(Social_Note):
         return   offsprings        
 
 
+    #TODO: check what social notes are private
+    def get_public_offsprings(self):
+        offsprings = [n.id for n in self.notes.filter(private=False)]
+        for child in self.notes.all():            
+            if child.get_note_type() == 'Frame':                  
+                offsprings.extend(child.social_frame.get_offsprings())        
+        return   offsprings
+
+
 
     def get_included_comments(self):
-        ns = self.get_offsprings()
+        ns = self.get_public_offsprings()
         comments = Social_Note_Comment.objects.filter(note__id__in=ns) 
         return comments
         
