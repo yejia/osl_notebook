@@ -106,7 +106,11 @@
 <b><img  src="/site_media/img/tags-small.png" />:</b>
 <span class="editable"><span class="tags_text" id="note_tags">
 {% for tag in note.get_tags %}
+{% if  'takenfrom:' in tag.name  %}
+<span><a href="{{book_uri_prefix}}/{{bookname}}/notes/tags/{{tag.name_as_list.0}}:/">{{tag.name_as_list.0}}:</a><a href="{{book_uri_prefix}}/{{bookname}}/notes/tags/{{tag.name_as_list.0}}:{{tag.name_as_list.1}}/">{{tag.name_as_list.1}}</a>:<a href="/social/{{tag.name_as_list.1}}/{{bookname}}/notes/note/{{tag.name_as_list.2}}/">{{tag.name_as_list.2}}</a></span> 
+{% else %}
 <a href="{{book_uri_prefix}}/{{bookname}}/notes/tags/{{tag}}/">{{tag}}</a>,
+{% endif %}  
 {% endfor %}
 </span>
 {% if user.username == profile_username and appname != 'social' %}
