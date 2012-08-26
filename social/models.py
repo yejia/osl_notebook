@@ -165,6 +165,9 @@ class Social_Tag(models.Model):
         return self.name
 
     
+    def name_as_list(self):        
+        return self.name.split(':')
+    
     #TODO:below not working. Remove
     def get_social_snippet(self):
         return self.social_social_snippet_related.all().count()
@@ -289,7 +292,11 @@ class Social_Note(models.Model):
         return ','.join([t.name for t in self.tags.all().order_by('name')])  
     
     def get_tags(self):
+        return [t for t in self.tags.filter(private=False).order_by('name')] 
+    
+    def get_tag_names(self):
         return [t.name for t in self.tags.filter(private=False).order_by('name')] 
+    
     
     def get_all_tags(self):
         return [t.name for t in self.tags.all().order_by('name')]   

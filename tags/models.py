@@ -30,6 +30,9 @@ class Tag(models.Model):
 
     def __unicode__(self):
         return self.name
+    
+    def name_as_list(self):        
+        return self.name.split(':')
 
     def get_working_sets(self):
         return self.workingset_set.filter(deleted=False)

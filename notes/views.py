@@ -710,8 +710,9 @@ def tags(request, username, bookname, tag_name, aspect_name):
             n_list1 =  N.objects.filter(tags__isnull=True) #[n for n in N.objects.all() if not n.tags.all()]
             n_list2 =  N.objects.filter(tags__name='')
             n_list = n_list1 | n_list2
-        elif tag_name == 'takenfrom:':
-           n_list = N.objects.filter(tags__name__startswith=tag_name)     
+        #below include both the case when tag is equal to takenfrom: and the case when tag is equal to takenfrom:username
+        elif tag_name.startswith('takenfrom:'): 
+           n_list = N.objects.filter(tags__name__startswith=tag_name)       
         elif tag_name == 'untagged':
            n_list = N.objects.filter(tags__name=None)  
         else:    
