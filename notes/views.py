@@ -876,7 +876,16 @@ def __get_context(request, note_list,#default_tag_id,
             note_list = note_list.filter(notes=None) 
             #print 'empty frmame list:', [(n.id, n.private, n.deleted) for n in note_list]
         elif pick_empty in false_words:
-            note_list = note_list.exclude(notes=None)   
+            note_list = note_list.exclude(notes=None) 
+            
+    pick_plan = 'all'
+    if bookname == 'framebook':
+        pick_plan = request.GET.get('pick_plan', 'all')
+        if pick_plan == 'w':
+            note_list = note_list.filter(title__startswith='Weekly Plan:') 
+            #print 'empty frmame list:', [(n.id, n.private, n.deleted) for n in note_list]
+        elif pick_plan == 'm':
+            note_list = note_list.filter(title__startswith='Monthly Plan:')               
         
         #cannot use model method to filter. So this logic is done in the template. Might change this later since
         #it makes the count of frames in each page different from actual frames displayed TODO: 
@@ -920,7 +929,7 @@ def __get_context(request, note_list,#default_tag_id,
 		   'next_cache_id':next_cache_id, 'show_notes_mode':show_notes_mode, 'show_caches_mode':show_caches_mode,'cl':cl, 
            'profile_username':username, 'date_range':date_range, 'order_type':order_type, 'in_linkage':in_linkage, 
            'with_attachment':with_attachment, 'users':User.objects.all(), 'wss':wss, 'current_ws':request.session.get("current_ws", None),
-           'pick_lang':pick_lang, 'true_words':true_words, 'all_words':all_words, 'false_words':false_words, 'pick_empty':pick_empty
+           'pick_lang':pick_lang, 'true_words':true_words, 'all_words':all_words, 'false_words':false_words, 'pick_empty':pick_empty, 'pick_plan':pick_plan
            }      #pick_empty is only for frames
     
 

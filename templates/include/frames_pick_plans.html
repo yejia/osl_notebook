@@ -1,0 +1,24 @@
+{% load i18n %}
+
+<span id="frames_pick_empty">
+ 
+    {% trans "Pick Learning Plans" %}
+    <select id="frame_plan_drop_down"  class="pick_drop_down" name="pick_plan">
+            {% if not pick_plan  %}
+                <option value="" selected="selected">---</option>
+            {% else %}   
+                <option value="">---</option>
+            {% endif %}   
+            {% if pick_plan == 'w'  %}
+                <option value="w" selected="selected">{% trans "Weekly plans" %}</option>
+            {% else %}
+                <option value="w">{% trans "Weekly plans" %}</option>
+            {% endif %}
+            {% if pick_plan == 'm'  %}
+                <option value="m" selected="selected">{% trans "Monthly plans" %}</option>
+            {% else %}
+                <option value="m">{% trans "Monthly plans" %}</option>
+            {% endif %}
+    </select>   
+
+</span>

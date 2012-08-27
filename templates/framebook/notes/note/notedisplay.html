@@ -7,10 +7,10 @@
 {% block note_type%}
 <div class='noPrint'>
 {% if  'Weekly Plan:' in note.title %}
-    <a href="{{book_uri_prefix}}/framebook/notes/?q=Weekly Plan:">{% trans 'View all weekly plans' %}</a>
+    <a href="{{book_uri_prefix}}/framebook/notes/?pick_plan=w">{% trans 'View all weekly plans' %}</a>
 {% else  %}
     {% if  'Monthly Plan:' in note.title %}
-        <a href="{{book_uri_prefix}}/framebook/notes/?q=Monthly Plan:">{% trans 'View all monthly plans' %}</a>
+        <a href="{{book_uri_prefix}}/framebook/notes/?pick_plan=m">{% trans 'View all monthly plans' %}</a>
     {% else  %}
         <a href="{{book_uri_prefix}}/framebook/notes/">{% trans 'View all frames' %}</a>
     {% endif %}
