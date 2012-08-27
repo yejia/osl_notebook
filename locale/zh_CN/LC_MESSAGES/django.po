@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-27 09:56+0800\n"
+"POT-Creation-Date: 2012-08-27 17:09+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -118,41 +118,97 @@ msgstr "到"
 msgid "Make your weekly plan for this week here."
 msgstr "在这里制定你一周的学习计划。"
 
-#: plan.py:70 plan.py:74
+#: plan.py:67
+msgid "Monthly Plan:"
+msgstr "月计划"
+
+#: plan.py:68
+msgid "Make your monthly plan for this month here."
+msgstr "在这里制定你本月的学习计划。"
+
+#: plan.py:85 plan.py:89
 msgid ""
 "It is the beginning of the week again. To start this week right, first make "
 "a learning plan for this week. What do you want to learn this week? And how "
-"are you doing to learn it?"
+"are you going to learn them?"
 msgstr ""
 "新的一周又开始了。每周开始的时候做个大概的计划会帮助你在这一周内的学习更有成"
 "果。现在就开始制定这周的学习计划吧。这周打算学些什么？怎么学？"
 
-#: plan.py:71 plan.py:75
+#: plan.py:86 plan.py:90
 msgid ""
 "A weekly plan has been created for you in your notebook. You just need to "
 "fill in the specifics by adding snippets to it:"
 msgstr "系统已经将本周学习计划添加到您的笔记本里。你只需要加入一些便条即可。"
 
-#: plan.py:80
+#: plan.py:95
 msgid "Time to make your weekly plan"
 msgstr "制定周学习计划的时间到了"
 
-#: plan.py:123 plan.py:126
+#: plan.py:112 plan.py:116
+msgid ""
+"It is the beginning of the month again. To start this month right, first "
+"make a learning plan for this month. What do you want to learn this month? "
+"And how are you going to learn them?"
+msgstr ""
+"新的一月又开始了。每月开始的时候做个大概的计划会帮助你在这一月内的学习更有成"
+"果。现在就开始制定本月的学习计划吧。这月打算学些什么？怎么学？"
+
+#: plan.py:113 plan.py:117
+msgid ""
+"A monthly plan has been created for you in your notebook. You just need to "
+"fill in the specifics by adding snippets to it:"
+msgstr "系统已经将本月学习计划添加到您的笔记本里。您只需要加入一些便条即可。"
+
+#: plan.py:122
+msgid "Time to make your monthly plan"
+msgstr "制定月学习计划的时间到了"
+
+#: plan.py:168 plan.py:172
 msgid ""
 "It is the weekend again. Now is your time to review your weekly plan. Have "
-"you accomplished your plan this week? What you have done well? What you "
+"you accomplished your plan this week? What have you done well? What you "
 "haven't done very well? What can you improve on? "
 msgstr ""
 "又到了周末了。现在是回顾你一周的学习计划的时间了。你是否完成了你制定的任务？"
 "哪些方面是做得比较好的？哪些方面是做得还不够好的？还有哪些可以提高的地方？"
 
-#: plan.py:124 plan.py:127
+#: plan.py:169 plan.py:173
 msgid "Remember to find time on the weekend to review your weekly plan:"
 msgstr "记住周末要找时间回顾你本周的学习计划："
 
-#: plan.py:129
+#: plan.py:170 plan.py:174
+msgid ""
+"If your weekly plan is empty this week, it will be removed for you "
+"automatically the beginning of next week:"
+msgstr "如果你的本周学习计划是空的，将在下周初被系统自动移除。"
+
+#: plan.py:176
 msgid "Time to review your weekly plan"
 msgstr "回顾一周学习计划的时间到了"
+
+#: plan.py:202 plan.py:206
+msgid ""
+"It is the end of the month again. Now is your time to review your monthly "
+"plan. Have you accomplished your plan this month? What have you done well? "
+"What you haven't done very well? What can you improve on? "
+msgstr ""
+"又到了月末了。现在是回顾你本月的学习计划的时间了。你是否完成了你制定的任务？"
+"哪些方面是做得比较好的？哪些方面是做得还不够好的？还有哪些可以提高的地方？"
+
+#: plan.py:203 plan.py:207
+msgid "Remember to find time to review your monthly plan:"
+msgstr "记住要找时间回顾你本月的学习计划："
+
+#: plan.py:204 plan.py:208
+msgid ""
+"If your monthly plan is empty this month, it will be removed for you "
+"automatically the beginning of next month:"
+msgstr "如果你的本月学习计划是空的，将在下个月的月初被系统自动移除。"
+
+#: plan.py:210
+msgid "Time to review your monthly plan"
+msgstr "回顾本月学习计划的时间到了"
 
 #: areas/views.py:169
 msgid "You have successfully removed the group from the area."
@@ -421,48 +477,48 @@ msgstr "创建者"
 msgid "Admins"
 msgstr "管理员"
 
-#: social/views.py:618
+#: social/views.py:621
 msgid "You are not an admin of this group, and thus cannot admin this group."
 msgstr "你不是这个小组的管理员，所以不能管理这个小组。"
 
-#: social/views.py:623
+#: social/views.py:626
 msgid "You have successfully removed the member from the group."
 msgstr "你已经成功的将该成员从这个小组移除。"
 
-#: social/views.py:657
+#: social/views.py:660
 msgid "No users are entered!"
 msgstr "没有输入任何用户名！"
 
-#: social/views.py:667
+#: social/views.py:670
 msgid "You are invited to join the group "
 msgstr "你被邀请参加学习小组"
 
-#: social/views.py:668
+#: social/views.py:671
 msgid "You can visit this group at "
 msgstr "这是该学习小组的网址 "
 
-#: social/views.py:669
+#: social/views.py:672
 msgid ""
 "If you want to join this group, you can click on the \"join the group\" "
 "button."
 msgstr "如果你想加入该学习小组，你可以点击\"加入小组\"按钮。"
 
-#: social/views.py:670
+#: social/views.py:673
 msgid ""
 "After joining, if you want to remove yourself from this group, you can do "
 "that in your groups page."
 msgstr ""
 "加入学习小组后，如果你想退出该学习小组，你可以在你的学习小组页面完成此操作。"
 
-#: social/views.py:671
+#: social/views.py:674
 msgid "You are invited to group "
 msgstr "你被邀请参加学习小组"
 
-#: social/views.py:675
+#: social/views.py:678
 msgid "You have successfully sent the group invitation!"
 msgstr "你已经成功的发出了小组邀请！"
 
-#: social/views.py:1063
+#: social/views.py:1070
 msgid ""
 "Your suggestion is successfully sent to the sys admin! Thank you for your "
 "valuable suggestion!"
@@ -1620,7 +1676,7 @@ msgstr "添加笔记时发生错误。"
 msgid "The order of the notes included in this frame is reset successfully!"
 msgstr "包里笔记的顺序成功的更改了！"
 
-#: templates/framebook/note_list_base.html:94
+#: templates/framebook/note_list_base.html:99
 #, python-format
 msgid "Notetbook of %(profile_username)s"
 msgstr "%(profile_username)s的笔记本"
@@ -1681,14 +1737,14 @@ msgstr ""
 "你可以在这里直接生成一个便条。直接在输入框里写就可以。一个新的便条会产生并加"
 "入到这个知识包里面。"
 
-#: templates/framebook/notes/note/children.html:41
+#: templates/framebook/notes/note/children.html:42
 msgid "vote by the owner"
 msgstr "原作者自评重要性"
 
-#: templates/framebook/notes/note/children.html:56
-#: templates/framebook/notes/note/children.html:58
-#: templates/framebook/notes/note/children.html:73
-#: templates/framebook/notes/note/children.html:75
+#: templates/framebook/notes/note/children.html:57
+#: templates/framebook/notes/note/children.html:59
+#: templates/framebook/notes/note/children.html:74
+#: templates/framebook/notes/note/children.html:76
 #: templates/framebook/notes/note/notedisplay.html:69
 #: templates/include/notes/notes_display.html:143
 #: templates/notebook/notes/note/notedisplay.html:43
@@ -1700,10 +1756,10 @@ msgstr "原作者自评重要性"
 msgid "attachment"
 msgstr "附件"
 
-#: templates/framebook/notes/note/children.html:56
-#: templates/framebook/notes/note/children.html:58
-#: templates/framebook/notes/note/children.html:73
-#: templates/framebook/notes/note/children.html:75
+#: templates/framebook/notes/note/children.html:57
+#: templates/framebook/notes/note/children.html:59
+#: templates/framebook/notes/note/children.html:74
+#: templates/framebook/notes/note/children.html:76
 msgid "No attachment"
 msgstr "没有附件"
 
