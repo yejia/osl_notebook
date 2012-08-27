@@ -167,11 +167,11 @@ def remind_weekly_review(users):
             frame_url = site_name + '/' + member.username + '/framebook/notes/note/' + str(f.id) + '/'   
             content = _("It is the weekend again. Now is your time to review your weekly plan. Have you accomplished your plan this week? What have you done well? What you haven't done very well? What can you improve on? ")+'\n'+\
                     _("Remember to find time on the weekend to review your weekly plan:") + '\n' + \
-                    frame_url + \
+                    frame_url + '\n\n' + \
                     _("If your weekly plan is empty this week, it will be removed for you automatically the beginning of next week:") 
             html_content =  _("It is the weekend again. Now is your time to review your weekly plan. Have you accomplished your plan this week? What have you done well? What you haven't done very well? What can you improve on? ")+'<br/>'+\
                     _("Remember to find time on the weekend to review your weekly plan:") + '<br/>' + \
-                    '<a href="' + frame_url +'">' + frame_url + '</a>' + '<br/>' + \
+                    '<a href="' + frame_url +'">' + frame_url + '</a>' + '<br/><br/>' + \
                     _("If your weekly plan is empty this week, it will be removed for you automatically the beginning of next week:")
             msg = EmailMultiAlternatives(_('Time to review your weekly plan'), content.encode('utf-8') , SERVER_EMAIL, [member.email])
             msg.attach_alternative(html_content.encode('utf-8') , "text/html")
@@ -201,11 +201,11 @@ def remind_monthly_review(users):
             frame_url = site_name + '/' + member.username + '/framebook/notes/note/' + str(f.id) + '/'   
             content = _("It is the end of the month again. Now is your time to review your monthly plan. Have you accomplished your plan this month? What have you done well? What you haven't done very well? What can you improve on? ")+'\n'+\
                     _("Remember to find time to review your monthly plan:") + '\n' + \
-                    frame_url+ '\n'+\
+                    frame_url+ '\n\n'+\
                     _("If your monthly plan is empty this month, it will be removed for you automatically the beginning of next month:") 
             html_content =  _("It is the end of the month again. Now is your time to review your monthly plan. Have you accomplished your plan this month? What have you done well? What you haven't done very well? What can you improve on? ")+'<br/>'+\
                     _("Remember to find time to review your monthly plan:") + '<br/>' + \
-                    '<a href="' + frame_url +'">' + frame_url + '</a>' + '<br/>' + \
+                    '<a href="' + frame_url +'">' + frame_url + '</a>' + '<br/>br/>' + \
                     _("If your monthly plan is empty this month, it will be removed for you automatically the beginning of next month:") 
             msg = EmailMultiAlternatives(_('Time to review your monthly plan'), content.encode('utf-8') , SERVER_EMAIL, [member.email])
             msg.attach_alternative(html_content.encode('utf-8') , "text/html")
