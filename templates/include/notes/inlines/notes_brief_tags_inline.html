@@ -1,7 +1,7 @@
 {% load i18n %}
 
 <div id="note_tags" title="{% trans "note tags" %}">
-                {% for tag in note.get_tags %}
+                {% for tag in note.tags.all %}
                     {% if  'takenfrom:' in tag.name  %}
                         <span><a href="/{{profile_username}}/{{bookname}}/notes/tags/{{tag.name_as_list.0}}:/">{{tag.name_as_list.0}}:</a><a href="/{{profile_username}}/{{bookname}}/notes/tags/{{tag.name_as_list.0}}:{{tag.name_as_list.1}}/">{{tag.name_as_list.1}}</a>:<a href="/social/{{tag.name_as_list.1}}/{{bookname}}/notes/note/{{tag.name_as_list.2}}/">{{tag.name_as_list.2}}</a></span> 
                         {% comment %} use taken in the url instead of still using tags {% endcomment %}

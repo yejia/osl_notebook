@@ -324,19 +324,14 @@ class Note(models.Model):
 
     def display_tags(self):
         #return ','.join([t.name for t in self.tags.all()])
-        return ','.join(self.get_tag_names())
+        return ','.join(self.get_tags())
     
      
     def get_tags_ids(self):
         return [t.id for t in self.tags.all()]    
     
     def get_tags(self):
-        #return [t.name for t in self.tags.all()] 
-        return [t for t in self.tags.all()] 
-    
-    def get_tag_names(self):
-        return [t.name for t in self.tags.all()] 
-        
+        return [t.name for t in self.tags.all()]     
     
     def display_linkages(self):
         return ','.join([str(l.id) for l in self.linkagenote_set.all()])     

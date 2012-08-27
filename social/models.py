@@ -292,11 +292,7 @@ class Social_Note(models.Model):
         return ','.join([t.name for t in self.tags.all().order_by('name')])  
     
     def get_tags(self):
-        return [t for t in self.tags.filter(private=False).order_by('name')] 
-    
-    def get_tag_names(self):
         return [t.name for t in self.tags.filter(private=False).order_by('name')] 
-    
     
     def get_all_tags(self):
         return [t.name for t in self.tags.all().order_by('name')]   

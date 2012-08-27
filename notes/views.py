@@ -1597,7 +1597,7 @@ def add_note(request, username, bookname):
     
     
     #'init_date':n.init_date
-    return  HttpResponse(simplejson.dumps({'note_id':n.id, 'private':n.private, 'tags':n.get_tag_names(),'display_tags':n.display_tags(),
+    return  HttpResponse(simplejson.dumps({'note_id':n.id, 'private':n.private, 'tags':n.get_tags(),'display_tags':n.display_tags(),
                                            'title':n.title,'desc':n.desc, 'vote':n.vote, 'init_date':n.init_date.strftime("%Y-%m-%d %H:%M"),
                                             'last_modi_date':n.last_modi_date.strftime("%Y-%m-%d %H:%M"),'comments':n.display_comments()}),  "application/json")
 

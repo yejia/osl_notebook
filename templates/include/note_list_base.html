@@ -1238,16 +1238,55 @@ $("#ac_tags").tagit("removeAll");
             });  
             
             
+            
+            
+       //from http://stackoverflow.com/questions/486896/adding-a-parameter-to-the-url-with-javascript 
+      //Using escape() to escape URL parameters is wrong. It breaks for values with "+" in them. You should be using encodeURIComponent instead. Full discussion: xkr.us/articles/javascript/encode-compare - Darwin    
+//If there is no parameters at all, it add an & right after ? . It does't look good, but it works. TODO:      
+function insertParam(key, value)
+{
+    key = escape(key); value = escape(value);
+
+    var kvp = document.location.search.substr(1).split('&');    
+
+    var i=kvp.length; var x; while(i--) 
+    {
+        x = kvp[i].split('=');
+
+        if (x[0]==key)
+        {
+                x[1] = value;
+                kvp[i] = x.join('=');
+                break;
+        }
+    }
+
+    if(i<0) {kvp[kvp.length] = [key,value].join('=');}
+  //alert('kvp:'+kvp);
+    //this will reload the page, it's likely better to store this until finished
+    document.location.search = kvp.join('&'); 
+   // alert('search:'+kvp.join('&'));
+}
+
+
+
+            
             //pick a language drop down  select with class lang_drop_down 
             $(":input[name='pick_lang']").change(function(){       
-                window.location.replace('?pick_lang='+$(this).val())
+                //window.location.replace('?pick_lang='+$(this).val())
+                insertParam('pick_lang', $(this).val());
              });
               //pick empty frames drop down  select with class frame_empty_drop_down 
              $(":input[name='pick_empty']").change(function(){       
-                window.location.replace('?pick_empty='+$(this).val())
+                //window.location.replace('?pick_empty='+$(this).val())
+                insertParam('pick_empty', $(this).val());
              });
              
-             
+              //pick learning plans frames drop down  select with class frame_plan_drop_down 
+             $(":input[name='pick_plan']").change(function(){       
+                //window.location.replace('?pick_empty='+$(this).val())
+                insertParam('pick_plan', $(this).val());
+             });
            
                 
                 

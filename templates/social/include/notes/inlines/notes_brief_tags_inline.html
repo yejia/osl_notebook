@@ -1,7 +1,7 @@
 {% load i18n %}
 
 <div id="note_tags" title="{% trans "note tags" %}">
-                {% for tag in note.get_tags %}
+                {% for tag in note.tags.all %}
                     {% if not tag.private or tag.name == group.get_group_tag_name %}
                         <span>
                             {% if appname == 'groups' %}
