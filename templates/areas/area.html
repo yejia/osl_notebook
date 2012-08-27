@@ -130,6 +130,14 @@ $(document).ready(function(){
 </tr></table>
   </div>
   
+  
+<div class="padded">
+  <b>{% trans "Question set in this area" %}:</b> 
+  {% for tq in area_question_tags_with_count %}
+      <a href="/{{profile_username}}/notebook/notes/?q=t%3A{{tq.0}}%26t%3Aquestion">{{tq.0}} ({{tq.1}})</a>,
+  {% endfor %}
+</div>
+  
 <div class="padded">
   <b>{% trans "Learning groups in this area" %}:</b>
   {% for g in area.get_groups %}

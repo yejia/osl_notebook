@@ -130,9 +130,15 @@ def area(request, username, areaname):
     
     area_tags =  Tag.objects.using(username).filter(name__in=area.get_all_tags())
     area_tags_with_count = []
+    area_question_tags_with_count = []
     for t in area_tags:
         note_list = Note.objects.using(username).filter(tags__name = t.name)
         area_tags_with_count.append([t, note_list.count()])
+        #question note list
+        q_note_list =  note_list.filter(tags__name = 'question')
+        q_count = q_note_list.count()
+        if q_count:
+            area_question_tags_with_count.append([t, q_count])
     
     groups = Group.objects.exclude(id__in=[g.id for g in area.get_groups()])
     editAreaForm = AddAreaForm(instance=area)
@@ -142,7 +148,8 @@ def area(request, username, areaname):
     #TODO:need this?
     theme = __get_view_theme(request)
     private =    theme['private'] 
-    return render_to_response('areas/area.html',{'area':area,  'area_tags_with_count':area_tags_with_count, 'editAreaForm':editAreaForm,'tags':tags, \
+    return render_to_response('areas/area.html',{'area':area,  'area_tags_with_count':area_tags_with_count, \
+                                                 'area_question_tags_with_count':area_question_tags_with_count, 'editAreaForm':editAreaForm,'tags':tags, \
                             'username':request.user.username,'profile_username':username,  'private':private, 'groups':groups}, \
                     context_instance=RequestContext(request,  {'book_uri_prefix':'/'+username+'/areas/area/'+area.name,
                                                               }))
