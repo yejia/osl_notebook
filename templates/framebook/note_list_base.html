@@ -67,22 +67,27 @@
 
 {% block extra_ready_script %}			
             $('span#frame_delete_note').click(function(){	
-                    $(this).load('deleteNoteFromFrame/',{ 'linkage_id':$(this).parents('div[note_id]').attr('note_id'), 'note_id':$(this).parents('*[linked_note_id]').attr('linked_note_id')});
+                  //refactor to reduce duplication and complexity between this and those in frames list display page. Since parent_frame_id is used to denote the parent frame, the div added to wrap the whole frame seem not useful anymore. TODO:
+                    $(this).load('deleteNoteFromFrame/',{ 'linkage_id':$(this).parents('li[parent_frame_id]').attr('parent_frame_id'), 'note_id':$(this).parents('*[linked_note_id]').attr('linked_note_id')});
                     
                     //For frames display
                     //remove the one in brief_display (if this is in full_display)
-                    var linked_note_id = $(this).parents("div[linked_note_id]").attr('linked_note_id');                   
-                    var display = $(this).parents("div[linked_note_id]").parents('div#frame').attr('class');                  
+                    var linked_note_id = $(this).parents("*[linked_note_id]").attr('linked_note_id');                   
+                    var display = $(this).parents("div[linked_note_id]").parents('div#frame').attr('class');      
+
+//alert('linked_note_id'+linked_note_id);
+//alert('display'+display);
+
                     if (display=="brief_display"){
                            $(this).parents('div.framebook').find('div.full_display').find('div#note_notes ul').find('div[linked_note_id="'+linked_note_id+'"]').remove();
                     }else{
                            $(this).parents('div.framebook').find('div.brief_display').find('div#note_notes ul').find("div[linked_note_id='"+linked_note_id+"']").remove();          
                     }
-                    $(this).parents("div[linked_note_id]").remove();
+                    $(this).parents("div[linked_note_id="+linked_note_id+"]").remove();
                     
                     
                     //For frame display
-                     $(this).parents("li[linked_note_id]").remove();
+                     $(this).parents("li[linked_note_id="+linked_note_id+"]").remove();
                     
             });
 {% endblock %}

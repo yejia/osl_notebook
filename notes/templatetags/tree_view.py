@@ -18,7 +18,8 @@ def tree_view_tag(context, frame):
     for child in children:
         child.owner_name = frame.owner_name
     return {'children': children, 'profile_username':context['profile_username'], \
-            'book_uri_prefix':context['book_uri_prefix'], 'sort':sort, 'pick_lang':context['pick_lang']}
+            'book_uri_prefix':context['book_uri_prefix'], 'sort':sort, 'pick_lang':context['pick_lang'], 
+            'parent_frame_id':frame.id} #parent_frame_id used for removing note from frame. 
 
 
 

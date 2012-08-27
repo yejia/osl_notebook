@@ -3,7 +3,8 @@
 
 
         {% for note in children %} 
-            <li  class="note_in_frame {% if note.get_note_type == 'Frame' %}expandable{% endif %} {% if forloop.last %}last{% endif %}"  note_id="{{note.id}}"  linked_note_id="{{note.id}}">  {% comment %}note_id for set_the_order and linked_note_id for #frame_delete_note{% endcomment %}
+            <li  class="note_in_frame {% if note.get_note_type == 'Frame' %}expandable{% endif %} {% if forloop.last %}last{% endif %}"  parent_frame_id="{{parent_frame_id}}" note_id="{{note.id}}"  linked_note_id="{{note.id}}">  {% comment %}note_id for set_the_order and linked_note_id for #frame_delete_note{% endcomment %}
+              
                 {% if note.get_note_type == 'Frame' %}<div class="hitarea expandable-hitarea"></div>{% endif %}
                 <span class='noPrint'>
                 <img src="/site_media/img/{{note.get_note_type}}.png" title="{{note.get_note_type}}" />
@@ -87,6 +88,7 @@
                 {% endif %}
             <!--Used here for spacing since styling the li here with padding or margin will mess up the tree view-->    
             <div class="spacing_li">&nbsp;&nbsp;</div>
-            </li>
             
+            
+            </li>            
         {% endfor %}
