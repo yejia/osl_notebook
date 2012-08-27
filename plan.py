@@ -205,7 +205,7 @@ def remind_monthly_review(users):
                     _("If your monthly plan is empty this month, it will be removed for you automatically the beginning of next month:") 
             html_content =  _("It is the end of the month again. Now is your time to review your monthly plan. Have you accomplished your plan this month? What have you done well? What you haven't done very well? What can you improve on? ")+'<br/>'+\
                     _("Remember to find time to review your monthly plan:") + '<br/>' + \
-                    '<a href="' + frame_url +'">' + frame_url + '</a>' + '<br/>br/>' + \
+                    '<a href="' + frame_url +'">' + frame_url + '</a>' + '<br/><br/>' + \
                     _("If your monthly plan is empty this month, it will be removed for you automatically the beginning of next month:") 
             msg = EmailMultiAlternatives(_('Time to review your monthly plan'), content.encode('utf-8') , SERVER_EMAIL, [member.email])
             msg.attach_alternative(html_content.encode('utf-8') , "text/html")
