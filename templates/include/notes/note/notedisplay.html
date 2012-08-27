@@ -58,6 +58,8 @@
  {% if user.username == profile_username %} 
 {% if note.deleted  %} 
 <img src="/site_media/img/hard-delete.png" title="{% trans 'hard delete' %}" id="hard_delete" class="delete_img_on_note_display clickable noPrint"/>
+&nbsp;
+<img src="/site_media/img/restore.png" title="{% trans 'restore' %}" id="restore" class="restore_img_on_note_display clickable noPrint"/>
 {% else %}
 <img src="/site_media/img/delete.png" title="{% trans 'soft delete' %}" id="soft_delete"  class="delete_img_on_note_display clickable noPrint"/>
 {% endif %}

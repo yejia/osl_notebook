@@ -1346,6 +1346,17 @@ function insertParam(key, value)
                            window.location.replace('{{book_uri_prefix}}/{{bookname}}/notes/') ;
                 
                 }
+                
+                 $('#restore'). click(function(){                      
+                     
+                         $(this).load('restoreNote/',{ 'id':$(this).parents("div").attr('note_id')}, note_restored, 'text');
+                });
+                
+                 function note_restored(result){
+                     if (result=='True')
+                            window.location.reload(true); 
+                
+                }
         
 
         
