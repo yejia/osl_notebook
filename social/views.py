@@ -201,7 +201,8 @@ def friends_notes2(request, username, bookname):
                                                  'appname':'friends', 'cl':cl, 'profile_username':username},\
                                                   context_instance=RequestContext(request, {'book_uri_prefix':'/'+username+'/friends',
                                                                                             'note_type':bookname_note_type_dict.get(bookname),
-                                                                                            'pick_empty':request.GET.get('pick_empty', 'all')  })) 
+                                                                                            'pick_empty':request.GET.get('pick_empty', 'all'),
+                                                                                            'pick_plan':request.GET.get('pick_plan', 'all')   })) 
  
 
 
@@ -297,7 +298,8 @@ def groups_notes(request, username, bookname):
                                                  'appname':'friends', 'cl':cl, 'profile_username':username},\
                                                   context_instance=RequestContext(request, 
                                                         {'book_uri_prefix':'/'+username+'/groups', 'note_type':bookname_note_type_dict.get(bookname),
-                                                         'pick_empty':request.GET.get('pick_empty', 'all')})) 
+                                                         'pick_empty':request.GET.get('pick_empty', 'all'),
+                                                         'pick_plan':request.GET.get('pick_plan', 'all')})) 
     
 
 
@@ -365,7 +367,8 @@ def notes(request, username, bookname):
                                'folders':folders, 'profile_username':username, 'profile_member':profile_member, 'appname':'social', 'cl':cl},\
                                                   context_instance=RequestContext(request,  {'book_uri_prefix':'/social/'+username, 
                                                                 'note_type':bookname_note_type_dict.get(bookname),
-                                                                'pick_empty':request.GET.get('pick_empty', 'all')}))
+                                                                'pick_empty':request.GET.get('pick_empty', 'all'),
+                                                                'pick_plan':request.GET.get('pick_plan', 'all')}))
 
 
 
@@ -798,7 +801,8 @@ def group(request, groupname, bookname):
                                                   'appname':'groups', 'cl':cl, 'area':area},\
                                                   context_instance=RequestContext(request, {'book_uri_prefix':'/groups/'+groupname,
                                                                                              'note_type':bookname_note_type_dict.get(bookname),
-                                                                                             'pick_empty':request.GET.get('pick_empty', 'all')}))
+                                                                                             'pick_empty':request.GET.get('pick_empty', 'all'),
+                                                                                             'pick_plan':request.GET.get('pick_plan', 'all')}))
 
 
 
@@ -830,7 +834,8 @@ def notes_tag(request, username, bookname, tag_name):
                                'profile_username':username, 'profile_member':profile_member, 'tags':tags, 'appname':'social', 'cl':cl},\
                                                   context_instance=RequestContext(request,  {'book_uri_prefix':'/social/'+username, 
                                                                                              'note_type':bookname_note_type_dict.get(bookname),
-                                                                                             'pick_empty':request.GET.get('pick_empty', 'all')})) 
+                                                                                             'pick_empty':request.GET.get('pick_empty', 'all'),
+                                                                                             'pick_plan':request.GET.get('pick_plan', 'all')})) #TODO: refactor, merge getting pick_* parameters together 
 
 
 
@@ -869,7 +874,9 @@ def group_tag(request, groupname, bookname, tag_name):
     return render_to_response('social/notes/group_notes.html', {'group':group, 'note_list':paged_notes,'sort':sort, 'current_tag':tag_name, 'bookname':bookname,\
                                           'profile_member':profile_member, 'tags':tags, 'appname':'groups', 'cl':cl},\
                                                   context_instance=RequestContext(request,  {'note_type':bookname_note_type_dict.get(bookname),
-                                                                                             'pick_empty':request.GET.get('pick_empty', 'all')}))
+                                                                                             'pick_empty':request.GET.get('pick_empty', 'all'),
+                                                                                             'pick_plan':request.GET.get('pick_plan', 'all')
+                                                                                             }))
     
 
 @login_required
@@ -1125,7 +1132,15 @@ def __get_notes_context(request, note_list):
         note_list = note_list.filter(notes=None) 
         #print 'empty frmame list:', [(n.id, n.private, n.deleted) for n in note_list]
     elif pick_empty in false_words:
-        note_list = note_list.exclude(notes=None) 
+        note_list = note_list.exclude(notes=None)         
+    
+    
+    pick_plan = request.GET.get('pick_plan', 'all')
+    if pick_plan == 'w':
+        note_list = note_list.filter(title__startswith='Weekly Plan:') 
+        #print 'empty frmame list:', [(n.id, n.private, n.deleted) for n in note_list]
+    elif pick_plan == 'm':
+        note_list = note_list.filter(title__startswith='Monthly Plan:')   
     
     
     order_type = request.GET.get('order_type','desc')  
