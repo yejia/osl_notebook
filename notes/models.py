@@ -324,7 +324,7 @@ class Note(models.Model):
 
     def display_tags(self):
         #return ','.join([t.name for t in self.tags.all()])
-        return ','.join(self.get_tags())
+        return ','.join(self.get_tag_names())
     
      
     def get_tags_ids(self):
