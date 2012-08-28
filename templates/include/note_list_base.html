@@ -1284,8 +1284,11 @@ function insertParam(key, value)
              
               //pick learning plans frames drop down  select with class frame_plan_drop_down 
              $(":input[name='pick_plan']").change(function(){       
-                //window.location.replace('?pick_empty='+$(this).val())
-                insertParam('pick_plan', $(this).val());
+                      insertParam('pick_plan', $(this).val());
+             });
+           
+                $(":input[name='pick_top']").change(function(){      
+                       insertParam('pick_top', $(this).val());
              });
            
                 

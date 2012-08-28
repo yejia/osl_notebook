@@ -929,7 +929,8 @@ def __get_context(request, note_list,#default_tag_id,
 		   'next_cache_id':next_cache_id, 'show_notes_mode':show_notes_mode, 'show_caches_mode':show_caches_mode,'cl':cl, 
            'profile_username':username, 'date_range':date_range, 'order_type':order_type, 'in_linkage':in_linkage, 
            'with_attachment':with_attachment, 'users':User.objects.all(), 'wss':wss, 'current_ws':request.session.get("current_ws", None),
-           'pick_lang':pick_lang, 'true_words':true_words, 'all_words':all_words, 'false_words':false_words, 'pick_empty':pick_empty, 'pick_plan':pick_plan
+           'pick_lang':pick_lang, 'true_words':true_words, 'all_words':all_words, 'false_words':false_words, 
+           'pick_empty':pick_empty, 'pick_plan':pick_plan, 'pick_top':request.GET.get('pick_top', 'y')
            }      #pick_empty is only for frames
     
 

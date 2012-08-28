@@ -9,8 +9,11 @@
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{% include "include/notes_pick_lang.html" %}    
         {% comment %}Use block inheritance and move this into framebook templates{% endcomment %}
          {% if  bookname == 'framebook'  %} 
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{% include "include/frames_pick_empty.html" %} 
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{% include "include/frames_pick_plans.html" %} 
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{% include "include/frames_pick_empty.html" %} 
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{% include "include/frames_pick_plans.html" %} 
+                {% if cl.paginator.count > 100 %}
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{% include "include/frames_pick_top.html" %} 
+                 {% endif %}    
         {% endif %}          
 		<span  style="float:right;"><a href="javascript:stream();" title="Alt-l">{% trans "Less" %}</a>    |    <a href="javascript:structure();" title="Alt-m">{% trans "More" %}</a></span>
 </div>
