@@ -1,0 +1,19 @@
+{% load i18n %}
+
+<span id="frames_pick_empty">
+ 
+    {% trans "Pick top" %} 
+    <select id="frame_top_drop_down"   class="pick_drop_down"  name="pick_top">
+            {% if not pick_top or  pick_top == 'y' %}
+                <option value="" selected="selected">{% trans "Top" %}</option>
+            {% else %}   
+                <option value="">{% trans "Top" %}</option>
+            {% endif %}               
+            {% if pick_top == 'n'  %}
+                <option value="n" selected="selected">{% trans "All" %}</option>
+            {% else %}
+                <option value="n">{% trans "All" %}</option>
+            {% endif %}
+    </select>   
+
+</span>
