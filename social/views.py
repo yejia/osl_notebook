@@ -26,7 +26,7 @@ from notebook.scraps.models import Scrap
 from notebook.social.models import *
 from notebook.areas.models import Area, Area_Group
 from notebook.notes.views import User, getT, getlogger, getFolder, get_public_notes, __get_folder_context
-from notebook.notes.views import getSearchResults,  __getQStr, __get_view_theme, Pl, ALL_VAR
+from notebook.notes.views import getSearchResults,  __getQStr, __get_view_theme, Pl, ALL_VAR, __get_lang
 from notebook.notes.util import *
 from notebook.notes.constants import *
 
@@ -178,7 +178,7 @@ def profile(request, username):
 @login_required
 def friends(request, username):
     #friends = request.user.member.get_friends()    
-    return render_to_response('social/friends.html', { 'profile_username':username}, context_instance=RequestContext(request))
+    return render_to_response('social/friends.html', { 'profile_username':username}, context_instance=RequestContext(request, {}))
 
 
 @login_required
@@ -202,7 +202,9 @@ def friends_notes2(request, username, bookname):
                                                   context_instance=RequestContext(request, {'book_uri_prefix':'/'+username+'/friends',
                                                                                             'note_type':bookname_note_type_dict.get(bookname),
                                                                                             'pick_empty':request.GET.get('pick_empty', 'all'),
-                                                                                            'pick_plan':request.GET.get('pick_plan', 'all')   })) 
+                                                                                            'pick_plan':request.GET.get('pick_plan', 'all'),
+                                                                                            'pick_lang': __get_lang(request)
+                                                                                               })) 
  
 
 
