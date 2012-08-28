@@ -922,7 +922,7 @@ def __get_context(request, note_list,#default_tag_id,
     #AddNForm_notes = create_model_form("AddNForm_"+str(username), N, fields={'tags':forms.ModelMultipleChoiceField(queryset=tags)})
     #addNoteForm = AddNForm_notes(initial={'tags': [default_tag_id]}) #TODO: is this form used at all?
     
-    pick_lang =  request.GET.get('pick_lang') 
+    pick_lang =  __get_lang(request)
     return  {'note_list': paged_notes, 'tags':tags, 'view_mode':view_mode,
                    'delete':delete, 'private':private, 
                    'day':now.day, 'month':now.month, 'year':now.year, #day, month, year current are not planed to be used in filtering in the UI, although you can use it by youself
@@ -1228,7 +1228,8 @@ def note(request, username, bookname, note_id):
     
     tags = __get_ws_tags(request, username, bookname)
     
-    pick_lang =  request.GET.get('pick_lang')      
+    pick_lang =  __get_lang(request)
+          
     return render_to_response(book_template_dict.get(bookname)+'notes/note/note.html', {'note':note, 'notes_included':notes_included, \
                                                                                    'note_form':note_form, 'profile_username':username, \
                                                                                    'note_trans_form':note_trans_form,\
@@ -1236,10 +1237,24 @@ def note(request, username, bookname, note_id):
                                                                                    'pagename':'note', 'appname':'notes' #TODO: in the future, get the app name from the app the view is included 
                                                                                    },
                                                                                     context_instance=RequestContext(request, {'bookname': bookname,\
-                                                                                                                              'aspect_name':'notes',\
-                                                                                                                              'book_uri_prefix':'/'+username,
-                                                                                                                               'profile_member':Member.objects.get(username=username) }))
-    
+                                                                                                                           'aspect_name':'notes',\
+                                                                                                                            'book_uri_prefix':'/'+username,
+                                                                                                                            'profile_member':Member.objects.get(username=username) }))
+
+            
+
+
+import django                                                                                                                             
+def __get_lang(request):
+    pick_lang =  request.GET.get('pick_lang')                                                                                                                             
+    if not pick_lang:        
+        current_active_lang = django.utils.translation.get_language()
+        print 'current_active_lang', current_active_lang
+        if current_active_lang == 'zh-cn':
+            pick_lang = 'C'
+        else:
+            pick_lang = 'E' 
+    return pick_lang              
 
 
   
@@ -1867,7 +1882,7 @@ def frame(request, username, frame_id):
         note_trans = Note_Translation.objects.using(username).get(note=frame)            
         note_trans_form = UpdateNoteTransForm(instance=note_trans)
     
-    pick_lang =  request.GET.get('pick_lang')  
+    pick_lang =  __get_lang(request)
        
     return render_to_response('framebook/notes/note/note.html', {'note':frame, 'notes_in_frame':notes_in_frame, 'sort':sort, \
                                                              'profile_username':username, 'note_form':note_form,\
@@ -2088,6 +2103,8 @@ def share(request, bookname):
     #print 'douban_service.client.token:', douban_service.client.token
     
     current_site = Site.objects.get_current()   
+    #get rid of pick_lang fromt the request in the template and use this instead TODO:
+    #pick_lang =  __get_lang(request)
     pick_lang = request.POST.get('pick_lang')
     if not pick_lang:
         pick_lang = 'E'

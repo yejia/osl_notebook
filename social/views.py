@@ -362,7 +362,7 @@ def notes(request, username, bookname):
     folders = F.objects.filter(private=False).order_by('name') 
     
     profile_member = Member.objects.get(username=username)
-    pick_lang =  request.GET.get('pick_lang') 
+    pick_lang =  __get_lang(request)
     return render_to_response('social/include/notes/notes.html', {'note_list':paged_notes,'sort':sort, 'bookname':bookname, 'pick_lang':pick_lang, \
                                'folders':folders, 'profile_username':username, 'profile_member':profile_member, 'appname':'social', 'cl':cl},\
                                                   context_instance=RequestContext(request,  {'book_uri_prefix':'/social/'+username, 
@@ -423,7 +423,7 @@ def note(request, username, bookname, note_id):
 #        print 'notes_included:', notes_included
 #===============================================================================
     
-    pick_lang =  request.GET.get('pick_lang')  
+    pick_lang =  __get_lang(request)
     profile_member = Member.objects.get(username=username)
     return render_to_response('social/include/notes/note/note.html', {'note':note,\
                                     #'frames':frames, \
@@ -515,7 +515,7 @@ def frame(request, username, bookname, frame_id):
     else:
         notes_in_frame = frame.get_public_notes_in_order(sort) 
     
-    pick_lang =  request.GET.get('pick_lang') 
+    pick_lang =  __get_lang(request)
     profile_member = Member.objects.get(username=username)
     return render_to_response('social/framebook/notes/note/note.html', {'note':frame, 'notes_in_frame':notes_in_frame,'sort':sort, \
                                                              #'frame_notes_display':frame_notes_display, \

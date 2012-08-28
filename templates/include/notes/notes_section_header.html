@@ -11,7 +11,7 @@
          {% if  bookname == 'framebook'  %} 
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{% include "include/frames_pick_empty.html" %} 
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{% include "include/frames_pick_plans.html" %} 
-                {% if cl.paginator.count > 100 %}
+                {% if cl.paginator.count > 50 %}
                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{% include "include/frames_pick_top.html" %} 
                  {% endif %}    
         {% endif %}          
