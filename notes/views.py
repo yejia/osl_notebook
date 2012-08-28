@@ -826,7 +826,9 @@ def included_notes_in_frame(request, frame_id, username, bookname):
     context = __get_context(request, note_list, #default_tag_id,
                              username, bookname)    
     return render_to_response(book_template_dict.get(bookname)+'notes/notes.html', context, context_instance=RequestContext(request,{'bookname': bookname, 'aspect_name':'notes',\
-                                                                                                        'book_uri_prefix':'/'+username}))
+                                                                                                        'book_uri_prefix':'/'+username,
+                                                                                                        'profile_member':Member.objects.get(username=username)
+                                                                                                        }))
 
 
 #view included notes in a linkage 
@@ -1702,7 +1704,7 @@ def  frame_notes(request, username, bookname):
 #    print "linkageNote.errors:",linkageNote.errors 
     frameNote.vote = frameNote.get_vote()
     frameNote.save()
-    messages.success(request, "A frame is successfully created!")
+    messages.success(request, _("A frame is successfully created!"))
     return HttpResponseRedirect(__get_pre_url(request))  
 
 
