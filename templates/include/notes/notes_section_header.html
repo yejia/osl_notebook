@@ -11,9 +11,9 @@
          {% if  bookname == 'framebook'  %} 
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{% include "include/frames_pick_empty.html" %} 
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{% include "include/frames_pick_plans.html" %} 
-                {% if cl.paginator.count > 50 %}
+                {% if cl.paginator.count > 50 or qstr %} 
                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{% include "include/frames_pick_top.html" %} 
-                 {% endif %}    
+                 {% endif %} 
         {% endif %}          
 		<span  style="float:right;"><a href="javascript:stream();" title="Alt-l">{% trans "Less" %}</a>    |    <a href="javascript:structure();" title="Alt-m">{% trans "More" %}</a></span>
 </div>
