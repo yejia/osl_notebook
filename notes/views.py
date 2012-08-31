@@ -1087,6 +1087,7 @@ def __get_notes_context(request, note_list):
     if get_resource == 'y':
         sorted_note_list = [n for n in sorted_note_list]
         for snl in sorted_note_list:
+            #TODO: it seems that some frames are not removed. If so, try adding the line below. It needs the profile_name, which can be passed from the calling method by setting the request.GET
             #snl.owner_name = 
             if snl.get_note_type()  == 'Frame':
                 sorted_note_list.remove(snl)

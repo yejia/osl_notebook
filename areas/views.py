@@ -166,7 +166,7 @@ def area(request, username, areaname):
                 r_a_notes = r_note_list.filter(tags__name = at).distinct()
                 r_a_note_list = [n for n in r_a_notes] 
                 for ran in r_a_note_list:
-                    ran.owner_name = username = username
+                    ran.owner_name = username 
                     if ran.get_note_type() == 'Frame':
                         r_a_note_list.remove(ran)
                 
