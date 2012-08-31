@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-31 13:59+0800\n"
+"POT-Creation-Date: 2012-08-31 18:06+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -210,7 +210,7 @@ msgstr "如果你的本月学习计划是空的，将在下个月的月初被系
 msgid "Time to review your monthly plan"
 msgstr "回顾本月学习计划的时间到了"
 
-#: areas/views.py:176
+#: areas/views.py:198
 msgid "You have successfully removed the group from the area."
 msgstr "你已经成功的将该小组从这个学习领域移除。"
 
@@ -241,7 +241,7 @@ msgid "The size of the title is limited to 2000 characaters."
 msgstr "标题的长度应小于2000字。"
 
 #: notes/models.py:192 notes/models.py:1166 social/models.py:615
-#: social/models.py:774 templates/areas/area.html:198
+#: social/models.py:774 templates/areas/area.html:213
 #: templates/areas/index.html:53
 msgid "Description"
 msgstr "正文"
@@ -262,7 +262,7 @@ msgstr "标签"
 msgid "Default tag is 'random thought'."
 msgstr "默认的标签是'random thought'。"
 
-#: notes/models.py:194 social/models.py:618 templates/areas/area.html:201
+#: notes/models.py:194 social/models.py:618 templates/areas/area.html:216
 #: templates/areas/index.html:56
 #: templates/framebook/notes/notesdisplay.html:22
 #: templates/include/note_list_base.html:1469
@@ -464,7 +464,7 @@ msgstr "接收更新"
 msgid "Home"
 msgstr "主页"
 
-#: social/models.py:614 templates/areas/area.html:176
+#: social/models.py:614 templates/areas/area.html:191
 #: templates/areas/index.html:36 templates/social/group/groups.html:34
 msgid "Name"
 msgstr "名字"
@@ -540,7 +540,7 @@ msgstr "你被邀请参加学习小组"
 msgid "You have successfully sent the group invitation!"
 msgstr "你已经成功的发出了小组邀请！"
 
-#: social/views.py:1107
+#: social/views.py:1108
 msgid ""
 "Your suggestion is successfully sent to the sys admin! Thank you for your "
 "valuable suggestion!"
@@ -654,7 +654,7 @@ msgid "Notebook administration"
 msgstr "笔记本管理"
 
 #: templates/admin/change_form.html:21 templates/admin/index.html:29
-#: templates/areas/area.html:204 templates/areas/index.html:59
+#: templates/areas/area.html:219 templates/areas/index.html:59
 #: templates/framebook/notes/notesdisplay.html:25
 #: templates/snippetbook/notes/add_note.html:66
 #: templates/snippetbook/notes/add_note.html:68
@@ -874,7 +874,7 @@ msgstr ""
 msgid "'s Learning Area"
 msgstr "的学习领域"
 
-#: templates/areas/area.html:95 templates/include/groups_menu.html:11
+#: templates/areas/area.html:95 templates/include/groups_menu.html:12
 #: templates/include/notes/addNote.html:117
 #: templates/include/notes/notes_display.html:57
 #: templates/include/notes/note/notedisplay.html:147
@@ -884,7 +884,7 @@ msgstr "的学习领域"
 msgid "private"
 msgstr "隐私"
 
-#: templates/areas/area.html:97 templates/include/groups_menu.html:16
+#: templates/areas/area.html:97 templates/include/groups_menu.html:19
 #: templates/include/notes/notes_display.html:59
 #: templates/snippetbook/notes/show_note_added_js.html:11
 #: templates/snippetbook/notes/show_note_added_js.html:13
@@ -901,12 +901,12 @@ msgstr "浏览全部"
 msgid "'s Learning Areas"
 msgstr "的学习领域"
 
-#: templates/areas/area.html:109 templates/areas/area.html.py:188
+#: templates/areas/area.html:109 templates/areas/area.html.py:203
 #: templates/areas/index.html:47
 msgid "Root tag tree"
 msgstr "根标签树"
 
-#: templates/areas/area.html:112 templates/areas/area.html.py:183
+#: templates/areas/area.html:112 templates/areas/area.html.py:198
 #: templates/areas/index.html:42
 msgid "Root frame"
 msgstr "根知识包"
@@ -989,42 +989,46 @@ msgid "All"
 msgstr "全部"
 
 #: templates/areas/area.html:135
+msgid "View the learning recources in this area"
+msgstr "浏览该领域的学习资源"
+
+#: templates/areas/area.html:150
 msgid "Question set in this area"
 msgstr "这个学习领域的问题集"
 
-#: templates/areas/area.html:135
+#: templates/areas/area.html:150
 msgid "Click to see how these questions are generated."
-msgstr ""
+msgstr "点击看这些问题是如何生成的。"
 
-#: templates/areas/area.html:142
+#: templates/areas/area.html:157
 msgid "Learning groups in this area"
 msgstr "这个学习领域里的学习小组"
 
-#: templates/areas/area.html:147 templates/social/admin/group.html:30
+#: templates/areas/area.html:162 templates/social/admin/group.html:30
 msgid "remove this group"
 msgstr "去除这个小组"
 
-#: templates/areas/area.html:157
+#: templates/areas/area.html:172
 msgid "Add Group"
 msgstr "添加一个学习小组"
 
-#: templates/areas/area.html:168
+#: templates/areas/area.html:183
 msgid "Edit the learning area"
 msgstr "编辑该学习领域"
 
-#: templates/areas/area.html:184 templates/areas/index.html:43
+#: templates/areas/area.html:199 templates/areas/index.html:43
 msgid "Enter a frame's id"
 msgstr "输入一个知识包的id"
 
-#: templates/areas/area.html:184 templates/areas/index.html:43
+#: templates/areas/area.html:199 templates/areas/index.html:43
 msgid "Click to see what is note id"
 msgstr ""
 
-#: templates/areas/area.html:188 templates/areas/index.html:47
+#: templates/areas/area.html:203 templates/areas/index.html:47
 msgid "Enter only 1 tag tree in the input box."
 msgstr "在输入框里只输入一个标签树。"
 
-#: templates/areas/area.html:188 templates/areas/index.html:47
+#: templates/areas/area.html:203 templates/areas/index.html:47
 msgid "And it has to be an existing tag tree."
 msgstr "并且必须是已经存在的标签树。"
 

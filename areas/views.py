@@ -128,30 +128,52 @@ def area(request, username, areaname):
     #tags = Tag_Frame.objects.using(username).all().order_by('name')
     area_tags_names = area.root_tag_frame.get_offsprings()
     
-    area_tags =  Tag.objects.using(username).filter(name__in=area.get_all_tags())
+    #area_tags =  Tag.objects.using(username).filter(name__in=area.get_all_tags())
     area_tags_with_count = []
     area_question_tags_with_count = []
-    for t in area_tags:
-        #For now, I think just use snippet is ok. 
-        note_list = Note.objects.using(username).filter(tags__name = t.name)
+    
+    for t in area_tags_names:
+        
+        note_list = Note.objects.using(username).filter(tags__name = t, deleted=False)
         area_tags_with_count.append([t, note_list.count()])
         #question note list
-        q_note_list = Snippet.objects.using(username).filter(tags__name = t.name)
+        #For now, I think just use snippet is ok. 
+        q_note_list = Snippet.objects.using(username).filter(tags__name = t,  deleted=False)
         q_note_list =  q_note_list.filter(tags__name = 'question')
         q_count = q_note_list.count()
         if q_count:
             area_question_tags_with_count.append([t, q_count])
     
+    resource_tags_with_count = []        
+    for r_tag in resource_tags:
+        r_note_list = Note.objects.using(username).filter(tags__name = r_tag, deleted=False)
+        r_note_list = r_note_list.filter(tags__name__in=area_tags_names).distinct()
+        r_count = r_note_list.count()
+        if r_count:
+            
+            resource_area_tags_with_count = []
+            for at in area_tags_names:
+                r_a_note_list = r_note_list.filter(tags__name = at).distinct()
+                ra_count = r_a_note_list.count()
+                #print '[at, ra_count]', [at, ra_count]
+                #print 'r_a_note_list', r_a_note_list.values('id')
+                if ra_count:
+                    resource_area_tags_with_count.append([at, ra_count])
+                    
+            resource_tags_with_count.append([r_tag, r_count, resource_area_tags_with_count])        
+    #print 'resource_tags_with_count', resource_tags_with_count  
     groups = Group.objects.exclude(id__in=[g.id for g in area.get_groups()])
     editAreaForm = AddAreaForm(instance=area)
     tags = Tag_Frame.objects.using(username).all().order_by('name')
-
-        
+    
+    
     #TODO:need this?
     theme = __get_view_theme(request)
     private =    theme['private'] 
     return render_to_response('areas/area.html',{'area':area,  'area_tags_with_count':area_tags_with_count, \
-                                                 'area_question_tags_with_count':area_question_tags_with_count, 'editAreaForm':editAreaForm,'tags':tags, \
+                                                 'area_question_tags_with_count':area_question_tags_with_count, 
+                                                 'resource_tags_with_count':resource_tags_with_count,
+                                                 'editAreaForm':editAreaForm,'tags':tags, \
                             'username':request.user.username,'profile_username':username,  'private':private, 'groups':groups}, \
                     context_instance=RequestContext(request,  {'book_uri_prefix':'/'+username+'/areas/area/'+area.name,
                                                               }))
