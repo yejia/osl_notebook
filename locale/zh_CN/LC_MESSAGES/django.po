@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-31 08:57+0800\n"
+"POT-Creation-Date: 2012-08-31 13:59+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -489,40 +489,58 @@ msgstr "你不是这个小组的管理员，所以不能管理这个小组。"
 msgid "You have successfully removed the member from the group."
 msgstr "你已经成功的将该成员从这个小组移除。"
 
-#: social/views.py:662
+#: social/views.py:662 social/views.py:694
 msgid "No users are entered!"
 msgstr "没有输入任何用户名！"
 
-#: social/views.py:672
-msgid "You are invited to join the group "
-msgstr "你被邀请参加学习小组"
+#: social/views.py:671
+msgid "You are added to the group "
+msgstr "你被加入学习小组"
 
-#: social/views.py:673
+#: social/views.py:672 social/views.py:705
 msgid "You can visit this group at "
 msgstr "这是该学习小组的网址 "
 
-#: social/views.py:674
+#: social/views.py:673
+msgid ""
+"If you do not want to join this group, you can remove yourself from this "
+"group on your groups page. "
+msgstr "如果你想退出该学习小组，你可以在你的学习小组页面完成此操作。"
+
+#: social/views.py:676
+msgid "You are added to group "
+msgstr "你被加入学习小组"
+
+#: social/views.py:680
+msgid "You have successfully added the user to the group!"
+msgstr "你已经成功的将该成员添加到这个小组。"
+
+#: social/views.py:704
+msgid "You are invited to join the group "
+msgstr "你被邀请参加学习小组"
+
+#: social/views.py:706
 msgid ""
 "If you want to join this group, you can click on the \"join the group\" "
 "button."
 msgstr "如果你想加入该学习小组，你可以点击\"加入小组\"按钮。"
 
-#: social/views.py:675
+#: social/views.py:707
 msgid ""
 "After joining, if you want to remove yourself from this group, you can do "
 "that in your groups page."
 msgstr ""
 "加入学习小组后，如果你想退出该学习小组，你可以在你的学习小组页面完成此操作。"
 
-#: social/views.py:676
+#: social/views.py:708
 msgid "You are invited to group "
 msgstr "你被邀请参加学习小组"
 
-#: social/views.py:680
+#: social/views.py:712
 msgid "You have successfully sent the group invitation!"
 msgstr "你已经成功的发出了小组邀请！"
 
-#: social/views.py:1072
+#: social/views.py:1107
 msgid ""
 "Your suggestion is successfully sent to the sys admin! Thank you for your "
 "valuable suggestion!"
@@ -856,7 +874,7 @@ msgstr ""
 msgid "'s Learning Area"
 msgstr "的学习领域"
 
-#: templates/areas/area.html:95 templates/include/groups_menu.html:8
+#: templates/areas/area.html:95 templates/include/groups_menu.html:11
 #: templates/include/notes/addNote.html:117
 #: templates/include/notes/notes_display.html:57
 #: templates/include/notes/note/notedisplay.html:147
@@ -866,7 +884,7 @@ msgstr "的学习领域"
 msgid "private"
 msgstr "隐私"
 
-#: templates/areas/area.html:97 templates/include/groups_menu.html:10
+#: templates/areas/area.html:97 templates/include/groups_menu.html:16
 #: templates/include/notes/notes_display.html:59
 #: templates/snippetbook/notes/show_note_added_js.html:11
 #: templates/snippetbook/notes/show_note_added_js.html:13
@@ -2274,7 +2292,7 @@ msgstr "标题"
 #: templates/include/notes/addNote.html:103
 #: templates/include/notes/menu/notes_section_menu.html:9
 #: templates/include/notes/menu/notes_section_menu.html:17
-#: templates/social/admin/group.html:98 templates/social/group/groups.html:41
+#: templates/social/admin/group.html:108 templates/social/group/groups.html:41
 #: templates/workingset/index.html:321 templates/workingset/index.html:328
 msgid "Add Tags"
 msgstr "加标签"
@@ -3246,15 +3264,19 @@ msgstr "创建者"
 msgid "remove this member"
 msgstr "去除这个组员"
 
-#: templates/social/admin/group.html:68
+#: templates/social/admin/group.html:70
+msgid "Add Users"
+msgstr "添加成员"
+
+#: templates/social/admin/group.html:78
 msgid "Invite Users"
 msgstr "邀请成员"
 
-#: templates/social/admin/group.html:82
+#: templates/social/admin/group.html:92
 msgid "Group Tags"
 msgstr "小组的标签"
 
-#: templates/social/admin/group.html:88
+#: templates/social/admin/group.html:98
 msgid "remove this tag"
 msgstr "去除标签"
 
@@ -3639,9 +3661,6 @@ msgstr "设成当前"
 
 #~ msgid "In your "
 #~ msgstr "在你的"
-
-#~ msgid "Add Users"
-#~ msgstr "添加成员"
 
 #~ msgid "You are invited and added to group "
 #~ msgstr "你被邀请参加并已被加入学习小组"

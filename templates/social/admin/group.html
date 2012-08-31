@@ -60,8 +60,17 @@
 </li>
 {% endfor %}
 <li>
-
+{% comment %}below is for testing purpose now{% endcomment %}
+{% if group.private and user.member = group.creator or user.username == 'leon' %}
 <form action="addUsers2Group/" method="post" id="addUsers2GroupForm"> 
+<div>   
+    <ul id="ac_users2"></ul>     
+</div> 
+<input type="submit" value="{% trans 'Add Users' %}"/>
+</form> 
+{% endif %} 
+
+<form action="inviteUsers2Group/" method="post" id="inviteUsers2GroupForm"> 
 <div>   
     <ul id="ac_users"></ul>     
 </div> 

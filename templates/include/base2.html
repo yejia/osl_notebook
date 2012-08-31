@@ -101,6 +101,11 @@
 			    availableTags: [{% for u in users %}"{{u}}",{% endfor %}],
                    allowSpaces: true
                 });     
+                
+                $("#ac_users2").tagit({
+			    availableTags: [{% for u in users %}"{{u}}",{% endfor %}],
+                   allowSpaces: true
+                }); 
             
             //TODO: make the tag-it lib able to take several auto complete input boxes
             //$("#ab_tags").tagit({

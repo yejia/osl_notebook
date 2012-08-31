@@ -662,6 +662,38 @@ def group_add_users(request, groupname):
         messages.error(request, _("No users are entered!"))  
     group = G.objects.get(name=groupname)     
     for uname in user_names:
+        member = Member.objects.get(username=uname)        
+        group.members.add(member)  
+        if member.default_lang:
+            activate(member.default_lang)
+        url = urlquote('www.91biji.com/groups/' + groupname + '/')
+            
+        content = _('You are added to the group ')+groupname+'\n\n'+\
+                _('You can visit this group at ')+ 'http://' + url  +'\n\n'+\
+                _('If you do not want to join this group, you can remove yourself from this group on your groups page. ') +\
+                urlquote('www.91biji.com/'+uname+'/groups/')
+                
+        send_mail(_('You are added to group ')+groupname, content.encode('utf-8'), u'sys@opensourcelearning.org', [member.email])
+    
+    if request.user.member.default_lang:
+          activate(request.user.member.default_lang)  
+    messages.success(request, _("You have successfully added the user to the group!"))  
+       
+    return HttpResponseRedirect('/groups/'+groupname+'/admin/')     
+
+
+
+#TODO: check if admin
+@login_required
+def group_invite_users(request, groupname):
+    user_names = request.POST.getlist('item[tags][]')
+    #TODO:what is below for?
+    #tags = [ST.objects.get(name=tag_name).name for tag_name in tag_names]
+    if not user_names:    
+        #TODO: give an error page, also validation on the form       
+        messages.error(request, _("No users are entered!"))  
+    group = G.objects.get(name=groupname)     
+    for uname in user_names:
         member = Member.objects.get(username=uname)
         #for now, only invite, don't add the member directly
         #group.members.add(member)  
@@ -679,7 +711,8 @@ def group_add_users(request, groupname):
           activate(request.user.member.default_lang)  
     messages.success(request, _("You have successfully sent the group invitation!"))  
        
-    return HttpResponseRedirect('/groups/'+groupname+'/admin/')     
+    return HttpResponseRedirect('/groups/'+groupname+'/admin/')  
+
 
     
 @login_required

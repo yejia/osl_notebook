@@ -1249,7 +1249,7 @@ def __get_lang(request):
     pick_lang =  request.GET.get('pick_lang')                                                                                                                             
     if not pick_lang:        
         current_active_lang = django.utils.translation.get_language()
-        print 'current_active_lang', current_active_lang
+        #print 'current_active_lang', current_active_lang
         if current_active_lang == 'zh-cn':
             pick_lang = 'C'
         else:
