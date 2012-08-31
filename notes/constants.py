@@ -19,10 +19,10 @@ search_fields_dict = {'notebook':('title','desc'), 'snippetbook':('title','desc'
 
 bookname_note_type_dict = {'notebook':'Note', 'snippetbook':'Snippet','bookmarkbook':'Bookmark', 'scrapbook': 'Scrap','framebook': 'Frame'}
 
-resource_tags = [u'resources', u'movie', u'movies', u'video', u'tutorial', u'reading', u'mag', u'book', u'books', u'news', u'great', u'greatest', u'people',
-                u'blog',u'blogs', u'top news reading', u'新闻阅读评论', ]
+resource_tags = ['resources', 'movie', 'movies', 'video', 'tutorial', 'reading', 'mag', 'book', 'books', 'news', 'great', 'greatest', 'people',
+                'blog','blogs', 'top news reading', u'新闻阅读评论', ]
 
-system_tags = resource_tags + [u'question',                
-               u'task', u'errand', u'todo', u'todos', u'toread', u'totry', u'daily', u'weekly', u'monthly', u'plan',
-               u'chinese', u'tech']
+system_tags = resource_tags + ['question',                
+               'task', 'errand', 'todo', 'todos', 'toread', 'totry', 'daily', 'weekly', 'monthly', 'plan',
+               'chinese', 'tech']
 
