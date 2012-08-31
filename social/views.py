@@ -767,6 +767,8 @@ def group(request, groupname, bookname):
     
     log.debug('tags of the group:'+str(group.tags.all()))
     
+    if group.private and groupname not in [g.name for g in gs]:
+        raise Http404
    
     note_list = group.get_notes(bookname)
     
