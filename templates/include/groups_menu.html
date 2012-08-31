@@ -4,20 +4,23 @@
         <h2>{% trans "Learning Groups" %} {% if user.username == profile_member.username %}<span class="setting-in-r-menu"><a href="/{{user}}/groups/">{% trans "Settings" %}</a></span>{% endif %}</h2>  
 <ul>        
 	{% for g in profile_member.get_groups %}	
-		<li>
+		
          {% if g.private %}
              {% if user.username == profile_member.username  %} 
+             <li>
                     <a href="/groups/{{ g.name }}/">{{g.name}}</a>   
                     <span class="lock_noclick" title="{% trans 'private'  %}" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;              
                                    </span> 
+              </li>                     
              {% endif %}
-        {% else %} 
+        {% else %}
+              <li>        
                     <a href="/groups/{{ g.name }}/">{{g.name}}</a>  
                     <span class="unlock_noclick" title="{% trans 'public'  %}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;          
-                </span>
-        
+                    </span>    
+              </li>                
         {% endif %}  
-        </li>
+        
         {% endfor %} 
 </ul>       
 </div> 
