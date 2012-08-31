@@ -413,11 +413,13 @@ def index(request, username, bookname):
     context.update(extra_context)  
     #TODO: see if I don't have to write book_uri_prifix everywhere
     
-
+    
+        
     return render_to_response(book_template_dict.get(bookname)+'notes/notes.html', context, \
                               context_instance=RequestContext(request,{'bookname': bookname, 'note_type':bookname_note_type_dict.get(bookname),
                                                                'profile_member':Member.objects.get(username=username), 'book_uri_prefix':'/'+username,
-                                                               'get_resource':request.GET.get('get_resource')}))
+                                                               #'get_resource':request.GET.get('get_resource')
+                                                               }))
 
 
 def  __getQStr(request):
@@ -1078,6 +1080,19 @@ def __get_notes_context(request, note_list):
    
     #print 'step 8, length of note_list', len(sorted_note_list)
     
+   
+    #doing this logic here or in the template shouldn't have too much difference in performance. Doing it here can remove the extra count of the frames from the notes count
+    #But get rid of this special case later. Refactor. TODO:
+    get_resource = request.GET.get('get_resource')
+    if get_resource == 'y':
+        sorted_note_list = [n for n in sorted_note_list]
+        for snl in sorted_note_list:
+            #snl.owner_name = 
+            if snl.get_note_type()  == 'Frame':
+                sorted_note_list.remove(snl)
+                 
+   
+   
    
     list_per_page = 30
     paginator = Paginator(sorted_note_list, list_per_page) 

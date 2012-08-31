@@ -44,8 +44,10 @@
         {% else %}   
              {% if bookname == 'framebook' and pick_top != 'n'  and note.is_in_frame %} {% comment %}TODO: use block inheritance to move this logic to framebook templates{% endcomment %}
              {% else %}     
+             {% comment %}
                     {% if bookname == 'notebook' and get_resource == 'y'  and note.get_note_type == 'Frame' %}  
-                    {% else %} 
+                    {% else %}
+           {% endcomment %}
          <li class="note_display" note_id="{{ note.id }}"  social_note_id="{{ note.get_social_note.id }}">
           <div class="{{bookname}}" note_id="{{ note.id }}">
          {% if user.username == profile_username %}     
@@ -171,7 +173,7 @@
            
 	     </li>
      {% endif %} {% comment %}  endif for check if frame is top frame. No displaying for non-top frames  TODO:  {% endcomment %}   
-    {% endif %} {% comment %}  endif for check if it is requesting resouce and if the note is frame. No displaying for frames in resources  TODO:   {% endcomment %}   
+   {% comment %}  {% endif %}{% endcomment %} {% comment %}  endif for check if it is requesting resouce and if the note is frame. No displaying for frames in resources  TODO:   {% endcomment %}   
     {% endif %} 
     {% endfor %}
 </ul>
