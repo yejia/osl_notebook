@@ -134,7 +134,7 @@ $(document).ready(function(){
 <div class="padded">
   <b>{% trans "Question set in this area" %} <a href="/social/leon/snippetbook/notes/note/16793/" title="{% trans "Click to see how these questions are generated." %} "><img src="/media/img/admin/icon-unknown.gif"/></a>:</b> 
   {% for tq in area_question_tags_with_count %}
-      <a href="/{{profile_username}}/notebook/notes/?q=t%3A{{tq.0}}%26t%3Aquestion">{{tq.0}} ({{tq.1}})</a>,
+      <a href="/{{profile_username}}/snippetbook/notes/?q=t%3A{{tq.0}}%26t%3Aquestion">{{tq.0}} ({{tq.1}})</a>,
   {% endfor %}
 </div>
   
