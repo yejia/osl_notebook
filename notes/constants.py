@@ -21,6 +21,6 @@ bookname_note_type_dict = {'notebook':'Note', 'snippetbook':'Snippet','bookmarkb
 
 system_tags = ['question', 
                'resources', 'movie', 'movies', 'video', 'tutorial', 'reading', 'mag', 'book', 'books', 'news', 'great', 'greatest', 'people', 
-               'blog','blogs', 'top news reading', '新闻阅读评论', 
+               'blog','blogs', 'top news reading', u'新闻阅读评论', 
                'task', 'errand', 'todo', 'todos', 'toread', 'totry', 'daily', 'weekly', 'monthly', 
                'chinese', 'tech']
