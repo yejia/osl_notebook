@@ -138,7 +138,7 @@ $(document).ready(function(){
   <li>
       {{r.0}} ({{r.1}}):  
       {% for ra in r.2 %}
-            <a href="/{{profile_username}}/notebook/notes/?q=t%3A{{r.0}}%26t%3A{{ra.0}}" target="_blank">{{ra.0}} ({{ra.1}})</a>,
+            <a href="/{{profile_username}}/notebook/notes/?q=t%3A{{r.0}}%26t%3A{{ra.0}}&get_resource=y" target="_blank">{{ra.0}} ({{ra.1}})</a>,
       {% endfor %}
   </li>    
   {% endfor %}

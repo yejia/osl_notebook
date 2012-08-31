@@ -148,17 +148,30 @@ def area(request, username, areaname):
     for r_tag in resource_tags:
         r_note_list = Note.objects.using(username).filter(tags__name = r_tag, deleted=False)
         r_note_list = r_note_list.filter(tags__name__in=area_tags_names).distinct()
-        for r in r_note_list:
-            if r.get_note_type == 'Frame':
-                r_note_list.remove(r)
-                
         r_count = r_note_list.count()
+        for r in r_note_list:
+            r.owner_name = username
+            #print 'r.get_note_type()', r.get_note_type()
+            if r.get_note_type() == 'Frame':
+                r_count -= 1 
+            
+            #    print 'removing the frame'
+            #    r_note_list.remove(r)
+                
+        
         if r_count:
             
             resource_area_tags_with_count = []
             for at in area_tags_names:
-                r_a_note_list = r_note_list.filter(tags__name = at).distinct()
-                ra_count = r_a_note_list.count()
+                r_a_notes = r_note_list.filter(tags__name = at).distinct()
+                r_a_note_list = [n for n in r_a_notes] 
+                for ran in r_a_note_list:
+                    ran.owner_name = username = username
+                    if ran.get_note_type() == 'Frame':
+                        r_a_note_list.remove(ran)
+                
+                
+                ra_count = len(r_a_note_list)
                 #print '[at, ra_count]', [at, ra_count]
                 #print 'r_a_note_list', r_a_note_list.values('id')
                 if ra_count:
