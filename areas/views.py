@@ -148,6 +148,10 @@ def area(request, username, areaname):
     for r_tag in resource_tags:
         r_note_list = Note.objects.using(username).filter(tags__name = r_tag, deleted=False)
         r_note_list = r_note_list.filter(tags__name__in=area_tags_names).distinct()
+        for r in r_note_list:
+            if r.get_note_type == 'Frame':
+                r_note_list.remove(r)
+                
         r_count = r_note_list.count()
         if r_count:
             
