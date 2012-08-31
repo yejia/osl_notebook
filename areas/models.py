@@ -8,6 +8,7 @@ from notebook.tags.models import Tag_Frame
 from notebook.notes.models import Frame, create_model
 from notebook.social.models import Group
 from notebook.notes.util import book_model_dict, getNote
+from notebook.notes.constants import *
 
 
 
@@ -50,6 +51,7 @@ class Area(models.Model):
         self.root_tag_frame.owner_name = self.owner_name
         area_tags_names = self.root_tag_frame.get_offsprings()
         area_tags_names.append(self.root_tag_frame.name)
+        area_tags_names = [t for t in area_tags_names if t not in system_tags]        
         area_tags_names.sort()
         return area_tags_names
         

@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 ALL_VAR = 'all'
 true_words = [True, 'True', 'true', 'Yes', 'yes', 'Y', 'y']
 false_words = [False, 'False', 'false', 'No', 'no', 'N', 'n']
@@ -16,3 +18,9 @@ search_fields_dict = {'notebook':('title','desc'), 'snippetbook':('title','desc'
                       'scrapbook':('title','desc', 'url'),'framebook':('title','desc')}
 
 bookname_note_type_dict = {'notebook':'Note', 'snippetbook':'Snippet','bookmarkbook':'Bookmark', 'scrapbook': 'Scrap','framebook': 'Frame'}
+
+system_tags = ['question', 
+               'resources', 'movie', 'movies', 'video', 'tutorial', 'reading', 'mag', 'book', 'books', 'news', 'great', 'greatest', 'people', 
+               'blog','blogs', 'top news reading', '新闻阅读评论', 
+               'task', 'errand', 'todo', 'todos', 'toread', 'totry', 'daily', 'weekly', 'monthly', 
+               'chinese', 'tech']
