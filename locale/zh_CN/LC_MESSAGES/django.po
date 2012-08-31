@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-28 09:15+0800\n"
+"POT-Creation-Date: 2012-08-31 08:57+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,31 +18,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: email_digest.py:84 email_digest.py:85 notes/views.py:2106
-#: notes/views.py:2117
+#: email_digest.py:84 email_digest.py:85 notes/views.py:2125
+#: notes/views.py:2136
 msgid "Sharing snippet:"
 msgstr "分享便条："
 
-#: email_digest.py:87 email_digest.py:88 notes/views.py:2108
-#: notes/views.py:2119
+#: email_digest.py:87 email_digest.py:88 notes/views.py:2127
+#: notes/views.py:2138
 msgid "Sharing bookmark:"
 msgstr "分享网址："
 
-#: email_digest.py:90 email_digest.py:91 notes/views.py:2110
-#: notes/views.py:2121
+#: email_digest.py:90 email_digest.py:91 notes/views.py:2129
+#: notes/views.py:2140
 msgid "Sharing scrap:"
 msgstr "分享网摘："
 
-#: email_digest.py:93 email_digest.py:94 notes/views.py:2112
-#: notes/views.py:2123
+#: email_digest.py:93 email_digest.py:94 notes/views.py:2131
+#: notes/views.py:2142
 msgid "Sharing knowledge package:"
 msgstr "分享知识包："
 
-#: email_digest.py:109 notes/views.py:2125
+#: email_digest.py:109 notes/views.py:2144
 msgid "Original Note:"
 msgstr "原笔记："
 
-#: email_digest.py:114 email_digest.py:116 notes/views.py:2136
+#: email_digest.py:114 email_digest.py:116 notes/views.py:2155
 msgid "from"
 msgstr "来自"
 
@@ -319,31 +319,35 @@ msgstr "密码不一致！"
 msgid "You have no permission here!"
 msgstr ""
 
-#: notes/views.py:1120
+#: notes/views.py:1122
 msgid "note"
 msgstr "条笔记"
 
-#: notes/views.py:1121 templates/include/notes/note/notedisplay.html:85
+#: notes/views.py:1123 templates/include/notes/note/notedisplay.html:85
 #: templates/social/include/notes/note/notedisplay.html:28
 msgid "notes"
 msgstr "条笔记"
 
-#: notes/views.py:1296
+#: notes/views.py:1313
 msgid ""
 "Error uploading the file. The file name is too long! Please use a shorter "
 "file name. You can reduce your file name by "
 msgstr ""
 "上传文件时发生错误。文件名太长！请用一个短点的文件名。你可以将文件名缩短"
 
-#: notes/views.py:1296
+#: notes/views.py:1313
 msgid " letters."
 msgstr "字即可。"
 
-#: notes/views.py:1320
+#: notes/views.py:1337
 msgid "Note is successfully updated!"
 msgstr "笔记更新成功！"
 
-#: notes/views.py:2127
+#: notes/views.py:1722
+msgid "A frame is successfully created!"
+msgstr "一个知识包成功生成了！"
+
+#: notes/views.py:2146
 msgid "Forwarded Note:"
 msgstr "转发的笔记："
 
@@ -477,48 +481,48 @@ msgstr "创建者"
 msgid "Admins"
 msgstr "管理员"
 
-#: social/views.py:621
+#: social/views.py:623
 msgid "You are not an admin of this group, and thus cannot admin this group."
 msgstr "你不是这个小组的管理员，所以不能管理这个小组。"
 
-#: social/views.py:626
+#: social/views.py:628
 msgid "You have successfully removed the member from the group."
 msgstr "你已经成功的将该成员从这个小组移除。"
 
-#: social/views.py:660
+#: social/views.py:662
 msgid "No users are entered!"
 msgstr "没有输入任何用户名！"
 
-#: social/views.py:670
+#: social/views.py:672
 msgid "You are invited to join the group "
 msgstr "你被邀请参加学习小组"
 
-#: social/views.py:671
+#: social/views.py:673
 msgid "You can visit this group at "
 msgstr "这是该学习小组的网址 "
 
-#: social/views.py:672
+#: social/views.py:674
 msgid ""
 "If you want to join this group, you can click on the \"join the group\" "
 "button."
 msgstr "如果你想加入该学习小组，你可以点击\"加入小组\"按钮。"
 
-#: social/views.py:673
+#: social/views.py:675
 msgid ""
 "After joining, if you want to remove yourself from this group, you can do "
 "that in your groups page."
 msgstr ""
 "加入学习小组后，如果你想退出该学习小组，你可以在你的学习小组页面完成此操作。"
 
-#: social/views.py:674
+#: social/views.py:676
 msgid "You are invited to group "
 msgstr "你被邀请参加学习小组"
 
-#: social/views.py:678
+#: social/views.py:680
 msgid "You have successfully sent the group invitation!"
 msgstr "你已经成功的发出了小组邀请！"
 
-#: social/views.py:1070
+#: social/views.py:1072
 msgid ""
 "Your suggestion is successfully sent to the sys admin! Thank you for your "
 "valuable suggestion!"
@@ -969,6 +973,10 @@ msgstr "全部"
 #: templates/areas/area.html:135
 msgid "Question set in this area"
 msgstr "这个学习领域的问题集"
+
+#: templates/areas/area.html:135
+msgid "Click to see how these questions are generated."
+msgstr ""
 
 #: templates/areas/area.html:142
 msgid "Learning groups in this area"
@@ -1960,8 +1968,6 @@ msgstr "我的朋友"
 #: templates/include/notes/inlines/add_comments_and_etc_inline.html:127
 #: templates/include/notes/todelete/linkagenotesdisplay.html:109
 #: templates/include/notes/todelete/linkagenotesdisplay.html:155
-#: templates/notebook/notes/notes_display.html:11
-#: templates/notebook/notes/notes_display.html:31
 #: templates/snippetbook/notes/linkagenotesdisplay.html:109
 #: templates/snippetbook/notes/linkagenotesdisplay.html:155
 #: templates/snippetbook/notes/show_note_added_js.html:37
@@ -3338,6 +3344,10 @@ msgstr "浏览该小组的标签树"
 #: templates/social/include/notes/notesdisplay.html:39
 msgid "Tag trees"
 msgstr "标签树"
+
+#: templates/social/include/notes/notesdisplay.html:39
+msgid "You can push your relevant tag trees to this group."
+msgstr "你可以把你的笔记本里相关的标签树推送到这个小组。"
 
 #: templates/social/include/notes/notesdisplay.html:76
 msgid "Take this note"
