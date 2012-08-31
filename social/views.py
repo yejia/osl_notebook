@@ -839,7 +839,8 @@ def group(request, groupname, bookname):
                                                   context_instance=RequestContext(request, {'book_uri_prefix':'/groups/'+groupname,
                                                                                              'note_type':bookname_note_type_dict.get(bookname),
                                                                                              'pick_empty':request.GET.get('pick_empty', 'all'),
-                                                                                             'pick_plan':request.GET.get('pick_plan', 'all')}))
+                                                                                             'pick_plan':request.GET.get('pick_plan', 'all'),
+                                                                                             'pick_lang': __get_lang(request)}))
 
 
 
