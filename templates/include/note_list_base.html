@@ -889,6 +889,7 @@ $("#ac_tags").tagit("removeAll");
 
             $(":input[name='sort']").change(function(){                      
                 window.location.replace('?sort='+$(this).val())      
+                 insertParam('sort', $(this).val());
              });
              
          
