@@ -133,10 +133,11 @@ def area(request, username, areaname):
     area_question_tags_with_count = []
     for t in area_tags:
         #For now, I think just use snippet is ok. 
-        note_list = Snippet.objects.using(username).filter(tags__name = t.name)
+        note_list = Note.objects.using(username).filter(tags__name = t.name)
         area_tags_with_count.append([t, note_list.count()])
         #question note list
-        q_note_list =  note_list.filter(tags__name = 'question')
+        q_note_list = Snippet.objects.using(username).filter(tags__name = t.name)
+        q_note_list =  q_note_list.filter(tags__name = 'question')
         q_count = q_note_list.count()
         if q_count:
             area_question_tags_with_count.append([t, q_count])
