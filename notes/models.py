@@ -445,6 +445,7 @@ class Note(models.Model):
             W = getW(self.owner_name)             
             w = W.objects.get(name=bookname)  
             
+            #TODO:no hard coding here. get from system tags constants
             tags_to_add = [tag for tag in tags_to_add if not tag.startswith('takenfrom:')]
                
             for tag_name in tags_to_add:    

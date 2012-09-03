@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-03 17:07+0800\n"
+"POT-Creation-Date: 2012-09-03 20:30+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,31 +18,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: email_digest.py:84 email_digest.py:85 notes/views.py:2145
-#: notes/views.py:2156
+#: email_digest.py:84 email_digest.py:85 notes/views.py:2165
+#: notes/views.py:2176
 msgid "Sharing snippet:"
 msgstr "分享便条："
 
-#: email_digest.py:87 email_digest.py:88 notes/views.py:2147
-#: notes/views.py:2158
+#: email_digest.py:87 email_digest.py:88 notes/views.py:2167
+#: notes/views.py:2178
 msgid "Sharing bookmark:"
 msgstr "分享网址："
 
-#: email_digest.py:90 email_digest.py:91 notes/views.py:2149
-#: notes/views.py:2160
+#: email_digest.py:90 email_digest.py:91 notes/views.py:2169
+#: notes/views.py:2180
 msgid "Sharing scrap:"
 msgstr "分享网摘："
 
-#: email_digest.py:93 email_digest.py:94 notes/views.py:2151
-#: notes/views.py:2162
+#: email_digest.py:93 email_digest.py:94 notes/views.py:2171
+#: notes/views.py:2182
 msgid "Sharing knowledge package:"
 msgstr "分享知识包："
 
-#: email_digest.py:109 notes/views.py:2164
+#: email_digest.py:109 notes/views.py:2184
 msgid "Original Note:"
 msgstr "原笔记："
 
-#: email_digest.py:114 email_digest.py:116 notes/views.py:2175
+#: email_digest.py:114 email_digest.py:116 notes/views.py:2195
 msgid "from"
 msgstr "来自"
 
@@ -229,24 +229,24 @@ msgstr ""
 "这个网址已经成功添加到您的网址本里。您可以关闭这个窗口，或者其会在1秒后自动关"
 "闭。"
 
-#: notes/models.py:189 notes/models.py:1165 social/models.py:773
+#: notes/models.py:189 notes/models.py:1166 social/models.py:773
 #: templates/framebook/notes/notesdisplay.html:18
 #: templates/include/notes/notesdisplay.html:40
 #: templates/scrapbook/notes/notesdisplay.html:28
 msgid "Title"
 msgstr "标题"
 
-#: notes/models.py:189 notes/models.py:1165 social/models.py:773
+#: notes/models.py:189 notes/models.py:1166 social/models.py:773
 msgid "The size of the title is limited to 2000 characaters."
 msgstr "标题的长度应小于2000字。"
 
-#: notes/models.py:192 notes/models.py:1166 social/models.py:615
-#: social/models.py:774 templates/areas/area.html:213
-#: templates/areas/index.html:53
+#: notes/models.py:192 notes/models.py:1167 social/models.py:615
+#: social/models.py:774 templates/areas/area.html:247
+#: templates/areas/index.html:54
 msgid "Description"
 msgstr "正文"
 
-#: notes/models.py:192 notes/models.py:1166 social/models.py:774
+#: notes/models.py:192 notes/models.py:1167 social/models.py:774
 msgid "The size of the desc is limited to 2000 characaters."
 msgstr "正文的长度应小于2000字。"
 
@@ -262,8 +262,8 @@ msgstr "标签"
 msgid "Default tag is 'random thought'."
 msgstr "默认的标签是'random thought'。"
 
-#: notes/models.py:194 social/models.py:618 templates/areas/area.html:216
-#: templates/areas/index.html:56
+#: notes/models.py:194 social/models.py:618 templates/areas/area.html:250
+#: templates/areas/index.html:57
 #: templates/framebook/notes/notesdisplay.html:22
 #: templates/include/note_list_base.html:1481
 #: templates/include/notes/notesdisplay.html:44
@@ -285,17 +285,17 @@ msgstr "最后修改时间"
 msgid "self ranking"
 msgstr "原作者的评级"
 
-#: notes/models.py:726 snippets/models.py:14 social/models.py:393
+#: notes/models.py:727 snippets/models.py:14 social/models.py:393
 #: social/models.py:417 templates/framebook/notes/notesdisplay.html:20
 #: templates/include/notes/notesdisplay.html:42
 msgid "Attachment"
 msgstr "附件"
 
-#: notes/models.py:1163 social/models.py:771
+#: notes/models.py:1164 social/models.py:771
 msgid "Language"
 msgstr "语言"
 
-#: notes/models.py:1164 social/models.py:772
+#: notes/models.py:1165 social/models.py:772
 msgid "Original language"
 msgstr "原来的语言"
 
@@ -347,11 +347,15 @@ msgstr "笔记更新成功！"
 msgid "Please enter a note id or comma separated note ids in the box!"
 msgstr "请输入笔记id或者逗号分隔的几个笔记的id！"
 
-#: notes/views.py:1742
+#: notes/views.py:1563
+msgid "Question successfully added!"
+msgstr "问题添加成功！"
+
+#: notes/views.py:1762
 msgid "A frame is successfully created!"
 msgstr "一个知识包成功生成了！"
 
-#: notes/views.py:2166
+#: notes/views.py:2186
 msgid "Forwarded Note:"
 msgstr "转发的笔记："
 
@@ -399,7 +403,7 @@ msgstr "每日更新"
 msgid "Weekly Digest"
 msgstr "每周更新"
 
-#: social/models.py:53 templates/areas/area.html:125
+#: social/models.py:53 templates/areas/area.html:145
 #: templates/framebook/notes/todelete/folders.html:19
 #: templates/include/note_list_base.html:1683
 #: templates/include/profile_head.html:49
@@ -414,7 +418,7 @@ msgstr "每周更新"
 msgid "Snippets"
 msgstr "便条"
 
-#: social/models.py:54 templates/areas/area.html:128
+#: social/models.py:54 templates/areas/area.html:148
 #: templates/include/note_list_base.html:1687
 #: templates/include/profile_head.html:64
 #: templates/include/profile_head.html:66
@@ -468,8 +472,8 @@ msgstr "接收更新"
 msgid "Home"
 msgstr "主页"
 
-#: social/models.py:614 templates/areas/area.html:191
-#: templates/areas/index.html:36 templates/social/group/groups.html:34
+#: social/models.py:614 templates/areas/area.html:225
+#: templates/areas/index.html:37 templates/social/group/groups.html:34
 msgid "Name"
 msgstr "名字"
 
@@ -658,7 +662,7 @@ msgid "Notebook administration"
 msgstr "笔记本管理"
 
 #: templates/admin/change_form.html:21 templates/admin/index.html:29
-#: templates/areas/area.html:219 templates/areas/index.html:59
+#: templates/areas/area.html:253 templates/areas/index.html:60
 #: templates/framebook/notes/notesdisplay.html:25
 #: templates/snippetbook/notes/add_note.html:66
 #: templates/snippetbook/notes/add_note.html:68
@@ -874,11 +878,11 @@ msgstr ""
 msgid "Delete?"
 msgstr ""
 
-#: templates/areas/area.html:83 templates/areas/area.html.py:88
+#: templates/areas/area.html:103 templates/areas/area.html.py:108
 msgid "'s Learning Area"
 msgstr "的学习领域"
 
-#: templates/areas/area.html:95 templates/include/groups_menu.html:12
+#: templates/areas/area.html:115 templates/include/groups_menu.html:12
 #: templates/include/notes/addNote.html:117
 #: templates/include/notes/notes_display.html:62
 #: templates/include/notes/note/notedisplay.html:147
@@ -888,7 +892,7 @@ msgstr "的学习领域"
 msgid "private"
 msgstr "隐私"
 
-#: templates/areas/area.html:97 templates/include/groups_menu.html:19
+#: templates/areas/area.html:117 templates/include/groups_menu.html:19
 #: templates/include/notes/notes_display.html:64
 #: templates/snippetbook/notes/show_note_added_js.html:10
 #: templates/snippetbook/notes/show_note_added_js.html:12
@@ -896,34 +900,34 @@ msgstr "隐私"
 msgid "public"
 msgstr "公开"
 
-#: templates/areas/area.html:102
+#: templates/areas/area.html:122
 msgid "View all of "
 msgstr "浏览全部"
 
-#: templates/areas/area.html:102 templates/areas/index.html:14
-#: templates/areas/index.html.py:20
+#: templates/areas/area.html:122 templates/areas/index.html:15
+#: templates/areas/index.html.py:21
 msgid "'s Learning Areas"
 msgstr "的学习领域"
 
-#: templates/areas/area.html:109 templates/areas/area.html.py:203
-#: templates/areas/index.html:47
+#: templates/areas/area.html:129 templates/areas/area.html.py:237
+#: templates/areas/index.html:48
 msgid "Root tag tree"
 msgstr "根标签树"
 
-#: templates/areas/area.html:112 templates/areas/area.html.py:198
-#: templates/areas/index.html:42
+#: templates/areas/area.html:132 templates/areas/area.html.py:232
+#: templates/areas/index.html:43
 msgid "Root frame"
 msgstr "根知识包"
 
-#: templates/areas/area.html:116
+#: templates/areas/area.html:136
 msgid "All the tags in this area"
 msgstr "这个学习领域的全部标签"
 
-#: templates/areas/area.html:123
+#: templates/areas/area.html:143
 msgid "View all notes in this learning area"
 msgstr "浏览这个学习领域里的所有笔记"
 
-#: templates/areas/area.html:126
+#: templates/areas/area.html:146
 #: templates/framebook/notes/todelete/folders.html:21
 #: templates/include/note_list_base.html:1684
 #: templates/include/profile_head.html:54
@@ -941,7 +945,7 @@ msgstr "浏览这个学习领域里的所有笔记"
 msgid "Bookmarks"
 msgstr "网址"
 
-#: templates/areas/area.html:127
+#: templates/areas/area.html:147
 #: templates/framebook/notes/todelete/folders.html:23
 #: templates/include/note_list_base.html:1685
 #: templates/include/profile_head.html:59
@@ -958,7 +962,7 @@ msgstr "网址"
 msgid "Scraps"
 msgstr "网摘"
 
-#: templates/areas/area.html:129 templates/bookmarkbook/notes/notes.html:7
+#: templates/areas/area.html:149 templates/bookmarkbook/notes/notes.html:7
 #: templates/bookmarkbook/notes/notes.html:9
 #: templates/framebook/notes/todelete/folders.html:25
 #: templates/include/frames_pick_top.html:13
@@ -992,59 +996,75 @@ msgstr "网摘"
 msgid "All"
 msgstr "全部"
 
-#: templates/areas/area.html:135
+#: templates/areas/area.html:155
 msgid "View the learning recources in this area"
 msgstr "浏览该领域的学习资源"
 
-#: templates/areas/area.html:150
+#: templates/areas/area.html:170
 msgid "Question set in this area"
 msgstr "这个学习领域的问题集"
 
-#: templates/areas/area.html:150
+#: templates/areas/area.html:170
 msgid "Click to see how these questions are generated."
 msgstr "点击看这些问题是如何生成的。"
 
-#: templates/areas/area.html:157
+#: templates/areas/area.html:175
+msgid "Ask a question"
+msgstr "问一个问题"
+
+#: templates/areas/area.html:178
+msgid "Write your question here"
+msgstr "直接在这里写问题"
+
+#: templates/areas/area.html:180
+msgid "Must enter at least one tag, and it must be one of the area tags above"
+msgstr "必须输入至少一个标签，并且必须是属于这个学习领域的标签"
+
+#: templates/areas/area.html:184
+msgid "Add Question"
+msgstr "提交问题"
+
+#: templates/areas/area.html:189
 msgid "Learning groups in this area"
 msgstr "这个学习领域里的学习小组"
 
-#: templates/areas/area.html:162 templates/social/admin/group.html:30
+#: templates/areas/area.html:194 templates/social/admin/group.html:30
 msgid "remove this group"
 msgstr "去除这个小组"
 
-#: templates/areas/area.html:172
+#: templates/areas/area.html:201 templates/areas/area.html.py:206
 msgid "Add Group"
 msgstr "添加一个学习小组"
 
-#: templates/areas/area.html:183
+#: templates/areas/area.html:217
 msgid "Edit the learning area"
 msgstr "编辑该学习领域"
 
-#: templates/areas/area.html:199 templates/areas/index.html:43
+#: templates/areas/area.html:233 templates/areas/index.html:44
 msgid "Enter a frame's id"
 msgstr "输入一个知识包的id"
 
-#: templates/areas/area.html:199 templates/areas/index.html:43
+#: templates/areas/area.html:233 templates/areas/index.html:44
 msgid "Click to see what is note id"
 msgstr ""
 
-#: templates/areas/area.html:203 templates/areas/index.html:47
+#: templates/areas/area.html:237 templates/areas/index.html:48
 msgid "Enter only 1 tag tree in the input box."
 msgstr "在输入框里只输入一个标签树。"
 
-#: templates/areas/area.html:203 templates/areas/index.html:47
+#: templates/areas/area.html:237 templates/areas/index.html:48
 msgid "And it has to be an existing tag tree."
 msgstr "并且必须是已经存在的标签树。"
 
-#: templates/areas/index.html:20
+#: templates/areas/index.html:21
 msgid "Learning areas are the major learning areas that you are learning"
 msgstr "学习领域是你正在学习的几个主要领域"
 
-#: templates/areas/index.html:30
+#: templates/areas/index.html:31
 msgid "Add a learning area"
 msgstr "添加一个学习领域"
 
-#: templates/areas/index.html:65
+#: templates/areas/index.html:66
 msgid "All areas"
 msgstr "全部学习领域"
 
@@ -1665,9 +1685,10 @@ msgid ""
 "syncs with the server. So you can make notes on this page at the fastest "
 "speed. If you want to make many notes on your desktop very quickly, you can "
 "also set this page as your default home page in your setting."
-msgstr "这个只添加便条的页面首先将添加的笔记在本地存储，然后再和服务器同步。所以你可以"
-"无延迟的最快的添加便条。如果你想在你的桌面电脑上快速的添加许多的便条，你可以考虑在设置里将"
-"该页面设置成你的缺省页面。"
+msgstr ""
+"这个只添加便条的页面首先将添加的笔记在本地存储，然后再和服务器同步。所以你可"
+"以无延迟的最快的添加便条。如果你想在你的桌面电脑上快速的添加许多的便条，你可"
+"以考虑在设置里将该页面设置成你的缺省页面。"
 
 #: templates/doc/suggest.html:6
 msgid "Make suggestions to the site"

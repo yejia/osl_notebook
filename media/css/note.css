@@ -534,6 +534,11 @@ width:300px;
 padding-bottom:0px;
 margin-bottom:0px;/*how ac_tags has no spacing at bottom without adding these?TODO:*/
 }
+ul#ac_area_tags{
+width:300px;
+padding-bottom:0px;
+margin-bottom:0px;
+}
 
 
 #sort_drop_down{
@@ -838,6 +843,10 @@ span.tags_edit, span.included_notes_edit {
 input#update_included_notes_inline_box{
 width:300px;
 }
+input#question{
+width:400px;
+}
+
 
 span.tags_save{
 /*
@@ -1128,12 +1137,12 @@ padding-bottom:10px;
 cursor:pointer;
 }
 
-span.note_frame_add{
+span.note_frame_add, span.area_question_add, span.area_group_add{
 background-image:url("../img/admin/tooltag-add.gif");
 background-repeat:no-repeat;
 padding-bottom:10px;
 }
-span.note_frame_add:hover{
+span.note_frame_add:hover, span.area_question_add:hover, span.area_group_add:hover{
 background-image:url("../img/admin/tooltag-add_over.gif");
 background-repeat:no-repeat;
 padding-bottom:10px;

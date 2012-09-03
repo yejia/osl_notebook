@@ -28,12 +28,32 @@ $(document).ready(function(){
                    allowSpaces: true
                   });  
 
+    $("#ac_area_tags").tagit({
+			    availableTags: [{% for tc in area_tags_with_count %}"{{tc.0}}",{% endfor %}],
+                   allowSpaces: true
+                  });  
 
  $("#ac_groups").tagit({
 			    availableTags: [{% for g in groups %}"{{g}}",{% endfor %}],
                    allowSpaces: true
                 });     
 
+
+   
+      
+            
+            $('#addGroups2AreaForm').hide();
+            
+            $('span.area_group_add').click(function(){	
+                $('#addGroups2AreaForm').toggle();
+            });   
+    
+            $('#addQuestionForm').hide();
+            
+            $('span.area_question_add').click(function(){	
+                $('#addQuestionForm').toggle();
+            });   
+    
     
     
       $('span#area_delete_group').click(function(){    
@@ -151,6 +171,18 @@ $(document).ready(function(){
   {% for tq in area_question_tags_with_count %}
       <a href="/{{profile_username}}/snippetbook/notes/?q=t%3A{{tq.0}}%26t%3Aquestion" target="_blank">{{tq.0}} ({{tq.1}})</a>,
   {% endfor %}
+  <br/>
+<span class="area_question_add" title="{% trans "Ask a question" %}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<form action="addQuestion/" method="post" id="addQuestionForm"> 
+
+ <textarea id="question" rows="3" cols="85" name="question" placeholder="{% trans "Write your question here" %}"></textarea>   
+<br/>
+{% trans "Must enter at least one tag, and it must be one of the area tags above" %}: 
+<span>   
+    <ul id="ac_area_tags"></ul>     
+</span> 
+<input type="submit" value="{% trans 'Add Question' %}"/>
+</form> 
 </div>
   
 <div class="padded">
@@ -165,6 +197,8 @@ $(document).ready(function(){
     </span>
     {% endfor %}
 {% if user.username == profile_username %}    
+<br/>
+<span class="area_group_add" title="{% trans "Add Group" %}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 <form action="addGroups2Area/" method="post" id="addGroups2AreaForm"> 
 <div>   
     <ul id="ac_groups"></ul>     

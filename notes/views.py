@@ -1545,6 +1545,26 @@ def delete_comment(request, username, bookname):
     return HttpResponse('successful', mimetype="text/plain")  
 
 
+#allow non group member to ask questions?
+@login_required  
+def add_question(request, username):
+    tag_names = request.POST.getlist('item[tags][]')
+    question = request.POST.get('question')
+    #whether to check if the user already have such a snippet?
+    N = getNote(username, 'snippetbook')
+    q = N.objects.using(username).create(desc=question)
+    q.owner_name = username
+    q.add_tags(tag_names,'snippetbook')
+    extra_tags = ['question']
+    if username != request.user.username:
+       extra_tags.append('askedby:'+request.user.username) 
+    q.add_tags(extra_tags,'snippetbook')
+    q.save()
+    messages.success(request, _("Question successfully added!"))  
+    return HttpResponseRedirect(__get_pre_url(request))  
+#HttpResponse(simplejson.dumps({'type':'success','msg':_('Question successfully added!')}))
+
+
 @login_required   
 def make_private(request, username, bookname):
     log.info('making private')
