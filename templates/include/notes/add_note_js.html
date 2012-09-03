@@ -53,26 +53,6 @@ if (onlineNow){
  syncAddNotes();
 }
 
-function syncAddNotes(){
-      if (localStorage.notes_to_add){
-          notes_to_sync = JSON.parse(localStorage['notes_to_add'])
-         for (var i=0; i < notes_to_sync.length; i++){
-            note_to_sync = notes_to_sync[i];
-            $.post('/{{profile_username}}/{{bookname}}/notes/addNote/?desc='+encodeURIComponent(note_to_sync[0])+'&private='+note_to_sync[1]+'&vote='+note_to_sync[2]+'&tags='+note_to_sync[3],{}, noteSynced , 'json');   
-        }          
-   }
-
-}
-
-function noteSynced(result){
-    //TODO: count and report how many succeeded and how many failed?
-     notes_synced = JSON.parse(localStorage['notes_to_add']);
-     count = notes_synced.length;
-     
-      $('ul.messages').append('<li class="success">'+count+' {% trans "notes successfully synced with the server!" %} </li>');
-      localStorage.clear();
-
-}
 
 
 });
@@ -157,6 +137,7 @@ function addNote(){
               localStorage.notes_to_add = JSON.stringify(notes_to_add);
               noteAdded(notes_to_add);
         if (online){  
+   
             syncAddNotes();
         }
         
@@ -179,6 +160,29 @@ function addNote(){
         
     }
     
+
+
+
+function syncAddNotes(){  
+      if (localStorage.notes_to_add){
+          notes_to_sync = JSON.parse(localStorage['notes_to_add'])
+         for (var i=0; i < notes_to_sync.length; i++){
+            note_to_sync = notes_to_sync[i];
+            $.post('/{{profile_username}}/{{bookname}}/notes/addNote/?desc='+encodeURIComponent(note_to_sync[0])+'&private='+note_to_sync[1]+'&vote='+note_to_sync[2]+'&tags='+note_to_sync[3],{}, noteSynced , 'json');   
+        }          
+   }
+
+}
+
+function noteSynced(result){ 
+    //TODO: count and report how many succeeded and how many failed?
+     notes_synced = JSON.parse(localStorage['notes_to_add']);
+     count = notes_synced.length;
+     
+      $('ul.messages').append('<li class="success">'+count+' {% trans "notes successfully synced with the server!" %} </li>');
+      localStorage.clear();
+
+}
 
     
 </script>
