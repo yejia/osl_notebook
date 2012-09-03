@@ -1500,7 +1500,7 @@ def create_note_in_frame(request, username, bookname):
     frame.tags = frame.get_sum_of_note_tag_ids()    
     frame.save() 
     
-    return HttpResponse(simplejson.dumps({'note_id':frame.id, 'notes_added':notes_to_add_clean_return}),
+    return HttpResponse(simplejson.dumps({'type':'success', 'result':{'note_id':frame.id, 'notes_added':notes_to_add_clean_return}}),
                                                                      "application/json")
 
 
