@@ -1445,9 +1445,12 @@ def add_notes_to_frame(request, username, bookname):
     included_notes_added =  request.POST.get('included_notes_added')  
     N = getNote(username, bookname)    
     note = N.objects.get(id=note_id)
-    
-    #TODO: remove the note itself and note that is already included
-    notes_to_add = __get_notes_by_ids(included_notes_added.split(','), username, 'notebook')
+    try:
+        #TODO: remove the note itself and note that is already included
+        notes_to_add = __get_notes_by_ids(included_notes_added.split(','), username, 'notebook')
+    except (UnicodeEncodeError, ValueError):
+        return HttpResponse(simplejson.dumps({'type':'error', 'msg':_('Please enter a note id or comma separated note ids in the box!'), 'result':{'note_id':note.id}}),
+                                                                     "application/json")    
      #TODO: find or write function that mimic truncatewords in template
     notes_to_add_clean = [n for n in notes_to_add if n.id != note.id and n.id not in note.notes.values_list('id', flat=True)] 
     notes_to_add_clean_return = [[n.id, n.title, n.desc[0:200], n.vote, n.get_note_bookname(), n.get_note_type()]  for n in notes_to_add_clean]
@@ -1459,7 +1462,7 @@ def add_notes_to_frame(request, username, bookname):
     note.tags = note.get_sum_of_note_tag_ids()    
     note.save() 
     
-    return HttpResponse(simplejson.dumps({'note_id':note.id, 'notes_added':notes_to_add_clean_return}),
+    return HttpResponse(simplejson.dumps({'type':'success', 'result':{'note_id':note.id, 'notes_added':notes_to_add_clean_return}}),
                                                                      "application/json")
 
 

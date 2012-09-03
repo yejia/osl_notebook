@@ -33,11 +33,11 @@ function showNoteAdded(note){
                       '<span class="thumb"><span class="thumbup hover"  title="{% trans "Rank Up Importance"  %}"><img src="/site_media/img/thumbUp.gif"/></span>'+
 			                                                 '<span class="thumbdown hover"  title="{% trans "Rank Down Importance"  %}"><img src="/site_media/img/thumbDown.gif"/></span>'+
                       '<span id="note_rank" title="{% trans "Importance"  %}">'+note.vote+'</span></span><span class="delete_img hover" title="{% trans "soft delete" %}"><img src="/site_media/img/delete.png"/></span>'+
-                      '<div class="snippetbook"><div class="brief_display"><table class="note_table"><tr><td class="note_table_td1 structure"><div id="note_title" title="{% trans "note title" %}">'+
+                      '<div class="snippetbook"><div class="brief_display"><table class="note_table"><tr><td class="note_table_td1"><div id="note_title" title="{% trans "note title" %}">'+
                       '<a href="/{{profile_username}}/{{bookname}}/notes/note/'+note.note_id +'/">{% trans "(No Title)" %}</a></div> </td><td class="note_table_td2"><div  id="note_desc" title="{% trans "note desc" %}">'+note.desc+'</div>'+	
                       '</td> <td class="note_table_tags">  <div id="note_tags" title="{% trans "note tags" %}">'+tags+'</div></td> <td class="note_table_td4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr></table></div>'+
                       '<div class="full_display">'+
-                                '<table class="note_table"><tr><td class="note_table_td1 structure">'+
+                                '<table class="note_table"><tr><td class="note_table_td1">'+
                                        '<div id="note_title" title="{% trans "note title" %}"><span class="editableText"><a href="/{{profile_username}}/{{bookname}}/notes/note/'+note.note_id+'/">{% trans "(No Title)" %}</a></span></div></td><td class="note_table_td2"> '+	
                                        '<div  id="note_desc" title="{% trans "note desc" %}"><span class="editableText">'+note.desc+'</span></div></td><td class="note_table_tags">'+
                                        '<span class="editable"><span class="tags_edit">&nbsp;&nbsp;&nbsp;&nbsp;</span>'+

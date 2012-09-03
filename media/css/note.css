@@ -836,7 +836,7 @@ span.tags_edit, span.included_notes_edit {
 }
 
 input#update_included_notes_inline_box{
-width:200px;
+width:300px;
 }
 
 span.tags_save{

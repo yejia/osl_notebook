@@ -1143,8 +1143,17 @@ $("#ac_tags").tagit("removeAll");
 
                            
                             function included_notes_updated_inline(result){           
-                                        //var  editable =     $('li[note_id="'+result.note_id+'"] div.full_display  div#note_add_notes span.editable') ;         
-                                        var  editable =     $('div[note_id="'+result.note_id+'"]  div#note_add_notes span.editable') ;     
+                                        //var  editable =     $('li[note_id="'+result.note_id+'"] div.full_display  div#note_add_notes span.editable') ;     
+                                 
+                                      
+                                        var  editable =     $('div[note_id="'+result.result.note_id+'"]  div#note_add_notes span.editable') ; 
+                                        msg_span = editable.find('span.msg');
+                                        msg_span.empty();
+                                        msg_span.hide();
+                                          if (result.type == 'error'){
+                                               msg_span.append(result.msg);
+                                               msg_span.show();
+                                        }else{
 
                                        //below applies to both frames display and a single frame display page
                                         editable.find('span.included_notes_cancel').remove();
@@ -1161,10 +1170,11 @@ $("#ac_tags").tagit("removeAll");
                                         var ul_brief  = full_display.parents('div.framebook').find('div.brief_display').find('div#note_notes ul');
                                          //alert('ul_brief is:'+ul_brief.html());     
                                          
+                                        result = result.result; 
                                         for (var i=0;i<result.notes_added.length;i++){ 
                                         
                                          
-                                       
+                                           
                                             if (result.notes_added[i][1] == ''){
                                                 title = '{% trans "(No Title)" %}';
                                             }else{
@@ -1217,6 +1227,7 @@ $("#ac_tags").tagit("removeAll");
                                            
                           
                                          } 
+                                    }
                             }        
             
                             // alert('after callback');     
