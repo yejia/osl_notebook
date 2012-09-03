@@ -50,13 +50,18 @@ $(document).ready(function(){
 var onlineNow = navigator.onLine;    
 if (onlineNow){
 //alert('localStorage.notes_to_add'+localStorage.notes_to_add);
-   if (localStorage.notes_to_add){
+ syncAddNotes();
+}
+
+function syncAddNotes(){
+      if (localStorage.notes_to_add){
           notes_to_sync = JSON.parse(localStorage['notes_to_add'])
          for (var i=0; i < notes_to_sync.length; i++){
             note_to_sync = notes_to_sync[i];
             $.post('/{{profile_username}}/{{bookname}}/notes/addNote/?desc='+encodeURIComponent(note_to_sync[0])+'&private='+note_to_sync[1]+'&vote='+note_to_sync[2]+'&tags='+note_to_sync[3],{}, noteSynced , 'json');   
         }          
    }
+
 }
 
 function noteSynced(result){
@@ -117,12 +122,14 @@ function addNote(){
                             selected_tags.push($(this).find(':input').val());	                  			
             });	
              
-           //$.post('/{{profile_username}}/{{bookname}}/notes/addNote/',{'desc':desc, 'private':priv,'tags':selected_tags}, noteAdded, 'json');         
+       
         var online = navigator.onLine;        
-        //alert('online:'+online);
+     
+     
+ {% if pagename == 'notes'%} //if in notes list page,  still post to the server directly since you need the return from the server (such as the note id) to do the editing on the newly generated note
         if (online){         
-              $.post('/{{profile_username}}/{{bookname}}/notes/addNote/?desc='+encodeURIComponent(desc)+'&private='+priv+'&vote='+vote+'&tags='+selected_tags,{}, noteAdded , 'json');         
-          }else{    
+             $.post('/{{profile_username}}/{{bookname}}/notes/addNote/?desc='+encodeURIComponent(desc)+'&private='+priv+'&vote='+vote+'&tags='+selected_tags,{}, noteAdded , 'json');         
+         }else{    
               note_to_add = [desc, priv, vote, selected_tags];                        
               if (localStorage['notes_to_add']){ 
                     notes_to_add = JSON.parse(localStorage['notes_to_add']);
@@ -133,7 +140,29 @@ function addNote(){
              } 
               localStorage.notes_to_add = JSON.stringify(notes_to_add);
               noteAdded(notes_to_add);
+              
+              
          }
+       
+     {% else %}  //in addNoteOnly page, add directly to localStorage first no matter online or not, then sync to server. This way it will be faster.
+     
+     note_to_add = [desc, priv, vote, selected_tags];                        
+              if (localStorage['notes_to_add']){ 
+                    notes_to_add = JSON.parse(localStorage['notes_to_add']);
+                    notes_to_add.push(note_to_add);
+               }else{
+                    notes_to_add = [];
+                     notes_to_add.push(note_to_add);
+             } 
+              localStorage.notes_to_add = JSON.stringify(notes_to_add);
+              noteAdded(notes_to_add);
+        if (online){  
+            syncAddNotes();
+        }
+        
+        
+        
+        {% endif%} 
                         
     } 
     
@@ -145,6 +174,7 @@ function addNote(){
     $('ul.messages').append('<li class="success">{% trans "Note is successfully added!" %} </li>');
     //clear the form's desc textarea field
         $('#id_desc').val('');
+        
         {% if pagename == 'notes'%}showNoteAdded(note){% endif%} 
         
     }
