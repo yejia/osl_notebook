@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-03 15:12+0800\n"
+"POT-Creation-Date: 2012-09-03 17:07+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -423,7 +423,7 @@ msgstr "便条"
 #: templates/include/supersearch.html:15 templates/include/supersearch.html:40
 #: templates/include/supersearch.html:42
 #: templates/include/notes/notes_display.html:151
-#: templates/snippetbook/notes/show_note_added_js.html:56
+#: templates/snippetbook/notes/show_note_added_js.html:55
 #: templates/social/profile.html:77
 msgid "Frames"
 msgstr "知识包"
@@ -882,16 +882,16 @@ msgstr "的学习领域"
 #: templates/include/notes/addNote.html:117
 #: templates/include/notes/notes_display.html:62
 #: templates/include/notes/note/notedisplay.html:147
-#: templates/snippetbook/notes/show_note_added_js.html:11
-#: templates/snippetbook/notes/show_note_added_js.html:13
+#: templates/snippetbook/notes/show_note_added_js.html:10
+#: templates/snippetbook/notes/show_note_added_js.html:12
 #: templates/social/group/groups.html:74
 msgid "private"
 msgstr "隐私"
 
 #: templates/areas/area.html:97 templates/include/groups_menu.html:19
 #: templates/include/notes/notes_display.html:64
-#: templates/snippetbook/notes/show_note_added_js.html:11
-#: templates/snippetbook/notes/show_note_added_js.html:13
+#: templates/snippetbook/notes/show_note_added_js.html:10
+#: templates/snippetbook/notes/show_note_added_js.html:12
 #: templates/social/group/groups.html:76
 msgid "public"
 msgstr "公开"
@@ -1659,6 +1659,16 @@ msgstr ""
 "记录东西。记录以后回家可以在电脑上做回顾和整理。即使没有网络，你仍然可以记录"
 "笔记。记录的笔记在你的设备连上网络时会同步到服务器。"
 
+#: templates/doc/mobile.html:17
+msgid ""
+"This \"Add note only\" page stores the newly added notes locally first, then "
+"syncs with the server. So you can make notes on this page at the fastest "
+"speed. If you want to make many notes on your desktop very quickly, you can "
+"also set this page as your default home page in your setting."
+msgstr "这个只添加便条的页面首先将添加的笔记在本地存储，然后再和服务器同步。所以你可以"
+"无延迟的最快的添加便条。如果你想在你的桌面电脑上快速的添加许多的便条，你可以考虑在设置里将"
+"该页面设置成你的缺省页面。"
+
 #: templates/doc/suggest.html:6
 msgid "Make suggestions to the site"
 msgstr "给网站提建议"
@@ -1706,7 +1716,7 @@ msgid "Settings"
 msgstr "设置"
 
 #: templates/framebook/note_list_base.html:58
-#: templates/include/notes/add_note_js.html:144
+#: templates/include/notes/add_note_js.html:154
 #: templates/tagframes/index.html:300
 msgid "An error happened when adding a note."
 msgstr "添加笔记时发生错误。"
@@ -1996,8 +2006,8 @@ msgstr "我的朋友"
 #: templates/include/notes/todelete/linkagenotesdisplay.html:155
 #: templates/snippetbook/notes/linkagenotesdisplay.html:109
 #: templates/snippetbook/notes/linkagenotesdisplay.html:155
-#: templates/snippetbook/notes/show_note_added_js.html:37
-#: templates/snippetbook/notes/show_note_added_js.html:41
+#: templates/snippetbook/notes/show_note_added_js.html:36
+#: templates/snippetbook/notes/show_note_added_js.html:40
 #: templates/social/commentsfor.html:35
 #: templates/social/framebook/notes/note/delete/children.html:6
 msgid "(No Title)"
@@ -2074,8 +2084,8 @@ msgstr "网站！你可以在设置里更改要分享的网站。"
 #: templates/include/note_list_base.html:999
 #: templates/include/notes/inlines/add_comments_and_etc_inline.html:81
 #: templates/include/notes/inlines/add_comments_and_etc_inline.html:97
-#: templates/snippetbook/notes/show_note_added_js.html:26
-#: templates/snippetbook/notes/show_note_added_js.html:181
+#: templates/snippetbook/notes/show_note_added_js.html:25
+#: templates/snippetbook/notes/show_note_added_js.html:180
 msgid "remove this comment"
 msgstr "去除这个评论"
 
@@ -2287,7 +2297,7 @@ msgstr "递交"
 #: templates/include/notes/inlines/add_comments_and_etc_inline.html:76
 #: templates/include/notes/inlines/add_comments_and_etc_inline.html:92
 #: templates/include/notes/menu/notes_section_menu.html:11
-#: templates/snippetbook/notes/show_note_added_js.html:63
+#: templates/snippetbook/notes/show_note_added_js.html:62
 #: templates/social/include/notes/inlines/add_comments_and_etc_inline.html:30
 #: templates/workingset/index.html:323
 msgid "Cancel"
@@ -2319,13 +2329,13 @@ msgid ""
 "You have used up 300 characters. It recommended to keep a snippet short."
 msgstr "你已经用完了300字的限额。建议保持便条的简短。"
 
-#: templates/include/notes/add_note_js.html:67
-msgid "notes successfully synced with the server!"
-msgstr "笔记同步成功！"
-
-#: templates/include/notes/add_note_js.html:145
+#: templates/include/notes/add_note_js.html:155
 msgid "Note is successfully added!"
 msgstr "笔记添加成功！"
+
+#: templates/include/notes/add_note_js.html:182
+msgid "notes successfully synced with the server!"
+msgstr "笔记同步成功！"
 
 #: templates/include/notes/caches_section.html:5
 msgid "Notes in cache"
@@ -2342,20 +2352,20 @@ msgstr "隐藏缓存区"
 #: templates/include/notes/notes_display.html:70
 #: templates/include/notes/note/notedisplay.html:140
 #: templates/snippetbook/notes/add_note.html:50
-#: templates/snippetbook/notes/show_note_added_js.html:33
+#: templates/snippetbook/notes/show_note_added_js.html:32
 msgid "Rank Up Importance"
 msgstr "增加重要性"
 
 #: templates/include/notes/notes_display.html:71
 #: templates/include/notes/note/notedisplay.html:141
 #: templates/snippetbook/notes/add_note.html:51
-#: templates/snippetbook/notes/show_note_added_js.html:34
+#: templates/snippetbook/notes/show_note_added_js.html:33
 msgid "Rank Down Importance"
 msgstr "降低重要性"
 
 #: templates/include/notes/notes_display.html:73
 #: templates/include/notes/note/notedisplay.html:138
-#: templates/snippetbook/notes/show_note_added_js.html:35
+#: templates/snippetbook/notes/show_note_added_js.html:34
 msgid "Importance"
 msgstr "重要性"
 
@@ -2365,7 +2375,7 @@ msgstr "相关性"
 
 #: templates/include/notes/notes_display.html:82
 #: templates/include/notes/note/notedisplay.html:64
-#: templates/snippetbook/notes/show_note_added_js.html:35
+#: templates/snippetbook/notes/show_note_added_js.html:34
 msgid "soft delete"
 msgstr "软删除"
 
@@ -2377,25 +2387,25 @@ msgid "note id"
 msgstr "笔记id"
 
 #: templates/include/notes/notes_display.html:145
-#: templates/snippetbook/notes/show_note_added_js.html:54
+#: templates/snippetbook/notes/show_note_added_js.html:53
 #: templates/social/include/notes/notesdisplay.html:133
 msgid "initial creation time"
 msgstr "生成的时间"
 
 #: templates/include/notes/notes_display.html:146
-#: templates/snippetbook/notes/show_note_added_js.html:55
+#: templates/snippetbook/notes/show_note_added_js.html:54
 #: templates/social/include/notes/notesdisplay.html:134
 msgid "last modified time"
 msgstr "最后修改时间"
 
 #: templates/include/notes/notes_display.html:151
-#: templates/snippetbook/notes/show_note_added_js.html:56
+#: templates/snippetbook/notes/show_note_added_js.html:55
 msgid "note in frames"
 msgstr "在包里的"
 
 #: templates/include/notes/notes_display.html:155
 #: templates/include/notes/note/notedisplay.html:164
-#: templates/snippetbook/notes/show_note_added_js.html:56
+#: templates/snippetbook/notes/show_note_added_js.html:55
 msgid "Not in any frame"
 msgstr "不在任何包里"
 
@@ -2458,7 +2468,7 @@ msgid "Comments by yourself on your personal note"
 msgstr "你对你个人笔记的评论"
 
 #: templates/include/notes/inlines/add_comments_and_etc_inline.html:42
-#: templates/snippetbook/notes/show_note_added_js.html:58
+#: templates/snippetbook/notes/show_note_added_js.html:57
 msgid "Annotations"
 msgstr "备注"
 
@@ -2496,7 +2506,7 @@ msgstr "在公开笔记本里看你的这个笔记"
 
 #: templates/include/notes/inlines/add_comments_and_etc_inline.html:75
 #: templates/include/notes/inlines/add_comments_and_etc_inline.html:91
-#: templates/snippetbook/notes/show_note_added_js.html:62
+#: templates/snippetbook/notes/show_note_added_js.html:61
 msgid "Save Comment"
 msgstr "增加评论"
 
@@ -2518,17 +2528,17 @@ msgid "remove this outer link"
 msgstr "去除这个外部链接"
 
 #: templates/include/notes/inlines/notes_brief_desc_inline.html:3
-#: templates/snippetbook/notes/show_note_added_js.html:37
-#: templates/snippetbook/notes/show_note_added_js.html:42
+#: templates/snippetbook/notes/show_note_added_js.html:36
+#: templates/snippetbook/notes/show_note_added_js.html:41
 msgid "note desc"
 msgstr "笔记正文"
 
 #: templates/include/notes/inlines/notes_brief_tags_inline.html:3
 #: templates/include/notes/inlines/notes_full_tags_inline.html:6
 #: templates/include/notes/note/notedisplay.html:121
-#: templates/snippetbook/notes/show_note_added_js.html:38
-#: templates/snippetbook/notes/show_note_added_js.html:44
-#: templates/snippetbook/notes/show_note_added_js.html:50
+#: templates/snippetbook/notes/show_note_added_js.html:37
+#: templates/snippetbook/notes/show_note_added_js.html:43
+#: templates/snippetbook/notes/show_note_added_js.html:49
 #: templates/social/group/notes/inlines/notes_brief_tags_inline.html:3
 #: templates/social/include/notes/notesdisplay.html:120
 #: templates/social/include/notes/notesdisplay.html:122
@@ -2547,8 +2557,8 @@ msgstr ""
 #: templates/include/notes/inlines/notes_brief_title_inline.html:3
 #: templates/notebook/notes/notes_display.html:11
 #: templates/notebook/notes/notes_display.html:31
-#: templates/snippetbook/notes/show_note_added_js.html:36
-#: templates/snippetbook/notes/show_note_added_js.html:41
+#: templates/snippetbook/notes/show_note_added_js.html:35
+#: templates/snippetbook/notes/show_note_added_js.html:40
 #: templates/social/include/notes/inlines/notes_brief_title_inline.html:3
 #: templates/social/notebook/notes/notesdisplay.html:17
 msgid "note title"
