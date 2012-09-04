@@ -2,7 +2,8 @@
  {% load i18n %}
 
 
-        {% for note in children %} 
+        {% for note in children %}     
+          {% if not note.private or user.username == profile_username %}           
             <li  class="note_in_frame {% if note.get_note_type == 'Frame' %}expandable{% endif %} {% if forloop.last %}last{% endif %}"  parent_frame_id="{{parent_frame_id}}" note_id="{{note.id}}"  linked_note_id="{{note.id}}">  {% comment %}note_id for set_the_order and linked_note_id for #frame_delete_note{% endcomment %}
               
                 {% if note.get_note_type == 'Frame' %}<div class="hitarea expandable-hitarea"></div>{% endif %}
@@ -90,5 +91,6 @@
             <div class="spacing_li">&nbsp;&nbsp;</div>
             
             
-            </li>            
+            </li>         
+          {% endif %}               
         {% endfor %}

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from django.http import HttpResponse,HttpResponseRedirect
+from django.http import HttpResponse,HttpResponseRedirect, Http404
 from django.shortcuts import render_to_response
 from django import forms
 from django.forms import ModelForm
@@ -1216,8 +1216,16 @@ def folders(request, username, bookname, folder_name):
 
 #TODO:add protection
 #below is copied from note_raw except using a different template page
+@login_required
 def note(request, username, bookname, note_id):    
     log.debug('Getting the note:'+note_id)
+    
+    #TODO: make this into decorator
+#===============================================================================
+#    if username != request.user.username:
+#        raise Http404
+#===============================================================================
+    
     if 'framebook' == bookname:
         return frame(request, username, note_id)
     N = getNote(username, bookname)
@@ -1563,6 +1571,25 @@ def add_question(request, username):
     messages.success(request, _("Question successfully added!"))  
     return HttpResponseRedirect(__get_pre_url(request))  
 #HttpResponse(simplejson.dumps({'type':'success','msg':_('Question successfully added!')}))
+
+
+#allow non group member to add projects?
+@login_required  
+def add_project(request, username):
+    tag_names = request.POST.getlist('item[tags][]')
+    project = request.POST.get('project')
+    #whether to check if the user already have such a snippet?
+    N = getNote(username, 'snippetbook')
+    q = N.objects.using(username).create(desc=project)
+    q.owner_name = username
+    q.add_tags(tag_names,'snippetbook')
+    extra_tags = ['projects']
+    if username != request.user.username:
+       extra_tags.append('addedby:'+request.user.username) 
+    q.add_tags(extra_tags,'snippetbook')
+    q.save()
+    messages.success(request, _("Project successfully added!"))  
+    return HttpResponseRedirect(__get_pre_url(request))  
 
 
 @login_required   

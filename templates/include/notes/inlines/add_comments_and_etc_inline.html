@@ -39,8 +39,10 @@ $(document).ready(function(){
 
 
 {% block personal_comments %}
+    {% if user.username == profile_username %}           
              <span class="note_tabs_item" id="personal_comments" title="{% trans "Comments by yourself on your personal note" %}">{% trans "Annotations" %}({{note.get_comments.count}})</span>             
              &nbsp;&nbsp;
+     {% endif %}            
 {% endblock %}       
              <span class="note_tabs_item"  id="public_comments" title="{% trans "Comments by you and others on your public note" %}">{% trans "Comments" %}({{social_note.get_comments.count}})</span>             
              &nbsp;&nbsp; 

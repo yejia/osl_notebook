@@ -189,7 +189,8 @@ def delete_frame(request, username):
     return HttpResponse('successful', mimetype="text/plain") 
 
 
-from notebook.notes.views import tags
+#from notebook.notes.views import tags
+from notebook.social.views import notes_tag
 
 def notes_by_tag(request, username, tag_path, bookname):   
     tag_list = tag_path.split('-')    
@@ -207,7 +208,9 @@ def notes_by_tag(request, username, tag_path, bookname):
 #===============================================================================        
         #request.limited_list = tag_list[-2:]
        
-    return tags(request, username, bookname, tag_name, 'notes')
+   
+    #return tags(request, username, bookname, tag_name, 'notes')
+    return notes_tag(request, username, bookname, tag_name)
 
 
 def get_related_tags(request, username):

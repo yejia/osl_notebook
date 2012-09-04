@@ -28,10 +28,16 @@ $(document).ready(function(){
                    allowSpaces: true
                   });  
 
-    $("#ac_area_tags").tagit({
+    $("#ac_area_question_tags").tagit({
 			    availableTags: [{% for tc in area_tags_with_count %}"{{tc.0}}",{% endfor %}],
                    allowSpaces: true
                   });  
+
+            $("#ac_area_project_tags").tagit({
+			    availableTags: [{% for tc in area_tags_with_count %}"{{tc.0}}",{% endfor %}],
+                   allowSpaces: true
+            });  
+
 
  $("#ac_groups").tagit({
 			    availableTags: [{% for g in groups %}"{{g}}",{% endfor %}],
@@ -53,6 +59,13 @@ $(document).ready(function(){
             $('span.area_question_add').click(function(){	
                 $('#addQuestionForm').toggle();
             });   
+    
+    $('#addProjectForm').hide();
+            
+            $('span.area_project_add').click(function(){	
+                $('#addProjectForm').toggle();
+            });  
+    
     
     
     
@@ -166,6 +179,27 @@ $(document).ready(function(){
   
    </div>
   
+  
+<div class="padded">
+  <b>{% trans "Project set in this area" %} <a href="/social/leon/snippetbook/notes/note/17743/" title="{% trans "Click to see how these projects are generated." %}"  target="_blank"><img src="/media/img/admin/icon-unknown.gif"/></a>:</b> 
+  {% for ptq in area_project_tags_with_count %}
+      <a href="/{{profile_username}}/notebook/notes/?q=t%3A{{ptq.0}}%26t%t%3Aprojects" target="_blank">{{ptq.0}} ({{ptq.1}})</a>,
+  {% endfor %}
+  <br/>
+<span class="area_project_add" title="{% trans "Add a project" %}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<form action="addProject/" method="post" id="addProjectForm"> 
+
+ <textarea id="project" rows="3" cols="85" name="project" placeholder="{% trans "Write your project here" %}"></textarea>   
+<br/>
+{% trans "Must enter at least one tag, and it must be one of the area tags above" %}: 
+<span>   
+    <ul id="ac_area_project_tags"></ul>     
+</span> 
+<input type="submit" value="{% trans 'Add Project' %}"/>
+</form> 
+</div>  
+  
+  
 <div class="padded">
   <b>{% trans "Question set in this area" %} <a href="/social/leon/snippetbook/notes/note/16793/" title="{% trans "Click to see how these questions are generated." %}"  target="_blank"><img src="/media/img/admin/icon-unknown.gif"/></a>:</b> 
   {% for tq in area_question_tags_with_count %}
@@ -179,7 +213,7 @@ $(document).ready(function(){
 <br/>
 {% trans "Must enter at least one tag, and it must be one of the area tags above" %}: 
 <span>   
-    <ul id="ac_area_tags"></ul>     
+    <ul id="ac_area_question_tags"></ul>     
 </span> 
 <input type="submit" value="{% trans 'Add Question' %}"/>
 </form> 

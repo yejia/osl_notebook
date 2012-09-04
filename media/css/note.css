@@ -534,7 +534,7 @@ width:300px;
 padding-bottom:0px;
 margin-bottom:0px;/*how ac_tags has no spacing at bottom without adding these?TODO:*/
 }
-ul#ac_area_tags{
+ul#ac_area_question_tags, ul#ac_area_project_tags{
 width:300px;
 padding-bottom:0px;
 margin-bottom:0px;
@@ -1137,12 +1137,12 @@ padding-bottom:10px;
 cursor:pointer;
 }
 
-span.note_frame_add, span.area_question_add, span.area_group_add{
+span.note_frame_add, span.area_question_add, span.area_group_add, span.area_project_add{
 background-image:url("../img/admin/tooltag-add.gif");
 background-repeat:no-repeat;
 padding-bottom:10px;
 }
-span.note_frame_add:hover, span.area_question_add:hover, span.area_group_add:hover{
+span.note_frame_add:hover, span.area_question_add:hover, span.area_group_add:hover, span.area_project_add:hover{
 background-image:url("../img/admin/tooltag-add_over.gif");
 background-repeat:no-repeat;
 padding-bottom:10px;

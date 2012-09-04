@@ -131,7 +131,7 @@ def area(request, username, areaname):
     #area_tags =  Tag.objects.using(username).filter(name__in=area.get_all_tags())
     area_tags_with_count = []
     area_question_tags_with_count = []
-    
+    area_project_tags_with_count = []
     for t in area_tags_names:
         
         note_list = Note.objects.using(username).filter(tags__name = t, deleted=False)
@@ -143,6 +143,13 @@ def area(request, username, areaname):
         q_count = q_note_list.count()
         if q_count:
             area_question_tags_with_count.append([t, q_count])
+        
+            
+        
+        p_note_list =  note_list.filter(tags__name = 'projects')
+        p_count = p_note_list.count()
+        if p_count:
+            area_project_tags_with_count.append([t, p_count])
     
     resource_tags_with_count = []        
     for r_tag in resource_tags:
@@ -183,12 +190,19 @@ def area(request, username, areaname):
     editAreaForm = AddAreaForm(instance=area)
     tags = Tag_Frame.objects.using(username).all().order_by('name')
     
+#===============================================================================
+#    if username == request.user.username:
+#        book_uri_prefix = '/'+username
+#    else:
+#        book_uri_prefix = '/social/'+username    
+#===============================================================================
     
     #TODO:need this?
     theme = __get_view_theme(request)
     private =    theme['private'] 
     return render_to_response('areas/area.html',{'area':area,  'area_tags_with_count':area_tags_with_count, \
                                                  'area_question_tags_with_count':area_question_tags_with_count, 
+                                                 'area_project_tags_with_count':area_project_tags_with_count,
                                                  'resource_tags_with_count':resource_tags_with_count,
                                                  'editAreaForm':editAreaForm,'tags':tags, \
                             'username':request.user.username,'profile_username':username,  'private':private, 'groups':groups}, \

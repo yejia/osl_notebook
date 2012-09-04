@@ -152,7 +152,7 @@ urlpatterns = patterns('',
     (r'^(?P<username>[^/]+)/areas/area/(?P<areaname>[^/]+)/removeGroupFromArea/$', 'notebook.areas.views.remove_group_from_area'),
 
     (r'^(?P<username>[^/]+)/(.*)/addQuestion/$', 'notebook.notes.views.add_question'),
-
+    (r'^(?P<username>[^/]+)/(.*)/addProject/$', 'notebook.notes.views.add_project'),
 
 
    #TODO: seems to be matching too many things 
