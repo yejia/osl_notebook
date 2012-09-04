@@ -1489,13 +1489,18 @@ def create_note_in_frame(request, username, bookname):
     else:    
         note_to_include, created = N_To_Include.objects.get_or_create(desc=note_created_desc)  
     T = getT(username)
-    if frame.title.startswith('Weekly Plan:'):
-        
+    if frame.title.startswith('Weekly Plan:'):        
         t1, t1_created = T.objects.get_or_create(name='weekly')
         t2, t2_created = T.objects.get_or_create(name='plan')
         note_to_include.tags.add(t1)
         note_to_include.tags.add(t2)
         note_to_include.save()
+    if frame.title.startswith('Monthly Plan:'):        
+        t1, t1_created = T.objects.get_or_create(name='monthly')
+        t2, t2_created = T.objects.get_or_create(name='plan')
+        note_to_include.tags.add(t1)
+        note_to_include.tags.add(t2)
+        note_to_include.save()    
 #=======think of getting rid of untagged tag from db, and just fill it in in the template artificially if tag is empty TODO:========================================================================
 #    else:
 #        t1 =  T.objects.get(name='untagged')   
