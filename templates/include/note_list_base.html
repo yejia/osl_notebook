@@ -1,6 +1,9 @@
 {% load i18n %}
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us"  manifest="/site_media/note_list_base.appcache"> 
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" manifest="/site_media/note_list_base.appcache"> <!--<![endif]-->
 <head> 
 
 <!--TODO:useful?-->
@@ -99,10 +102,7 @@
     
 <script type="text/javascript">
     if ($.browser.msie) {
-//alert('{% trans "You are using an IE browser or IE based browser! You are too out! Please switch to other browsers. All other browser can view this site. The best is:" %} <a href="http://www.google.com/chrome/ ">{%trans "google chrome"%}</a>');
-  // $('ul.messages').append('<li class="error">{% trans "You are using an IE browser or IE based browser! You are too out! Please switch to other browsers. All other browser can view this site. The best is:" %} <a href="http://www.google.com/chrome/ ">{%trans "google chrome"%}</a></li>');
-//$('body').replaceWith('{% trans "You are using an IE browser or IE based browser! You are too out! Please switch to other browsers. All other browser can view this site. The best is:" %} <a href="http://www.google.com/chrome/ ">{%trans "google chrome"%}</a>');
-  window.location.replace('/changeYourBroswer/')
+// window.location.replace('/changeYourBroswer/')
   }
 </script>
 
