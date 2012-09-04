@@ -201,6 +201,11 @@ def register_user(request):
         password1 = request.POST.get('password1')
         password2 = request.POST.get('password2')
         email = request.POST.get('email')
+        
+        if not email:
+            messages.error(request, _("No email entered!"))                 
+            return HttpResponseRedirect('/registre/')  
+        
         #f = UserCreationForm(request.POST)
 #        if f.errors:
 #            log.debug('Registrtion form errors:'+str(f.errors))
@@ -227,7 +232,7 @@ def register_user(request):
                     m2 = Member.objects.get(username=username)         
                     fr = Friend_Rel(friend1=m1, friend2=m2)
                     #So far, make it confirmed automcatically. TODO:
-                    fr.comfirmed = True
+                    fr.confirmed = True
                     fr.save()
                     log.info('New member created and added as a friend of the inviter!') 
                     messages.success(request, _("New member created and added as your friend!"))  
