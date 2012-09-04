@@ -127,8 +127,8 @@ class Area_Group(models.Model):
     group_id = models.IntegerField()
    
     
-class Meta:
-    verbose_name = "group in area"                   
+    class Meta:
+        verbose_name = "group in area"                   
 
 
     def __unicode__(self):

@@ -1,62 +1,34 @@
 <!DOCTYPE html>
-<html>
-<head>
-<!--TODO:useful?-->
-    <link href="/site_media/css/tag-it/reset.css" rel="stylesheet" type="text/css" />       
-	<link href="/site_media/css/tag-it/master.css" rel="stylesheet" type="text/css" />
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
 
- <!-- These 2 CSS files are required: any 1 jQuery UI theme CSS, plus the Tag-it base CSS. -->
-    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
-      <link href="/site_media/css/tag-it/jquery.tagit.css" rel="stylesheet" type="text/css" />
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-    <!-- This is an optional CSS theme that only applies to this widget. Use it in addition to the jQuery UI theme. -->
-    <!--
-    <link href="css/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
--->
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <script src="js/vendor/modernizr-2.6.1.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+        <![endif]-->
 
-    <!-- jQuery and jQuery UI are required dependencies. -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+        <!-- Add your site or application content here -->
+        <p>Hello world! This is HTML5 Boilerplate.</p>
 
-  
-    <!-- The real deal -->
-<script src="/site_media/js/tag-it.js" type="text/javascript" charset="utf-8"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.1.min.js"><\/script>')</script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
 
-  
-  <script>
-$(function(){
-     var sampleTags = ['c++', 'java', 'php', 'coldfusion', 'javascript', 'asp', 'ruby', 'python', 'c', 'scala', 'groovy', 'haskell', 'perl', 'erlang', 'apl', 'cobol', 'go', 'lua'];
-     
-       $("#ac_tags").tagit({
-			    availableTags: sampleTags
-            });    
-            
-              $("#add_note_tags").tagit({
-		    availableTags:sampleTags
-          });    
-          
-     
-
-     
-     
-  });
-  
-  
-  
-  </script>
-</head>
-<body style="font-size:62.5%;">
-  
-<div id="tabs">
-first:
-<ul id="add_note_tags"></ul>
- <br/>
-second:
-<ul id="ac_tags"></ul>
-
-third:
-<ul id="myTags"></ul>
-<input type="submit" value="Submit">
-</div>
-</body>
+        
+    </body>
 </html>
