@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-04 16:02+0800\n"
+"POT-Creation-Date: 2012-09-04 18:09+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -70,7 +70,9 @@ msgstr "或者你可以去小组页面去浏览新添加的笔记！"
 msgid ""
 "You can contribute your notes to this group by adding the group tags to your "
 "notes. The tags of this group are:"
-msgstr "你可以把你的笔记推送到这个学习小组，只要你对你的笔记添加该小组的标签。该学习小组的标签是："
+msgstr ""
+"你可以把你的笔记推送到这个学习小组，只要你对你的笔记添加该小组的标签。该学习"
+"小组的标签是："
 
 #: email_digest.py:177 email_digest.py:181
 msgid "You can set up how you want to receive group digest in your setting:"
@@ -2328,6 +2330,26 @@ msgstr "含标签"
 #: templates/include/supersearch.html:4 templates/include/supersearch.html:62
 msgid " of "
 msgstr "的"
+
+#: templates/include/test.html:19
+msgid "You are using an outdated browser."
+msgstr "你在使用一个过时的浏览器。"
+
+#: templates/include/test.html:19
+msgid "Upgrade your browser today"
+msgstr "请升级你的浏览器"
+
+#: templates/include/test.html:19
+msgid " or "
+msgstr "或者"
+
+#: templates/include/test.html:19
+msgid "install Google Chrome Frame"
+msgstr "安装谷歌浏览器框"
+
+#: templates/include/test.html:19
+msgid " to better experience this site."
+msgstr "以获得对本网站更好的体验。"
 
 #: templates/include/notes/addNote.html:82
 msgid "This bookmark aready exists!"
