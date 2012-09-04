@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-04 18:09+0800\n"
+"POT-Creation-Date: 2012-09-04 20:52+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -273,7 +273,7 @@ msgstr "默认的标签是'random thought'。"
 #: notes/models.py:194 social/models.py:618 templates/areas/area.html:284
 #: templates/areas/index.html:57
 #: templates/framebook/notes/notesdisplay.html:22
-#: templates/include/note_list_base.html:1481
+#: templates/include/note_list_base.html:1483
 #: templates/include/notes/notesdisplay.html:44
 #: templates/scrapbook/notes/notesdisplay.html:29
 #: templates/snippetbook/notes/add_note.html:47
@@ -417,7 +417,7 @@ msgstr "每周更新"
 
 #: social/models.py:53 templates/areas/area.html:158
 #: templates/framebook/notes/todelete/folders.html:19
-#: templates/include/note_list_base.html:1683
+#: templates/include/note_list_base.html:1685
 #: templates/include/profile_head.html:49
 #: templates/include/profile_head.html:51
 #: templates/include/profile_head.html:80 templates/include/supersearch.html:6
@@ -431,7 +431,7 @@ msgid "Snippets"
 msgstr "便条"
 
 #: social/models.py:54 templates/areas/area.html:161
-#: templates/include/note_list_base.html:1687
+#: templates/include/note_list_base.html:1689
 #: templates/include/profile_head.html:64
 #: templates/include/profile_head.html:66
 #: templates/include/profile_head.html:83
@@ -701,7 +701,7 @@ msgstr[1] ""
 
 #: templates/admin/delete_confirmation.html:10
 #: templates/admin/submit_line.html:4
-#: templates/include/note_list_base.html:1466
+#: templates/include/note_list_base.html:1468
 msgid "Delete"
 msgstr "删除"
 
@@ -941,7 +941,7 @@ msgstr "浏览这个学习领域里的所有笔记"
 
 #: templates/areas/area.html:159
 #: templates/framebook/notes/todelete/folders.html:21
-#: templates/include/note_list_base.html:1684
+#: templates/include/note_list_base.html:1686
 #: templates/include/profile_head.html:54
 #: templates/include/profile_head.html:56
 #: templates/include/profile_head.html:81
@@ -959,7 +959,7 @@ msgstr "网址"
 
 #: templates/areas/area.html:160
 #: templates/framebook/notes/todelete/folders.html:23
-#: templates/include/note_list_base.html:1685
+#: templates/include/note_list_base.html:1687
 #: templates/include/profile_head.html:59
 #: templates/include/profile_head.html:61
 #: templates/include/profile_head.html:82
@@ -979,11 +979,11 @@ msgstr "网摘"
 #: templates/framebook/notes/todelete/folders.html:25
 #: templates/include/frames_pick_top.html:13
 #: templates/include/frames_pick_top.html:15
-#: templates/include/note_list_base.html:1483
 #: templates/include/note_list_base.html:1485
-#: templates/include/note_list_base.html:1552
+#: templates/include/note_list_base.html:1487
 #: templates/include/note_list_base.html:1554
-#: templates/include/note_list_base.html:1688
+#: templates/include/note_list_base.html:1556
+#: templates/include/note_list_base.html:1690
 #: templates/include/profile_head.html:69
 #: templates/include/profile_head.html:71
 #: templates/include/profile_head.html:84
@@ -1239,12 +1239,12 @@ msgstr "在链条里的"
 
 #: templates/bookmarkbook/notes/notes.html:12
 #: templates/bookmarkbook/notes/notes.html:14
-#: templates/include/note_list_base.html:1468
 #: templates/include/note_list_base.html:1470
-#: templates/include/note_list_base.html:1489
+#: templates/include/note_list_base.html:1472
 #: templates/include/note_list_base.html:1491
-#: templates/include/note_list_base.html:1558
+#: templates/include/note_list_base.html:1493
 #: templates/include/note_list_base.html:1560
+#: templates/include/note_list_base.html:1562
 #: templates/notebook/notes/notes.html:14
 #: templates/notebook/notes/notes.html:16
 #: templates/scrapbook/notes/notes.html:13
@@ -1340,9 +1340,6 @@ msgid "sys @ 3exps.org"
 msgstr "sys @ 91biji.com"
 
 #: templates/doc/change_your_browser.html:5
-#: templates/include/note_list_base.html:102
-#: templates/include/note_list_base.html:103
-#: templates/include/note_list_base.html:104
 msgid ""
 "You are using an IE browser or IE based browser! You are too out! Please "
 "switch to other browsers. All other browser can view this site. The best is:"
@@ -1351,9 +1348,6 @@ msgstr ""
 "他浏览器皆可浏览本站。最好的是"
 
 #: templates/doc/change_your_browser.html:5
-#: templates/include/note_list_base.html:102
-#: templates/include/note_list_base.html:103
-#: templates/include/note_list_base.html:104
 msgid "google chrome"
 msgstr "谷歌浏览器"
 
@@ -2157,64 +2151,84 @@ msgid ""
 "and it cannot be recovered!"
 msgstr "你确定你想永久删除这条笔记吗？你将不能恢复被永久删除的笔记！"
 
-#: templates/include/note_list_base.html:1454
+#: templates/include/note_list_base.html:1418 templates/include/test.html:17
+msgid "You are using an outdated browser."
+msgstr "你在使用一个过时的浏览器。"
+
+#: templates/include/note_list_base.html:1418 templates/include/test.html:17
+msgid "Upgrade your browser today"
+msgstr "请升级你的浏览器"
+
+#: templates/include/note_list_base.html:1418 templates/include/test.html:17
+msgid " or "
+msgstr "或者"
+
+#: templates/include/note_list_base.html:1418 templates/include/test.html:17
+msgid "install Google Chrome Frame"
+msgstr "安装谷歌浏览器框"
+
+#: templates/include/note_list_base.html:1418 templates/include/test.html:17
+msgid " to better experience this site."
+msgstr "以获得对本网站更好的体验。"
+
+#: templates/include/note_list_base.html:1456
 msgid "show side menu"
 msgstr "显示侧边菜单"
 
-#: templates/include/note_list_base.html:1455
+#: templates/include/note_list_base.html:1457
 msgid "hide side menu"
 msgstr "隐藏侧边菜单"
 
-#: templates/include/note_list_base.html:1474
 #: templates/include/note_list_base.html:1476
-#: templates/include/note_list_base.html:1495
+#: templates/include/note_list_base.html:1478
 #: templates/include/note_list_base.html:1497
+#: templates/include/note_list_base.html:1499
 msgid "No"
 msgstr "否"
 
-#: templates/include/note_list_base.html:1504
+#: templates/include/note_list_base.html:1506
 msgid "Date Range"
 msgstr "时间范围"
 
-#: templates/include/note_list_base.html:1509
 #: templates/include/note_list_base.html:1511
+#: templates/include/note_list_base.html:1513
 msgid "Any day"
 msgstr "任何天"
 
-#: templates/include/note_list_base.html:1515
 #: templates/include/note_list_base.html:1517
+#: templates/include/note_list_base.html:1519
 msgid "Today"
 msgstr "今天"
 
-#: templates/include/note_list_base.html:1521
 #: templates/include/note_list_base.html:1523
+#: templates/include/note_list_base.html:1525
 msgid "Past 7 Days"
 msgstr "过去7天"
 
-#: templates/include/note_list_base.html:1527
 #: templates/include/note_list_base.html:1529
+#: templates/include/note_list_base.html:1531
 msgid "This Month"
 msgstr "本月"
 
-#: templates/include/note_list_base.html:1532
+#: templates/include/note_list_base.html:1534
 msgid "This Season"
 msgstr "本季度"
 
-#: templates/include/note_list_base.html:1535
 #: templates/include/note_list_base.html:1537
+#: templates/include/note_list_base.html:1539
 msgid "This Year"
 msgstr "今年"
 
-#: templates/include/note_list_base.html:1541
+#: templates/include/note_list_base.html:1543
 msgid "Pick a Range"
 msgstr "选择一个日期范围"
 
-#: templates/include/note_list_base.html:1550
+#: templates/include/note_list_base.html:1552
 msgid "With attachment"
 msgstr "含附件"
 
 # python-format
-#: templates/include/note_list_base.html:1678
+#: templates/include/note_list_base.html:1680
 #, python-format
 msgid "Personal notes of %(profile_username)s"
 msgstr "%(profile_username)s的个人笔记"
@@ -2330,26 +2344,6 @@ msgstr "含标签"
 #: templates/include/supersearch.html:4 templates/include/supersearch.html:62
 msgid " of "
 msgstr "的"
-
-#: templates/include/test.html:19
-msgid "You are using an outdated browser."
-msgstr "你在使用一个过时的浏览器。"
-
-#: templates/include/test.html:19
-msgid "Upgrade your browser today"
-msgstr "请升级你的浏览器"
-
-#: templates/include/test.html:19
-msgid " or "
-msgstr "或者"
-
-#: templates/include/test.html:19
-msgid "install Google Chrome Frame"
-msgstr "安装谷歌浏览器框"
-
-#: templates/include/test.html:19
-msgid " to better experience this site."
-msgstr "以获得对本网站更好的体验。"
 
 #: templates/include/notes/addNote.html:82
 msgid "This bookmark aready exists!"
@@ -3022,6 +3016,14 @@ msgstr "你的用户名和密码不对。请重新输入。"
 #: templates/registration/login.html:36
 msgid "login"
 msgstr "登录"
+
+#: templates/registration/login.html:36
+msgid "Not a user yet?"
+msgstr "还没有帐号？"
+
+#: templates/registration/login.html:36
+msgid "Register"
+msgstr "注册"
 
 #: templates/registration/login.html:40
 msgid ""
