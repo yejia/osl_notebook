@@ -168,11 +168,17 @@ def send_group_digest(username, groupname, freq, pick_lang):
         if freq == 'weekly':    
             digest_heading = _('Weekly digest from the group:')+groupname+'\n\n\n'
         settings_url = site_name + '/settings/'
-        html_settings_url = '<a href="'+settings_url+'">'+settings_url+'</a>' 
+        html_settings_url = '<a href="'+settings_url+'">'+settings_url+'</a>'        
+        
+        group_tags = group.display_tags()
         digest = digest_heading + content + '\n'+ _('Or you can go to the group page to view the new notes! ')+ \
-                  group_url + '\n\n'+_('You can set up how you want to receive group digest in your setting:')+ settings_url
+                  group_url + '\n\n'+\
+                  _('You can contribute your notes to this group by adding the group tags to your notes. The tags of this group are:')+'\n' +group_tags+'\n\n'+\
+                  _('You can set up how you want to receive group digest in your setting:')+ settings_url
         html_digest = digest_heading + '<br/><br/><br/>'+ html_content +'<br/>'+ _('Or you can go to the group page to view the new notes! ')+ \
-                  html_group_url + '<br/><br/>'+_('You can set up how you want to receive group digest in your setting:')+ html_settings_url
+                  html_group_url + '<br/><br/>'+\
+                  _('You can contribute your notes to this group by adding the group tags to your notes. The tags of this group are:') +'<br/>'+group_tags+'<br/><br/>'+\
+                  _('You can set up how you want to receive group digest in your setting:')+ html_settings_url
         #print 'digest is:', digest
         
         #mailserver = get_mail_server()
