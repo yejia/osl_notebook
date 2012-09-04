@@ -222,15 +222,20 @@ def register_user(request):
                 log.info('DB is created for the new user!') 
                 #automatically add the invited person to the inviter's friends        
                 #notebook.social.views.add_friend(request, username)
-                m1 = request.user.member
-                m2 = Member.objects.get(username=username)         
-                fr = Friend_Rel(friend1=m1, friend2=m2)
-                #So far, make it confirmed automcatically. TODO:
-                fr.comfirmed = True
-                fr.save()
-                log.info('New member created and added as a friend of the inviter!') 
-                messages.success(request, _("New member created and added as your friend!"))  
-                return HttpResponseRedirect('/registre/') 
+                if not request.user.is_anonymous:
+                    m1 = request.user.member
+                    m2 = Member.objects.get(username=username)         
+                    fr = Friend_Rel(friend1=m1, friend2=m2)
+                    #So far, make it confirmed automcatically. TODO:
+                    fr.comfirmed = True
+                    fr.save()
+                    log.info('New member created and added as a friend of the inviter!') 
+                    messages.success(request, _("New member created and added as your friend!"))  
+                    return HttpResponseRedirect('/registre/') 
+                else:
+                    #TODO: send email to confirm
+                    messages.success(request, _("You can now login with your username and password!"))  
+                    return HttpResponseRedirect('/login/') 
             else:
                 log.error('Error creating a member!')
                 messages.error(request, _("Error creating a member!"))                 
