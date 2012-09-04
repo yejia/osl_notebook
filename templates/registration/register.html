@@ -9,12 +9,12 @@
 
 
 <form method="post" action="/registre/">
-<p><label for="id_username">Username:</label> <input id="id_username" type="text" name="username" maxlength="30" /> Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only.</p>
+<p><label for="id_username">{% trans "Username" %}:</label> <input id="id_username" type="text" name="username" maxlength="30" />{% trans "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only." %} </p>
 
-<p><label for="id_password1">Password:</label> <input type="password" name="password1" id="id_password1" /></p>
-<p><label for="id_password2">Password confirmation:</label> <input type="password" name="password2" id="id_password2" /> Enter the same password as above, for verification.</p>
+<p><label for="id_password1">{% trans "Password" %}:</label> <input type="password" name="password1" id="id_password1" /></p>
+<p><label for="id_password2">{% trans "Password confirmation" %}:</label> <input type="password" name="password2" id="id_password2" />{% trans " Enter the same password as above, for verification." %}</p>
 <p><label for="id_email">Email:</label> <input type="text" name="email" id="id_email" /></p>
-<input type="submit" value="register" />
+<input type="submit" value="{% trans "register" %}" />
 
 </form>
 
