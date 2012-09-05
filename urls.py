@@ -205,6 +205,8 @@ urlpatterns = patterns('',
     (r'registre/$', 'notebook.notes.views.register_user'),
 
     (r'reg/$', 'notebook.notes.views.register'),
+    (r'activate/$', 'notebook.notes.views.activate'),
+
 
     (r'^setLang/$', 'notebook.notes.views.set_language'),
 

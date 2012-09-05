@@ -1166,7 +1166,9 @@ class Note_Translation(models.Model):
     title = models.CharField(verbose_name=ugettext_lazy('Title'), blank=True,max_length=2000, help_text=_("The size of the title is limited to 2000 characaters."))
     desc =  models.TextField(verbose_name=ugettext_lazy('Description'), max_length=2000, blank=True,  help_text=_("The size of the desc is limited to 2000 characaters."))
     
-    
+
+
+
        
 
 #TODO:should this table be here?

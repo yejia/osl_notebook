@@ -27,7 +27,11 @@ from notebook.env_settings import DB_ROOT
 fs = FileSystemStorage(location=DB_ROOT)
 
 
-
+class Activation(models.Model):
+    #TODO: what is the limit of user username?
+    username = models.CharField(max_length=100) 
+    activation_id = models.CharField(max_length=100) 
+    
 
 
 class Member(User):

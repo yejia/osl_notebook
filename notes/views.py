@@ -18,7 +18,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.sites.models import Site
 from django.template import RequestContext
 from django.core.exceptions import ObjectDoesNotExist, FieldError
-from django.core.mail import send_mass_mail
+from django.core.mail import send_mass_mail, send_mail
 
 
 
@@ -27,7 +27,7 @@ from notebook.notes.models import *
 from notebook.snippets.models import Snippet
 from notebook.bookmarks.models import Bookmark
 from notebook.scraps.models import Scrap
-from notebook.social.models import Member, Friend_Rel
+from notebook.social.models import Member, Friend_Rel, Activation
 from notebook.notes.constants import *
 from notebook.notes.util import *
 
@@ -292,6 +292,16 @@ def register(request):
                 create_db(username)
                 log.info('DB is created for the new user!') 
                 m.active = False
+                site_name = 'http://www.91biji.com/'  
+                activationID = __getNewID()
+                #activation_list = request.session.get('activation',[])
+                activation = Activation(username=m.username, activation_id=activationID)
+                activation.save()
+                #activation_list.append([m.username,activationID])  
+                #request.session['activation'] = activation_list           
+                url = site_name+'activate/?username='+m.username+'&activationID='+activationID
+                content = _('You have successfully registered with ')+site_name + '\n'+_('You can activiate your account by clicking or copying the url below to your browser address bar:')+'\n'+url 
+                send_mail(_('Please activate your account'), content.encode('utf-8'), u'sys@opensourcelearning.org', [m.email])
                 messages.success(request, _("An account is created for you! You can go to your email to activate your account."))  
                 return HttpResponseRedirect('/login/') 
         messages.error(request, _("Passwords don't match!"))
@@ -300,7 +310,28 @@ def register(request):
         #registerForm = UserCreationForm()
         #registerForm = RegistrationForm()
         return render_to_response('registration/reg.html', {}, context_instance=RequestContext(request))             
+    
+    
+def activate(request): 
+    username = request.GET.get('username')
+    activationID = request.GET.get('activationID')   
+    #activation_list = request.session.get('activation')
+    #print 'activation_list',activation_list
+    if  Activation.objects.filter(username=username, activation_id=activationID).exists():
+        activation = Activation.objects.get(username=username, activation_id=activationID)
+        u = User.objects.get(username=username)
+        u.active = True
+        u.save()
+        activation.delete()
+        messages.success(request, _("You have successfully activated your account!"))
+        return HttpResponseRedirect('/login/')  
+    else:
+        messages.success(request, _("Wrong activation id!"))
+        return HttpResponseRedirect('/login/')  
         
+
+def __getNewID():            
+    return str(time.time())
 
 @login_required
 def root(request):    
