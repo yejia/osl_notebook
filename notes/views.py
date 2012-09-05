@@ -259,7 +259,8 @@ def invite(request):
     pass
        
 
-
+#remove the line below to enable registration by public
+@login_required
 def register(request): 
     if request.method == 'POST':          
         log.info('Registering a new user...')       
