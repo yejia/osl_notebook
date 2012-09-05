@@ -284,6 +284,11 @@ def register(request):
         if User.objects.filter(username=username).exists():
             messages.error(request, _("Username is already used by someone else. Please pick another one.")) 
             log.info('Registration failed. Username is already used by someone else.')  
+            return HttpResponseRedirect('/reg/') 
+        #TODO:remove hardcoding
+        if email !='yuanliangliu@gmail.com' and User.objects.filter(email=email).exists(): 
+            messages.error(request, _("Email is already used by someone else. Please pick another one."))             
+            log.info('Registration failed. Email is already used by someone else.')  
             return HttpResponseRedirect('/reg/')          
         if password1 == password2:        
             m, created = create_member(username, email, password1)
@@ -334,6 +339,15 @@ def activate(request):
 
 def __getNewID():            
     return str(time.time())
+
+#TODO:
+def forget_passwd(request):
+    email = request.GET.get('email')
+    resetID = __getNewID()
+    
+
+
+
 
 @login_required
 def root(request):    

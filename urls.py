@@ -202,6 +202,10 @@ urlpatterns = patterns('',
     (r'^passwordChange/$', 'django.contrib.auth.views.password_change'),
     (r'^passwordChanged/$', 'django.contrib.auth.views.password_change_done'),
 
+
+
+
+
     (r'registre/$', 'notebook.notes.views.register_user'),
 
     (r'reg/$', 'notebook.notes.views.register'),
@@ -246,4 +250,13 @@ urlpatterns = patterns('',
     (r'^file/(?P<path>.*)$', 'django.views.static.serve',
         {'document_root': DB_ROOT}),
 
+)
+
+from django.contrib.auth import views as auth_views
+
+urlpatterns+=(
+url(r'^passreset/$',auth_views.password_reset,name='forgot_password1'),
+url(r'^passresetdone/$',auth_views.password_reset_done,name='forgot_password2'),
+url(r'^passresetconfirm/(?P<uidb36>[-\w]+)/(?P<token>[-\w]+)/$',auth_views.password_reset_confirm,name='forgot_password3'),
+url(r'^passresetcomplete/$',auth_views.password_reset_complete,name='forgot_password4'),
 )

@@ -33,7 +33,7 @@ $(document).ready(function(){
 </tr>
 </table>
 
-<input type="submit" value="{% trans "login" %}" />&nbsp;&nbsp;&nbsp;&nbsp;{% trans "Not a user yet?" %}  <a href="/reg/">{% trans "Register" %}</a>
+<input type="submit" value="{% trans "login" %}" /><a href="/reg/">&nbsp;&nbsp;&nbsp;&nbsp;<a href="/passreset/">{% trans "Forgot your password?" %}</a>&nbsp;&nbsp;&nbsp;&nbsp;{% trans "Not a user yet?" %}  <a href="/reg/">{% trans "Register" %}</a>
 <input type="hidden" name="next" value="{{ next }}" />
 </form>
 
