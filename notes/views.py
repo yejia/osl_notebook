@@ -291,7 +291,7 @@ def register(request):
                 log.info('A new user is created!')  
                 create_db(username)
                 log.info('DB is created for the new user!') 
-                m.active = False
+                m.is_active = False
                 m.save()
                 site_name = 'http://www.91biji.com/'  
                 activationID = __getNewID()
