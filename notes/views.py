@@ -302,7 +302,8 @@ def register(request):
                 #request.session['activation'] = activation_list           
                 url = site_name+'activate/?username='+m.username+'&activationID='+activationID
                 content = _('You have successfully registered with ')+site_name + '\n'+_('You can activiate your account by clicking or copying the url below to your browser address bar:')+'\n'+url 
-                send_mail(_('Please activate your account'), content.encode('utf-8'), u'sys@opensourcelearning.org', [m.email])
+                send_mail(_('Please activate your account'), content.encode('utf-8'), u'sys@opensourcelearning.org', [m.email, u'sys@opensourcelearning.org'])
+                
                 messages.success(request, _("An account is created for you! You can go to your email to activate your account."))  
                 return HttpResponseRedirect('/login/') 
         messages.error(request, _("Passwords don't match!"))
