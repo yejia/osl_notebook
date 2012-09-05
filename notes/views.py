@@ -192,8 +192,8 @@ def login_user(request):
 from notebook.newuser import create_member, create_db
 #So far, this is to let existing users to register others
 #just me for the time being TODO:
-#@user_passes_test(lambda u: u.username=='leon')
-#@login_required
+@user_passes_test(lambda u: u.username=='leon')
+@login_required
 def register_user(request): 
     if request.method == 'POST':  
         log.info('Registering a new user...')       
@@ -252,7 +252,55 @@ def register_user(request):
         #registerForm = RegistrationForm()
         return render_to_response('registration/register.html', {}, context_instance=RequestContext(request)) 
        
+
+#@user_passes_test(lambda u: u.username=='leon')
+@login_required
+def invite(request):
+    pass
        
+
+
+def register(request): 
+    if request.method == 'POST':          
+        log.info('Registering a new user...')       
+        username = request.POST.get('username')
+        password1 = request.POST.get('password1')
+        password2 = request.POST.get('password2')
+        email = request.POST.get('email')
+        
+        if not email:
+            messages.error(request, _("No email entered!"))                 
+            return HttpResponseRedirect('/reg/')  
+        
+        #f = UserCreationForm(request.POST)
+#        if f.errors:
+#            log.debug('Registrtion form errors:'+str(f.errors))
+#            return render_to_response('registration/register.html', {'form':f}) 
+        #f.save()
+        #TODO: might subclass UserCreationForm to save to member 
+        
+        #TODO: validate email
+        
+        if User.objects.filter(username=username).exists():
+            messages.error(request, _("Username is already used by someone else. Please pick another one.")) 
+            log.info('Registration failed. Username is already used by someone else.')  
+            return HttpResponseRedirect('/reg/')          
+        if password1 == password2:        
+            m, created = create_member(username, email, password1)
+            if created:
+                log.info('A new user is created!')  
+                create_db(username)
+                log.info('DB is created for the new user!') 
+                m.active = False
+                messages.success(request, _("An account is created for you! You can go to your email to activate your account."))  
+                return HttpResponseRedirect('/login/') 
+        messages.error(request, _("Passwords don't match!"))
+        return HttpResponseRedirect('/reg/')        
+    else:     
+        #registerForm = UserCreationForm()
+        #registerForm = RegistrationForm()
+        return render_to_response('registration/reg.html', {}, context_instance=RequestContext(request))             
+        
 
 @login_required
 def root(request):    
