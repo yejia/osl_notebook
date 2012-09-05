@@ -321,7 +321,7 @@ def activate(request):
     if  Activation.objects.filter(username=username, activation_id=activationID).exists():
         activation = Activation.objects.get(username=username, activation_id=activationID)
         u = User.objects.get(username=username)
-        u.active = True
+        u.is_active = True
         u.save()
         activation.delete()
         messages.success(request, _("You have successfully activated your account!"))
