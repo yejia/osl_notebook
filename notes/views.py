@@ -181,8 +181,8 @@ def login_user(request):
                    
             return HttpResponseRedirect(__get_home(request)) 
         else:
-            pass
-            # Return a 'disabled account' error message
+            messages.error(request, _("This is not an active user! You might need to activate your account. Please check your email for activation email. Or you can contact the admin."))
+            return HttpResponseRedirect('/login/') 
     else:
         messages.error(request, "Username or password is not correct. Please enter again!")
         return HttpResponseRedirect('/login/') 
