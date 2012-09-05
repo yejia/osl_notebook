@@ -308,9 +308,8 @@ msgid "Original language"
 msgstr "原来的语言"
 
 #: notes/views.py:206 notes/views.py:272
-#, fuzzy
 msgid "No email entered!"
-msgstr "没有输入任何用户名！"
+msgstr "没有输入email！"
 
 #: notes/views.py:219 notes/views.py:285
 msgid "Username is already used by someone else. Please pick another one."
@@ -318,11 +317,11 @@ msgstr "用户名已经被他人使用。请另选。"
 
 #: notes/views.py:238
 msgid "New member created and added as your friend!"
-msgstr "新成员注册成功并添加你为好友！"
+msgstr "新成员注册成功并添加您为好友！"
 
 #: notes/views.py:242
 msgid "You can now login with your username and password!"
-msgstr ""
+msgstr "你可以用您的用户名和密码登录了！"
 
 #: notes/views.py:246
 msgid "Error creating a member!"
@@ -333,39 +332,36 @@ msgid "Passwords don't match!"
 msgstr "密码不一致！"
 
 #: notes/views.py:303
-#, fuzzy
 msgid "You have successfully registered with "
-msgstr "你已经成功的将该成员添加到这个小组。"
+msgstr "您已经成功注册了"
 
 #: notes/views.py:303
 msgid ""
 "You can activiate your account by clicking or copying the url below to your "
 "browser address bar:"
-msgstr ""
+msgstr "要激活您的帐号，你可以点击下面的链接或者将该链接拷贝到您的浏览器的地址栏："
 
 #: notes/views.py:304
-#, fuzzy
 msgid "Please activate your account"
-msgstr "你的帐号的设置"
+msgstr "请激活您的帐号"
 
 #: notes/views.py:305
 msgid ""
 "An account is created for you! You can go to your email to activate your "
 "account."
-msgstr ""
+msgstr "已经为您生成了一个帐号！您现在可以去你的邮箱激活您的帐号。"
 
 #: notes/views.py:326
-#, fuzzy
 msgid "You have successfully activated your account!"
-msgstr "你已经成功的发出了小组邀请！"
+msgstr "您已经成功的激活了您的帐号！"
 
 #: notes/views.py:329
 msgid "Wrong activation id!"
-msgstr ""
+msgstr "错误的激活代码！"
 
 #: notes/views.py:455
 msgid "You have no permission here!"
-msgstr ""
+msgstr "您在此没有权限！"
 
 #: notes/views.py:1228
 msgid "note"
