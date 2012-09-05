@@ -292,6 +292,7 @@ def register(request):
                 create_db(username)
                 log.info('DB is created for the new user!') 
                 m.active = False
+                m.save()
                 site_name = 'http://www.91biji.com/'  
                 activationID = __getNewID()
                 #activation_list = request.session.get('activation',[])
