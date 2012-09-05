@@ -26,3 +26,4 @@ system_tags = resource_tags + ['question',
                'task', 'errand', 'todo', 'todos', 'toread', 'totry', 'daily', 'weekly', 'monthly', 'plan',
                'chinese', 'tech']
 
+notebook_host_names = ['www.91biji.com', '91biji.com', 'opensourcelearning.org', 'www.opensourcelearning.org', '3exps.org', '3exps.com', 'www.3exps.org', 'www.3exps.com']

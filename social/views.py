@@ -163,7 +163,7 @@ def get_groups_list(request, username):
     return list(group_set)
 
     
-@login_required
+
 def profile(request, username):
     gs_created = get_groups_created_by_self(request, username)
     gs_following = get_groups_following(request, username)  
@@ -374,7 +374,6 @@ def notes(request, username, bookname):
 
 
 
-notebook_host_names = ['www.91biji.com', '91biji.com', 'opensourcelearning.org', 'www.opensourcelearning.org', '3exps.org', '3exps.com', 'www.3exps.org', 'www.3exps.com']
 
 
 def note(request, username, bookname, note_id):
