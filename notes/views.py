@@ -3094,9 +3094,6 @@ def bind_check(request):
     return HttpResponseRedirect(back_to_url)
 
 
-
-
-
 #a test page to try jquery stuff. TODO: might use django's tests
 def test(request):    
-    return render_to_response('include/test.html')
+    return render_to_response('include/test.html', {})

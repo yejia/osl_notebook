@@ -1,0 +1,176 @@
+{% extends "include/base2.html" %}
+{% load i18n %}
+
+
+
+
+
+{% block extra_css %}
+
+{% endblock %}
+
+
+{% block extra_script %}
+<script type="text/javascript">
+        function show_more_section(){ 
+                    $('div#more_section').show();	
+                    $('.show_more_section').hide(); 
+                    $('.hide_more_section').show();                    
+                    return false;       
+        }     
+              
+</script>
+<script type="text/javascript">
+$(document).ready(function(){	 
+      //copied from base2.html
+	    $("#ac_tags").tagit({
+			    availableTags: [{% for tag in tags %}"{{tag}}",{% endfor %}],
+                   allowSpaces: true
+                  });  
+
+
+    
+    
+
+
+
+//below coped from base2.html
+     //below are copied from add bookmark button page. TODO: merge and clean up
+              $('.hide_more_section').hide(0);
+   
+   $('.hide_more_section').click(function(){
+                    $('div#more_section').hide();
+             		$(this).hide();   
+                    $('.show_more_section').show();                  
+                    return false;
+        });
+		
+    $('.show_more_section').click(function(){
+                    $('div#more_section').show();	
+                    $(this).hide();   	
+                    $('.hide_more_section').show();                    
+                    return false;
+        });               
+                
+                
+                
+        	});   
+
+        
+	
+</script>
+{% endblock %}
+
+{% block title %}
+{{groupname}} {% trans "'s Learning Salons" %}  : {{salon.name}}
+{% endblock %}
+
+
+{% block site_branding %}
+<a href="/groups/{{groupname}}/">{{groupname}}</a> {% trans "'s Learning Salon" %}   : <b>{{salon.name}} </b>
+
+{% endblock %}
+
+
+{% block content%}
+<div>{{salon.desc}}
+{% comment %}
+{% if salon.private %} <span class="lock_noclick" title="{% trans 'private'  %}" style="display:{% if area.private %}inline{% else %}none{% endif %};">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;              
+                                   </span> 
+{% else %} <span class="unlock_noclick" title="{% trans 'public'  %}" style="display:{% if area.private %}none{% else %}inline{% endif %};">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;          
+                </span>        
+{% endif %}  
+{% endcomment %}
+</div>
+<br/>
+<a href="/groups/{{groupname}}/salons/">{% trans "View all of " %}{{groupname}} {% trans "'s Learning salons" %}</a>
+<br/><br/>
+
+
+<div salon_name="{{salon.name}}">
+
+<div class="padded">
+ <b>{% trans "Name" %}:</b> {{salon.name}}
+ </div>
+<div class="padded">
+ <b>{% trans "Desc" %}:</b>  {{salon.desc}}
+ </div>
+ <div class="padded">
+ <b>{% trans "Location" %}:</b>  {{salon.location}}
+ </div>
+ <div class="padded">
+ <b>{% trans "Start date" %}:</b>  {{salon.start_date}}
+ </div>
+ <div class="padded">
+ <b>{% trans "Max people" %}:</b>  {{salon.max_people}}
+ </div>
+ <div class="padded">
+ <b>{% trans "Min people" %}:</b>  {{salon.min_people}}
+ </div>
+ <div class="padded">
+ <b>{% trans "poster" %}:</b>  {{salon.poster}}
+ </div>
+
+  </div>
+
+
+<br/>
+{% if user.member in group.admins.all  %} 
+<p> 
+<a href="javascript:void(0);" onclick="javascript:show_more_section();">{% trans "Edit the learning salon" %}:</a>
+<span class="show_more_section"><img title="" src="/site_media/img/right-arrow.jpg"/></span><span class="hide_more_section"><img title="" src="/site_media/img/down-arrow.jpg"/></span> 
+</p>
+<div id="more_section" style="display:none;">
+<form action="" method="post" enctype="multipart/form-data" id="editAreaForm">
+
+ <input type="hidden" name="id" value="{{salon.id}}"/>
+<p>   
+               {% trans "Name" %} <span class="required">*</span>: 
+                {{ editSalonForm.name.errors }}
+               {{editSalonForm.name}}
+    </p>
+    <p>   
+               {% trans "Desc" %} <span class="required">*</span>: 
+                {{ editSalonForm.desc.errors }}
+               {{editSalonForm.desc}}
+    </p>
+     <p>   
+               {% trans "Location" %} <span class="required">*</span>: 
+                {{ editSalonForm.location.errors }}
+               {{editSalonForm.location}}
+    </p>
+    <p>   
+               {% trans "Start date" %} <span class="required">*</span>: 
+                {{ editSalonForm.start_date.errors }}
+              
+                <input id="id_start_date" type="text" class="datepicker" name="start_date" value="{{editSalonForm.start_date.value}}" size="20" />
+                <!--
+                    <div class="input-append bootstrap-timepicker-component">
+    <input type="text" class="timepicker-default input-small">
+    <span class="add-on">
+    <i class="icon-time"></i>
+    </span>
+    </div>-->
+    </p>
+    <p>   
+               {% trans "Max people" %}: 
+                {{ editSalonForm.max_people.errors }}
+               {{editSalonForm.max_people}}
+    </p>
+     <p>   
+               {% trans "Min people" %}: 
+                {{ editSalonForm.min_people.errors }}
+               {{editSalonForm.min_people}}
+    </p>
+    <p>   
+               {% trans "poster" %}: 
+                {{ editSalonForm.poster.errors }}
+               {{editSalonForm.poster}}
+    </p>
+    
+<input type="submit" value="{% trans 'Add' %}"/>
+</form> 
+</div>
+{% endif %}
+
+{% endblock %}

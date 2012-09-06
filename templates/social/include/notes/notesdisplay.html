@@ -38,8 +38,16 @@
  <p>
      {% trans "View tag trees of this group" %}: <a href="/groups/{{group.name}}/tagframes/">{% trans "Tag trees" %}</a>. {% trans "You can push your relevant tag trees to this group." %}
  </p>  
- <br/>
+
  {% endif %}  
+ 
+
+ <p>
+        <a href="/groups/{{group.name}}/salons/">{% trans "View salons" %}</a>
+</p>
+
+
+ <br/>
 {% endblock %}	
 
  {% block notes_section_header %} 
