@@ -204,11 +204,25 @@
 <ul>
 {% for salon in salons %}		
 <li>
+<table><tr>
+  <td>
+  {% if salon.poster  %} 
+  <img src="/file/{{salon.poster}}" class="salon_img"/>
+  {% else %}
+    <img src="/file/{{group.icon}}" class="salon_img"/>
+{% endif %}
+  </td>
+<td>
 <a href="/groups/{{groupname}}/salons/salon/{{salon.name}}/" class="big_font">{{salon.name}}</a><br/>
  <b>{% trans "Group" %}:</b>  {{salon.group}}<br/>
  <b>{% trans "Time" %}:</b>  {{salon.start_date}} {{salon.start_time}} - {{salon.end_time}}<br/>
   <b>{% trans "Location" %}:</b>  {{salon.location}}<br/>
-   <b>{{salon.get_signed.count}}</b>{% trans " attend" %}  <b>{{salon.get_maybe.count}}</b>{% trans " interested" %}<br/><br/>
+   <b>{{salon.get_signed.count}}</b>{% trans " attend" %}  <b>{{salon.get_maybe.count}}</b>{% trans " interested" %}
+    
+  </td>
+
+</tr></table>
+   <br/><br/>
 </li>
 {% endfor %}
 </ul>
