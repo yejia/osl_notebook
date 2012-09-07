@@ -1,0 +1,237 @@
+{% extends "include/base2.html" %}
+{% load i18n %}
+
+
+
+
+{% block extra_css %}
+
+{% endblock %}
+
+
+
+
+{% block title %}
+ {% trans "Group" %}  {{groupname}}{% trans "'s Learning Salons" %} 
+{% endblock %}
+
+
+{% block site_branding %}
+<br/>
+ {% trans "Group" %}  <a href="/groups/{{groupname}}/">{{groupname}}</a>{% trans "'s Learning Salons" %}  
+<br/><br/>
+
+{% endblock %}
+
+
+{% block content%}
+
+{% if user.member in group.admins.all  %} 
+<p> 
+<a href="javascript:void(0);" onclick="javascript:show_more_section();">{% trans "Add a learning salon" %}:</a>
+<span class="show_more_section"><img title="" src="/site_media/img/right-arrow.jpg"/></span><span class="hide_more_section"><img title="" src="/site_media/img/down-arrow.jpg"/></span> 
+</p>
+<div id="more_section" style="display:none;">
+<form action="" method="post" enctype="multipart/form-data" id="addSalonForm">
+
+<p>   
+               {% trans "Name" %} <span class="required">*</span>: 
+                {{ addSalonForm.name.errors }}
+               {{addSalonForm.name}}
+    </p>
+    <p>   
+               {% trans "Desc" %} <span class="required">*</span>: 
+                {{ addSalonForm.desc.errors }}
+               {{addSalonForm.desc}}
+    </p>
+     <p>   
+               {% trans "location" %} <span class="required">*</span>: 
+                {{ addSalonForm.location.errors }}
+               {{addSalonForm.location}}
+    </p>
+    <p>   
+               {% trans "Start date" %} <span class="required">*</span>: 
+                {{ addSalonForm.start_date.errors }}
+              
+                <input id="id_start_date" type="text" class="datepicker" name="start_date" size="20" />
+    </p>
+     <p>   
+               {% trans "Start time" %} <span class="required">*</span>: 
+                {{ addSalonForm.start_time.errors }}                 
+                 <select id="id_start_time" name="start_time" >
+<option value="" selected="">----</option>
+<option value="08:00">08:00</option>
+<option value="08:30">08:30</option>
+<option value="09:00">09:00</option>
+<option value="09:30">09:30</option>
+<option value="10:00">10:00</option>
+<option value="10:30">10:30</option>
+<option value="11:00">11:00</option>
+<option value="11:30">11:30</option>
+<option value="12:00">12:00</option>
+<option value="12:30">12:30</option>
+<option value="13:00">13:00</option>
+<option value="13:30">13:30</option>
+<option value="14:00">14:00</option>
+<option value="14:30">14:30</option>
+<option value="15:00">15:00</option>
+<option value="15:30">15:30</option>
+<option value="16:00">16:00</option>
+<option value="16:30">16:30</option>
+<option value="17:00">17:00</option>
+<option value="17:30">17:30</option>
+<option value="18:00">18:00</option>
+<option value="18:30">18:30</option>
+<option value="19:00">19:00</option>
+<option value="19:30">19:30</option>
+<option value="20:00">20:00</option>
+<option value="20:30">20:30</option>
+<option value="21:00">21:00</option>
+<option value="21:30">21:30</option>
+<option value="22:00">22:00</option>
+<option value="22:30">22:30</option>
+<option value="23:00">23:00</option>
+<option value="23:30">23:30</option>
+<option value="00:00">00:00</option>
+<option value="00:30">00:30</option>
+<option value="01:00">01:00</option>
+<option value="01:30">01:30</option>
+<option value="02:00">02:00</option>
+<option value="02:30">02:30</option>
+<option value="03:00">03:00</option>
+<option value="03:30">03:30</option>
+<option value="04:00">04:00</option>
+<option value="04:30">04:30</option>
+<option value="05:00">05:00</option>
+<option value="05:30">05:30</option>
+<option value="06:00">06:00</option>
+<option value="06:30">06:30</option>
+<option value="07:00">07:00</option>
+<option value="07:30">07:30</option>
+</select>
+              
+               
+    </p>
+    
+     <p>   
+               {% trans "End date" %} <span class="required">*</span>: 
+                {{ addSalonForm.end_date.errors }}
+              
+                <input id="id_end_date" type="text" class="datepicker" name="end_date" size="20" />
+    </p>
+     <p>   
+               {% trans "End time" %} <span class="required">*</span>: 
+                {{ addSalonForm.end_time.errors }}                 
+                 <select id="id_end_time" name="end_time" >
+<option value="" selected="">----</option>
+<option value="08:00">08:00</option>
+<option value="08:30">08:30</option>
+<option value="09:00">09:00</option>
+<option value="09:30">09:30</option>
+<option value="10:00">10:00</option>
+<option value="10:30">10:30</option>
+<option value="11:00">11:00</option>
+<option value="11:30">11:30</option>
+<option value="12:00">12:00</option>
+<option value="12:30">12:30</option>
+<option value="13:00">13:00</option>
+<option value="13:30">13:30</option>
+<option value="14:00">14:00</option>
+<option value="14:30">14:30</option>
+<option value="15:00">15:00</option>
+<option value="15:30">15:30</option>
+<option value="16:00">16:00</option>
+<option value="16:30">16:30</option>
+<option value="17:00">17:00</option>
+<option value="17:30">17:30</option>
+<option value="18:00">18:00</option>
+<option value="18:30">18:30</option>
+<option value="19:00">19:00</option>
+<option value="19:30">19:30</option>
+<option value="20:00">20:00</option>
+<option value="20:30">20:30</option>
+<option value="21:00">21:00</option>
+<option value="21:30">21:30</option>
+<option value="22:00">22:00</option>
+<option value="22:30">22:30</option>
+<option value="23:00">23:00</option>
+<option value="23:30">23:30</option>
+<option value="00:00">00:00</option>
+<option value="00:30">00:30</option>
+<option value="01:00">01:00</option>
+<option value="01:30">01:30</option>
+<option value="02:00">02:00</option>
+<option value="02:30">02:30</option>
+<option value="03:00">03:00</option>
+<option value="03:30">03:30</option>
+<option value="04:00">04:00</option>
+<option value="04:30">04:30</option>
+<option value="05:00">05:00</option>
+<option value="05:30">05:30</option>
+<option value="06:00">06:00</option>
+<option value="06:30">06:30</option>
+<option value="07:00">07:00</option>
+<option value="07:30">07:30</option>
+</select>
+              
+               
+    </p>
+    
+    
+    <p>   
+               {% trans "Max people" %}: 
+                {{ addSalonForm.max_people.errors }}
+               {{addSalonForm.max_people}}
+    </p>
+     <p>   
+               {% trans "Min people" %}: 
+                {{ addSalonForm.min_people.errors }}
+               {{addSalonForm.min_people}}
+    </p>
+    <p>   
+               {% trans "poster" %}: 
+                {{ addSalonForm.poster.errors }}
+               {{addSalonForm.poster}}
+    </p>
+    
+<input type="submit" value="{% trans 'Add' %}"/>
+</form> 
+</div>
+
+{% endif %}
+
+<br/>
+<ul>
+{% for salon in salons %}		
+<li>
+<table><tr>
+  <td>
+  {% if salon.poster  %} 
+  <img src="/file/{{salon.poster}}" class="salon_img_in_list"/>
+  {% else %}
+    <img src="/file/{{group.icon}}" class="salon_img_in_list"/>
+{% endif %}
+  </td>
+<td>
+<a href="/groups/{{groupname}}/salons/salon/{{salon.name}}/" class="big_font">{{salon.name}}</a><br/>
+ <b>{% trans "Group" %}:</b>  {{salon.group}}<br/>
+ <b>{% trans "Time" %}:</b>  {{salon.start_date}} {{salon.start_time}} - {{salon.end_time}}<br/>
+  <b>{% trans "Location" %}:</b>  {{salon.location}}<br/>
+   <b>{{salon.get_signed.count}}</b>{% trans " attend" %}  <b>{{salon.get_maybe.count}}</b>{% trans " interested" %}
+    
+  </td>
+
+</tr></table>
+   <br/><br/>
+</li>
+{% endfor %}
+</ul>
+
+
+
+
+
+
+
+
+{% endblock %}
