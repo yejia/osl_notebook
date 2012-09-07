@@ -15,10 +15,18 @@
 <span class="item">
 <a href="/{{ user.username|default:'anonymous' }}/areas/">{% trans 'Learning Areas' %}</a>
 </span>
+<span class="item">
+<a href="/{{ user.username|default:'anonymous' }}/framebook/notes/?&pick_plan=w">{% trans 'Learning Plans' %}</a>
+</span>
 
 <span class="item">
 <a href="/{{ user.username|default:'anonymous' }}/groups/">{% trans 'Learning Groups' %}</a>
 </span>
+
+<span class="item">
+<a href="/salons/">{% trans 'Learning Salons' %}</a>
+</span>
+
 <span class="item">
 <a href="/{{ user.username|default:'anonymous' }}/friends/">{% trans 'Friends' %}</a>
 </span>

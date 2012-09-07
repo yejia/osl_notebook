@@ -33,6 +33,13 @@ class AddSalonForm(ModelForm):
         exclude = ('private', 'last_modi_date', 'status', 'fee') 
         
 
+def salons(request):
+    #TODO:select current salons
+    salons = Salon.objects.all() 
+    return render_to_response('salons/index.html',{'salons':salons}, \
+                    context_instance=RequestContext(request,  {}))
+
+
 def group_salons(request, groupname):
     group = Group.objects.get(name=groupname)
     if request.method == 'POST': 
@@ -50,7 +57,7 @@ def group_salons(request, groupname):
     
     addSalonForm = AddSalonForm(initial={'creator': request.user.member.id, 'group':group.id})    
     
-    return render_to_response('salons/index.html',{'salons':salons, 'addSalonForm':addSalonForm, 
+    return render_to_response('salons/group_salons.html',{'salons':salons, 'addSalonForm':addSalonForm, 
                                                    'groupname':groupname,
                                                    'group':group}, \
                     context_instance=RequestContext(request,  {}))

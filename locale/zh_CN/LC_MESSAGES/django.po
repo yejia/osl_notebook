@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-07 17:48+0800\n"
+"POT-Creation-Date: 2012-09-07 19:23+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -538,8 +538,8 @@ msgid "Home"
 msgstr "主页"
 
 #: social/models.py:618 templates/areas/area.html:259
-#: templates/areas/index.html:37 templates/salons/index.html:40
-#: templates/salons/salon.html:186 templates/social/group/groups.html:34
+#: templates/areas/index.html:37 templates/salons/group_salons.html:38
+#: templates/salons/salon.html:188 templates/social/group/groups.html:34
 msgid "Name"
 msgstr "名字"
 
@@ -710,11 +710,11 @@ msgstr ""
 #: templates/admin/base.html:41
 #: templates/admin/auth/user/change_password.html:15
 #: templates/admin/auth/user/change_password.html:48
-#: templates/include/sites_header.html:74 templates/registration/base.html:45
+#: templates/include/sites_header.html:82 templates/registration/base.html:45
 msgid "Change password"
 msgstr "修改密码"
 
-#: templates/admin/base.html:48 templates/include/sites_header.html:75
+#: templates/admin/base.html:48 templates/include/sites_header.html:83
 #: templates/registration/base.html:52
 msgid "Log out"
 msgstr "退出"
@@ -730,7 +730,7 @@ msgstr "笔记本管理"
 #: templates/admin/change_form.html:21 templates/admin/index.html:29
 #: templates/areas/area.html:287 templates/areas/index.html:60
 #: templates/framebook/notes/notesdisplay.html:25
-#: templates/salons/index.html:199
+#: templates/salons/group_salons.html:197
 #: templates/snippetbook/notes/add_note.html:66
 #: templates/snippetbook/notes/add_note.html:68
 #: templates/tagframes/index.html:380
@@ -848,7 +848,7 @@ msgstr "用户名"
 msgid "Password:"
 msgstr "密码"
 
-#: templates/admin/login.html:26 templates/include/sites_header.html:72
+#: templates/admin/login.html:26 templates/include/sites_header.html:80
 msgid "Log in"
 msgstr ""
 
@@ -1001,8 +1001,8 @@ msgstr "浏览这个学习领域里的所有笔记"
 #: templates/include/profile_head.html:54
 #: templates/include/profile_head.html:56
 #: templates/include/profile_head.html:81
-#: templates/include/sites_header.html:40
-#: templates/include/sites_header.html:42 templates/include/supersearch.html:9
+#: templates/include/sites_header.html:48
+#: templates/include/sites_header.html:50 templates/include/supersearch.html:9
 #: templates/include/supersearch.html:30 templates/include/supersearch.html:32
 #: templates/social/profile.html:75 templates/social/wall_snippets.html:28
 #: templates/social/wall_snippets.html:30
@@ -1279,8 +1279,9 @@ msgstr "搜索网址"
 
 #: templates/bookmarkbook/notes/addNote.html:8
 #: templates/framebook/notes/notesdisplay.html:15
-#: templates/include/notes/notesdisplay.html:37 templates/salons/index.html:45
-#: templates/salons/salon.html:191 templates/scrapbook/notes/addNote.html:9
+#: templates/include/notes/notesdisplay.html:37
+#: templates/salons/group_salons.html:43 templates/salons/salon.html:193
+#: templates/scrapbook/notes/addNote.html:9
 #: templates/scrapbook/notes/notesdisplay.html:22
 #: templates/workingset/index.html:286
 msgid "Desc"
@@ -1813,7 +1814,7 @@ msgstr "一个知识包本是一组动态的基于某个搜索的知识包。"
 #: templates/framebook/folders_special_side_menu.html:5
 #: templates/include/folders_special_side_menu.html:11
 #: templates/include/friends_menu.html:5 templates/include/groups_menu.html:4
-#: templates/include/sites_header.html:67
+#: templates/include/sites_header.html:75
 #: templates/include/notes/menu/toggle_tag_menu.html:33
 msgid "Settings"
 msgstr "设置"
@@ -2136,7 +2137,7 @@ msgstr "我的朋友"
 msgid "(No Title)"
 msgstr "（无标题）"
 
-#: templates/include/groups_menu.html:4 templates/include/sites_header.html:20
+#: templates/include/groups_menu.html:4 templates/include/sites_header.html:23
 msgid "Learning Groups"
 msgstr "学习小组"
 
@@ -2301,9 +2302,11 @@ msgstr "隐藏通知"
 msgid "Pick a language"
 msgstr "选择语言"
 
-#: templates/include/profile_head.html:23 templates/salons/index.html:15
-#: templates/salons/index.html.py:21 templates/salons/index.html:210
-#: templates/salons/salon.html:119 templates/social/admin/group.html:7
+#: templates/include/profile_head.html:23
+#: templates/salons/group_salons.html:15 templates/salons/group_salons.html:21
+#: templates/salons/group_salons.html:217 templates/salons/index.html:44
+#: templates/salons/salon.html:71 templates/salons/salon.html.py:76
+#: templates/salons/salon.html:121 templates/social/admin/group.html:7
 #: templates/social/admin/group.html:13 templates/social/group/group.html:8
 #: templates/social/group/group.html:14
 msgid "Group"
@@ -2361,33 +2364,42 @@ msgstr "便条"
 msgid "Learning Areas"
 msgstr "学习领域"
 
-#: templates/include/sites_header.html:23
+#: templates/include/sites_header.html:19
+msgid "Learning Plans"
+msgstr "学习计划"
+
+#: templates/include/sites_header.html:27 templates/salons/index.html:15
+#: templates/salons/index.html.py:21
+msgid "Learning Salons"
+msgstr "学习沙龙"
+
+#: templates/include/sites_header.html:31
 msgid "Friends"
 msgstr "我的朋友"
 
-#: templates/include/sites_header.html:27
+#: templates/include/sites_header.html:35
 msgid "Suggest"
 msgstr "建议"
 
-#: templates/include/sites_header.html:33
-#: templates/include/sites_header.html:35
+#: templates/include/sites_header.html:41
+#: templates/include/sites_header.html:43
 #: templates/snippetbook/folders_special_side_menu.html:4
 #: templates/social/snippetbook/folders_special_side_menu.html:4
 msgid "Snippetbook"
 msgstr "便条本"
 
-#: templates/include/sites_header.html:47
-#: templates/include/sites_header.html:49
+#: templates/include/sites_header.html:55
+#: templates/include/sites_header.html:57
 #: templates/scrapbook/folders_special_side_menu.html:4
 #: templates/social/scrapbook/folders_special_side_menu.html:4
 msgid "Scrapbook"
 msgstr "摘录本"
 
-#: templates/include/sites_header.html:60
+#: templates/include/sites_header.html:68
 msgid "For new users"
 msgstr "新用户帮助"
 
-#: templates/include/sites_header.html:63
+#: templates/include/sites_header.html:71
 msgid "Doc"
 msgstr "文档"
 
@@ -3125,69 +3137,72 @@ msgstr "输入和上面相同的密码，用以确认。"
 msgid "register"
 msgstr "注册"
 
-#: templates/salons/index.html:15 templates/salons/index.html.py:21
+#: templates/salons/group_salons.html:15 templates/salons/group_salons.html:21
 #: templates/salons/salon.html:71
 msgid "'s Learning Salons"
 msgstr "的学习沙龙"
 
-#: templates/salons/index.html:31
+#: templates/salons/group_salons.html:31
 msgid "Add a learning salon"
 msgstr "添加一个学习沙龙"
 
-#: templates/salons/index.html:50
+#: templates/salons/group_salons.html:48
 msgid "location"
 msgstr "地点"
 
-#: templates/salons/index.html:55 templates/salons/salon.html:201
+#: templates/salons/group_salons.html:53 templates/salons/salon.html:203
 msgid "Start date"
 msgstr "开始日期"
 
-#: templates/salons/index.html:61 templates/salons/salon.html:214
+#: templates/salons/group_salons.html:59 templates/salons/salon.html:216
 msgid "Start time"
 msgstr "开始时间"
 
-#: templates/salons/index.html:119 templates/salons/salon.html:219
+#: templates/salons/group_salons.html:117 templates/salons/salon.html:221
 msgid "End date"
 msgstr "结束日期"
 
-#: templates/salons/index.html:125 templates/salons/salon.html:225
+#: templates/salons/group_salons.html:123 templates/salons/salon.html:227
 msgid "End time"
 msgstr "结束时间"
 
-#: templates/salons/index.html:184 templates/salons/salon.html:129
-#: templates/salons/salon.html.py:230
+#: templates/salons/group_salons.html:182 templates/salons/salon.html:131
+#: templates/salons/salon.html.py:232
 msgid "Max people"
 msgstr "最多容纳人数"
 
-#: templates/salons/index.html:189 templates/salons/salon.html:132
-#: templates/salons/salon.html.py:235
+#: templates/salons/group_salons.html:187 templates/salons/salon.html:134
+#: templates/salons/salon.html.py:237
 msgid "Min people"
 msgstr "最少人数"
 
-#: templates/salons/index.html:194 templates/salons/salon.html:240
+#: templates/salons/group_salons.html:192 templates/salons/salon.html:242
 msgid "poster"
 msgstr "海报"
 
-#: templates/salons/index.html:205
-msgid "All salons"
-msgstr "全部学习沙龙"
-
-#: templates/salons/index.html:211 templates/salons/salon.html:122
+#: templates/salons/group_salons.html:218 templates/salons/index.html:45
+#: templates/salons/salon.html:124
 msgid "Time"
 msgstr "时间"
 
-#: templates/salons/index.html:212 templates/salons/salon.html:125
-#: templates/salons/salon.html.py:196
+#: templates/salons/group_salons.html:219 templates/salons/index.html:46
+#: templates/salons/salon.html:127 templates/salons/salon.html.py:198
 msgid "Location"
 msgstr "地点"
 
-#: templates/salons/index.html:213 templates/salons/salon.html:140
+#: templates/salons/group_salons.html:220 templates/salons/index.html:48
+#: templates/salons/salon.html:142
 msgid " attend"
 msgstr "参加"
 
-#: templates/salons/index.html:213 templates/salons/salon.html:140
+#: templates/salons/group_salons.html:220 templates/salons/index.html:48
+#: templates/salons/salon.html:142
 msgid " interested"
 msgstr "感兴趣"
+
+#: templates/salons/index.html:47 templates/salons/salon.html:137
+msgid "Host"
+msgstr "主办"
 
 #: templates/salons/salon.html:76
 msgid "'s Learning Salon"
@@ -3211,31 +3226,27 @@ msgstr "请传播这个活动让更多的人来参加！"
 msgid " Please sign up and make this event happen!"
 msgstr "请赶快报名，让这个活动成立！"
 
-#: templates/salons/salon.html:135
-msgid "Host"
-msgstr "主办"
-
-#: templates/salons/salon.html:146 templates/salons/salon.html.py:152
+#: templates/salons/salon.html:148 templates/salons/salon.html.py:154
 msgid "I will attend"
 msgstr "我要参加"
 
-#: templates/salons/salon.html:149 templates/salons/salon.html.py:153
+#: templates/salons/salon.html:151 templates/salons/salon.html.py:155
 msgid "I am interested"
 msgstr "我感兴趣"
 
-#: templates/salons/salon.html:157
+#: templates/salons/salon.html:159
 msgid " Cancel"
 msgstr "取消"
 
-#: templates/salons/salon.html:170
+#: templates/salons/salon.html:172
 msgid "Salon Details"
 msgstr "沙龙详情"
 
-#: templates/salons/salon.html:178
+#: templates/salons/salon.html:180
 msgid "Edit the learning salon"
 msgstr "编辑该学习沙龙"
 
-#: templates/salons/salon.html:245 templates/settings/index.html:26
+#: templates/salons/salon.html:247 templates/settings/index.html:26
 #: templates/social/admin/group.html:46
 msgid "Update"
 msgstr "更新"
@@ -3921,15 +3932,14 @@ msgstr "全部工作区"
 msgid "Make Current"
 msgstr "设成当前"
 
+#~ msgid "All salons"
+#~ msgstr "全部学习沙龙"
+
 #~ msgid "Not a user yet?"
 #~ msgstr "还没有帐号？"
 
 #~ msgid "Register"
 #~ msgstr "注册"
-
-#, fuzzy
-#~ msgid "Pick Learning Plans"
-#~ msgstr "的学习领域"
 
 #~ msgid "Enter only 1 tag tree in the input box"
 #~ msgstr "在输入框里只输入一个标签树"
