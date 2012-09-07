@@ -41,11 +41,11 @@
 
  {% endif %}  
  
-
+ {% if appname == 'groups'   %} 
  <p>
         <a href="/groups/{{group.name}}/salons/">{% trans "View salons" %}</a>
 </p>
-
+ {% endif %}  
 
  <br/>
 {% endblock %}	
