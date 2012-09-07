@@ -65,7 +65,7 @@ def group_salon(request, groupname, salon_name):
         post['creator'] = salon.creator.id
         post['group'] = group.id     
         editSalonForm = AddSalonForm(post, request.FILES, instance=salon)
-        print ('form errors:'+str(editSalonForm.errors))
+        #print ('form errors:'+str(editSalonForm.errors))
         editSalonForm.save()
     
     signup = request.GET.get('signup')
