@@ -1126,6 +1126,12 @@ margin:0px;
 padding:0px;
 
 }
+.salon_img_in_list{
+height:auto;
+width:100px;
+margin:0px;
+padding:0px;
+}
 span#display_attachment{
 float:right;
 }
