@@ -34,18 +34,21 @@ class AddSalonForm(ModelForm):
         
 
 def group_salons(request, groupname):
+    group = Group.objects.get(name=groupname)
     if request.method == 'POST': 
         #TODO:check if end date is before start date, and so on
+        post = request.POST.copy()  
+        post['creator'] = request.user.member.id
+        post['group'] = group.id  
         s = Salon()
         s.fee = 0
-        addSalonForm = AddSalonForm(request.POST, request.FILES,  instance=s) 
+        addSalonForm = AddSalonForm(post, request.FILES,  instance=s) 
         log.debug('form errors:'+str(addSalonForm.errors))
         addSalonForm.save()
         
     salons = Salon.objects.filter(group__name=groupname) 
-    group = Group.objects.get(name=groupname)
-    addSalonForm = AddSalonForm(initial={'creator': request.user.member.id, 'group':group.id})
     
+    addSalonForm = AddSalonForm(initial={'creator': request.user.member.id, 'group':group.id})    
     
     return render_to_response('salons/index.html',{'salons':salons, 'addSalonForm':addSalonForm, 
                                                    'groupname':groupname,
