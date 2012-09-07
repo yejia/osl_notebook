@@ -109,6 +109,8 @@ $(document).ready(function(){
   <td>
   {% if salon.poster  %} 
   <img src="/file/{{salon.poster}}" class="salon_img"/>
+  {% else %}
+    <img src="/file/{{group.icon}}" class="salon_img"/>
 {% endif %}
   </td>
 <td>
