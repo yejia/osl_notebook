@@ -44,7 +44,7 @@ def group_salons(request, groupname):
         
     salons = Salon.objects.filter(group__name=groupname) 
     group = Group.objects.get(name=groupname)
-    addSalonForm = AddSalonForm(initial={'creator': request.user.member, 'group':group})
+    addSalonForm = AddSalonForm(initial={'creator': request.user.member.id, 'group':group.id})
     
     
     return render_to_response('salons/index.html',{'salons':salons, 'addSalonForm':addSalonForm, 
