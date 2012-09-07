@@ -18,6 +18,12 @@
                     $('.hide_more_section').show();                    
                     return false;       
         }     
+        
+        
+        function attend(){ 
+              
+        
+        }
               
 </script>
 <script type="text/javascript">
@@ -62,18 +68,18 @@ $(document).ready(function(){
 {% endblock %}
 
 {% block title %}
-{{groupname}} {% trans "'s Learning Salons" %}  : {{salon.name}}
+ {% trans "Group" %}  {{groupname}} {% trans "'s Learning Salons" %}  : {{salon.name}}
 {% endblock %}
 
 
 {% block site_branding %}
-<a href="/groups/{{groupname}}/">{{groupname}}</a> {% trans "'s Learning Salon" %}   : <b>{{salon.name}} </b>
+ {% trans "Group" %}  <a href="/groups/{{groupname}}/">{{groupname}}</a> {% trans "'s Learning Salon" %}   : <b>{{salon.name}} </b>
 
 {% endblock %}
 
 
 {% block content%}
-<div>{{salon.desc}}
+<div>
 {% comment %}
 {% if salon.private %} <span class="lock_noclick" title="{% trans 'private'  %}" style="display:{% if area.private %}inline{% else %}none{% endif %};">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;              
                                    </span> 
@@ -82,36 +88,88 @@ $(document).ready(function(){
 {% endif %}  
 {% endcomment %}
 </div>
-<br/>
+
 <a href="/groups/{{groupname}}/salons/">{% trans "View all of " %}{{groupname}} {% trans "'s Learning salons" %}</a>
 <br/><br/>
 
 
 <div salon_name="{{salon.name}}">
-
+<div class="banner">
+ {% if salon.get_signed.count < salon.min_people %} 
+ {% trans "This event is not active yet bcause the number of people signed up is still below the minimum people required to start this event." %}
+  {% if user.member.id in salon.get_signed %} 
+       {% trans "Please spread the event and have more people to sign up!" %}
+    {% else %}
+        {% trans " Please sign up and make this event happen!" %}
+   {% endif %}
+ {% endif %}
+</div>
 <div class="padded">
- <b>{% trans "Name" %}:</b> {{salon.name}}
+<table><tr>
+  <td>
+  {% if salon.poster  %} 
+  <img src="/file/{{salon.poster}}" class="salon_img"/>
+{% endif %}
+  </td>
+<td>
+ <div class="padded">
+ <span class="super_big_font"> {{salon.name}}</span>
+  </div>
+   <div class="padded">
+ <b>{% trans "Group" %}:</b>  {{groupname}}
  </div>
 <div class="padded">
- <b>{% trans "Desc" %}:</b>  {{salon.desc}}
+ <b>{% trans "Time" %}:</b>  {{salon.start_date}} {{salon.start_time}} - {{salon.end_time}}
  </div>
  <div class="padded">
  <b>{% trans "Location" %}:</b>  {{salon.location}}
  </div>
- <div class="padded">
- <b>{% trans "Start date" %}:</b>  {{salon.start_date}}
- </div>
+
  <div class="padded">
  <b>{% trans "Max people" %}:</b>  {{salon.max_people}}
  </div>
  <div class="padded">
  <b>{% trans "Min people" %}:</b>  {{salon.min_people}}
  </div>
- <div class="padded">
- <b>{% trans "poster" %}:</b>  {{salon.poster}}
+  <div class="padded">
+ <b>{% trans "Host" %}:</b>  <a href="/social/{{salon.creator}}/">{{salon.creator}}</a>
+ </div>
+ 
+ 
+  <div class="padded">
+ <b>{{salon.get_signed.count}}</b>{% trans " attend" %}  <b>{{salon.get_maybe.count}}</b>{% trans " interested" %}
+ </div>
+ 
+ 
+   <div class="padded">
+ {% if user.member.id in salon.get_signed %} 
+ {% trans 'I will attend' %}
+ {% endif %}
+  {% if user.member.id in salon.get_maybe %} 
+{% trans 'I am interested' %}
+ {% endif %}
+{% if user.member.id not in salon.get_signed  and user.member.id not in salon.get_maybe %} 
+<button class="big clickable" id="attend"  onclick="javascript: window.location.replace('?signup=y') ; "/>{% trans 'I will attend' %}</button>
+<button class="big clickable" id="attend"  onclick="javascript: window.location.replace('?maybe=y')  ; "/>{% trans 'I am interested' %}</button>
+{% endif %}
+
+{% if user.member.id in salon.get_signed or user.member.id in salon.get_maybe %} 
+    &nbsp;&nbsp;&nbsp;<a href="?cancel=y">{% trans " Cancel" %}</a>
+{% endif %}  
+ </div>
+ 
+  </td>
+
+</tr></table>
+ </div>
+ 
+
+ 
+
+<div class="padded">
+ <span class="big_font">{% trans "Salon Details" %}:</span> <br/> <br/>  {{salon.desc}}
  </div>
 
-  </div>
 
 
 <br/>
@@ -143,7 +201,7 @@ $(document).ready(function(){
                {% trans "Start date" %} <span class="required">*</span>: 
                 {{ editSalonForm.start_date.errors }}
               
-                <input id="id_start_date" type="text" class="datepicker" name="start_date" value="{{editSalonForm.start_date.value}}" size="20" />
+                <input id="id_start_date" type="text" class="datepicker" name="start_date" value="{{editSalonForm.start_date.value|date:"m/d/Y"}}" size="20" />
                 <!--
                     <div class="input-append bootstrap-timepicker-component">
     <input type="text" class="timepicker-default input-small">
@@ -152,6 +210,22 @@ $(document).ready(function(){
     </span>
     </div>-->
     </p>
+      <p>   
+               {% trans "Start time" %} <span class="required">*</span>: 
+                {{ editSalonForm.start_time.errors }}
+                {{editSalonForm.start_time}}
+    </p>
+ <p>   
+               {% trans "End date" %} <span class="required">*</span>: 
+                {{ editSalonForm.end_date.errors }}              
+                <input id="id_end_date" type="text" class="datepicker" name="end_date" value="{{editSalonForm.end_date.value|date:"m/d/Y"}}" size="20" />
+               
+    </p>  
+<p>   
+               {% trans "End time" %} <span class="required">*</span>: 
+                {{ editSalonForm.end_time.errors }}
+                {{editSalonForm.end_time}}
+    </p>    
     <p>   
                {% trans "Max people" %}: 
                 {{ editSalonForm.max_people.errors }}
@@ -168,7 +242,7 @@ $(document).ready(function(){
                {{editSalonForm.poster}}
     </p>
     
-<input type="submit" value="{% trans 'Add' %}"/>
+<input type="submit" value="{% trans 'Update' %}"/>
 </form> 
 </div>
 {% endif %}

@@ -30,7 +30,10 @@ class Salon(models.Model):
     location = models.TextField(max_length=2000)
     max_people = models.IntegerField(default=0, blank=True)
     min_people = models.IntegerField(default=0, blank=True)
-    start_date = models.DateTimeField('Starting date', auto_now_add=False)
+    start_date = models.DateField('Starting date', auto_now_add=False)
+    start_time = models.TimeField('Starting time', auto_now_add=False)
+    end_date = models.DateField('Ending date', auto_now_add=False)
+    end_time = models.TimeField('Ending time', auto_now_add=False)
     init_date = models.DateTimeField('date created', auto_now_add=True)
     last_modi_date = models.DateTimeField('date last modified', auto_now=True)
     status = models.CharField(max_length=1, choices=STATUS_CHOICES) 
@@ -47,7 +50,28 @@ class Salon(models.Model):
     def __unicode__(self):
         return self.name
         
+    def get_signed(self):
+        return Salon_Signup.objects.filter(salon=self, status='y').values_list('member', flat=True)
 
+    def get_maybe(self):
+        return Salon_Signup.objects.filter(salon=self, status='m').values_list('member', flat=True)
+    
+    def signup(self, username):
+        m = Member.objects.get(username=username)
+        if m:
+            Salon_Signup.objects.get_or_create(member=m, salon=self, status='y')
+        
+    def maybe(self, username):
+        m = Member.objects.get(username=username)
+        if m:
+            Salon_Signup.objects.get_or_create(member=m, salon=self, status='m')
+            
+            
+    def cancel(self, username):
+        m = Member.objects.get(username=username)
+        s = Salon_Signup.objects.get(member=m, salon=self)
+        if s:
+            s.delete()          
 
 
 
@@ -59,8 +83,17 @@ class Salon_Signup(models.Model):
     )  
     #member has to be group member first
     member = models.ForeignKey(Member)
+    salon = models.ForeignKey(Salon)
     status = models.CharField(max_length=1, choices=STATUS_CHOICES)
     init_date = models.DateTimeField('date created', auto_now_add=True)
     last_modi_date = models.DateTimeField('date last modified', auto_now=True) 
+    
+    
+    class Meta:
+        ordering = ['salon', 'member']
+        unique_together = (('salon', 'member'),)
+        
+    def __unicode__(self):
+        return self.member.username +' '+ self.salon.name + ' '+self.status 
     
     

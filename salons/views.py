@@ -18,8 +18,9 @@ from django.core.exceptions import ObjectDoesNotExist, FieldError
 
 
 from notebook.salons.models import *
+from notebook.notes.views import __get_pre_url, getlogger
 
-
+log = getlogger('salons.views')  
 
 
     
@@ -34,13 +35,14 @@ class AddSalonForm(ModelForm):
 
 def group_salons(request, groupname):
     if request.method == 'POST': 
+        #TODO:check if end date is before start date, and so on
         s = Salon()
         s.fee = 0
-        addSalonForm = AddSalonForm(request.POST, instance=s) 
-        print 'form errors:', str(addSalonForm.errors)
+        addSalonForm = AddSalonForm(request.POST, request.FILES,  instance=s) 
+        log.debug('form errors:'+str(addSalonForm.errors))
         addSalonForm.save()
         
-    salons = Salon.objects.all() 
+    salons = Salon.objects.filter(group__name=groupname) 
     group = Group.objects.get(name=groupname)
     addSalonForm = AddSalonForm(initial={'creator': request.user.member, 'group':group})
     
@@ -52,11 +54,29 @@ def group_salons(request, groupname):
     
     
     
-def group_salon(request, groupname, salon_name):   
-     salon = Salon.objects.get(group__name=groupname, name=salon_name) 
-     editSalonForm = AddSalonForm(instance=salon)
-     group = Group.objects.get(name=groupname)
-     return render_to_response('salons/salon.html',{'salon':salon, 'editSalonForm':editSalonForm, 
+def group_salon(request, groupname, salon_name):  
+    salon = Salon.objects.get(group__name=groupname, name=salon_name) 
+    group = Group.objects.get(name=groupname)
+    if request.method == 'POST': 
+        post = request.POST.copy()  
+        post['creator'] = salon.creator.id
+        post['group'] = group.id     
+        editSalonForm = AddSalonForm(post, request.FILES, instance=salon)
+        print ('form errors:'+str(editSalonForm.errors))
+        editSalonForm.save()
+    
+    signup = request.GET.get('signup')
+    if signup:
+        salon.signup(request.user.username)
+    maybe = request.GET.get('maybe')
+    if maybe:
+        salon.maybe(request.user.username)  
+    cancel = request.GET.get('cancel')
+    if cancel:
+        salon.cancel(request.user.username)        
+    editSalonForm = AddSalonForm(instance=salon)
+    
+    return render_to_response('salons/salon.html',{'salon':salon, 'editSalonForm':editSalonForm, 
                                                    'groupname':groupname,
                                                    'group':group}, \
                     context_instance=RequestContext(request,  {}))

@@ -47,6 +47,9 @@ font-size: 9px;
 .big_font{
 font-size: 15px;
 }
+.super_big_font{
+font-size: 25px;
+}
 #content-main{
 border-right:1px dotted #696969;
 border-left:1px dotted #696969;
@@ -394,6 +397,10 @@ margin-bottom:12px;
 
 .required{
 color: red;
+}
+.banner{
+color: red;
+font-size:15px;
 }
 
 .note_display{
@@ -1112,7 +1119,13 @@ margin:20px;
 padding:8px;
 border:1px dashed green
 }
+.salon_img{
+height:auto;
+width:180px;
+margin:0px;
+padding:0px;
 
+}
 span#display_attachment{
 float:right;
 }

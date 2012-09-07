@@ -148,7 +148,7 @@ def __create_tag_frame(tag_name, username):
             if not TF.objects.filter(name=tag_name).exists():
                 t = Tag.objects.using(username).get(name=tag_name)
                 cursor = connections[username].cursor()       
-                print 'The following query will be executed:', 'insert into tags_tag_frame (tag_ptr_id, current) values('+str(t.id)+',FALSE)'
+                #print 'The following query will be executed:', 'insert into tags_tag_frame (tag_ptr_id, current) values('+str(t.id)+',FALSE)'
                 #sqlite has no TRUE/FALSE as its boolean value, it use 0, 1. postgresql accepts both.          
                 cursor.execute("insert into tags_tag_frame (tag_ptr_id, current) values("+str(t.id)+", '0')")                
                 #it seems that unlike raw sql delete, even without using=username, the transaction is still commited
