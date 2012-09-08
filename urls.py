@@ -212,7 +212,7 @@ urlpatterns = patterns('',
 
     (r'registre/$', 'notebook.notes.views.register_user'),
 
-    (r'reg/$', 'notebook.notes.views.register'),
+    (r'reg/$', 'notebook.notes.views.user_register'),
     (r'activate/$', 'notebook.notes.views.activate'),
 
 
