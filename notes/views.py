@@ -11,15 +11,17 @@ from django.utils import simplejson
 from django.utils.http import urlencode
 from django.utils.translation import ugettext as _ , activate
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate, logout, REDIRECT_FIELD_NAME, login as auth_login
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.sites.models import Site
 from django.template import RequestContext
 from django.core.exceptions import ObjectDoesNotExist, FieldError
 from django.core.mail import send_mass_mail, send_mail
-
+from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.cache import never_cache
+from django.contrib.sites.models import get_current_site
 
 
 
@@ -27,13 +29,14 @@ from notebook.notes.models import *
 from notebook.snippets.models import Snippet
 from notebook.bookmarks.models import Bookmark
 from notebook.scraps.models import Scrap
-from notebook.social.models import Member, Friend_Rel, Activation
+from notebook.social.models import Member, Friend_Rel, Activation, Sys_Setting
 from notebook.notes.constants import *
 from notebook.notes.util import *
 
 
 import notebook
 
+import urlparse
 import datetime
 from datetime import date
 import re
@@ -139,6 +142,62 @@ class ProfileForm(ModelForm):
 #        model = Member
 #        fields = ('username')  
                        
+
+
+
+
+@csrf_protect
+@never_cache
+def login(request, template_name='registration/login.html',
+          redirect_field_name=REDIRECT_FIELD_NAME,
+          authentication_form=AuthenticationForm,
+          current_app=None, extra_context=None):
+    """
+    Displays the login form and handles the login action.
+    """
+    redirect_to = request.REQUEST.get(redirect_field_name, '')
+
+    if request.method == "POST":
+        form = authentication_form(data=request.POST)
+        if form.is_valid():
+            netloc = urlparse.urlparse(redirect_to)[1]
+
+            # Use default setting if redirect_to is empty
+            if not redirect_to:
+                pass
+            #below commented out by yliu. Is it useful in anyway?
+            #    redirect_to = settings.LOGIN_REDIRECT_URL
+
+            # Security check -- don't allow redirection to a different
+            # host.
+            elif netloc and netloc != request.get_host():
+                redirect_to = settings.LOGIN_REDIRECT_URL
+
+            # Okay, security checks complete. Log the user in.
+            auth_login(request, form.get_user())
+
+            if request.session.test_cookie_worked():
+                request.session.delete_test_cookie()
+
+            return HttpResponseRedirect(redirect_to)
+    else:
+        form = authentication_form(request)
+
+    request.session.set_test_cookie()
+
+    current_site = get_current_site(request)
+
+    context = {
+        'form': form,
+        redirect_field_name: redirect_to,
+        'site': current_site,
+        'site_name': current_site.name,
+    }
+    context.update(extra_context or {})
+    return render_to_response(template_name, context,
+                              context_instance=RequestContext(request, {'user_reg_setting': Sys_Setting.objects.get(member__username='leon').user_reg}, current_app=current_app))
+    
+    
     
 def logout_view(request): 
     logout(request)
@@ -164,6 +223,7 @@ def __get_home(request):
 
 
 def login_user(request): 
+    print 'login_user called'
     username = request.POST['username']
     password = request.POST['password']
     log.debug('username:'+username)
@@ -262,62 +322,67 @@ def invite(request):
 #remove the line below to enable registration by public
 #@login_required
 def user_register(request): 
-    if request.method == 'POST':          
-        log.info('Registering a new user...')       
-        username = request.POST.get('username')
-        password1 = request.POST.get('password1')
-        password2 = request.POST.get('password2')
-        email = request.POST.get('email')
-        
-        if not email:
-            messages.error(request, _("No email entered!"))                 
-            return HttpResponseRedirect('/reg/')  
-        
-        #f = UserCreationForm(request.POST)
-#        if f.errors:
-#            log.debug('Registrtion form errors:'+str(f.errors))
-#            return render_to_response('registration/register.html', {'form':f}) 
-        #f.save()
-        #TODO: might subclass UserCreationForm to save to member 
-        
-        #TODO: validate email
-        
-        if User.objects.filter(username=username).exists():
-            messages.error(request, _("Username is already used by someone else. Please pick another one.")) 
-            log.info('Registration failed. Username is already used by someone else.')  
-            return HttpResponseRedirect('/reg/') 
-        #TODO:remove hardcoding
-        if email !='yuanliangliu@gmail.com' and User.objects.filter(email=email).exists(): 
-            messages.error(request, _("Email is already used by someone else. Please pick another one."))             
-            log.info('Registration failed. Email is already used by someone else.')  
-            return HttpResponseRedirect('/reg/')          
-        if password1 == password2:        
-            m, created = create_member(username, email, password1)
-            if created:
-                log.info('A new user is created!')  
-                create_db(username)
-                log.info('DB is created for the new user!') 
-                m.is_active = False
-                m.save()
-                site_name = 'http://www.91biji.com/'  
-                activationID = __getNewID()
-                #activation_list = request.session.get('activation',[])
-                activation = Activation(username=m.username, activation_id=activationID)
-                activation.save()
-                #activation_list.append([m.username,activationID])  
-                #request.session['activation'] = activation_list           
-                url = site_name+'activate/?username='+m.username+'&activationID='+activationID
-                content = _('You have successfully registered with ')+site_name + '\n'+_('You can activiate your account by clicking or copying the url below to your browser address bar:')+'\n'+url 
-                send_mail(_('Please activate your account'), content.encode('utf-8'), u'sys@opensourcelearning.org', [m.email, u'sys@opensourcelearning.org'])
-                
-                messages.success(request, _("An account is created for you! You can go to your email to activate your account."))  
-                return HttpResponseRedirect('/login/') 
-        messages.error(request, _("Passwords don't match!"))
-        return HttpResponseRedirect('/reg/')        
-    else:     
-        #registerForm = UserCreationForm()
-        #registerForm = RegistrationForm()
-        return render_to_response('registration/reg.html', {}, context_instance=RequestContext(request))             
+    user_reg_setting = Sys_Setting.objects.get(member__username='leon')
+    if user_reg_setting and user_reg_setting == 'n':
+        pass
+    else:
+        if request.method == 'POST':          
+            log.info('Registering a new user...')       
+            username = request.POST.get('username')
+            password1 = request.POST.get('password1')
+            password2 = request.POST.get('password2')
+            email = request.POST.get('email')
+            
+            if not email:
+                messages.error(request, _("No email entered!"))                 
+                return HttpResponseRedirect('/reg/')  
+            
+            #f = UserCreationForm(request.POST)
+    #        if f.errors:
+    #            log.debug('Registrtion form errors:'+str(f.errors))
+    #            return render_to_response('registration/register.html', {'form':f}) 
+            #f.save()
+            #TODO: might subclass UserCreationForm to save to member 
+            
+            #TODO: validate email
+            
+            if User.objects.filter(username=username).exists():
+                messages.error(request, _("Username is already used by someone else. Please pick another one.")) 
+                log.info('Registration failed. Username is already used by someone else.')  
+                return HttpResponseRedirect('/reg/') 
+            #TODO:remove hardcoding
+            if email !='yuanliangliu@gmail.com' and User.objects.filter(email=email).exists(): 
+                messages.error(request, _("Email is already used by someone else. Please pick another one."))             
+                log.info('Registration failed. Email is already used by someone else.')  
+                return HttpResponseRedirect('/reg/')          
+            if password1 == password2:        
+                m, created = create_member(username, email, password1)
+                if created:
+                    log.info('A new user is created!')  
+                    create_db(username)
+                    log.info('DB is created for the new user!') 
+                    m.is_active = False
+                    m.save()
+                    site_name = 'http://www.91biji.com/'  
+                    activationID = __getNewID()
+                    #activation_list = request.session.get('activation',[])
+                    activation = Activation(username=m.username, activation_id=activationID)
+                    activation.save()
+                    #activation_list.append([m.username,activationID])  
+                    #request.session['activation'] = activation_list           
+                    url = site_name+'activate/?username='+m.username+'&activationID='+activationID
+                    content = _('You have successfully registered with ')+site_name + '\n'+_('You can activiate your account by clicking or copying the url below to your browser address bar:')+'\n'+url 
+                    send_mail(_('Please activate your account'), content.encode('utf-8'), u'sys@opensourcelearning.org', [m.email, u'sys@opensourcelearning.org'])
+                    
+                    messages.success(request, _("An account is created for you! You can go to your email to activate your account."))  
+                    return HttpResponseRedirect('/login/') 
+            messages.error(request, _("Passwords don't match!"))
+            return HttpResponseRedirect('/reg/')        
+        else:     
+            #registerForm = UserCreationForm()
+            #registerForm = RegistrationForm()
+            return render_to_response('registration/reg.html', {}, context_instance=RequestContext(request))             
+    
     
     
 def activate(request): 
@@ -348,6 +413,16 @@ def forget_passwd(request):
     
 
 
+@user_passes_test(lambda u: u.username=='leon')
+@login_required
+def super_admin(request):    
+    userreg = request.GET.get('userreg')
+    if userreg in ['y','n']:
+        sys_setting, created = Sys_Setting.objects.get_or_create(member=request.user.member)
+        sys_setting.user_reg = userreg
+        sys_setting.save()
+    
+    return HttpResponseRedirect(__get_pre_url(request))  
 
 
 @login_required

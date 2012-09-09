@@ -200,7 +200,8 @@ urlpatterns = patterns('',
     (r'settings/bindCheck$', 'notebook.notes.views.bind_check'),
     (r'settings/bind/removeAuth$', 'notebook.notes.views.bind_remove_auth'),
 
-    (r'login/$', 'django.contrib.auth.views.login'),
+    #(r'login/$', 'django.contrib.auth.views.login'),
+    (r'login/$', 'notebook.notes.views.login'),
     (r'^loginUser/$', 'notebook.notes.views.login_user'), 
     (r'^logout/$', 'notebook.notes.views.logout_view'),
     (r'^passwordChange/$', 'django.contrib.auth.views.password_change'),
@@ -214,6 +215,8 @@ urlpatterns = patterns('',
 
     (r'reg/$', 'notebook.notes.views.user_register'),
     (r'activate/$', 'notebook.notes.views.activate'),
+    (r'supera/$', 'notebook.notes.views.super_admin'),
+
 
 
     (r'^setLang/$', 'notebook.notes.views.set_language'),

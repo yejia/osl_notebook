@@ -31,8 +31,10 @@ class Activation(models.Model):
     #TODO: what is the limit of user username?
     username = models.CharField(max_length=100) 
     activation_id = models.CharField(max_length=100) 
+  
     
 
+    
 
 class Member(User):
     ROLE_CHOICES = (        
@@ -155,6 +157,17 @@ class Member(User):
      
 #    def __unicode__(self): 
 #        return self.member.username + ugettext_lazy('  settings')   
+
+
+
+class Sys_Setting(models.Model):
+    USER_REG_CHOICES = (        
+        ('y', 'yes'),
+        ('n', 'no'),        
+    ) 
+    user_reg =  models.CharField(max_length=1, choices=USER_REG_CHOICES, blank=True)
+    member = models.ForeignKey(Member)
+    
        
 
 class Social_Tag(models.Model):    
