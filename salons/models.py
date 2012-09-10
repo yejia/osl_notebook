@@ -40,6 +40,9 @@ class Salon(models.Model):
     group_only =  models.BooleanField(default=True)
     fee =  models.IntegerField(default=0, blank=True)
     poster = models.ImageField(upload_to=get_storage_loc,blank=True, storage=fs, verbose_name=ugettext_lazy('Poster')) 
+    #tag_frame = models.ForeignKey(Tag_Frame, blank=True)
+    #note_frame = models.ForeignKey(Frame, blank=True)
+    #area = models.ForeignKey(Area, blank=True)
     #TODO:tags?
     #tags = 
     
