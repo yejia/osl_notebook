@@ -202,8 +202,7 @@ $(document).ready(function(){
     <p>   
                {% trans "Start date" %} <span class="required">*</span>: 
                 {{ editSalonForm.start_date.errors }}
-            editSalonForm.start_date.value  {{editSalonForm.start_date.value}}
-            editSalonForm.start_date  {{editSalonForm.start_date}}
+              
                 <input id="id_start_date" type="text" class="datepicker" name="start_date" value="{{editSalonForm.start_date.value|date:"m/d/Y"}}" size="20" />
                 <!--
                     <div class="input-append bootstrap-timepicker-component">
