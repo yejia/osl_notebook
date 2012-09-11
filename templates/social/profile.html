@@ -85,7 +85,7 @@
 {% for area in areas %}	
 {% if  not area.private %}
 <li>
-<a href="/{{profile_username}}/areas/area/{{area.name}}/">{{area.name}}</a>
+<a href="/{{profile_username}}/areas/area/{{area.id}}/">{{area.name}}</a>
 </li>
 {% endif %}
 {% endfor %}
