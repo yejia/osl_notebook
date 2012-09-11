@@ -169,7 +169,7 @@ $(document).ready(function(){
  
 
 <div class="padded">
- <span class="big_font">{% trans "Salon Details" %}:</span> <br/> <br/>  {{salon.desc|urlize}}
+ <span class="big_font">{% trans "Salon Details" %}:</span> <br/> <br/>  {% autoescape on %}{{salon.desc|urlize}}{% endautoescape %}
  </div>
 
 

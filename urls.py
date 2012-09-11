@@ -149,7 +149,7 @@ urlpatterns = patterns('',
     (r'^(?P<username>[^/]+)/tagframes/tagframe/(?P<tagframe_name>[^/]+)/pushTagFrame2Groups/$','notebook.tags.views.push_tag_frame_2_groups'),
 
     (r'^(?P<username>[^/]+)/areas/$', 'notebook.areas.views.index'),
-    (r'^(?P<username>[^/]+)/areas/area/(?P<areaname>[^/]+)/$', 'notebook.areas.views.area'),
+    (r'^(?P<username>[^/]+)/areas/area/(?P<area_id>[^/]+)/$', 'notebook.areas.views.area'),
     (r'^(?P<username>[^/]+)/areas/area/(?P<areaname>[^/]+)/(?P<bookname>[^/]+)/notes/$', 'notebook.areas.views.area_notes'),
     (r'^(?P<username>[^/]+)/areas/area/(?P<areaname>[^/]+)/(?P<bookname>[^/]+)/getAreaTags/$', 'notebook.areas.views.get_area_tags'),
     (r'^(?P<username>[^/]+)/areas/area/(?P<areaname>[^/]+)/addGroups2Area/$', 'notebook.areas.views.add_groups_2_area'),

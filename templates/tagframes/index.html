@@ -220,7 +220,7 @@
            }else{
                 tag_frame_title.text(tag_name);
                 href =  tag_frame_title.attr('href')
-                 tag_frame_title.attr('href', href+tag_name)
+                 tag_frame_title.attr('href', '/{{profile_username}}/tagframes/tagframe/'+tag_name)
                 $('div#tag_frame_block').show(300);
             }
              
@@ -334,7 +334,7 @@
 {% block content%}
 
 <div id="tag_frame_block">
-<div>{% trans "Tag Tree" %}: <span id="tag_frame_title"><a href="/{{profile_username}}/tagframes/tagframe/"></a></span></div>
+<div>{% trans "Tag Tree" %}: <span id="tag_frame_title"><a href=""></a></span></div>
 <div id="import_tag_tree"><a href="javascript:void();">{% trans "Import this tag tree" %}</a></div>
 <div>{% trans "View this tag tree as a working set" %} </div>
 <div>{% trans "View this tag tree like in Trello" %} </div>

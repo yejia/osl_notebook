@@ -33,7 +33,7 @@
  
  {% if appname == 'groups'   and area  %} 
  <p>
-     {% trans "View the learning area of this group" %}: <a href="/{{group.creator}}/areas/area/{{area.name}}/">{{area.name}}</a>
+     {% trans "View the learning area of this group" %}: <a href="/{{group.creator}}/areas/area/{{area.id}}/">{{area.name}}</a>
  </p>  
  <p>
      {% trans "View tag trees of this group" %}: <a href="/groups/{{group.name}}/tagframes/">{% trans "Tag trees" %}</a>. {% trans "You can push your relevant tag trees to this group." %}

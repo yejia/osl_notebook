@@ -99,7 +99,8 @@ def index(request, username):
     
     
 
-def area(request, username, areaname):  
+def area(request, username, area_id):  
+    #print 'areaname', areaname
     if request.method == 'POST': 
         #below copied from index. merge. TODO:
         post = request.POST.copy()
@@ -120,7 +121,7 @@ def area(request, username, areaname):
         a.save() 
            
     
-    area = Area.objects.using(username).get(name=areaname)
+    area = Area.objects.using(username).get(id=area_id)
        
     area.owner_name = username
     area.root_tag_frame.owner_name = username
