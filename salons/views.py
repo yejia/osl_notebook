@@ -69,6 +69,7 @@ def group_salon_signup(request, groupname, salon_name):
     salon = Salon.objects.get(group__name=groupname, name=salon_name) 
     group = Group.objects.get(name=groupname)
     signup = request.GET.get('signup')
+    group.members.add(request.user.member)
     if signup == 'y':          
         salon.signup(request.user.username)    
     elif signup == 'm': 
@@ -96,6 +97,6 @@ def group_salon(request, groupname, salon_name):
     editSalonForm = AddSalonForm(instance=salon)
     
     return render_to_response('salons/salon.html',{'salon':salon, 'editSalonForm':editSalonForm, 
-                                                   'groupname':groupname,
+                                                   'groupname':groupname, 'is_in_group': request.user.member.is_in_group(groupname),
                                                    'group':group}, \
                     context_instance=RequestContext(request,  {}))

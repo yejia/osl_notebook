@@ -20,9 +20,17 @@
         }     
         
         
-        function attend(){ 
-              
-        
+        function attend(signup){ 
+          {% if not is_in_group %}
+           var r=confirm("{% trans 'By signing up, you will first be added to the group ' %}{{groupname}}");
+            if (r==false){    
+            }else{    
+                window.location.replace( window.location.href+'signup/?signup='+signup) ;
+           }
+            {% else %}
+                window.location.replace( window.location.href+'signup/?signup='+signup) ;
+            {% endif %}
+            
         }
               
 </script>
@@ -151,8 +159,8 @@ $(document).ready(function(){
 {% trans 'I am interested' %}
  {% endif %}
 {% if user.member.id not in salon.get_signed  and user.member.id not in salon.get_maybe %} 
-<button class="big clickable" id="attend"  onclick="javascript: window.location.replace( window.location.href+'signup/?signup=y') ; "/>{% trans 'I will attend' %}</button>
-<button class="big clickable" id="attend"  onclick="javascript: window.location.replace(window.location.href+'signup/?signup=m')  ; "/>{% trans 'I am interested' %}</button>
+<button class="big clickable" id="attend"  onclick="javascript:attend('y');"/>{% trans 'I will attend' %}</button>
+<button class="big clickable" id="attend"  onclick="javascript: attend('m')  ; "/>{% trans 'I am interested' %}</button>
 {% endif %}
 
 {% if user.member.id in salon.get_signed or user.member.id in salon.get_maybe %} 
