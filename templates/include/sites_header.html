@@ -64,6 +64,7 @@
 <span class="item">
     <strong><a href="/social/{{ user.username }}/">{{ user.username }}</a></strong> <!--TODO:user-->
 </span>
+{% if not user.is_anonymous %}
 <span class="item">
     <a href="/forNewUsers/">{% trans 'For new users' %}</a>
 </span>
@@ -71,10 +72,9 @@
     <a href="/doc/">{% trans 'Doc' %}</a>
 </span>
 <span class="item">
-{% if not user.is_anonymous %}
-    <a href="/settings/">{% trans 'Settings' %}</a>
-{% endif %}       
+    <a href="/settings/">{% trans 'Settings' %}</a> 
 </span>
+{% endif %}      
 <span class="item">
 {% if user.is_anonymous %}
     <a href="/login/">{% trans "Log in" %}</a>
