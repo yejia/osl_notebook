@@ -50,7 +50,8 @@ class AddAreaForm(ModelForm):
 
 
 def index(request, username): 
-    #print  'username',username
+    if username == 'anonymous':
+        return HttpResponseRedirect('/login/')    
     if request.method == 'POST': 
         post = request.POST.copy()
         #print 'post', post  
