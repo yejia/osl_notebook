@@ -95,8 +95,12 @@ def group_salon(request, groupname, salon_name):
     
          
     editSalonForm = AddSalonForm(instance=salon)
+    if request.user.is_anonymous():
+        is_in_group = False
+    else:
+        is_in_group =  request.user.member.is_in_group(groupname) 
     
     return render_to_response('salons/salon.html',{'salon':salon, 'editSalonForm':editSalonForm, 
-                                                   'groupname':groupname, 'is_in_group': request.user.member.is_in_group(groupname),
+                                                   'groupname':groupname, 'is_in_group': is_in_group,
                                                    'group':group}, \
                     context_instance=RequestContext(request,  {}))
