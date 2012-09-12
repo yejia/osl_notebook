@@ -63,27 +63,36 @@ def group_salons(request, groupname):
                     context_instance=RequestContext(request,  {}))
     
     
+
+@login_required
+def group_salon_signup(request, groupname, salon_name): 
+    salon = Salon.objects.get(group__name=groupname, name=salon_name) 
+    group = Group.objects.get(name=groupname)
+    signup = request.GET.get('signup')
+    if signup == 'y':          
+        salon.signup(request.user.username)    
+    elif signup == 'm': 
+        salon.maybe(request.user.username)  
+    else:    
+        salon.cancel(request.user.username)   
+    
+    return HttpResponseRedirect('/groups/'+groupname+'/salons/salon/'+salon_name+'/')  
+    
     
 def group_salon(request, groupname, salon_name):  
     salon = Salon.objects.get(group__name=groupname, name=salon_name) 
     group = Group.objects.get(name=groupname)
     if request.method == 'POST': 
-        post = request.POST.copy()  
-        post['creator'] = salon.creator.id
-        post['group'] = group.id     
-        editSalonForm = AddSalonForm(post, request.FILES, instance=salon)
-        #print ('form errors:'+str(editSalonForm.errors))
-        editSalonForm.save()
+        #check if the user has the permission to update this 
+        if request.user.username == salon.creator.username: 
+            post = request.POST.copy()  
+            post['creator'] = salon.creator.id
+            post['group'] = group.id     
+            editSalonForm = AddSalonForm(post, request.FILES, instance=salon)
+            #print ('form errors:'+str(editSalonForm.errors))
+            editSalonForm.save()
     
-    signup = request.GET.get('signup')
-    if signup:
-        salon.signup(request.user.username)
-    maybe = request.GET.get('maybe')
-    if maybe:
-        salon.maybe(request.user.username)  
-    cancel = request.GET.get('cancel')
-    if cancel:
-        salon.cancel(request.user.username)        
+         
     editSalonForm = AddSalonForm(instance=salon)
     
     return render_to_response('salons/salon.html',{'salon':salon, 'editSalonForm':editSalonForm, 

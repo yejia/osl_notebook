@@ -223,7 +223,7 @@ def __get_home(request):
 
 
 def login_user(request): 
-    print 'login_user called'
+    #print 'login_user called'
     username = request.POST['username']
     password = request.POST['password']
     log.debug('username:'+username)
@@ -425,8 +425,10 @@ def super_admin(request):
     return HttpResponseRedirect(__get_pre_url(request))  
 
 
-@login_required
+#for anonymous users, direct to salons page. For members, get membre's preferred home
 def root(request):    
+    if request.user.is_anonymous():        
+        return HttpResponseRedirect('/salons/') 
     user = request.user
     username = user.username
     return HttpResponseRedirect(__get_home(request)) 

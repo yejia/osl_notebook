@@ -151,12 +151,12 @@ $(document).ready(function(){
 {% trans 'I am interested' %}
  {% endif %}
 {% if user.member.id not in salon.get_signed  and user.member.id not in salon.get_maybe %} 
-<button class="big clickable" id="attend"  onclick="javascript: window.location.replace('?signup=y') ; "/>{% trans 'I will attend' %}</button>
-<button class="big clickable" id="attend"  onclick="javascript: window.location.replace('?maybe=y')  ; "/>{% trans 'I am interested' %}</button>
+<button class="big clickable" id="attend"  onclick="javascript: window.location.replace( window.location.href+'signup/?signup=y') ; "/>{% trans 'I will attend' %}</button>
+<button class="big clickable" id="attend"  onclick="javascript: window.location.replace(window.location.href+'signup/?signup=m')  ; "/>{% trans 'I am interested' %}</button>
 {% endif %}
 
 {% if user.member.id in salon.get_signed or user.member.id in salon.get_maybe %} 
-    &nbsp;&nbsp;&nbsp;<a href="?cancel=y">{% trans " Cancel" %}</a>
+    &nbsp;&nbsp;&nbsp;<a href="javascript: window.location.replace(window.location.href+'signup/?signup=n')">{% trans " Cancel" %}</a>
 {% endif %}  
  </div>
  

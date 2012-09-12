@@ -55,6 +55,7 @@ urlpatterns = patterns('',
     (r'^groups/(?P<groupname>[^/]+)/tagframes/$', 'notebook.social.views.group_tagframes'),
     (r'^groups/(?P<groupname>[^/]+)/salons/$', 'notebook.salons.views.group_salons'),
     (r'^groups/(?P<groupname>[^/]+)/salons/salon/(?P<salon_name>[^/]+)/$', 'notebook.salons.views.group_salon'),
+    (r'^groups/(?P<groupname>[^/]+)/salons/salon/(?P<salon_name>[^/]+)/signup/$', 'notebook.salons.views.group_salon_signup'),
 
     (r'^groups/(?P<groupname>[^/]+)/joinGroup/$', 'notebook.social.views.join_group'),
     (r'^groups/(?P<groupname>[^/]+)/admin/$', 'notebook.social.views.group_admin'),
