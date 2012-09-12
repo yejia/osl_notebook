@@ -35,7 +35,7 @@ class AddSalonForm(ModelForm):
 
 def salons(request):
     #TODO:select current salons
-    salons = Salon.objects.all() 
+    salons = Salon.objects.filter(private=False).order_by('start_date', 'start_time')
     return render_to_response('salons/index.html',{'salons':salons}, \
                     context_instance=RequestContext(request,  {}))
 
