@@ -23,7 +23,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.cache import never_cache
 from django.contrib.sites.models import get_current_site
 
-
+from django.views.decorators.cache import cache_page
 
 from notebook.notes.models import *
 from notebook.snippets.models import Snippet
@@ -557,6 +557,7 @@ def add_note_only(request, username):
 
 #TODO: add date range search, votes search
 @login_required
+@cache_page(30)
 def index(request, username, bookname):   
     
     N = getNote(username, bookname)
@@ -1400,6 +1401,7 @@ def folders(request, username, bookname, folder_name):
 #TODO:add protection
 #below is copied from note_raw except using a different template page
 @login_required
+@cache_page(30)
 def note(request, username, bookname, note_id):    
     log.debug('Getting the note:'+note_id)
     
