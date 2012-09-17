@@ -1194,7 +1194,9 @@ def __get_context(request, note_list,#default_tag_id,
         #TODO: get private ones
         wss = W.objects.all().order_by('name')
   
-        if request.user.username != username:        
+        if request.user.is_anonymous():
+            tags = None  
+        elif request.user.username != username:        
             tags = get_public_tags(tags)          
     
     #AddNForm_notes = create_model_form("AddNForm_"+str(username), N, fields={'tags':forms.ModelMultipleChoiceField(queryset=tags)})
