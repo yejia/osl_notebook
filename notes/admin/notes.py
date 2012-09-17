@@ -1,5 +1,5 @@
 from notebook.notes.models import Note, Tag, LinkageNote, Folder, Cache, WorkingSet, UserAuth
-from notebook.social.models import Group, Social_Note, Social_Tag, Member, Social_Note_Comment, Social_Note_Vote, Friend_Rel
+from notebook.social.models import Group, Social_Note, Social_Tag, Member, Social_Note_Comment, Social_Note_Vote, Friend_Rel, Invitation_Code, User_Reg_Invitation_Code
 from django.contrib import admin
 from django.contrib.auth.models import User #, Group
 
@@ -100,6 +100,13 @@ class MessageAdmin(MultiDBModelAdmin):
 
 
 
+class Invitation_CodeAdmin(MultiDBModelAdmin):
+     list_display = ('code', 'group', 'max_size', 'current_size', 'expire_date', 'init_date')
+
+
+class User_Reg_Invitation_CodeAdmin(MultiDBModelAdmin):
+     list_display = ('member', 'code', 'init_date')
+
 
 site = admin.AdminSite()
 
@@ -129,8 +136,8 @@ site.register(Notice, NoticeAdmin)
 site.register(NoticeType, NoticeTypeAdmin)
 site.register(Message, MessageAdmin)
 
-
-
+site.register(Invitation_Code, Invitation_CodeAdmin)
+site.register(User_Reg_Invitation_Code, User_Reg_Invitation_CodeAdmin)
 #TODO: register Site as well
 
 

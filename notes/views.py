@@ -29,7 +29,7 @@ from notebook.notes.models import *
 from notebook.snippets.models import Snippet
 from notebook.bookmarks.models import Bookmark
 from notebook.scraps.models import Scrap
-from notebook.social.models import Member, Friend_Rel, Activation, Sys_Setting
+from notebook.social.models import Member, Friend_Rel, Activation, Sys_Setting, Invitation_Code, User_Reg_Invitation_Code, Group
 from notebook.notes.constants import *
 from notebook.notes.util import *
 
@@ -384,6 +384,97 @@ def user_register(request):
             return render_to_response('registration/reg.html', {}, context_instance=RequestContext(request))             
     
     
+
+#copied from user_register with some modification to use invitation ocde
+def user_register_with_code(request): 
+    user_reg_setting = Sys_Setting.objects.get(member__username='leon')
+    if user_reg_setting and user_reg_setting == 'n':
+        pass
+    else:
+        
+        if request.method == 'POST':   
+            log.info('Registering a new user...')       
+            username = request.POST.get('username')
+            password1 = request.POST.get('password1')
+            password2 = request.POST.get('password2')
+            email = request.POST.get('email')
+            invite_code = request.POST.get('invite_code')
+            invcode = None
+            if Invitation_Code.objects.filter(code=invite_code).exists():
+                invcode = Invitation_Code.objects.get(code=invite_code)
+                if invcode.is_expired():
+                    messages.error(request, _("Invitation code expired!"))                 
+                    return HttpResponseRedirect('/invite/')  
+                if invcode.max_size <= invcode.current_size:
+                    messages.error(request, _("This invitation code is full!"))                 
+                    return HttpResponseRedirect('/invite/')  
+            else:
+                messages.error(request, _("This invitation code is not valid!"))                 
+                return HttpResponseRedirect('/invite/')  
+            if not email:
+                messages.error(request, _("No email entered!"))                 
+                return HttpResponseRedirect('/invite/')  
+            
+            
+            #f = UserCreationForm(request.POST)
+    #        if f.errors:
+    #            log.debug('Registrtion form errors:'+str(f.errors))
+    #            return render_to_response('registration/register.html', {'form':f}) 
+            #f.save()
+            #TODO: might subclass UserCreationForm to save to member 
+            
+            #TODO: validate email
+            
+            if User.objects.filter(username=username).exists():
+                messages.error(request, _("Username is already used by someone else. Please pick another one.")) 
+                log.info('Registration failed. Username is already used by someone else.')  
+                return HttpResponseRedirect('/invite/') 
+            #TODO:remove hardcoding
+            if email !='yuanliangliu@gmail.com' and User.objects.filter(email=email).exists(): 
+                messages.error(request, _("Email is already used by someone else. Please pick another one."))             
+                log.info('Registration failed. Email is already used by someone else.')  
+                return HttpResponseRedirect('/invite/')          
+            if password1 == password2:        
+                m, created = create_member(username, email, password1)
+                if created:
+                    log.info('A new user is created!')  
+                    create_db(username)
+                    log.info('DB is created for the new user!') 
+                    m.is_active = False
+                    m.save()
+                    site_name = 'http://www.91biji.com/'  
+                    activationID = __getNewID()
+                    #activation_list = request.session.get('activation',[])
+                    activation = Activation(username=m.username, activation_id=activationID)
+                    activation.save()
+                    #activation_list.append([m.username,activationID])  
+                    #request.session['activation'] = activation_list           
+                    url = site_name+'activate/?username='+m.username+'&activationID='+activationID
+                    content = _('You have successfully registered with ')+site_name + '\n'+_('You can activiate your account by clicking or copying the url below to your browser address bar:')+'\n'+url 
+                    send_mail(_('Please activate your account'), content.encode('utf-8'), u'sys@opensourcelearning.org', [m.email, u'sys@opensourcelearning.org'])
+                    
+                    #even not activiated, still count it. Might change this logic later TODO:
+                    
+                    invcode.current_size += 1
+                    invcode.save()
+                    uric = User_Reg_Invitation_Code(member=m, code=invcode)
+                    uric.save()
+                    #add this user to the group associated with this code
+                    g = Group.objects.get(name=invcode.group)
+                    g.members.add(m)
+                    g.save()
+                    
+                    messages.success(request, _("An account is created for you! You can go to your email to activate your account."))  
+                    return HttpResponseRedirect('/login/') 
+            messages.error(request, _("Passwords don't match!"))
+            return HttpResponseRedirect('/invite/')        
+        else:     
+            #registerForm = UserCreationForm()
+            #registerForm = RegistrationForm()
+            return render_to_response('registration/reg_with_code.html', {}, context_instance=RequestContext(request))             
+    
+
+
     
 def activate(request): 
     username = request.GET.get('username')

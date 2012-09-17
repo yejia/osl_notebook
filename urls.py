@@ -215,6 +215,7 @@ urlpatterns = patterns('',
     (r'registre/$', 'notebook.notes.views.register_user'),
 
     (r'reg/$', 'notebook.notes.views.user_register'),
+    (r'invite/$', 'notebook.notes.views.user_register_with_code'),
     (r'activate/$', 'notebook.notes.views.activate'),
     (r'supera/$', 'notebook.notes.views.super_admin'),
 

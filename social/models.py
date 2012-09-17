@@ -790,4 +790,38 @@ class Social_Note_Translation(models.Model):
     title = models.CharField(verbose_name=ugettext_lazy('Title'), blank=True,max_length=2000, help_text=_("The size of the title is limited to 2000 characaters."))
     desc =  models.TextField(verbose_name=ugettext_lazy('Description'), max_length=2000, blank=True,  help_text=_("The size of the desc is limited to 2000 characaters."))
     
+
+
+
+#this can be used for individuals to invite users too.
+class Invitation_Code(models.Model):
+    code = models.CharField(verbose_name=ugettext_lazy('Invitation Code'), max_length=50)
+    #For now, at most one group to add automatically for newly registered users.
+    group = models.ForeignKey(Group, blank=True)
+    max_size = models.IntegerField(default=100)
+    current_size = models.IntegerField(default=0)
+    expire_date = models.DateTimeField('Expiration date', auto_now_add=False)
+    init_date = models.DateTimeField('date created', auto_now_add=True)
     
+    def __unicode__(self):        
+        return self.code+" for group "+self.group.name
+    
+
+    class Meta:
+        unique_together = (("code"),)   
+            
+            
+    def is_expired(self):
+        if  self.expire_date < datetime.datetime.now():
+            return True
+        else:
+            return False
+    
+    
+       
+        
+
+class User_Reg_Invitation_Code(models.Model):  
+   member =  models.ForeignKey(Member) 
+   code =  models.ForeignKey(Invitation_Code) 
+   init_date = models.DateTimeField('date created', auto_now_add=True)                                  
