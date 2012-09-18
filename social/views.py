@@ -132,6 +132,7 @@ class EditGroupForm(ModelForm):
 #===============================================================================
 
 @login_required
+@cache_page(300)
 def group_index(request, groupname):
     
     return HttpResponseRedirect('/groups/'+groupname+'/snippetbook/notes/') 
@@ -275,6 +276,7 @@ def groups(request, username):
 
 
 @login_required
+@cache_page(300)
 def groups_notes(request, username, bookname):
     group_list = get_groups_list(request, username)
     
@@ -333,7 +335,7 @@ def push_group_tags_back(request, groupname):
 
 
 
-
+@cache_page(300)
 def notes(request, username, bookname):
 #===============================================================================
 #    if 'framebook' == bookname:
@@ -375,7 +377,7 @@ def notes(request, username, bookname):
 
 
 
-
+@cache_page(300)
 def note(request, username, bookname, note_id):
     log.debug('Getting the note:'+note_id)   
     
@@ -478,7 +480,7 @@ def note(request, username, bookname, note_id):
 
 
 
-
+@cache_page(300)
 def frame(request, username, bookname, frame_id):     
     frame = Social_Frame.objects.get(owner__username=username, id=frame_id)    
     if frame.private:        
@@ -791,6 +793,7 @@ def group_remove_tag(request, groupname):
 
 
 @login_required
+@cache_page(300)
 def group(request, groupname, bookname):
     
     gs = G.objects.filter(members__username=request.user.username)  
@@ -853,7 +856,7 @@ def group_tagframes(request, groupname):
                                                   context_instance=RequestContext(request, {'book_uri_prefix':'/groups/'+groupname}))
               
 
-
+@cache_page(300)
 def notes_tag(request, username, bookname, tag_name):   
     if tag_name.startswith('takenfrom:'):
         note_list = getSN(bookname).objects.filter(tags__name__startswith=tag_name, owner__username=username)
