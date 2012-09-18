@@ -14,6 +14,7 @@ from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
 from django.utils.translation import ugettext as _ , activate
 from django.core.mail import send_mail
+from django.views.decorators.cache import cache_page
 
 
 import datetime
