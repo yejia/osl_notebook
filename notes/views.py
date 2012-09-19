@@ -395,6 +395,12 @@ def user_register_with_code(request):
         if request.method == 'POST':   
             log.info('Registering a new user...')       
             username = request.POST.get('username')
+            
+            try:     
+                username.encode('ascii')
+            except  UnicodeEncodeError:
+                messages.error(request, _("Only English or Pinyin allowed for username!"))
+                return HttpResponseRedirect('/invite/') 
             password1 = request.POST.get('password1')
             password2 = request.POST.get('password2')
             email = request.POST.get('email')
@@ -434,8 +440,9 @@ def user_register_with_code(request):
                 messages.error(request, _("Email is already used by someone else. Please pick another one."))             
                 log.info('Registration failed. Email is already used by someone else.')  
                 return HttpResponseRedirect('/invite/')          
-            if password1 == password2:        
+            if password1 == password2:                        
                 m, created = create_member(username, email, password1)
+                      
                 if created:
                     log.info('A new user is created!')  
                     create_db(username)

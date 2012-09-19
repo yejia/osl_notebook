@@ -20,7 +20,7 @@ book_entry_dict = {'notebook':'', 'snippetbook':'__snippet','bookmarkbook':'__bo
 
 
 def getNote(username, bookname):
-    return create_model("Note_"+str(bookname)+"_"+str(username), book_model_dict.get(bookname), username) 
+    return create_model((u'Note_'+str(bookname)+'_'+unicode(username)).encode('utf8'), book_model_dict.get(bookname), username) 
 
 def getFolder(username, bookname):
     return create_model("Folder_"+str(bookname)+"_"+str(username), book_folder_dict.get(bookname), username) 

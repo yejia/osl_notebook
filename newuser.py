@@ -39,7 +39,10 @@ def create_member(username, email, passwd):
 #This function doesn't work on local machine since the local dev server will reload the settings.py if it is changed making 
 def create_db(username):   
     command_to_run = 'cp '+DB_ROOT+'notesdb_init  '+DB_ROOT+'notesdb_'+username
-    #print 'command_to_run ', command_to_run
+    #below is for working with Chinese name. But even with the user creation and db creation passed, there is still
+    #issue when logging in. The system cannot use the Chinese alias to find connection even the connection does exist. TODO:
+    #command_to_run = (u'cp '+DB_ROOT+u'notesdb_init  '+DB_ROOT+u'notesdb_'+username).encode('utf8')
+    
     os.system(command_to_run)
 
     #as the last resort, put this at the end or registration code to restart the server 
@@ -97,6 +100,7 @@ DATABASES['%(id)s'] = {
     file_to_store_settings = os.path.join(path_to_store_settings, db_settings['id'] + ".py") 
     f = open(file_to_store_settings, 'w')
     f.write(newDbString)    
+    #f.write(newDbString.encode('utf8'))  
 
     
     
