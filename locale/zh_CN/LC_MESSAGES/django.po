@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-19 16:59+0800\n"
+"POT-Creation-Date: 2012-09-20 16:28+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,31 +18,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: email_digest.py:84 email_digest.py:85 notes/views.py:2482
-#: notes/views.py:2493
+#: email_digest.py:84 email_digest.py:85 notes/views.py:2485
+#: notes/views.py:2496
 msgid "Sharing snippet:"
 msgstr "分享便条："
 
-#: email_digest.py:87 email_digest.py:88 notes/views.py:2484
-#: notes/views.py:2495
+#: email_digest.py:87 email_digest.py:88 notes/views.py:2487
+#: notes/views.py:2498
 msgid "Sharing bookmark:"
 msgstr "分享网址："
 
-#: email_digest.py:90 email_digest.py:91 notes/views.py:2486
-#: notes/views.py:2497
+#: email_digest.py:90 email_digest.py:91 notes/views.py:2489
+#: notes/views.py:2500
 msgid "Sharing scrap:"
 msgstr "分享网摘："
 
-#: email_digest.py:93 email_digest.py:94 notes/views.py:2488
-#: notes/views.py:2499
+#: email_digest.py:93 email_digest.py:94 notes/views.py:2491
+#: notes/views.py:2502
 msgid "Sharing knowledge package:"
 msgstr "分享知识包："
 
-#: email_digest.py:109 notes/views.py:2501
+#: email_digest.py:109 notes/views.py:2504
 msgid "Original Note:"
 msgstr "原笔记："
 
-#: email_digest.py:114 email_digest.py:116 notes/views.py:2512
+#: email_digest.py:114 email_digest.py:116 notes/views.py:2515
 msgid "from"
 msgstr "来自"
 
@@ -315,11 +315,11 @@ msgstr ""
 "这不是一个活跃帐号！您也许还没有激活该帐号。请在您的邮箱里查看有无收到邀请您"
 "激活该帐号的email。或者你可以联系系统管理员。"
 
-#: notes/views.py:266 notes/views.py:337 notes/views.py:415
+#: notes/views.py:266 notes/views.py:337 notes/views.py:421
 msgid "No email entered!"
 msgstr "没有输入email！"
 
-#: notes/views.py:279 notes/views.py:350 notes/views.py:429
+#: notes/views.py:279 notes/views.py:350 notes/views.py:435
 msgid "Username is already used by someone else. Please pick another one."
 msgstr "用户名已经被他人使用。请另选。"
 
@@ -335,104 +335,104 @@ msgstr "你可以用您的用户名和密码登录了！"
 msgid "Error creating a member!"
 msgstr "注册成员错误"
 
-#: notes/views.py:308 notes/views.py:379 notes/views.py:473
+#: notes/views.py:308 notes/views.py:379 notes/views.py:476
 msgid "Passwords don't match!"
 msgstr "密码不一致！"
 
-#: notes/views.py:355 notes/views.py:434
+#: notes/views.py:355 notes/views.py:440
 msgid "Email is already used by someone else. Please pick another one."
 msgstr "Email已经被他人使用。请另选。"
 
-#: notes/views.py:374 notes/views.py:457
+#: notes/views.py:374 notes/views.py:460
 msgid "You have successfully registered with "
 msgstr "您已经成功注册了"
 
-#: notes/views.py:374 notes/views.py:457
+#: notes/views.py:374 notes/views.py:460
 msgid ""
 "You can activiate your account by clicking or copying the url below to your "
 "browser address bar:"
 msgstr ""
 "要激活您的帐号，你可以点击下面的链接或者将该链接拷贝到您的浏览器的地址栏："
 
-#: notes/views.py:375 notes/views.py:458
+#: notes/views.py:375 notes/views.py:461
 msgid "Please activate your account"
 msgstr "请激活您的帐号"
 
-#: notes/views.py:377 notes/views.py:471
+#: notes/views.py:377 notes/views.py:474
 msgid ""
 "An account is created for you! You can go to your email to activate your "
 "account."
 msgstr "已经为您生成了一个帐号！您现在可以去你的邮箱激活您的帐号。"
 
-#: notes/views.py:406
-msgid "Invitation code expired!"
-msgstr "邀请码过期！"
-
-#: notes/views.py:409
-msgid "This invitation code is full!"
-msgstr "这个邀请码已满！"
-
-#: notes/views.py:412
-msgid "This invitation code is not valid!"
-msgstr "这个邀请码无效！"
-
-#: notes/views.py:441
+#: notes/views.py:402
 msgid "Only English or Pinyin allowed for username!"
 msgstr "用户名请用英文或拼音！"
 
-#: notes/views.py:494
+#: notes/views.py:412
+msgid "Invitation code expired!"
+msgstr "邀请码过期！"
+
+#: notes/views.py:415
+msgid "This invitation code is full!"
+msgstr "这个邀请码已满！"
+
+#: notes/views.py:418
+msgid "This invitation code is not valid!"
+msgstr "这个邀请码无效！"
+
+#: notes/views.py:497
 msgid "You have successfully activated your account!"
 msgstr "您已经成功的激活了您的帐号！"
 
-#: notes/views.py:497
+#: notes/views.py:500
 msgid "Wrong activation id!"
 msgstr "错误的激活代码！"
 
-#: notes/views.py:644
+#: notes/views.py:647
 msgid "You have no permission here!"
 msgstr "您在此没有权限！"
 
-#: notes/views.py:1423
+#: notes/views.py:1426
 msgid "note"
 msgstr "条笔记"
 
-#: notes/views.py:1424 templates/include/notes/note/notedisplay.html:85
+#: notes/views.py:1427 templates/include/notes/note/notedisplay.html:85
 #: templates/social/include/notes/note/notedisplay.html:28
 msgid "notes"
 msgstr "条笔记"
 
-#: notes/views.py:1623
+#: notes/views.py:1626
 msgid ""
 "Error uploading the file. The file name is too long! Please use a shorter "
 "file name. You can reduce your file name by "
 msgstr ""
 "上传文件时发生错误。文件名太长！请用一个短点的文件名。你可以将文件名缩短"
 
-#: notes/views.py:1623
+#: notes/views.py:1626
 msgid " letters."
 msgstr "字即可。"
 
-#: notes/views.py:1647
+#: notes/views.py:1650
 msgid "Note is successfully updated!"
 msgstr "笔记更新成功！"
 
-#: notes/views.py:1745
+#: notes/views.py:1748
 msgid "Please enter a note id or comma separated note ids in the box!"
 msgstr "请输入笔记id或者逗号分隔的几个笔记的id！"
 
-#: notes/views.py:1861
+#: notes/views.py:1864
 msgid "Question successfully added!"
 msgstr "问题添加成功！"
 
-#: notes/views.py:1881
+#: notes/views.py:1884
 msgid "Project successfully added!"
 msgstr "项目添加成功！"
 
-#: notes/views.py:2079
+#: notes/views.py:2082
 msgid "A frame is successfully created!"
 msgstr "一个知识包成功生成了！"
 
-#: notes/views.py:2503
+#: notes/views.py:2506
 msgid "Forwarded Note:"
 msgstr "转发的笔记："
 
@@ -571,7 +571,7 @@ msgstr "创建者"
 msgid "Admins"
 msgstr "管理员"
 
-#: social/models.py:798
+#: social/models.py:798 templates/registration/reg_with_code.html:17
 msgid "Invitation Code"
 msgstr "邀请码"
 
@@ -868,7 +868,7 @@ msgstr "用户名"
 msgid "Password:"
 msgstr "密码"
 
-#: templates/admin/login.html:26 templates/include/sites_header.html:82
+#: templates/admin/login.html:27 templates/include/sites_header.html:82
 msgid "Log in"
 msgstr ""
 
@@ -3134,6 +3134,10 @@ msgid ""
 "The site is currently invitation only. If you want to join the site, please "
 "contact sys admin"
 msgstr "本网站目前只接受邀请。如果你想加入，请和系统管理员联系"
+
+#: templates/registration/login.html:42
+msgid "Remove the spaces."
+msgstr "去掉中间的空格。"
 
 #: templates/registration/login.html:42
 msgid "give the username you want to use and a brief introduction of yourself."
