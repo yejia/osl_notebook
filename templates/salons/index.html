@@ -42,7 +42,7 @@
 <td>
 <a href="/groups/{{salon.group.name}}/salons/salon/{{salon.name}}/" class="big_font">{{salon.name}}</a><br/>
  <b>{% trans "Group" %}:</b>  <a href="/groups/{{salon.group.name}}/">{{salon.group}}</a><br/>
- <b>{% trans "Time" %}:</b>  {{salon.start_date}} {{salon.start_time}} - {{salon.end_time}}<br/>
+ <b>{% trans "Time" %}:</b>  {{salon.start_date|date:"M d Y D"}}  {{salon.start_time}} - {{salon.end_date|date:"M d Y D"}}  {{salon.end_time}}<br/>
   <b>{% trans "Location" %}:</b>  {{salon.location}}<br/>
      <b>{% trans "Host" %}:</b>  <a href="/social/{{salon.creator}}/">{{salon.creator}}</a><br/>
    <b>{{salon.get_signed.count}}</b>{% trans " attend" %}  <b>{{salon.get_maybe.count}}</b>{% trans " interested" %}
