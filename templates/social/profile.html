@@ -21,7 +21,7 @@
 <table class="my_table"><tr>
 <td>
 <div>
-<div><a href="/settings/"><img src={% if  profile_member.icon %}"/file/{{profile_member.icon}}"
+<div><a href="/settings/"><img class="avatar" src={% if  profile_member.icon %}"/file/{{profile_member.icon}}"
 {% else %}
 {% if  profile_member.gender == 'f' %}"/site_media/img/default_female.png"{% endif %} 
 {% if  profile_member.gender == 'm' %}"/site_media/img/default_male.jpg"{% endif %} 
