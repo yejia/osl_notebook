@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-20 16:28+0800\n"
+"POT-Creation-Date: 2012-09-23 20:07+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,31 +18,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: email_digest.py:84 email_digest.py:85 notes/views.py:2485
-#: notes/views.py:2496
+#: email_digest.py:84 email_digest.py:85 notes/views.py:2487
+#: notes/views.py:2498
 msgid "Sharing snippet:"
 msgstr "分享便条："
 
-#: email_digest.py:87 email_digest.py:88 notes/views.py:2487
-#: notes/views.py:2498
+#: email_digest.py:87 email_digest.py:88 notes/views.py:2489
+#: notes/views.py:2500
 msgid "Sharing bookmark:"
 msgstr "分享网址："
 
-#: email_digest.py:90 email_digest.py:91 notes/views.py:2489
-#: notes/views.py:2500
+#: email_digest.py:90 email_digest.py:91 notes/views.py:2491
+#: notes/views.py:2502
 msgid "Sharing scrap:"
 msgstr "分享网摘："
 
-#: email_digest.py:93 email_digest.py:94 notes/views.py:2491
-#: notes/views.py:2502
+#: email_digest.py:93 email_digest.py:94 notes/views.py:2493
+#: notes/views.py:2504
 msgid "Sharing knowledge package:"
 msgstr "分享知识包："
 
-#: email_digest.py:109 notes/views.py:2504
+#: email_digest.py:109 notes/views.py:2506
 msgid "Original Note:"
 msgstr "原笔记："
 
-#: email_digest.py:114 email_digest.py:116 notes/views.py:2515
+#: email_digest.py:114 email_digest.py:116 notes/views.py:2517
 msgid "from"
 msgstr "来自"
 
@@ -315,11 +315,11 @@ msgstr ""
 "这不是一个活跃帐号！您也许还没有激活该帐号。请在您的邮箱里查看有无收到邀请您"
 "激活该帐号的email。或者你可以联系系统管理员。"
 
-#: notes/views.py:266 notes/views.py:337 notes/views.py:421
+#: notes/views.py:266 notes/views.py:337 notes/views.py:423
 msgid "No email entered!"
 msgstr "没有输入email！"
 
-#: notes/views.py:279 notes/views.py:350 notes/views.py:435
+#: notes/views.py:279 notes/views.py:350 notes/views.py:437
 msgid "Username is already used by someone else. Please pick another one."
 msgstr "用户名已经被他人使用。请另选。"
 
@@ -335,104 +335,108 @@ msgstr "你可以用您的用户名和密码登录了！"
 msgid "Error creating a member!"
 msgstr "注册成员错误"
 
-#: notes/views.py:308 notes/views.py:379 notes/views.py:476
+#: notes/views.py:308 notes/views.py:379 notes/views.py:478
 msgid "Passwords don't match!"
 msgstr "密码不一致！"
 
-#: notes/views.py:355 notes/views.py:440
+#: notes/views.py:355 notes/views.py:442
 msgid "Email is already used by someone else. Please pick another one."
 msgstr "Email已经被他人使用。请另选。"
 
-#: notes/views.py:374 notes/views.py:460
+#: notes/views.py:374 notes/views.py:462
 msgid "You have successfully registered with "
 msgstr "您已经成功注册了"
 
-#: notes/views.py:374 notes/views.py:460
+#: notes/views.py:374 notes/views.py:462
 msgid ""
 "You can activiate your account by clicking or copying the url below to your "
 "browser address bar:"
 msgstr ""
 "要激活您的帐号，你可以点击下面的链接或者将该链接拷贝到您的浏览器的地址栏："
 
-#: notes/views.py:375 notes/views.py:461
+#: notes/views.py:375 notes/views.py:463
 msgid "Please activate your account"
 msgstr "请激活您的帐号"
 
-#: notes/views.py:377 notes/views.py:474
+#: notes/views.py:377 notes/views.py:476
 msgid ""
 "An account is created for you! You can go to your email to activate your "
 "account."
 msgstr "已经为您生成了一个帐号！您现在可以去你的邮箱激活您的帐号。"
 
-#: notes/views.py:402
+#: notes/views.py:399
+msgid "No space allowed in username!"
+msgstr "用户名不能有空格！"
+
+#: notes/views.py:404
 msgid "Only English or Pinyin allowed for username!"
 msgstr "用户名请用英文或拼音！"
 
-#: notes/views.py:412
+#: notes/views.py:414
 msgid "Invitation code expired!"
 msgstr "邀请码过期！"
 
-#: notes/views.py:415
+#: notes/views.py:417
 msgid "This invitation code is full!"
 msgstr "这个邀请码已满！"
 
-#: notes/views.py:418
+#: notes/views.py:420
 msgid "This invitation code is not valid!"
 msgstr "这个邀请码无效！"
 
-#: notes/views.py:497
+#: notes/views.py:499
 msgid "You have successfully activated your account!"
 msgstr "您已经成功的激活了您的帐号！"
 
-#: notes/views.py:500
+#: notes/views.py:502
 msgid "Wrong activation id!"
 msgstr "错误的激活代码！"
 
-#: notes/views.py:647
+#: notes/views.py:649
 msgid "You have no permission here!"
 msgstr "您在此没有权限！"
 
-#: notes/views.py:1426
+#: notes/views.py:1428
 msgid "note"
 msgstr "条笔记"
 
-#: notes/views.py:1427 templates/include/notes/note/notedisplay.html:85
+#: notes/views.py:1429 templates/include/notes/note/notedisplay.html:85
 #: templates/social/include/notes/note/notedisplay.html:28
 msgid "notes"
 msgstr "条笔记"
 
-#: notes/views.py:1626
+#: notes/views.py:1628
 msgid ""
 "Error uploading the file. The file name is too long! Please use a shorter "
 "file name. You can reduce your file name by "
 msgstr ""
 "上传文件时发生错误。文件名太长！请用一个短点的文件名。你可以将文件名缩短"
 
-#: notes/views.py:1626
+#: notes/views.py:1628
 msgid " letters."
 msgstr "字即可。"
 
-#: notes/views.py:1650
+#: notes/views.py:1652
 msgid "Note is successfully updated!"
 msgstr "笔记更新成功！"
 
-#: notes/views.py:1748
+#: notes/views.py:1750
 msgid "Please enter a note id or comma separated note ids in the box!"
 msgstr "请输入笔记id或者逗号分隔的几个笔记的id！"
 
-#: notes/views.py:1864
+#: notes/views.py:1866
 msgid "Question successfully added!"
 msgstr "问题添加成功！"
 
-#: notes/views.py:1884
+#: notes/views.py:1886
 msgid "Project successfully added!"
 msgstr "项目添加成功！"
 
-#: notes/views.py:2082
+#: notes/views.py:2084
 msgid "A frame is successfully created!"
 msgstr "一个知识包成功生成了！"
 
-#: notes/views.py:2506
+#: notes/views.py:2508
 msgid "Forwarded Note:"
 msgstr "转发的笔记："
 
@@ -3200,25 +3204,25 @@ msgstr "开始日期"
 msgid "Start time"
 msgstr "开始时间"
 
-#: templates/salons/group_salons.html:117 templates/salons/salon.html:229
+#: templates/salons/group_salons.html:117 templates/salons/salon.html:280
 msgid "End date"
 msgstr "结束日期"
 
-#: templates/salons/group_salons.html:123 templates/salons/salon.html:235
+#: templates/salons/group_salons.html:123 templates/salons/salon.html:286
 msgid "End time"
 msgstr "结束时间"
 
 #: templates/salons/group_salons.html:182 templates/salons/salon.html:139
-#: templates/salons/salon.html.py:240
+#: templates/salons/salon.html.py:341
 msgid "Max people"
 msgstr "最多容纳人数"
 
 #: templates/salons/group_salons.html:187 templates/salons/salon.html:142
-#: templates/salons/salon.html.py:245
+#: templates/salons/salon.html.py:346
 msgid "Min people"
 msgstr "最少人数"
 
-#: templates/salons/group_salons.html:192 templates/salons/salon.html:250
+#: templates/salons/group_salons.html:192 templates/salons/salon.html:351
 msgid "poster"
 msgstr "海报"
 
@@ -3293,7 +3297,7 @@ msgstr "沙龙详情"
 msgid "Edit the learning salon"
 msgstr "编辑该学习沙龙"
 
-#: templates/salons/salon.html:255 templates/settings/index.html:26
+#: templates/salons/salon.html:356 templates/settings/index.html:26
 #: templates/social/admin/group.html:46
 msgid "Update"
 msgstr "更新"
