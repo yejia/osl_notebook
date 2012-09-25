@@ -27,7 +27,8 @@
 <div title="{% trans 'Last login time' %}">{{profile_member.last_login}}
 </div>
 
-
+<p><a href="/social/{{profile_username}}/commentsfor/">{% blocktrans %} Comments for {{profile_username}}{% endblocktrans %}</a></p>
+<p><a href="/social/{{profile_username}}/commentsby/">{% blocktrans %} Comments by {{profile_username}}{% endblocktrans %}</a></p>
 
 {% if  appname == 'notes' %}
 <div><br/>
