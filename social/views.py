@@ -1018,7 +1018,6 @@ def add_course(request):
 from notification.models import Notice
 
 #TODO:check if profile_member is the same as requesting user. If not, don't allow viewing (Currently already hidden in html)
-@login_required
 def comments_4_user(request, username):  
     profile_member = Member.objects.get(username=username) 
     current_commenter = request.GET.get('commenter', 'all')
@@ -1039,13 +1038,14 @@ def comments_4_user(request, username):
         comments = comments.filter(commenter__username=current_commenter)
     
     #clear notifications related to comment receive
-    Notice.objects.filter(notice_type__label='comment_receive', recipient=request.user).update(unseen=False)    
+    if (not request.user.is_anonymous()) and request.user.username == username:
+        Notice.objects.filter(notice_type__label='comment_receive', recipient=request.user).update(unseen=False)    
     return render_to_response('social/commentsfor.html', {'comments':comments,'profile_username':username, 'commenters':commenters, 'current_commenter': current_commenter},\
                                                   context_instance=RequestContext(request)) 
 
 
 
-@login_required
+
 def comments_by_user(request, username):  
     profile_member = Member.objects.get(username=username) 
     comments = Social_Note_Comment.objects.filter(commenter=profile_member).order_by('-init_date')     
