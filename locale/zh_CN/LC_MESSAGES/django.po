@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-26 06:49+0800\n"
+"POT-Creation-Date: 2012-09-26 07:56+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1799,6 +1799,14 @@ msgstr ""
 "以无延迟的最快的添加便条。如果你想在你的桌面电脑上快速的添加许多的便条，你可"
 "以考虑在设置里将该页面设置成你的缺省页面。"
 
+#: templates/doc/results.html:7 templates/registration/login.html:45
+msgid "results"
+msgstr "效果"
+
+#: templates/doc/results.html:13
+msgid "Results of knowledge engine experimentation"
+msgstr "知识引擎实验阶段性成果报告"
+
 #: templates/doc/suggest.html:6
 msgid "Make suggestions to the site"
 msgstr "给网站提建议"
@@ -3148,6 +3156,12 @@ msgstr "去掉中间的空格。"
 #: templates/registration/login.html:42
 msgid "give the username you want to use and a brief introduction of yourself."
 msgstr "告知你要用的用户名和你的一个简单的自我介绍。"
+
+#: templates/registration/login.html:45
+msgid ""
+"If you are still deciding whether to join, here are some results from some "
+"users:"
+msgstr ""
 
 #: templates/registration/reg.html:7
 #: templates/registration/reg_with_code.html:7
