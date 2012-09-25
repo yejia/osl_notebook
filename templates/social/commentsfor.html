@@ -32,7 +32,11 @@
 {% for comment in comments %}	
 <li>
 <div><a href="/social/{{comment.commenter.username}}/">{{comment.commenter.username}}</a>: {{comment.desc}}  <span class="grey">({{comment.init_date}})</span></div>
-<div>{% if comment.note.owner.username == profile_username %}	{% trans "on your note" %}{% else %}{% trans "on note commented by you" %} {% endif %}   <a href="/social/{{comment.note.owner.username}}/{{comment.note.get_note_bookname}}/notes/note/{{ comment.note.id }}">{% if comment.note.desc %}{{comment.note.desc}}{% else %}{{comment.note.title|default:_('(No Title)')}}{% endif %}</a></div>
+<div>
+{% if comment.note.owner.username == profile_username %}	{% trans "on " %}{% if user.username == profile_username %}{% trans "your" %}{% else %}{{profile_username}}{% trans "'s" %}{% endif %}{% trans " note" %}
+{% else %}{% trans "on " %}{% if user.username == profile_username %}{% trans "you" %}{% else %}{{profile_username}}{% endif %}{% trans " commented note" %}
+{% endif %}:   
+  <a href="/social/{{comment.note.owner.username}}/{{comment.note.get_note_bookname}}/notes/note/{{ comment.note.id }}">{% if comment.note.desc %}{{comment.note.desc}}{% else %}{{comment.note.title|default:_('(No Title)')}}{% endif %}</a></div>
 </li>
 {% endfor %}
 </ul>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-23 20:07+0800\n"
+"POT-Creation-Date: 2012-09-26 06:49+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -491,11 +491,11 @@ msgstr "每周更新"
 #: social/models.py:59 templates/areas/area.html:158
 #: templates/framebook/notes/todelete/folders.html:19
 #: templates/include/note_list_base.html:1685
-#: templates/include/profile_head.html:49
-#: templates/include/profile_head.html:51
-#: templates/include/profile_head.html:80 templates/include/supersearch.html:6
+#: templates/include/profile_head.html:50
+#: templates/include/profile_head.html:52
+#: templates/include/profile_head.html:81 templates/include/supersearch.html:6
 #: templates/include/supersearch.html:25 templates/include/supersearch.html:27
-#: templates/social/profile.html:74 templates/social/wall_snippets.html:25
+#: templates/social/profile.html:75 templates/social/wall_snippets.html:25
 #: templates/social/notes/friends_notes.html:20
 #: templates/social/notes/group_notes.html:17
 #: templates/social/notes/groups_notes.html:16
@@ -505,15 +505,15 @@ msgstr "便条"
 
 #: social/models.py:60 templates/areas/area.html:161
 #: templates/include/note_list_base.html:1689
-#: templates/include/profile_head.html:64
-#: templates/include/profile_head.html:66
-#: templates/include/profile_head.html:83
+#: templates/include/profile_head.html:65
+#: templates/include/profile_head.html:67
+#: templates/include/profile_head.html:84
 #: templates/include/sites_header.html:10
 #: templates/include/supersearch.html:15 templates/include/supersearch.html:40
 #: templates/include/supersearch.html:42
 #: templates/include/notes/notes_display.html:151
 #: templates/snippetbook/notes/show_note_added_js.html:55
-#: templates/social/profile.html:77
+#: templates/social/profile.html:78
 msgid "Frames"
 msgstr "知识包"
 
@@ -1024,13 +1024,13 @@ msgstr "浏览这个学习领域里的所有笔记"
 #: templates/areas/area.html:159
 #: templates/framebook/notes/todelete/folders.html:21
 #: templates/include/note_list_base.html:1686
-#: templates/include/profile_head.html:54
-#: templates/include/profile_head.html:56
-#: templates/include/profile_head.html:81
+#: templates/include/profile_head.html:55
+#: templates/include/profile_head.html:57
+#: templates/include/profile_head.html:82
 #: templates/include/sites_header.html:48
 #: templates/include/sites_header.html:50 templates/include/supersearch.html:9
 #: templates/include/supersearch.html:30 templates/include/supersearch.html:32
-#: templates/social/profile.html:75 templates/social/wall_snippets.html:28
+#: templates/social/profile.html:76 templates/social/wall_snippets.html:28
 #: templates/social/wall_snippets.html:30
 #: templates/social/wall_snippets.html:42
 #: templates/social/notes/friends_notes.html:21
@@ -1042,11 +1042,11 @@ msgstr "网址"
 #: templates/areas/area.html:160
 #: templates/framebook/notes/todelete/folders.html:23
 #: templates/include/note_list_base.html:1687
-#: templates/include/profile_head.html:59
-#: templates/include/profile_head.html:61
-#: templates/include/profile_head.html:82
+#: templates/include/profile_head.html:60
+#: templates/include/profile_head.html:62
+#: templates/include/profile_head.html:83
 #: templates/include/supersearch.html:12 templates/include/supersearch.html:35
-#: templates/include/supersearch.html:37 templates/social/profile.html:76
+#: templates/include/supersearch.html:37 templates/social/profile.html:77
 #: templates/social/wall_snippets.html:33
 #: templates/social/wall_snippets.html:35
 #: templates/social/wall_snippets.html:43
@@ -1066,9 +1066,9 @@ msgstr "网摘"
 #: templates/include/note_list_base.html:1554
 #: templates/include/note_list_base.html:1556
 #: templates/include/note_list_base.html:1690
-#: templates/include/profile_head.html:69
-#: templates/include/profile_head.html:71
-#: templates/include/profile_head.html:84
+#: templates/include/profile_head.html:70
+#: templates/include/profile_head.html:72
+#: templates/include/profile_head.html:85
 #: templates/include/supersearch.html:18 templates/include/supersearch.html:45
 #: templates/include/supersearch.html:47
 #: templates/include/notes/menu/notes_section_menu.html:5
@@ -1081,7 +1081,7 @@ msgstr "网摘"
 #: templates/snippetbook/notes/notes.html:9
 #: templates/snippetbook/notes/notes.html:11
 #: templates/social/commentsfor.html:17 templates/social/commentsfor.html:19
-#: templates/social/profile.html:78
+#: templates/social/profile.html:79
 #: templates/social/notes/friends_notes.html:24
 #: templates/social/notes/group_notes.html:21
 #: templates/social/notes/groups_notes.html:20
@@ -2158,7 +2158,7 @@ msgstr "我的朋友"
 #: templates/snippetbook/notes/linkagenotesdisplay.html:155
 #: templates/snippetbook/notes/show_note_added_js.html:36
 #: templates/snippetbook/notes/show_note_added_js.html:40
-#: templates/social/commentsfor.html:35
+#: templates/social/commentsfor.html:39
 #: templates/social/framebook/notes/note/delete/children.html:6
 msgid "(No Title)"
 msgstr "（无标题）"
@@ -2342,39 +2342,41 @@ msgstr "小组"
 msgid "Last login time"
 msgstr "最后登录时间"
 
-#: templates/include/profile_head.html:34
-msgid "View your public notebook"
-msgstr "看你的公开笔记本"
-
-#: templates/include/profile_head.html:34
-#: templates/include/notes/inlines/add_comments_and_etc_inline.html:68
-msgid "View social"
-msgstr "看公开"
-
-#: templates/include/profile_head.html:39
-msgid "View your personal notebook"
-msgstr "看你的个人笔记本"
-
-#: templates/include/profile_head.html:39
-#: templates/social/include/notes/inlines/add_comments_and_etc_inline.html:48
-msgid "View personal"
-msgstr "看个人"
-
-#: templates/include/profile_head.html:90 templates/social/profile.html:43
-msgid "Private Message"
-msgstr "私信"
-
-#: templates/include/profile_head.html:94 templates/social/commentsfor.html:5
+#: templates/include/profile_head.html:30
+#: templates/include/profile_head.html:95 templates/social/commentsfor.html:5
 #: templates/social/commentsfor.html:11 templates/social/profile.html:47
 #, python-format
 msgid " Comments for %(profile_username)s"
 msgstr "%(profile_username)s收到的评论"
 
-#: templates/include/profile_head.html:95 templates/social/commentsby.html:5
+#: templates/include/profile_head.html:31
+#: templates/include/profile_head.html:96 templates/social/commentsby.html:5
 #: templates/social/commentsby.html:10 templates/social/profile.html:48
 #, python-format
 msgid " Comments by %(profile_username)s"
 msgstr "%(profile_username)s发布的评论"
+
+#: templates/include/profile_head.html:35
+msgid "View your public notebook"
+msgstr "看你的公开笔记本"
+
+#: templates/include/profile_head.html:35
+#: templates/include/notes/inlines/add_comments_and_etc_inline.html:68
+msgid "View social"
+msgstr "看公开"
+
+#: templates/include/profile_head.html:40
+msgid "View your personal notebook"
+msgstr "看你的个人笔记本"
+
+#: templates/include/profile_head.html:40
+#: templates/social/include/notes/inlines/add_comments_and_etc_inline.html:48
+msgid "View personal"
+msgstr "看个人"
+
+#: templates/include/profile_head.html:91 templates/social/profile.html:43
+msgid "Private Message"
+msgstr "私信"
 
 #: templates/include/search.html:9 templates/include/supersearch.html:54
 msgid "Or Search on comments"
@@ -3459,13 +3461,29 @@ msgstr "的笔记"
 msgid "View by commenter:"
 msgstr "选择评论者："
 
-#: templates/social/commentsfor.html:35
-msgid "on your note"
-msgstr "对你的笔记"
+#: templates/social/commentsfor.html:36 templates/social/commentsfor.html:37
+msgid "on "
+msgstr "对"
 
-#: templates/social/commentsfor.html:35
-msgid "on note commented by you"
-msgstr "对你评论过的笔记"
+#: templates/social/commentsfor.html:36
+msgid "your"
+msgstr "你的"
+
+#: templates/social/commentsfor.html:36
+msgid "'s"
+msgstr "的"
+
+#: templates/social/commentsfor.html:36
+msgid " note"
+msgstr "笔记"
+
+#: templates/social/commentsfor.html:37
+msgid "you"
+msgstr "你"
+
+#: templates/social/commentsfor.html:37
+msgid " commented note"
+msgstr "评论过的笔记"
 
 #: templates/social/folders.html:11
 #, python-format
@@ -3512,45 +3530,45 @@ msgstr "浏览全部"
 msgid " %(profile_username)s's Public Profile "
 msgstr "%(profile_username)s的公开主页"
 
-#: templates/social/profile.html:56
+#: templates/social/profile.html:57
 msgid "Add Friend"
 msgstr "加朋友"
 
-#: templates/social/profile.html:61
+#: templates/social/profile.html:62
 msgid "Remove Friend"
 msgstr "移除朋友"
 
-#: templates/social/profile.html:70
+#: templates/social/profile.html:71
 #, python-format
 msgid " view %(profile_username)s's notebook "
 msgstr "%(profile_username)s的笔记本"
 
-#: templates/social/profile.html:83
+#: templates/social/profile.html:84
 #, python-format
 msgid " view %(profile_username)s's tag tree "
 msgstr "%(profile_username)s的标签树"
 
 # python-format
-#: templates/social/profile.html:85
+#: templates/social/profile.html:86
 #, python-format
 msgid " view %(profile_username)s's  "
 msgstr "%(profile_username)s的"
 
-#: templates/social/profile.html:85
+#: templates/social/profile.html:86
 msgid "learning areas"
 msgstr "学习领域"
 
-#: templates/social/profile.html:100 templates/social/group/groups.html:69
+#: templates/social/profile.html:101 templates/social/group/groups.html:69
 #, python-format
 msgid " Groups created by %(profile_username)s "
 msgstr "%(profile_username)s创建的小组"
 
-#: templates/social/profile.html:112 templates/social/group/groups.html:87
+#: templates/social/profile.html:113 templates/social/group/groups.html:87
 #, python-format
 msgid " Groups followed by %(profile_username)s "
 msgstr "%(profile_username)s加入的小组"
 
-#: templates/social/profile.html:124
+#: templates/social/profile.html:125
 #, python-format
 msgid "Friends of %(profile_username)s "
 msgstr "%(profile_username)s的朋友"
@@ -3983,6 +4001,9 @@ msgstr "全部工作区"
 msgid "Make Current"
 msgstr "设成当前"
 
+#~ msgid "on your note"
+#~ msgstr "对你的笔记"
+
 #~ msgid "Doc"
 #~ msgstr "文档"
 
@@ -3991,9 +4012,6 @@ msgstr "设成当前"
 
 #~ msgid "Enter only 1 tag tree in the input box"
 #~ msgstr "在输入框里只输入一个标签树"
-
-#~ msgid "on "
-#~ msgstr "对包含的笔记："
 
 #~ msgid "Here is your weekly plan for you to review:"
 #~ msgstr "这里是你本周的学习计划，供你回顾："
@@ -4004,9 +4022,6 @@ msgstr "设成当前"
 #, fuzzy
 #~ msgid "View all snippets"
 #~ msgstr "浏览所有的知识包"
-
-#~ msgid "In your "
-#~ msgstr "在你的"
 
 #~ msgid "You are invited and added to group "
 #~ msgstr "你被邀请参加并已被加入学习小组"
