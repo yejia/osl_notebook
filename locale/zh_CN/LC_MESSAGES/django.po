@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-26 07:56+0800\n"
+"POT-Creation-Date: 2012-09-26 12:52+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3162,6 +3162,14 @@ msgid ""
 "If you are still deciding whether to join, here are some results from some "
 "users:"
 msgstr "如果你仍然无法决定是否加入，这里是一些用户的使用效果反馈："
+
+#: templates/registration/login.html:45
+msgid "There are also some screenshots available"
+msgstr "另外可以看截屏"
+
+#: templates/registration/login.html:45
+msgid "screenshots"
+msgstr "截屏"
 
 #: templates/registration/reg.html:7
 #: templates/registration/reg_with_code.html:7
