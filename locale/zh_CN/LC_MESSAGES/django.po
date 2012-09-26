@@ -3161,7 +3161,7 @@ msgstr "告知你要用的用户名和你的一个简单的自我介绍。"
 msgid ""
 "If you are still deciding whether to join, here are some results from some "
 "users:"
-msgstr ""
+msgstr "如果你仍然无法决定是否加入，这里是一些用户的使用效果反馈："
 
 #: templates/registration/reg.html:7
 #: templates/registration/reg_with_code.html:7
