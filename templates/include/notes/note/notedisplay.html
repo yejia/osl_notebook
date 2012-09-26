@@ -55,6 +55,7 @@
  {% include "include/get_title.html" %}   
  &nbsp;&nbsp;&nbsp; 
  {% block delete_note%}
+  {% comment %}commented out temporaily. There seems to be some problem in deleting notes.
  {% if user.username == profile_username %} 
 {% if note.deleted  %} 
 <img src="/site_media/img/hard-delete.png" title="{% trans 'hard delete' %}" id="hard_delete" class="delete_img_on_note_display clickable noPrint"/>
@@ -64,6 +65,7 @@
 <img src="/site_media/img/delete.png" title="{% trans 'soft delete' %}" id="soft_delete"  class="delete_img_on_note_display clickable noPrint"/>
 {% endif %}
 {% endif %}
+  {% endcomment %}
 {% endblock %}
 
 </div>
