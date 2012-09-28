@@ -987,8 +987,13 @@ $("#ac_tags").tagit("removeAll");
                 
                 
                    $('.public_comment_submit').click(function(){  
-                        var newValue = $(this).parents("#add_public_comment_box").find("#add_content").val();                       
-                        $.post('/social/{{user.username}}/addComment/',{ 'id':$(this).parents('div[note_id]').attr('social_note_id'), 'content':  newValue}, public_commentAdded ,'json');  
+                       {% if user.is_anonymous %}
+                                alert('{% trans "You are not logged in! Please login first." %}');
+                        {% else %} 
+                                var newValue = $(this).parents("#add_public_comment_box").find("#add_content").val();                       
+                                $.post('/social/{{user.username}}/addComment/',{ 'id':$(this).parents('div[note_id]').attr('social_note_id'), 'content':  newValue}, public_commentAdded ,'json');  
+                        
+                       {% endif %} 
                 });
                 
               
