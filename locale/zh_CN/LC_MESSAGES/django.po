@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-15 15:10+0800\n"
+"POT-Creation-Date: 2012-10-15 17:34+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -218,7 +218,15 @@ msgstr "如果你的本月学习计划是空的，将在下个月的月初被系
 msgid "Time to review your monthly plan"
 msgstr "回顾本月学习计划的时间到了"
 
-#: areas/views.py:233
+#: areas/views.py:83
+msgid "Please enter a frame id!"
+msgstr "请输入一个知识包的id！"
+
+#: areas/views.py:86
+msgid "Failed to find a frame with this id. Please enter a valid frame id!"
+msgstr "找不到这个id的知识包。请输入一个有效的知识包id！"
+
+#: areas/views.py:240
 msgid "You have successfully removed the group from the area."
 msgstr "你已经成功的将该小组从这个学习领域移除。"
 

@@ -77,7 +77,14 @@ def index(request, username):
         a.private = post.get('private', False)
         #TODO: warn of empty root_note_frame and root_tag_frame. They cannot be null
         if post.get('root_note_frame'):
-            a.root_note_frame = Frame.objects.using(username).get(id=post.get('root_note_frame'))
+            try:
+                a.root_note_frame = Frame.objects.using(username).get(id=post.get('root_note_frame'))
+            except UnicodeEncodeError:
+                messages.error(request, _("Please enter a frame id!"))
+                return HttpResponseRedirect('/'+username+'/areas/')  
+            except ObjectDoesNotExist:
+                messages.error(request, _("Failed to find a frame with this id. Please enter a valid frame id!"))
+                return HttpResponseRedirect('/'+username+'/areas/')     
         if tag_ids:  
             a.root_tag_frame = Tag_Frame.objects.using(username).get(id=tag_ids[0])  
         a.save()   
