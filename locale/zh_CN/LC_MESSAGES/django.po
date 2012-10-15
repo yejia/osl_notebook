@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-28 09:08+0800\n"
+"POT-Creation-Date: 2012-10-15 15:10+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1799,7 +1799,7 @@ msgstr ""
 "以无延迟的最快的添加便条。如果你想在你的桌面电脑上快速的添加许多的便条，你可"
 "以考虑在设置里将该页面设置成你的缺省页面。"
 
-#: templates/doc/results.html:7
+#: templates/doc/results.html:7 templates/registration/login.html:47
 msgid "results"
 msgstr "效果"
 
@@ -3152,6 +3152,12 @@ msgstr "去掉中间的空格。"
 msgid "give the username you want to use and a brief introduction of yourself."
 msgstr "告知你要用的用户名和你的一个简单的自我介绍。"
 
+#: templates/registration/login.html:47
+msgid ""
+"If you are still deciding whether to join, here are some results from some "
+"users:"
+msgstr "如果你仍然无法决定是否加入，这里是一些用户的使用效果反馈："
+
 #: templates/registration/login.html:49
 msgid "There are also some screenshots available"
 msgstr "另外可以看截屏"
@@ -4014,11 +4020,6 @@ msgstr "设成当前"
 
 #~ msgid "hard delete"
 #~ msgstr "永久删除"
-
-#~ msgid ""
-#~ "If you are still deciding whether to join, here are some results from "
-#~ "some users:"
-#~ msgstr "如果你仍然无法决定是否加入，这里是一些用户的使用效果反馈："
 
 #~ msgid "on your note"
 #~ msgstr "对你的笔记"
