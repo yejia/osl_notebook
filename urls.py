@@ -34,8 +34,8 @@ urlpatterns = patterns('',
    
 
     (r'^$','notebook.notes.views.root'),
-    (r'^myadmin/doc/', include('django.contrib.admindocs.urls')),
-    (r'^myadmin/', include('notebook.notes.admin.urls')),
+    (r'^mysysadmin/doc/', include('django.contrib.admindocs.urls')),
+    (r'^mysysadmin/', include('notebook.notes.admin.urls')),
 
     #TODO: maybe all urls for adding and updating shouldn't have a username in the url, and 
     #should get it from the request 
@@ -248,7 +248,8 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     
-    (r'^admin/', include(admin.site.urls)),
+    #defaultsystemadmin
+    (r'^dsysadmin/', include(admin.site.urls)),
     
 
     (r'^databrowse/(.*)', databrowse.site.root),
