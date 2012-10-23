@@ -8,7 +8,9 @@
             <td>
                 <div id="add_note_section">
                     <div class="section_header">
-                        <span class="big_font">{{user.username}}, <a href="http://blog.opensourcelearning.org/?p=109" target="_blank">{% trans "What have your learned today?" %}
+                        <span class="big_font">
+                            <img src="/site_media/img/light-bulb.png"/>
+                           {{user.username}}, <a href="http://blog.opensourcelearning.org/?p=109" target="_blank">{% trans "What have your learned today?" %}
                                 <img src="/media/img/admin/icon-unknown.gif"/></a>:&nbsp;&nbsp;&nbsp;&nbsp;
                         </span>     
                          {% if pagename == 'notes'%}
