@@ -13,18 +13,18 @@
 <a href="/{{ user.username|default:'anonymous' }}/tagframes/">{% trans 'Tag Tree' %}</a>
 </span>
 <span class="item">
-<a href="/{{ user.username|default:'anonymous' }}/areas/">{% trans 'Learning Areas' %}</a>
+<a href="/{{ user.username|default:'anonymous' }}/areas/">{% trans 'Areas' %}</a>
 </span>
 <span class="item">
-<a href="/{{ user.username|default:'anonymous' }}/framebook/notes/?&pick_plan=w">{% trans 'Learning Plans' %}</a>
-</span>
-
-<span class="item">
-<a href="/{{ user.username|default:'anonymous' }}/groups/">{% trans 'Learning Groups' %}</a>
+<a href="/{{ user.username|default:'anonymous' }}/framebook/notes/?&pick_plan=w">{% trans 'Plans' %}</a>
 </span>
 
 <span class="item">
-<a href="/salons/">{% trans 'Learning Salons' %}</a>
+<a href="/{{ user.username|default:'anonymous' }}/groups/">{% trans 'Groups' %}</a>
+</span>
+
+<span class="item">
+<a href="/salons/">{% trans 'Salons' %}</a>
 </span>
 
 <span class="item">

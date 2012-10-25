@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-15 17:34+0800\n"
+"POT-Creation-Date: 2012-10-25 11:48+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -284,7 +284,7 @@ msgstr "默认的标签是'random thought'。"
 #: templates/include/note_list_base.html:1488
 #: templates/include/notes/notesdisplay.html:44
 #: templates/scrapbook/notes/notesdisplay.html:29
-#: templates/snippetbook/notes/add_note.html:47
+#: templates/snippetbook/notes/add_note.html:49
 #: templates/social/group/groups.html:56
 msgid "Private"
 msgstr "隐私"
@@ -763,8 +763,8 @@ msgstr "笔记本管理"
 #: templates/areas/area.html:287 templates/areas/index.html:60
 #: templates/framebook/notes/notesdisplay.html:25
 #: templates/salons/group_salons.html:197
-#: templates/snippetbook/notes/add_note.html:66
 #: templates/snippetbook/notes/add_note.html:68
+#: templates/snippetbook/notes/add_note.html:70
 #: templates/tagframes/index.html:380
 msgid "Add"
 msgstr "添加"
@@ -2179,7 +2179,7 @@ msgstr "我的朋友"
 msgid "(No Title)"
 msgstr "（无标题）"
 
-#: templates/include/groups_menu.html:4 templates/include/sites_header.html:23
+#: templates/include/groups_menu.html:4
 msgid "Learning Groups"
 msgstr "学习小组"
 
@@ -2409,16 +2409,19 @@ msgid "Notes"
 msgstr "便条"
 
 #: templates/include/sites_header.html:16
-msgid "Learning Areas"
+msgid "Areas"
 msgstr "学习领域"
 
 #: templates/include/sites_header.html:19
-msgid "Learning Plans"
+msgid "Plans"
 msgstr "学习计划"
 
-#: templates/include/sites_header.html:27 templates/salons/index.html:15
-#: templates/salons/index.html.py:21
-msgid "Learning Salons"
+#: templates/include/sites_header.html:23
+msgid "Groups"
+msgstr "学习小组"
+
+#: templates/include/sites_header.html:27
+msgid "Salons"
 msgstr "学习沙龙"
 
 #: templates/include/sites_header.html:31
@@ -2532,14 +2535,14 @@ msgstr "隐藏缓存区"
 
 #: templates/include/notes/notes_display.html:70
 #: templates/include/notes/note/notedisplay.html:143
-#: templates/snippetbook/notes/add_note.html:50
+#: templates/snippetbook/notes/add_note.html:52
 #: templates/snippetbook/notes/show_note_added_js.html:32
 msgid "Rank Up Importance"
 msgstr "增加重要性"
 
 #: templates/include/notes/notes_display.html:71
 #: templates/include/notes/note/notedisplay.html:144
-#: templates/snippetbook/notes/add_note.html:51
+#: templates/snippetbook/notes/add_note.html:53
 #: templates/snippetbook/notes/show_note_added_js.html:33
 msgid "Rank Down Importance"
 msgstr "降低重要性"
@@ -3278,6 +3281,10 @@ msgstr "参加"
 msgid " interested"
 msgstr "感兴趣"
 
+#: templates/salons/index.html:15 templates/salons/index.html.py:21
+msgid "Learning Salons"
+msgstr "学习沙龙"
+
 #: templates/salons/salon.html:25
 msgid "By signing up, you will first be added to the group "
 msgstr "报名后你会被自动加入学习小组"
@@ -3440,33 +3447,33 @@ msgstr "%(profile_username)s的便条本"
 msgid "Search snippets"
 msgstr "搜索便条"
 
-#: templates/snippetbook/notes/add_note.html:11
+#: templates/snippetbook/notes/add_note.html:13
 msgid "What have your learned today?"
 msgstr "你今天学到了什么？"
 
-#: templates/snippetbook/notes/add_note.html:15
+#: templates/snippetbook/notes/add_note.html:17
 msgid "Show adding snippet"
 msgstr "显示加便条"
 
-#: templates/snippetbook/notes/add_note.html:16
+#: templates/snippetbook/notes/add_note.html:18
 msgid "Hide adding snippet"
 msgstr "隐藏加便条"
 
-#: templates/snippetbook/notes/add_note.html:23
+#: templates/snippetbook/notes/add_note.html:25
 msgid "letters used"
 msgstr "字已经输入了"
 
-#: templates/snippetbook/notes/add_note.html:25
+#: templates/snippetbook/notes/add_note.html:27
 msgid "(< 300 letters)"
 msgstr "建议短便条(少于150字)"
 
-#: templates/snippetbook/notes/add_note.html:26
+#: templates/snippetbook/notes/add_note.html:28
 msgid ""
 "A short snippet is enough to represent a significant experience. Practice on "
 "that. :-)"
 msgstr "一个短的便条足够表达一个重要的感受。练习一下。:-)"
 
-#: templates/snippetbook/notes/add_note.html:56
+#: templates/snippetbook/notes/add_note.html:58
 msgid "Add tags"
 msgstr "加标签"
 
@@ -4025,6 +4032,12 @@ msgstr "全部工作区"
 #: templates/workingset/index.html:370
 msgid "Make Current"
 msgstr "设成当前"
+
+#~ msgid "Learning Areas"
+#~ msgstr "学习领域"
+
+#~ msgid "Learning Plans"
+#~ msgstr "学习计划"
 
 #~ msgid "hard delete"
 #~ msgstr "永久删除"
