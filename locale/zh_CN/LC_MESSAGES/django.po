@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-25 11:48+0800\n"
+"POT-Creation-Date: 2012-11-02 16:37+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -245,24 +245,24 @@ msgstr ""
 "这个网址已经成功添加到您的网址本里。您可以关闭这个窗口，或者其会在1秒后自动关"
 "闭。"
 
-#: notes/models.py:189 notes/models.py:1166 social/models.py:790
+#: notes/models.py:189 notes/models.py:1166 social/models.py:795
 #: templates/framebook/notes/notesdisplay.html:18
 #: templates/include/notes/notesdisplay.html:40
 #: templates/scrapbook/notes/notesdisplay.html:28
 msgid "Title"
 msgstr "标题"
 
-#: notes/models.py:189 notes/models.py:1166 social/models.py:790
+#: notes/models.py:189 notes/models.py:1166 social/models.py:795
 msgid "The size of the title is limited to 2000 characaters."
 msgstr "标题的长度应小于2000字。"
 
-#: notes/models.py:192 notes/models.py:1167 social/models.py:632
-#: social/models.py:791 templates/areas/area.html:281
+#: notes/models.py:192 notes/models.py:1167 social/models.py:637
+#: social/models.py:796 templates/areas/area.html:281
 #: templates/areas/index.html:54
 msgid "Description"
 msgstr "正文"
 
-#: notes/models.py:192 notes/models.py:1167 social/models.py:791
+#: notes/models.py:192 notes/models.py:1167 social/models.py:796
 msgid "The size of the desc is limited to 2000 characaters."
 msgstr "正文的长度应小于2000字。"
 
@@ -278,7 +278,7 @@ msgstr "标签"
 msgid "Default tag is 'random thought'."
 msgstr "默认的标签是'random thought'。"
 
-#: notes/models.py:194 social/models.py:635 templates/areas/area.html:284
+#: notes/models.py:194 social/models.py:640 templates/areas/area.html:284
 #: templates/areas/index.html:57
 #: templates/framebook/notes/notesdisplay.html:22
 #: templates/include/note_list_base.html:1488
@@ -289,7 +289,7 @@ msgstr "默认的标签是'random thought'。"
 msgid "Private"
 msgstr "隐私"
 
-#: notes/models.py:196 social/models.py:634
+#: notes/models.py:196 social/models.py:639
 msgid "date created"
 msgstr "生成时间"
 
@@ -301,17 +301,17 @@ msgstr "最后修改时间"
 msgid "self ranking"
 msgstr "原作者的评级"
 
-#: notes/models.py:727 snippets/models.py:14 social/models.py:410
-#: social/models.py:434 templates/framebook/notes/notesdisplay.html:20
+#: notes/models.py:727 snippets/models.py:14 social/models.py:415
+#: social/models.py:439 templates/framebook/notes/notesdisplay.html:20
 #: templates/include/notes/notesdisplay.html:42
 msgid "Attachment"
 msgstr "附件"
 
-#: notes/models.py:1164 social/models.py:788
+#: notes/models.py:1164 social/models.py:793
 msgid "Language"
 msgstr "语言"
 
-#: notes/models.py:1165 social/models.py:789
+#: notes/models.py:1165 social/models.py:794
 msgid "Original language"
 msgstr "原来的语言"
 
@@ -496,7 +496,15 @@ msgstr "每日更新"
 msgid "Weekly Digest"
 msgstr "每周更新"
 
-#: social/models.py:59 templates/areas/area.html:158
+#: social/models.py:59
+msgid "No Notice"
+msgstr "无通知"
+
+#: social/models.py:60
+msgid "Receive Plan Notice"
+msgstr "接收计划通知"
+
+#: social/models.py:63 templates/areas/area.html:158
 #: templates/framebook/notes/todelete/folders.html:19
 #: templates/include/note_list_base.html:1690
 #: templates/include/profile_head.html:50
@@ -511,7 +519,7 @@ msgstr "每周更新"
 msgid "Snippets"
 msgstr "便条"
 
-#: social/models.py:60 templates/areas/area.html:161
+#: social/models.py:64 templates/areas/area.html:161
 #: templates/include/note_list_base.html:1694
 #: templates/include/profile_head.html:65
 #: templates/include/profile_head.html:67
@@ -525,36 +533,40 @@ msgstr "便条"
 msgid "Frames"
 msgstr "知识包"
 
-#: social/models.py:61 templates/include/sites_header.html:13
+#: social/models.py:65 templates/include/sites_header.html:13
 #: templates/tagframes/index.html:337
 msgid "Tag Tree"
 msgstr "标签树"
 
-#: social/models.py:62
+#: social/models.py:66
 msgid "Add Note Only"
 msgstr ""
 
-#: social/models.py:66
+#: social/models.py:70
 msgid "Nickname"
 msgstr "绰号"
 
-#: social/models.py:69 social/models.py:639
+#: social/models.py:73 social/models.py:644
 msgid "Icon"
 msgstr "头像"
 
-#: social/models.py:70
+#: social/models.py:74
 msgid "Gender"
 msgstr "性别"
 
-#: social/models.py:73
+#: social/models.py:77
 msgid "Default language"
 msgstr "默认语言"
 
-#: social/models.py:74
+#: social/models.py:78
 msgid "Digest"
 msgstr "接收更新"
 
-#: social/models.py:75 templates/admin/500.html:4
+#: social/models.py:79
+msgid "Plan Notice"
+msgstr "计划通知"
+
+#: social/models.py:80 templates/admin/500.html:4
 #: templates/admin/app_index.html:8 templates/admin/base.html:55
 #: templates/admin/change_form.html:18
 #: templates/admin/delete_confirmation.html:6
@@ -565,25 +577,25 @@ msgstr "接收更新"
 msgid "Home"
 msgstr "主页"
 
-#: social/models.py:631 templates/areas/area.html:259
+#: social/models.py:636 templates/areas/area.html:259
 #: templates/areas/index.html:37 templates/salons/group_salons.html:38
 #: templates/salons/salon.html:196 templates/social/group/groups.html:34
 msgid "Name"
 msgstr "名字"
 
-#: social/models.py:636 templates/social/notes/group_notes.html:35
+#: social/models.py:641 templates/social/notes/group_notes.html:35
 msgid "Members"
 msgstr "成员"
 
-#: social/models.py:637
+#: social/models.py:642
 msgid "Creator"
 msgstr "创建者"
 
-#: social/models.py:638
+#: social/models.py:643
 msgid "Admins"
 msgstr "管理员"
 
-#: social/models.py:798 templates/registration/reg_with_code.html:17
+#: social/models.py:803 templates/registration/reg_with_code.html:17
 msgid "Invitation Code"
 msgstr "邀请码"
 

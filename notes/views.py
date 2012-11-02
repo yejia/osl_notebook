@@ -2822,6 +2822,7 @@ def settings_update_profile(request):
     m.gender = request.POST.get('gender')
     m.default_lang = request.POST.get('default_lang')
     m.digest = request.POST.get('digest')
+    m.plan_notice = request.POST.get('plan_notice')
     m.home = request.POST.get('home')
     m.save()
     #

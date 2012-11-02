@@ -76,55 +76,61 @@ def create_monthly_plan(user):
 
 def  email_weekly_plan_notice(user, user_frame_id):
     member = Member.objects.get(username=user)
-    pick_lang = 'zh-cn'
-    if member.default_lang:        
-         pick_lang = member.default_lang    
-         activate(pick_lang)
-         
-    frame_url = site_name + '/' + member.username + '/framebook/notes/note/' + str(user_frame_id) + '/'   
-    content = _('It is the beginning of the week again. To start this week right, first make a learning plan for this week. What do you want to learn this week? And how are you going to learn them?')+'\n'+\
-               _('A weekly plan has been created for you in your notebook. You just need to fill in the specifics by adding snippets to it:') + '\n' + \
-                frame_url
-    
-    html_content =  _('It is the beginning of the week again. To start this week right, first make a learning plan for this week. What do you want to learn this week? And how are you going to learn them?')+'<br/>'+\
-               _('A weekly plan has been created for you in your notebook. You just need to fill in the specifics by adding snippets to it:') + '<br/>' + \
-               '<a href="' + frame_url +'">' + frame_url + '</a>'
+    if member.plan_notice == 'n':
+        pass
+    else:
+        pick_lang = 'zh-cn'
+        if member.default_lang:        
+             pick_lang = member.default_lang    
+             activate(pick_lang)
+             
+        frame_url = site_name + '/' + member.username + '/framebook/notes/note/' + str(user_frame_id) + '/'   
+        content = _('It is the beginning of the week again. To start this week right, first make a learning plan for this week. What do you want to learn this week? And how are you going to learn them?')+'\n'+\
+                   _('A weekly plan has been created for you in your notebook. You just need to fill in the specifics by adding snippets to it:') + '\n' + \
+                    frame_url
+        
+        html_content =  _('It is the beginning of the week again. To start this week right, first make a learning plan for this week. What do you want to learn this week? And how are you going to learn them?')+'<br/>'+\
+                   _('A weekly plan has been created for you in your notebook. You just need to fill in the specifics by adding snippets to it:') + '<br/>' + \
+                   '<a href="' + frame_url +'">' + frame_url + '</a>'
 
  
     
-    msg = EmailMultiAlternatives(_('Time to make your weekly plan'), content.encode('utf-8') , SERVER_EMAIL, [member.email])
-    msg.attach_alternative(html_content.encode('utf-8') , "text/html")
-    msg.send()
-    print 'email was sent to user',user,' for weekly plan.'
-    time.sleep(10)
+        msg = EmailMultiAlternatives(_('Time to make your weekly plan'), content.encode('utf-8') , SERVER_EMAIL, [member.email])
+        msg.attach_alternative(html_content.encode('utf-8') , "text/html")
+        msg.send()
+        print 'email was sent to user',user,' for weekly plan.'
+        time.sleep(10)
     
 
 
 #TODO: refactor and merge
 def email_monthly_plan_notice(user, user_frame_id):
     member = Member.objects.get(username=user)
-    pick_lang = 'zh-cn'
-    if member.default_lang:        
-         pick_lang = member.default_lang    
-         activate(pick_lang)
-         
-    frame_url = site_name + '/' + member.username + '/framebook/notes/note/' + str(user_frame_id) + '/' 
-    content = _('It is the beginning of the month again. To start this month right, first make a learning plan for this month. What do you want to learn this month? And how are you going to learn them?')+'\n'+\
-               _('A monthly plan has been created for you in your notebook. You just need to fill in the specifics by adding snippets to it:') + '\n' + \
-                frame_url
+    if member.plan_notice == 'n':
+        pass
+    else:
+        pick_lang = 'zh-cn'
+        if member.default_lang:        
+             pick_lang = member.default_lang    
+             activate(pick_lang)
+             
+        frame_url = site_name + '/' + member.username + '/framebook/notes/note/' + str(user_frame_id) + '/' 
+        content = _('It is the beginning of the month again. To start this month right, first make a learning plan for this month. What do you want to learn this month? And how are you going to learn them?')+'\n'+\
+                   _('A monthly plan has been created for you in your notebook. You just need to fill in the specifics by adding snippets to it:') + '\n' + \
+                    frame_url
+        
+        html_content =  _('It is the beginning of the month again. To start this month right, first make a learning plan for this month. What do you want to learn this month? And how are you going to learn them?')+'<br/>'+\
+                   _('A monthly plan has been created for you in your notebook. You just need to fill in the specifics by adding snippets to it:') + '<br/>' + \
+                   '<a href="' + frame_url +'">' + frame_url + '</a>'
     
-    html_content =  _('It is the beginning of the month again. To start this month right, first make a learning plan for this month. What do you want to learn this month? And how are you going to learn them?')+'<br/>'+\
-               _('A monthly plan has been created for you in your notebook. You just need to fill in the specifics by adding snippets to it:') + '<br/>' + \
-               '<a href="' + frame_url +'">' + frame_url + '</a>'
-
- 
-    
-    msg = EmailMultiAlternatives(_('Time to make your monthly plan'), content.encode('utf-8') , SERVER_EMAIL, [member.email])
-    msg.attach_alternative(html_content.encode('utf-8') , "text/html")
-    msg.send()
-    print 'email was sent to user',user,' for monthly plan.'
-    time.sleep(10)
-    
+     
+        
+        msg = EmailMultiAlternatives(_('Time to make your monthly plan'), content.encode('utf-8') , SERVER_EMAIL, [member.email])
+        msg.attach_alternative(html_content.encode('utf-8') , "text/html")
+        msg.send()
+        print 'email was sent to user',user,' for monthly plan.'
+        time.sleep(10)
+        
     
 
 
@@ -157,27 +163,31 @@ def remind_weekly_review(users):
     
     for user in users:
         try:
-            f =getFrame(user).objects.get(title__startswith='Weekly Plan:'+this_monday.strftime('%Y-%m-%d')+' to ')
             member = Member.objects.get(username=user)
-            pick_lang = 'zh-cn'
-            if member.default_lang:        
-                 pick_lang = member.default_lang    
-                 activate(pick_lang) 
-            
-            frame_url = site_name + '/' + member.username + '/framebook/notes/note/' + str(f.id) + '/'   
-            content = _("It is the weekend again. Now is your time to review your weekly plan. Have you accomplished your plan this week? What have you done well? What you haven't done very well? What can you improve on? ")+'\n'+\
-                    _("Remember to find time on the weekend to review your weekly plan:") + '\n' + \
-                    frame_url + '\n\n' + \
-                    _("If your weekly plan is empty this week, it will be removed for you automatically the beginning of next week:") 
-            html_content =  _("It is the weekend again. Now is your time to review your weekly plan. Have you accomplished your plan this week? What have you done well? What you haven't done very well? What can you improve on? ")+'<br/>'+\
-                    _("Remember to find time on the weekend to review your weekly plan:") + '<br/>' + \
-                    '<a href="' + frame_url +'">' + frame_url + '</a>' + '<br/><br/>' + \
-                    _("If your weekly plan is empty this week, it will be removed for you automatically the beginning of next week:")
-            msg = EmailMultiAlternatives(_('Time to review your weekly plan'), content.encode('utf-8') , SERVER_EMAIL, [member.email])
-            msg.attach_alternative(html_content.encode('utf-8') , "text/html")
-            msg.send()
-            print 'email was sent to user',user,' for weekly plan review.'
-            time.sleep(10)       
+            if member.plan_notice == 'n':
+                pass
+            else:
+                f =getFrame(user).objects.get(title__startswith='Weekly Plan:'+this_monday.strftime('%Y-%m-%d')+' to ')
+                            
+                pick_lang = 'zh-cn'
+                if member.default_lang:        
+                     pick_lang = member.default_lang    
+                     activate(pick_lang) 
+                
+                frame_url = site_name + '/' + member.username + '/framebook/notes/note/' + str(f.id) + '/'   
+                content = _("It is the weekend again. Now is your time to review your weekly plan. Have you accomplished your plan this week? What have you done well? What you haven't done very well? What can you improve on? ")+'\n'+\
+                        _("Remember to find time on the weekend to review your weekly plan:") + '\n' + \
+                        frame_url + '\n\n' + \
+                        _("If your weekly plan is empty this week, it will be removed for you automatically the beginning of next week:") 
+                html_content =  _("It is the weekend again. Now is your time to review your weekly plan. Have you accomplished your plan this week? What have you done well? What you haven't done very well? What can you improve on? ")+'<br/>'+\
+                        _("Remember to find time on the weekend to review your weekly plan:") + '<br/>' + \
+                        '<a href="' + frame_url +'">' + frame_url + '</a>' + '<br/><br/>' + \
+                        _("If your weekly plan is empty this week, it will be removed for you automatically the beginning of next week:")
+                msg = EmailMultiAlternatives(_('Time to review your weekly plan'), content.encode('utf-8') , SERVER_EMAIL, [member.email])
+                msg.attach_alternative(html_content.encode('utf-8') , "text/html")
+                msg.send()
+                print 'email was sent to user',user,' for weekly plan review.'
+                time.sleep(10)       
         except:
             print sys.exc_info()  
             #print type(inst)
@@ -191,27 +201,30 @@ def remind_monthly_review(users):
       
     for user in users:
         try:
-            f =getFrame(user).objects.get(title__startswith='Monthly Plan:'+now.strftime('%Y-%m'))
             member = Member.objects.get(username=user)
-            pick_lang = 'zh-cn'
-            if member.default_lang:        
-                 pick_lang = member.default_lang    
-                 activate(pick_lang) 
-            
-            frame_url = site_name + '/' + member.username + '/framebook/notes/note/' + str(f.id) + '/'   
-            content = _("It is the end of the month again. Now is your time to review your monthly plan. Have you accomplished your plan this month? What have you done well? What you haven't done very well? What can you improve on? ")+'\n'+\
-                    _("Remember to find time to review your monthly plan:") + '\n' + \
-                    frame_url+ '\n\n'+\
-                    _("If your monthly plan is empty this month, it will be removed for you automatically the beginning of next month:") 
-            html_content =  _("It is the end of the month again. Now is your time to review your monthly plan. Have you accomplished your plan this month? What have you done well? What you haven't done very well? What can you improve on? ")+'<br/>'+\
-                    _("Remember to find time to review your monthly plan:") + '<br/>' + \
-                    '<a href="' + frame_url +'">' + frame_url + '</a>' + '<br/><br/>' + \
-                    _("If your monthly plan is empty this month, it will be removed for you automatically the beginning of next month:") 
-            msg = EmailMultiAlternatives(_('Time to review your monthly plan'), content.encode('utf-8') , SERVER_EMAIL, [member.email])
-            msg.attach_alternative(html_content.encode('utf-8') , "text/html")
-            msg.send()
-            print 'email was sent to user',user,' for monthly plan review.'
-            time.sleep(10)       
+            if member.plan_notice == 'n':
+                pass
+            else:
+                f =getFrame(user).objects.get(title__startswith='Monthly Plan:'+now.strftime('%Y-%m'))                
+                pick_lang = 'zh-cn'
+                if member.default_lang:        
+                     pick_lang = member.default_lang    
+                     activate(pick_lang) 
+                
+                frame_url = site_name + '/' + member.username + '/framebook/notes/note/' + str(f.id) + '/'   
+                content = _("It is the end of the month again. Now is your time to review your monthly plan. Have you accomplished your plan this month? What have you done well? What you haven't done very well? What can you improve on? ")+'\n'+\
+                        _("Remember to find time to review your monthly plan:") + '\n' + \
+                        frame_url+ '\n\n'+\
+                        _("If your monthly plan is empty this month, it will be removed for you automatically the beginning of next month:") 
+                html_content =  _("It is the end of the month again. Now is your time to review your monthly plan. Have you accomplished your plan this month? What have you done well? What you haven't done very well? What can you improve on? ")+'<br/>'+\
+                        _("Remember to find time to review your monthly plan:") + '<br/>' + \
+                        '<a href="' + frame_url +'">' + frame_url + '</a>' + '<br/><br/>' + \
+                        _("If your monthly plan is empty this month, it will be removed for you automatically the beginning of next month:") 
+                msg = EmailMultiAlternatives(_('Time to review your monthly plan'), content.encode('utf-8') , SERVER_EMAIL, [member.email])
+                msg.attach_alternative(html_content.encode('utf-8') , "text/html")
+                msg.send()
+                print 'email was sent to user',user,' for monthly plan review.'
+                time.sleep(10)       
         except Exception as inst:
             print sys.exc_info()  
    

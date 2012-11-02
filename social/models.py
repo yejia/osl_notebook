@@ -55,6 +55,10 @@ class Member(User):
         ('d', ugettext_lazy('Daily Digest')),
         ('w', ugettext_lazy('Weekly Digest')),        
     )  
+    PLAN_NOTICE_CHOICES = (      
+        ('n', ugettext_lazy('No Notice')),                
+        ('y', ugettext_lazy('Receive Plan Notice')),             
+    ) 
     HOME_CHOICES = (      
         ('s', ugettext_lazy('Snippets')),                
         ('f', ugettext_lazy('Frames')),
@@ -71,7 +75,8 @@ class Member(User):
     #TODO: change max_length to 5
     #so far, this is only used for scripts instead of in the web app. TODO:
     default_lang = models.CharField(max_length=10, choices=LANG_CHOICES, blank=True,  verbose_name=ugettext_lazy('Default language'))   
-    digest = models.CharField(max_length=1, choices=DIGEST_CHOICES, blank=True, default='d',  verbose_name=ugettext_lazy('Digest')) 
+    digest = models.CharField(max_length=1, choices=DIGEST_CHOICES, blank=True, default='d',  verbose_name=ugettext_lazy('Digest'))
+    plan_notice = models.CharField(max_length=1, choices=PLAN_NOTICE_CHOICES, blank=True, default='y',  verbose_name=ugettext_lazy('Plan Notice')) 
     home = models.CharField(max_length=1, choices=HOME_CHOICES, blank=True, default='s',  verbose_name=ugettext_lazy('Home'))
     #maynot be a good way to do like this. TODO:
     # Use UserManager to get the create_user method, etc.
