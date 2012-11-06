@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.http import HttpResponse,HttpResponseRedirect, Http404
+from django.shortcuts import get_object_or_404
 from django.shortcuts import render_to_response
 from django import forms
 from django.forms import ModelForm
@@ -169,7 +170,7 @@ def get_groups_list(request, username):
 def profile(request, username):
     gs_created = get_groups_created_by_self(request, username)
     gs_following = get_groups_following(request, username)  
-    profile_member = Member.objects.get(username=username)  
+    profile_member = get_object_or_404(Member, username=username) 
     areas = Area.objects.using(username).filter(private=False) 
     return render_to_response('social/profile.html', {'gs_created':gs_created, 'gs_following':gs_following, \
                                                       'profile_user':User.objects.get(username=username), \
