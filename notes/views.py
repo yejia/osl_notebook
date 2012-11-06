@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.http import HttpResponse,HttpResponseRedirect, Http404
+from django.shortcuts import get_object_or_404
 from django.shortcuts import render_to_response
 from django import forms
 from django.forms import ModelForm
@@ -1519,7 +1520,7 @@ def note(request, username, bookname, note_id):
     if 'framebook' == bookname:
         return frame(request, username, note_id)
     N = getNote(username, bookname)
-    note = N.objects.get(id=note_id)    
+    note = get_object_or_404(N, pk=note_id)
     #linkages = note.linkagenote_set.all()
     
         
