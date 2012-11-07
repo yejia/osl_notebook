@@ -159,7 +159,11 @@
       tag_path = '{{tag_tree.name}}' + '-' + tag_path;
       //alert('tag_path: '+tag_path);
       
-      window.open('/{{profile_username}}/tagframes/'+tag_path+'/'+bookname+'/notes/?sort=relevance')  ;       
+     {% if user.username == profile_username %}  
+            window.open('/{{profile_username}}/tagframes/'+tag_path+'/'+bookname+'/notes/?sort=relevance')  ;       
+     {% else %}  
+            window.open('/social/{{profile_username}}/tagframes/'+tag_path+'/'+bookname+'/notes/?sort=relevance')  ;       
+     {% endif %}  
       
     });
     

@@ -1117,6 +1117,8 @@ def suggest(request):
 
 
 def __get_notes_context(request, note_list):
+    print '__get_notes_context called'
+    
     theme = __get_view_theme(request)
     #view_mode = theme['view_mode']
     order_field = theme['sort']   
@@ -1187,13 +1189,41 @@ def __get_notes_context(request, note_list):
     
     order_type = request.GET.get('order_type','desc')  
     
-    if order_field == 'relevance':
-        order_field = 'init_date'
+#===============================================================================
+#    if order_field == 'relevance':
+#        order_field = 'init_date'
+#===============================================================================
 
+    print 'order_field', order_field
+    
+    #order_field that was set when triggering notes list view for tagframe app need to be reset
+    if order_field == 'relevance' and not (hasattr(request,'appname') and request.appname == 'tagframe'):
+        order_field = 'init_date' 
+    
     sorted_note_list = note_list    
-    if order_field != 'usefulness':  
+    if order_field not in  ['usefulness', 'relevance'] :  
         sorted_note_list = note_list.order_by('%s%s' % ((order_type == 'desc' and '-' or ''), order_field),'-init_date','desc') 
-    else:       
+    elif order_field == 'relevance':   
+         #sort by relevance
+        
+        
+        #for ordering by relevance, order by vote first so that vote can be the secondary ordering after relevance :
+        note_list = note_list.order_by('-vote')
+        
+        #it is too much computation to compute the relevance for each note. So cut the size if there are more than 100 notes. 
+        #This is not right! It still need to sort by relevance first to get the first 100 more relevant notes.
+        #TODO: create another table to store the relevance values for notes that are in the tag tree and do the computation separately every day.
+        if len(note_list) > 100:
+            note_list = note_list[:100]
+            request.limited = True
+        
+        sorted_notes = [(note, note.get_relevance(request.tag_path)) for note in note_list]   
+        sorted_notes.sort(key=lambda r: r[1],reverse = True) 
+        for item  in sorted_notes:
+            item[0].relevance = item[1] 
+            print 'relevance is',  item[1] 
+        sorted_note_list = [r[0] for r in sorted_notes]
+    else:         
         #Social_Note has usefulness
         sorted_notes = [(note, note.get_usefulness()) for note in note_list]   
         sorted_notes.sort(key=lambda r: r[1],reverse = (order_type == 'desc' and True or False))  

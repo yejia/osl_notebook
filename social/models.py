@@ -409,6 +409,57 @@ class Social_Note(models.Model):
         return False
     
     
+     
+     
+    def get_relevance(self, tag_path):
+        tag_list = tag_path.split('-')
+        tag_name = tag_list[-1]
+        relevance = 0
+        #check if this note really has tag_name as its tag.
+        if not tag_name in self.get_tags():
+            #print 'tag not in the note tags, return 0'
+            return 0 #not related at all. May raise an error here TODO:
+        
+        relevant_tags = [tag_name]
+        
+        #merge code of direct parent with grand parents?TODO:
+        direct_parent = tag_list[-2]
+        relevant_tags.append(direct_parent)
+        if direct_parent in self.get_tags():
+            relevance += 10 * tag_list.index(direct_parent)
+            
+        
+        ptf = Tag_Frame.objects.using(self.owner.username).get(name=direct_parent)
+        ptf.owner_name = self.owner.username
+        #print 'ptf.get_siblings(tag_name)', ptf.get_siblings(tag_name)
+        for sib in ptf.get_siblings(tag_name):
+            relevant_tags.append(sib)
+            if sib in self.get_tags():
+                relevance += 5
+        
+        #TODO: checking for cousins.
+        #check for uncles
+        grandparent_list = tag_list[:-2]
+        grandparent_list.reverse()
+        for i, grandparent in enumerate(grandparent_list):
+            relevant_tags.append(grandparent)
+            if grandparent in self.get_tags():
+                relevance += 10 * tag_list.index(grandparent)
+            child_tag_name = tag_list[-i-2]
+            gtf = Tag_Frame.objects.using(self.owner.username).get(name=grandparent)
+            #print 'child_tag_name:', child_tag_name, 'gtf', gtf
+            gtf.owner_name = self.owner.username
+            for sib in gtf.get_siblings(child_tag_name):
+                relevant_tags.append(sib)
+                if sib in self.get_tags():
+                    relevance += len(tag_list) - i #check if always > 0
+            
+        #log.info('relevant_tags'+str(relevant_tags))
+        for t in self.get_tags():
+            if not t in relevant_tags:
+                relevance -= 1
+        
+        return relevance    
        
 
 class Social_Snippet(Social_Note):

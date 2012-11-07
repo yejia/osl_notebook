@@ -127,6 +127,7 @@ urlpatterns = patterns('',
     (r'^(?P<username>[^/]+)/tagframes/deleteFrame/$', 'notebook.tags.views.delete_frame'),
     
     (r'^(?P<username>[^/]+)/tagframes/(?P<tag_path>[^/]+)/(?P<bookname>[^/]+)/notes/$', 'notebook.tags.views.notes_by_tag'),
+    (r'^social/(?P<username>[^/]+)/tagframes/(?P<tag_path>[^/]+)/(?P<bookname>[^/]+)/notes/$', 'notebook.tags.views.social_notes_by_tag'),
     (r'^(?P<username>[^/]+)/tagframes/getRelatedTags/$','notebook.tags.views.get_related_tags'),  
     (r'^(?P<username>[^/]+)/tagframes/export/$','notebook.tags.views.export'),  
 

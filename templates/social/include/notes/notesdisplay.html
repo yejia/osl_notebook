@@ -79,16 +79,18 @@
             
 		    <span class="social_thumb"> 
            
-           {% if user.username  %}
-            {% if user.username != note.owner.username %}  
-			<span class="take hover"><img src="/site_media/img/take.png" title="{% trans "Take this note"  %}"/></span>			
-            {% endif %}            
+            {% if user.username  %}
+                {% if user.username != note.owner.username %}  
+                    <span class="take hover"><img src="/site_media/img/take.png" title="{% trans "Take this note"  %}"/></span>			
+                {% endif %}            
             
-            <span class="voteuseful hover"><img src="/site_media/img/vote_up.gif"   title="{% trans "Group Member Vote Useful"  %}"/></span>           
-			<span class="voteunuseful hover"><img src="/site_media/img/vote_down.gif"  title="{% trans "Group Member Vote Unuseful"  %}"/></span>
+                <span class="voteuseful hover"><img src="/site_media/img/vote_up.gif"   title="{% trans "Group Member Vote Useful"  %}"/></span>           
+                <span class="voteunuseful hover"><img src="/site_media/img/vote_down.gif"  title="{% trans "Group Member Vote Unuseful"  %}"/></span>
             {% endif %}
-             <span id="note_vote" title="{% trans "Usefulness voted by group members"  %}">{{note.get_useful_votes}}/{{note.get_total_votes}}</span>
+            <span id="note_vote" title="{% trans "Usefulness voted by group members"  %}">{{note.get_useful_votes}}/{{note.get_total_votes}}</span>
             <span id="note_rank" title="{% trans "owner's ranking"  %}">{{note.vote}}</span>   
+            
+            
             
             <!--
             {% if user.username == note.owner.username %}  
@@ -102,7 +104,10 @@
 		    <span class="delete_img" title="soft delete"><img src="/site_media/img/delete.png"/></span>
 		    {% endif %}
             -->
-           
+            
+           {% if request.appname == 'tagframe' %}
+              <span id="note_relevance" title="{% trans "relevance"  %}" class="relevance">{{note.relevance}}</span>
+		    {% endif %}
            
        
             {% block brief_display %}
