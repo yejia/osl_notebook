@@ -87,6 +87,9 @@ def index(request, username):
                 return HttpResponseRedirect('/'+username+'/areas/')     
         if tag_ids:  
             a.root_tag_frame = Tag_Frame.objects.using(username).get(id=tag_ids[0])  
+        else:
+            messages.error(request, _("Please enter a tag!"))
+            return HttpResponseRedirect('/'+username+'/areas/')  
         a.save()   
     if request.user.username == username:
         areas = Area.objects.using(username).all()    
