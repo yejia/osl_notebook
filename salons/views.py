@@ -65,8 +65,8 @@ def group_salons(request, groupname):
     
 
 @login_required
-def group_salon_signup(request, groupname, salon_name): 
-    salon = Salon.objects.get(group__name=groupname, name=salon_name) 
+def group_salon_signup(request, groupname, salon_id): 
+    salon = Salon.objects.get(group__name=groupname, id=salon_id) 
     group = Group.objects.get(name=groupname)
     signup = request.GET.get('signup')
     group.members.add(request.user.member)
@@ -77,11 +77,11 @@ def group_salon_signup(request, groupname, salon_name):
     else:    
         salon.cancel(request.user.username)   
     
-    return HttpResponseRedirect('/groups/'+groupname+'/salons/salon/'+salon_name+'/')  
+    return HttpResponseRedirect('/groups/'+groupname+'/salons/salon/'+salon_id+'/')  
     
     
-def group_salon(request, groupname, salon_name):  
-    salon = Salon.objects.get(group__name=groupname, name=salon_name) 
+def group_salon(request, groupname, salon_id):  
+    salon = Salon.objects.get(group__name=groupname, id=salon_id) 
     group = Group.objects.get(name=groupname)
     if request.method == 'POST': 
         #check if the user has the permission to update this 
