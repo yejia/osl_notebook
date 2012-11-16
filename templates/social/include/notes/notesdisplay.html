@@ -36,14 +36,14 @@
      {% trans "View the learning area of this group" %}: <a href="/{{group.creator}}/areas/area/{{area.id}}/">{{area.name}}</a>
  </p>  
  <p>
-     {% trans "View tag trees of this group" %}: <a href="/groups/{{group.name}}/tagframes/">{% trans "Tag trees" %}</a>. {% trans "You can push your relevant tag trees to this group." %}
+     {% trans "View tag trees of this group" %}: <a href="/groups/{{group.id}}/tagframes/">{% trans "Tag trees" %}</a>. {% trans "You can push your relevant tag trees to this group." %}
  </p>  
 
  {% endif %}  
  
  {% if appname == 'groups'   %} 
  <p>
-        <a href="/groups/{{group.name}}/salons/">{% trans "View salons" %}</a>
+        <a href="/groups/{{group.id}}/salons/">{% trans "View salons" %}</a>
 </p>
  {% endif %}  
 

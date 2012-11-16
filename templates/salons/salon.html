@@ -81,7 +81,7 @@ $(document).ready(function(){
 
 
 {% block site_branding %}
- {% trans "Group" %}  <a href="/groups/{{groupname}}/">{{groupname}}</a> {% trans "'s Learning Salon" %}   : <b>{{salon.name}} </b>
+ {% trans "Group" %}  <a href="/groups/{{group.id}}/">{{groupname}}</a> {% trans "'s Learning Salon" %}   : <b>{{salon.name}} </b>
 
 {% endblock %}
 
@@ -97,7 +97,7 @@ $(document).ready(function(){
 {% endcomment %}
 </div>
 
-<a href="/groups/{{groupname}}/salons/">{% trans "View all of " %}{{groupname}} {% trans "'s Learning salons" %}</a>
+<a href="/groups/{{group.id}}/salons/">{% trans "View all of " %}{{groupname}} {% trans "'s Learning salons" %}</a>
 <br/><br/>
 
 

@@ -127,9 +127,9 @@
             
             
               $('span#group_delete_member').click(function(){               
-                   var group_name = $(this).parents('li[group_name]').attr('group_name');
+                   var group_id = $(this).parents('li[group_id]').attr('group_id');
                     $(this).parents("li[member_id]").remove();
-                    $.post('/groups/'+group_name+'/admin/deleteMember/',{'member_id':$(this).parents('li[member_id]').attr('member_id') }, memberDeleted, 'json');
+                    $.post('/groups/'+group_id+'/admin/deleteMember/',{'member_id':$(this).parents('li[member_id]').attr('member_id') }, memberDeleted, 'json');
                    
                 });
                 

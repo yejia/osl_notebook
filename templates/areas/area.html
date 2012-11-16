@@ -222,7 +222,7 @@ $(document).ready(function(){
 <div class="padded">
   <b>{% trans "Learning groups in this area" %}:</b>
   {% for g in area.get_groups %}
-    <span group_id="{{g.id}}"><a href="/groups/{{g.name}}/" target="_blank">{{g.name}}</a>
+    <span group_id="{{g.id}}"><a href="/groups/{{g.id}}/" target="_blank">{{g.name}}</a>
     &nbsp;
    {% if user.username == profile_username %}  
          <span title="{% trans "remove this group" %}" class="inline_delete"  id="area_delete_group">&nbsp;&nbsp;&nbsp;</span>

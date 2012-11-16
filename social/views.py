@@ -135,9 +135,9 @@ class EditGroupForm(ModelForm):
 
 @login_required
 @cache_page(300)
-def group_index(request, groupname):
+def group_index(request, groupid):
     
-    return HttpResponseRedirect('/groups/'+groupname+'/snippetbook/notes/') 
+    return HttpResponseRedirect('/groups/'+groupid+'/snippetbook/notes/') 
 
 
 
@@ -587,19 +587,19 @@ def remove_friend(request, username):
 #But how about the special sharinggroup tag? Should be removed, right?
 
 @login_required
-def join_group(request, groupname):
+def join_group(request, groupid):
     user = request.user
-    group = G.objects.get(name=groupname)  
+    group = G.objects.get(id=groupid)  
     group.members.add(user.member)
     group.save()
     push_group_tags_back(request, group.name)
-    return HttpResponseRedirect('/groups/'+groupname+'/snippetbook/notes/')
+    return HttpResponseRedirect('/groups/'+groupid+'/snippetbook/notes/')
     
 
 
 @login_required
-def group_admin(request, groupname):
-    g = G.objects.get(name=groupname) 
+def group_admin(request, groupid):
+    g = G.objects.get(id=groupid) 
     #TODO: move below to a decorator
     if request.user.member not in g.admins.all():
         return HttpResponse("You are not an admin of this group, and thus cannot admin this group.", mimetype="text/plain") #TODO: translate
@@ -614,9 +614,9 @@ def group_admin(request, groupname):
 
 #delete a member won't remove the group:groupname workingset from member's personal space 
 @login_required    
-def group_delete_member(request, groupname):
+def group_delete_member(request, groupid):
     #groupname = request.POST.get('group_name')
-    g = G.objects.get(name=groupname)     
+    g = G.objects.get(id=groupid)     
     member_id = request.POST.get('member_id')
     member = User.objects.get(id=member_id)
     #TODO: move below to a decorator
@@ -631,95 +631,97 @@ def group_delete_member(request, groupname):
     return HttpResponse(simplejson.dumps({'type':'success','msg':_('You have successfully removed the member from the group.')}), "application/json")
 
 
-@login_required
-def group_update_tags(request, groupname):
-    tag_names = request.POST.getlist('item[tags][]')
-    group = G.objects.get(name=groupname)     
-    for tag_name in tag_names: 
-        if not tag_name in group.get_tag_names():
-            group_add_tags(request, groupname)
-    for tag_name in group.get_tag_names():
-        if not tag_name in tag_names:
-            group_remove_tag(request, groupname)
+#===below seems not used============================================================================
+# @login_required
+# def group_update_tags(request, groupname):
+#    tag_names = request.POST.getlist('item[tags][]')
+#    group = G.objects.get(name=groupname)     
+#    for tag_name in tag_names: 
+#        if not tag_name in group.get_tag_names():
+#            group_add_tags(request, groupname)
+#    for tag_name in group.get_tag_names():
+#        if not tag_name in tag_names:
+#            group_remove_tag(request, groupname)
+#===============================================================================
                      
 
 @login_required
-def update_group(request, groupname):
-    group = G.objects.get(name=groupname)   
+def update_group(request, groupid):
+    group = G.objects.get(id=groupid)   
     editGroupForm = EditGroupForm(request.POST, request.FILES, instance=group)
     #TODO:record last modified by who?
     #username = request.user.username
     log.debug('form errors:'+str(editGroupForm.errors))
     editGroupForm.save() 
-    return HttpResponseRedirect('/groups/'+groupname+'/admin/')
+    return HttpResponseRedirect('/groups/'+groupid+'/admin/')
 
 
 #TODO: check if admin
 @login_required
-def group_add_users(request, groupname):
+def group_add_users(request, groupid):
     user_names = request.POST.getlist('item[tags][]')
     #TODO:what is below for?
     #tags = [ST.objects.get(name=tag_name).name for tag_name in tag_names]
     if not user_names:    
         #TODO: give an error page, also validation on the form       
         messages.error(request, _("No users are entered!"))  
-    group = G.objects.get(name=groupname)     
+    group = G.objects.get(id=groupid)     
     for uname in user_names:
         member = Member.objects.get(username=uname)        
         group.members.add(member)  
         if member.default_lang:
             activate(member.default_lang)
-        url = urlquote('www.91biji.com/groups/' + groupname + '/')
+        url = urlquote('www.91biji.com/groups/' + groupid + '/')
             
-        content = _('You are added to the group ')+groupname+'\n\n'+\
+        content = _('You are added to the group ')+group.name+'\n\n'+\
                 _('You can visit this group at ')+ 'http://' + url  +'\n\n'+\
                 _('If you do not want to join this group, you can remove yourself from this group on your groups page. ') +\
                 urlquote('www.91biji.com/'+uname+'/groups/')
                 
-        send_mail(_('You are added to group ')+groupname, content.encode('utf-8'), u'sys@opensourcelearning.org', [member.email])
+        send_mail(_('You are added to group ')+group.name, content.encode('utf-8'), u'sys@opensourcelearning.org', [member.email])
     
     if request.user.member.default_lang:
           activate(request.user.member.default_lang)  
     messages.success(request, _("You have successfully added the user to the group!"))  
        
-    return HttpResponseRedirect('/groups/'+groupname+'/admin/')     
+    return HttpResponseRedirect('/groups/'+groupid+'/admin/')     
 
 
 
 #TODO: check if admin
 @login_required
-def group_invite_users(request, groupname):
+def group_invite_users(request, groupid):
     user_names = request.POST.getlist('item[tags][]')
     #TODO:what is below for?
     #tags = [ST.objects.get(name=tag_name).name for tag_name in tag_names]
     if not user_names:    
         #TODO: give an error page, also validation on the form       
         messages.error(request, _("No users are entered!"))  
-    group = G.objects.get(name=groupname)     
+    group = G.objects.get(id=groupid)     
     for uname in user_names:
         member = Member.objects.get(username=uname)
         #for now, only invite, don't add the member directly
         #group.members.add(member)  
         if member.default_lang:
             activate(member.default_lang)
-        url = urlquote('www.91biji.com/groups/' + groupname + '/')
+        url = urlquote('www.91biji.com/groups/' + groupid + '/')
             
-        content = _('You are invited to join the group ')+groupname+'\n\n'+\
+        content = _('You are invited to join the group ')+group.name+'\n\n'+\
                 _('You can visit this group at ')+ 'http://' + url  +'\n\n'+\
                 _('If you want to join this group, you can click on the "join the group" button.')+'\n\n'+\
                  _('After joining, if you want to remove yourself from this group, you can do that in your groups page.')
-        send_mail(_('You are invited to group ')+groupname, content.encode('utf-8'), u'sys@opensourcelearning.org', [member.email])
+        send_mail(_('You are invited to group ')+group.name, content.encode('utf-8'), u'sys@opensourcelearning.org', [member.email])
     
     if request.user.member.default_lang:
           activate(request.user.member.default_lang)  
     messages.success(request, _("You have successfully sent the group invitation!"))  
        
-    return HttpResponseRedirect('/groups/'+groupname+'/admin/')  
+    return HttpResponseRedirect('/groups/'+groupid+'/admin/')  
 
 
     
 @login_required
-def group_add_tags(request, groupname):
+def group_add_tags(request, groupid):
     """
     Add tags to a group. Non-existing tags can be added, and they will be pushed back to each user's personal space
     """
@@ -730,7 +732,7 @@ def group_add_tags(request, groupname):
     if not tag_names:    
         #TODO: give an error page, also validation on the form       
         messages.error(request, "No tags are entered!")   
-    group = G.objects.get(name=groupname)   
+    group = G.objects.get(id=groupid)   
     
     username = request.user.username
     
@@ -777,15 +779,15 @@ def group_add_tags(request, groupname):
         group.tags.add(t)            
     group.save()   
     
-    return HttpResponseRedirect('/groups/'+groupname+'/admin/')
+    return HttpResponseRedirect('/groups/'+groupid+'/admin/')
      
 
 
 @login_required
-def group_remove_tag(request, groupname):
+def group_remove_tag(request, groupid):
     tag_id = request.POST.get('tag_id')
     tag = ST.objects.get(id=tag_id)
-    group = G.objects.get(name=groupname) 
+    group = G.objects.get(id=groupid) 
     group.tags.remove(tag)
     #TODO: update user's group working set
     return HttpResponse('successful', mimetype="text/plain")  
@@ -796,15 +798,15 @@ def group_remove_tag(request, groupname):
 
 @login_required
 @cache_page(300)
-def group(request, groupname, bookname):
+def group(request, groupid, bookname):
     
     gs = G.objects.filter(members__username=request.user.username)  
-    group = G.objects.get(name=groupname)  
+    group = G.objects.get(id=groupid)  
     #tags = [t for t in group.tags.all()] 
     
     log.debug('tags of the group:'+str(group.tags.all()))
     
-    if group.private and groupname not in [g.name for g in gs]:
+    if group.private and group.name not in [g.name for g in gs]:
         raise Http404
    
     note_list = group.get_notes(bookname)
@@ -820,8 +822,8 @@ def group(request, groupname, bookname):
       
     #group.tags.all()
     #tags = Social_Tag.objects.filter(group=group).order_by('name')#.annotate(Count('social_'+book_entry_dict.get(bookname))).order_by('name')
-    tags = get_group_tags(request, groupname, bookname)
-    profile_member = Group.objects.get(name=groupname)
+    tags = get_group_tags(request, group.id, bookname)
+    profile_member = group#Group.objects.get(name=group.name)
     
     
     
@@ -840,7 +842,7 @@ def group(request, groupname, bookname):
                                                  'tags':tags, 'qstr':qstr,\
                                                   'profile_member':profile_member,\
                                                   'appname':'groups', 'cl':cl, 'area':area},\
-                                                  context_instance=RequestContext(request, {'book_uri_prefix':'/groups/'+groupname,
+                                                  context_instance=RequestContext(request, {'book_uri_prefix':'/groups/'+groupid,
                                                                                              'note_type':bookname_note_type_dict.get(bookname),
                                                                                              'pick_empty':request.GET.get('pick_empty', 'all'),
                                                                                              'pick_plan':request.GET.get('pick_plan', 'all'),
@@ -848,14 +850,14 @@ def group(request, groupname, bookname):
 
 
 
-def group_tagframes(request, groupname):
-    group = G.objects.get(name=groupname)
+def group_tagframes(request, groupid):
+    group = G.objects.get(id=groupid)
     #print 'group', group
     tfs = group.get_tag_frames()   
     return render_to_response('social/group/group_tagframes.html', {'group':group,                                
                                                   'tag_frames':tfs, 'appname':'groups', 
                                                   },\
-                                                  context_instance=RequestContext(request, {'book_uri_prefix':'/groups/'+groupname}))
+                                                  context_instance=RequestContext(request, {'book_uri_prefix':'/groups/'+groupid}))
               
 
 @cache_page(300)
@@ -882,8 +884,8 @@ def notes_tag(request, username, bookname, tag_name):
 
 
 
-def get_group_tags(request, groupname, bookname):
-    group = G.objects.get(name=groupname) 
+def get_group_tags(request, groupid, bookname):
+    group = G.objects.get(id=groupid) 
     tags_qs = group.tags.all().order_by('name')    
     SN = getSN(bookname)
     tags = []
@@ -895,8 +897,8 @@ def get_group_tags(request, groupname, bookname):
 
 
 @login_required
-def group_tag(request, groupname, bookname, tag_name):    
-    group = G.objects.get(name=groupname)  
+def group_tag(request, groupid, bookname, tag_name):    
+    group = G.objects.get(id=groupid)  
     
 #    if bookname == 'scraps':  
 #        note_list = Social_Scrap.objects.filter(tags__name=tag_name, owner__in=group.members.all())         
@@ -911,8 +913,8 @@ def group_tag(request, groupname, bookname, tag_name):
     qstr = __getQStr(request)    
     note_list  = getSearchResults(note_list, qstr)
     sort, order_type,  paged_notes, cl  = __get_notes_context(request, note_list) 
-    tags = get_group_tags(request, groupname, bookname)
-    profile_member = Group.objects.get(name=groupname)
+    tags = get_group_tags(request, groupid, bookname)
+    profile_member = group#Group.objects.get(name=groupname)
     return render_to_response('social/notes/group_notes.html', {'group':group, 'note_list':paged_notes,'sort':sort, 'current_tag':tag_name, 'bookname':bookname,\
                                           'profile_member':profile_member, 'tags':tags, 'appname':'groups', 'cl':cl},\
                                                   context_instance=RequestContext(request,  {'note_type':bookname_note_type_dict.get(bookname),

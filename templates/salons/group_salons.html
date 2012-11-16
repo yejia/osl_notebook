@@ -18,7 +18,7 @@
 
 {% block site_branding %}
 <br/>
- {% trans "Group" %}  <a href="/groups/{{groupname}}/">{{groupname}}</a>{% trans "'s Learning Salons" %}  
+ {% trans "Group" %}  <a href="/groups/{{group.id}}/">{{groupname}}</a>{% trans "'s Learning Salons" %}  
 <br/><br/>
 
 {% endblock %}
@@ -213,7 +213,7 @@
 {% endif %}
   </td>
 <td>
-<a href="/groups/{{groupname}}/salons/salon/{{salon.name}}/" class="big_font">{{salon.name}}</a><br/>
+<a href="/groups/{{group.id}}/salons/salon/{{salon.id}}/" class="big_font">{{salon.name}}</a><br/>
  <b>{% trans "Group" %}:</b>  {{salon.group}}<br/>
  <b>{% trans "Time" %}:</b>  {{salon.start_date|date:"M d Y D"}}  {{salon.start_time}} - {{salon.end_date|date:"M d Y D"}}  {{salon.end_time}}<br/>
   <b>{% trans "Location" %}:</b>  {{salon.location}}<br/>

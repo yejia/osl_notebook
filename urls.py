@@ -34,8 +34,8 @@ urlpatterns = patterns('',
    
 
     (r'^$','notebook.notes.views.root'),
-    (r'^mysysadmin/doc/', include('django.contrib.admindocs.urls')),
-    (r'^mysysadmin/', include('notebook.notes.admin.urls')),
+    (r'^myadmin/doc/', include('django.contrib.admindocs.urls')),
+    (r'^myadmin/', include('notebook.notes.admin.urls')),
 
     #TODO: maybe all urls for adding and updating shouldn't have a username in the url, and 
     #should get it from the request 
@@ -51,29 +51,29 @@ urlpatterns = patterns('',
     #(r'^users/(?P<username>[^/]+)/wall/snippets/$', 'notebook.social.views.wall_snippets'),
     #(r'^users/(?P<username>[^/]+)/wall/bookmarks/$', 'notebook.social.views.wall_bookmarks'),
     #(r'^users/(?P<username>[^/]+)/wall/scraps/$', 'notebook.social.views.wall_scraps'),
-    (r'^groups/(?P<groupname>[^/]+)/$', 'notebook.social.views.group_index'),
-    (r'^groups/(?P<groupname>[^/]+)/tagframes/$', 'notebook.social.views.group_tagframes'),
-    (r'^groups/(?P<groupname>[^/]+)/salons/$', 'notebook.salons.views.group_salons'),
-    (r'^groups/(?P<groupname>[^/]+)/salons/salon/(?P<salon_id>[^/]+)/$', 'notebook.salons.views.group_salon'),
-    (r'^groups/(?P<groupname>[^/]+)/salons/salon/(?P<salon_id>[^/]+)/signup/$', 'notebook.salons.views.group_salon_signup'),
+    (r'^groups/(?P<groupid>[^/]+)/$', 'notebook.social.views.group_index'),
+    (r'^groups/(?P<groupid>[^/]+)/tagframes/$', 'notebook.social.views.group_tagframes'),
+    (r'^groups/(?P<groupid>[^/]+)/salons/$', 'notebook.salons.views.group_salons'),
+    (r'^groups/(?P<groupid>[^/]+)/salons/salon/(?P<salon_id>[^/]+)/$', 'notebook.salons.views.group_salon'),
+    (r'^groups/(?P<groupid>[^/]+)/salons/salon/(?P<salon_id>[^/]+)/signup/$', 'notebook.salons.views.group_salon_signup'),
 
-    (r'^groups/(?P<groupname>[^/]+)/joinGroup/$', 'notebook.social.views.join_group'),
-    (r'^groups/(?P<groupname>[^/]+)/admin/$', 'notebook.social.views.group_admin'),
-    (r'^groups/(?P<groupname>[^/]+)/admin/deleteMember/$', 'notebook.social.views.group_delete_member'),
-    (r'^groups/(?P<groupname>[^/]+)/admin/addTags2Group/$', 'notebook.social.views.group_add_tags'),
-    (r'^groups/(?P<groupname>[^/]+)/admin/removeTagFromGroup/$', 'notebook.social.views.group_remove_tag'),
-    (r'^groups/(?P<groupname>[^/]+)/admin/updateGroup/$', 'notebook.social.views.update_group'),
-    (r'^groups/(?P<groupname>[^/]+)/admin/addUsers2Group/$', 'notebook.social.views.group_add_users'),
-    (r'^groups/(?P<groupname>[^/]+)/admin/inviteUsers2Group/$', 'notebook.social.views.group_invite_users'),
+    (r'^groups/(?P<groupid>[^/]+)/joinGroup/$', 'notebook.social.views.join_group'),
+    (r'^groups/(?P<groupid>[^/]+)/admin/$', 'notebook.social.views.group_admin'),
+    (r'^groups/(?P<groupid>[^/]+)/admin/deleteMember/$', 'notebook.social.views.group_delete_member'),
+    (r'^groups/(?P<groupid>[^/]+)/admin/addTags2Group/$', 'notebook.social.views.group_add_tags'),
+    (r'^groups/(?P<groupid>[^/]+)/admin/removeTagFromGroup/$', 'notebook.social.views.group_remove_tag'),
+    (r'^groups/(?P<groupid>[^/]+)/admin/updateGroup/$', 'notebook.social.views.update_group'),
+    (r'^groups/(?P<groupid>[^/]+)/admin/addUsers2Group/$', 'notebook.social.views.group_add_users'),
+    (r'^groups/(?P<groupid>[^/]+)/admin/inviteUsers2Group/$', 'notebook.social.views.group_invite_users'),
 
     (r'^salons/$', 'notebook.salons.views.salons'),
 
 
 
-    #(r'^groups/(?P<groupname>[^/]+)/snippets/$', 'notebook.social.views.group_snippets'),
-    (r'^groups/(?P<groupname>[^/]+)/(?P<bookname>[^/]+)/notes/$', 'notebook.social.views.group'),
-    #(r'^groups/(?P<groupname>[^/]+)/(?P<bookname>[^/]+)/notes/note/(?P<note_id>[^/]+)/$', 'notebook.social.views.note'),
-    (r'^groups/(?P<groupname>[^/]+)/(?P<bookname>[^/]+)/tags/(?P<tag_name>[^/]+)/$','notebook.social.views.group_tag'),
+    #(r'^groups/(?P<groupid>[^/]+)/snippets/$', 'notebook.social.views.group_snippets'),
+    (r'^groups/(?P<groupid>[^/]+)/(?P<bookname>[^/]+)/notes/$', 'notebook.social.views.group'),
+    #(r'^groups/(?P<groupid>[^/]+)/(?P<bookname>[^/]+)/notes/note/(?P<note_id>[^/]+)/$', 'notebook.social.views.note'),
+    (r'^groups/(?P<groupid>[^/]+)/(?P<bookname>[^/]+)/tags/(?P<tag_name>[^/]+)/$','notebook.social.views.group_tag'),
 
 
 

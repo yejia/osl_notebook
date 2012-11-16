@@ -40,8 +40,8 @@
 {% endif %}
   </td>
 <td>
-<a href="/groups/{{salon.group.name}}/salons/salon/{{salon.id}}/" class="big_font">{{salon.name}}</a><br/>
- <b>{% trans "Group" %}:</b>  <a href="/groups/{{salon.group.name}}/">{{salon.group}}</a><br/>
+<a href="/groups/{{salon.group.id}}/salons/salon/{{salon.id}}/" class="big_font">{{salon.name}}</a><br/>
+ <b>{% trans "Group" %}:</b>  <a href="/groups/{{salon.group.id}}/">{{salon.group}}</a><br/>
  <b>{% trans "Time" %}:</b>  {{salon.start_date|date:"M d Y D"}}  {{salon.start_time}} - {{salon.end_date|date:"M d Y D"}}  {{salon.end_time}}<br/>
   <b>{% trans "Location" %}:</b>  {{salon.location}}<br/>
      <b>{% trans "Host" %}:</b>  <a href="/social/{{salon.creator}}/">{{salon.creator}}</a><br/>

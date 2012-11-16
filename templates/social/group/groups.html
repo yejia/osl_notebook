@@ -70,7 +70,7 @@
 {% for g in gs_created_by_self %}		
 
 <li>
-<a href="/groups/{{g}}/">{{g}}</a>&nbsp;&nbsp;&nbsp;&nbsp;<span><a href="/groups/{{g}}/admin">{% trans "admin" %}</a></span>
+<a href="/groups/{{g.id}}/">{{g}}</a>&nbsp;&nbsp;&nbsp;&nbsp;<span><a href="/groups/{{g.id}}/admin">{% trans "admin" %}</a></span>
 {% if g.private %} <span class="lock_noclick" title="{% trans 'private'  %}" style="display:{% if g.private %}inline{% else %}none{% endif %};">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;              
                                    </span> 
         {% else %} <span class="unlock_noclick" title="{% trans 'public'  %}" style="display:{% if g.private %}none{% else %}inline{% endif %};">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;          
@@ -87,7 +87,7 @@
 {% blocktrans %} Groups followed by {{profile_username}} {% endblocktrans %}:
 {% for g in gs_following %}		
 <li member_id="{{user.id}}" group_name={{g.name}}>
-<a href="/groups/{{g}}/">{{g}}</a>
+<a href="/groups/{{g.id}}/">{{g}}</a>
 {% if user.username == profile_username %}
 <span title="{% trans "remove myself from this group" %}" class="inline_delete" id="group_delete_member">&nbsp;&nbsp;&nbsp;</span>
 {% endif %}

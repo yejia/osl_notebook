@@ -40,8 +40,8 @@ def salons(request):
                     context_instance=RequestContext(request,  {}))
 
 @login_required
-def group_salons(request, groupname):
-    group = Group.objects.get(name=groupname)
+def group_salons(request, groupid):
+    group = Group.objects.get(id=groupid)
     if request.method == 'POST': 
         #TODO:check if end date is before start date, and so on
         post = request.POST.copy()  
@@ -53,21 +53,21 @@ def group_salons(request, groupname):
         log.debug('form errors:'+str(addSalonForm.errors))
         addSalonForm.save()
         
-    salons = Salon.objects.filter(group__name=groupname) 
+    salons = Salon.objects.filter(group__name=group.name) 
     
     addSalonForm = AddSalonForm(initial={'creator': request.user.member.id, 'group':group.id})    
     
     return render_to_response('salons/group_salons.html',{'salons':salons, 'addSalonForm':addSalonForm, 
-                                                   'groupname':groupname,
+                                                   'groupname':group.name,
                                                    'group':group}, \
                     context_instance=RequestContext(request,  {}))
     
     
 
 @login_required
-def group_salon_signup(request, groupname, salon_id): 
-    salon = Salon.objects.get(group__name=groupname, id=salon_id) 
-    group = Group.objects.get(name=groupname)
+def group_salon_signup(request, groupid, salon_id): 
+    salon = Salon.objects.get(group__id=groupid, id=salon_id) 
+    group = Group.objects.get(id=groupid)
     signup = request.GET.get('signup')
     group.members.add(request.user.member)
     if signup == 'y':          
@@ -77,12 +77,12 @@ def group_salon_signup(request, groupname, salon_id):
     else:    
         salon.cancel(request.user.username)   
     
-    return HttpResponseRedirect('/groups/'+groupname+'/salons/salon/'+salon_id+'/')  
+    return HttpResponseRedirect('/groups/'+groupid+'/salons/salon/'+salon_id+'/')  
     
     
-def group_salon(request, groupname, salon_id):  
-    salon = Salon.objects.get(group__name=groupname, id=salon_id) 
-    group = Group.objects.get(name=groupname)
+def group_salon(request, groupid, salon_id):  
+    salon = Salon.objects.get(group__id=int(groupid), id=salon_id) 
+    group = Group.objects.get(id=groupid)
     if request.method == 'POST': 
         #check if the user has the permission to update this 
         if request.user.username == salon.creator.username: 
@@ -98,9 +98,9 @@ def group_salon(request, groupname, salon_id):
     if request.user.is_anonymous():
         is_in_group = False
     else:
-        is_in_group =  request.user.member.is_in_group(groupname) 
+        is_in_group =  request.user.member.is_in_group(group.name) 
     
     return render_to_response('salons/salon.html',{'salon':salon, 'editSalonForm':editSalonForm, 
-                                                   'groupname':groupname, 'is_in_group': is_in_group,
+                                                   'groupname':group.name, 'is_in_group': is_in_group,
                                                    'group':group}, \
                     context_instance=RequestContext(request,  {}))
