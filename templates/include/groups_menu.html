@@ -8,14 +8,14 @@
          {% if g.private %}
              {% if user.username == profile_member.username  %} 
              <li>
-                    <a href="/groups/{{ g.name }}/">{{g.name}}</a>   
+                    <a href="/groups/{{ g.id }}/">{{g.name}}</a>   
                     <span class="lock_noclick" title="{% trans 'private'  %}" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;              
                                    </span> 
               </li>                     
              {% endif %}
         {% else %}
               <li>        
-                    <a href="/groups/{{ g.name }}/">{{g.name}}</a>  
+                    <a href="/groups/{{ g.id }}/">{{g.name}}</a>  
                     <span class="unlock_noclick" title="{% trans 'public'  %}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;          
                     </span>    
               </li>                

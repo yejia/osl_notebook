@@ -101,7 +101,7 @@
 {% for g in gs_created %}	
 {% if  not g.private %}
 <li>
-<a href="/groups/{{g}}/">{{g}}</a>
+<a href="/groups/{{g.id}}/">{{g}}</a>
 </li>
 {% endif %}
 {% endfor %}
@@ -113,7 +113,7 @@
 {% for g in gs_following %}	
 {% if  not g.private %}
 <li>
-<a href="/groups/{{g}}/">{{g}}</a>
+<a href="/groups/{{g.id}}/">{{g}}</a>
 </li>
 {% endif %}
 {% endfor %}
