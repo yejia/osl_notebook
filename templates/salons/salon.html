@@ -181,6 +181,41 @@ $(document).ready(function(){
  </div>
 
 
+<div class="padded">
+ <span class="big_font">{% trans "Attendees" %}:</span><br/><br/>
+ {% trans "Will attend" %}:
+ <ul>
+ {% for m in signed %}
+ <li style="display: inline ;">
+      <a href="/social/{{m}}/">{% comment %}below copied from profile page{% endcomment %}
+      <img class="avatar_small"  title="{{m}}"  src={% if  m.icon %}"/file/{{m.icon}}"
+{% else %}
+{% if  m.gender == 'f' %}"/site_media/img/default_female.png"{% endif %} 
+{% if  m.gender == 'm' %}"/site_media/img/default_male.jpg"{% endif %} 
+{% if  not m.gender %}"/site_media/img/default_user_icon.jpg"{% endif %}{% endif %}/>
+</a>
+</li>
+ {% endfor %}
+ </ul>
+ 
+  {% trans "Maybe" %}:
+ <ul>
+ {% for m in maybe %}
+ <li style="display: inline ;">
+      <a href="/social/{{m}}/">{% comment %}below copied from profile page{% endcomment %}
+      <img class="avatar_small"  title="{{m}}"  src={% if  m.icon %}"/file/{{m.icon}}"
+{% else %}
+{% if  m.gender == 'f' %}"/site_media/img/default_female.png"{% endif %} 
+{% if  m.gender == 'm' %}"/site_media/img/default_male.jpg"{% endif %} 
+{% if  not m.gender %}"/site_media/img/default_user_icon.jpg"{% endif %}{% endif %}/>
+</a>
+</li>
+ {% endfor %}
+ </ul>
+ 
+</div>
+
+
 
 <br/>
 {% if user.member in group.admins.all  %} 

@@ -934,7 +934,10 @@ img.avatar{
 height: auto;
 width: 100px;
 }
-
+img.avatar_small{
+height: 28px;
+width: 28px;
+}
 ul.binding_sites li{
 margin-top:20px;
 }

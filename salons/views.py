@@ -100,7 +100,11 @@ def group_salon(request, groupid, salon_id):
     else:
         is_in_group =  request.user.member.is_in_group(group.name) 
     
+    signed_ids = salon.get_signed()
+    signed = Member.objects.filter(id__in=signed_ids)
+    maybe_ids = salon.get_maybe()
+    maybe = Member.objects.filter(id__in=maybe_ids)
     return render_to_response('salons/salon.html',{'salon':salon, 'editSalonForm':editSalonForm, 
                                                    'groupname':group.name, 'is_in_group': is_in_group,
-                                                   'group':group}, \
+                                                   'group':group, 'signed':signed, 'maybe':maybe}, \
                     context_instance=RequestContext(request,  {}))
