@@ -97,7 +97,7 @@
 </script>
 {% endblock %}
 
-
+{% include "include/switchui_js.html" %}  
 	
 <script type="text/javascript">
 	$(document).ready(function(){	 
@@ -208,15 +208,7 @@
          });    
          
          
-           $('#space'). mouseover(function(){     
-                       $('.space_menu').show();
-                      
-                 });
-                 
-            $('#space_nav'). mouseleave(function(){     
-                       $('.space_menu').hide();
-                      
-                 });    
+      
          
          
 	});

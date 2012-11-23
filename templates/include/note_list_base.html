@@ -108,6 +108,7 @@
 
 {% include "include/notes/add_note_js.html" %}
 {% include "include/notes/update_tags_inline_js.html" %}    
+{% include "include/switchui_js.html" %}  
 <script type="text/javascript">
 
 
@@ -1379,15 +1380,7 @@ function insertParam(key, value)
                 }
         
      
-             $('#space'). mouseover(function(){     
-                       $('.space_menu').show();
-                      
-                 });
 
-                  $('#space_nav'). mouseleave(function(){     
-                       $('.space_menu').hide();
-                      
-                 });    
          
         
         {% block extra_ready_script %}
