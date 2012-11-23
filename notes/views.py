@@ -3153,6 +3153,17 @@ def set_language(request):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))
 
 
+def switch_ui(request):
+    if not request.user.is_anonymous(): 
+        #TODO:check size of input?
+        request.user.member.default_ui = request.GET.get('v')
+        request.user.member.save()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))    
+
+
+
+
+
 def for_new_users(request):
     return render_to_response('doc/for_new_users.html', context_instance=RequestContext(request))
 

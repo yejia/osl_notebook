@@ -1378,7 +1378,17 @@ function insertParam(key, value)
                 
                 }
         
+     
+             $('#space'). mouseover(function(){     
+                       $('.space_menu').show();
+                      
+                 });
 
+                  $('#space_nav'). mouseleave(function(){     
+                       $('.space_menu').hide();
+                      
+                 });    
+         
         
         {% block extra_ready_script %}
         {% endblock %}

@@ -67,7 +67,7 @@ urlpatterns = patterns('',
     (r'^groups/(?P<groupid>[^/]+)/admin/inviteUsers2Group/$', 'notebook.social.views.group_invite_users'),
 
     (r'^salons/$', 'notebook.salons.views.salons'),
-
+    (r'^mysalons/$', 'notebook.salons.views.my_salons'),
 
 
     #(r'^groups/(?P<groupid>[^/]+)/snippets/$', 'notebook.social.views.group_snippets'),
@@ -220,6 +220,7 @@ urlpatterns = patterns('',
     (r'activate/$', 'notebook.notes.views.activate'),
     (r'supera/$', 'notebook.notes.views.super_admin'),
 
+    (r'switchui/$', 'notebook.notes.views.switch_ui'),
 
 
     (r'^setLang/$', 'notebook.notes.views.set_language'),

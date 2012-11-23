@@ -1,8 +1,88 @@
 {% load i18n %}
 
 
-<div id="sites_header" class="noPrint">
-<span>
+
+
+<span id="space_nav">
+
+<span class="space_menu">
+     {% trans 'My Personal Space' %}<br/><br/>
+     <span class="item">
+        <a href="/{{ user.username|default:'anonymous' }}/snippetbook/notes/">{% trans 'Notes' %}</a>
+    </span>
+    <span class="item">
+<a href="/{{ user.username|default:'anonymous' }}/framebook/notes/">{% trans 'Frames' %}</a>
+</span>
+<span class="item">
+<a href="/{{ user.username|default:'anonymous' }}/tagframes/">{% trans 'Tag Tree' %}</a>
+</span><br/>
+<span class="item">
+<a href="/{{ user.username|default:'anonymous' }}/areas/">{% trans 'Areas' %}</a>
+</span>
+<span class="item">
+<a href="/{{ user.username|default:'anonymous' }}/framebook/notes/?&pick_plan=w">{% trans 'Plans' %}</a>
+</span>
+
+</span>
+
+
+
+<span class="space_menu">
+     {% trans 'My Social Space' %}<br/><br/>
+     
+<span class="item">
+<a href="/{{ user.username|default:'anonymous' }}/groups/">{% trans 'Groups' %}</a>
+</span>
+
+<span class="item">
+<a href="/mysalons/">{% trans 'Salons' %}</a>
+</span>
+<br/>
+<span class="item">
+<a href="/{{ user.username|default:'anonymous' }}/friends/">{% trans 'Friends' %}</a>
+</span>
+
+</span>
+
+
+
+
+<span class="space_menu">
+     {% trans 'Square' %}<br/><br/>
+     
+
+<span class="item">
+<a href="/salons/">{% trans 'Salons' %}</a>
+</span>
+
+
+
+</span>
+
+
+</span>
+
+
+
+<div id="sites_header" class="noPrint" >
+{% if user.is_anonymous or user.member.default_ui != 'old' %} 
+
+<span class="new">
+<span class="item"  id="space"><!--
+<img src="/site_media/img/door.png"/>-->
+<a href="javascript:void();">{% trans 'Space' %}</a>
+</span>
+<span class="item">
+<a href="/suggest/">{% trans 'Suggest' %}</a>
+</span>
+<span class="item" style="background:#E0FF85">
+<a href="/switchui?v=old">{% trans 'Switch back to the old menu' %}</a>
+</span>
+</span>
+
+ {% else %}
+
+<span class="previous">
 <span class="item">
 <a href="/{{ user.username|default:'anonymous' }}/snippetbook/notes/">{% trans 'Notes' %}</a>
 </span>
@@ -34,6 +114,10 @@
 <span class="item">
 <a href="/suggest/">{% trans 'Suggest' %}</a>
 </span>
+<span class="item" style="background:#E0FF85">
+<a href="/switchui?v=new">{% trans 'Switch to the new menu' %}</a>
+</span>
+
 
 <!--
 <span class="item">
@@ -60,6 +144,11 @@
 -->
 
 </span>
+
+{% endif %}
+
+
+
 <span class='sites_right_header'>
 <span class="item">
     <strong><a href="/social/{{ user.username }}/">{{ user.username }}</a></strong> <!--TODO:user-->

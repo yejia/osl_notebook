@@ -46,6 +46,19 @@ def salons(request):
     return render_to_response('salons/index.html',{'salons':salons, 'past':past}, \
                     context_instance=RequestContext(request,  {}))
 
+
+@login_required
+def my_salons(request):    
+    past = request.GET.get('past')
+    signups = Salon_Signup.objects.filter(member=request.user.member).values_list('salon', flat=True)
+    if past and past=='y':
+        salons = Salon.objects.filter(private=False, id__in=signups).exclude(end_date__gte=datetime.date.today()).order_by('start_date', 'start_time')
+    else:                
+        salons = Salon.objects.filter(private=False, end_date__gte=datetime.date.today(), id__in=signups).order_by('start_date', 'start_time')
+    return render_to_response('salons/my.html',{'salons':salons, 'past':past}, \
+                    context_instance=RequestContext(request,  {}))
+
+
 @login_required
 def group_salons(request, groupid):
     group = Group.objects.get(id=groupid)

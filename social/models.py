@@ -86,6 +86,7 @@ class Member(User):
     
     #viewing mode. Later think of adding other viewing modes here so user can set these in their profile
     viewing_private = models.CharField(max_length=20, blank=True)
+    default_ui = models.CharField(max_length=20, blank=True,  verbose_name=ugettext_lazy('Default UI'))   
     
     class Meta:
         ordering = ['username']

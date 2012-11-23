@@ -70,6 +70,43 @@ z-index:10;
 
 }
 
+.space_menu{
+display:none;
+position:relative;
+    background: #00FFFF;/*#BFFFEA;*/
+    color: #000000;
+    overflow: hidden;
+border:1px solid;
+-moz-border-radius:5px 5px 5px 5px; /* Firefox */
+border-top-left-radius:15px;
+border-top-right-radius:15px;
+border-bottom-left-radius:15px;
+border-bottom-right-radius:15px;
+z-index:8000;
+float:left;
+padding:10px;
+margin:10px;
+height:60px;
+width:150px;
+}
+
+#space_nav{
+position:absolute;
+left:0px;
+top:0px;
+border:1px dashed;
+z-index:8000;
+background:#FFFFFF;
+
+}
+
+#space{
+
+font-size: 15px;
+font-weight: 600;
+}
+
+
 
 table.my_table td{
 border-bottom:none;/*the one from base.css (i think), has a border-bottom:solid property*/

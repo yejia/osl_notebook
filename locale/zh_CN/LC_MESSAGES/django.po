@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-23 08:18+0800\n"
+"POT-Creation-Date: 2012-11-23 16:09+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -249,24 +249,24 @@ msgstr ""
 "这个网址已经成功添加到您的网址本里。您可以关闭这个窗口，或者其会在1秒后自动关"
 "闭。"
 
-#: notes/models.py:189 notes/models.py:1166 social/models.py:846
+#: notes/models.py:189 notes/models.py:1166 social/models.py:847
 #: templates/framebook/notes/notesdisplay.html:18
 #: templates/include/notes/notesdisplay.html:40
 #: templates/scrapbook/notes/notesdisplay.html:28
 msgid "Title"
 msgstr "标题"
 
-#: notes/models.py:189 notes/models.py:1166 social/models.py:846
+#: notes/models.py:189 notes/models.py:1166 social/models.py:847
 msgid "The size of the title is limited to 2000 characaters."
 msgstr "标题的长度应小于2000字。"
 
-#: notes/models.py:192 notes/models.py:1167 social/models.py:688
-#: social/models.py:847 templates/areas/area.html:281
+#: notes/models.py:192 notes/models.py:1167 social/models.py:689
+#: social/models.py:848 templates/areas/area.html:281
 #: templates/areas/index.html:54
 msgid "Description"
 msgstr "正文"
 
-#: notes/models.py:192 notes/models.py:1167 social/models.py:847
+#: notes/models.py:192 notes/models.py:1167 social/models.py:848
 msgid "The size of the desc is limited to 2000 characaters."
 msgstr "正文的长度应小于2000字。"
 
@@ -282,10 +282,10 @@ msgstr "标签"
 msgid "Default tag is 'random thought'."
 msgstr "默认的标签是'random thought'。"
 
-#: notes/models.py:194 social/models.py:691 templates/areas/area.html:284
+#: notes/models.py:194 social/models.py:692 templates/areas/area.html:284
 #: templates/areas/index.html:57
 #: templates/framebook/notes/notesdisplay.html:22
-#: templates/include/note_list_base.html:1488
+#: templates/include/note_list_base.html:1498
 #: templates/include/notes/notesdisplay.html:44
 #: templates/scrapbook/notes/notesdisplay.html:29
 #: templates/snippetbook/notes/add_note.html:49
@@ -293,7 +293,7 @@ msgstr "默认的标签是'random thought'。"
 msgid "Private"
 msgstr "隐私"
 
-#: notes/models.py:196 social/models.py:690
+#: notes/models.py:196 social/models.py:691
 msgid "date created"
 msgstr "生成时间"
 
@@ -305,17 +305,17 @@ msgstr "最后修改时间"
 msgid "self ranking"
 msgstr "原作者的评级"
 
-#: notes/models.py:727 snippets/models.py:14 social/models.py:466
-#: social/models.py:490 templates/framebook/notes/notesdisplay.html:20
+#: notes/models.py:727 snippets/models.py:14 social/models.py:467
+#: social/models.py:491 templates/framebook/notes/notesdisplay.html:20
 #: templates/include/notes/notesdisplay.html:42
 msgid "Attachment"
 msgstr "附件"
 
-#: notes/models.py:1164 social/models.py:844
+#: notes/models.py:1164 social/models.py:845
 msgid "Language"
 msgstr "语言"
 
-#: notes/models.py:1165 social/models.py:845
+#: notes/models.py:1165 social/models.py:846
 msgid "Original language"
 msgstr "原来的语言"
 
@@ -510,7 +510,7 @@ msgstr "接收计划通知"
 
 #: social/models.py:63 templates/areas/area.html:158
 #: templates/framebook/notes/todelete/folders.html:19
-#: templates/include/note_list_base.html:1690
+#: templates/include/note_list_base.html:1700
 #: templates/include/profile_head.html:49
 #: templates/include/profile_head.html:51
 #: templates/include/profile_head.html:80 templates/include/supersearch.html:6
@@ -524,11 +524,12 @@ msgid "Snippets"
 msgstr "便条"
 
 #: social/models.py:64 templates/areas/area.html:161
-#: templates/include/note_list_base.html:1694
+#: templates/include/note_list_base.html:1704
 #: templates/include/profile_head.html:64
 #: templates/include/profile_head.html:66
 #: templates/include/profile_head.html:83
-#: templates/include/sites_header.html:10
+#: templates/include/sites_header.html:14
+#: templates/include/sites_header.html:90
 #: templates/include/supersearch.html:15 templates/include/supersearch.html:40
 #: templates/include/supersearch.html:42
 #: templates/include/notes/notes_display.html:150
@@ -537,8 +538,8 @@ msgstr "便条"
 msgid "Frames"
 msgstr "知识包"
 
-#: social/models.py:65 templates/include/sites_header.html:13
-#: templates/tagframes/index.html:341
+#: social/models.py:65 templates/include/sites_header.html:17
+#: templates/include/sites_header.html:93 templates/tagframes/index.html:341
 msgid "Tag Tree"
 msgstr "标签树"
 
@@ -550,7 +551,7 @@ msgstr ""
 msgid "Nickname"
 msgstr "绰号"
 
-#: social/models.py:73 social/models.py:695
+#: social/models.py:73 social/models.py:696
 msgid "Icon"
 msgstr "头像"
 
@@ -581,25 +582,29 @@ msgstr "计划通知"
 msgid "Home"
 msgstr "主页"
 
-#: social/models.py:687 templates/areas/area.html:259
-#: templates/areas/index.html:37 templates/salons/group_salons.html:38
+#: social/models.py:89
+msgid "Default UI"
+msgstr "默认UI"
+
+#: social/models.py:688 templates/areas/area.html:259
+#: templates/areas/index.html:37 templates/salons/group_salons.html:44
 #: templates/salons/salon.html:233 templates/social/group/groups.html:34
 msgid "Name"
 msgstr "名字"
 
-#: social/models.py:692 templates/social/notes/group_notes.html:35
+#: social/models.py:693 templates/social/notes/group_notes.html:35
 msgid "Members"
 msgstr "成员"
 
-#: social/models.py:693
+#: social/models.py:694
 msgid "Creator"
 msgstr "创建者"
 
-#: social/models.py:694
+#: social/models.py:695
 msgid "Admins"
 msgstr "管理员"
 
-#: social/models.py:854 templates/registration/reg_with_code.html:17
+#: social/models.py:855 templates/registration/reg_with_code.html:17
 msgid "Invitation Code"
 msgstr "邀请码"
 
@@ -758,11 +763,11 @@ msgstr ""
 #: templates/admin/base.html:41
 #: templates/admin/auth/user/change_password.html:15
 #: templates/admin/auth/user/change_password.html:48
-#: templates/include/sites_header.html:84 templates/registration/base.html:45
+#: templates/include/sites_header.html:173 templates/registration/base.html:45
 msgid "Change password"
 msgstr "修改密码"
 
-#: templates/admin/base.html:48 templates/include/sites_header.html:85
+#: templates/admin/base.html:48 templates/include/sites_header.html:174
 #: templates/registration/base.html:52
 msgid "Log out"
 msgstr "退出"
@@ -778,7 +783,7 @@ msgstr "笔记本管理"
 #: templates/admin/change_form.html:21 templates/admin/index.html:29
 #: templates/areas/area.html:287 templates/areas/index.html:60
 #: templates/framebook/notes/notesdisplay.html:25
-#: templates/salons/group_salons.html:197
+#: templates/salons/group_salons.html:203
 #: templates/snippetbook/notes/add_note.html:68
 #: templates/snippetbook/notes/add_note.html:70
 #: templates/tagframes/index.html:384
@@ -804,7 +809,7 @@ msgstr[1] ""
 
 #: templates/admin/delete_confirmation.html:10
 #: templates/admin/submit_line.html:4
-#: templates/include/note_list_base.html:1473
+#: templates/include/note_list_base.html:1483
 msgid "Delete"
 msgstr "删除"
 
@@ -896,7 +901,7 @@ msgstr "用户名"
 msgid "Password:"
 msgstr "密码"
 
-#: templates/admin/login.html:27 templates/include/sites_header.html:82
+#: templates/admin/login.html:27 templates/include/sites_header.html:171
 msgid "Log in"
 msgstr ""
 
@@ -1047,14 +1052,15 @@ msgstr "浏览这个学习领域里的所有笔记"
 
 #: templates/areas/area.html:159
 #: templates/framebook/notes/todelete/folders.html:21
-#: templates/include/note_list_base.html:1691
+#: templates/include/note_list_base.html:1701
 #: templates/include/profile_head.html:54
 #: templates/include/profile_head.html:56
 #: templates/include/profile_head.html:81
-#: templates/include/sites_header.html:48
-#: templates/include/sites_header.html:50 templates/include/supersearch.html:9
-#: templates/include/supersearch.html:30 templates/include/supersearch.html:32
-#: templates/social/profile.html:76 templates/social/wall_snippets.html:28
+#: templates/include/sites_header.html:132
+#: templates/include/sites_header.html:134
+#: templates/include/supersearch.html:9 templates/include/supersearch.html:30
+#: templates/include/supersearch.html:32 templates/social/profile.html:76
+#: templates/social/wall_snippets.html:28
 #: templates/social/wall_snippets.html:30
 #: templates/social/wall_snippets.html:42
 #: templates/social/notes/friends_notes.html:21
@@ -1065,7 +1071,7 @@ msgstr "网址"
 
 #: templates/areas/area.html:160
 #: templates/framebook/notes/todelete/folders.html:23
-#: templates/include/note_list_base.html:1692
+#: templates/include/note_list_base.html:1702
 #: templates/include/profile_head.html:59
 #: templates/include/profile_head.html:61
 #: templates/include/profile_head.html:82
@@ -1085,11 +1091,11 @@ msgstr "网摘"
 #: templates/framebook/notes/todelete/folders.html:25
 #: templates/include/frames_pick_top.html:13
 #: templates/include/frames_pick_top.html:15
-#: templates/include/note_list_base.html:1490
-#: templates/include/note_list_base.html:1492
-#: templates/include/note_list_base.html:1559
-#: templates/include/note_list_base.html:1561
-#: templates/include/note_list_base.html:1695
+#: templates/include/note_list_base.html:1500
+#: templates/include/note_list_base.html:1502
+#: templates/include/note_list_base.html:1569
+#: templates/include/note_list_base.html:1571
+#: templates/include/note_list_base.html:1705
 #: templates/include/profile_head.html:69
 #: templates/include/profile_head.html:71
 #: templates/include/profile_head.html:84
@@ -1330,7 +1336,7 @@ msgstr "搜索网址"
 #: templates/bookmarkbook/notes/addNote.html:8
 #: templates/framebook/notes/notesdisplay.html:15
 #: templates/include/notes/notesdisplay.html:37
-#: templates/salons/group_salons.html:43 templates/salons/salon.html:238
+#: templates/salons/group_salons.html:49 templates/salons/salon.html:238
 #: templates/scrapbook/notes/addNote.html:9
 #: templates/scrapbook/notes/notesdisplay.html:22
 #: templates/workingset/index.html:286
@@ -1346,12 +1352,12 @@ msgstr "在链条里的"
 
 #: templates/bookmarkbook/notes/notes.html:12
 #: templates/bookmarkbook/notes/notes.html:14
-#: templates/include/note_list_base.html:1475
-#: templates/include/note_list_base.html:1477
-#: templates/include/note_list_base.html:1496
-#: templates/include/note_list_base.html:1498
-#: templates/include/note_list_base.html:1565
-#: templates/include/note_list_base.html:1567
+#: templates/include/note_list_base.html:1485
+#: templates/include/note_list_base.html:1487
+#: templates/include/note_list_base.html:1506
+#: templates/include/note_list_base.html:1508
+#: templates/include/note_list_base.html:1575
+#: templates/include/note_list_base.html:1577
 #: templates/notebook/notes/notes.html:14
 #: templates/notebook/notes/notes.html:16
 #: templates/scrapbook/notes/notes.html:13
@@ -1872,7 +1878,7 @@ msgstr "一个知识包本是一组动态的基于某个搜索的知识包。"
 #: templates/framebook/folders_special_side_menu.html:5
 #: templates/include/folders_special_side_menu.html:11
 #: templates/include/friends_menu.html:5 templates/include/groups_menu.html:4
-#: templates/include/sites_header.html:77
+#: templates/include/sites_header.html:166
 #: templates/include/notes/menu/toggle_tag_menu.html:33
 msgid "Settings"
 msgstr "设置"
@@ -2065,23 +2071,23 @@ msgstr "%(profile_username)s的文件夹%(current_folder)s"
 msgid "linkiages"
 msgstr "链条"
 
-#: templates/include/base2.html:219 templates/include/note_list_base.html:1423
+#: templates/include/base2.html:232 templates/include/note_list_base.html:1433
 msgid "You are using an outdated browser."
 msgstr "你在使用一个过时的浏览器。"
 
-#: templates/include/base2.html:219 templates/include/note_list_base.html:1423
+#: templates/include/base2.html:232 templates/include/note_list_base.html:1433
 msgid "Upgrade your browser today"
 msgstr "请升级你的浏览器"
 
-#: templates/include/base2.html:219 templates/include/note_list_base.html:1423
+#: templates/include/base2.html:232 templates/include/note_list_base.html:1433
 msgid " or "
 msgstr "或者"
 
-#: templates/include/base2.html:219 templates/include/note_list_base.html:1423
+#: templates/include/base2.html:232 templates/include/note_list_base.html:1433
 msgid "install Google Chrome Frame"
 msgstr "安装谷歌浏览器框"
 
-#: templates/include/base2.html:219 templates/include/note_list_base.html:1423
+#: templates/include/base2.html:232 templates/include/note_list_base.html:1433
 msgid " to better experience this site."
 msgstr "以获得对本网站更好的体验。"
 
@@ -2290,64 +2296,64 @@ msgid ""
 "and it cannot be recovered!"
 msgstr "你确定你想永久删除这条笔记吗？你将不能恢复被永久删除的笔记！"
 
-#: templates/include/note_list_base.html:1461
+#: templates/include/note_list_base.html:1471
 msgid "show side menu"
 msgstr "显示侧边菜单"
 
-#: templates/include/note_list_base.html:1462
+#: templates/include/note_list_base.html:1472
 msgid "hide side menu"
 msgstr "隐藏侧边菜单"
 
-#: templates/include/note_list_base.html:1481
-#: templates/include/note_list_base.html:1483
-#: templates/include/note_list_base.html:1502
-#: templates/include/note_list_base.html:1504
+#: templates/include/note_list_base.html:1491
+#: templates/include/note_list_base.html:1493
+#: templates/include/note_list_base.html:1512
+#: templates/include/note_list_base.html:1514
 msgid "No"
 msgstr "否"
 
-#: templates/include/note_list_base.html:1511
+#: templates/include/note_list_base.html:1521
 msgid "Date Range"
 msgstr "时间范围"
 
-#: templates/include/note_list_base.html:1516
-#: templates/include/note_list_base.html:1518
+#: templates/include/note_list_base.html:1526
+#: templates/include/note_list_base.html:1528
 msgid "Any day"
 msgstr "任何天"
 
-#: templates/include/note_list_base.html:1522
-#: templates/include/note_list_base.html:1524
+#: templates/include/note_list_base.html:1532
+#: templates/include/note_list_base.html:1534
 msgid "Today"
 msgstr "今天"
 
-#: templates/include/note_list_base.html:1528
-#: templates/include/note_list_base.html:1530
+#: templates/include/note_list_base.html:1538
+#: templates/include/note_list_base.html:1540
 msgid "Past 7 Days"
 msgstr "过去7天"
 
-#: templates/include/note_list_base.html:1534
-#: templates/include/note_list_base.html:1536
+#: templates/include/note_list_base.html:1544
+#: templates/include/note_list_base.html:1546
 msgid "This Month"
 msgstr "本月"
 
-#: templates/include/note_list_base.html:1539
+#: templates/include/note_list_base.html:1549
 msgid "This Season"
 msgstr "本季度"
 
-#: templates/include/note_list_base.html:1542
-#: templates/include/note_list_base.html:1544
+#: templates/include/note_list_base.html:1552
+#: templates/include/note_list_base.html:1554
 msgid "This Year"
 msgstr "今年"
 
-#: templates/include/note_list_base.html:1548
+#: templates/include/note_list_base.html:1558
 msgid "Pick a Range"
 msgstr "选择一个日期范围"
 
-#: templates/include/note_list_base.html:1557
+#: templates/include/note_list_base.html:1567
 msgid "With attachment"
 msgstr "含附件"
 
 # python-format
-#: templates/include/note_list_base.html:1685
+#: templates/include/note_list_base.html:1695
 #, python-format
 msgid "Personal notes of %(profile_username)s"
 msgstr "%(profile_username)s的个人笔记"
@@ -2366,11 +2372,11 @@ msgstr "选择语言"
 
 #: templates/include/profile_head.html:23
 #: templates/salons/group_salons.html:15 templates/salons/group_salons.html:21
-#: templates/salons/group_salons.html:217 templates/salons/index.html:48
-#: templates/salons/salon.html:79 templates/salons/salon.html.py:84
-#: templates/salons/salon.html:129 templates/social/admin/group.html:7
-#: templates/social/admin/group.html:13 templates/social/group/group.html:8
-#: templates/social/group/group.html:14
+#: templates/salons/group_salons.html:223 templates/salons/index.html:48
+#: templates/salons/my.html:48 templates/salons/salon.html:79
+#: templates/salons/salon.html.py:84 templates/salons/salon.html:129
+#: templates/social/admin/group.html:7 templates/social/admin/group.html:13
+#: templates/social/group/group.html:8 templates/social/group/group.html:14
 msgid "Group"
 msgstr "小组"
 
@@ -2416,51 +2422,83 @@ msgstr "%(profile_username)s发布的评论"
 msgid "Or Search on comments"
 msgstr "或者在评论上搜索"
 
-#: templates/include/sites_header.html:7
+#: templates/include/sites_header.html:9
+msgid "My Personal Space"
+msgstr "我的个人空间"
+
+#: templates/include/sites_header.html:11
+#: templates/include/sites_header.html:87
 #: templates/social/wall_snippets.html:23
 #: templates/social/wall_snippets.html:41
 msgid "Notes"
 msgstr "便条"
 
-#: templates/include/sites_header.html:16
+#: templates/include/sites_header.html:20
+#: templates/include/sites_header.html:96
 msgid "Areas"
 msgstr "学习领域"
 
-#: templates/include/sites_header.html:19
+#: templates/include/sites_header.html:23
+#: templates/include/sites_header.html:99
 msgid "Plans"
 msgstr "学习计划"
 
-#: templates/include/sites_header.html:23
+#: templates/include/sites_header.html:31
+msgid "My Social Space"
+msgstr "我的社交空间"
+
+#: templates/include/sites_header.html:34
+#: templates/include/sites_header.html:103
 msgid "Groups"
 msgstr "学习小组"
 
-#: templates/include/sites_header.html:27
+#: templates/include/sites_header.html:38
+#: templates/include/sites_header.html:55
+#: templates/include/sites_header.html:107
 msgid "Salons"
 msgstr "学习沙龙"
 
-#: templates/include/sites_header.html:31
+#: templates/include/sites_header.html:42
+#: templates/include/sites_header.html:111
 msgid "Friends"
 msgstr "我的朋友"
 
-#: templates/include/sites_header.html:35
+#: templates/include/sites_header.html:51
+msgid "Square"
+msgstr "广场"
+
+#: templates/include/sites_header.html:73
+msgid "Space"
+msgstr "空间"
+
+#: templates/include/sites_header.html:76
+#: templates/include/sites_header.html:115
 msgid "Suggest"
 msgstr "建议"
 
-#: templates/include/sites_header.html:41
-#: templates/include/sites_header.html:43
+#: templates/include/sites_header.html:79
+msgid "Switch back to the old menu"
+msgstr "切换回旧菜单"
+
+#: templates/include/sites_header.html:118
+msgid "Switch to the new menu"
+msgstr "切换到新菜单"
+
+#: templates/include/sites_header.html:125
+#: templates/include/sites_header.html:127
 #: templates/snippetbook/folders_special_side_menu.html:4
 #: templates/social/snippetbook/folders_special_side_menu.html:4
 msgid "Snippetbook"
 msgstr "便条本"
 
-#: templates/include/sites_header.html:55
-#: templates/include/sites_header.html:57
+#: templates/include/sites_header.html:139
+#: templates/include/sites_header.html:141
 #: templates/scrapbook/folders_special_side_menu.html:4
 #: templates/social/scrapbook/folders_special_side_menu.html:4
 msgid "Scrapbook"
 msgstr "摘录本"
 
-#: templates/include/sites_header.html:69
+#: templates/include/sites_header.html:158
 msgid "For new users"
 msgstr "新用户帮助"
 
@@ -3228,89 +3266,106 @@ msgstr "输入和上面相同的密码，用以确认。"
 msgid "register"
 msgstr "注册"
 
-#: templates/salons/group_salons.html:15 templates/salons/group_salons.html:21
-#: templates/salons/salon.html:79
+#: templates/salons/group_salons.html:15 templates/salons/salon.html:79
 msgid "'s Learning Salons"
 msgstr "的学习沙龙"
 
-#: templates/salons/group_salons.html:31
+#: templates/salons/group_salons.html:23 templates/salons/index.html:22
+msgid "Past Learning Salons"
+msgstr "往期学习沙龙"
+
+#: templates/salons/group_salons.html:25 templates/salons/index.html:15
+#: templates/salons/index.html.py:24
+msgid "Learning Salons"
+msgstr "学习沙龙"
+
+#: templates/salons/group_salons.html:37
 msgid "Add a learning salon"
 msgstr "添加一个学习沙龙"
 
-#: templates/salons/group_salons.html:48
+#: templates/salons/group_salons.html:54
 msgid "location"
 msgstr "地点"
 
-#: templates/salons/group_salons.html:53 templates/salons/salon.html:248
+#: templates/salons/group_salons.html:59 templates/salons/salon.html:248
 msgid "Start date"
 msgstr "开始日期"
 
-#: templates/salons/group_salons.html:59 templates/salons/salon.html:261
+#: templates/salons/group_salons.html:65 templates/salons/salon.html:261
 msgid "Start time"
 msgstr "开始时间"
 
-#: templates/salons/group_salons.html:117 templates/salons/salon.html:317
+#: templates/salons/group_salons.html:123 templates/salons/salon.html:317
 msgid "End date"
 msgstr "结束日期"
 
-#: templates/salons/group_salons.html:123 templates/salons/salon.html:323
+#: templates/salons/group_salons.html:129 templates/salons/salon.html:323
 msgid "End time"
 msgstr "结束时间"
 
-#: templates/salons/group_salons.html:182 templates/salons/salon.html:139
+#: templates/salons/group_salons.html:188 templates/salons/salon.html:139
 #: templates/salons/salon.html.py:378
 msgid "Max people"
 msgstr "最多容纳人数"
 
-#: templates/salons/group_salons.html:187 templates/salons/salon.html:142
+#: templates/salons/group_salons.html:193 templates/salons/salon.html:142
 #: templates/salons/salon.html.py:383
 msgid "Min people"
 msgstr "最少人数"
 
-#: templates/salons/group_salons.html:192 templates/salons/salon.html:388
+#: templates/salons/group_salons.html:198 templates/salons/salon.html:388
 msgid "poster"
 msgstr "海报"
 
-#: templates/salons/group_salons.html:218 templates/salons/index.html:49
-#: templates/salons/salon.html:132
+#: templates/salons/group_salons.html:224 templates/salons/index.html:49
+#: templates/salons/my.html:49 templates/salons/salon.html:132
 msgid "Time"
 msgstr "时间"
 
-#: templates/salons/group_salons.html:219 templates/salons/index.html:50
-#: templates/salons/salon.html:135 templates/salons/salon.html.py:243
+#: templates/salons/group_salons.html:225 templates/salons/index.html:50
+#: templates/salons/my.html:50 templates/salons/salon.html:135
+#: templates/salons/salon.html.py:243
 msgid "Location"
 msgstr "地点"
 
-#: templates/salons/group_salons.html:220 templates/salons/index.html:51
-#: templates/salons/salon.html:145
+#: templates/salons/group_salons.html:226 templates/salons/index.html:51
+#: templates/salons/my.html:51 templates/salons/salon.html:145
 msgid "Host"
 msgstr "主办"
 
-#: templates/salons/group_salons.html:221 templates/salons/index.html:52
-#: templates/salons/salon.html:150
+#: templates/salons/group_salons.html:227 templates/salons/index.html:52
+#: templates/salons/my.html:52 templates/salons/salon.html:150
 msgid " attend"
 msgstr "参加"
 
-#: templates/salons/group_salons.html:221 templates/salons/index.html:52
-#: templates/salons/salon.html:150
+#: templates/salons/group_salons.html:227 templates/salons/index.html:52
+#: templates/salons/my.html:52 templates/salons/salon.html:150
 msgid " interested"
 msgstr "感兴趣"
 
-#: templates/salons/index.html:15 templates/salons/index.html.py:24
-msgid "Learning Salons"
-msgstr "学习沙龙"
-
-#: templates/salons/index.html:22
-msgid "Past Learning Salons"
-msgstr "往期学习沙龙"
-
-#: templates/salons/index.html:65
+#: templates/salons/group_salons.html:240 templates/salons/index.html:65
 msgid "View current salons"
 msgstr "浏览当前沙龙"
 
-#: templates/salons/index.html:69
+#: templates/salons/group_salons.html:244 templates/salons/index.html:69
 msgid "View past salons"
 msgstr "浏览往期沙龙"
+
+#: templates/salons/my.html:15 templates/salons/my.html.py:24
+msgid "My Learning Salons"
+msgstr "我的学习沙龙"
+
+#: templates/salons/my.html:22
+msgid "My Past Learning Salons"
+msgstr "我的往期学习沙龙"
+
+#: templates/salons/my.html:65
+msgid "View my current salons"
+msgstr "浏览我的当前沙龙"
+
+#: templates/salons/my.html:69
+msgid "View my past salons"
+msgstr "浏览我的往期沙龙"
 
 #: templates/salons/salon.html:25
 msgid "By signing up, you will first be added to the group "
