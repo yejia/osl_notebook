@@ -18,7 +18,13 @@
 
 {% block site_branding %}
 <br/>
- {% trans "Group" %}  <a href="/groups/{{group.id}}/">{{groupname}}</a>{% trans "'s Learning Salons" %}  
+ {% trans "Group" %}  <a href="/groups/{{group.id}}/">{{groupname}}</a>
+  {% if past == 'y'  %} 
+ {% trans "Past Learning Salons" %}  
+ {% else %}
+{% trans "Learning Salons" %}  
+{% endif %}
+
 <br/><br/>
 
 {% endblock %}
@@ -229,7 +235,15 @@
 </ul>
 
 
-
+{% if past == 'y'  %} 
+ <a href="/groups/{{group.id}}/salons/">
+{% trans "View current salons" %}  
+</a>
+ {% else %}
+<a href="/groups/{{group.id}}/salons?past=y">
+{% trans "View past salons" %}  
+</a>
+{% endif %}
 
 
 

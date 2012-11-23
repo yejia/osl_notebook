@@ -37,8 +37,7 @@ class AddSalonForm(ModelForm):
         exclude = ('private', 'last_modi_date', 'status', 'fee') 
         
 
-def salons(request):
-    #TODO:select current salons
+def salons(request):    
     past = request.GET.get('past')
     if past and past=='y':
         salons = Salon.objects.filter(private=False).exclude(end_date__gte=datetime.date.today()).order_by('start_date', 'start_time')
@@ -60,14 +59,17 @@ def group_salons(request, groupid):
         addSalonForm = AddSalonForm(post, request.FILES,  instance=s) 
         log.debug('form errors:'+str(addSalonForm.errors))
         addSalonForm.save()
-        
-    salons = Salon.objects.filter(group__name=group.name) 
+    past = request.GET.get('past')
+    if past and past=='y':
+        salons = Salon.objects.filter(group__name=group.name, private=False).exclude(end_date__gte=datetime.date.today()).order_by('start_date', 'start_time')     
+    else:
+        salons = Salon.objects.filter(group__name=group.name, private=False, end_date__gte=datetime.date.today()).order_by('start_date', 'start_time') 
     
     addSalonForm = AddSalonForm(initial={'creator': request.user.member.id, 'group':group.id})    
     
     return render_to_response('salons/group_salons.html',{'salons':salons, 'addSalonForm':addSalonForm, 
                                                    'groupname':group.name,
-                                                   'group':group}, \
+                                                   'group':group,'past':past}, \
                     context_instance=RequestContext(request,  {}))
     
     
