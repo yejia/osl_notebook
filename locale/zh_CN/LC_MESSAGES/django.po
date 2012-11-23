@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-23 07:25+0800\n"
+"POT-Creation-Date: 2012-11-23 08:18+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2366,7 +2366,7 @@ msgstr "选择语言"
 
 #: templates/include/profile_head.html:23
 #: templates/salons/group_salons.html:15 templates/salons/group_salons.html:21
-#: templates/salons/group_salons.html:217 templates/salons/index.html:44
+#: templates/salons/group_salons.html:217 templates/salons/index.html:48
 #: templates/salons/salon.html:79 templates/salons/salon.html.py:84
 #: templates/salons/salon.html:129 templates/social/admin/group.html:7
 #: templates/social/admin/group.html:13 templates/social/group/group.html:8
@@ -3271,34 +3271,46 @@ msgstr "最少人数"
 msgid "poster"
 msgstr "海报"
 
-#: templates/salons/group_salons.html:218 templates/salons/index.html:45
+#: templates/salons/group_salons.html:218 templates/salons/index.html:49
 #: templates/salons/salon.html:132
 msgid "Time"
 msgstr "时间"
 
-#: templates/salons/group_salons.html:219 templates/salons/index.html:46
+#: templates/salons/group_salons.html:219 templates/salons/index.html:50
 #: templates/salons/salon.html:135 templates/salons/salon.html.py:243
 msgid "Location"
 msgstr "地点"
 
-#: templates/salons/group_salons.html:220 templates/salons/index.html:47
+#: templates/salons/group_salons.html:220 templates/salons/index.html:51
 #: templates/salons/salon.html:145
 msgid "Host"
 msgstr "主办"
 
-#: templates/salons/group_salons.html:221 templates/salons/index.html:48
+#: templates/salons/group_salons.html:221 templates/salons/index.html:52
 #: templates/salons/salon.html:150
 msgid " attend"
 msgstr "参加"
 
-#: templates/salons/group_salons.html:221 templates/salons/index.html:48
+#: templates/salons/group_salons.html:221 templates/salons/index.html:52
 #: templates/salons/salon.html:150
 msgid " interested"
 msgstr "感兴趣"
 
-#: templates/salons/index.html:15 templates/salons/index.html.py:21
+#: templates/salons/index.html:15 templates/salons/index.html.py:24
 msgid "Learning Salons"
 msgstr "学习沙龙"
+
+#: templates/salons/index.html:22
+msgid "Past Learning Salons"
+msgstr "往期学习沙龙"
+
+#: templates/salons/index.html:65
+msgid "View current salons"
+msgstr "浏览当前沙龙"
+
+#: templates/salons/index.html:69
+msgid "View past salons"
+msgstr "浏览往期沙龙"
 
 #: templates/salons/salon.html:25
 msgid "By signing up, you will first be added to the group "

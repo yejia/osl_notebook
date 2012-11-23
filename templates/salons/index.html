@@ -18,7 +18,11 @@
 
 {% block site_branding %}
 <br/>
+ {% if past == 'y'  %} 
+ {% trans "Past Learning Salons" %}  
+ {% else %}
 {% trans "Learning Salons" %}  
+{% endif %}
 <br/><br/>
 
 {% endblock %}
@@ -55,6 +59,16 @@
 {% endfor %}
 </ul>
 
+
+{% if past == 'y'  %} 
+ <a href="/salons/">
+{% trans "View current salons" %}  
+</a>
+ {% else %}
+<a href="/salons?past=y">
+{% trans "View past salons" %}  
+</a>
+{% endif %}
 
 
 

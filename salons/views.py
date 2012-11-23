@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import datetime
+
 from django.http import HttpResponse,HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django import forms
@@ -20,6 +22,8 @@ from django.core.exceptions import ObjectDoesNotExist, FieldError
 from notebook.salons.models import *
 from notebook.notes.views import __get_pre_url, getlogger
 
+
+
 log = getlogger('salons.views')  
 
 
@@ -35,8 +39,12 @@ class AddSalonForm(ModelForm):
 
 def salons(request):
     #TODO:select current salons
-    salons = Salon.objects.filter(private=False).order_by('start_date', 'start_time')
-    return render_to_response('salons/index.html',{'salons':salons}, \
+    past = request.GET.get('past')
+    if past and past=='y':
+        salons = Salon.objects.filter(private=False).exclude(end_date__gte=datetime.date.today()).order_by('start_date', 'start_time')
+    else:
+        salons = Salon.objects.filter(private=False, end_date__gte=datetime.date.today()).order_by('start_date', 'start_time')
+    return render_to_response('salons/index.html',{'salons':salons, 'past':past}, \
                     context_instance=RequestContext(request,  {}))
 
 @login_required
