@@ -1,0 +1,79 @@
+{% extends "include/base2.html" %}
+{% load i18n %}
+
+
+
+
+{% block extra_css %}
+
+{% endblock %}
+
+
+
+
+{% block title %}
+{% trans "My Learning Salons" %} 
+{% endblock %}
+
+
+{% block site_branding %}
+<br/>
+ {% if past == 'y'  %} 
+ {% trans "My Past Learning Salons" %}  
+ {% else %}
+{% trans "My Learning Salons" %}  
+{% endif %}
+<br/><br/>
+
+{% endblock %}
+
+
+{% block content%}
+
+
+<br/>
+<ul>
+{% for salon in salons %}		
+<li>
+<table><tr>
+  <td>
+  {% if salon.poster  %} 
+  <img src="/file/{{salon.poster}}" class="salon_img_in_list"/>
+  {% else %}
+    <img src="/file/{{salon.group.icon}}" class="salon_img_in_list"/>
+{% endif %}
+  </td>
+<td>
+<a href="/groups/{{salon.group.id}}/salons/salon/{{salon.id}}/" class="big_font">{{salon.name}}</a><br/>
+ <b>{% trans "Group" %}:</b>  <a href="/groups/{{salon.group.id}}/">{{salon.group}}</a><br/>
+ <b>{% trans "Time" %}:</b>  {{salon.start_date|date:"M d Y D"}}  {{salon.start_time}} - {{salon.end_date|date:"M d Y D"}}  {{salon.end_time}}<br/>
+  <b>{% trans "Location" %}:</b>  {{salon.location}}<br/>
+     <b>{% trans "Host" %}:</b>  <a href="/social/{{salon.creator}}/">{{salon.creator}}</a><br/>
+   <b>{{salon.get_signed.count}}</b>{% trans " attend" %}  <b>{{salon.get_maybe.count}}</b>{% trans " interested" %}
+  
+  </td>
+
+</tr></table>
+   <br/><br/>
+</li>
+{% endfor %}
+</ul>
+
+
+{% if past == 'y'  %} 
+ <a href="/mysalons/">
+{% trans "View my current salons" %}  
+</a>
+ {% else %}
+<a href="/mysalons?past=y">
+{% trans "View my past salons" %}  
+</a>
+{% endif %}
+
+
+
+
+
+
+
+{% endblock %}
