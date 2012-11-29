@@ -1,0 +1,82 @@
+{% extends "include/base2.html" %}
+{% load i18n %}
+
+
+
+
+{% block extra_css %}
+
+{% endblock %}
+
+
+
+
+{% block title %}
+{{profile_username}} {% trans "'s Learning Areas" %} 
+{% endblock %}
+
+
+{% block site_branding %}
+<br/>
+<a href="/social/{{profile_username}}/">{{profile_username}}</a> {% trans "'s Learning Areas" %}  <span title="{% trans 'Learning areas are the major learning areas that you are learning' %}"><img src="/media/img/admin/icon-unknown.gif"/></span>
+<br/><br/>
+
+{% endblock %}
+
+
+{% block content%}
+
+ {% if user.username == profile_username %}  
+<p> 
+<a href="javascript:void(0);" onclick="javascript:show_more_section();">{% trans "Add a learning area" %}:</a>
+<span class="show_more_section"><img title="" src="/site_media/img/right-arrow.jpg"/></span><span class="hide_more_section"><img title="" src="/site_media/img/down-arrow.jpg"/></span> 
+</p>
+<div id="more_section" style="display:none;">
+<form action="" method="post" enctype="multipart/form-data" id="addAreaForm">
+    <p>   
+               {% trans "Name" %} <span class="required">*</span>: 
+                {{ addAreaForm.name.errors }}
+               {{addAreaForm.name}}
+    </p>
+    
+      <p>
+        {% trans "Root frame" %}<span class="required">*</span>:   
+    <input type="text" name="root_note_frame" placeholder="{% trans "Enter a frame's id" %}" /> <a href="http://www.91biji.com/social/leon/framebook/notes/note/16785/"  target="_blank"><img src="/media/img/admin/icon-unknown.gif" title="{% trans 'Click to see what is note id' %}"  /></a>
+    </p>
+    
+     <div>   
+   {% trans "Root tag tree" %}  ({% trans "Enter only 1 tag tree in the input box." %}{% trans "And it has to be an existing tag tree." %})<span class="required">*</span>:
+   {{ addAreaForm.root_tag_frame.errors }}
+    <ul id="ac_tags"></ul> 
+    </div>
+      
+    <p>
+        {% trans "Description" %}:  {{addAreaForm.desc}}
+    </p>
+    <p>
+        {% trans "Private" %}:  {{addAreaForm.private}}
+    </p>
+    
+<input type="submit" value="{% trans 'Add' %}"/>
+</form> 
+</div>
+
+{% endif %}
+
+<span> {% trans "All areas" %}:</span>
+<ul>
+{% for area in areas %}		
+<li>
+<a href="/{{profile_username}}/areas/area/{{area.id}}/">{{area.name}}</a>
+</li>
+{% endfor %}
+</ul>
+
+
+
+
+
+
+
+
+{% endblock %}

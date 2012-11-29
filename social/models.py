@@ -684,6 +684,22 @@ class Social_Note_Vote(models.Model):
 
 
 
+class Social_Area(models.Model):
+    owner = models.ForeignKey(Member)
+    owner_area_id = models.IntegerField(blank=True)
+    name = models.CharField(max_length=150)
+    #private = models.BooleanField(default=False)
+    desc =  models.TextField(blank=True, max_length=2000)
+    num_of_notes = models.IntegerField(default=0)
+    area_tags = models.TextField(blank=True,max_length=2000, verbose_name=ugettext_lazy('Area Tags'))
+    
+    
+    class Meta:
+        ordering = ['name']
+        unique_together = (('name','owner'),)
+
+
+
 class Group(models.Model):
     name = models.CharField(blank=False,max_length=50, verbose_name=ugettext_lazy('Name'))
     desc = models.TextField(blank=True,max_length=500, verbose_name=ugettext_lazy('Description'))

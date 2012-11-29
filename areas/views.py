@@ -28,7 +28,7 @@ from django.db import connections,  transaction
 
 from notebook.areas.models import *
 from notebook.notes.views import __get_pre_url, getlogger, __get_view_theme, __getQStr, getSearchResults, __get_context 
-from notebook.social.models import Member
+from notebook.social.models import Member, Social_Area
 from notebook.notes.util import *
 from notebook.notes.constants import *
 
@@ -47,9 +47,16 @@ class AddAreaForm(ModelForm):
         
 
     
+def index(request): 
+    areas = Social_Area.objects.all().order_by('-num_of_notes')
+    return render_to_response('areas/index.html',{'areas':areas}, \
+                    context_instance=RequestContext(request,  {}))
 
 
-def index(request, username): 
+
+
+
+def my_areas(request, username): 
     if username == 'anonymous':
         return HttpResponseRedirect('/login/')    
     if request.method == 'POST': 
@@ -104,7 +111,7 @@ def index(request, username):
     profile_member = Member.objects.get(username=username)
     private = profile_member.viewing_private    
     #print 'private', private
-    return render_to_response('areas/index.html',{'areas':areas, 'addAreaForm':addAreaForm, 'tags':tags, \
+    return render_to_response('areas/my.html',{'areas':areas, 'addAreaForm':addAreaForm, 'tags':tags, \
                             'username':request.user.username,'profile_username':username,  'private':private}, \
                     context_instance=RequestContext(request,  {}))
     
