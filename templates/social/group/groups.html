@@ -25,7 +25,11 @@
 
 {% for group in groups %}		
 <span class="groups_block"> 
-<span class="group_title"><a href="/groups/{{group.id}}/">{{group.name}}</a> </span><img src="/file/{{group.icon}}" class="group_icon" /><br/><br/>
+<span class="group_title"><a href="/groups/{{group.id}}/">{{group.name}}</a> </span>
+{% if group.icon %}	
+<img src="/file/{{group.icon}}" class="group_icon" />
+{% endif %}	
+<br/><br/>
 {% trans "creator" %}: <a href="/social/{{group.creator}}/">{{group.creator}}</a> <br/>
 {{group.members.count}}     {% trans "members" %}  <br/>
 {{group.get_public_notes_count}} {% trans "notes" %}<br/>
