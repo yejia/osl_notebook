@@ -511,7 +511,7 @@ $("#ac_tags").tagit("removeAll");
     function show_confirm(){
         var r=confirm("{% trans "If you join this group, any note you make that is tagged with any of the tag of this group will be pushed to this group. Private note, however, will not be pushed, unless you specifically want to share it with a group." %}");
         if (r==true){
-            window.location.replace('/groups/{{group.name}}/joinGroup')
+            window.location.replace('/groups/{{group.id}}/joinGroup')
         }
         else{
              ;
