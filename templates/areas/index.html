@@ -25,9 +25,9 @@
 <span class="area_title"><a href="/{{area.owner}}/areas/area/{{area.owner_area_id}}/">{{area.name}}</a> </span>
 	
 <br/><br/>
-{% trans "owner" %}: <a href="/social/{{area.owner}}/">{{area.owner}}</a> <br/>
+{% trans "owner: " %} <a href="/social/{{area.owner}}/">{{area.owner}}</a> <br/>
 {{area.num_of_notes}}     {% trans "notes" %}  <br/>
-{% trans "tags" %} : {{area.area_tags}}
+{% trans "tags: " %}  {{area.area_tags}}
 </span>
 
 {% endfor %}

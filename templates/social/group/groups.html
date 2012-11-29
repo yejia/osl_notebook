@@ -33,7 +33,7 @@
 {% trans "creator" %}: <a href="/social/{{group.creator}}/">{{group.creator}}</a> <br/>
 {{group.members.count}}     {% trans "members" %}  <br/>
 {{group.get_public_notes_count}} {% trans "notes" %}<br/>
-{% trans "tags" %} : {{group.display_tags}}
+{% trans "tags: " %}  {{group.display_tags}}
 </span>
 
 {% endfor %}
