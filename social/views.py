@@ -212,7 +212,7 @@ def friends_notes2(request, username, bookname):
 
 
 def groups(request):
-    gs = G.objects.filter(private=False).annotate(num_members=Count('members')).order_by('num_members')  
+    gs = G.objects.filter(private=False).annotate(num_members=Count('members')).order_by('-num_members')  
     return render_to_response('social/group/groups.html', {'groups':gs}, \
                                                       context_instance=RequestContext(request))
 
