@@ -2,103 +2,38 @@
 {% load i18n %}
 
 
-
-
 {% block title %}
-{% blocktrans %} {{user}}'s Groups {% endblocktrans %}
+{% blocktrans %} Groups {% endblocktrans %}
 {% endblock %}
 
 
 {% block site_branding %}
 <div id="branding">
-<h1 id="site-name">{% blocktrans %} {{user}}'s Groups {% endblocktrans %}</h1>
+<h1 id="site-name">{% blocktrans %}Groups {% endblocktrans %}</h1>
 </div>
 {% endblock %}
 
 
+
 {% block content%}
 
+<table>
 
+<tr>
+</tr>
+</table>
 
-<br/><br/>
-{% if user.username == profile_username %}
+{% for group in groups %}		
+<span class="groups_block"> 
+<span class="group_title"><a href="/groups/{{group.id}}/">{{group.name}}</a> </span><img src="/file/{{group.icon}}" class="group_icon" /><br/><br/>
+{% trans "creator" %}: <a href="/social/{{group.creator}}/">{{group.creator}}</a> <br/>
+{{group.members.count}}     {% trans "members" %}  <br/>
+{{group.get_public_notes_count}} {% trans "notes" %}<br/>
+{% trans "tags" %} : {{group.display_tags}}
+</span>
 
-<p> 
-<a href="javascript:void(0);" onclick="javascript:show_more_section();">{% trans "Add a group" %}:</a>
-<span class="show_more_section"><img title="" src="/site_media/img/right-arrow.jpg"/></span><span class="hide_more_section"><img title="" src="/site_media/img/down-arrow.jpg"/></span> 
-</p>
-<div id="more_section"  class="addgroup" style="display:none;">
-
-<form action="addGroup" method="post" id="addGroupForm"> 
-    <p>   
-               {% trans "Name" %} <span class="required">*</span>: 
-                {{ addGroupForm.name.errors }}
-               {{addGroupForm.name}}
-    </p>
-
-    <div>
-   
-   {% trans "Add Tags" %}  <span class="required">*</span>: 
-   {{ addGroupForm.tags.errors }}
-    <ul id="ac_tags"></ul> 
-    </div>
-    
-     <p>   
-               {{ addGroupForm.icon.label_tag }}:
-                {{ addGroupForm.icon.errors }}
-               {{addGroupForm.icon}}
-    </p>
-    
-    <p>
-        {% trans "Group Description" %}:  {{addGroupForm.desc}}
-    </p>
-    <p>
-        {% trans "Private" %}:  {{addGroupForm.private}}
-    </p>
-    
-    <input type="hidden" name="creator" value="{{user.id}}"/>
-    <input type="hidden" name="members" value="{{user.id}}"/>
-    <input type="hidden" name="admins" value="{{user.id}}"/>
-
-   <input type="submit" value="{% trans 'Submit' %}"/>
-</form> 
-</div>
- {% endif %}  
-<br/><br/><br/>
-<div>
-{% blocktrans %} Groups created by {{profile_username}} {% endblocktrans %}:
-{% for g in gs_created_by_self %}		
-
-<li>
-<a href="/groups/{{g.id}}/">{{g}}</a>&nbsp;&nbsp;&nbsp;&nbsp;<span><a href="/groups/{{g.id}}/admin">{% trans "admin" %}</a></span>
-{% if g.private %} <span class="lock_noclick" title="{% trans 'private'  %}" style="display:{% if g.private %}inline{% else %}none{% endif %};">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;              
-                                   </span> 
-        {% else %} <span class="unlock_noclick" title="{% trans 'public'  %}" style="display:{% if g.private %}none{% else %}inline{% endif %};">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;          
-                </span>
-        
-        {% endif %}  
-</li>
 {% endfor %}
-</div>
 
-
-<br/>
-<div>
-{% blocktrans %} Groups followed by {{profile_username}} {% endblocktrans %}:
-{% for g in gs_following %}		
-<li member_id="{{user.id}}" group_name={{g.name}}>
-<a href="/groups/{{g.id}}/">{{g}}</a>
-{% if user.username == profile_username %}
-<span title="{% trans "remove myself from this group" %}" class="inline_delete" id="group_delete_member">&nbsp;&nbsp;&nbsp;</span>
-{% endif %}
-</li>
-{% endfor %}
-</div>
-
-<br/><br/>
-{% if user.username == profile_username and user.member.get_groups %}<a href="/{{profile_username}}/groups/snippetbook/notes/">{% trans "view all group notes" %}</a>{% endif %}
-
-</div>
 
 
 {% endblock %}

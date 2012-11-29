@@ -3,7 +3,7 @@
 import datetime
 
 from django.http import HttpResponse,HttpResponseRedirect
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, get_object_or_404
 from django import forms
 from django.forms import ModelForm
 from django.db.models import Q, F, Avg, Max, Min, Count
@@ -48,14 +48,15 @@ def salons(request):
 
 
 @login_required
-def my_salons(request):    
+def my_salons(request, username):    
     past = request.GET.get('past')
-    signups = Salon_Signup.objects.filter(member=request.user.member).values_list('salon', flat=True)
+    m =  get_object_or_404(Member, username=username) 
+    signups = Salon_Signup.objects.filter(member=m).values_list('salon', flat=True)
     if past and past=='y':
         salons = Salon.objects.filter(private=False, id__in=signups).exclude(end_date__gte=datetime.date.today()).order_by('start_date', 'start_time')
     else:                
         salons = Salon.objects.filter(private=False, end_date__gte=datetime.date.today(), id__in=signups).order_by('start_date', 'start_time')
-    return render_to_response('salons/my.html',{'salons':salons, 'past':past}, \
+    return render_to_response('salons/my.html',{'salons':salons, 'past':past, 'profile_username':username}, \
                     context_instance=RequestContext(request,  {}))
 
 

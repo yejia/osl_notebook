@@ -61,11 +61,11 @@
 
 
 {% if past == 'y'  %} 
- <a href="/mysalons/">
+ <a href="/{{profile_username}}/salons/">
 {% trans "View my current salons" %}  
 </a>
  {% else %}
-<a href="/mysalons?past=y">
+<a href="/{{profile_username}}/salons?past=y">
 {% trans "View my past salons" %}  
 </a>
 {% endif %}

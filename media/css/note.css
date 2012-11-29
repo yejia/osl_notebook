@@ -106,7 +106,34 @@ font-size: 15px;
 font-weight: 600;
 }
 
+.groups_block{
 
+position:relative;
+    background: #FFFF8A;/*FFF858;#BFFFEA;*/
+    color: #000000;
+    overflow: hidden;
+border:1px solid;
+-moz-border-radius:5px 5px 5px 5px; /* Firefox */
+border-top-left-radius:15px;
+border-top-right-radius:15px;
+border-bottom-left-radius:15px;
+border-bottom-right-radius:15px;
+
+float:left;
+padding:10px;
+margin:10px;
+height:160px;
+width:280px;
+}
+.group_title{
+font-size: 35px;
+font-weight: 400;
+}
+img.group_icon{
+float:right;
+height:60px;
+width:60px;
+}
 
 table.my_table td{
 border-bottom:none;/*the one from base.css (i think), has a border-bottom:solid property*/

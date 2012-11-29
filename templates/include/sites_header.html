@@ -35,7 +35,7 @@
 </span>
 
 <span class="item">
-<a href="/mysalons/">{% trans 'Salons' %}</a>
+<a href="/{{ user.username|default:'anonymous' }}/salons/">{% trans 'Salons' %}</a>
 </span>
 <br/>
 <span class="item">
@@ -55,7 +55,9 @@
 <a href="/salons/">{% trans 'Salons' %}</a>
 </span>
 
-
+<span class="item">
+<a href="/groups/">{% trans 'Groups' %}</a>
+</span>
 
 </span>
 

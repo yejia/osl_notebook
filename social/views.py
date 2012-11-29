@@ -211,10 +211,17 @@ def friends_notes2(request, username, bookname):
  
 
 
+def groups(request):
+    gs = G.objects.filter(private=False).annotate(num_members=Count('members')).order_by('num_members')  
+    return render_to_response('social/group/groups.html', {'groups':gs}, \
+                                                      context_instance=RequestContext(request))
+
+
+
 #TODO: think of getting username arg, since you can get it from request. Also think of 
 # get rid of it in the url.py, changing to personal, or my
 @login_required
-def groups(request, username):
+def my_groups(request, username):
     gs_created_by_self = get_groups_created_by_self(request, username)
     gs_following = get_groups_following(request, username)
     addGroupForm = AddGroupForm(initial={'admins': [username]})
@@ -271,7 +278,7 @@ def groups(request, username):
                   
     #print 'tags:', tags
     
-    return render_to_response('social/group/groups.html', {'gs_created_by_self':gs_created_by_self, 'gs_following':gs_following,\
+    return render_to_response('social/group/mygroups.html', {'gs_created_by_self':gs_created_by_self, 'gs_following':gs_following,\
                                                       'addGroupForm':addGroupForm, 'tags':tags, 'profile_username':username}, \
                                                       context_instance=RequestContext(request))
 

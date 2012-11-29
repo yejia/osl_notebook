@@ -66,8 +66,10 @@ urlpatterns = patterns('',
     (r'^groups/(?P<groupid>[^/]+)/admin/addUsers2Group/$', 'notebook.social.views.group_add_users'),
     (r'^groups/(?P<groupid>[^/]+)/admin/inviteUsers2Group/$', 'notebook.social.views.group_invite_users'),
 
+    (r'^groups/$', 'notebook.social.views.groups'),
+ 
     (r'^salons/$', 'notebook.salons.views.salons'),
-    (r'^mysalons/$', 'notebook.salons.views.my_salons'),
+    (r'^(?P<username>[^/]+)/salons/$', 'notebook.salons.views.my_salons'),
 
 
     #(r'^groups/(?P<groupid>[^/]+)/snippets/$', 'notebook.social.views.group_snippets'),
@@ -100,7 +102,7 @@ urlpatterns = patterns('',
 
     (r'^(?P<username>[^/]+)/addNoteOnly/$', 'notebook.notes.views.add_note_only'),
 
-    (r'^(?P<username>[^/]+)/groups/$', 'notebook.social.views.groups'),
+    (r'^(?P<username>[^/]+)/groups/$', 'notebook.social.views.my_groups'),
     (r'^(?P<username>[^/]+)/groups/addGroup$', 'notebook.social.views.groups'),
     (r'^(?P<username>[^/]+)/friends/$', 'notebook.social.views.friends'),
     (r'^suggest/$', 'notebook.social.views.suggest'),
