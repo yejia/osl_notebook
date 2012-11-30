@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-30 11:04+0800\n"
+"POT-Creation-Date: 2012-11-30 11:45+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -424,8 +424,8 @@ msgstr "条笔记"
 
 #: notes/views.py:1434 templates/areas/index.html:29
 #: templates/include/notes/note/notedisplay.html:88
-#: templates/social/all_people.html:33 templates/social/friends.html:33
-#: templates/social/learners.html:33 templates/social/group/groups.html:35
+#: templates/social/friends.html:33 templates/social/learners.html:33
+#: templates/social/people.html:33 templates/social/group/groups.html:35
 #: templates/social/include/notes/note/notedisplay.html:28
 msgid "notes"
 msgstr "条笔记"
@@ -542,7 +542,7 @@ msgstr "便条"
 #: templates/include/profile_head.html:66
 #: templates/include/profile_head.html:83
 #: templates/include/sites_header.html:14
-#: templates/include/sites_header.html:97
+#: templates/include/sites_header.html:105
 #: templates/include/supersearch.html:15 templates/include/supersearch.html:40
 #: templates/include/supersearch.html:42
 #: templates/include/notes/notes_display.html:150
@@ -552,7 +552,7 @@ msgid "Frames"
 msgstr "知识包"
 
 #: social/models.py:65 templates/include/sites_header.html:17
-#: templates/include/sites_header.html:100 templates/tagframes/index.html:341
+#: templates/include/sites_header.html:108 templates/tagframes/index.html:341
 msgid "Tag Tree"
 msgstr "标签树"
 
@@ -625,66 +625,66 @@ msgstr "管理员"
 msgid "Invitation Code"
 msgstr "邀请码"
 
-#: social/views.py:657
+#: social/views.py:667
 msgid "You are not an admin of this group, and thus cannot admin this group."
 msgstr "你不是这个小组的管理员，所以不能管理这个小组。"
 
-#: social/views.py:662
+#: social/views.py:672
 msgid "You have successfully removed the member from the group."
 msgstr "你已经成功的将该成员从这个小组移除。"
 
-#: social/views.py:698 social/views.py:730
+#: social/views.py:708 social/views.py:740
 msgid "No users are entered!"
 msgstr "没有输入任何用户名！"
 
-#: social/views.py:707
+#: social/views.py:717
 msgid "You are added to the group "
 msgstr "你被加入学习小组"
 
-#: social/views.py:708 social/views.py:741
+#: social/views.py:718 social/views.py:751
 msgid "You can visit this group at "
 msgstr "这是该学习小组的网址 "
 
-#: social/views.py:709
+#: social/views.py:719
 msgid ""
 "If you do not want to join this group, you can remove yourself from this "
 "group on your groups page. "
 msgstr "如果你想退出该学习小组，你可以在你的学习小组页面完成此操作。"
 
-#: social/views.py:712
+#: social/views.py:722
 msgid "You are added to group "
 msgstr "你被加入学习小组"
 
-#: social/views.py:716
+#: social/views.py:726
 msgid "You have successfully added the user to the group!"
 msgstr "你已经成功的将该成员添加到这个小组。"
 
-#: social/views.py:740
+#: social/views.py:750
 msgid "You are invited to join the group "
 msgstr "你被邀请参加学习小组"
 
-#: social/views.py:742
+#: social/views.py:752
 msgid ""
 "If you want to join this group, you can click on the \"join the group\" "
 "button."
 msgstr "如果你想加入该学习小组，你可以点击\"加入小组\"按钮。"
 
-#: social/views.py:743
+#: social/views.py:753
 msgid ""
 "After joining, if you want to remove yourself from this group, you can do "
 "that in your groups page."
 msgstr ""
 "加入学习小组后，如果你想退出该学习小组，你可以在你的学习小组页面完成此操作。"
 
-#: social/views.py:744
+#: social/views.py:754
 msgid "You are invited to group "
 msgstr "你被邀请参加学习小组"
 
-#: social/views.py:748
+#: social/views.py:758
 msgid "You have successfully sent the group invitation!"
 msgstr "你已经成功的发出了小组邀请！"
 
-#: social/views.py:1144
+#: social/views.py:1154
 msgid ""
 "Your suggestion is successfully sent to the sys admin! Thank you for your "
 "valuable suggestion!"
@@ -780,11 +780,11 @@ msgstr ""
 #: templates/admin/base.html:41
 #: templates/admin/auth/user/change_password.html:15
 #: templates/admin/auth/user/change_password.html:48
-#: templates/include/sites_header.html:180 templates/registration/base.html:45
+#: templates/include/sites_header.html:188 templates/registration/base.html:45
 msgid "Change password"
 msgstr "修改密码"
 
-#: templates/admin/base.html:48 templates/include/sites_header.html:181
+#: templates/admin/base.html:48 templates/include/sites_header.html:189
 #: templates/registration/base.html:52
 msgid "Log out"
 msgstr "退出"
@@ -918,7 +918,7 @@ msgstr "用户名"
 msgid "Password:"
 msgstr "密码"
 
-#: templates/admin/login.html:27 templates/include/sites_header.html:178
+#: templates/admin/login.html:27 templates/include/sites_header.html:186
 msgid "Log in"
 msgstr ""
 
@@ -1073,8 +1073,8 @@ msgstr "浏览这个学习领域里的所有笔记"
 #: templates/include/profile_head.html:54
 #: templates/include/profile_head.html:56
 #: templates/include/profile_head.html:81
-#: templates/include/sites_header.html:139
-#: templates/include/sites_header.html:141
+#: templates/include/sites_header.html:147
+#: templates/include/sites_header.html:149
 #: templates/include/supersearch.html:9 templates/include/supersearch.html:30
 #: templates/include/supersearch.html:32 templates/social/profile.html:76
 #: templates/social/wall_snippets.html:28
@@ -1220,7 +1220,7 @@ msgstr "并且必须是已经存在的标签树。"
 #: templates/areas/index.html:6 templates/areas/index.html.py:12
 #: templates/include/sites_header.html:20
 #: templates/include/sites_header.html:64
-#: templates/include/sites_header.html:103
+#: templates/include/sites_header.html:111
 msgid "Areas"
 msgstr "学习领域"
 
@@ -1906,7 +1906,7 @@ msgstr "一个知识包本是一组动态的基于某个搜索的知识包。"
 #: templates/framebook/folders_special_side_menu.html:5
 #: templates/include/folders_special_side_menu.html:11
 #: templates/include/friends_menu.html:5 templates/include/groups_menu.html:4
-#: templates/include/sites_header.html:173
+#: templates/include/sites_header.html:181
 #: templates/include/notes/menu/toggle_tag_menu.html:33
 msgid "Settings"
 msgstr "设置"
@@ -2455,14 +2455,14 @@ msgid "My Personal Space"
 msgstr "我的个人空间"
 
 #: templates/include/sites_header.html:11
-#: templates/include/sites_header.html:94
+#: templates/include/sites_header.html:102
 #: templates/social/wall_snippets.html:23
 #: templates/social/wall_snippets.html:41
 msgid "Notes"
 msgstr "便条"
 
 #: templates/include/sites_header.html:23
-#: templates/include/sites_header.html:106
+#: templates/include/sites_header.html:114
 msgid "Plans"
 msgstr "学习计划"
 
@@ -2472,19 +2472,19 @@ msgstr "我的社交空间"
 
 #: templates/include/sites_header.html:34
 #: templates/include/sites_header.html:59
-#: templates/include/sites_header.html:110
+#: templates/include/sites_header.html:118
 #: templates/social/group/groups.html:6 templates/social/group/groups.html:12
 msgid "Groups"
 msgstr "学习小组"
 
 #: templates/include/sites_header.html:38
 #: templates/include/sites_header.html:55
-#: templates/include/sites_header.html:114
+#: templates/include/sites_header.html:122
 msgid "Salons"
 msgstr "学习沙龙"
 
 #: templates/include/sites_header.html:42
-#: templates/include/sites_header.html:118 templates/social/friends.html:6
+#: templates/include/sites_header.html:126 templates/social/friends.html:6
 #: templates/social/friends.html.py:12
 msgid "Friends"
 msgstr "我的朋友"
@@ -2493,38 +2493,47 @@ msgstr "我的朋友"
 msgid "Square"
 msgstr "广场"
 
-#: templates/include/sites_header.html:80
+#: templates/include/sites_header.html:68 templates/social/learners.html:6
+#: templates/social/learners.html.py:12
+msgid "Power Learners"
+msgstr "学习达人"
+
+#: templates/include/sites_header.html:72
+msgid "All Frames"
+msgstr "全部知识包"
+
+#: templates/include/sites_header.html:88
 msgid "Space"
 msgstr "空间"
 
-#: templates/include/sites_header.html:83
-#: templates/include/sites_header.html:122
+#: templates/include/sites_header.html:91
+#: templates/include/sites_header.html:130
 msgid "Suggest"
 msgstr "建议"
 
-#: templates/include/sites_header.html:86
+#: templates/include/sites_header.html:94
 msgid "Switch back to the old menu"
 msgstr "切换回旧菜单"
 
-#: templates/include/sites_header.html:125
+#: templates/include/sites_header.html:133
 msgid "Switch to the new menu"
 msgstr "切换到新菜单"
 
-#: templates/include/sites_header.html:132
-#: templates/include/sites_header.html:134
+#: templates/include/sites_header.html:140
+#: templates/include/sites_header.html:142
 #: templates/snippetbook/folders_special_side_menu.html:4
 #: templates/social/snippetbook/folders_special_side_menu.html:4
 msgid "Snippetbook"
 msgstr "便条本"
 
-#: templates/include/sites_header.html:146
-#: templates/include/sites_header.html:148
+#: templates/include/sites_header.html:154
+#: templates/include/sites_header.html:156
 #: templates/scrapbook/folders_special_side_menu.html:4
 #: templates/social/scrapbook/folders_special_side_menu.html:4
 msgid "Scrapbook"
 msgstr "摘录本"
 
-#: templates/include/sites_header.html:165
+#: templates/include/sites_header.html:173
 msgid "For new users"
 msgstr "新用户帮助"
 
@@ -3008,22 +3017,22 @@ msgid "View all "
 msgstr "浏览全部"
 
 #: templates/include/notes/note/notedisplay.html:79
-#: templates/social/all_people.html:33 templates/social/friends.html:33
-#: templates/social/learners.html:33
+#: templates/social/friends.html:33 templates/social/learners.html:33
+#: templates/social/people.html:33
 #: templates/social/include/notes/note/notedisplay.html:18
 msgid "bookmarks"
 msgstr "网址"
 
 #: templates/include/notes/note/notedisplay.html:82
-#: templates/social/all_people.html:33 templates/social/friends.html:33
-#: templates/social/learners.html:33
+#: templates/social/friends.html:33 templates/social/learners.html:33
+#: templates/social/people.html:33
 #: templates/social/include/notes/note/notedisplay.html:23
 msgid "scraps"
 msgstr "网摘"
 
 #: templates/include/notes/note/notedisplay.html:85
-#: templates/social/all_people.html:33 templates/social/friends.html:33
-#: templates/social/learners.html:33
+#: templates/social/friends.html:33 templates/social/learners.html:33
+#: templates/social/people.html:33
 #: templates/social/include/notes/note/notedisplay.html:13
 msgid "snippets"
 msgstr "便条"
@@ -3608,25 +3617,6 @@ msgstr "加标签"
 msgid "Add snippet"
 msgstr "添加便条"
 
-#: templates/social/all_people.html:6 templates/social/all_people.html:12
-msgid "Learners"
-msgstr "学习者"
-
-#: templates/social/all_people.html:30 templates/social/friends.html:30
-#: templates/social/learners.html:30
-msgid "groups"
-msgstr "学习小组"
-
-#: templates/social/all_people.html:31 templates/social/friends.html:31
-#: templates/social/learners.html:31
-msgid "areas"
-msgstr "学习领域"
-
-#: templates/social/all_people.html:33 templates/social/friends.html:33
-#: templates/social/learners.html:33
-msgid "frames"
-msgstr "知识包"
-
 #: templates/social/commentsby.html:15
 msgid "Comments on"
 msgstr "评论"
@@ -3689,9 +3679,24 @@ msgstr "基于某一搜索的网摘本"
 msgid "Notebook based on a custom query"
 msgstr "基于某一搜索的笔记本"
 
-#: templates/social/learners.html:6 templates/social/learners.html.py:12
-msgid "Power Learners"
-msgstr "学习达人"
+#: templates/social/friends.html:30 templates/social/learners.html:30
+#: templates/social/people.html:30
+msgid "groups"
+msgstr "学习小组"
+
+#: templates/social/friends.html:31 templates/social/learners.html:31
+#: templates/social/people.html:31
+msgid "areas"
+msgstr "学习领域"
+
+#: templates/social/friends.html:33 templates/social/learners.html:33
+#: templates/social/people.html:33
+msgid "frames"
+msgstr "知识包"
+
+#: templates/social/people.html:6 templates/social/people.html.py:12
+msgid "Learners"
+msgstr "学习者"
 
 #: templates/social/profile.html:6 templates/social/profile.html.py:13
 #, python-format
