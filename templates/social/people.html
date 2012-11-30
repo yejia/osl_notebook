@@ -3,13 +3,13 @@
 
 
 {% block title %}
-{% trans "Friends" %}
+{% trans "Learners" %}
 {% endblock %}
 
 
 {% block site_branding %}
 <div id="branding">
-{% trans "Friends" %}
+{% trans "Learners" %}
 </div>
 {% endblock %}
 
@@ -19,7 +19,7 @@
 
 
 
-{% for m in friends %}	
+{% for m in learners %}		
 <span class="member_block"> 
 <span class="group_title"><a href="/social/{{m.0.username}}/">{{m.0.username}}</a> </span>
 {% if m.0.icon %}	

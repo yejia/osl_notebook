@@ -8,7 +8,7 @@ from django.forms import ModelForm
 from django.db.models import Q, F, Avg, Max, Min, Count
 from django.utils import simplejson
 from django.utils.http import urlencode
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.template import RequestContext
 from django.core.exceptions import ObjectDoesNotExist, FieldError, MultipleObjectsReturned
 from django.contrib import messages
@@ -228,12 +228,22 @@ def all_notes(request, bookname):
 
 
 def learners(request):
-    members = Member.objects.filter(is_active=True)#.order_by('-get_public_notes_count') 
-    sorted_members = [[m, m.get_public_notes_count()] for m in members] 
+    members = Member.objects.filter(is_active=True)#.order_by('-get_public_notes_count')     
+    sorted_members = [[m, m.get_public_notes_count()] for m in members if m.get_public_notes_count() > 10 and m.username not in ['test', 'guest']] 
     sorted_members.sort(key=lambda r:r[1],reverse = True) 
     return render_to_response('social/learners.html', {'learners':sorted_members}, \
                                                       context_instance=RequestContext(request))
         
+#viewing all people
+@user_passes_test(lambda u: u.username=='leon')
+@login_required
+def people(request):
+    members = Member.objects.filter(is_active=True)#.order_by('-get_public_notes_count')     
+    sorted_members = [[m, m.get_public_notes_count()] for m in members] 
+    sorted_members.sort(key=lambda r:r[1],reverse = True) 
+    return render_to_response('social/people.html', {'learners':sorted_members}, \
+                                                      context_instance=RequestContext(request))
+    
 
 def groups(request):
     gs = G.objects.filter(private=False).annotate(num_members=Count('members')).order_by('-num_members')  

@@ -3,13 +3,13 @@
 
 
 {% block title %}
-{% trans "Learners" %}
+{% trans "Power Learners" %}
 {% endblock %}
 
 
 {% block site_branding %}
 <div id="branding">
-{% trans "Learners" %}
+{% trans "Power Learners" %}
 </div>
 {% endblock %}
 
@@ -20,14 +20,14 @@
 
 
 {% for m in learners %}		
-<span class="groups_block"> 
+<span class="member_block"> 
 <span class="group_title"><a href="/social/{{m.0.username}}/">{{m.0.username}}</a> </span>
 {% if m.0.icon %}	
 <img src="/file/{{m.0.icon}}" class="group_icon" />
 {% endif %}	
 <br/><br/>
 
-{{m.0.get_groups.count}}     {% trans "groups" %}  <br/>
+{{m.0.get_public_groups.count}}     {% trans "groups" %}  <br/>
 {{m.0.get_areas.count}}     {% trans "areas" %}  <br/>
 
 {{m.0.get_public_notes_count}} {% trans "notes" %}: {{m.0.get_public_snippets_count}} {% trans "snippets" %}, {{m.0.get_public_bookmarks_count}} {% trans "bookmarks" %}, {{m.0.get_public_scraps_count}} {% trans "scraps" %}, {{m.0.get_public_frames_count}} {% trans "frames" %}<br/>

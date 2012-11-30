@@ -120,6 +120,10 @@ class Member(User):
         return Group.objects.filter(members=self).order_by('name')
     
     
+    def get_public_groups(self):
+        return Group.objects.filter(members=self, private=False).order_by('name')
+    
+    
     def is_in_group(self, groupname):
         groups = [group.name for group in self.get_groups()]
         if groupname in groups:

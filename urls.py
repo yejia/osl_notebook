@@ -70,6 +70,8 @@ urlpatterns = patterns('',
 
     (r'^learners/$', 'notebook.social.views.learners'),
  
+    (r'^people/$', 'notebook.social.views.people'),
+
     (r'^salons/$', 'notebook.salons.views.salons'),
     (r'^(?P<username>[^/]+)/salons/$', 'notebook.salons.views.my_salons'),
 

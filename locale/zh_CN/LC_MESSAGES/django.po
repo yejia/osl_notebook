@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-30 10:34+0800\n"
+"POT-Creation-Date: 2012-11-30 11:04+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -256,24 +256,24 @@ msgstr ""
 "这个网址已经成功添加到您的网址本里。您可以关闭这个窗口，或者其会在1秒后自动关"
 "闭。"
 
-#: notes/models.py:189 notes/models.py:1166 social/models.py:866
+#: notes/models.py:189 notes/models.py:1166 social/models.py:870
 #: templates/framebook/notes/notesdisplay.html:18
 #: templates/include/notes/notesdisplay.html:40
 #: templates/scrapbook/notes/notesdisplay.html:28
 msgid "Title"
 msgstr "标题"
 
-#: notes/models.py:189 notes/models.py:1166 social/models.py:866
+#: notes/models.py:189 notes/models.py:1166 social/models.py:870
 msgid "The size of the title is limited to 2000 characaters."
 msgstr "标题的长度应小于2000字。"
 
-#: notes/models.py:192 notes/models.py:1167 social/models.py:708
-#: social/models.py:867 templates/areas/area.html:285
+#: notes/models.py:192 notes/models.py:1167 social/models.py:712
+#: social/models.py:871 templates/areas/area.html:285
 #: templates/areas/my.html:54
 msgid "Description"
 msgstr "正文"
 
-#: notes/models.py:192 notes/models.py:1167 social/models.py:867
+#: notes/models.py:192 notes/models.py:1167 social/models.py:871
 msgid "The size of the desc is limited to 2000 characaters."
 msgstr "正文的长度应小于2000字。"
 
@@ -289,7 +289,7 @@ msgstr "标签"
 msgid "Default tag is 'random thought'."
 msgstr "默认的标签是'random thought'。"
 
-#: notes/models.py:194 social/models.py:711 templates/areas/area.html:288
+#: notes/models.py:194 social/models.py:715 templates/areas/area.html:288
 #: templates/areas/my.html:57 templates/framebook/notes/notesdisplay.html:22
 #: templates/include/note_list_base.html:1491
 #: templates/include/notes/notesdisplay.html:44
@@ -299,7 +299,7 @@ msgstr "默认的标签是'random thought'。"
 msgid "Private"
 msgstr "隐私"
 
-#: notes/models.py:196 social/models.py:710
+#: notes/models.py:196 social/models.py:714
 msgid "date created"
 msgstr "生成时间"
 
@@ -311,17 +311,17 @@ msgstr "最后修改时间"
 msgid "self ranking"
 msgstr "原作者的评级"
 
-#: notes/models.py:727 snippets/models.py:14 social/models.py:470
-#: social/models.py:494 templates/framebook/notes/notesdisplay.html:20
+#: notes/models.py:727 snippets/models.py:14 social/models.py:474
+#: social/models.py:498 templates/framebook/notes/notesdisplay.html:20
 #: templates/include/notes/notesdisplay.html:42
 msgid "Attachment"
 msgstr "附件"
 
-#: notes/models.py:1164 social/models.py:864
+#: notes/models.py:1164 social/models.py:868
 msgid "Language"
 msgstr "语言"
 
-#: notes/models.py:1165 social/models.py:865
+#: notes/models.py:1165 social/models.py:869
 msgid "Original language"
 msgstr "原来的语言"
 
@@ -424,8 +424,8 @@ msgstr "条笔记"
 
 #: notes/views.py:1434 templates/areas/index.html:29
 #: templates/include/notes/note/notedisplay.html:88
-#: templates/social/friends.html:33 templates/social/learners.html:33
-#: templates/social/group/groups.html:35
+#: templates/social/all_people.html:33 templates/social/friends.html:33
+#: templates/social/learners.html:33 templates/social/group/groups.html:35
 #: templates/social/include/notes/note/notedisplay.html:28
 msgid "notes"
 msgstr "条笔记"
@@ -564,7 +564,7 @@ msgstr ""
 msgid "Nickname"
 msgstr "绰号"
 
-#: social/models.py:73 social/models.py:715
+#: social/models.py:73 social/models.py:719
 msgid "Icon"
 msgstr "头像"
 
@@ -599,29 +599,29 @@ msgstr "主页"
 msgid "Default UI"
 msgstr "默认UI"
 
-#: social/models.py:697
+#: social/models.py:701
 msgid "Area Tags"
 msgstr "领域标签"
 
-#: social/models.py:707 templates/areas/area.html:263
+#: social/models.py:711 templates/areas/area.html:263
 #: templates/areas/my.html:37 templates/salons/group_salons.html:44
 #: templates/salons/salon.html:233 templates/social/group/mygroups.html:34
 msgid "Name"
 msgstr "名字"
 
-#: social/models.py:712 templates/social/notes/group_notes.html:35
+#: social/models.py:716 templates/social/notes/group_notes.html:35
 msgid "Members"
 msgstr "成员"
 
-#: social/models.py:713
+#: social/models.py:717
 msgid "Creator"
 msgstr "创建者"
 
-#: social/models.py:714
+#: social/models.py:718
 msgid "Admins"
 msgstr "管理员"
 
-#: social/models.py:874 templates/registration/reg_with_code.html:17
+#: social/models.py:878 templates/registration/reg_with_code.html:17
 msgid "Invitation Code"
 msgstr "邀请码"
 
@@ -3008,19 +3008,22 @@ msgid "View all "
 msgstr "浏览全部"
 
 #: templates/include/notes/note/notedisplay.html:79
-#: templates/social/friends.html:33 templates/social/learners.html:33
+#: templates/social/all_people.html:33 templates/social/friends.html:33
+#: templates/social/learners.html:33
 #: templates/social/include/notes/note/notedisplay.html:18
 msgid "bookmarks"
 msgstr "网址"
 
 #: templates/include/notes/note/notedisplay.html:82
-#: templates/social/friends.html:33 templates/social/learners.html:33
+#: templates/social/all_people.html:33 templates/social/friends.html:33
+#: templates/social/learners.html:33
 #: templates/social/include/notes/note/notedisplay.html:23
 msgid "scraps"
 msgstr "网摘"
 
 #: templates/include/notes/note/notedisplay.html:85
-#: templates/social/friends.html:33 templates/social/learners.html:33
+#: templates/social/all_people.html:33 templates/social/friends.html:33
+#: templates/social/learners.html:33
 #: templates/social/include/notes/note/notedisplay.html:13
 msgid "snippets"
 msgstr "便条"
@@ -3605,6 +3608,25 @@ msgstr "加标签"
 msgid "Add snippet"
 msgstr "添加便条"
 
+#: templates/social/all_people.html:6 templates/social/all_people.html:12
+msgid "Learners"
+msgstr "学习者"
+
+#: templates/social/all_people.html:30 templates/social/friends.html:30
+#: templates/social/learners.html:30
+msgid "groups"
+msgstr "学习小组"
+
+#: templates/social/all_people.html:31 templates/social/friends.html:31
+#: templates/social/learners.html:31
+msgid "areas"
+msgstr "学习领域"
+
+#: templates/social/all_people.html:33 templates/social/friends.html:33
+#: templates/social/learners.html:33
+msgid "frames"
+msgstr "知识包"
+
 #: templates/social/commentsby.html:15
 msgid "Comments on"
 msgstr "评论"
@@ -3667,21 +3689,9 @@ msgstr "基于某一搜索的网摘本"
 msgid "Notebook based on a custom query"
 msgstr "基于某一搜索的笔记本"
 
-#: templates/social/friends.html:30 templates/social/learners.html:30
-msgid "groups"
-msgstr "学习小组"
-
-#: templates/social/friends.html:31 templates/social/learners.html:31
-msgid "areas"
-msgstr "学习领域"
-
-#: templates/social/friends.html:33 templates/social/learners.html:33
-msgid "frames"
-msgstr "知识包"
-
 #: templates/social/learners.html:6 templates/social/learners.html.py:12
-msgid "Learners"
-msgstr "学习者"
+msgid "Power Learners"
+msgstr "学习达人"
 
 #: templates/social/profile.html:6 templates/social/profile.html.py:13
 #, python-format
