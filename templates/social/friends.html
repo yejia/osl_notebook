@@ -3,27 +3,39 @@
 
 
 {% block title %}
-{% blocktrans %} {{user}}'s Friends {% endblocktrans %}
+{% trans "Friends" %}
 {% endblock %}
 
 
 {% block site_branding %}
 <div id="branding">
-<h1 id="site-name">{% blocktrans %} {{user}}'s Friends {% endblocktrans %}</h1>
+{% trans "Friends" %}
 </div>
 {% endblock %}
 
 
+
 {% block content%}
 
-<div>
-<br/><br/><br/>
-{% blocktrans %}Friends of {{user}} {% endblocktrans %}:  {% if user.username == profile_username %}<a href="/{{profile_username}}/friends/snippetbook/notes/">{% trans "view all" %}</a>{% endif %}
-{% for f in user.member.get_friends %}		
-<li>
-<a href="/social/{{f.username}}/">{{f.username}}</a><!--TODO:nickname-->
-</li>
+
+
+{% for m in friends %}	
+<span class="member_block"> 
+<span class="group_title"><a href="/social/{{m.0.username}}/">{{m.0.username}}</a> </span>
+{% if m.0.icon %}	
+<img src="/file/{{m.0.icon}}" class="group_icon" />
+{% endif %}	
+<br/><br/>
+
+{{m.0.get_groups.count}}     {% trans "groups" %}  <br/>
+{{m.0.get_areas.count}}     {% trans "areas" %}  <br/>
+
+{{m.0.get_public_notes_count}} {% trans "notes" %}: {{m.0.get_public_snippets_count}} {% trans "snippets" %}, {{m.0.get_public_bookmarks_count}} {% trans "bookmarks" %}, {{m.0.get_public_scraps_count}} {% trans "scraps" %}, {{m.0.get_public_frames_count}} {% trans "frames" %}<br/>
+
+</span>
+
 {% endfor %}
-</div>
+
+
 
 {% endblock %}

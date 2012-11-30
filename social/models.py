@@ -111,6 +111,9 @@ class Member(User):
         return [friend.username for friend in friends]
        
      
+    
+    def get_areas(self):
+        return Social_Area.objects.filter(owner=self).order_by('name')
        
    
     def get_groups(self):

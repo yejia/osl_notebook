@@ -29,4 +29,4 @@ system_tags = resource_tags + ['question',
 notebook_host_names = ['www.91biji.com', '91biji.com', 'opensourcelearning.org', 'www.opensourcelearning.org', '3exps.org', '3exps.com', 'www.3exps.org', 'www.3exps.com']
 
 
-not_allowed_names = ['all', 'king', 'queen', 'son', 'dad', 'mom', 'father', 'mother']
+not_allowed_names = ['all', 'king', 'queen', 'son', 'dad', 'mom', 'dads', 'moms', 'father', 'mother', 'fathers', 'mothers', 'learner', 'learners', 'teacher', 'teachers']

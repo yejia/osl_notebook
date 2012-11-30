@@ -159,6 +159,27 @@ font-size: 35px;
 font-weight: 400;
 }
 
+.member_block{
+
+position:relative;
+    background: #CCFF8F;/*FFF858;#BFFFEA;*/
+    color: #000000;
+    overflow: hidden;
+border:1px solid;
+-moz-border-radius:5px 5px 5px 5px; /* Firefox */
+border-top-left-radius:15px;
+border-top-right-radius:15px;
+border-bottom-left-radius:15px;
+border-bottom-right-radius:15px;
+
+float:left;
+padding:10px;
+margin:10px;
+height:115px;
+width:200px;
+
+}
+
 table.my_table td{
 border-bottom:none;/*the one from base.css (i think), has a border-bottom:solid property*/
 padding:25px;

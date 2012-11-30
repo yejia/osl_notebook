@@ -179,8 +179,11 @@ def profile(request, username):
 
 @login_required
 def friends(request, username):
-    #friends = request.user.member.get_friends()    
-    return render_to_response('social/friends.html', { 'profile_username':username}, context_instance=RequestContext(request, {}))
+    profile_member = get_object_or_404(Member, username=username) 
+    friends = profile_member.get_friends()  
+    sorted_members = [[m, m.get_public_notes_count()] for m in friends] 
+    sorted_members.sort(key=lambda r:r[1],reverse = True)  
+    return render_to_response('social/friends.html', { 'profile_username':username, 'friends':sorted_members}, context_instance=RequestContext(request, {}))
 
 
 @login_required
@@ -221,7 +224,16 @@ def all_notes(request, bookname):
                                                                                             'pick_plan':request.GET.get('pick_plan', 'all'),
                                                                                             'pick_lang': __get_lang(request)
                                                                                                })) 
-    
+
+
+
+def learners(request):
+    members = Member.objects.filter(is_active=True)#.order_by('-get_public_notes_count') 
+    sorted_members = [[m, m.get_public_notes_count()] for m in members] 
+    sorted_members.sort(key=lambda r:r[1],reverse = True) 
+    return render_to_response('social/learners.html', {'learners':sorted_members}, \
+                                                      context_instance=RequestContext(request))
+        
 
 def groups(request):
     gs = G.objects.filter(private=False).annotate(num_members=Count('members')).order_by('-num_members')  
