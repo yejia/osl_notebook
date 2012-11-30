@@ -399,6 +399,7 @@ def user_register_with_code(request):
             username = request.POST.get('username')
             if username.lower() in not_allowed_names:
                 messages.error(request, _("This username is not allowed! Please pick another username.")) 
+                return HttpResponseRedirect('/invite/') 
             if ' ' in username:
                 messages.error(request, _("No space allowed in username!"))
                 return HttpResponseRedirect('/invite/') 
