@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-29 20:46+0800\n"
+"POT-Creation-Date: 2012-11-30 06:50+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -115,27 +115,33 @@ msgstr "收到新的评论"
 msgid "you have received a comment"
 msgstr "你收到了新的评论"
 
-#: plan.py:49
+#: plan.py:37 plan.py:40
+msgid ""
+"If you don't want to receive any learning plan notice, you can change your "
+"preference setting:"
+msgstr "如果你不想接收学习计划的通知，你可以在你的设置里选择不接收计划通知："
+
+#: plan.py:56
 msgid "Weekly Plan:"
 msgstr "周学习计划："
 
-#: plan.py:49
+#: plan.py:56
 msgid " to "
 msgstr "到"
 
-#: plan.py:50
+#: plan.py:57
 msgid "Make your weekly plan for this week here."
 msgstr "在这里制定你一周的学习计划。"
 
-#: plan.py:67
+#: plan.py:74
 msgid "Monthly Plan:"
 msgstr "月计划"
 
-#: plan.py:68
+#: plan.py:75
 msgid "Make your monthly plan for this month here."
 msgstr "在这里制定你本月的学习计划。"
 
-#: plan.py:88 plan.py:92
+#: plan.py:95 plan.py:99
 msgid ""
 "It is the beginning of the week again. To start this week right, first make "
 "a learning plan for this week. What do you want to learn this week? And how "
@@ -144,17 +150,17 @@ msgstr ""
 "新的一周又开始了。每周开始的时候做个大概的计划会帮助你在这一周内的学习更有成"
 "果。现在就开始制定这周的学习计划吧。这周打算学些什么？怎么学？"
 
-#: plan.py:89 plan.py:93
+#: plan.py:96 plan.py:100
 msgid ""
 "A weekly plan has been created for you in your notebook. You just need to "
 "fill in the specifics by adding snippets to it:"
 msgstr "系统已经将本周学习计划添加到您的笔记本里。你只需要加入一些便条即可。"
 
-#: plan.py:98
+#: plan.py:105
 msgid "Time to make your weekly plan"
 msgstr "制定周学习计划的时间到了"
 
-#: plan.py:118 plan.py:122
+#: plan.py:125 plan.py:129
 msgid ""
 "It is the beginning of the month again. To start this month right, first "
 "make a learning plan for this month. What do you want to learn this month? "
@@ -163,17 +169,17 @@ msgstr ""
 "新的一月又开始了。每月开始的时候做个大概的计划会帮助你在这一月内的学习更有成"
 "果。现在就开始制定本月的学习计划吧。这月打算学些什么？怎么学？"
 
-#: plan.py:119 plan.py:123
+#: plan.py:126 plan.py:130
 msgid ""
 "A monthly plan has been created for you in your notebook. You just need to "
 "fill in the specifics by adding snippets to it:"
 msgstr "系统已经将本月学习计划添加到您的笔记本里。您只需要加入一些便条即可。"
 
-#: plan.py:128
+#: plan.py:135
 msgid "Time to make your monthly plan"
 msgstr "制定月学习计划的时间到了"
 
-#: plan.py:178 plan.py:182
+#: plan.py:185 plan.py:189
 msgid ""
 "It is the weekend again. Now is your time to review your weekly plan. Have "
 "you accomplished your plan this week? What have you done well? What you "
@@ -182,21 +188,21 @@ msgstr ""
 "又到了周末了。现在是回顾你一周的学习计划的时间了。你是否完成了你制定的任务？"
 "哪些方面是做得比较好的？哪些方面是做得还不够好的？还有哪些可以提高的地方？"
 
-#: plan.py:179 plan.py:183
+#: plan.py:186 plan.py:190
 msgid "Remember to find time on the weekend to review your weekly plan:"
 msgstr "记住周末要找时间回顾你本周的学习计划："
 
-#: plan.py:181 plan.py:185
+#: plan.py:188 plan.py:192
 msgid ""
 "If your weekly plan is empty this week, it will be removed for you "
 "automatically the beginning of next week:"
 msgstr "如果你的本周学习计划是空的，将在下周初被系统自动移除。"
 
-#: plan.py:186
+#: plan.py:193
 msgid "Time to review your weekly plan"
 msgstr "回顾一周学习计划的时间到了"
 
-#: plan.py:215 plan.py:219
+#: plan.py:222 plan.py:226
 msgid ""
 "It is the end of the month again. Now is your time to review your monthly "
 "plan. Have you accomplished your plan this month? What have you done well? "
@@ -205,17 +211,17 @@ msgstr ""
 "又到了月末了。现在是回顾你本月的学习计划的时间了。你是否完成了你制定的任务？"
 "哪些方面是做得比较好的？哪些方面是做得还不够好的？还有哪些可以提高的地方？"
 
-#: plan.py:216 plan.py:220
+#: plan.py:223 plan.py:227
 msgid "Remember to find time to review your monthly plan:"
 msgstr "记住要找时间回顾你本月的学习计划："
 
-#: plan.py:218 plan.py:222
+#: plan.py:225 plan.py:229
 msgid ""
 "If your monthly plan is empty this month, it will be removed for you "
 "automatically the beginning of next month:"
 msgstr "如果你的本月学习计划是空的，将在下个月的月初被系统自动移除。"
 
-#: plan.py:223
+#: plan.py:230
 msgid "Time to review your monthly plan"
 msgstr "回顾本月学习计划的时间到了"
 

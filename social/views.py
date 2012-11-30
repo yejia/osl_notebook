@@ -191,12 +191,9 @@ def friends_notes2(request, username, bookname):
     q = Q(owner__in=friends, private=False)
     note_list = getSN(bookname).objects.filter(q)   
     qstr = __getQStr(request)    
-    note_list  = getSearchResults(note_list, qstr)
-    
+    note_list  = getSearchResults(note_list, qstr)    
     sort, order_type,  paged_notes, cl = __get_notes_context(request, note_list) 
     
-    
-      
     #tags = get_group_tags(request, groupname, bookname)
     return render_to_response('social/notes/friends_notes.html', {'note_list':paged_notes,'sort':sort, 'bookname':bookname, \
                                                  'tags':None, 'qstr':qstr, \
@@ -209,6 +206,22 @@ def friends_notes2(request, username, bookname):
                                                                                                })) 
  
 
+#notes of all users
+def all_notes(request, bookname):
+    note_list = getSN(bookname).objects.all()
+    qstr = __getQStr(request)    
+    note_list  = getSearchResults(note_list, qstr)    
+    sort, order_type,  paged_notes, cl = __get_notes_context(request, note_list)  
+    return render_to_response('social/notes/all_notes.html', {'note_list':paged_notes,'sort':sort, 'bookname':bookname, \
+                                                 'tags':None, 'qstr':qstr, \
+                                                 'appname':'all', 'cl':cl},\
+                                                  context_instance=RequestContext(request, {'book_uri_prefix':'/all',
+                                                                                            'note_type':bookname_note_type_dict.get(bookname),
+                                                                                            'pick_empty':request.GET.get('pick_empty', 'all'),
+                                                                                            'pick_plan':request.GET.get('pick_plan', 'all'),
+                                                                                            'pick_lang': __get_lang(request)
+                                                                                               })) 
+    
 
 def groups(request):
     gs = G.objects.filter(private=False).annotate(num_members=Count('members')).order_by('-num_members')  
