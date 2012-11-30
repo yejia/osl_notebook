@@ -330,6 +330,7 @@ def user_register(request):
         if request.method == 'POST':          
             log.info('Registering a new user...')       
             username = request.POST.get('username')
+            
             password1 = request.POST.get('password1')
             password2 = request.POST.get('password2')
             email = request.POST.get('email')
@@ -396,6 +397,8 @@ def user_register_with_code(request):
         if request.method == 'POST':   
             log.info('Registering a new user...')       
             username = request.POST.get('username')
+            if username.lower() in not_allowed_names:
+                messages.error(request, _("This username is not allowed! Please pick another username.")) 
             if ' ' in username:
                 messages.error(request, _("No space allowed in username!"))
                 return HttpResponseRedirect('/invite/') 
