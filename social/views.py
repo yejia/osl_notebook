@@ -211,7 +211,7 @@ def friends_notes2(request, username, bookname):
 
 #notes of all users
 def all_notes(request, bookname):
-    note_list = getSN(bookname).objects.all()
+    note_list = getSN(bookname).objects.filter(private=False)
     qstr = __getQStr(request)    
     note_list  = getSearchResults(note_list, qstr)    
     sort, order_type,  paged_notes, cl = __get_notes_context(request, note_list)  
