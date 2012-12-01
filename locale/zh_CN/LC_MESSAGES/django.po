@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-30 11:45+0800\n"
+"POT-Creation-Date: 2012-12-01 07:48+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -424,7 +424,7 @@ msgstr "条笔记"
 
 #: notes/views.py:1434 templates/areas/index.html:29
 #: templates/include/notes/note/notedisplay.html:88
-#: templates/social/friends.html:33 templates/social/learners.html:33
+#: templates/social/friends.html:36 templates/social/learners.html:33
 #: templates/social/people.html:33 templates/social/group/groups.html:35
 #: templates/social/include/notes/note/notedisplay.html:28
 msgid "notes"
@@ -1834,28 +1834,16 @@ msgstr "移动应用"
 
 #: templates/doc/mobile.html:15
 msgid ""
-"No mobile app is developed currently. But to help you jotting down notes on "
-"the go, if you visit our site from mobile devices, you will have a simple "
-"note making page as your default home page, where you can make notes "
-"quickly. You can make notes even without internet access. When you get "
-"online, the notes you made will get synced with the server."
+"No mobile app is developed currently. But you can visit the site by opening "
+"a browser on your mobile device (cell phone or ipad). We made special "
+"changes so that you can make notes quickly on the mobile device even without "
+"internet access. You can save this page as a shortcut on your desktop/main "
+"screen or you can set it as your home page to allow easy access."
 msgstr ""
-"现在还没有时间开发专门的移动版应用，但移动版对于这样的生活中学习的工具是非常"
-"重要的。现在网站对于移动终端上网站的呈现做了些改进。手机和ipad的登录到网站后"
-"的首页即是一个简单的便条输入框，没有其他任何东西。方便大家平时随时随地的快速"
-"记录东西。记录以后回家可以在电脑上做回顾和整理。即使没有网络，你仍然可以记录"
-"笔记。记录的笔记在你的设备连上网络时会同步到服务器。"
-
-#: templates/doc/mobile.html:17
-msgid ""
-"This \"Add note only\" page stores the newly added notes locally first, then "
-"syncs with the server. So you can make notes on this page at the fastest "
-"speed. If you want to make many notes on your desktop very quickly, you can "
-"also set this page as your default home page in your setting."
-msgstr ""
-"这个只添加便条的页面首先将添加的笔记在本地存储，然后再和服务器同步。所以你可"
-"以无延迟的最快的添加便条。如果你想在你的桌面电脑上快速的添加许多的便条，你可"
-"以考虑在设置里将该页面设置成你的缺省页面。"
+"现在还没有专门的移动版应用，但你可以用你移动终端（手机或平板）通过浏览器访问"
+"网站。我们做了特殊处理让你在移动终端上可以快速的记录笔记，即使没有互联网连接。"
+"你可以将该页面存为你桌面/主屏幕上的快捷方式，以后你只要点开就可以记录笔记"
+"了。或者你可以将其存为你浏览器的首页。"
 
 #: templates/doc/results.html:7 templates/registration/login.html:47
 msgid "results"
@@ -3017,21 +3005,21 @@ msgid "View all "
 msgstr "浏览全部"
 
 #: templates/include/notes/note/notedisplay.html:79
-#: templates/social/friends.html:33 templates/social/learners.html:33
+#: templates/social/friends.html:36 templates/social/learners.html:33
 #: templates/social/people.html:33
 #: templates/social/include/notes/note/notedisplay.html:18
 msgid "bookmarks"
 msgstr "网址"
 
 #: templates/include/notes/note/notedisplay.html:82
-#: templates/social/friends.html:33 templates/social/learners.html:33
+#: templates/social/friends.html:36 templates/social/learners.html:33
 #: templates/social/people.html:33
 #: templates/social/include/notes/note/notedisplay.html:23
 msgid "scraps"
 msgstr "网摘"
 
 #: templates/include/notes/note/notedisplay.html:85
-#: templates/social/friends.html:33 templates/social/learners.html:33
+#: templates/social/friends.html:36 templates/social/learners.html:33
 #: templates/social/people.html:33
 #: templates/social/include/notes/note/notedisplay.html:13
 msgid "snippets"
@@ -3679,17 +3667,17 @@ msgstr "基于某一搜索的网摘本"
 msgid "Notebook based on a custom query"
 msgstr "基于某一搜索的笔记本"
 
-#: templates/social/friends.html:30 templates/social/learners.html:30
+#: templates/social/friends.html:33 templates/social/learners.html:30
 #: templates/social/people.html:30
 msgid "groups"
 msgstr "学习小组"
 
-#: templates/social/friends.html:31 templates/social/learners.html:31
+#: templates/social/friends.html:34 templates/social/learners.html:31
 #: templates/social/people.html:31
 msgid "areas"
 msgstr "学习领域"
 
-#: templates/social/friends.html:33 templates/social/learners.html:33
+#: templates/social/friends.html:36 templates/social/learners.html:33
 #: templates/social/people.html:33
 msgid "frames"
 msgstr "知识包"
@@ -4184,6 +4172,30 @@ msgstr "全部工作区"
 #: templates/workingset/index.html:370
 msgid "Make Current"
 msgstr "设成当前"
+
+#~ msgid ""
+#~ "No mobile app is developed currently. But to help you jotting down notes "
+#~ "on the go, if you visit our site from mobile devices, you will have a "
+#~ "simple note making page as your default home page, where you can make "
+#~ "notes quickly. You can make notes even without internet access. When you "
+#~ "get online, the notes you made will get synced with the server."
+#~ msgstr ""
+#~ "现在还没有时间开发专门的移动版应用，但移动版对于这样的生活中学习的工具是非"
+#~ "常重要的。现在网站对于移动终端上网站的呈现做了些改进。手机和ipad的登录到网"
+#~ "站后的首页即是一个简单的便条输入框，没有其他任何东西。方便大家平时随时随地"
+#~ "的快速记录东西。记录以后回家可以在电脑上做回顾和整理。即使没有网络，你仍然"
+#~ "可以记录笔记。记录的笔记在你的设备连上网络时会同步到服务器。"
+
+#~ msgid ""
+#~ "This \"Add note only\" page stores the newly added notes locally first, "
+#~ "then syncs with the server. So you can make notes on this page at the "
+#~ "fastest speed. If you want to make many notes on your desktop very "
+#~ "quickly, you can also set this page as your default home page in your "
+#~ "setting."
+#~ msgstr ""
+#~ "这个只添加便条的页面首先将添加的笔记在本地存储，然后再和服务器同步。所以你"
+#~ "可以无延迟的最快的添加便条。如果你想在你的桌面电脑上快速的添加许多的便条，"
+#~ "你可以考虑在设置里将该页面设置成你的缺省页面。"
 
 #~ msgid " %(user)s's Friends "
 #~ msgstr "%(user)s的朋友"

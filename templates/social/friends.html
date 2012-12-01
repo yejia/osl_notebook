@@ -10,6 +10,9 @@
 {% block site_branding %}
 <div id="branding">
 {% trans "Friends" %}
+{% comment %}
+{% blocktrans %}Friends of {{user}} {% endblocktrans %}:  {% if user.username == profile_username %}<a href="/{{profile_username}}/friends/snippetbook/notes/">{% trans "view notes" %}</a>{% endif %}
+{% endcomment %}
 </div>
 {% endblock %}
 
