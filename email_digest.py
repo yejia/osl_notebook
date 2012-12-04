@@ -135,9 +135,9 @@ def build_content(note, bookname, pick_lang, title_size):
 #and parse http:// link (stop when encountering whitespace). One thing to watch out is
 #that url in bookmark or scrap may not have http:// prefix if it is entered by the user manually.
 #(What you can do is to have the system automcatically add http:// prefix if it is not there when creating a bookmark
-def send_group_digest(username, groupname, freq, pick_lang):
-    #print 'Sending '+freq+' digest for', username, 'in', groupname
-    group = G.objects.get(name=groupname) 
+def send_group_digest(username, groupid, freq, pick_lang):
+    
+    group = G.objects.get(id=groupid) 
     
     content = ''
     html_content = ''
@@ -161,12 +161,12 @@ def send_group_digest(username, groupname, freq, pick_lang):
                 html_content += html_note_content
     
     if content:
-        group_url = site_name +  '/groups/' +urlquote(groupname)+'/'
+        group_url = site_name +  '/groups/' +urlquote(groupid)+'/'
         html_group_url = '<a href="'+group_url+'">'+group_url+'</a>' 
         if freq == 'daily':
-            digest_heading = _('Daily digest from the group:')+groupname+'\n\n\n'
+            digest_heading = _('Daily digest from the group:')+group.name+'\n\n\n'
         if freq == 'weekly':    
-            digest_heading = _('Weekly digest from the group:')+groupname+'\n\n\n'
+            digest_heading = _('Weekly digest from the group:')+group.name+'\n\n\n'
         settings_url = site_name + '/settings/'
         html_settings_url = '<a href="'+settings_url+'">'+settings_url+'</a>'        
         
@@ -184,9 +184,9 @@ def send_group_digest(username, groupname, freq, pick_lang):
         #mailserver = get_mail_server()
         
         if freq == 'daily':
-            subject = (_('Learning Group ')+groupname+_(":today's new notes!")).encode('utf-8')
+            subject = (_('Learning Group ')+group.name+_(":today's new notes!")).encode('utf-8')
         if freq == 'weekly':
-            subject = (_('Learning Group ')+groupname+_(":this week's new notes!")).encode('utf-8')   
+            subject = (_('Learning Group ')+group.name+_(":this week's new notes!")).encode('utf-8')   
         #sendEmail(mailserver , SERVER_EMAIL, [member.email], subject, digest.encode('utf-8'))
         #mailserver.close()
 
@@ -194,7 +194,7 @@ def send_group_digest(username, groupname, freq, pick_lang):
         msg.attach_alternative(html_digest.encode('utf-8') , "text/html")
         #msg.content_subtype = "html"
         msg.send()
-        print 'Email digest was sent to '+member.email+' for group '+ groupname 
+        print 'Email digest was sent to '+member.email+' for group '+ group.name 
         time.sleep(10)
    
     
@@ -208,13 +208,10 @@ def send_digest(username, freq):
     if member.default_lang:        
          pick_lang = member.default_lang    
          activate(pick_lang)   
-    #print 'current preferred language is:', get_language()
-     
-    #print 'Now current preferred language is:', get_language() 
-    groups = member.get_groups()
-    #print username, "'s groups:", groups
-    for group in groups:
-        send_group_digest(username, group.name, freq, pick_lang)
+    
+    groups = member.get_groups()    
+    for group in groups:        
+        send_group_digest(username, group.id, freq, pick_lang)
         
     
 
