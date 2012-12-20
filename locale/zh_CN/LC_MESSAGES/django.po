@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-21 06:49+0800\n"
+"POT-Creation-Date: 2012-12-21 07:30+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -226,23 +226,23 @@ msgstr "如果你的本月学习计划是空的，将在下个月的月初被系
 msgid "Time to review your monthly plan"
 msgstr "回顾本月学习计划的时间到了"
 
-#: areas/views.py:92
-msgid "Please enter a frame id!"
-msgstr "请输入一个知识包的id！"
-
-#: areas/views.py:95
-msgid "Failed to find a frame with this id. Please enter a valid frame id!"
-msgstr "找不到这个id的知识包。请输入一个有效的知识包id！"
-
-#: areas/views.py:100
-msgid "Please enter a tag!"
-msgstr "请输入一个标签！"
-
-#: areas/views.py:132
+#: areas/views.py:72 areas/views.py:136
 msgid "It is not a valid tag! Please enter a valid tag."
 msgstr "输入的不是有效的标签！请输入一个已有的标签。"
 
-#: areas/views.py:259
+#: areas/views.py:96
+msgid "Please enter a frame id!"
+msgstr "请输入一个知识包的id！"
+
+#: areas/views.py:99
+msgid "Failed to find a frame with this id. Please enter a valid frame id!"
+msgstr "找不到这个id的知识包。请输入一个有效的知识包id！"
+
+#: areas/views.py:104
+msgid "Please enter a tag!"
+msgstr "请输入一个标签！"
+
+#: areas/views.py:263
 msgid "You have successfully removed the group from the area."
 msgstr "你已经成功的将该小组从这个学习领域移除。"
 
@@ -1240,6 +1240,10 @@ msgstr "学习领域是你正在学习的几个主要领域"
 #: templates/areas/my.html:31
 msgid "Add a learning area"
 msgstr "添加一个学习领域"
+
+#: templates/areas/my.html:48
+msgid "Please enter the name of the tag tree."
+msgstr "请输入标签树的名字。"
 
 #: templates/areas/my.html:66
 msgid "All areas"
