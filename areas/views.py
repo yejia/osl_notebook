@@ -3,7 +3,7 @@
 
 
 from django.http import HttpResponse,HttpResponseRedirect
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, get_object_or_404
 from django import forms
 from django.forms import ModelForm
 from django.db.models import Q, F, Avg, Max, Min, Count
@@ -66,7 +66,13 @@ def my_areas(request, username):
         #copied from social.views.groups()
         tag_names = post.getlist('item[tags][]')
         #Don't allow creating new tag frame here for now. TODO:
-        tag_ids = [Tag_Frame.objects.using(username).get(name=tag_name).id for tag_name in tag_names]  
+        try:
+            tag_ids = [Tag_Frame.objects.using(username).get(name=tag_name).id for tag_name in tag_names]
+        except ObjectDoesNotExist:
+            messages.error(request, _("It is not a valid tag! Please enter a valid tag."))
+            return HttpResponseRedirect('/'+username+'/areas/')    
+        #TF = getTagFrame(username)        
+        #tag_ids = [get_object_or_404(TF, name=tag_name).id for tag_name in tag_names]   
                
          
         A = getArea(username)
@@ -124,7 +130,14 @@ def area(request, username, area_id):
         post = request.POST.copy()
         tag_names = post.getlist('item[tags][]')
         #Don't allow creating new tag frame here for now. TODO:
-        tag_ids = [Tag_Frame.objects.using(username).get(name=tag_name).id for tag_name in tag_names]         
+        try:
+            tag_ids = [Tag_Frame.objects.using(username).get(name=tag_name).id for tag_name in tag_names]
+        except ObjectDoesNotExist:
+            messages.error(request, _("It is not a valid tag! Please enter a valid tag."))
+            return HttpResponseRedirect('/'+username+'/areas/area/'+area_id+'/')        
+        #TF = getTagFrame(username)        
+        #tag_ids = [get_object_or_404(TF, name=tag_name).id for tag_name in tag_names]      
+             
         A = getArea(username)
         a = A.objects.get(id=post.get('id'))
         a.owner_name = username

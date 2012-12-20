@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-01 07:48+0800\n"
+"POT-Creation-Date: 2012-12-21 06:49+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -115,33 +115,34 @@ msgstr "收到新的评论"
 msgid "you have received a comment"
 msgstr "你收到了新的评论"
 
-#: plan.py:37 plan.py:40
+#: plan.py:40 plan.py:43 plan.py:101 plan.py:107 plan.py:135 plan.py:141
+#: plan.py:200 plan.py:208 plan.py:244 plan.py:251
 msgid ""
 "If you don't want to receive any learning plan notice, you can change your "
 "preference setting:"
 msgstr "如果你不想接收学习计划的通知，你可以在你的设置里选择不接收计划通知："
 
-#: plan.py:56
+#: plan.py:59
 msgid "Weekly Plan:"
 msgstr "周学习计划："
 
-#: plan.py:56
+#: plan.py:59
 msgid " to "
 msgstr "到"
 
-#: plan.py:57
+#: plan.py:60
 msgid "Make your weekly plan for this week here."
 msgstr "在这里制定你一周的学习计划。"
 
-#: plan.py:74
+#: plan.py:77
 msgid "Monthly Plan:"
 msgstr "月计划"
 
-#: plan.py:75
+#: plan.py:78
 msgid "Make your monthly plan for this month here."
 msgstr "在这里制定你本月的学习计划。"
 
-#: plan.py:95 plan.py:99
+#: plan.py:98 plan.py:104
 msgid ""
 "It is the beginning of the week again. To start this week right, first make "
 "a learning plan for this week. What do you want to learn this week? And how "
@@ -150,17 +151,17 @@ msgstr ""
 "新的一周又开始了。每周开始的时候做个大概的计划会帮助你在这一周内的学习更有成"
 "果。现在就开始制定这周的学习计划吧。这周打算学些什么？怎么学？"
 
-#: plan.py:96 plan.py:100
+#: plan.py:99 plan.py:105
 msgid ""
 "A weekly plan has been created for you in your notebook. You just need to "
 "fill in the specifics by adding snippets to it:"
 msgstr "系统已经将本周学习计划添加到您的笔记本里。你只需要加入一些便条即可。"
 
-#: plan.py:105
+#: plan.py:112
 msgid "Time to make your weekly plan"
 msgstr "制定周学习计划的时间到了"
 
-#: plan.py:125 plan.py:129
+#: plan.py:132 plan.py:138
 msgid ""
 "It is the beginning of the month again. To start this month right, first "
 "make a learning plan for this month. What do you want to learn this month? "
@@ -169,17 +170,17 @@ msgstr ""
 "新的一月又开始了。每月开始的时候做个大概的计划会帮助你在这一月内的学习更有成"
 "果。现在就开始制定本月的学习计划吧。这月打算学些什么？怎么学？"
 
-#: plan.py:126 plan.py:130
+#: plan.py:133 plan.py:139
 msgid ""
 "A monthly plan has been created for you in your notebook. You just need to "
 "fill in the specifics by adding snippets to it:"
 msgstr "系统已经将本月学习计划添加到您的笔记本里。您只需要加入一些便条即可。"
 
-#: plan.py:135
+#: plan.py:146
 msgid "Time to make your monthly plan"
 msgstr "制定月学习计划的时间到了"
 
-#: plan.py:185 plan.py:189
+#: plan.py:196 plan.py:204
 msgid ""
 "It is the weekend again. Now is your time to review your weekly plan. Have "
 "you accomplished your plan this week? What have you done well? What you "
@@ -188,21 +189,21 @@ msgstr ""
 "又到了周末了。现在是回顾你一周的学习计划的时间了。你是否完成了你制定的任务？"
 "哪些方面是做得比较好的？哪些方面是做得还不够好的？还有哪些可以提高的地方？"
 
-#: plan.py:186 plan.py:190
+#: plan.py:197 plan.py:205
 msgid "Remember to find time on the weekend to review your weekly plan:"
 msgstr "记住周末要找时间回顾你本周的学习计划："
 
-#: plan.py:188 plan.py:192
+#: plan.py:199 plan.py:207
 msgid ""
 "If your weekly plan is empty this week, it will be removed for you "
 "automatically the beginning of next week:"
 msgstr "如果你的本周学习计划是空的，将在下周初被系统自动移除。"
 
-#: plan.py:193
+#: plan.py:211
 msgid "Time to review your weekly plan"
 msgstr "回顾一周学习计划的时间到了"
 
-#: plan.py:222 plan.py:226
+#: plan.py:240 plan.py:247
 msgid ""
 "It is the end of the month again. Now is your time to review your monthly "
 "plan. Have you accomplished your plan this month? What have you done well? "
@@ -211,33 +212,37 @@ msgstr ""
 "又到了月末了。现在是回顾你本月的学习计划的时间了。你是否完成了你制定的任务？"
 "哪些方面是做得比较好的？哪些方面是做得还不够好的？还有哪些可以提高的地方？"
 
-#: plan.py:223 plan.py:227
+#: plan.py:241 plan.py:248
 msgid "Remember to find time to review your monthly plan:"
 msgstr "记住要找时间回顾你本月的学习计划："
 
-#: plan.py:225 plan.py:229
+#: plan.py:243 plan.py:250
 msgid ""
 "If your monthly plan is empty this month, it will be removed for you "
 "automatically the beginning of next month:"
 msgstr "如果你的本月学习计划是空的，将在下个月的月初被系统自动移除。"
 
-#: plan.py:230
+#: plan.py:254
 msgid "Time to review your monthly plan"
 msgstr "回顾本月学习计划的时间到了"
 
-#: areas/views.py:90
+#: areas/views.py:92
 msgid "Please enter a frame id!"
 msgstr "请输入一个知识包的id！"
 
-#: areas/views.py:93
+#: areas/views.py:95
 msgid "Failed to find a frame with this id. Please enter a valid frame id!"
 msgstr "找不到这个id的知识包。请输入一个有效的知识包id！"
 
-#: areas/views.py:98
+#: areas/views.py:100
 msgid "Please enter a tag!"
 msgstr "请输入一个标签！"
 
-#: areas/views.py:250
+#: areas/views.py:132
+msgid "It is not a valid tag! Please enter a valid tag."
+msgstr "输入的不是有效的标签！请输入一个已有的标签。"
+
+#: areas/views.py:259
 msgid "You have successfully removed the group from the area."
 msgstr "你已经成功的将该小组从这个学习领域移除。"
 
@@ -291,7 +296,7 @@ msgstr "默认的标签是'random thought'。"
 
 #: notes/models.py:194 social/models.py:715 templates/areas/area.html:288
 #: templates/areas/my.html:57 templates/framebook/notes/notesdisplay.html:22
-#: templates/include/note_list_base.html:1491
+#: templates/include/note_list_base.html:1494
 #: templates/include/notes/notesdisplay.html:44
 #: templates/scrapbook/notes/notesdisplay.html:29
 #: templates/snippetbook/notes/add_note.html:49
@@ -523,7 +528,7 @@ msgstr "接收计划通知"
 
 #: social/models.py:63 templates/areas/area.html:162
 #: templates/framebook/notes/todelete/folders.html:19
-#: templates/include/note_list_base.html:1693
+#: templates/include/note_list_base.html:1696
 #: templates/include/profile_head.html:49
 #: templates/include/profile_head.html:51
 #: templates/include/profile_head.html:80 templates/include/supersearch.html:6
@@ -537,7 +542,7 @@ msgid "Snippets"
 msgstr "便条"
 
 #: social/models.py:64 templates/areas/area.html:165
-#: templates/include/note_list_base.html:1697
+#: templates/include/note_list_base.html:1700
 #: templates/include/profile_head.html:64
 #: templates/include/profile_head.html:66
 #: templates/include/profile_head.html:83
@@ -826,7 +831,7 @@ msgstr[1] ""
 
 #: templates/admin/delete_confirmation.html:10
 #: templates/admin/submit_line.html:4
-#: templates/include/note_list_base.html:1476
+#: templates/include/note_list_base.html:1479
 msgid "Delete"
 msgstr "删除"
 
@@ -1069,7 +1074,7 @@ msgstr "浏览这个学习领域里的所有笔记"
 
 #: templates/areas/area.html:163
 #: templates/framebook/notes/todelete/folders.html:21
-#: templates/include/note_list_base.html:1694
+#: templates/include/note_list_base.html:1697
 #: templates/include/profile_head.html:54
 #: templates/include/profile_head.html:56
 #: templates/include/profile_head.html:81
@@ -1088,7 +1093,7 @@ msgstr "网址"
 
 #: templates/areas/area.html:164
 #: templates/framebook/notes/todelete/folders.html:23
-#: templates/include/note_list_base.html:1695
+#: templates/include/note_list_base.html:1698
 #: templates/include/profile_head.html:59
 #: templates/include/profile_head.html:61
 #: templates/include/profile_head.html:82
@@ -1108,11 +1113,11 @@ msgstr "网摘"
 #: templates/framebook/notes/todelete/folders.html:25
 #: templates/include/frames_pick_top.html:13
 #: templates/include/frames_pick_top.html:15
-#: templates/include/note_list_base.html:1493
-#: templates/include/note_list_base.html:1495
-#: templates/include/note_list_base.html:1562
-#: templates/include/note_list_base.html:1564
-#: templates/include/note_list_base.html:1698
+#: templates/include/note_list_base.html:1496
+#: templates/include/note_list_base.html:1498
+#: templates/include/note_list_base.html:1565
+#: templates/include/note_list_base.html:1567
+#: templates/include/note_list_base.html:1701
 #: templates/include/profile_head.html:69
 #: templates/include/profile_head.html:71
 #: templates/include/profile_head.html:84
@@ -1380,12 +1385,12 @@ msgstr "在链条里的"
 
 #: templates/bookmarkbook/notes/notes.html:12
 #: templates/bookmarkbook/notes/notes.html:14
-#: templates/include/note_list_base.html:1478
-#: templates/include/note_list_base.html:1480
-#: templates/include/note_list_base.html:1499
-#: templates/include/note_list_base.html:1501
-#: templates/include/note_list_base.html:1568
-#: templates/include/note_list_base.html:1570
+#: templates/include/note_list_base.html:1481
+#: templates/include/note_list_base.html:1483
+#: templates/include/note_list_base.html:1502
+#: templates/include/note_list_base.html:1504
+#: templates/include/note_list_base.html:1571
+#: templates/include/note_list_base.html:1573
 #: templates/notebook/notes/notes.html:14
 #: templates/notebook/notes/notes.html:16
 #: templates/scrapbook/notes/notes.html:13
@@ -1841,8 +1846,8 @@ msgid ""
 "screen or you can set it as your home page to allow easy access."
 msgstr ""
 "现在还没有专门的移动版应用，但你可以用你移动终端（手机或平板）通过浏览器访问"
-"网站。我们做了特殊处理让你在移动终端上可以快速的记录笔记，即使没有互联网连接。"
-"你可以将该页面存为你桌面/主屏幕上的快捷方式，以后你只要点开就可以记录笔记"
+"网站。我们做了特殊处理让你在移动终端上可以快速的记录笔记，即使没有互联网连"
+"接。你可以将该页面存为你桌面/主屏幕上的快捷方式，以后你只要点开就可以记录笔记"
 "了。或者你可以将其存为你浏览器的首页。"
 
 #: templates/doc/results.html:7 templates/registration/login.html:47
@@ -2087,23 +2092,23 @@ msgstr "%(profile_username)s的文件夹%(current_folder)s"
 msgid "linkiages"
 msgstr "链条"
 
-#: templates/include/base2.html:224 templates/include/note_list_base.html:1426
+#: templates/include/base2.html:231 templates/include/note_list_base.html:1429
 msgid "You are using an outdated browser."
 msgstr "你在使用一个过时的浏览器。"
 
-#: templates/include/base2.html:224 templates/include/note_list_base.html:1426
+#: templates/include/base2.html:231 templates/include/note_list_base.html:1429
 msgid "Upgrade your browser today"
 msgstr "请升级你的浏览器"
 
-#: templates/include/base2.html:224 templates/include/note_list_base.html:1426
+#: templates/include/base2.html:231 templates/include/note_list_base.html:1429
 msgid " or "
 msgstr "或者"
 
-#: templates/include/base2.html:224 templates/include/note_list_base.html:1426
+#: templates/include/base2.html:231 templates/include/note_list_base.html:1429
 msgid "install Google Chrome Frame"
 msgstr "安装谷歌浏览器框"
 
-#: templates/include/base2.html:224 templates/include/note_list_base.html:1426
+#: templates/include/base2.html:231 templates/include/note_list_base.html:1429
 msgid " to better experience this site."
 msgstr "以获得对本网站更好的体验。"
 
@@ -2204,7 +2209,7 @@ msgid "My Friends"
 msgstr "我的朋友"
 
 #: templates/include/get_title.html:2
-#: templates/include/note_list_base.html:1185
+#: templates/include/note_list_base.html:1188
 #: templates/include/notes/inlines/add_comments_and_etc_inline.html:129
 #: templates/include/notes/todelete/linkagenotesdisplay.html:109
 #: templates/include/notes/todelete/linkagenotesdisplay.html:155
@@ -2221,47 +2226,47 @@ msgstr "（无标题）"
 msgid "Learning Groups"
 msgstr "学习小组"
 
-#: templates/include/note_list_base.html:242
-#: templates/include/note_list_base.html:293
+#: templates/include/note_list_base.html:245
+#: templates/include/note_list_base.html:296
 msgid "Please select the notes!"
 msgstr "请选择笔记"
 
-#: templates/include/note_list_base.html:312
+#: templates/include/note_list_base.html:315
 msgid "Tags are successfully updated!"
 msgstr "标签更新成功！"
 
-#: templates/include/note_list_base.html:328
+#: templates/include/note_list_base.html:331
 msgid "The following notes are going to be put into a frame:"
 msgstr "下面的这些笔记将被放入一个包里："
 
-#: templates/include/note_list_base.html:400
-#: templates/include/note_list_base.html:412
+#: templates/include/note_list_base.html:403
+#: templates/include/note_list_base.html:415
 #: templates/include/notes/caches_section.html:13
 #: templates/include/notes/caches_section.html:15
 msgid "cache"
 msgstr "缓存"
 
-#: templates/include/note_list_base.html:400
+#: templates/include/note_list_base.html:403
 #: templates/include/notes/caches_section.html:13
 #: templates/include/notes/caches_section.html:15
 #: templates/tagframes/children.html:38 templates/tagframes/children.html:115
 msgid "View"
 msgstr "浏览"
 
-#: templates/include/note_list_base.html:400
+#: templates/include/note_list_base.html:403
 #: templates/include/notes/caches_section.html:13
 #: templates/include/notes/caches_section.html:15
 msgid "Clear"
 msgstr "清除"
 
-#: templates/include/note_list_base.html:404
+#: templates/include/note_list_base.html:407
 #: templates/include/notes/menu/notes_section_menu.html:31
 #: templates/include/notes/menu/notes_section_menu.html:33
 #: templates/include/notes/menu/notes_section_menu.html:37
 msgid "Add selection to cache"
 msgstr "加选取的到缓存区"
 
-#: templates/include/note_list_base.html:512
+#: templates/include/note_list_base.html:515
 msgid ""
 "If you join this group, any note you make that is tagged with any of the tag "
 "of this group will be pushed to this group. Private note, however, will not "
@@ -2271,21 +2276,21 @@ msgstr ""
 "被添加到这个小组里。但是隐私的笔记不会。隐私的笔记永远在你的私人笔记本里，除"
 "非你有意的要分享给某个小组。"
 
-#: templates/include/note_list_base.html:604
+#: templates/include/note_list_base.html:607
 msgid ""
 "You have not set up sites for sharing. Please set it up in the settings."
 msgstr "你还没有设置要分享的网站。你可以在设置里绑定。"
 
-#: templates/include/note_list_base.html:607
+#: templates/include/note_list_base.html:610
 msgid " notes are shared with"
 msgstr "笔记分享到"
 
-#: templates/include/note_list_base.html:607
+#: templates/include/note_list_base.html:610
 msgid "sites! You can change sites for sharing in the settings."
 msgstr "网站！你可以在设置里更改要分享的网站。"
 
-#: templates/include/note_list_base.html:968
-#: templates/include/note_list_base.html:1005
+#: templates/include/note_list_base.html:971
+#: templates/include/note_list_base.html:1008
 #: templates/include/notes/inlines/add_comments_and_etc_inline.html:83
 #: templates/include/notes/inlines/add_comments_and_etc_inline.html:99
 #: templates/snippetbook/notes/show_note_added_js.html:25
@@ -2293,83 +2298,83 @@ msgstr "网站！你可以在设置里更改要分享的网站。"
 msgid "remove this comment"
 msgstr "去除这个评论"
 
-#: templates/include/note_list_base.html:992
+#: templates/include/note_list_base.html:995
 msgid "You are not logged in! Please login first."
 msgstr "你还没有登录！请先登录。"
 
-#: templates/include/note_list_base.html:1034
+#: templates/include/note_list_base.html:1037
 #: templates/social/include/notes/inlines/add_comments_and_etc_inline.html:35
 msgid "remove this course"
 msgstr "去除这个课程"
 
-#: templates/include/note_list_base.html:1137
+#: templates/include/note_list_base.html:1140
 msgid "You cannot add a note to itself!"
 msgstr "你不能把一个笔记添加给自己！"
 
-#: templates/include/note_list_base.html:1355
+#: templates/include/note_list_base.html:1358
 msgid ""
 "Are you sure you want to discard this? This note will be deleted permanently "
 "and it cannot be recovered!"
 msgstr "你确定你想永久删除这条笔记吗？你将不能恢复被永久删除的笔记！"
 
-#: templates/include/note_list_base.html:1464
+#: templates/include/note_list_base.html:1467
 msgid "show side menu"
 msgstr "显示侧边菜单"
 
-#: templates/include/note_list_base.html:1465
+#: templates/include/note_list_base.html:1468
 msgid "hide side menu"
 msgstr "隐藏侧边菜单"
 
-#: templates/include/note_list_base.html:1484
-#: templates/include/note_list_base.html:1486
-#: templates/include/note_list_base.html:1505
-#: templates/include/note_list_base.html:1507
+#: templates/include/note_list_base.html:1487
+#: templates/include/note_list_base.html:1489
+#: templates/include/note_list_base.html:1508
+#: templates/include/note_list_base.html:1510
 msgid "No"
 msgstr "否"
 
-#: templates/include/note_list_base.html:1514
+#: templates/include/note_list_base.html:1517
 msgid "Date Range"
 msgstr "时间范围"
 
-#: templates/include/note_list_base.html:1519
-#: templates/include/note_list_base.html:1521
+#: templates/include/note_list_base.html:1522
+#: templates/include/note_list_base.html:1524
 msgid "Any day"
 msgstr "任何天"
 
-#: templates/include/note_list_base.html:1525
-#: templates/include/note_list_base.html:1527
+#: templates/include/note_list_base.html:1528
+#: templates/include/note_list_base.html:1530
 msgid "Today"
 msgstr "今天"
 
-#: templates/include/note_list_base.html:1531
-#: templates/include/note_list_base.html:1533
+#: templates/include/note_list_base.html:1534
+#: templates/include/note_list_base.html:1536
 msgid "Past 7 Days"
 msgstr "过去7天"
 
-#: templates/include/note_list_base.html:1537
-#: templates/include/note_list_base.html:1539
+#: templates/include/note_list_base.html:1540
+#: templates/include/note_list_base.html:1542
 msgid "This Month"
 msgstr "本月"
 
-#: templates/include/note_list_base.html:1542
+#: templates/include/note_list_base.html:1545
 msgid "This Season"
 msgstr "本季度"
 
-#: templates/include/note_list_base.html:1545
-#: templates/include/note_list_base.html:1547
+#: templates/include/note_list_base.html:1548
+#: templates/include/note_list_base.html:1550
 msgid "This Year"
 msgstr "今年"
 
-#: templates/include/note_list_base.html:1551
+#: templates/include/note_list_base.html:1554
 msgid "Pick a Range"
 msgstr "选择一个日期范围"
 
-#: templates/include/note_list_base.html:1560
+#: templates/include/note_list_base.html:1563
 msgid "With attachment"
 msgstr "含附件"
 
 # python-format
-#: templates/include/note_list_base.html:1688
+#: templates/include/note_list_base.html:1691
 #, python-format
 msgid "Personal notes of %(profile_username)s"
 msgstr "%(profile_username)s的个人笔记"
