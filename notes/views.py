@@ -1008,7 +1008,7 @@ def tags(request, username, bookname, tag_name, aspect_name):
         elif tag_name == 'untagged':
            n_list = N.objects.filter(tags__name=None)  
         else:    
-            t = T.objects.get(name=tag_name)       
+            t = get_object_or_404(T, name=tag_name)       
             if aspect_name=='notes':
                 #n_list = t.note_set
                 n_list = N.objects.filter(tags__name=tag_name)
