@@ -34,12 +34,31 @@
 <img src="/site_media/img/screenshots/add_link_to_toolbar.jpg" class="attachment_img"/>
 <br/><br/>
 
-{% trans "You can view the video demo below to see how it is done. Here we use Google Chrome browser to do the demo." %}
+{% trans "You can view the video demo below to see how it is done." %} ({% trans "You can view the video demo in full screen mode." %})
 <br/><br/>
-<video width="768" height="480" controls>
+
+{% trans "Add the buttons to your browser bookmark bar. Here we use Google Chrome browser to do the demo." %}
+<br/><br/>
+<video width="384" height="240" controls>
   <source src="/site_media/addbutton.mp4" type="video/mp4">
   <source src="/site_media/addbutton.webm" type="video/webm">
   <source src="addbutton.ogg" type="video/ogg">
+{% trans "Your browser does not support the video tag." %}
+</video>
+<br/><br/>
+
+{% trans "When you browse the internet, you can save the website you are viewing as a bookmark." %}
+<br/><br/>
+<video width="384" height="240" controls>
+  <source src="/site_media/addbookmark.webm" type="video/webm">
+{% trans "Your browser does not support the video tag." %}
+</video>
+<br/><br/>
+
+{% trans "When you browse the internet, you can save a scrap of the webpage." %}
+<br/><br/>
+<video width="384" height="240" controls>
+  <source src="/site_media/addscrap.webm" type="video/webm">
 {% trans "Your browser does not support the video tag." %}
 </video>
 <br/><br/>
