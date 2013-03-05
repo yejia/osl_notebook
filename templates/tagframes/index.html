@@ -409,6 +409,7 @@
 <div id="top_tag_trees">
 <ull>
 {% for top_tree in top_tag_trees %} 
+{% if not top_tree.private or username == profile_username %}    
 <li frame_name="{{top_tree.name}}">
 <a href="/{{profile_username}}/tagframes/tagframe/{{top_tree.name}}/">{{top_tree.name}}</a>: {{top_tree.desc|default:''}}
 {% if  username == profile_username %}
@@ -420,6 +421,7 @@
     </ul>
  {% endcomment %}    
 </li>
+{%endif%}
  {% endfor %}
  </ul>
 </div>
