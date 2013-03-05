@@ -387,17 +387,17 @@
 
 
 {% if tag_tree %}    
-    <div id="sidetreecontrol"> <a href="?#">{% trans 'List' %}</a> | <a href="?#">{% trans 'Expanded' %}</a></div>    
-<div>{{tag_tree}}
-    <ul id="sortable" class="frame_tree" >
-        {% tag_tree_view_tag tag_tree %}
-    </ul> 
-
-
-
-</div>
+    {% if tag_tree.private and username != profile_username %}   
+          {% trans "Page not found" %}
+    {%else%}
+        <div id="sidetreecontrol"> <a href="?#">{% trans 'List' %}</a> | <a href="?#">{% trans 'Expanded' %}</a></div>    
+        <div>{{tag_tree}}
+            <ul id="sortable" class="frame_tree" >
+                {% tag_tree_view_tag tag_tree %}
+            </ul> 
+        </div>
+    {%endif%}
 {%endif%}
-
 <br/><br/>
 
 
