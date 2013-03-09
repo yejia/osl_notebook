@@ -138,23 +138,23 @@ def add_tags_2_frame(request, username):
 #TODO: username should be obtained from parent_frame.owner_name
 def __add_tags_2_frame(parent_frame, tags_to_add, username):    
     for tag in tags_to_add.split(','):        
-        __create_tag_frame(tag, request.user.username)        
+        __create_tag_frame(tag, username)        
     parent_frame.add_tags(tags_to_add)
     
     
 def __create_tag_frame(tag_name, username):
     #handling tag frame and tag creation here
-    TF = getTagFrame(request.user.username)
-    if Tag.objects.using(request.user.username).filter(name=tag_name).exists():           
+    TF = getTagFrame(username)
+    if Tag.objects.using(username).filter(name=tag_name).exists():           
             #if the tag already exists, and tag_frame doesn't exist yet, create only the tag_frame
             if not TF.objects.filter(name=tag_name).exists():
-                t = Tag.objects.using(request.user.username).get(name=tag_name)
-                cursor = connections[request.user.username].cursor()       
+                t = Tag.objects.using(username).get(name=tag_name)
+                cursor = connections[username].cursor()       
                 #print 'The following query will be executed:', 'insert into tags_tag_frame (tag_ptr_id, current) values('+str(t.id)+',FALSE)'
                 #sqlite has no TRUE/FALSE as its boolean value, it use 0, 1. postgresql accepts both.          
                 cursor.execute("insert into tags_tag_frame (tag_ptr_id, current) values("+str(t.id)+", '0')")                
                 #it seems that unlike raw sql delete, even without using=username, the transaction is still commited
-                transaction.commit_unless_managed(using=request.user.username)  
+                transaction.commit_unless_managed(using=username)  
     else:
         tf = TF(name=tag_name)
         tf.save()     

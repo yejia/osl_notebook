@@ -158,7 +158,10 @@ def area(request, username, area_id):
     area.root_tag_frame.owner_name = username
     area.root_note_frame.owner_name = username
     #tags = Tag_Frame.objects.using(username).all().order_by('name')
-    area_tags_names = area.get_all_tags()#area.root_tag_frame.get_offsprings()
+    if username == request.user.username:
+        area_tags_names = area.get_all_tags()#area.root_tag_frame.get_offsprings()
+    else:        
+        area_tags_names = area.get_public_tags()    
     
     #area_tags =  Tag.objects.using(username).filter(name__in=area.get_all_tags())
     area_tags_with_count = []

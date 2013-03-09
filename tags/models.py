@@ -179,6 +179,20 @@ class Tag_Frame(Tag):
         offsprings.sort() 
         return  list(set(offsprings))        
    
+    
+    
+    def get_public_offsprings(self):
+        #don't count private tags' children, even if they are public
+        offsprings = [t.name for t in self.tags.all() if not t.private]#it is managed, can it use .tags reference directly? TODO:
+        for child in self.tags.all():
+            child.owner_name = self.owner_name
+            #no need for the if check below now, since the UI guarantee that only tag frames are added as children
+            if child.get_tag_type() == 'Nonleaf': 
+                child.tag_frame.owner_name = self.owner_name 
+                offsprings.extend(child.tag_frame.get_public_offsprings())
+        #print 'offsprings',offsprings
+        offsprings.sort() 
+        return  list(set(offsprings)) 
         
      
     def add_tags(self, tag_names_str):

@@ -151,7 +151,7 @@ $(document).ready(function(){
  <div class="padded">
   <b> {% trans "All the tags in this area" %}:  </b>
   {% for t in area_tags_with_count %}
-  <a href="/{{profile_username}}/notebook/notes/tags/{{t.0}}/" target="_blank">{{t.0}} ({{t.1}})</a>,
+    <a href="/{{profile_username}}/notebook/notes/tags/{{t.0}}/" target="_blank">{{t.0}} ({{t.1}})</a>,
   {% endfor %}
   </div>
 

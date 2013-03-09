@@ -794,7 +794,8 @@ class Frame(Note):
             n = Note.objects.using(self.owner_name).get(id=note_id)
             #add below so it can keep pointing to the right db
             n.owner_name = self.owner_name
-            ns.append(n)
+            if not n.deleted:
+                ns.append(n)
         if sort and sort == 'vote':
             ns.sort(key=lambda r: r.vote, reverse=True)  
         return ns
@@ -809,7 +810,8 @@ class Frame(Note):
             n = Note.objects.using(self.owner_name).get(id=note_id)
             n.owner_name = self.owner_name
             if n.private == False:
-                ns.append(n)
+                if not n.deleted:
+                    ns.append(n)
         if sort and sort == 'vote':
             ns.sort(key=lambda r: r.vote, reverse=True)  
         return ns
