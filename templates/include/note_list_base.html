@@ -564,12 +564,15 @@ $("#ac_tags").tagit("removeAll");
       $("*").bind('keydown', 'alt+s', addNote);
       //$('div.addnote #id_desc').bind('keydown', 'alt+s', addNote);
       
-       $("*").bind('keydown', 'alt+p', showDisplayMode);
-       
-       
+         $("*").bind('keydown', 'alt+p', showDisplayMode);
+         $("*").bind('keydown', 'alt+q', hideDisplayMode); //toggle didn't work (Not sure why.) So separate it into two keys, one showing and one hiding
        
        function showDisplayMode(){
-            $("#display_mode").toggle();     
+            $("#display_mode").show();         
+       }
+       
+        function hideDisplayMode(){ 
+            $("#display_mode").hide();     
        
        }
        

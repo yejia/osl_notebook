@@ -2,8 +2,8 @@
     {{note.desc|striptags}}
 {% endif %}    
 {% if pick_lang == 'C'  %}
-    {{note.get_desc_cn|striptags}}
+    {{note.get_desc_cn|default:'(无正文)'|striptags}}
 {% endif %}      
 {% if pick_lang == 'E'  %}
-    {{note.get_desc_en|striptags}}
+    {{note.get_desc_en|default:'(No Desc)'|striptags}}
 {% endif %}  

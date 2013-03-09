@@ -3,8 +3,8 @@
     {{n.desc|striptags|truncatewords:"30" }}
 {% endif %}    
 {% if pick_lang == 'C'  %}
-    {{n.get_desc_cn|striptags|truncatewords:"30"}}
+    {{n.get_desc_cn|default:'(无正文)'|striptags|truncatewords:"30"}}
 {% endif %}      
 {% if pick_lang == 'E'  %}
-    {{n.get_desc_en|striptags|truncatewords:"30"}}
+    {{n.get_desc_en|default:'(No Desc)'|striptags|truncatewords:"30"}}
 {% endif %}  
