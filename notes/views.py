@@ -1598,12 +1598,15 @@ def note_raw(request, username, bookname, note_id):
 
 @login_required
 def update_note(request, note_id, username, bookname): 
+    #with the current url.py inclusion, username will have to be passed in the parameters. But inside the method, we choose not to use it at all
+    #so we make sure the requesting user is only changing his own content
     log.debug( 'updating note :'+note_id)
     #N = getNote(username, bookname) #TODO:isn't this better?
 #    note = N.objects.get(id=note_id)  
-    note = Note.objects.using(username).get(id=note_id)  
+    
+    note = Note.objects.using(request.user.username).get(id=note_id)  
     #TODO: probably there is no need with the complicated dynamic class generation anymore. Just use the way below
-    note.owner_name = username
+    note.owner_name = request.user.username
  
 
     note.title = request.POST.get('title')
@@ -1661,7 +1664,7 @@ def update_note(request, note_id, username, bookname):
 @login_required
 def update_note_trans(request, note_id, username, bookname): 
     #note_id is the id of the original note
-    N = getNote(username, bookname)
+    N = getNote(request.user.username, bookname)
     note = N.objects.get(id=note_id) 
     #trans, created =  Note_Translation.objects.using(username).get_or_create(note=note)
  
@@ -1683,7 +1686,7 @@ def set_notes_order_in_frame(request, note_id, username, bookname):
     log.debug( 'setting the order of the notes in a frame:'+note_id)
     ordered_notes = request.GET.get('ordered_notes').split(',')   
     #print 'ordered_notes:',ordered_notes
-    N = getNote(username, bookname)
+    N = getNote(request.user.username, bookname)
     f = N.objects.get(id=note_id)  
     f.set_notes_order(ordered_notes)
     return HttpResponse('successful', mimetype="text/plain")  
@@ -1697,7 +1700,7 @@ def update_note_inline(request, username, bookname):
     content =  request.POST.get('content')  
     note_field = request.POST.get('note_field')  
     
-    N = getNote(username, bookname)    
+    N = getNote(request.user.username, bookname)    
     note = N.objects.get(id=note_id)
     if note_field=='note_title':
         note.title = content
@@ -1731,7 +1734,7 @@ def update_note_tags_inline(request, username, bookname):
     #strip away special tags that should not be changed by the user
     #it is already enforced at db level. Code below can be removed TODO:
     tags_clean = [tag for tag in tags.split(',') if not tag.startswith('takenfrom:')]
-    N = getNote(username, bookname)    
+    N = getNote(request.user.username, bookname)    
     note = N.objects.get(id=note_id)
     note.update_tags(','.join(tags_clean)) 
     note.save() 
@@ -1746,11 +1749,11 @@ def update_note_tags_inline(request, username, bookname):
 def add_notes_to_frame(request, username, bookname): 
     note_id = request.POST.get('id')
     included_notes_added =  request.POST.get('included_notes_added')  
-    N = getNote(username, bookname)    
+    N = getNote(request.user.username, bookname)    
     note = N.objects.get(id=note_id)
     try:
         #TODO: remove the note itself and note that is already included
-        notes_to_add = __get_notes_by_ids(included_notes_added.split(','), username, 'notebook')
+        notes_to_add = __get_notes_by_ids(included_notes_added.split(','), request.user.username, 'notebook')
     except (UnicodeEncodeError, ValueError):
         return HttpResponse(simplejson.dumps({'type':'error', 'msg':_('Please enter a note id or comma separated note ids in the box!'), 'result':{'note_id':note.id}}),
                                                                      "application/json")    
@@ -1760,7 +1763,7 @@ def add_notes_to_frame(request, username, bookname):
     
     notes_to_add_clean_str = ','.join([str(n.id) for n in notes_to_add_clean])
     note.add_notes(notes_to_add_clean_str) 
-    note.owner_name = username
+    note.owner_name = request.user.username
     note.vote = note.get_vote()
     note.tags = note.get_sum_of_note_tag_ids()    
     note.save() 
@@ -1773,17 +1776,17 @@ def create_note_in_frame(request, username, bookname):
     note_id = request.POST.get('id')
     note_created_desc = request.POST.get('note_created_desc')
     #bookname should always be framebook here
-    N = getNote(username, bookname) 
+    N = getNote(request.user.username, bookname) 
     frame = N.objects.get(id=note_id) 
     #for now, only create a snippet directly inside a frame. Think of creating bookmark or scrap later TODO:
-    N_To_Include = getNote(username, 'snippetbook')  
+    N_To_Include = getNote(request.user.username, 'snippetbook')  
     
     #there might be multiple notes with the same desc. If so, just get the first one for now. TODO:
     if N_To_Include.objects.filter(desc=note_created_desc).count() > 1: 
         note_to_include =  N_To_Include.objects.filter(desc=note_created_desc)[0]
     else:    
         note_to_include, created = N_To_Include.objects.get_or_create(desc=note_created_desc)  
-    T = getT(username)
+    T = getT(request.user.username)
     if frame.title.startswith('Weekly Plan:'):        
         t1, t1_created = T.objects.get_or_create(name='weekly')
         t2, t2_created = T.objects.get_or_create(name='plan')
@@ -1816,12 +1819,12 @@ def create_note_in_frame(request, username, bookname):
 def delete_note_from_frame(request, username, bookname):    
     frame_id = request.POST.get('linkage_id')
     log.debug( 'frame is:'+str(frame_id))
-    F = getFrame(username)
+    F = getFrame(request.user.username)
     frame = F.objects.get(id=frame_id)
     note_id = request.POST.get('note_id')
     log.debug('note to be deleted from the frame:'+note_id)
     frame.remove_note(note_id)  
-    frame.owner_name = username
+    frame.owner_name = request.user.username
     frame.vote = frame.get_vote()
     frame.tags = frame.get_sum_of_note_tag_ids()   
     frame.save()
@@ -1833,10 +1836,10 @@ def delete_note_from_frame(request, username, bookname):
 @login_required   
 def add_comment(request, username, bookname):  
     note_id = request.POST.get('id')
-    N = getNote(username, bookname)
+    N = getNote(request.user.username, bookname)
     note = N.objects.get(id=note_id)
     content = request.POST.get('content')
-    NC = getNC(username)
+    NC = getNC(request.user.username)
     nc = NC(note=note, desc=content)
     nc.save()
     return  HttpResponse(simplejson.dumps({'note_id':note_id, 'comment_id':nc.id, 'comment_desc':nc.desc}),
@@ -1847,7 +1850,7 @@ def add_comment(request, username, bookname):
 def delete_comment(request, username, bookname):
     #note_id = request.POST.get('id')
     comment_id = request.POST.get('comment_id')    
-    NC = getNC(username)
+    NC = getNC(request.user.username)
     nc = NC.objects.get(id=comment_id)
     nc.delete()
     return HttpResponse('successful', mimetype="text/plain")  
@@ -1896,7 +1899,7 @@ def add_project(request, username):
 def make_private(request, username, bookname):
     log.info('making private')
     note_id = request.POST.get('id')
-    N = getNote(username, bookname)
+    N = getNote(request.user.username, bookname)
     note = N.objects.get(id=note_id)
     note.private = True
     note.save()
@@ -1906,7 +1909,7 @@ def make_private(request, username, bookname):
 @login_required   
 def make_public(request, username, bookname):
     note_id = request.POST.get('id')
-    N = getNote(username, bookname)
+    N = getNote(request.user.username, bookname)
     note = N.objects.get(id=note_id)
     note.private = False
     note.save()
@@ -1919,10 +1922,9 @@ def make_public(request, username, bookname):
 @login_required   
 def vote_up_note(request, username, bookname):    
     note_id = request.POST.get('id')
-    N = getNote(username, bookname)
+    N = getNote(request.user.username, bookname)
     note = N.objects.get(id=note_id)
-    note.vote += 1
-    
+    note.vote += 1    
     note.save()
     return HttpResponse(note.vote, mimetype="text/plain") 
     
@@ -1930,17 +1932,16 @@ def vote_up_note(request, username, bookname):
 @login_required    
 def vote_down_note(request, username, bookname):    
     note_id = request.POST.get('id')
-    N = getNote(username, bookname)
+    N = getNote(request.user.username, bookname)
     note = N.objects.get(id=note_id)
     note.vote -= 1
-
     note.save()
     return HttpResponse(note.vote, mimetype="text/plain")    
 
 @login_required    
 def delete_note(request, username, bookname):
     note_id = request.POST.get('id')
-    N = getNote(username, bookname)
+    N = getNote(request.user.username, bookname)
     note = N.objects.get(id=note_id)
     note.deleted = True    
     note.save()
@@ -1949,7 +1950,7 @@ def delete_note(request, username, bookname):
 @login_required      
 def discard_note(request, username, bookname):
     note_id = request.POST.get('id')
-    N = getNote(username, bookname)
+    N = getNote(request.user.username, bookname)
     note = N.objects.get(id=note_id)
     note.delete()
     return HttpResponse(True, mimetype="text/plain") 
@@ -1957,7 +1958,7 @@ def discard_note(request, username, bookname):
 @login_required      
 def restore_note(request, username, bookname):
     note_id = request.POST.get('id')
-    N = getNote(username, bookname)
+    N = getNote(request.user.username, bookname)
     note = N.objects.get(id=note_id)
     note.deleted = False
     note.save()
@@ -1966,8 +1967,8 @@ def restore_note(request, username, bookname):
 
 @login_required
 def add_note(request, username, bookname):
-    N = getNote(username, bookname)
-    T = getT(username)
+    N = getNote(request.user.username, bookname)
+    T = getT(request.user.username)
     #tags = T.objects.all()
     #have to add tags below specifically. Otherwise, error in db matching.
     #AddNForm = create_model_form("AddNForm_add_note_"+str(username), N, fields={'tags':forms.ModelMultipleChoiceField(queryset=tags)})      
@@ -2046,7 +2047,7 @@ def  frame_notes(request, username, bookname):
         
     #ptr_notes = __get_parent_note_ids(notes, username, bookname)
     #print 'ptr_notes is:', ptr_notes #TODO:should be the same as notes
-    N = getNote(username, bookname)
+    N = getNote(request.user.username, bookname)
    
     tag_list = []
     if notes:
@@ -2064,7 +2065,7 @@ def  frame_notes(request, username, bookname):
     
     #post['vote'] = 0 #TODO: should have the default in the model    
 
-    F = getFrame(username)
+    F = getFrame(request.user.username)
     frameNote = F()
     frameNote.title = post.get('title')
     frameNote.desc = post.get('desc')
@@ -2345,8 +2346,8 @@ def add_tags_to_notes(request, username, bookname):
     #TODO:use POST
     note_ids= request.GET.getlist('note_ids')[0].split(',')        
     tags_to_add = request.GET.getlist('tags_to_add')[0].split(',')    	
-    N = getNote(username, bookname)
-    T = getT(username)
+    N = getNote(request.user.username, bookname)
+    T = getT(request.user.username)
     for note_id in note_ids:
         note = N.objects.get(id=note_id)    
         for tag_id in tags_to_add:
@@ -2364,7 +2365,7 @@ def add_tags_to_notes2(request, username, bookname):
     note_ids= request.GET.getlist('note_ids')[0].split(',')      
     tags_to_add = request.GET.getlist('tags_to_add')[0].split(',')  
     tags_to_add_clean = [tag for tag in tags_to_add if not tag.startswith('takenfrom:')]    
-    N = getNote(username, bookname)    
+    N = getNote(request.user.username, bookname)    
     result = [] 
     for note_id in note_ids:
         note = N.objects.get(id=note_id)
@@ -2562,7 +2563,7 @@ def share(request, bookname):
 @login_required
 def set_notes_private(request, username, bookname):     
     note_ids = request.POST.getlist('note_ids[]')      
-    N = getNote(username, bookname)
+    N = getNote(request.user.username, bookname)
     notes = N.objects.filter(id__in=note_ids)
     #below doesn't call note.save9)? It seems that it doesn't withdrawn notes made private from public. why? TODO:
     #notes.update(private = True)
@@ -2575,7 +2576,7 @@ def set_notes_private(request, username, bookname):
 @login_required
 def set_notes_public(request, username, bookname): 
     note_ids = request.POST.getlist('note_ids[]')   
-    N = getNote(username, bookname)
+    N = getNote(request.user.username, bookname)
     notes = N.objects.filter(id__in=note_ids)    
     #notes.update(private = False)
     for note in notes:
@@ -2587,21 +2588,21 @@ def set_notes_public(request, username, bookname):
 @login_required    
 def set_notes_delete(request, username, bookname):
     note_ids = []    
-    N = getNote(username, bookname)
+    N = getNote(request.user.username, bookname)
     notes = N.objects.filter(id_in=note_ids)
     notes.update(deleted = True)
 
 @login_required
 def remove_notes_delete(request, username, bookname):
     note_ids = []    
-    N = getNote(username, bookname)
+    N = getNote(request.user.username, bookname)
     notes = N.objects.filter(id_in=note_ids)
     notes.update(deleted = False)    
 
 @login_required 
 def discard_notes(request, username, bookname):
     note_ids = []    
-    N = getNote(username, bookname)
+    N = getNote(request.user.username, bookname)
     notes = N.objects.filter(id_in=note_ids)
     notes.delete()
 
@@ -2616,7 +2617,7 @@ def discard_notes(request, username, bookname):
 @login_required
 def update_notes_init_date(request, username, bookname):
     note_ids = []    
-    N = getNote(username, bookname)
+    N = getNote(request.user.username, bookname)
     notes = N.objects.filter(id_in=note_ids)
     init_date = ''    
     notes.update(init_date=init_date)       
@@ -2646,8 +2647,8 @@ def remove_tags_from_notes2(request, username, bookname):
     #it is already enforced at the db level that takefrom tag canno tbe changed.
     tags_to_remove = [tag for tag in tags_to_remove if not tag.startswith('takenfrom:')]    
     log.debug( 'The following tags are going to removed:'+str(tags_to_remove))    
-    N = getNote(username, bookname)
-    T = getT(username)
+    N = getNote(request.user.username, bookname)
+    T = getT(request.user.username)
     result = []
     for note_id in note_ids:
         note = N.objects.get(id=note_id)
@@ -2665,7 +2666,7 @@ def save_search(request, username, bookname):
     log.debug( 'Saving the following query as a folder:'+folder_value)
     folder_name= request.POST.get('folder_name')
     log.debug( 'The folder is going to be named as:'+folder_name)
-    F = getFolder(username, bookname)
+    F = getFolder(request.user.username, bookname)
     folder = F(name=folder_name, value=folder_value) 
     folder.save()
     return HttpResponseRedirect(__get_pre_url(request))      
@@ -2757,14 +2758,14 @@ def add_notes_to_cache(request,username, bookname, cache_id):
 #TODO: delete...
 @login_required
 def clear_cache(request, username, bookname, cache_id):
-    C = getCache(username, bookname)
+    C = getCache(request.user.username, bookname)
     #It seems that dynamic class had a problem to find the parent or child in the right user db to delete
     #So the following code used. Might think of a better solution TODO:
-    N_C = getCache(username, 'notebook')
-    Sn_C = getCache(username, 'snippetbook')
-    B_C = getCache(username, 'bookmarkbook')
-    Sc_C = getCache(username, 'scrapbook')
-    F_C = getCache(username, 'framebook')
+    N_C = getCache(request.user.username, 'notebook')
+    Sn_C = getCache(request.user.username, 'snippetbook')
+    B_C = getCache(request.user.username, 'bookmarkbook')
+    Sc_C = getCache(request.user.username, 'scrapbook')
+    F_C = getCache(request.user.username, 'framebook')
     if bookname == 'notebook':        
         cache = C.objects.get(id=cache_id)        
         try:
@@ -3026,6 +3027,7 @@ def settings_folder(request, username, folder_name, bookname):
     return render_to_response('folders/folder.html',  {'folder':folder, 'folder_form':folder_form}, context_instance=RequestContext(request)) 
 
 
+#TODO: check is username correct
 @login_required
 def settings_folder_add(request, username, bookname):       
     post = request.POST.copy()
@@ -3038,7 +3040,7 @@ def settings_folder_add(request, username, bookname):
 
 @login_required
 def settings_folder_update(request, username, bookname, folder_name): 
-    F = getFolder(username, bookname)  
+    F = getFolder(request.user.username, bookname)  
     folder = F.objects.get(name__exact=folder_name)     
     folder_form = UpdateFolderForm(request.POST, instance=folder)
     folder_form.save()

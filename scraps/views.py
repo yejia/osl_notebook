@@ -110,7 +110,7 @@ def add_scrap(request):
 def share(request, username):   
     print 'share in note called'   
     note_ids = request.POST.getlist('note_ids')   
-    N = getNote(username)   
+    N = getNote(request.user.username)   
     msgs = [] 
     for note_id in note_ids:         
         note = N.objects.get(id=note_id)  

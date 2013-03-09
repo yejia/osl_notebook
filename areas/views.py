@@ -67,7 +67,7 @@ def my_areas(request, username):
         tag_names = post.getlist('item[tags][]')
         #Don't allow creating new tag frame here for now. TODO:
         try:
-            tag_ids = [Tag_Frame.objects.using(username).get(name=tag_name).id for tag_name in tag_names]
+            tag_ids = [Tag_Frame.objects.using(request.user.username).get(name=tag_name).id for tag_name in tag_names]
         except ObjectDoesNotExist:
             messages.error(request, _("It is not a valid tag! Please enter a valid tag."))
             return HttpResponseRedirect('/'+username+'/areas/')    
@@ -75,9 +75,9 @@ def my_areas(request, username):
         #tag_ids = [get_object_or_404(TF, name=tag_name).id for tag_name in tag_names]   
                
          
-        A = getArea(username)
+        A = getArea(request.user.username)
         a = A()
-        a.owner_name = username
+        a.owner_name = request.user.username
 #===============================================================================
 #        addAreaForm = AddAreaForm(post, instance=a)
 #        if not addAreaForm.is_valid(): 
@@ -91,7 +91,7 @@ def my_areas(request, username):
         #TODO: warn of empty root_note_frame and root_tag_frame. They cannot be null
         if post.get('root_note_frame'):
             try:
-                a.root_note_frame = Frame.objects.using(username).get(id=post.get('root_note_frame'))
+                a.root_note_frame = Frame.objects.using(request.user.username).get(id=post.get('root_note_frame'))
             except UnicodeEncodeError:
                 messages.error(request, _("Please enter a frame id!"))
                 return HttpResponseRedirect('/'+username+'/areas/')  
@@ -99,7 +99,7 @@ def my_areas(request, username):
                 messages.error(request, _("Failed to find a frame with this id. Please enter a valid frame id!"))
                 return HttpResponseRedirect('/'+username+'/areas/')     
         if tag_ids:  
-            a.root_tag_frame = Tag_Frame.objects.using(username).get(id=tag_ids[0])  
+            a.root_tag_frame = Tag_Frame.objects.using(request.user.username).get(id=tag_ids[0])  
         else:
             messages.error(request, _("Please enter a tag!"))
             return HttpResponseRedirect('/'+username+'/areas/')  
@@ -131,24 +131,24 @@ def area(request, username, area_id):
         tag_names = post.getlist('item[tags][]')
         #Don't allow creating new tag frame here for now. TODO:
         try:
-            tag_ids = [Tag_Frame.objects.using(username).get(name=tag_name).id for tag_name in tag_names]
+            tag_ids = [Tag_Frame.objects.using(request.user.username).get(name=tag_name).id for tag_name in tag_names]
         except ObjectDoesNotExist:
             messages.error(request, _("It is not a valid tag! Please enter a valid tag."))
             return HttpResponseRedirect('/'+username+'/areas/area/'+area_id+'/')        
         #TF = getTagFrame(username)        
         #tag_ids = [get_object_or_404(TF, name=tag_name).id for tag_name in tag_names]      
              
-        A = getArea(username)
+        A = getArea(request.user.username)
         a = A.objects.get(id=post.get('id'))
-        a.owner_name = username
+        a.owner_name = request.user.username
         a.name = post.get('name')
         a.desc = post.get('desc')
         a.private = post.get('private', False)
         #TODO: warn of empty root_note_frame and root_tag_frame. They cannot be null
         if post.get('root_note_frame'):
-            a.root_note_frame = Frame.objects.using(username).get(id=post.get('root_note_frame'))
+            a.root_note_frame = Frame.objects.using(request.user.username).get(id=post.get('root_note_frame'))
         if tag_ids:  
-            a.root_tag_frame = Tag_Frame.objects.using(username).get(id=tag_ids[0])  
+            a.root_tag_frame = Tag_Frame.objects.using(request.user.username).get(id=tag_ids[0])  
         a.save() 
            
     
@@ -244,8 +244,8 @@ def area(request, username, area_id):
  
 
 def add_groups_2_area(request,username, areaname):
-    area = Area.objects.using(username).get(name=areaname)
-    area.owner_name = username
+    area = Area.objects.using(request.user.username).get(name=areaname)
+    area.owner_name = request.user.username
     group_names = request.POST.getlist('item[tags][]')
     groups = Group.objects.filter(name__in=group_names)
     group_ids = [g.id for g in groups]
@@ -257,8 +257,8 @@ def add_groups_2_area(request,username, areaname):
 def remove_group_from_area(request,username, areaname):
     print 'delete_group'
     group_id = request.POST.get('group_id')
-    area = Area.objects.using(username).get(name=areaname)
-    area.owner_name = username
+    area = Area.objects.using(request.user.username).get(name=areaname)
+    area.owner_name = request.user.username
     area.remove_group(group_id)
     return HttpResponse(simplejson.dumps({'type':'success','msg':_('You have successfully removed the group from the area.')}), "application/json")
     
