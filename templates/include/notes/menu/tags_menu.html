@@ -25,6 +25,7 @@ $(document).ready(function(){
                           
                    //tag_choices = ''
                    $('.tag_list').empty();
+                   tagsAvailable = []
                    for(var i = 0; i < tags.length; i++){
                         //below are the old code used with qs
                        //$('.tag_menu').append(' <li><span><a href="/{{profile_username}}/{{bookname}}/{{aspect_name}}/tags/'+tags[i].fields.name+'/">'+tags[i].fields.name+'</a></span></li>')
@@ -33,10 +34,18 @@ $(document).ready(function(){
                        }else{
                            $('.tag_list').append(' <li><span  style="font-size:18px">'+tags[i].name+'</a> ('+tags[i].note_count+')</span></li>')
                        }
-                       
+                       tagsAvailable.push(tags[i].name);
                        //tag_choices = tags[i].name+','+tag_choices                       
                    }
-                  // alert('showme');
+                  //alert('tagsAvailable:'+tagsAvailable);
+                
+               // reload add_note_tags
+                $("#add_note_tags").tagit({
+			    availableTags: tagsAvailable,
+                   allowSpaces: true
+            });
+            
+            
                    $('#loading').hide();         
                  
             }
