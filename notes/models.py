@@ -583,19 +583,20 @@ class Note(models.Model):
         
         #TODO: consider moving this into various subclasses
         #TODO: shouldn't this check if the note is private or delete?
-        if hasattr(self, 'snippet'):
-            sn, created = Social_Snippet.objects.get_or_create(owner=owner.member, owner_note_id=self.id) 
-        if hasattr(self, 'bookmark'):
-            sn, created = Social_Bookmark.objects.get_or_create(owner=owner.member, owner_note_id=self.id) 
-        if hasattr(self, 'scrap'):
-            sn, created = Social_Scrap.objects.get_or_create(owner=owner.member, owner_note_id=self.id)  
-        if hasattr(self, 'frame'):
-            sn, created = Social_Frame.objects.get_or_create(owner=owner.member, owner_note_id=self.id)            
+        if not (self.is_private or self.deleted) or self.tags.filter(name__startswith="sharinggroup:"):
+            if hasattr(self, 'snippet'):
+                sn, created = Social_Snippet.objects.get_or_create(owner=owner.member, owner_note_id=self.id) 
+            if hasattr(self, 'bookmark'):
+                sn, created = Social_Bookmark.objects.get_or_create(owner=owner.member, owner_note_id=self.id) 
+            if hasattr(self, 'scrap'):
+                sn, created = Social_Scrap.objects.get_or_create(owner=owner.member, owner_note_id=self.id)  
+            if hasattr(self, 'frame'):
+                sn, created = Social_Frame.objects.get_or_create(owner=owner.member, owner_note_id=self.id)            
         
         
         #if the note has sharinggroup: prefixed tag, then it still need to be in the social space
         #if not created and (self.private or self.deleted) and not self.tags.filter(name__startswith="sharinggroup:").exists():   
-        if (self.private or self.deleted) and not self.tags.filter(name__startswith="sharinggroup:").exists():  
+        if (self.is_private or self.deleted) and not self.tags.filter(name__startswith="sharinggroup:").exists():  
             #if the note is already in social note, and the note in the original db is changed to priviate or delete
             #   then needs to delete it from the social note
             #TODO: still, deleting the child won't delete the parent. Will this be an issue? So at least disable mixed.
