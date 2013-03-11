@@ -1,85 +1,6 @@
 {% load i18n %}
 
-<!--
-<h4>{% trans "Tag" %} </h4>
--->
-{% block extra_script %}
 
-
-<script type="text/javascript">
-$(document).ready(function(){	
-            $(":input[name='workingset']").change(function(){              
-                    $('#loading').show(0);     
-                    $.get('/{{profile_username}}/{{bookname}}/getWsTags/',{'ws':$(this).val()}, loadTags, 'json');  
-             });
-
-            {% if appname == 'areas' %}
-                    $.get('/{{profile_username}}/areas/area/{{area}}/{{bookname}}/getAreaTags/',{}, loadTags, 'json');  
-            {% else %}
-                    $.get('/{{profile_username}}/{{bookname}}/getWsTags/',{}, loadTags, 'json');  
-            
-            {% endif %}
-
-
-            function loadTags(tags){                 
-                          
-                   //tag_choices = ''
-                   $('.tag_list').empty();
-                   tagsAvailable = []
-                   for(var i = 0; i < tags.length; i++){
-                        //below are the old code used with qs
-                       //$('.tag_menu').append(' <li><span><a href="/{{profile_username}}/{{bookname}}/{{aspect_name}}/tags/'+tags[i].fields.name+'/">'+tags[i].fields.name+'</a></span></li>')
-                       if (tags[i].name != '{{current_tag}}'){
-                            $('.tag_list').append(' <li><span><a href="/{{profile_username}}/{{bookname}}/notes/tags/'+tags[i].name+'/">'+tags[i].name+'</a> ('+tags[i].note_count+')</span></li>')
-                       }else{
-                           $('.tag_list').append(' <li><span  style="font-size:18px">'+tags[i].name+'</a> ('+tags[i].note_count+')</span></li>')
-                       }
-                       tagsAvailable.push(tags[i].name);
-                       //tag_choices = tags[i].name+','+tag_choices                       
-                   }
-                  //alert('tagsAvailable:'+tagsAvailable);
-                
-               // reload add_note_tags
-                $("#add_note_tags").tagit({
-			    availableTags: tagsAvailable,
-                   allowSpaces: true
-            });
-            
-            
-                   $('#loading').hide();         
-                 
-            }
-            
-            
-            var view_by_tags = $("#view_by_tags")
-             view_by_tags.tagit({
-			    availableTags: tagsAvailable,
-                   allowSpaces: true,
-                   onTagClicked: function(evt, tag) {
-                          //alert('clicked '+view_by_tags.tagit('tagLabel', tag));        
-                          tagClicked = view_by_tags.tagit('tagLabel', tag)  
-                          window.location.assign('/{{profile_username}}/{{bookname}}/notes/tags/'+tagClicked+'/') ;                         
-                },
-                onTagAdded:function(evt, tag) {
-                          //alert('added tag '+view_by_tags.tagit('tagLabel', tag));      
-                          tag.find('a.tagit-close').remove();
-                          tag.find('a').css('text-decoration','decoration:underline')
-                          tag.parents('ul').find('tagit-new').remove();
-                                                    
-                                
-                }
-            });    
-            
-            
-           
-            
-            
-    });
-	
-            
-</script>
-
-{% endblock %}
 
   <ul class="tag_menu">
   <li>
@@ -98,4 +19,13 @@ $(document).ready(function(){
 
 
 </ul>
+
+
+
+
+
+
+
+
+
 
