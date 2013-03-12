@@ -100,6 +100,11 @@ urlpatterns = patterns('',
     #for now, still keep share in notes.views instead of moving to social.views (If moving, might need to move sites binding together) TODO: 
     (r'^social/(?P<bookname>[^/]+)/share/$','notebook.notes.views.share'),
 
+
+    (r'^social/(?P<username>[^/]+)/mentioned/$', 'notebook.social.views.mentioned'),
+    (r'^social/(?P<username>[^/]+)/mentioned_in_note/$', 'notebook.social.views.mentioned_in_note'),
+    (r'^social/(?P<username>[^/]+)/mentioned_in_comment/$', 'notebook.social.views.mentioned_in_comment'),
+
     (r'/voteUseful/$','notebook.social.views.vote_useful'), 
     (r'/voteUnuseful/$','notebook.social.views.vote_unuseful'), 
     (r'/take/$','notebook.social.views.take'), 

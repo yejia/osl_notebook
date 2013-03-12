@@ -17,6 +17,7 @@ from django.utils.translation import ugettext as _ , activate
 from django.core.mail import send_mail
 from django.views.decorators.cache import cache_page
 
+import re
 
 import datetime
 from urlparse import urlparse
@@ -1021,6 +1022,9 @@ if "notification" in settings.INSTALLED_APPS:
 else:
     notification = None
 
+
+
+
 @login_required
 def add_comment(request):  
     note_id = request.POST.get('id')
@@ -1043,8 +1047,15 @@ def add_comment(request):
         notification.send(other_commenters, "comment_receive", {"from_user": request.user})      
       
       #print 'notices sent'
+    if '@' in nc.desc:
+        notebook.notes.util.processAtAndSendNotice(request, nc.desc)  
     return  HttpResponse(simplejson.dumps({'note_id':note_id, 'comment_id':nc.id, 'comment_desc':nc.desc, 'commenter':nc.commenter.username}),
                                                                      "application/json")
+
+
+
+    
+    
 
 
 @login_required
@@ -1095,6 +1106,29 @@ def comments_by_user(request, username):
     return render_to_response('social/commentsby.html', {'comments':comments, 'profile_username':username},\
                                                   context_instance=RequestContext(request)) 
 
+
+@login_required   
+def mentioned(request, username):
+    #clear notifications related to mention
+    if (not request.user.is_anonymous()) and request.user.username == username:
+        Notice.objects.filter(notice_type__label='mentioned', recipient=request.user).update(unseen=False)   
+    return render_to_response('social/mentioned.html', {'profile_username':username},\
+                                                  context_instance=RequestContext(request)) 
+
+
+@login_required   
+def mentioned_in_note(request, username):    
+    notes = Social_Note.objects.filter(desc__contains=u'@'+username+' ').order_by('-init_date')    
+    return render_to_response('social/mentioned_in_note.html', {'notes':notes,'profile_username':username},\
+                                                  context_instance=RequestContext(request)) 
+
+
+@login_required   
+def mentioned_in_comment(request, username):     
+    comments = Social_Note_Comment.objects.filter(desc__contains='@'+username+' ').order_by('-init_date')    
+    return render_to_response('social/mentioned_in_comment.html', {'comments':comments, 'profile_username':username},\
+                                                  context_instance=RequestContext(request)) 
+    
 
 @login_required   
 def delete_comment(request):

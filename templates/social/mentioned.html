@@ -1,0 +1,15 @@
+{% extends "include/base2.html" %}
+{% load i18n %}
+
+{% block title %}
+{% blocktrans %}Mentions  for {{profile_username}}{% endblocktrans %}
+{% endblock %}
+
+
+{% block content%}
+{% blocktrans %}Mentions  for {{profile_username}}{% endblocktrans %}
+<br/><br/>
+<a href="/social/{{profile_username}}/mentioned_in_note/">{% trans "Mentioned in notes" %}</a>   |    <a href="/social/{{profile_username}}/mentioned_in_comment/">{% trans "Mentioned in comments" %}</a>
+
+
+{% endblock %}

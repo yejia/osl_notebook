@@ -1,0 +1,25 @@
+{% extends "include/base2.html" %}
+{% load i18n %}
+
+{% block title %}
+{% blocktrans %}Mentions  in notes for {{profile_username}}{% endblocktrans %}
+{% endblock %}
+
+
+{% block content%}
+{% blocktrans %}Mentions  in notes for {{profile_username}}{% endblocktrans %}
+
+<br/><br/>
+
+<ul>
+{% for note in notes %}	
+<li>
+<div><a href="/social/{{note.owner.username}}/">{{note.owner.username}}</a>: <a href="/social/{{note.owner.username}}/notebook/notes/note/{{note.id}}/">{{note.title|default:_('(No Title)')}} </a>    {{note.desc}}  <span class="grey">({{note.init_date}})</span></div>
+
+</li>
+{% endfor %}
+</ul>
+
+
+
+{% endblock %}

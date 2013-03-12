@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-07 18:46+0800\n"
+"POT-Creation-Date: 2013-03-12 11:18+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,31 +18,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: email_digest.py:84 email_digest.py:85 notes/views.py:2492
-#: notes/views.py:2503
+#: email_digest.py:84 email_digest.py:85 notes/views.py:2534
+#: notes/views.py:2545
 msgid "Sharing snippet:"
 msgstr "分享便条："
 
-#: email_digest.py:87 email_digest.py:88 notes/views.py:2494
-#: notes/views.py:2505
+#: email_digest.py:87 email_digest.py:88 notes/views.py:2536
+#: notes/views.py:2547
 msgid "Sharing bookmark:"
 msgstr "分享网址："
 
-#: email_digest.py:90 email_digest.py:91 notes/views.py:2496
-#: notes/views.py:2507
+#: email_digest.py:90 email_digest.py:91 notes/views.py:2538
+#: notes/views.py:2549
 msgid "Sharing scrap:"
 msgstr "分享网摘："
 
-#: email_digest.py:93 email_digest.py:94 notes/views.py:2498
-#: notes/views.py:2509
+#: email_digest.py:93 email_digest.py:94 notes/views.py:2540
+#: notes/views.py:2551
 msgid "Sharing knowledge package:"
 msgstr "分享知识包："
 
-#: email_digest.py:109 notes/views.py:2511
+#: email_digest.py:109 notes/views.py:2553
 msgid "Original Note:"
 msgstr "原笔记："
 
-#: email_digest.py:114 email_digest.py:116 notes/views.py:2522
+#: email_digest.py:114 email_digest.py:116 notes/views.py:2564
 msgid "from"
 msgstr "来自"
 
@@ -114,6 +114,14 @@ msgstr "收到新的评论"
 #: manage.py:34
 msgid "you have received a comment"
 msgstr "你收到了新的评论"
+
+#: manage.py:35
+msgid "Mentioned"
+msgstr "提到了你"
+
+#: manage.py:35
+msgid "You have been mentioned"
+msgstr "你被提到了"
 
 #: plan.py:40 plan.py:43 plan.py:101 plan.py:107 plan.py:135 plan.py:141
 #: plan.py:200 plan.py:208 plan.py:244 plan.py:251
@@ -242,7 +250,7 @@ msgstr "找不到这个id的知识包。请输入一个有效的知识包id！"
 msgid "Please enter a tag!"
 msgstr "请输入一个标签！"
 
-#: areas/views.py:263
+#: areas/views.py:266
 msgid "You have successfully removed the group from the area."
 msgstr "你已经成功的将该小组从这个学习领域移除。"
 
@@ -261,24 +269,24 @@ msgstr ""
 "这个网址已经成功添加到您的网址本里。您可以关闭这个窗口，或者其会在1秒后自动关"
 "闭。"
 
-#: notes/models.py:189 notes/models.py:1166 social/models.py:870
+#: notes/models.py:189 notes/models.py:1169 social/models.py:870
 #: templates/framebook/notes/notesdisplay.html:18
 #: templates/include/notes/notesdisplay.html:40
 #: templates/scrapbook/notes/notesdisplay.html:28
 msgid "Title"
 msgstr "标题"
 
-#: notes/models.py:189 notes/models.py:1166 social/models.py:870
+#: notes/models.py:189 notes/models.py:1169 social/models.py:870
 msgid "The size of the title is limited to 2000 characaters."
 msgstr "标题的长度应小于2000字。"
 
-#: notes/models.py:192 notes/models.py:1167 social/models.py:712
+#: notes/models.py:192 notes/models.py:1170 social/models.py:712
 #: social/models.py:871 templates/areas/area.html:285
 #: templates/areas/my.html:54
 msgid "Description"
 msgstr "正文"
 
-#: notes/models.py:192 notes/models.py:1167 social/models.py:871
+#: notes/models.py:192 notes/models.py:1170 social/models.py:871
 msgid "The size of the desc is limited to 2000 characaters."
 msgstr "正文的长度应小于2000字。"
 
@@ -296,7 +304,7 @@ msgstr "默认的标签是'random thought'。"
 
 #: notes/models.py:194 social/models.py:715 templates/areas/area.html:288
 #: templates/areas/my.html:57 templates/framebook/notes/notesdisplay.html:22
-#: templates/include/note_list_base.html:1494
+#: templates/include/note_list_base.html:1497
 #: templates/include/notes/notesdisplay.html:44
 #: templates/scrapbook/notes/notesdisplay.html:29
 #: templates/snippetbook/notes/add_note.html:49
@@ -316,17 +324,17 @@ msgstr "最后修改时间"
 msgid "self ranking"
 msgstr "原作者的评级"
 
-#: notes/models.py:727 snippets/models.py:14 social/models.py:474
+#: notes/models.py:728 snippets/models.py:14 social/models.py:474
 #: social/models.py:498 templates/framebook/notes/notesdisplay.html:20
 #: templates/include/notes/notesdisplay.html:42
 msgid "Attachment"
 msgstr "附件"
 
-#: notes/models.py:1164 social/models.py:868
+#: notes/models.py:1167 social/models.py:868
 msgid "Language"
 msgstr "语言"
 
-#: notes/models.py:1165 social/models.py:869
+#: notes/models.py:1168 social/models.py:869
 msgid "Original language"
 msgstr "原来的语言"
 
@@ -419,15 +427,15 @@ msgstr "您已经成功的激活了您的帐号！"
 msgid "Wrong activation id!"
 msgstr "错误的激活代码！"
 
-#: notes/views.py:654
+#: notes/views.py:655
 msgid "You have no permission here!"
 msgstr "您在此没有权限！"
 
-#: notes/views.py:1433
+#: notes/views.py:1434
 msgid "note"
 msgstr "条笔记"
 
-#: notes/views.py:1434 templates/areas/index.html:29
+#: notes/views.py:1435 templates/areas/index.html:29
 #: templates/include/notes/note/notedisplay.html:88
 #: templates/social/friends.html:36 templates/social/learners.html:33
 #: templates/social/people.html:33 templates/social/group/groups.html:35
@@ -435,38 +443,38 @@ msgstr "条笔记"
 msgid "notes"
 msgstr "条笔记"
 
-#: notes/views.py:1633
+#: notes/views.py:1637
 msgid ""
 "Error uploading the file. The file name is too long! Please use a shorter "
 "file name. You can reduce your file name by "
 msgstr ""
 "上传文件时发生错误。文件名太长！请用一个短点的文件名。你可以将文件名缩短"
 
-#: notes/views.py:1633
+#: notes/views.py:1637
 msgid " letters."
 msgstr "字即可。"
 
-#: notes/views.py:1657
+#: notes/views.py:1661
 msgid "Note is successfully updated!"
 msgstr "笔记更新成功！"
 
-#: notes/views.py:1755
+#: notes/views.py:1759
 msgid "Please enter a note id or comma separated note ids in the box!"
 msgstr "请输入笔记id或者逗号分隔的几个笔记的id！"
 
-#: notes/views.py:1871
+#: notes/views.py:1875
 msgid "Question successfully added!"
 msgstr "问题添加成功！"
 
-#: notes/views.py:1891
+#: notes/views.py:1895
 msgid "Project successfully added!"
 msgstr "项目添加成功！"
 
-#: notes/views.py:2089
+#: notes/views.py:2131
 msgid "A frame is successfully created!"
 msgstr "一个知识包成功生成了！"
 
-#: notes/views.py:2513
+#: notes/views.py:2555
 msgid "Forwarded Note:"
 msgstr "转发的笔记："
 
@@ -528,7 +536,7 @@ msgstr "接收计划通知"
 
 #: social/models.py:63 templates/areas/area.html:162
 #: templates/framebook/notes/todelete/folders.html:19
-#: templates/include/note_list_base.html:1696
+#: templates/include/note_list_base.html:1699
 #: templates/include/profile_head.html:49
 #: templates/include/profile_head.html:51
 #: templates/include/profile_head.html:80 templates/include/supersearch.html:6
@@ -542,7 +550,7 @@ msgid "Snippets"
 msgstr "便条"
 
 #: social/models.py:64 templates/areas/area.html:165
-#: templates/include/note_list_base.html:1700
+#: templates/include/note_list_base.html:1703
 #: templates/include/profile_head.html:64
 #: templates/include/profile_head.html:66
 #: templates/include/profile_head.html:83
@@ -689,7 +697,7 @@ msgstr "你被邀请参加学习小组"
 msgid "You have successfully sent the group invitation!"
 msgstr "你已经成功的发出了小组邀请！"
 
-#: social/views.py:1154
+#: social/views.py:1178
 msgid ""
 "Your suggestion is successfully sent to the sys admin! Thank you for your "
 "valuable suggestion!"
@@ -722,6 +730,7 @@ msgstr ""
 "耐心和支持！"
 
 #: templates/admin/404.html:4 templates/admin/404.html.py:8
+#: templates/tagframes/index.html:391
 msgid "Page not found"
 msgstr "没找到页面"
 
@@ -831,7 +840,7 @@ msgstr[1] ""
 
 #: templates/admin/delete_confirmation.html:10
 #: templates/admin/submit_line.html:4
-#: templates/include/note_list_base.html:1479
+#: templates/include/note_list_base.html:1482
 msgid "Delete"
 msgstr "删除"
 
@@ -954,7 +963,7 @@ msgid "Save"
 msgstr ""
 
 #: templates/admin/search_form.html:8 templates/include/search.html:6
-#: templates/include/notes/menu/tags_menu.html:84
+#: templates/include/notes/menu/tags_menu.html:14
 msgid "Search"
 msgstr "搜索"
 
@@ -1074,7 +1083,7 @@ msgstr "浏览这个学习领域里的所有笔记"
 
 #: templates/areas/area.html:163
 #: templates/framebook/notes/todelete/folders.html:21
-#: templates/include/note_list_base.html:1697
+#: templates/include/note_list_base.html:1700
 #: templates/include/profile_head.html:54
 #: templates/include/profile_head.html:56
 #: templates/include/profile_head.html:81
@@ -1093,7 +1102,7 @@ msgstr "网址"
 
 #: templates/areas/area.html:164
 #: templates/framebook/notes/todelete/folders.html:23
-#: templates/include/note_list_base.html:1698
+#: templates/include/note_list_base.html:1701
 #: templates/include/profile_head.html:59
 #: templates/include/profile_head.html:61
 #: templates/include/profile_head.html:82
@@ -1113,11 +1122,11 @@ msgstr "网摘"
 #: templates/framebook/notes/todelete/folders.html:25
 #: templates/include/frames_pick_top.html:13
 #: templates/include/frames_pick_top.html:15
-#: templates/include/note_list_base.html:1496
-#: templates/include/note_list_base.html:1498
-#: templates/include/note_list_base.html:1565
-#: templates/include/note_list_base.html:1567
-#: templates/include/note_list_base.html:1701
+#: templates/include/note_list_base.html:1499
+#: templates/include/note_list_base.html:1501
+#: templates/include/note_list_base.html:1568
+#: templates/include/note_list_base.html:1570
+#: templates/include/note_list_base.html:1704
 #: templates/include/profile_head.html:69
 #: templates/include/profile_head.html:71
 #: templates/include/profile_head.html:84
@@ -1389,12 +1398,12 @@ msgstr "在链条里的"
 
 #: templates/bookmarkbook/notes/notes.html:12
 #: templates/bookmarkbook/notes/notes.html:14
-#: templates/include/note_list_base.html:1481
-#: templates/include/note_list_base.html:1483
-#: templates/include/note_list_base.html:1502
-#: templates/include/note_list_base.html:1504
-#: templates/include/note_list_base.html:1571
-#: templates/include/note_list_base.html:1573
+#: templates/include/note_list_base.html:1484
+#: templates/include/note_list_base.html:1486
+#: templates/include/note_list_base.html:1505
+#: templates/include/note_list_base.html:1507
+#: templates/include/note_list_base.html:1574
+#: templates/include/note_list_base.html:1576
 #: templates/notebook/notes/notes.html:14
 #: templates/notebook/notes/notes.html:16
 #: templates/scrapbook/notes/notes.html:13
@@ -2099,7 +2108,7 @@ msgstr "在笔记列表里浏览"
 #: templates/include/notes/notes_section_header.html:6
 #: templates/social/framebook/notes/note/notedisplay.html:36
 #: templates/social/include/notes/notes_section_header.html:4
-#: templates/tagframes/index.html:390
+#: templates/tagframes/index.html:393
 msgid "List"
 msgstr "表单"
 
@@ -2107,7 +2116,7 @@ msgstr "表单"
 #: templates/include/notes/notes_section_header.html:5
 #: templates/social/framebook/notes/note/notedisplay.html:36
 #: templates/social/include/notes/notes_section_header.html:4
-#: templates/tagframes/index.html:390
+#: templates/tagframes/index.html:393
 msgid "Expanded"
 msgstr "展开"
 
@@ -2126,23 +2135,23 @@ msgstr "%(profile_username)s的文件夹%(current_folder)s"
 msgid "linkiages"
 msgstr "链条"
 
-#: templates/include/base2.html:231 templates/include/note_list_base.html:1429
+#: templates/include/base2.html:231 templates/include/note_list_base.html:1432
 msgid "You are using an outdated browser."
 msgstr "你在使用一个过时的浏览器。"
 
-#: templates/include/base2.html:231 templates/include/note_list_base.html:1429
+#: templates/include/base2.html:231 templates/include/note_list_base.html:1432
 msgid "Upgrade your browser today"
 msgstr "请升级你的浏览器"
 
-#: templates/include/base2.html:231 templates/include/note_list_base.html:1429
+#: templates/include/base2.html:231 templates/include/note_list_base.html:1432
 msgid " or "
 msgstr "或者"
 
-#: templates/include/base2.html:231 templates/include/note_list_base.html:1429
+#: templates/include/base2.html:231 templates/include/note_list_base.html:1432
 msgid "install Google Chrome Frame"
 msgstr "安装谷歌浏览器框"
 
-#: templates/include/base2.html:231 templates/include/note_list_base.html:1429
+#: templates/include/base2.html:231 templates/include/note_list_base.html:1432
 msgid " to better experience this site."
 msgstr "以获得对本网站更好的体验。"
 
@@ -2243,7 +2252,7 @@ msgid "My Friends"
 msgstr "我的朋友"
 
 #: templates/include/get_title.html:2
-#: templates/include/note_list_base.html:1188
+#: templates/include/note_list_base.html:1191
 #: templates/include/notes/inlines/add_comments_and_etc_inline.html:129
 #: templates/include/notes/todelete/linkagenotesdisplay.html:109
 #: templates/include/notes/todelete/linkagenotesdisplay.html:155
@@ -2252,6 +2261,8 @@ msgstr "我的朋友"
 #: templates/snippetbook/notes/show_note_added_js.html:36
 #: templates/snippetbook/notes/show_note_added_js.html:40
 #: templates/social/commentsfor.html:39
+#: templates/social/mentioned_in_comment.html:32
+#: templates/social/mentioned_in_note.html:17
 #: templates/social/framebook/notes/note/delete/children.html:6
 msgid "(No Title)"
 msgstr "（无标题）"
@@ -2310,21 +2321,21 @@ msgstr ""
 "被添加到这个小组里。但是隐私的笔记不会。隐私的笔记永远在你的私人笔记本里，除"
 "非你有意的要分享给某个小组。"
 
-#: templates/include/note_list_base.html:607
+#: templates/include/note_list_base.html:610
 msgid ""
 "You have not set up sites for sharing. Please set it up in the settings."
 msgstr "你还没有设置要分享的网站。你可以在设置里绑定。"
 
-#: templates/include/note_list_base.html:610
+#: templates/include/note_list_base.html:613
 msgid " notes are shared with"
 msgstr "笔记分享到"
 
-#: templates/include/note_list_base.html:610
+#: templates/include/note_list_base.html:613
 msgid "sites! You can change sites for sharing in the settings."
 msgstr "网站！你可以在设置里更改要分享的网站。"
 
-#: templates/include/note_list_base.html:971
-#: templates/include/note_list_base.html:1008
+#: templates/include/note_list_base.html:974
+#: templates/include/note_list_base.html:1011
 #: templates/include/notes/inlines/add_comments_and_etc_inline.html:83
 #: templates/include/notes/inlines/add_comments_and_etc_inline.html:99
 #: templates/snippetbook/notes/show_note_added_js.html:25
@@ -2332,83 +2343,83 @@ msgstr "网站！你可以在设置里更改要分享的网站。"
 msgid "remove this comment"
 msgstr "去除这个评论"
 
-#: templates/include/note_list_base.html:995
+#: templates/include/note_list_base.html:998
 msgid "You are not logged in! Please login first."
 msgstr "你还没有登录！请先登录。"
 
-#: templates/include/note_list_base.html:1037
+#: templates/include/note_list_base.html:1040
 #: templates/social/include/notes/inlines/add_comments_and_etc_inline.html:35
 msgid "remove this course"
 msgstr "去除这个课程"
 
-#: templates/include/note_list_base.html:1140
+#: templates/include/note_list_base.html:1143
 msgid "You cannot add a note to itself!"
 msgstr "你不能把一个笔记添加给自己！"
 
-#: templates/include/note_list_base.html:1358
+#: templates/include/note_list_base.html:1361
 msgid ""
 "Are you sure you want to discard this? This note will be deleted permanently "
 "and it cannot be recovered!"
 msgstr "你确定你想永久删除这条笔记吗？你将不能恢复被永久删除的笔记！"
 
-#: templates/include/note_list_base.html:1467
+#: templates/include/note_list_base.html:1470
 msgid "show side menu"
 msgstr "显示侧边菜单"
 
-#: templates/include/note_list_base.html:1468
+#: templates/include/note_list_base.html:1471
 msgid "hide side menu"
 msgstr "隐藏侧边菜单"
 
-#: templates/include/note_list_base.html:1487
-#: templates/include/note_list_base.html:1489
-#: templates/include/note_list_base.html:1508
-#: templates/include/note_list_base.html:1510
+#: templates/include/note_list_base.html:1490
+#: templates/include/note_list_base.html:1492
+#: templates/include/note_list_base.html:1511
+#: templates/include/note_list_base.html:1513
 msgid "No"
 msgstr "否"
 
-#: templates/include/note_list_base.html:1517
+#: templates/include/note_list_base.html:1520
 msgid "Date Range"
 msgstr "时间范围"
 
-#: templates/include/note_list_base.html:1522
-#: templates/include/note_list_base.html:1524
+#: templates/include/note_list_base.html:1525
+#: templates/include/note_list_base.html:1527
 msgid "Any day"
 msgstr "任何天"
 
-#: templates/include/note_list_base.html:1528
-#: templates/include/note_list_base.html:1530
+#: templates/include/note_list_base.html:1531
+#: templates/include/note_list_base.html:1533
 msgid "Today"
 msgstr "今天"
 
-#: templates/include/note_list_base.html:1534
-#: templates/include/note_list_base.html:1536
+#: templates/include/note_list_base.html:1537
+#: templates/include/note_list_base.html:1539
 msgid "Past 7 Days"
 msgstr "过去7天"
 
-#: templates/include/note_list_base.html:1540
-#: templates/include/note_list_base.html:1542
+#: templates/include/note_list_base.html:1543
+#: templates/include/note_list_base.html:1545
 msgid "This Month"
 msgstr "本月"
 
-#: templates/include/note_list_base.html:1545
+#: templates/include/note_list_base.html:1548
 msgid "This Season"
 msgstr "本季度"
 
-#: templates/include/note_list_base.html:1548
-#: templates/include/note_list_base.html:1550
+#: templates/include/note_list_base.html:1551
+#: templates/include/note_list_base.html:1553
 msgid "This Year"
 msgstr "今年"
 
-#: templates/include/note_list_base.html:1554
+#: templates/include/note_list_base.html:1557
 msgid "Pick a Range"
 msgstr "选择一个日期范围"
 
-#: templates/include/note_list_base.html:1563
+#: templates/include/note_list_base.html:1566
 msgid "With attachment"
 msgstr "含附件"
 
 # python-format
-#: templates/include/note_list_base.html:1691
+#: templates/include/note_list_base.html:1694
 #, python-format
 msgid "Personal notes of %(profile_username)s"
 msgstr "%(profile_username)s的个人笔记"
@@ -2990,12 +3001,8 @@ msgstr "下"
 msgid "up"
 msgstr "上"
 
-#: templates/include/notes/menu/tags_menu.html:4
-msgid "Tag"
-msgstr "标签"
-
-#: templates/include/notes/menu/tags_menu.html:78
-#: templates/include/notes/menu/tags_menu.html:80
+#: templates/include/notes/menu/tags_menu.html:8
+#: templates/include/notes/menu/tags_menu.html:10
 #: templates/include/notes/menu/toggle_tag_menu.html:17
 #: templates/include/notes/menu/toggle_tag_menu.html:19
 #: templates/social/include/notes/menu/tags_menu.html:9
@@ -3003,11 +3010,11 @@ msgstr "标签"
 msgid "all tags"
 msgstr "全部标签"
 
-#: templates/include/notes/menu/tags_menu.html:78
+#: templates/include/notes/menu/tags_menu.html:8
 msgid "tags of this area"
 msgstr ""
 
-#: templates/include/notes/menu/tags_menu.html:86
+#: templates/include/notes/menu/tags_menu.html:16
 msgid "Loading tags..."
 msgstr "载入。。。"
 
@@ -3184,7 +3191,7 @@ msgstr "私信"
 msgid "Date of the Notice"
 msgstr "通知日期"
 
-#: templates/notification/notices.html:22
+#: templates/notification/notices.html:27
 msgid "ago"
 msgstr "以前"
 
@@ -3657,26 +3664,33 @@ msgid "View by commenter:"
 msgstr "选择评论者："
 
 #: templates/social/commentsfor.html:36 templates/social/commentsfor.html:37
+#: templates/social/mentioned_in_comment.html:29
+#: templates/social/mentioned_in_comment.html:30
 msgid "on "
 msgstr "对"
 
 #: templates/social/commentsfor.html:36
+#: templates/social/mentioned_in_comment.html:29
 msgid "your"
 msgstr "你的"
 
 #: templates/social/commentsfor.html:36
+#: templates/social/mentioned_in_comment.html:29
 msgid "'s"
 msgstr "的"
 
 #: templates/social/commentsfor.html:36
+#: templates/social/mentioned_in_comment.html:29
 msgid " note"
 msgstr "笔记"
 
 #: templates/social/commentsfor.html:37
+#: templates/social/mentioned_in_comment.html:30
 msgid "you"
 msgstr "你"
 
 #: templates/social/commentsfor.html:37
+#: templates/social/mentioned_in_comment.html:30
 msgid " commented note"
 msgstr "评论过的笔记"
 
@@ -3720,6 +3734,32 @@ msgstr "学习领域"
 #: templates/social/people.html:33
 msgid "frames"
 msgstr "知识包"
+
+#: templates/social/mentioned.html:5 templates/social/mentioned.html.py:10
+#, python-format
+msgid "Mentions  for %(profile_username)s"
+msgstr "提到%(profile_username)s"
+
+#: templates/social/mentioned.html:12
+msgid "Mentioned in notes"
+msgstr "在笔记列表里提到的"
+
+#: templates/social/mentioned.html:12
+msgid "Mentioned in comments"
+msgstr "在评论里提到的"
+
+#: templates/social/mentioned_in_comment.html:5
+#: templates/social/mentioned_in_comment.html:10
+#, python-format
+msgid "Mentions  in comments for %(profile_username)s"
+msgstr "在评论里%(profile_username)s的"
+
+# python-format
+#: templates/social/mentioned_in_note.html:5
+#: templates/social/mentioned_in_note.html:10
+#, python-format
+msgid "Mentions  in notes for %(profile_username)s"
+msgstr "在笔记里提到%(profile_username)s"
 
 #: templates/social/people.html:6 templates/social/people.html.py:12
 msgid "Learners"
@@ -4123,7 +4163,7 @@ msgstr "添加标签到树里"
 msgid "View other Top Level Tag Trees"
 msgstr "浏览其他顶级标签树"
 
-#: templates/tagframes/index.html:415
+#: templates/tagframes/index.html:416
 msgid "delete this"
 msgstr "删除"
 
@@ -4211,6 +4251,9 @@ msgstr "全部工作区"
 #: templates/workingset/index.html:370
 msgid "Make Current"
 msgstr "设成当前"
+
+#~ msgid "Tag"
+#~ msgstr "标签"
 
 #~ msgid ""
 #~ "No mobile app is developed currently. But to help you jotting down notes "

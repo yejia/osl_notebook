@@ -32,6 +32,7 @@ if "notification" in settings.INSTALLED_APPS:
         notification.create_notice_type("friends_invite", _("Invitation Received"), _("you have received an invitation"))
         notification.create_notice_type("friends_accept", _("Acceptance Received"), _("an invitation you sent has been accepted"))
         notification.create_notice_type("comment_receive", _("Comment Received"), _("you have received a comment"))
+        notification.create_notice_type("mentioned", _("Mentioned"), _("You have been mentioned"))
         
 
     signals.post_syncdb.connect(create_notice_types, sender=notification)

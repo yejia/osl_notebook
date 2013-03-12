@@ -1,0 +1,38 @@
+{% extends "include/base2.html" %}
+{% load i18n %}
+
+{% block title %}
+{% blocktrans %}Mentions  in comments for {{profile_username}}{% endblocktrans %}
+{% endblock %}
+
+
+{% block content%}
+{% blocktrans %}Mentions  in comments for {{profile_username}}{% endblocktrans %}
+
+<br/><br/>
+
+
+
+
+
+
+
+
+
+
+
+<ul>
+{% for comment in comments %}	
+<li>
+<div><a href="/social/{{comment.commenter.username}}/">{{comment.commenter.username}}</a>: {{comment.desc}}  <span class="grey">({{comment.init_date}})</span></div>
+<div>
+{% if comment.note.owner.username == profile_username %}	{% trans "on " %}{% if user.username == profile_username %}{% trans "your" %}{% else %}{{profile_username}}{% trans "'s" %}{% endif %}{% trans " note" %}
+{% else %}{% trans "on " %}{{comment.note.owner.username}}{% trans "'s" %}{% trans " note" %}
+{% endif %}:   
+  <a href="/social/{{comment.note.owner.username}}/{{comment.note.get_note_bookname}}/notes/note/{{ comment.note.id }}">{% if comment.note.desc %}{{comment.note.desc}}{% else %}{{comment.note.title|default:_('(No Title)')}}{% endif %}</a></div>
+</li>
+{% endfor %}
+</ul>
+
+
+{% endblock %}

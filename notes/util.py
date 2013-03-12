@@ -6,8 +6,12 @@ from notebook.notes.models import Note, Tag, Frame, LinkageNote, Folder, Working
 from notebook.snippets.models import Snippet
 from notebook.bookmarks.models import Bookmark
 from notebook.scraps.models import Scrap
-from notebook.social.models import Social_Note, Social_Snippet, Social_Bookmark, Social_Scrap, Social_Frame
+from notebook.social.models import Social_Note, Social_Snippet, Social_Bookmark, Social_Scrap, Social_Frame, Member
 
+
+from django.contrib.auth.models import User
+
+import re
 
 
 book_model_dict = {'notebook':Note, 'snippetbook':Snippet,'bookmarkbook':Bookmark, 'scrapbook': Scrap, 'framebook':Frame}
@@ -59,4 +63,23 @@ def getFrameTags(username):
 
 
 
+import notebook.settings as settings
+if "notification" in settings.INSTALLED_APPS:
+    from notification import models as notification
+else:
+    notification = None
+
+
+def processAtAndSendNotice(request, desc):
+    validnames = processAt(desc)
+    ms = Member.objects.filter(username__in=validnames)        
+    notification.send(ms, "mentioned", {"from_user": request.user})
+
+
+def processAt(desc):    
+    peop = re.findall(r'@.+?[\s]', desc)    
+    #checkk validity of the names
+    peop = [p.rstrip(' ').lstrip('@') for p in peop]
+    validnames = [p  for p in peop if User.objects.filter(username=p).exists()]
+    return validnames
 

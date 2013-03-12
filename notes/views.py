@@ -544,7 +544,8 @@ from notification.models import Notice
 def get_notices(request):
     if request.user.is_anonymous():
         return HttpResponse(simplejson.dumps([]), "application/json")
-    notice_url_dict={'postman_message':'/messages/', 'postman_reply':'/messages/', 'comment_receive':'/social/'+request.user.username+'/commentsfor/'}
+    notice_url_dict={'postman_message':'/messages/', 'postman_reply':'/messages/', 'comment_receive':'/social/'+request.user.username+'/commentsfor/',
+                     'mentioned':'/social/'+request.user.username+'/mentioned/'}
     notices = Notice.objects.filter(recipient=request.user, unseen=True)    
     #TODO:get count of each type of notice
     ns = [(n.notice_type.label, n.notice_type.display, notice_url_dict.get(n.notice_type.label)) for n in notices]    
@@ -1986,7 +1987,9 @@ def add_note(request, username, bookname):
     
     if not tags or (len(tags) == 1 and tags[0] == u''):
         tags = None
-    n = N(desc=request.GET.get('desc'))  
+    desc = request.GET.get('desc')
+    
+    n = N(desc=desc)  
     n.vote = request.GET.get('vote', 0)
     private = request.GET.get('private', False)
     if private == 'true':
@@ -1999,7 +2002,9 @@ def add_note(request, username, bookname):
     n.save()
     #messages.success(request, "Note is successfully added!") #TODO    
     
-    
+    if '@' in desc:
+        notebook.notes.util.processAtAndSendNotice(request, desc)
+        
     #'init_date':n.init_date
     return  HttpResponse(simplejson.dumps({'note_id':n.id, 'private':n.private, 'tags':n.get_tags(),'display_tags':n.display_tags(),
                                            'title':n.title,'desc':n.desc, 'vote':n.vote, 'init_date':n.init_date.strftime("%Y-%m-%d %H:%M"),
@@ -2007,6 +2012,19 @@ def add_note(request, username, bookname):
 
     #return HttpResponseRedirect(__get_pre_url(request))    
     
+
+
+#===============================================================================
+# def send_at_notice(name, bookname, note_id):
+#    if notification: 
+#        
+#        notification.send([name], "mentioned", {"from_user": request.user})
+#===============================================================================
+ 
+                       
+    
+
+
 
 #TODO: other better ways of implementation
 #TODO: use HttpRequest.META['HTTP_REFERER'] such as return request.META.get('HTTP_REFERER','/')
