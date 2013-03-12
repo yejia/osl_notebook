@@ -145,7 +145,7 @@ class ProfileForm(ModelForm):
                        
 
 
-
+#TODO:move the login and registration part into a separate module, better to be independent and reusable
 
 @csrf_protect
 @never_cache
@@ -252,8 +252,8 @@ def login_user(request):
 
 from notebook.newuser import create_member, create_db
 #So far, this is to let existing users to register others
-#just me for the time being TODO:
-@user_passes_test(lambda u: u.username=='leon')
+#TODO:allow a teacher or a school to register their students
+@user_passes_test(lambda u: u.is_staff)
 @login_required
 def register_user(request): 
     if request.method == 'POST':  
