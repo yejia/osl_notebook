@@ -85,7 +85,7 @@ $(document).ready(function(){
 
 <div class="addnote" style="margin-left:15px;margin-top:15px;">
 
-<form action="" method="post" enctype="multipart/form-data" id="addNoteForm"> <!--TODO:get ok? it still send an extra request to the server-->
+<form action="" method="post" enctype="multipart/form-data" id="addNoteForm">{% csrf_token %} <!--TODO:get ok? it still send an extra request to the server-->
 	<input type="submit" value="{% trans "Submit" %}"/>&nbsp;&nbsp;<input type="submit" name="btnC" value="{% trans "Cancel" %}" onclick="window.close();"><br/><br/>
     <p>
     {{addNoteForm.url.label_tag}}:  {{url}}
