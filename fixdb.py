@@ -27,8 +27,10 @@ from notebook.social.models import Social_Frame, Social_Snippet, Social_Tag, Soc
 from notebook.notes.models import Tag, Note
 
 from django.contrib.auth.models import User
+from django.db.utils import ConnectionDoesNotExist
 
-
+import datetime
+from datetime import date
 
 
 
@@ -202,6 +204,18 @@ def  check_frames(username):
        
 
 
+def sync_last_ndays(username, ndays):
+    N = getNote(username, 'notebook') 
+    now = date.today()
+    ndays_ago = now - datetime.timedelta(days=ndays)    
+    note_list = N.objects.filter(init_date__gte=ndays_ago.strftime('%Y-%m-%d'),  init_date__lte=now.strftime('%Y-%m-%d 23:59:59'))
+    print 'Sync '+str(len(note_list))+'notes...'
+    for n in note_list:        
+        n.save()
+    print 'Sync finished for this user!'
+
+
+
 #notes from personal notebook deleted(or privated) before implemenation of "withdrawn from social notebook if 
 #deleted or made private from personal" are still in social notebook (for example, those with private=True, deleted=False) 
 #should be removed from db by the following script (although they cannot be viewed in social notebook now)   TODO:privacy
@@ -240,5 +254,22 @@ if __name__ == "__main__":
             fix_table('ALTER TABLE notes_frame_notes ADD COLUMN _order integer;')
         if command=='show_out_of_sync':
              show_out_of_sync(username)
+        if command=='sync_last_ndays':
+             ndays = int(sys.argv[3])
+             if username=='allusers':
+                 print "Sync the last "+str(ndays)+" for all users..."
+                 users = [u.username for u in User.objects.all()]
+                 for u in users:
+                     try:
+                         print 'Sync for user:', u
+                         sync_last_ndays(u, ndays)
+                     except ConnectionDoesNotExist, e:
+                         print e
+                     
+             else:
+                 print "Sync the last "+str(ndays)+" for user "+username+'...'
+                 sync_last_ndays(username, ndays)
+           
+
           
          
