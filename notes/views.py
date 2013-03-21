@@ -545,7 +545,7 @@ def get_notices(request):
     if request.user.is_anonymous():
         return HttpResponse(simplejson.dumps([]), "application/json")
     notice_url_dict={'postman_message':'/messages/', 'postman_reply':'/messages/', 'comment_receive':'/social/'+request.user.username+'/commentsfor/',
-                     'mentioned':'/social/'+request.user.username+'/mentioned/'}
+                     'mentioned':'/social/'+request.user.username+'/mentioned/', 'friends_add':'/'+request.user.username+'/friends/'}
     notices = Notice.objects.filter(recipient=request.user, unseen=True)    
     #TODO:get count of each type of notice
     ns = [(n.notice_type.label, n.notice_type.display, notice_url_dict.get(n.notice_type.label)) for n in notices]    

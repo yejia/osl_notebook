@@ -21,6 +21,7 @@
                 <td class="notice_message">
                             <a href="{% if notice.notice_type.label == 'comment_receive' %}/social/{{user}}/commentsfor/"{% endif %}
                             {% if notice.notice_type.label == 'mentioned' %}/social/{{user}}/mentioned/"{% endif %}
+                            {% if notice.notice_type.label == 'friends_add' %}/{{user}}/friends/"{% endif %} 
                             {% if notice.notice_type.label == 'postman_message' or  notice.notice_type.label == 'postman_reply' %}/social/{{user}}/messages/"{% endif %}>{{ notice.message|safe }}</a>
                 
                 </td>

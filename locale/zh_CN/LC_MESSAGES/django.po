@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-12 11:18+0800\n"
+"POT-Creation-Date: 2013-03-21 09:48+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,31 +18,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: email_digest.py:84 email_digest.py:85 notes/views.py:2534
-#: notes/views.py:2545
+#: email_digest.py:84 email_digest.py:85 notes/views.py:2511
+#: notes/views.py:2522
 msgid "Sharing snippet:"
 msgstr "分享便条："
 
-#: email_digest.py:87 email_digest.py:88 notes/views.py:2536
-#: notes/views.py:2547
+#: email_digest.py:87 email_digest.py:88 notes/views.py:2513
+#: notes/views.py:2524
 msgid "Sharing bookmark:"
 msgstr "分享网址："
 
-#: email_digest.py:90 email_digest.py:91 notes/views.py:2538
-#: notes/views.py:2549
+#: email_digest.py:90 email_digest.py:91 notes/views.py:2515
+#: notes/views.py:2526
 msgid "Sharing scrap:"
 msgstr "分享网摘："
 
-#: email_digest.py:93 email_digest.py:94 notes/views.py:2540
-#: notes/views.py:2551
+#: email_digest.py:93 email_digest.py:94 notes/views.py:2517
+#: notes/views.py:2528
 msgid "Sharing knowledge package:"
 msgstr "分享知识包："
 
-#: email_digest.py:109 notes/views.py:2553
+#: email_digest.py:109 notes/views.py:2530
 msgid "Original Note:"
 msgstr "原笔记："
 
-#: email_digest.py:114 email_digest.py:116 notes/views.py:2564
+#: email_digest.py:114 email_digest.py:116 notes/views.py:2541
 msgid "from"
 msgstr "来自"
 
@@ -91,37 +91,45 @@ msgstr "今天新添加的笔记！"
 msgid ":this week's new notes!"
 msgstr "本周新添加的笔记！"
 
-#: manage.py:32
+#: manage.py:25
 msgid "Invitation Received"
 msgstr "收到新的邀请"
 
-#: manage.py:32
+#: manage.py:25
 msgid "you have received an invitation"
 msgstr "你收到了一份邀请"
 
-#: manage.py:33
+#: manage.py:26
 msgid "Acceptance Received"
 msgstr "邀请被接受了"
 
-#: manage.py:33
+#: manage.py:26
 msgid "an invitation you sent has been accepted"
 msgstr "你发出的邀请被接受了"
 
-#: manage.py:34
+#: manage.py:27
 msgid "Comment Received"
 msgstr "收到新的评论"
 
-#: manage.py:34
+#: manage.py:27
 msgid "you have received a comment"
 msgstr "你收到了新的评论"
 
-#: manage.py:35
+#: manage.py:28
 msgid "Mentioned"
 msgstr "提到了你"
 
-#: manage.py:35
+#: manage.py:28
 msgid "You have been mentioned"
 msgstr "你被提到了"
+
+#: manage.py:30
+msgid "Friend Added"
+msgstr "添加了朋友"
+
+#: manage.py:30
+msgid "Someone added you as a friend"
+msgstr "有人添加了你做朋友"
 
 #: plan.py:40 plan.py:43 plan.py:101 plan.py:107 plan.py:135 plan.py:141
 #: plan.py:200 plan.py:208 plan.py:244 plan.py:251
@@ -470,11 +478,11 @@ msgstr "问题添加成功！"
 msgid "Project successfully added!"
 msgstr "项目添加成功！"
 
-#: notes/views.py:2131
+#: notes/views.py:2108
 msgid "A frame is successfully created!"
 msgstr "一个知识包成功生成了！"
 
-#: notes/views.py:2555
+#: notes/views.py:2532
 msgid "Forwarded Note:"
 msgstr "转发的笔记："
 
@@ -638,66 +646,66 @@ msgstr "管理员"
 msgid "Invitation Code"
 msgstr "邀请码"
 
-#: social/views.py:667
+#: social/views.py:679
 msgid "You are not an admin of this group, and thus cannot admin this group."
 msgstr "你不是这个小组的管理员，所以不能管理这个小组。"
 
-#: social/views.py:672
+#: social/views.py:684
 msgid "You have successfully removed the member from the group."
 msgstr "你已经成功的将该成员从这个小组移除。"
 
-#: social/views.py:708 social/views.py:740
+#: social/views.py:720 social/views.py:752
 msgid "No users are entered!"
 msgstr "没有输入任何用户名！"
 
-#: social/views.py:717
+#: social/views.py:729
 msgid "You are added to the group "
 msgstr "你被加入学习小组"
 
-#: social/views.py:718 social/views.py:751
+#: social/views.py:730 social/views.py:763
 msgid "You can visit this group at "
 msgstr "这是该学习小组的网址 "
 
-#: social/views.py:719
+#: social/views.py:731
 msgid ""
 "If you do not want to join this group, you can remove yourself from this "
 "group on your groups page. "
 msgstr "如果你想退出该学习小组，你可以在你的学习小组页面完成此操作。"
 
-#: social/views.py:722
+#: social/views.py:734
 msgid "You are added to group "
 msgstr "你被加入学习小组"
 
-#: social/views.py:726
+#: social/views.py:738
 msgid "You have successfully added the user to the group!"
 msgstr "你已经成功的将该成员添加到这个小组。"
 
-#: social/views.py:750
+#: social/views.py:762
 msgid "You are invited to join the group "
 msgstr "你被邀请参加学习小组"
 
-#: social/views.py:752
+#: social/views.py:764
 msgid ""
 "If you want to join this group, you can click on the \"join the group\" "
 "button."
 msgstr "如果你想加入该学习小组，你可以点击\"加入小组\"按钮。"
 
-#: social/views.py:753
+#: social/views.py:765
 msgid ""
 "After joining, if you want to remove yourself from this group, you can do "
 "that in your groups page."
 msgstr ""
 "加入学习小组后，如果你想退出该学习小组，你可以在你的学习小组页面完成此操作。"
 
-#: social/views.py:754
+#: social/views.py:766
 msgid "You are invited to group "
 msgstr "你被邀请参加学习小组"
 
-#: social/views.py:758
+#: social/views.py:770
 msgid "You have successfully sent the group invitation!"
 msgstr "你已经成功的发出了小组邀请！"
 
-#: social/views.py:1178
+#: social/views.py:1194
 msgid ""
 "Your suggestion is successfully sent to the sys admin! Thank you for your "
 "valuable suggestion!"
@@ -1491,7 +1499,7 @@ msgid ""
 msgstr ""
 "笔记本网站也很适合一个团队内部的项目合作。您的团队可以用笔记本来在项目中学习"
 "和探索。笔记本也很适合一个公司内部的知识分享。使用笔记本做知识分享，知识可以"
-"在您的公司里更加连续性的到处流动着，比传统的以文本为中心的知识管理系统能更好"
+"在您的公司里更加连续性的到处流动着，比传统的以文件为中心的知识管理系统能更好"
 "的管理贵公司的知识和智慧。如果您希望为您的公司或者团队建立一个站点，请联系："
 
 #: templates/doc/about.html:30
@@ -3191,7 +3199,7 @@ msgstr "私信"
 msgid "Date of the Notice"
 msgstr "通知日期"
 
-#: templates/notification/notices.html:27
+#: templates/notification/notices.html:28
 msgid "ago"
 msgstr "以前"
 
@@ -3676,21 +3684,21 @@ msgstr "你的"
 
 #: templates/social/commentsfor.html:36
 #: templates/social/mentioned_in_comment.html:29
+#: templates/social/mentioned_in_comment.html:30
 msgid "'s"
 msgstr "的"
 
 #: templates/social/commentsfor.html:36
 #: templates/social/mentioned_in_comment.html:29
+#: templates/social/mentioned_in_comment.html:30
 msgid " note"
 msgstr "笔记"
 
 #: templates/social/commentsfor.html:37
-#: templates/social/mentioned_in_comment.html:30
 msgid "you"
 msgstr "你"
 
 #: templates/social/commentsfor.html:37
-#: templates/social/mentioned_in_comment.html:30
 msgid " commented note"
 msgstr "评论过的笔记"
 

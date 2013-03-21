@@ -26,6 +26,8 @@ if "notification" in settings.INSTALLED_APPS:
         notification.create_notice_type("friends_accept", _("Acceptance Received"), _("an invitation you sent has been accepted"))
         notification.create_notice_type("comment_receive", _("Comment Received"), _("you have received a comment"))
         notification.create_notice_type("mentioned", _("Mentioned"), _("You have been mentioned"))
+        #so far, people can add friends without being approved
+        notification.create_notice_type("friends_add", _("Friend Added"), _("Someone added you as a friend")) 
         
 
     signals.post_syncdb.connect(create_notice_types, sender=notification)

@@ -65,6 +65,12 @@ ST = Social_Tag
 
 
 
+import notebook.settings as settings
+if "notification" in settings.INSTALLED_APPS:
+    from notification import models as notification
+else:
+    notification = None
+
 
 class AddGroupForm(ModelForm):
     error_css_class = 'error'
@@ -184,6 +190,9 @@ def friends(request, username):
     friends = profile_member.get_friends()  
     sorted_members = [[m, m.get_public_notes_count()] for m in friends] 
     sorted_members.sort(key=lambda r:r[1],reverse = True)  
+    if (not request.user.is_anonymous()) and request.user.username == username:
+        Notice.objects.filter(notice_type__label='friends_add', recipient=request.user).update(unseen=False)    
+   
     return render_to_response('social/friends.html', { 'profile_username':username, 'friends':sorted_members}, context_instance=RequestContext(request, {}))
 
 
@@ -613,6 +622,8 @@ def add_friend(request, username):
     #So far, make it confirmed automcatically. TODO:
     f.comfirmed = True
     f.save()
+    notification.send([m2], "friends_add", {"from_user": request.user}) 
+    print 'adding friend notification sent'
     return HttpResponseRedirect('/social/'+username+'/')  
     
 
@@ -1016,11 +1027,6 @@ def take(request):
     return  HttpResponse(created, mimetype="text/plain")   
 
 
-import notebook.settings as settings
-if "notification" in settings.INSTALLED_APPS:
-    from notification import models as notification
-else:
-    notification = None
 
 
 
