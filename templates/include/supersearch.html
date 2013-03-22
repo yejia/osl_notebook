@@ -19,7 +19,7 @@
 {% endif %}" /> 
 		
         <div>
-        {{current_tag}}
+        <span id="search_tag">{{current_tag}}</span>{% if  current_tag %}<span title="{% trans "remove this tag" %}" class="inline_delete" id="search_tag_delete">&nbsp;&nbsp;&nbsp;</span>{% endif %}
         <select id="note_type_drop_down"  name="note_type_select">
         {% if bookname == 'snippetbook' %}
             <option value="Snippets" selected="selected">{% trans "Snippets" %}</option>
@@ -54,13 +54,8 @@
 <a href="javascript:alert('Not implemented yet!');" class="NotImplementedYet">{% trans "Or Search on comments"  %}</a>
 -->
 <script type="text/javascript"> 
-$(document).ready(function(){	   
 
-      $(":input#note_type_drop_down").change(function(){                      
-                 current_select = $(this).val();
-                // alert('value is:'+$('option[value='+current_select+']').html());
-                 hint = '{% trans "Search " %}{%if current_tag%}{% trans "in tag " %}{{current_tag}}{% trans " of " %}{%endif%}'+$('option[value='+current_select+']').html();
-                  $(":input#searchbar").attr('placeholder', hint);
+function getBooknameFromSelect(current_select){
                   if (current_select == 'Snippets')
                         bookname = "snippetbook";
                   if (current_select == 'Bookmarks')
@@ -70,9 +65,30 @@ $(document).ready(function(){
                   if (current_select == 'Frames')
                         bookname = "framebook";  
                   if (current_select == 'All')
-                        bookname = "notebook";        
+                        bookname = "notebook";   
+                  return bookname
+}
+
+$(document).ready(function(){	   
+
+      $(":input#note_type_drop_down").change(function(){                      
+                 current_select = $(this).val();
+                // alert('value is:'+$('option[value='+current_select+']').html());
+                 hint = '{% trans "Search " %}{%if current_tag%}{% trans "in tag " %}{{current_tag}}{% trans " of " %}{%endif%}'+$('option[value='+current_select+']').html();
+                  $(":input#searchbar").attr('placeholder', hint);
+                  bookname = getBooknameFromSelect(current_select);     
                   $('form#search').attr('action', '{{book_uri_prefix}}/'+bookname+'/notes/{%if current_tag%}tags/{{current_tag}}/{%endif%}');
                   
+        });
+        
+       $("span#search_tag_delete").click(function(){ // alert('search_tag delete clicked');
+                 $(this).parent().find("span#search_tag").text('');
+                 $(this).remove();                
+                 current_select = $(":input#note_type_drop_down").val();
+                 hint =  '{% trans "Search " %}'+$('option[value='+current_select+']').html();                 
+                 $(":input#searchbar").attr('placeholder', hint);
+                  bookname = getBooknameFromSelect(current_select);     
+                 $('form#search').attr('action', '{{book_uri_prefix}}/'+bookname+'/notes/');
         });
 
 

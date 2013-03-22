@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-21 09:48+0800\n"
+"POT-Creation-Date: 2013-03-22 08:29+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2583,17 +2583,22 @@ msgstr "摘录本"
 msgid "For new users"
 msgstr "新用户帮助"
 
-#: templates/include/supersearch.html:4 templates/include/supersearch.html:62
+#: templates/include/supersearch.html:4 templates/include/supersearch.html:77
+#: templates/include/supersearch.html:88
 msgid "Search "
 msgstr "搜索"
 
-#: templates/include/supersearch.html:4 templates/include/supersearch.html:62
+#: templates/include/supersearch.html:4 templates/include/supersearch.html:77
 msgid "in tag "
 msgstr "含标签"
 
-#: templates/include/supersearch.html:4 templates/include/supersearch.html:62
+#: templates/include/supersearch.html:4 templates/include/supersearch.html:77
 msgid " of "
 msgstr "的"
+
+#: templates/include/supersearch.html:22 templates/social/admin/group.html:98
+msgid "remove this tag"
+msgstr "去除标签"
 
 #: templates/include/notes/addNote.html:82
 msgid "This bookmark aready exists!"
@@ -3882,10 +3887,6 @@ msgstr "邀请成员"
 #: templates/social/admin/group.html:92
 msgid "Group Tags"
 msgstr "小组的标签"
-
-#: templates/social/admin/group.html:98
-msgid "remove this tag"
-msgstr "去除标签"
 
 #: templates/social/bookmarkbook/notes/notesdisplay.html:20
 #: templates/social/framebook/notes/notesdisplay.html:24
