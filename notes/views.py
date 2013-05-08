@@ -605,7 +605,7 @@ douban_consumer_secret = 'fdb75b2f20bff4a6'#'8e19a57b11ceb4f4' #'5d20de5ba479a33
 
 
 
-#TODO: verify if notes of private tags are excluded
+
 def get_public_notes(note_list):    
     note_list = note_list.filter(private=False)
     n_list = remove_private_tag_notes(note_list)
