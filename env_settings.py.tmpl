@@ -1,0 +1,64 @@
+#setting for the local env
+DEBUG = True
+TEMPLATE_DEBUG = True
+
+DB_ROOT = "path to your db root dirctory"
+
+
+db_user_default = 'django'
+db_name_default = 'notesdb'
+
+
+DATABASES = {
+    'default': {
+        'NAME': db_name_default,
+        'ENGINE': 'django.db.backends.postgresql_psycopg2' ,
+        'USER': db_user_default,
+        'PASSWORD': ''
+    },
+    
+ }   
+
+
+
+# Absolute path to the directory that holds media.
+# Example: "/home/media/media.lawrence.com/"
+MEDIA_ROOT = 'yourpath/notebook/media/'
+
+TEMPLATE_DIRS = (
+    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+    '/yourpath/notebook/templates/'
+)
+
+#memcached config
+#CACHES = {
+#    'default': {
+#        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+#        'LOCATION': 'unix:/yourpath/memcached.sock', #change to your path
+#    }
+#}
+
+
+# Make this unique, and don't share it with anybody.
+SECRET_KEY = 'yoursecretekey'
+
+
+SERVER_EMAIL = 'root@localhost'
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'root@localhost'
+
+WEBAPP_ROOT = "yourwebapproot"
+
+HOME_PATH = 'yourhomepath'
+
+command_to_restart_serve = 'apache2/bin/restart'
+
+path_to_store_settings = 'yourpath/notebook/settings/'
+
+
+
+
+
+
