@@ -1,6 +1,12 @@
-#setting for the local env
+#setting for the local env. This is only a tempate. You should use this to generate a env_settings.py file yourself
+#filling in your local env infos
 DEBUG = True
 TEMPLATE_DEBUG = True
+
+
+ADMINS = (
+     ('username', 'emailaddr'),
+)
 
 DB_ROOT = "path to your db root dirctory"
 
@@ -44,6 +50,10 @@ TEMPLATE_DIRS = (
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'yoursecretekey'
 
+EMAIL_HOST =  'yourmailhost'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'yourusername'
+EMAIL_HOST_PASSWORD = 'yourpasswd'
 
 SERVER_EMAIL = 'root@localhost'
 EMAIL_USE_TLS = True
