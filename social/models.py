@@ -745,7 +745,7 @@ class Group(models.Model):
         
      
     def get_tag_names(self):
-        return [tag.name for tag in self.tags.all()]     
+        return [tag.name for tag in self.tags.all().order_by('name')]     
 
     def display_tags(self):      
         return ','.join(self.get_tag_names())

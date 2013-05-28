@@ -8,7 +8,14 @@ ADMINS = (
      ('username', 'emailaddr'),
 )
 
-DB_ROOT = "path to your db root dirctory"
+#here it bypass django's test framework, and pick the test databases for nosetests 
+import os
+test_mode = os.environ.get("TEST_MODE") 
+if test_mode and test_mode == "unittest":
+    DB_ROOT = "/yourdbpath/unittest/"
+else:            
+    DB_ROOT = "/yourdbpath/"
+
 
 
 db_user_default = 'django'
@@ -20,6 +27,13 @@ DATABASES = {
         'NAME': db_name_default,
         'ENGINE': 'django.db.backends.postgresql_psycopg2' ,
         'USER': db_user_default,
+        'PASSWORD': ''
+    },
+    
+    'unittest': {
+        'NAME': DB_ROOT+'/notesdb_unittest',
+        'ENGINE': 'django.db.backends.sqlite3' ,
+        'USER': '',
         'PASSWORD': ''
     },
     
