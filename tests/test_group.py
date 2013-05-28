@@ -8,7 +8,7 @@ from nose.tools import nottest, istest, raises, eq_, ok_
 from notebook.social.models import Group as G, Social_Tag as ST, Member
 from notebook.notes.models import Tag as T, getW, getT 
 
-from notebook.data import *
+from notebook.data.data import create_group
 
 
 
@@ -19,41 +19,16 @@ class TestPrivateGroup(unittest.TestCase):
 
 class TestGroup(unittest.TestCase):
     def setUp(self):
-        print 'test_mode:', os.environ['TEST_MODE']
-        
+        self.tearDown()
+        print 'test_mode:', os.environ['TEST_MODE']        
         #create a unittest member first
+        creator_name = 'unittest'
         m, created = Member.objects.get_or_create(username='unittest')
-        g, created = G.objects.get_or_create(name = 'test_maniacs')        
-        g.private = False
-        g.creator = m
-        g.save()
+        groupname = 'test_maniacs'          
         tag_names = ['testing', 'framework', 'philosophy']
         tag_ids = [ST.objects.get_or_create(name=tag_name)[0].id for tag_name in tag_names]
-        g.tags = tag_ids
-        gtn = "sharinggroup:"+g.name 
-        st, created = ST.objects.get_or_create(name=gtn, private=g.private)        
-        g.tags.add(st)
-        
-    #push_group_tags_back
-        username = 'unittest'
-        T = getT(username)
-        
-        sts = g.tags.all()
-        W = getW(username)
-        w1, created  = W.objects.get_or_create(name='snippetbook')    
-        w2, created  = W.objects.get_or_create(name='bookmarkbook')   
-        w3, created  = W.objects.get_or_create(name='scrapbook')
-        w, created  = W.objects.get_or_create(name="sharinggroup:"+g.name)
-        
-        for st in sts:
-            t, created = T.objects.get_or_create(name=st.name)
-            if created:
-                t.private = st.private
-            w1.tags.add(t) 
-            w2.tags.add(t) 
-            w3.tags.add(t) 
-            w.tags.add(t)
-            
+        create_group(groupname, tag_ids, creator_name, private=False)
+
             
     def testCreateGroup(self):  
         g = G.objects.get(name='test_maniacs')
@@ -70,8 +45,7 @@ class TestGroup(unittest.TestCase):
         w3 = W.objects.get(name='scrapbook') 
         eq_(w3.name, 'scrapbook')
         w = W.objects.get(name="sharinggroup:"+g.name) 
-        eq_(w.name, "sharinggroup:"+g.name)
-        
+        eq_(w.name, "sharinggroup:"+g.name)        
         for st in ['testing', 'framework', 'philosophy']:
             t = T.objects.get(name=st)
             eq_(t.name, st)
