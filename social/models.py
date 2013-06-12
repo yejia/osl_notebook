@@ -710,7 +710,11 @@ class Social_Area(models.Model):
 class Group(models.Model):
     name = models.CharField(blank=False,max_length=50, verbose_name=ugettext_lazy('Name'))
     desc = models.TextField(blank=True,max_length=500, verbose_name=ugettext_lazy('Description'))
+    #these are the tags that really belong to the group, having these tags will surely be pushed to
+    #this group 
     tags = models.ManyToManyField(Social_Tag)
+    #other tags that can be related, but don't decide whether the notes belong to a group
+    #extra_tags = models.ManyToManyField(Social_Tag)
     init_date = models.DateTimeField(verbose_name=ugettext_lazy('date created'), auto_now_add=True)
     private = models.BooleanField(blank=True,verbose_name=ugettext_lazy('Private'))     
     members = models.ManyToManyField(Member, related_name='members', verbose_name=ugettext_lazy('Members'))

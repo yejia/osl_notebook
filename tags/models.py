@@ -15,6 +15,14 @@ class Tag(models.Model):
     private = models.BooleanField(default=False)
     desc =  models.TextField(blank=True, max_length=200)
     #deleted = models.BooleanField(default=False)
+    #whether this tag belong to a group that this member is in    
+    #group_tag = models.BooleanField(default=False) 
+
+
+
+# class Group_Tag(models.Model):
+#     tag = models.ForeignKey(Tag)
+    
     
     
     
@@ -251,3 +259,5 @@ class Frame_Tags(models.Model):
     def __unicode__(self):
         return self.frame.name + '-' + self.tag.name         
     
+
+

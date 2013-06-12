@@ -32,6 +32,7 @@ from notebook.notes.views import User, getT, getlogger, getFolder, get_public_no
 from notebook.notes.views import getSearchResults,  __getQStr, __get_view_theme, Pl, ALL_VAR, __get_lang
 from notebook.notes.util import *
 from notebook.notes.constants import *
+from data.data import *
 
 
 
@@ -285,8 +286,8 @@ def my_groups(request, username):
         #    log.error("No tags are entered when generating a group!") 
         #    return HttpResponseRedirect('/'+username+'/groups/')
         
-        #So far, only tags already existing in social tags can be used. Otherwise, there will be an error TODO:
-        tag_ids = [ST.objects.get(name=tag_name).id for tag_name in tag_names]
+        #If tag doesn't exist yet, it will be created.
+        tag_ids = [ST.objects.get_or_create(name=tag_name)[0].id for tag_name in tag_names]
          
         post.setlist('tags', tag_ids) 
         #TODO: check if the group already exists
@@ -317,7 +318,7 @@ def my_groups(request, username):
             #T = getT(username=gtn)
             #T.objects.get_or_create(name=gtn, private=g.private)
             
-            push_group_tags_back(request, g.name)
+            push_group_tags_back(g, request.user.username)
             #TODO: add the creator to the admin?
     
                   
@@ -365,7 +366,7 @@ def groups_notes(request, username, bookname):
 #TODO: so far automatically push all back. In the future, after for user confirmation
 #push group tags back to the user's space, also create a working set with the group name
 @login_required
-def push_group_tags_back(request, groupname):
+def push_group_tags_back_to_delete(request, groupname):
     username = request.user.username
     T = getT(username)
     g = Group.objects.get(name=groupname)

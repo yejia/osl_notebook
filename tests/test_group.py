@@ -29,8 +29,10 @@ class TestGroup(unittest.TestCase):
         m, created = Member.objects.get_or_create(username=self.name)
         groupname = 'test_maniacs'          
         tag_names = ['testing', 'framework', 'philosophy']
-        tag_ids = [ST.objects.get_or_create(name=tag_name)[0].id for tag_name in tag_names]
-        self.group = create_group(groupname, tag_ids, creator_name, private=False)
+        #tag_ids = [ST.objects.get_or_create(name=tag_name)[0].id for tag_name in tag_names]
+        self.group = create_group(groupname, tag_names, creator_name, private=False)
+
+        create_group('my_private_group', ['my_private_group'], 'unittest', private=True)
 
             
     def testCreateGroup(self):  
@@ -53,7 +55,34 @@ class TestGroup(unittest.TestCase):
             eq_(t.name, st)
             eq_(t.private, False)
             eq_(t.name in w1.display_tags().split(','), True)
-            
+
+
+    def testCreatePrivateGroup(self):          
+        g = G.objects.get(name='my_private_group')
+        eq_(g.name, 'my_private_group')
+        eq_(g.private, True)
+        eq_(g.get_tag_names(), ['my_private_group', 'sharinggroup:'+g.name])        
+        T = getT('unittest')
+        W = getW('unittest')
+        w1 = W.objects.get(name='snippetbook') 
+        eq_(w1.name, 'snippetbook')
+        w2 = W.objects.get(name='bookmarkbook') 
+        eq_(w2.name, 'bookmarkbook')
+        w3 = W.objects.get(name='scrapbook') 
+        eq_(w3.name, 'scrapbook')
+        w = W.objects.get(name="sharinggroup:"+g.name) 
+        eq_(w.name, "sharinggroup:"+g.name)        
+        for st in ['my_private_group', 'sharinggroup:'+g.name]:
+            t = T.objects.get(name=st)
+            eq_(t.name, st)
+            eq_(t.private, True)
+            eq_(t.name in w1.display_tags().split(','), True)        
+    
+
+    def testPostToPrivateGroup(self):  
+        pass
+
+
     
     def testUpdateGroup(self):
         g1 = G.objects.get(name='test_maniacs')

@@ -580,10 +580,10 @@ class Note(models.Model):
 #                    f.notes.remove(self)
 #                    f.save()
 #===============================================================================
-  
+        sharingtoGroup = self.tags.filter(name__startswith="sharinggroup:").exists()
         #TODO: consider moving this into various subclasses
         #this checks if the note is private or delete
-        if not (self.is_private() or self.deleted) or self.tags.filter(name__startswith="sharinggroup:"):
+        if not (self.is_private() or self.deleted) or sharingtoGroup:
             if hasattr(self, 'snippet'):
                 sn, created = Social_Snippet.objects.get_or_create(owner=owner.member, owner_note_id=self.id) 
             if hasattr(self, 'bookmark'):
@@ -596,7 +596,7 @@ class Note(models.Model):
         
         #if the note has sharinggroup: prefixed tag, then it still need to be in the social space
         #if not created and (self.private or self.deleted) and not self.tags.filter(name__startswith="sharinggroup:").exists():   
-        if (self.is_private() or self.deleted) and not self.tags.filter(name__startswith="sharinggroup:").exists():  
+        if (self.is_private() or self.deleted) and not sharingtoGroup:  
             #if the note is already in social note, and the note in the original db is changed to priviate or delete
             #   then needs to delete it from the social note
             #TODO: still, deleting the child won't delete the parent. Will this be an issue? So at least disable mixed.
@@ -661,7 +661,7 @@ class Note(models.Model):
             sn.last_modi_date = self.last_modi_date
             sn.init_date = self.init_date
             sn.vote = self.vote
-            sn.private = self.private
+            sn.private = self.is_private()
             #attachment
             sn.tags.clear()
             for st in sts:
@@ -1169,8 +1169,6 @@ class Note_Translation(models.Model):
     title = models.CharField(verbose_name=ugettext_lazy('Title'), blank=True,max_length=2000, help_text=_("The size of the title is limited to 2000 characaters."))
     desc =  models.TextField(verbose_name=ugettext_lazy('Description'), max_length=2000, blank=True,  help_text=_("The size of the desc is limited to 2000 characaters."))
     
-
-
 
        
 

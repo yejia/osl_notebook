@@ -4,10 +4,10 @@ from notebook.social.models import Group as G, Social_Tag as ST, Member
 from notebook.notes.models import Tag as T, getW, getT
 
 
-def create_group(name, tag_ids, creator_name, desc='', private=False):
+def create_group(name, tag_names, creator_name, desc='', private=False):
     if not name:
         raise Exception('No group name given!')
-    if not tag_ids:
+    if not tag_names:
         raise Exception('No tags given!')
     if not creator_name:
         raise Exception('No creator given!')
@@ -18,6 +18,8 @@ def create_group(name, tag_ids, creator_name, desc='', private=False):
     g, created = G.objects.get_or_create(name = name, creator = creator) 
     if not created:
         raise Exception('Group with that name already exist for this user!') 
+    #If tag doesn't exist yet, it will be created.
+    tag_ids = [ST.objects.get_or_create(name=tag_name)[0].id for tag_name in tag_names]
     g.private = private
     g.desc = desc
     g.creator = creator
@@ -42,6 +44,13 @@ def push_group_tags_back(g, username):
         t, created = T.objects.get_or_create(name=st.name)
         if created:
             t.private = st.private
+        #It is a little messy here. The logic here is that for private
+        #group, the tags it pushes back to the use space should be private 
+        #as well. Then when user save their notes with that tag, the social
+        #note will be private.
+        if g.private:
+            t.private = True   
+        t.save()     
         w1.tags.add(t) 
         w2.tags.add(t) 
         w3.tags.add(t) 
