@@ -2,6 +2,12 @@ body{/*These makes the font sharper*/
 font-family: Arial, sans-serif; 
 background-color:#FFFFFF;
 color:#000000;
+font-size: 12px;
+}
+
+td, th {
+  font-family:Arial, sans-serif;
+  font-size:12px;
 }
 
 a:link, a:visited {
@@ -17,7 +23,7 @@ border-bottom:thin solid;
 
 span.item{
 margin-right:10px;
-}
+}	
 
 span.sites_right_header{
 float:right;

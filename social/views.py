@@ -318,6 +318,7 @@ def my_groups(request, username):
             #T.objects.get_or_create(name=gtn, private=g.private)
             
             push_group_tags_back(request, g.name)
+            #TODO: add the creator to the admin?
     
                   
     #print 'tags:', tags
@@ -722,6 +723,7 @@ def group_add_users(request, groupid):
     for uname in user_names:
         member = Member.objects.get(username=uname)        
         group.members.add(member)  
+        #TODO:push_group_tags_back
         if member.default_lang:
             activate(member.default_lang)
         url = urlquote('www.91biji.com/groups/' + groupid + '/')
