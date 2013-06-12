@@ -32,7 +32,7 @@ from notebook.notes.views import User, getT, getlogger, getFolder, get_public_no
 from notebook.notes.views import getSearchResults,  __getQStr, __get_view_theme, Pl, ALL_VAR, __get_lang
 from notebook.notes.util import *
 from notebook.notes.constants import *
-from data.data import *
+from notebook.notebook_data.data import *
 
 
 

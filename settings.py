@@ -108,6 +108,7 @@ INSTALLED_APPS = (
     'notebook.tags',
     'notebook.areas',
     'notebook.salons',
+    'notebook.notebook_data',
 
     'django.contrib.databrowse',
     'django.contrib.messages',
