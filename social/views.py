@@ -852,7 +852,7 @@ def group_remove_tag(request, groupid):
     
 
 
-@login_required
+
 def group(request, groupid, bookname):
     
     gs = G.objects.filter(members__username=request.user.username)  
