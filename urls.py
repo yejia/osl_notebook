@@ -255,7 +255,7 @@ urlpatterns = patterns('',
     (r'^mobile/$','notebook.notes.views.mobile'),
     (r'^results/$','notebook.notes.views.results'),
     (r'^changeYourBroswer/$','notebook.notes.views.change_your_broswer'),
-    (r'^whoami$','notebook.notes.views.whoami'),
+    (r'^whoami/$','notebook.notes.views.whoami'),
 
 
     (r'^test','notebook.notes.views.test'),
