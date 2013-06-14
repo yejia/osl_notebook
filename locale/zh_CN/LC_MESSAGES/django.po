@@ -1497,10 +1497,10 @@ msgid ""
 "systems. If you are intereted in setting up a site for your team or your "
 "company, please contact:"
 msgstr ""
-"笔记本网站也很适合一个团队内部的项目合作。您的团队可以用笔记本来在项目中学习"
-"和探索。笔记本也很适合一个公司内部的知识分享。使用笔记本做知识分享，知识可以"
-"在您的公司里更加连续性的到处流动着，比传统的以文件为中心的知识管理系统能更好"
-"的管理贵公司的知识和智慧。如果您希望为您的公司或者团队建立一个站点，请联系："
+"笔记本网站也很适合一个团队内部的项目合作或者一个公司内部的知识分享。如何进行有效的知识分享是每一个公司面临的巨大问题。"
+"相比传统的以文件为中心的知识管理系统，本网站以碎片化的方式鼓励组织内部更快更方便的分享，让知识真正流动起来，并通过逐步的整理形成结构化规模化的知识。"
+"当知识能够沉淀，学习就可以自然的发生。除了随时随地的自然发生的学习，正式的主题分享或培训也更容易卓有成效的进行。"
+"如果您希望为您的公司或者团队建立一个站点，请联系："
 
 #: templates/doc/about.html:30 templates/doc/whoami.html:26
 msgid "sys @ 3exps.org"
@@ -1937,7 +1937,7 @@ msgstr "知识在这里沉淀！"
 
 #: templates/doc/whoami.html:21
 msgid "Here learning happens naturally!"
-msgstr "在这里学习自然的发生！"
+msgstr "学习在这里自然的发生！"
 
 #: templates/folders/index.html:11
 msgid "Create a new folder"
