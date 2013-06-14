@@ -3218,7 +3218,8 @@ def faq(request):
 def change_your_broswer(request):
     return render_to_response('doc/change_your_browser.html', context_instance=RequestContext(request))
      
-
+def whoami(request):
+    return render_to_response('doc/whoami.html', context_instance=RequestContext(request))
 
 allbindingsites = ['sina', 'douban', 'tencent', 'facebook', 'twitter']
 

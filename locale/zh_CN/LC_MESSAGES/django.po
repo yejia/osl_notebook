@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-15 06:15+0800\n"
+"POT-Creation-Date: 2013-06-15 06:49+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1486,7 +1486,7 @@ msgstr "官方博客"
 msgid "One page introduction"
 msgstr "一页纸介绍"
 
-#: templates/doc/about.html:29
+#: templates/doc/about.html:29 templates/doc/whoami.html:25
 msgid ""
 "Notebook is also well suited for a team to cooperate on a project. Your team "
 "can use it to coordinate team efforts in learning and exploring a new "
@@ -1502,7 +1502,7 @@ msgstr ""
 "在您的公司里更加连续性的到处流动着，比传统的以文件为中心的知识管理系统能更好"
 "的管理贵公司的知识和智慧。如果您希望为您的公司或者团队建立一个站点，请联系："
 
-#: templates/doc/about.html:30
+#: templates/doc/about.html:30 templates/doc/whoami.html:26
 msgid "sys @ 3exps.org"
 msgstr "sys @ 91biji.com"
 
@@ -1901,7 +1901,7 @@ msgstr ""
 "接。你可以将该页面存为你桌面/主屏幕上的快捷方式，以后你只要点开就可以记录笔记"
 "了。或者你可以将其存为你浏览器的首页。"
 
-#: templates/doc/results.html:7 templates/registration/login.html:47
+#: templates/doc/results.html:7
 msgid "results"
 msgstr "效果"
 
@@ -1920,6 +1920,24 @@ msgstr "给网站提个建议"
 #: templates/doc/suggest.html:17
 msgid "by"
 msgstr "来自"
+
+#: templates/doc/whoami.html:7 templates/include/notes/addNote.html:108
+#: templates/include/notes/notes_section_header.html:19
+#: templates/registration/login.html:47
+msgid "More"
+msgstr "更多"
+
+#: templates/doc/whoami.html:14
+msgid "What we are"
+msgstr "关于我们"
+
+#: templates/doc/whoami.html:17
+msgid "Here knowledge starts forming!"
+msgstr "知识在这里沉淀！"
+
+#: templates/doc/whoami.html:21
+msgid "Here learning happens naturally!"
+msgstr "在这里学习自然的发生！"
 
 #: templates/folders/index.html:11
 msgid "Create a new folder"
@@ -2638,11 +2656,6 @@ msgstr "标题"
 msgid "Add Tags"
 msgstr "加标签"
 
-#: templates/include/notes/addNote.html:108
-#: templates/include/notes/notes_section_header.html:19
-msgid "More"
-msgstr "更多"
-
 #: templates/include/notes/addNote.html:114
 msgid "Vote"
 msgstr "自打分重要性"
@@ -3302,10 +3315,8 @@ msgid "give the username you want to use and a brief introduction of yourself."
 msgstr "告知你要用的用户名和你的一个简单的自我介绍。"
 
 #: templates/registration/login.html:47
-msgid ""
-"If you are still deciding whether to join, here are some results from some "
-"users:"
-msgstr "如果你仍然无法决定是否加入，这里是一些用户的使用效果反馈："
+msgid "What is the site for you?"
+msgstr "本网站能帮助您做什么？"
 
 #: templates/registration/login.html:49
 msgid "There are also some screenshots available"
@@ -4256,6 +4267,11 @@ msgstr "全部工作区"
 #: templates/workingset/index.html:370
 msgid "Make Current"
 msgstr "设成当前"
+
+#~ msgid ""
+#~ "If you are still deciding whether to join, here are some results from "
+#~ "some users:"
+#~ msgstr "如果你仍然无法决定是否加入，这里是一些用户的使用效果反馈："
 
 #~ msgid "A simple notebook that helps you learn in real life!"
 #~ msgstr "一个简单的帮助你在生活中学习的笔记本！"
