@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-22 08:29+0800\n"
+"POT-Creation-Date: 2013-06-15 06:15+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -277,24 +277,24 @@ msgstr ""
 "这个网址已经成功添加到您的网址本里。您可以关闭这个窗口，或者其会在1秒后自动关"
 "闭。"
 
-#: notes/models.py:189 notes/models.py:1169 social/models.py:870
+#: notes/models.py:189 notes/models.py:1169 social/models.py:874
 #: templates/framebook/notes/notesdisplay.html:18
 #: templates/include/notes/notesdisplay.html:40
 #: templates/scrapbook/notes/notesdisplay.html:28
 msgid "Title"
 msgstr "标题"
 
-#: notes/models.py:189 notes/models.py:1169 social/models.py:870
+#: notes/models.py:189 notes/models.py:1169 social/models.py:874
 msgid "The size of the title is limited to 2000 characaters."
 msgstr "标题的长度应小于2000字。"
 
 #: notes/models.py:192 notes/models.py:1170 social/models.py:712
-#: social/models.py:871 templates/areas/area.html:285
+#: social/models.py:875 templates/areas/area.html:285
 #: templates/areas/my.html:54
 msgid "Description"
 msgstr "正文"
 
-#: notes/models.py:192 notes/models.py:1170 social/models.py:871
+#: notes/models.py:192 notes/models.py:1170 social/models.py:875
 msgid "The size of the desc is limited to 2000 characaters."
 msgstr "正文的长度应小于2000字。"
 
@@ -310,7 +310,7 @@ msgstr "标签"
 msgid "Default tag is 'random thought'."
 msgstr "默认的标签是'random thought'。"
 
-#: notes/models.py:194 social/models.py:715 templates/areas/area.html:288
+#: notes/models.py:194 social/models.py:719 templates/areas/area.html:288
 #: templates/areas/my.html:57 templates/framebook/notes/notesdisplay.html:22
 #: templates/include/note_list_base.html:1497
 #: templates/include/notes/notesdisplay.html:44
@@ -320,7 +320,7 @@ msgstr "默认的标签是'random thought'。"
 msgid "Private"
 msgstr "隐私"
 
-#: notes/models.py:196 social/models.py:714
+#: notes/models.py:196 social/models.py:718
 msgid "date created"
 msgstr "生成时间"
 
@@ -338,11 +338,11 @@ msgstr "原作者的评级"
 msgid "Attachment"
 msgstr "附件"
 
-#: notes/models.py:1167 social/models.py:868
+#: notes/models.py:1167 social/models.py:872
 msgid "Language"
 msgstr "语言"
 
-#: notes/models.py:1168 social/models.py:869
+#: notes/models.py:1168 social/models.py:873
 msgid "Original language"
 msgstr "原来的语言"
 
@@ -585,7 +585,7 @@ msgstr ""
 msgid "Nickname"
 msgstr "绰号"
 
-#: social/models.py:73 social/models.py:719
+#: social/models.py:73 social/models.py:723
 msgid "Icon"
 msgstr "头像"
 
@@ -630,82 +630,82 @@ msgstr "领域标签"
 msgid "Name"
 msgstr "名字"
 
-#: social/models.py:716 templates/social/notes/group_notes.html:35
+#: social/models.py:720 templates/social/notes/group_notes.html:35
 msgid "Members"
 msgstr "成员"
 
-#: social/models.py:717
+#: social/models.py:721
 msgid "Creator"
 msgstr "创建者"
 
-#: social/models.py:718
+#: social/models.py:722
 msgid "Admins"
 msgstr "管理员"
 
-#: social/models.py:878 templates/registration/reg_with_code.html:17
+#: social/models.py:882 templates/registration/reg_with_code.html:17
 msgid "Invitation Code"
 msgstr "邀请码"
 
-#: social/views.py:679
+#: social/views.py:681
 msgid "You are not an admin of this group, and thus cannot admin this group."
 msgstr "你不是这个小组的管理员，所以不能管理这个小组。"
 
-#: social/views.py:684
+#: social/views.py:686
 msgid "You have successfully removed the member from the group."
 msgstr "你已经成功的将该成员从这个小组移除。"
 
-#: social/views.py:720 social/views.py:752
+#: social/views.py:722 social/views.py:755
 msgid "No users are entered!"
 msgstr "没有输入任何用户名！"
 
-#: social/views.py:729
+#: social/views.py:732
 msgid "You are added to the group "
 msgstr "你被加入学习小组"
 
-#: social/views.py:730 social/views.py:763
+#: social/views.py:733 social/views.py:766
 msgid "You can visit this group at "
 msgstr "这是该学习小组的网址 "
 
-#: social/views.py:731
+#: social/views.py:734
 msgid ""
 "If you do not want to join this group, you can remove yourself from this "
 "group on your groups page. "
 msgstr "如果你想退出该学习小组，你可以在你的学习小组页面完成此操作。"
 
-#: social/views.py:734
+#: social/views.py:737
 msgid "You are added to group "
 msgstr "你被加入学习小组"
 
-#: social/views.py:738
+#: social/views.py:741
 msgid "You have successfully added the user to the group!"
 msgstr "你已经成功的将该成员添加到这个小组。"
 
-#: social/views.py:762
+#: social/views.py:765
 msgid "You are invited to join the group "
 msgstr "你被邀请参加学习小组"
 
-#: social/views.py:764
+#: social/views.py:767
 msgid ""
 "If you want to join this group, you can click on the \"join the group\" "
 "button."
 msgstr "如果你想加入该学习小组，你可以点击\"加入小组\"按钮。"
 
-#: social/views.py:765
+#: social/views.py:768
 msgid ""
 "After joining, if you want to remove yourself from this group, you can do "
 "that in your groups page."
 msgstr ""
 "加入学习小组后，如果你想退出该学习小组，你可以在你的学习小组页面完成此操作。"
 
-#: social/views.py:766
+#: social/views.py:769
 msgid "You are invited to group "
 msgstr "你被邀请参加学习小组"
 
-#: social/views.py:770
+#: social/views.py:773
 msgid "You have successfully sent the group invitation!"
 msgstr "你已经成功的发出了小组邀请！"
 
-#: social/views.py:1194
+#: social/views.py:1197
 msgid ""
 "Your suggestion is successfully sent to the sys admin! Thank you for your "
 "valuable suggestion!"
@@ -3252,12 +3252,8 @@ msgid "Trash"
 msgstr "垃圾"
 
 #: templates/registration/login.html:18
-msgid "A simple notebook that helps you learn in real life!"
-msgstr "一个简单的帮助你在生活中学习的笔记本！"
-
-#: templates/registration/login.html:18
-msgid "9 notes a day is a day not wasted!"
-msgstr "每天9条笔记，1天就没有白过！"
+msgid "91biji, where knowledge starts forming!"
+msgstr "91笔记，知识在这里沉淀！"
 
 #: templates/registration/login.html:21
 msgid "Your username and password didn't match. Please try again."
@@ -4260,6 +4256,12 @@ msgstr "全部工作区"
 #: templates/workingset/index.html:370
 msgid "Make Current"
 msgstr "设成当前"
+
+#~ msgid "A simple notebook that helps you learn in real life!"
+#~ msgstr "一个简单的帮助你在生活中学习的笔记本！"
+
+#~ msgid "9 notes a day is a day not wasted!"
+#~ msgstr "每天9条笔记，1天就没有白过！"
 
 #~ msgid "Tag"
 #~ msgstr "标签"
