@@ -28,7 +28,7 @@ from notebook.bookmarks.models import Bookmark
 from notebook.scraps.models import Scrap
 from notebook.social.models import *
 from notebook.areas.models import Area, Area_Group
-from notebook.notes.views import User, getT, getlogger, getFolder, get_public_notes, __get_folder_context
+from notebook.notes.views import User, getT, getlogger, getFolder, get_public_notes, __get_folder_context, __get_pre_url
 from notebook.notes.views import getSearchResults,  __getQStr, __get_view_theme, Pl, ALL_VAR, __get_lang
 from notebook.notes.util import *
 from notebook.notes.constants import *
@@ -450,9 +450,12 @@ def note(request, username, bookname, note_id):
     if note.private:        
         sharing_groups = [tag.name.split(':')[1] for tag in note.tags.all() if tag.name.startswith('sharinggroup:')]
         #print 'sharing_groups:', sharing_groups
-        #if request.user.is_anonymous() or not request.user.member.is_in_groups(sharing_groups):
-        if not request.user.member.is_in_groups(sharing_groups):
-            raise Http404
+        if request.user.is_anonymous() or not request.user.member.is_in_groups(sharing_groups):           
+            return HttpResponseRedirect('/login?next='+request.get_full_path())
+        
+
+        #if not request.user.member.is_in_groups(sharing_groups):
+        #    raise Http404
     
     
     #get the backlink
