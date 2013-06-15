@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-15 08:07+0800\n"
+"POT-Creation-Date: 2013-06-15 12:11+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -646,66 +646,66 @@ msgstr "管理员"
 msgid "Invitation Code"
 msgstr "邀请码"
 
-#: social/views.py:681
+#: social/views.py:686
 msgid "You are not an admin of this group, and thus cannot admin this group."
 msgstr "你不是这个小组的管理员，所以不能管理这个小组。"
 
-#: social/views.py:686
+#: social/views.py:691
 msgid "You have successfully removed the member from the group."
 msgstr "你已经成功的将该成员从这个小组移除。"
 
-#: social/views.py:722 social/views.py:755
+#: social/views.py:727 social/views.py:760
 msgid "No users are entered!"
 msgstr "没有输入任何用户名！"
 
-#: social/views.py:732
+#: social/views.py:737
 msgid "You are added to the group "
 msgstr "你被加入学习小组"
 
-#: social/views.py:733 social/views.py:766
+#: social/views.py:738 social/views.py:771
 msgid "You can visit this group at "
 msgstr "这是该学习小组的网址 "
 
-#: social/views.py:734
+#: social/views.py:739
 msgid ""
 "If you do not want to join this group, you can remove yourself from this "
 "group on your groups page. "
 msgstr "如果你想退出该学习小组，你可以在你的学习小组页面完成此操作。"
 
-#: social/views.py:737
+#: social/views.py:742
 msgid "You are added to group "
 msgstr "你被加入学习小组"
 
-#: social/views.py:741
+#: social/views.py:746
 msgid "You have successfully added the user to the group!"
 msgstr "你已经成功的将该成员添加到这个小组。"
 
-#: social/views.py:765
+#: social/views.py:770
 msgid "You are invited to join the group "
 msgstr "你被邀请参加学习小组"
 
-#: social/views.py:767
+#: social/views.py:772
 msgid ""
 "If you want to join this group, you can click on the \"join the group\" "
 "button."
 msgstr "如果你想加入该学习小组，你可以点击\"加入小组\"按钮。"
 
-#: social/views.py:768
+#: social/views.py:773
 msgid ""
 "After joining, if you want to remove yourself from this group, you can do "
 "that in your groups page."
 msgstr ""
 "加入学习小组后，如果你想退出该学习小组，你可以在你的学习小组页面完成此操作。"
 
-#: social/views.py:769
+#: social/views.py:774
 msgid "You are invited to group "
 msgstr "你被邀请参加学习小组"
 
-#: social/views.py:773
+#: social/views.py:778
 msgid "You have successfully sent the group invitation!"
 msgstr "你已经成功的发出了小组邀请！"
 
-#: social/views.py:1197
+#: social/views.py:1202
 msgid ""
 "Your suggestion is successfully sent to the sys admin! Thank you for your "
 "valuable suggestion!"
@@ -1708,62 +1708,70 @@ msgstr ""
 "笔记本目前有三个本：便条本（记录便条），网址本（收集网址），网摘本（收集网页"
 "摘录）。"
 
-#: templates/doc/for_new_users.html:24
+#: templates/doc/for_new_users.html:23
+msgid "About frame"
+msgstr "关于知识包"
+
+#: templates/doc/for_new_users.html:23
+msgid "Frame is a set of notes(snippets/bookmarks/scraps) packaged together."
+msgstr "一个知识包是一组笔记（便条/网址/网摘）打包而成。"
+
+#: templates/doc/for_new_users.html:25
 msgid ""
 "For the convenience of adding bookmarks, you can drag the link below to your "
 "browser bookmark bar."
 msgstr "为了方便加书签，您可以将下面这个链接拖到你的浏览器的书签栏里去。"
 
-#: templates/doc/for_new_users.html:25 templates/include/notes/addNote.html:78
+#: templates/doc/for_new_users.html:26 templates/include/notes/addNote.html:78
 msgid "Add a bookmark"
 msgstr "添加一个网址"
 
-#: templates/doc/for_new_users.html:29
+#: templates/doc/for_new_users.html:30
 msgid ""
 "For the convenience of adding scraps, you can drag the link below to your "
 "browser bookmark bar."
 msgstr "为了方便加摘录，您可以将下面这个链接拖到你的浏览器的书签栏里去。"
 
-#: templates/doc/for_new_users.html:30
+#: templates/doc/for_new_users.html:31
 #: templates/scrapbook/notes/addNote.html:5
 msgid "Add a scrap"
 msgstr "加一个网摘"
 
-#: templates/doc/for_new_users.html:33
+#: templates/doc/for_new_users.html:34
 msgid "Here is how these two buttons look like in your browser bookmark bar."
 msgstr "这两个按钮在你的浏览器的书签栏里的样子如下图所示："
 
-#: templates/doc/for_new_users.html:37
+#: templates/doc/for_new_users.html:38
 msgid "You can view the video demo below to see how it is done."
 msgstr "下面是如何操作的视频演示。"
 
-#: templates/doc/for_new_users.html:37
+#: templates/doc/for_new_users.html:38
 msgid "You can view the video demo in full screen mode."
 msgstr "你可以点击视频上的全屏模式来观看。"
 
-#: templates/doc/for_new_users.html:40
+#: templates/doc/for_new_users.html:41
 msgid ""
 "Add the buttons to your browser bookmark bar. Here we use Google Chrome "
 "browser to do the demo."
 msgstr ""
 "将按钮加到你的浏览器的书签栏里。这里我们使用Google Chrome浏览器做示范。"
 
-#: templates/doc/for_new_users.html:46 templates/doc/for_new_users.html:54
-#: templates/doc/for_new_users.html:62
+#: templates/doc/for_new_users.html:47 templates/doc/for_new_users.html:55
+#: templates/doc/for_new_users.html:63
 msgid "Your browser does not support the video tag."
 msgstr "你的浏览器不支持video tag。"
 
-#: templates/doc/for_new_users.html:50
+#: templates/doc/for_new_users.html:51
 msgid ""
 "When you browse the internet, you can save the website you are viewing as a "
 "bookmark."
-msgstr "当年浏览网站时，你可以将网址存下来。"
+msgstr "当你浏览网站时，你可以将网址存下来。"
 
-#: templates/doc/for_new_users.html:58
+#: templates/doc/for_new_users.html:59
 msgid "When you browse the internet, you can save a scrap of the webpage."
 msgstr "当你浏览网页时，你可以做网摘并保存。"
 
-#: templates/doc/for_new_users.html:67
+#: templates/doc/for_new_users.html:68
 msgid ""
 "There are two tags automatically added when a new user is generated: "
 "untagged, notebook feedbacks. \"untagged\" is the default tag used for all "
@@ -1774,23 +1782,23 @@ msgstr ""
 "feedbacks。 \"untagged\"是一切没有无标签项的默认标签。\"notebook feedbacks"
 "\"是供用户对本笔记本应用程序提出反馈。"
 
-#: templates/doc/for_new_users.html:71
+#: templates/doc/for_new_users.html:72
 msgid ""
 " You can save your queries on snippets/bookmarks/scraps into a dynamic "
 "snippetbook/bookmarkbook/scrapbook."
 msgstr "你可以把将你对便条/网址/网摘的搜索存成动态的便条本/网址本/网摘本。"
 
-#: templates/doc/for_new_users.html:74
+#: templates/doc/for_new_users.html:75
 msgid "About search"
 msgstr "关于搜索"
 
-#: templates/doc/for_new_users.html:74
+#: templates/doc/for_new_users.html:75
 msgid ""
 "You can do some complex searches in the search box. Below are the sample "
 "queries"
 msgstr "你可以在搜索框里做一些复杂的搜索。下面是一些例子。"
 
-#: templates/doc/for_new_users.html:77
+#: templates/doc/for_new_users.html:78
 msgid "Note on notation"
 msgstr "标注说明"
 
@@ -1812,49 +1820,49 @@ msgid ""
 msgstr "但是你的私人标签，不会被共享到你的公开笔记本。"
 
 #: templates/doc/for_new_users.html:95
-msgid " About groups"
+msgid "About groups"
 msgstr "关于小组"
 
 #: templates/doc/for_new_users.html:95
 msgid ""
 " A group has several tags that are added by the group admin. (The creater of "
 "the group is automatically the admin of the group.) After you join a group, "
-"you can make notes in your personal notebook. Any notes that is tagged with "
-"any of the group tags will be pushed to that group. "
+"you can make notes in your personal notebook and have those group tags to "
+"use. Any notes that is tagged with any of the group tags will be pushed to "
+"that group. "
 msgstr ""
 "一个小组的管理员可以给这个小组加小组的标签。（小组的创建者自动成为该小组的管"
-"理员。）你加入这个小组后，你可以在你的个人笔记本做笔记。只要你给笔记加任何这"
+"理员。）你加入这个小组后，你可以在你的个人笔记本做笔记，并可以使用该小组的标签。只要你给笔记加任何这"
 "个小组的标签，这条笔记就会被共享到该小组。"
 
-#: templates/doc/for_new_users.html:96
-msgid "Notes that are private, however, won't be pushed to the social space."
-msgstr "隐私笔记，不会被共享到公共空间。"
-
-#: templates/doc/for_new_users.html:96
-msgid ""
-" If you add a sharinggroup:yourgroupname tag to the note, the sharing "
-"machanism will be different."
-msgstr ""
-"如果你加一个sharinggroup:yourgroupname标签到你的笔记，分享的机制会不同。"
-
-#: templates/doc/for_new_users.html:97
-msgid ""
-" Any note you add a sharinggroup:yourgroupname tag will be pushed to that "
-"group, even if the note has no any other tags of that group or the note is "
-"private."
-msgstr ""
-"任何加了sharinggroup:yourgroupname标签的笔记会被共享到那个小组，即使这条笔记"
-"不含该小组的标签或者笔记是隐私的。"
-
 #: templates/doc/for_new_users.html:102
+msgid ""
+"If you don't want your note to be shared to your group, make it private."
+msgstr "如果你不想让你的笔记分享到小组去，只需要将该笔记设为私有。"
+
+#: templates/doc/for_new_users.html:105
+msgid "About private groups"
+msgstr "关于私有小组"
+
+#: templates/doc/for_new_users.html:105
+msgid ""
+"You can set a group to be private. For a private group, if you are a member "
+"of that private group, you will also have the tags of that group to use in "
+"your personal notebook, just like in a public group. But notes added with "
+"those tags won't be shared automatically unless you specifically add "
+"sharinggroup:thatgroupname to the notes. Then it will be shared to that "
+"private group and only members of that private group can view them."
+msgstr "你可以把一个小组设为私有小组。如果你上一个私有小组的成员，和公开小组一样，你会在你的个人笔记本里使用这个小组的标签。但加那些标签的笔记并不会自动分享到小组里去，除非你添加sharinggroup:thatgroupname标签。那样才会将其分享到私有小组去，而只有该小组的成员才能浏览。"
+
+#: templates/doc/for_new_users.html:109
 msgid "Below are for advanced users only"
 msgstr "下面的仅供高级用户"
 
-#: templates/doc/for_new_users.html:104
+#: templates/doc/for_new_users.html:111
 msgid "About working set"
 msgstr "关于工作区"
 
-#: templates/doc/for_new_users.html:104
+#: templates/doc/for_new_users.html:111
 msgid ""
 "A working set is a set of tags that you can work with when viewing stuff in "
 "the notebook. If you have a lot of tags, it is a good idea to choose a "
@@ -1863,11 +1871,11 @@ msgstr ""
 "一个工作区是一组标签，你可以用来浏览或记录你的笔记本。如果你使用很多的标签，"
 "可以用工作区来只使用这个工作区的标签来浏览或记录你的笔记本。"
 
-#: templates/doc/for_new_users.html:107
+#: templates/doc/for_new_users.html:114
 msgid "About cache"
 msgstr "关于缓存区"
 
-#: templates/doc/for_new_users.html:107
+#: templates/doc/for_new_users.html:114
 msgid ""
 " Cache is used to help you when working with notes. For example, you can "
 "find some notes by search. Then add those notes to a cache. Do a search "
@@ -1877,14 +1885,6 @@ msgstr ""
 "缓存区是为了方便你整理笔记。比如，你可以通过搜索找到一些笔记，把这些笔记加入"
 "缓存区。然后再搜索找到一些其他笔记，你也把他们加入该缓存区。然后浏览该缓存区"
 "的所有笔记，对他们进行批量处理。"
-
-#: templates/doc/for_new_users.html:110
-msgid "About frame"
-msgstr "关于知识包"
-
-#: templates/doc/for_new_users.html:110
-msgid "Frame is a set of notes/bookmarks/scraps packaged together."
-msgstr "一个知识包是一组便条/网址/网摘。"
 
 #: templates/doc/mobile.html:7 templates/doc/mobile.html.py:13
 msgid "Mobile"
@@ -4288,6 +4288,24 @@ msgstr "全部工作区"
 #: templates/workingset/index.html:370
 msgid "Make Current"
 msgstr "设成当前"
+
+#~ msgid ""
+#~ "Notes that are private, however, won't be pushed to the social space."
+#~ msgstr "隐私笔记，不会被共享到公共空间。"
+
+#~ msgid ""
+#~ " If you add a sharinggroup:yourgroupname tag to the note, the sharing "
+#~ "machanism will be different."
+#~ msgstr ""
+#~ "如果你加一个sharinggroup:yourgroupname标签到你的笔记，分享的机制会不同。"
+
+#~ msgid ""
+#~ " Any note you add a sharinggroup:yourgroupname tag will be pushed to that "
+#~ "group, even if the note has no any other tags of that group or the note "
+#~ "is private."
+#~ msgstr ""
+#~ "任何加了sharinggroup:yourgroupname标签的笔记会被共享到那个小组，即使这条笔"
+#~ "记不含该小组的标签或者笔记是隐私的。"
 
 #~ msgid ""
 #~ "If you are still deciding whether to join, here are some results from "

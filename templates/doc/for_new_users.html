@@ -20,7 +20,8 @@
 <br/><br/>
 {% trans 'Notebook so far has three books: snippetbook (a collection of snippets or notes), bookmarks book (a collection of bookmarks), scrapbook (a collection of scraps).' %}
 <br/><br/>
-
+{% trans 'About frame' %}: {% trans 'Frame is a set of notes(snippets/bookmarks/scraps) packaged together.' %}
+<br/><br/>
 {% trans "For the convenience of adding bookmarks, you can drag the link below to your browser bookmark bar." %}<br/>
 <a href="javascript:(function(){var%20a=window,b=document,c=encodeURIComponent,d=a.open('http://{{request.META.HTTP_HOST}}/user/bookmarkbook/bookmarks/addBookmark/?url='+c(b.location)+'&title='+c(b.title),'bkmk_popup','left='+((a.screenX||a.screenLeft)+10)+',top='+((a.screenY||a.screenTop)+10)+',height=300px,width=500px,resizable=1,alwaysRaised=1');a.setTimeout(function(){d.focus()},300)})();">{% trans "Add a bookmark" %}</a>
 <br/><br/>
@@ -71,7 +72,7 @@
 {% trans ' You can save your queries on snippets/bookmarks/scraps into a dynamic snippetbook/bookmarkbook/scrapbook.' %}
 <br/><br/>
 
-{% trans 'About search' %}:{% trans 'You can do some complex searches in the search box. Below are the sample queries' %} :
+{% trans 'About search' %}: {% trans 'You can do some complex searches in the search box. Below are the sample queries' %} :
 
 <pre>
 {% trans 'Note on notation' %} : 't' for tag, 'v' for vote, '&' is "and" relation, '|' is "or" relation, '~' is "not" relation.
@@ -83,19 +84,22 @@ important agile programming people = t:agile & t:people  & v:>2
 Non tech blog= t:blog & ~t:tech
 important liberal arts learning = t:movies |  t:books |  t:blogs & ~t:tech & v:>2
 consciousness only =  t:consciousness & ~t:society & ~t:new science & ~t:zen
-stuff that has "thinking" in = thinking' 
+stuff that has "thinking" in = thinking
 </pre>
 <br/><br/>
-
 
 {% trans ' About sharing to your public notebook' %}: {% trans ' Any note you make that is not marked as private will be pushed to your social public notebook, together with its tags.' %} 
 {% trans "Your private tags, however, won't be pushed over to your social public notebook."  %}
 <br/><br/>
 
-{% trans ' About groups' %}: {% trans ' A group has several tags that are added by the group admin. (The creater of the group is automatically the admin of the group.) After you join a group, you can make notes in your personal notebook. Any notes that is tagged with any of the group tags will be pushed to that group. ' %}
-{% trans "Notes that are private, however, won't be pushed to the social space." %}{% trans ' If you add a sharinggroup:yourgroupname tag to the note, the sharing machanism will be different.' %}
-{% trans ' Any note you add a sharinggroup:yourgroupname tag will be pushed to that group, even if the note has no any other tags of that group or the note is private.' %}
+{% trans 'About groups' %}: {% trans ' A group has several tags that are added by the group admin. (The creater of the group is automatically the admin of the group.) After you join a group, you can make notes in your personal notebook and have those group tags to use. Any notes that is tagged with any of the group tags will be pushed to that group. ' %}
+{%comment%} trans "Notes that are private, however, won't be pushed to the social space." {%endcomment%}
+{%comment%} trans ' If you add a sharinggroup:yourgroupname tag to the note, the sharing machanism will be different.' {%endcomment%}
+{%comment%} trans ' Any note you add a sharinggroup:yourgroupname tag will be pushed to that group, even if the note has no any other tags of that group or the note is private.' {%endcomment%}
+{% trans "If you don't want your note to be shared to your group, make it private." %}
 
+<br/><br/>
+{% trans 'About private groups' %}:  {% trans "You can set a group to be private. For a private group, if you are a member of that private group, you will also have the tags of that group to use in your personal notebook, just like in a public group. But notes added with those tags won't be shared automatically unless you specifically add sharinggroup:thatgroupname to the notes. Then it will be shared to that private group and only members of that private group can view them."  %}
 <br/><br/><br/>
 
 
@@ -107,8 +111,7 @@ stuff that has "thinking" in = thinking'
 {% trans 'About cache' %}:{% trans ' Cache is used to help you when working with notes. For example, you can find some notes by search. Then add those notes to a cache. Do a search again, and add some other notes to that same cache. You can then view all notes in that cache, and do bulk operations on them.' %}
 <br/><br/>
 
-{% trans 'About frame' %}:{% trans 'Frame is a set of notes/bookmarks/scraps packaged together.' %}
-<br/><br/>
+
 
 {% endblock %}
 

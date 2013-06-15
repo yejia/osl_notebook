@@ -450,7 +450,9 @@ def note(request, username, bookname, note_id):
     if note.private:        
         sharing_groups = [tag.name.split(':')[1] for tag in note.tags.all() if tag.name.startswith('sharinggroup:')]
         #print 'sharing_groups:', sharing_groups
-        if request.user.is_anonymous() or not request.user.member.is_in_groups(sharing_groups):           
+        if request.user.is_anonymous() or not request.user.member.is_in_groups(sharing_groups):  
+            #flash a msg here? TODO:          
+            #messages.error(request, _("This is from a private group! You need to be a member to view it."))  
             return HttpResponseRedirect('/login?next='+request.get_full_path())
         
 
