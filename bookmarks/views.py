@@ -71,7 +71,13 @@ def add_bookmark(request):
         n.title = post.get('title')
         n.desc = post.get('desc')
         n.url = post.get('url')
-        n.private = post.get('private', False)
+        private = post.get('private', False)
+        if private in ['true', 'on']:
+            n.private = True
+        else:
+            n.private = False     
+        #n.private = post.get('private', False)
+
         n.vote = post.get('vote')
         n.save()
         n.add_tags(tags, 'bookmarkbook') 

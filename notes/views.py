@@ -1992,7 +1992,7 @@ def add_note(request, username, bookname):
     n = N(desc=desc)  
     n.vote = request.GET.get('vote', 0)
     private = request.GET.get('private', False)
-    if private == 'true':
+    if private in ['true', 'on']:
         n.private = True
     else:
         n.private = False     

@@ -606,7 +606,7 @@ class Note(models.Model):
             except ObjectDoesNotExist:    
                 pass
            
-        else:               
+        else:            
             #whether the note is first created or just an update, below applies to both situations
             sts = [] 
             for t in self.tags.all():  
@@ -847,10 +847,8 @@ class Frame(Note):
             self.db = self.owner_name
             for note_id in note_id_list:   
                 if note_id != str(self.id):   
-                    print 'It is not the frame itself.'   
                     n = Note.objects.using(self.owner_name).get(id=note_id)   
                     if n not in self.notes.all():   
-                        print 'not in the existing included notes.'        
                         fn,created = Frame_Notes.objects.using(self.owner_name).get_or_create(frame=self, note=n)
                         if created:
                             fn._order=current_num_of_notes

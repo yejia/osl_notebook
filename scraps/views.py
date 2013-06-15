@@ -72,7 +72,11 @@ def add_scrap(request):
         n.title = post.get('title')
         n.desc = post.get('desc')
         n.url = post.get('url')
-        n.private = post.get('private', False)
+        private = post.get('private', False)
+        if private in ['true', 'on']:
+            n.private = True
+        else:
+            n.private = False     
         n.vote = post.get('vote')
         n.save()
         n.add_tags(tags, 'scrapbook')   
@@ -81,10 +85,8 @@ def add_scrap(request):
         return render_to_response("include/notes/addNote_result.html",\
                                   {'message':_('Scrap is successfully added! You can close this window, or it will be closed for you in 1 second.')})
        
-    else:
-        
+    else:        
         tags = __get_ws_tags(request, username, 'scrapbook')        
-        
         from django.forms import TextInput
         #by adding the tags field specifically here, we avoided it using tags of another user (a strange error which repeat even after changing class names and variable names)
         AddNForm_scrap = create_model_form("AddNForm_add_scrap_get_"+str(username), N, fields={#'tags':forms.ModelMultipleChoiceField(queryset=tags)
