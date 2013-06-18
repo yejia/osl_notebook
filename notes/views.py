@@ -1626,8 +1626,15 @@ def update_note(request, note_id, username, bookname):
         #note.tags = request.POST.getlist('tags')
     url = request.POST.get('url')
     if url:
-        #TODO: if note type is note
-        note.url = url
+        if note.get_note_type() == 'Bookmark':            
+            note.bookmark.owner_name =  username
+            note.bookmark.url = url
+            note.bookmark.save()
+        if note.get_note_type() == 'Scrap':
+            note.scrap.owner_name =  username
+            note.scrap.url = url 
+            note.scrap.save()  
+        
     file = request.FILES.get('attachment')     
     attachment_clear = request.POST.get('attachment-clear')    
     if file:
