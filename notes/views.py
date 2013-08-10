@@ -321,7 +321,7 @@ def invite(request):
        
 
 #remove the line below to enable registration by public
-@login_required
+#@login_required
 def user_register(request): 
     user_reg_setting = Sys_Setting.objects.get(member__username='leon')
     if user_reg_setting and user_reg_setting == 'n':
