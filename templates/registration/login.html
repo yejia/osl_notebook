@@ -34,7 +34,7 @@ $(document).ready(function(){
 </table>
 
 <input type="submit" value="{% trans "login" %}" /><a href="/reg/">&nbsp;&nbsp;&nbsp;&nbsp;<a href="/passreset/">{% trans "Forgot your password?" %}</a>{% if user_reg_setting == 'y' %}&nbsp;&nbsp;&nbsp;&nbsp;{% trans "Not a user yet?" %}  <a href="/reg/">{% trans "Register" %}</a>{% endif %}
-<input type="hidden" name="next" value="{{ next }}" />
+<input type="hidden" name="next" value="{{ next }}" />{% comment %}change /reg/ to /invite/ to close public registration{% endcomment %}
 </form>
 
 <p style="font-size: 9px;" class="browser_alert">{% trans "Recommended browsers for visiting this site: Chrome, Firefox, Safari, Opera."  %} {% trans "Best viewed with Chrome, Firefox, and Safari, and with your browser zooming in one level."  %}</p>
