@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from django.db import models
-
-from django.contrib.auth.models import User
-
-from django.forms import ModelForm
-from django.db.models.query import QuerySet
-from django.db.models import Q
 from django.core.exceptions import ObjectDoesNotExist
-
+from django.db import models
+from django.db.models import Q
+from django.db.models.query import QuerySet
+from django.forms import ModelForm
+from django.contrib.auth.models import User
+from django.conf import settings
 from django.utils.translation import ugettext as _
 
 from notebook.social.models import Social_Note, Social_Tag, Social_Snippet, Social_Bookmark, Social_Scrap, Social_Frame, Social_Frame_Notes
@@ -25,11 +23,11 @@ import notebook
 #TODO: put logging into a common modules so both models and views can import from it
 def getlogger(name):
     logger = logging.getLogger(name)
-    hdlr = logging.FileHandler(notebook.settings.LOG_FILE)    
+    hdlr = logging.FileHandler(settings.LOG_FILE)    
     formatter = logging.Formatter('[%(asctime)s]%(levelname)-8s%(name)s,%(pathname)s,line%(lineno)d,process%(process)d,thread%(thread)d,"%(message)s"','%Y-%m-%d %a %H:%M:%S')    
     hdlr.setFormatter(formatter)
     logger.addHandler(hdlr)
-    logger.setLevel(notebook.settings.LOG_LEVEL)
+    logger.setLevel(settings.LOG_LEVEL)
     return logger
 
 log = getlogger('notes.models')
