@@ -76,6 +76,12 @@ log = getlogger('notes.views')
 #or maybe subclass QuerySet and for every query, add user__username__exact=username filter. But this might cause slow performance.
 
 
+class MyAuthenticationForm(AuthenticationForm):
+    def __init__(self, *args, **kwargs):            
+        super(MyAuthenticationForm, self).__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs['autofocus'] = u'autofocus'
+
+
 class AddLinkageNoteForm(ModelForm):
     error_css_class = 'error'
     required_css_class = 'required'
@@ -151,7 +157,7 @@ class ProfileForm(ModelForm):
 @never_cache
 def login(request, template_name='registration/login.html',
           redirect_field_name=REDIRECT_FIELD_NAME,
-          authentication_form=AuthenticationForm,
+          authentication_form=MyAuthenticationForm,
           current_app=None, extra_context=None):
     """
     Displays the login form and handles the login action.
