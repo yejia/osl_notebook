@@ -42,7 +42,7 @@ $(document).ready(function(){
                 $('span#charCount').html(charLength);
                 // Alerts when 300 characters is reached
                 if($(this).val().length > 300)
-                        $('#charCount_alert').html('<strong>{% trans "You have used up 300 characters. It recommended to keep a snippet short." %}</strong>');
+                        $('#charCount_alert').html('<strong>{% trans "You have used up 300 characters. It is recommended to keep a snippet short." %}</strong>');
                  else
                        $('#charCount_alert').html('')                
         });

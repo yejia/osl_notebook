@@ -4,3 +4,4 @@ psycopg2
 django-notification==0.2
 PIL
 gdata==2.0.15
+#copy over weibopy folder and douban egg, also copy over easy-install.pth
